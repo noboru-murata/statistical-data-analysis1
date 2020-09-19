@@ -1,0 +1,176 @@
+#+HUGO_BASE_DIR: ./
+#+HUGO_SECTION: page
+#+HUGO_WEIGHT: auto
+#+author: Noboru Murata
+#+link: github https://noboru-murata.github.io/multivariate-analysis/
+# C-c C-e H A (generate MDs for all subtrees)
+
+* 概要
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: _index
+  :EXPORT_HUGO_SECTION: ./
+  :EXPORT_DATE: <2020-03-18 Wed>
+  :END:
+  本講義では多変量解析の主要な方法を取り上げ，
+  その基本的な考え方を修得することを目的とします．
+
+  データを縮約し，
+  その構造をより鮮明に捉えるために少数の変量に変換する手法として
+  回帰分析・主成分分析を，
+  多数の変量を手掛りにデータを分類するための手法として
+  判別分析・クラスタ分析を学びます．
+
+** 講義資料
+   - [[github:pdfs/multivariate-analysis.pdf][多変量解析]]
+   随時修正します．
+
+** 参考資料   
+  必要な参考書については講義中に指示します．
+
+
+* 講義1
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture01
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide01" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide01.pdf][PDF file]]
+   
+* 講義2
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture02
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide02" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide02.pdf][PDF file]]
+
+* 講義3
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture03
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide03" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide03.pdf][PDF file]]
+
+* 講義4
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture04
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide04" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide04.pdf][PDF file]]
+
+* 講義5
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture05
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide05" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide05.pdf][PDF file]]
+
+* 講義6
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture06
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide06" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide06.pdf][PDF file]]
+
+* 講義8
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture08
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide08" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide08.pdf][PDF file]]
+
+* 講義9
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture09
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide09" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide09.pdf][PDF file]]
+
+* 講義10
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture10
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide10" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide10.pdf][PDF file]]
+
+* 講義12
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture12
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide12" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide12.pdf][PDF file]]
+
+* 講義13
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture13
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide13" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide13.pdf][PDF file]]
+
+* 講義14
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: lecture14
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+  準備中
+** COMMENT スライド
+   #+html: {{< myslide base="multivariate-analysis" name="slide14" >}}
+** COMMENT ハンドアウト
+   - [[github:pdfs/slide14.pdf][PDF file]]
+
+* COMMENT お知らせ
+  おしらせは以下を利用     
+
+* COMMENT 講義の進め方
+  :PROPERTIES:
+  :EXPORT_HUGO_SECTION: ./post
+  :EXPORT_FILE_NAME: post1
+  :EXPORT_DATE: <2020-08-26 Wed>
+  :END:
+
+* COMMENT ローカル変数
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

@@ -1,0 +1,6 @@
+#+TITLE: 統計データ解析I 講義資料
+
+講義ノートとコードの公開用 [[https://noboru-murata.github.io/statistical-data-analysis1/]]
+
+* 課題
+  - 講義資料の整理

@@ -1,0 +1,37 @@
+baseURL = "https://noboru-murata.github.io/statistical-data-analysis1"
+disablePathToLower = true
+languageCode = "en-us"
+title = "統計データ解析I"
+theme = "docter"
+publishDir = "docs"
+
+[params]
+  # the name of your project and a link back to the home page
+  home = "統計データ解析I"
+  # A small snippet of text above the sidebar:
+  # subtitle = ""
+
+  author = "Noboru Murata"
+  author_url= "https://noboru-murata.github.io"
+
+  # Point readers to your repo and invite them to edit pages 
+  repo_host = "GitHub"
+  repo = "https://github.com/noboru-murata/statistical-data-analysis1"
+
+  # Add a reference to a logo, which will appear in the top right
+  # logourl = ""
+  # logoalt = ""
+
+  # Mention your hosting provider 
+  hosted_on = "GitHub"
+  hosted_on_url= "https://github.com/noboru-murata/statistical-data-analysis1"
+
+  # main sections
+  # change the main section to set the directory where the top articles are sourced
+  mainSections = ["post"]
+
+  # brand color
+  brand_color = "#8c0324"
+
+[markup.goldmark.renderer]
+  unsafe = true
