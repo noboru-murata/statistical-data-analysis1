@@ -3,7 +3,7 @@ title = "確率シミュレーションの例"
 author = ["Noboru Murata"]
 date = 2020-09-19T00:00:00+09:00
 draft = false
-weight = 1016
+weight = 1018
 +++
 
 感染症の確率シミュレーションにはいろいろな考え方があります．

@@ -125,15 +125,6 @@
     </item>
     
     <item>
-      <title>講義14</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture14/</link>
-      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture14/</guid>
-      <description>準備中</description>
-    </item>
-    
-    <item>
       <title>スライドの使い方</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/post/post1/</link>
       <pubDate>Mon, 21 Sep 2020 00:00:00 +0900</pubDate>
@@ -142,6 +133,15 @@
       <description>スライドは reveal.js を使って作っています．
 スライドを click して &amp;ldquo;?&amp;rdquo; を入力すると shortcut key が表示されますが，これ以外にも以下の key などが使えます．
 フルスクリーン  f フルスクリーン表示 esc 元に戻る  黒板  w スライドと黒板の切り替え (toggle) x/y チョークの色の切り替え (巡回) c 消去  メモ書き  e 編集モードの切り替え (toggle) x/y ペンの色の切り替え (巡回) c 消去  </description>
+    </item>
+    
+    <item>
+      <title>講義14</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture14/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture14/</guid>
+      <description>準備中</description>
     </item>
     
     <item>

@@ -171,32 +171,31 @@
 ** 解答例
    - [[github:code/slide12.R][RScript]]
 
-* COMMENT 講義13
-  :PROPERTIES:
-  :EXPORT_FILE_NAME: lecture13
-  :EXPORT_DATE: <2020-09-19 Sat>
-  :END:
-  準備中
-** COMMENT スライド
-   #+html: {{< myslide base="statistical-data-analysis1" name="slide13" >}}
-** COMMENT ハンドアウト
-   - [[github:pdfs/slide13.pdf][PDF file]]
+# * COMMENT 講義13
+#   :PROPERTIES:
+#   :EXPORT_FILE_NAME: lecture13
+#   :EXPORT_DATE: <2020-09-19 Sat>
+#   :END:
+#   準備中
+# ** COMMENT スライド
+#    #+html: {{< myslide base="statistical-data-analysis1" name="slide13" >}}
+# ** COMMENT ハンドアウト
+#    - [[github:pdfs/slide13.pdf][PDF file]]
+# ** COMMENT 解答例
+#    - [[github:code/slide13.R][RScript]]
 
-** COMMENT 解答例
-   - [[github:code/slide13.R][RScript]]
-
-* COMMENT 講義14
-  :PROPERTIES:
-  :EXPORT_FILE_NAME: lecture14
-  :EXPORT_DATE: <2020-09-19 Sat>
-  :END:
-  準備中
-** COMMENT スライド
-   #+html: {{< myslide base="statistical-data-analysis1" name="slide14" >}}
-** COMMENT ハンドアウト
-   - [[github:pdfs/slide14.pdf][PDF file]]
-** COMMENT 解答例
-   - [[github:code/slide14.R][RScript]]
+# * COMMENT 講義14
+#   :PROPERTIES:
+#   :EXPORT_FILE_NAME: lecture14
+#   :EXPORT_DATE: <2020-09-19 Sat>
+#   :END:
+#   準備中
+# ** COMMENT スライド
+#    #+html: {{< myslide base="statistical-data-analysis1" name="slide14" >}}
+# ** COMMENT ハンドアウト
+#    - [[github:pdfs/slide14.pdf][PDF file]]
+# ** COMMENT 解答例
+#    - [[github:code/slide14.R][RScript]]
 
 * COMMENT お知らせの雛形
   :PROPERTIES:
