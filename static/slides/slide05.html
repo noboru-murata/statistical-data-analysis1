@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>確率シミュレーション</title>
+<meta name="author" content="村田 昇"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-state="no-toc-progress">
+<!-- This is an HTML template for the title slide. -->
+<!-- Embed logos as necessary. -->
+<!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
+<div class="talk-title">
+    <h1 class="no-toc-progress">確率シミュレーション</h1>
+</div>
+<div class="talk-subtitle">
+    <p></p>
+</div>
+<div class="keyboard-usage">
+    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+</div>
+<div class="talk-author">
+  <p>村田 昇<br />
+  2020.05.22</p>
+</div>
+
+</section>
+
+<section>
+<section id="slide-org47ca2ac">
+<h2 id="org47ca2ac">計算機による数値実験</h2>
+<div class="outline-text-2" id="text-org47ca2ac">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgbf5fa6b">
+<h3 id="orgbf5fa6b">データ解析の枠組</h3>
+<ul>
+<li>分析の目的:
+<ul>
+<li>集団の背後にある共通の法則の発見</li>
+<li>将来の予測</li>
+
+</ul></li>
+<li>集団全体のデータが入手できることは稀:
+<ul>
+<li>現時点の集団に含まれているとは限らない</li>
+<li>将来のデータは入手不可</li>
+
+</ul></li>
+<li><p>
+<b>問題</b>
+</p>
+<blockquote>
+<p>
+分析対象の集団の一部のデータのみを用いて，
+そこから集団全体の性質についての知見を得るには?
+</p>
+</blockquote></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgb818128">
+<h3 id="orgb818128">データのもつべき性質</h3>
+<ul>
+<li>偏った一部のデータから全体の性質の推測は困難:
+<ul>
+<li>知りたい事柄: <span style="color:darkgreen;">日本全体の平均気温</span></li>
+<li>得られるデータ: <span style="color:darkgreen;">沖縄県の各地点の気温</span></li>
+
+</ul></li>
+<li>直感的にはデータを <b>ランダム</b> に収集すれば良い:
+<ul>
+<li>そもそもランダムとは?</li>
+<li>ランダムにデータを収集するコストは?</li>
+
+</ul></li>
+<li><p>
+<b>問題</b> 
+</p>
+<blockquote>
+<p>
+<span style="color:darkred;">ランダム</span>
+にデータを収集することで課題が解決できる根拠は？
+</p>
+</blockquote></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org3c9963f">
+<h3 id="org3c9963f">理論解析と数値実験</h3>
+<ul>
+<li><p>
+<b>問題</b> 
+</p>
+<blockquote>
+<p>
+<span style="color:darkred;">ランダム</span>
+にデータを収集することで課題が解決できる根拠は？
+</p>
+</blockquote></li>
+<li>厳密な意味での解答: 
+<ul>
+<li>(測度論的)確率論</li>
+<li>その理解のための他の数学分野</li>
+
+</ul></li>
+<li>乱数を使った数値実験:
+<ul>
+<li>計算機上でランダムネスを実現</li>
+<li>ランダムネスから結論される数学的結果を直接観察</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org7d30409">
+<h2 id="org7d30409">乱数</h2>
+<div class="outline-text-2" id="text-org7d30409">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgfff3ed6">
+<h3 id="orgfff3ed6">擬似乱数</h3>
+<ul>
+<li>コンピューターで生成された数列:
+<ul>
+<li>完全にランダムに数字を発生されることは不可能</li>
+<li>Rでは <b>Mersenne-Twister法</b> が標準で用いられる</li>
+<li><code>help(Random)</code> 参照</li>
+
+</ul></li>
+<li>数値シミュレーションは再現可能:
+<ul>
+<li>乱数の <b>シード値</b> を指定して再現性を担保</li>
+<li>同一のシード値から生成される乱数系列は同一</li>
+<li>関数 <code>set.seed()</code> 参照</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgedba0d5">
+<h3 id="orgedba0d5">基本的な乱数</h3>
+<ul>
+<li><b>ランダムサンプリング</b> (無作為抽出)<br />
+与えられた集合の要素をランダムに抽出する乱数</li>
+<li><b>二項乱数</b> (確率 \(p\) に対する次数 \(n\) の二項乱数) <br />
+確率 \(p\) で表が出るコインを \(n\) 回投げた際の表の数</li>
+<li><b>一様乱数</b> (区間 \((a,b)\) 上の一様乱数) <br />
+決まった区間 \((a, b)\) からランダムに発生する乱数</li>
+<li>(これ以外にも種々の乱数が存在)</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org66b66a9">
+<h3 id="org66b66a9">乱数を発生する関数</h3>
+<ul>
+<li>Rには様々な確率分布に従う乱数が実装されている
+<ul>
+<li><code>sample()</code>: ランダムサンプリング</li>
+<li><code>rbinom()</code>: 二項乱数</li>
+<li><code>runif()</code>: 一様乱数</li>
+
+</ul></li>
+<li>これ以外は次回以降で取り上げる</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org2421958">
+<h3 id="org2421958">関数の利用例 (1/3)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >### 関数sampleの使い方
+x &lt;- 1:10 # サンプリング対象の集合をベクトルとして定義
+set.seed(123) # 乱数のシード値(任意に決めてよい)を指定
+sample(x, 5)  # xから5つの要素を重複なしでランダムに抽出
+sample(x, length(x)) # xの要素のランダムな並べ替えとなる
+sample(x, 5, replace=TRUE) # xから5つの要素を重複ありでランダムに抽出
+sample(1:6, 10, replace=TRUE) # サイコロを10回振る実験の再現
+sample(1:6, 10, prob=6:1, replace=TRUE) # 出る目の確率に偏りがある場合
+</code></pre>
+</div>
+
+<pre class="example">
+[1]  3 10  2  8  6
+ [1]  5  4  6  8  1  2  3  7  9 10
+[1] 9 9 9 3 8
+ [1] 2 2 1 6 3 4 6 1 3 5
+ [1] 1 1 2 2 2 1 1 1 2 1
+</pre>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgdf6ac52">
+<h3 id="orgdf6ac52">関数の利用例 (2/3)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >### 関数rbinomの使い方
+rbinom(10, size=4, prob=0.5) # 確率0.5に対する次数4の二項乱数を10個発生
+rbinom(20, size=4, prob=0.2) # 個数を20, 確率を0.2に変更
+### 関数runifの使い方
+runif(5, min=-1, max=2) # 区間(-1,2)上の一様乱数を5個発生
+runif(5) # 指定しない場合は区間(0,1)が既定値
+</code></pre>
+</div>
+
+<pre class="example">
+ [1] 3 0 2 3 1 2 1 1 3 3
+ [1] 0 1 0 0 0 1 1 1 1 1 1 1 1 1 0 1 0 0 1 0
+[1] -0.6665937 -0.2691416  1.0041668  0.2529403  1.3645875
+[1] 0.1028646 0.4348927 0.9849570 0.8930511 0.8864691
+</pre>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org939df72">
+<h3 id="org939df72">関数の利用例 (3/3)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >### 関数set.seedについて
+set.seed(1) # 乱数の初期値をseed=1で指定
+runif(5) 
+set.seed(2) # 乱数の初期値をseed=2で指定
+runif(5)    # seed=1の場合と異なる結果
+set.seed(1) # 乱数の初期値をseed=1で指定
+runif(5)    # 初めのseed=1の場合と同じ結果
+</code></pre>
+</div>
+
+<pre class="example">
+[1] 0.2655087 0.3721239 0.5728534 0.9082078 0.2016819
+[1] 0.1848823 0.7023740 0.5733263 0.1680519 0.9438393
+[1] 0.2655087 0.3721239 0.5728534 0.9082078 0.2016819
+</pre>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org8a6b3d5">
+<h2 id="org8a6b3d5">乱数を用いた数値実験</h2>
+<div class="outline-text-2" id="text-org8a6b3d5">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orga39bbad">
+<h3 id="orga39bbad">Monte-Carlo法</h3>
+<ul>
+<li>確率的現象の理解
+<ul>
+<li>抽象化・単純化した問題: 詳細な理論的解析</li>
+<li>複雑な問題: 理論的に解析を行うことが難しい</li>
+
+</ul></li>
+<li><p>
+計算機上の擬似乱数を利用した数値的解析
+</p>
+<ul>
+<li>確率シミュレーション (stochastic simulation)</li>
+<li>モンテカルロ法 (Monte-Carlo method)</li>
+
+</ul>
+<p>
+などと呼ばれる
+</p></li>
+<li>利点
+<ul>
+<li>計算機上では繰り返しシミュレーションが可能</li>
+<li>原因となる要素を自由に設定して結果の観察が可能</li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgeced35c">
+<h3 id="orgeced35c">関数 <code>replicate()</code></h3>
+<p>
+指定した回数繰り返して関数(プログラム)を評価する
+</p>
+<ul>
+<li><p>
+基本書式 
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >replicate(n, expr, simplify = "array")
+</code></pre>
+</div></li>
+<li>関数の引数
+<ul>
+<li><code>n</code> : 繰り返し回数</li>
+<li><code>expr</code>: 評価する関数 (1回の実験に相当)</li>
+<li><code>simplify</code>: 出力の形式を指定</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgca6855b">
+<h3 id="orgca6855b">関数 <code>replecate()</code> の例</h3>
+<ul>
+<li><p>
+2つのサイコロを振る試行
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >### 2つのサイコロを振る試行の Monte-Carlo 法
+## 試行(1回の実験)を行う関数を用意する
+myTrial &lt;- function(){ # この問題では引数は不要
+  dice &lt;- sample(1:6, 2, replace=TRUE) # 2個のサイコロを振る
+  return(dice)
+}
+## 乱数のシード値を指定
+set.seed(202005)
+## Monte-Carlo法を実行
+myData &lt;- replicate(10, # 10回実験
+		    myTrial()) # 実行する関数を指定
+print(myData) # 実験結果は行列として保存されている
+</code></pre>
+</div>
+
+<pre class="example">
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+[1,]    4    3    5    3    1    1    3    6    5     2
+[2,]    5    6    2    1    1    1    1    6    1     1
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org1f2862e" data-background="#fef4f4">
+<h2 id="org1f2862e">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org7d3fdd1" data-background="#fef4f4">
+<h3 id="org7d3fdd1">練習問題</h3>
+<ul>
+<li><p>
+コイン投げの賭け
+</p>
+<blockquote>
+<p>
+Alice と Bob の二人で交互にコインを投げる．
+最初に表が出た方を勝ちとするとき，
+それぞれの勝率はいくつとなるか？
+</p>
+</blockquote>
+<p>
+の確率シミュレーションを行いなさい．
+</p></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orge0c5aca">
+<h2 id="orge0c5aca">例題</h2>
+<div class="outline-text-2" id="text-orge0c5aca">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org248dc08">
+<h3 id="org248dc08">Buffonの針</h3>
+<blockquote>
+<p>
+2次元平面上に等間隔 \(d\) で平行線が引いてある．
+長さ \(l\) の針を
+この平面上にランダムに落としたとき，
+平行線と交わる確率はいくつか？
+ただし \(l\leq d\) とする．
+</p>
+</blockquote>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd5d3bd2">
+<h3 id="orgd5d3bd2">Monty Hall 問題</h3>
+<blockquote>
+<p>
+ゲームの参加者の前に閉まった3つのドアがあって，
+1つのドアの後ろには景品の新車が，
+2つのドアの後ろには外れを意味するヤギがいる．
+参加者は新車のドアを当てると新車がもらえる．
+参加者が1つのドアを選択した後，
+司会のモンティが残りのドアのうちヤギがいるドアを開けてヤギを見せる．
+ここで参加者は，最初に選んだドアを，
+残っているドアに変更してもよいと言われる．
+</p>
+
+<p>
+参加者はドアを変更すべきだろうか？
+</p>
+</blockquote>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orge3abc2d">
+<h3 id="orge3abc2d">St Petersburgのパラドックス</h3>
+<blockquote>
+<p>
+偏りのないコインを表が出るまで投げ続け，賞金を貰うゲームを考える．
+表が出るまでにコインを投げた回数が \(n\) 回であるとき，
+貰える賞金は \(2^{n}\) 円とする． 
+</p>
+
+<p>
+このとき賞金の期待値は
+</p>
+<div>
+\begin{equation}
+  \mathbb{E}[\text{賞金}]
+  =2\times\frac{1}{2}
+  +2^{2}\times\frac{1}{2^{2}}
+  +2^{3}\times\frac{1}{2^{3}}
+  +\dotsb
+  =\infty
+\end{equation}
+
+</div>
+
+<p>
+となるが，
+ゲームを行う回数が有限であるとき，
+期待値はいかなるものになるだろうか?
+</p>
+</blockquote>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org8456c39">
+<h3 id="org8456c39">秘書問題</h3>
+<blockquote>
+<p>
+以下の条件のもと秘書を1人雇うとする．
+</p>
+<ul>
+<li>\(n\) 人が応募しており \(n\) は既知とする．</li>
+<li>応募者には \(1\) 位から \(n\) 位まで順位付けできる．</li>
+<li>無作為な順序で1人ずつ面接を行う．</li>
+<li>毎回の面接後その応募者を採用するか否かを決定する．</li>
+<li>不採用にした応募者を後から採用することはできない．</li>
+
+</ul>
+
+<p>
+「 \(r-1\) 番までの応募者は採用せず，
+\(r\) 番以降の応募者でそれまで面接した中で最も良い者を採用する」
+という戦略を取るとき，最適な \(r\) はいくつだろうか?
+</p>
+</blockquote>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/notes/notes.js"></script>
+<script src="./reveal.js/plugin/search/search.js"></script>
+<script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: true,
+fragmentInURL: true,
+hashOneBasedIndex: false,
+pdfSeparateFragments: false,
+
+overview: true,
+
+transition: 'fade',
+transitionSpeed: 'default',
+chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }},
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+{ src: './reveal.js/plugin/menu/menu.js'},
+{ src: './reveal.js/plugin/chalkboard/chalkboard.js'}]
+
+});
+</script>
+</body>
+</html>

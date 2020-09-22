@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>データの整理と集計</title>
+<meta name="author" content="村田 昇"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-state="no-toc-progress">
+<!-- This is an HTML template for the title slide. -->
+<!-- Embed logos as necessary. -->
+<!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
+<div class="talk-title">
+    <h1 class="no-toc-progress">データの整理と集計</h1>
+</div>
+<div class="talk-subtitle">
+    <p></p>
+</div>
+<div class="keyboard-usage">
+    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+</div>
+<div class="talk-author">
+  <p>村田 昇<br />
+  2020.05.01</p>
+</div>
+
+</section>
+
+<section>
+<section id="slide-org5c7bac9">
+<h2 id="org5c7bac9">データフレームの操作</h2>
+<div class="outline-text-2" id="text-org5c7bac9">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgf2bcedc">
+<h3 id="orgf2bcedc">Rに用意されているデータ構造</h3>
+<p>
+下記は代表的なもので，これ以外にもある
+</p>
+<ul>
+<li>ベクトル (vector)</li>
+<li>行列 (matrix)</li>
+<li>リスト (list)</li>
+<li><b>データフレーム (data frame)</b></li>
+<li>配列 (array)</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org9adaa4d">
+<h3 id="org9adaa4d">データフレームからの項目の抽出</h3>
+<ul>
+<li>添字の番号を指定</li>
+<li>要素の名前で指定</li>
+<li><b>除外</b>: マイナス記号(-)をつけて指定</li>
+<li><p>
+論理値で指定
+</p>
+<ul>
+<li><code>TRUE</code>: 要素の選択</li>
+<li><code>FALSE</code>: 要素の <b>除外</b></li>
+
+</ul>
+<p>
+(欠損値 <code>NA</code> が含まれると正しく指定できない場合があるので注意)
+</p></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org3679b41">
+<h3 id="org3679b41">データ例</h3>
+<ul>
+<li><b><code>datasets::airquality</code></b> (Rに準備されている)<br />
+<b>New York Air Quality Measurements</b>
+<ul>
+<li>Description:
+Daily air quality measurements in New York, May to September 1973.</li>
+<li>Format: 
+A data frame with 153 observations on 6 variables.
+<ul>
+<li>[,1]   Ozone   numeric Ozone (ppb)</li>
+<li>[,2]   Solar.R numeric Solar R (lang)</li>
+<li>[,3]   Wind    numeric Wind (mph)</li>
+<li>[,4]   Temp    numeric Temperature (degrees F)</li>
+<li>[,5]   Month   numeric Month (1&#x2013;12)</li>
+<li>[,6]   Day     numeric Day of month (1&#x2013;31)</li>
+
+</ul></li>
+<li>(<code>help(airquality)</code> または <code>?ariquality</code> で詳細を確認)</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org93cb7e9">
+<h3 id="org93cb7e9">行の抽出 (1/3)</h3>
+<ul>
+<li><p>
+行番号による指定
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 抽出する行番号のベクトルで指定
+airquality[1:10,] # 1-10行を抽出
+</code></pre>
+</div>
+
+<pre class="example">
+   Ozone Solar.R Wind Temp Month Day
+1     41     190  7.4   67     5   1
+2     36     118  8.0   72     5   2
+3     12     149 12.6   74     5   3
+4     18     313 11.5   62     5   4
+5     NA      NA 14.3   56     5   5
+6     28      NA 14.9   66     5   6
+7     23     299  8.6   65     5   7
+8     19      99 13.8   59     5   8
+9      8      19 20.1   61     5   9
+10    NA     194  8.6   69     5  10
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org1f17757">
+<h3 id="org1f17757">行の抽出 (2/3)</h3>
+<ul>
+<li><p>
+条件の指定
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 条件に合致する行はTRUE (NAは欠損値)
+airquality[1:16,]$Ozone&gt;100 # 条件の指定
+airquality[1:16,]$Ozone&gt;100 &amp; airquality[1:16,]$Wind&lt;=5 # 条件のAND
+with(airquality[1:16,], Ozone&gt;100 &amp; Wind&lt;=5) # 上と同じ(短い書き方)
+with(airquality[1:24,], Ozone&gt;100 | Wind&lt;=5) # 条件のOR
+</code></pre>
+</div>
+
+<pre class="example">
+ [1] FALSE FALSE FALSE FALSE    NA FALSE FALSE FALSE FALSE    NA FALSE FALSE
+[13] FALSE FALSE FALSE FALSE
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE
+ [1] FALSE FALSE FALSE FALSE    NA FALSE FALSE FALSE FALSE    NA FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org67ccf9f">
+<h3 id="org67ccf9f">行の抽出 (3/3)</h3>
+<ul>
+<li><p>
+条件に合致する行番号の抽出
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数whichでTRUEの番号を抽出
+which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)) # 全データから抽出
+</code></pre>
+</div>
+
+<pre class="example">
+[1]  62  99 117 121
+</pre></li>
+
+<li><p>
+条件に合致する行の抽出
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 行の抽出
+airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), ] 
+</code></pre>
+</div>
+
+<pre class="example">
+    Ozone Solar.R Wind Temp Month Day
+62    135     269  4.1   84     7   1
+99    122     255  4.0   89     8   7
+117   168     238  3.4   81     8  25
+121   118     225  2.3   94     8  29
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgbb5d97b">
+<h3 id="orgbb5d97b">列の抽出 (1/2)</h3>
+<ul>
+<li><p>
+列番号による指定
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 列番号のベクトルで指定
+airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), c(1,5,6)] 
+</code></pre>
+</div>
+
+<pre class="example">
+    Ozone Month Day
+62    135     7   1
+99    122     8   7
+117   168     8  25
+121   118     8  29
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org02a94c2">
+<h3 id="org02a94c2">列の抽出 (2/2)</h3>
+<ul>
+<li><p>
+列名による指定
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 複数の列の場合
+airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), 
+	   c("Month","Day")] 
+</code></pre>
+</div>
+
+<pre class="example">
+    Month Day
+62      7   1
+99      8   7
+117     8  25
+121     8  29
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class=" R" >## 1つの列の場合は以下でも良い (ただしベクトルになる)
+airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)),]$Month
+</code></pre>
+</div>
+
+<pre class="example">
+[1] 7 8 8 8
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orge1006b1">
+<h3 id="orge1006b1">関数 <code>subset()</code></h3>
+<p>
+複合的な条件を指定してデータを整理する
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >subset(x,subset,select,drop=FALSE)
+</code></pre>
+</div></li>
+<li>関数の引数
+<ul>
+<li><code>x</code>:  データフレーム</li>
+<li><code>subset</code>: 抽出する行の条件</li>
+<li><code>select</code>: 列の選択(未指定の場合は全ての列)</li>
+<li><code>drop</code>: 結果が1行または1列の場合ベクトルとする(TRUE)かデータフレームとする(FALSE)か</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org9cd3e72">
+<h3 id="org9cd3e72">関数 <code>subset()</code> の例 (1/3)</h3>
+<ul>
+<li><p>
+前出の例の書き換え
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >subset(airquality,
+       subset = Ozone&gt;100 &amp; Wind&lt;=5,
+       select = c(1,5,6))
+subset(airquality,
+       Ozone&gt;100 &amp; Wind&lt;=5, # 順序通りなら引数の名前は省略可
+       c(Month,Day)) # 名前は$の後と同じ扱い
+</code></pre>
+</div>
+
+<pre class="example">
+    Ozone Month Day
+62    135     7   1
+99    122     8   7
+117   168     8  25
+121   118     8  29
+    Month Day
+62      7   1
+99      8   7
+117     8  25
+121     8  29
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgf0024e3">
+<h3 id="orgf0024e3">関数 <code>subset()</code> の例 (2/3)</h3>
+<ul>
+<li><p>
+いろいろな記述の仕方
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## Ozoneに欠測(NA)がなく, かつDayが5か10のWindからDayまでの列を抽出
+subset(airquality, 
+       subset = !is.na(Ozone) &amp; Day %in% c(5,10),
+       select = Wind:Day)
+</code></pre>
+</div>
+
+<pre class="example">
+    Wind Temp Month Day
+41  11.5   87     6  10
+66   4.6   83     7   5
+71   7.4   89     7  10
+97   7.4   85     8   5
+128  7.4   87     9   5
+133  9.7   73     9  10
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgfe732ab">
+<h3 id="orgfe732ab">関数 <code>subset()</code> の例 (3/3)</h3>
+<ul>
+<li><p>
+いろいろな記述の仕方
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
+subset(airquality,
+       subset = Ozone&gt;120 | Wind &lt;= 3,
+       select = -Temp)
+</code></pre>
+</div>
+
+<pre class="example">
+    Ozone Solar.R Wind Month Day
+53     NA      59  1.7     6  22
+62    135     269  4.1     7   1
+99    122     255  4.0     8   7
+117   168     238  3.4     8  25
+121   118     225  2.3     8  29
+126    73     183  2.8     9   3
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orge19a5ce" data-background="#fef4f4">
+<h2 id="orge19a5ce">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org8f8d3b2" data-background="#fef4f4">
+<h3 id="org8f8d3b2">練習問題</h3>
+<ul>
+<li><code>datasets::airquality</code> に対して
+以下の条件を満たすデータを取り出しなさい．
+<ul>
+<li>7月のオゾン濃度 (<code>Ozone</code>)</li>
+<li>風速 (<code>Wind</code>) が時速10マイル以上で，
+かつ気温 (<code>Temp</code>) が華氏80度以上の日のデータ</li>
+<li>オゾン (<code>Ozone</code>) も日射量 (<code>Solar.R</code>) も
+欠測 (<code>NA</code>) でないデータの月 (<code>Month</code>) と日 (<code>Day</code>)</li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org71313d6">
+<h2 id="org71313d6">ファイルの取り扱い</h2>
+<div class="outline-text-2" id="text-org71313d6">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org596a814">
+<h3 id="org596a814">データファイルの読み書き</h3>
+<ul>
+<li>実際の解析においては以下の操作が必要
+<ul>
+<li>収集されたデータを読み込む</li>
+<li>整理したデータを保存する</li>
+
+</ul></li>
+<li>Rで利用可能なデータファイル
+<ul>
+<li>CSV形式(comma separated values): テキストファイル</li>
+<li>RData形式: Rの内部表現を用いたバイナリーファイル</li>
+<li>(Excel形式: RStudio の読み込み機能が利用可能)</li>
+
+</ul></li>
+<li>データフレームを対象とした扱いを整理する</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgf036fb5">
+<h3 id="orgf036fb5">作業ディレクトリ</h3>
+<ul>
+<li>Rは <b>作業ディレクトリ</b> で実行される
+<ul>
+<li>ファイルは作業ディレクトリに存在するものとして扱われる</li>
+<li>それ以外のファイルを扱う場合はパスを含めて指定する</li>
+
+</ul></li>
+<li>作業ディレクトリの確認の仕方
+<ul>
+<li>コンソールの上部の表示</li>
+<li>関数 <code>getwd()</code></li>
+
+</ul></li>
+<li>作業ディレクトリの変更の仕方
+<ul>
+<li><b>Session</b> メニューの <b>Set Working Directory</b> で指定
+<ul>
+<li>読み込んだファイルの場所を選択</li>
+<li>File Pane の場所を選択</li>
+<li>ディレクトリを直接選択</li>
+
+</ul></li>
+<li>関数 <code>setwd()</code></li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orge51cd92">
+<h3 id="orge51cd92">関数 <code>getwd()/setwd()</code> の例</h3>
+<ul>
+<li>コンソール / R Scriptからの作業ディレクトリの操作</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 作業ディレクトリの確認 (環境によって実行結果が異なる)
+getwd()
+## 作業ディレクトリの移動 (環境によって指定の仕方も異なる)
+setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダに移動
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orge3f9dcd">
+<h3 id="orge3f9dcd">関数 <code>write.csv()</code></h3>
+<p>
+データフレームをCSVファイルへ書き出す
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >write.csv(x, file="ファイル名")
+</code></pre>
+</div></li>
+<li>関数の引数
+<ul>
+<li><code>x</code>: 書き出すデータフレーム</li>
+<li><code>file</code>: 書き出すファイルの名前<br />
+(作業ディレクトリ下，またはパスを指定)</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org51e6245">
+<h3 id="org51e6245">関数 <code>write.csv()</code> の例</h3>
+<ul>
+<li><p>
+CSVファイルの書き出し
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数write.csvの使い方
+(myData &lt;- subset(airquality, 
+		  subset = Ozone&gt;120,
+		  select = -Temp)) # データフレームの作成
+dim(myData) # データフレームの大きさを確認
+write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
+</code></pre>
+</div>
+
+<pre class="example">
+    Ozone Solar.R Wind Month Day
+62    135     269  4.1     7   1
+99    122     255  4.0     8   7
+117   168     238  3.4     8  25
+[1] 3 5
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org680a04f">
+<h3 id="org680a04f">関数 <code>read.csv()</code></h3>
+<p>
+CSVファイルからデータフレームを読み込む
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >read.csv(file="ファイル名", header=TRUE,
+	 row.names, fileEncoding)      
+</code></pre>
+</div></li>
+<li>関数の引数
+<ul>
+<li><code>file</code>: 読み込むファイルの名前<br />
+(作業ディレクトリ下，またはパスを指定)</li>
+<li><code>header</code>: 1行目を列名として使うか否か</li>
+<li><code>row.names</code>: 行名の指定<br />
+(行名を含む列番号/列名，または行名の直接指定が可能)</li>
+<li><code>fileEncoding</code>: 文字コードの指定<br />
+(日本語の場合，主に使うのは <b>&ldquo;utf8&rdquo;,&ldquo;sjis&rdquo;</b>)</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd517621">
+<h3 id="orgd517621">関数 <code>read.csv()</code> の例</h3>
+<ul>
+<li><p>
+CSVファイルの読み込み 
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数read.csvの使い方
+(newdata &lt;- read.csv(file="data/mydata.csv",
+		     row.names=1)) # 1列目を行名に指定
+dim(newdata) # 正しく読み込めたか大きさを確認
+</code></pre>
+</div>
+
+<pre class="example">
+    Ozone Solar.R Wind Month Day
+62    135     269  4.1     7   1
+99    122     255  4.0     8   7
+117   168     238  3.4     8  25
+[1] 3 5
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgf11e3c1">
+<h3 id="orgf11e3c1">関数 <code>save()</code></h3>
+<p>
+RDataファイルへ書き出す
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >save(..., file="ファイル名")
+</code></pre>
+</div></li>
+<li>関数の引数
+<ul>
+<li><code>...</code>: 保存するオブジェクト名<br />
+(複数可，データフレーム以外も可)</li>
+<li><code>file</code>: 書き出すファイルの名前<br />
+(作業ディレクトリ下，またはパスを指定)</li>
+
+</ul></li>
+<li>CSV形式と異なり，
+<b>複数</b> のデータフレームを1つのファイルに保存することができる</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org7529ac8">
+<h3 id="org7529ac8">関数 <code>save()</code> の例</h3>
+<ul>
+<li><p>
+RDataファイルの書き出し
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数saveの使い方
+(myDat1 &lt;- subset(airquality, Temp&gt;95, select=-Ozone)) 
+(myDat2 &lt;- subset(airquality, Temp&lt;57, select=-Ozone)) 
+dim(myDat1); dim(myDat2) # 大きさを確認
+save(myDat1,myDat2,file="data/mydata.rdata") # RData形式で書き出し
+</code></pre>
+</div>
+
+<pre class="example">
+    Solar.R Wind Temp Month Day
+120     203  9.7   97     8  28
+122     237  6.3   96     8  30
+  Solar.R Wind Temp Month Day
+5      NA 14.3   56     5   5
+[1] 2 5
+[1] 1 5
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgef5fca1">
+<h3 id="orgef5fca1">関数 <code>load()</code></h3>
+<p>
+RDataファイルから読み込む
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >load(file="ファイル名")
+</code></pre>
+</div></li>
+<li>関数の引数
+<ul>
+<li><code>file</code>: 読み込むファイルの名前<br />
+(作業ディレクトリ下，またはパスを指定)</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org212a6a9">
+<h3 id="org212a6a9">関数 <code>load()</code> の例</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数loadの使い方
+(myDat1 &lt;- subset(airquality, Ozone &gt; 160)) # 新たに作成
+load(file="data/mydata.rdata") # RData形式の読み込み
+myDat1 # saveしたときの名前で読み込まれ上書きされる
+myDat2 
+</code></pre>
+</div>
+
+<pre class="example">
+    Ozone Solar.R Wind Temp Month Day
+117   168     238  3.4   81     8  25
+    Solar.R Wind Temp Month Day
+120     203  9.7   97     8  28
+122     237  6.3   96     8  30
+  Solar.R Wind Temp Month Day
+5      NA 14.3   56     5   5
+</pre>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orgc66dfa4" data-background="#fef4f4">
+<h2 id="orgc66dfa4">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgeb7b773" data-background="#fef4f4">
+<h3 id="orgeb7b773">練習問題</h3>
+<ul>
+<li>以下のデータを読み込み，データの操作を行ってみよう．
+<ul>
+<li>データファイル (文字コード: utf8)
+<ul>
+<li>jpdata1.csv: 県別の対象データ</li>
+<li>jpdata2.csv: 対象データの内容</li>
+<li>jpdata3.csv: 県別と地域の対応関係</li>
+
+</ul></li>
+<li><a href="https://www.e-stat.go.jp">https://www.e-stat.go.jp</a> より取得したデータ<br />
+(地域から探す / 全県を選択 / 項目を選択してダウンロード)</li>
+<li><p>
+作業ディレクトリに置いて，以下のように読み込む
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >myData &lt;- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
+myItem &lt;- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
+myArea &lt;- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
+</code></pre>
+</div></li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orgcfd0477">
+<h2 id="orgcfd0477">データの集計</h2>
+<div class="outline-text-2" id="text-orgcfd0477">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd84bef4">
+<h3 id="orgd84bef4">集約のための関数</h3>
+<ul>
+<li>データを集約するための基本的な関数は用意されている
+<ul>
+<li>関数 <code>sum()</code>: 総和</li>
+<li>関数 <code>mean()</code>: 平均</li>
+<li>関数 <code>max()</code>: 最大値</li>
+<li>関数 <code>min()</code>: 最小値</li>
+
+</ul></li>
+
+</ul>
+
+<ul>
+<li>(これ以外にも集約を行なう関数は沢山ある)</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org2763eeb">
+<h3 id="org2763eeb">関数の例</h3>
+<ul>
+<li><p>
+練習問題のデータの集計を行う
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >myData &lt;- read.csv(file="data/jpdata1.csv",
+		   row.names=1, fileEncoding="utf8")
+## 一度読み込んでいれば上の行は不要
+sum(myData$人口) # 全国の総人口 (列名で選択)
+mean(myData[,4]) # 面積の平均値 (行列として列を選択)
+median(myData[[4]]) # 面積の中央値 (リストとして列を選択)
+min(myData["若年"])  # 若年人口の最小値 (列名で選択)
+with(myData,max(老人))  # 老年人口の最大値 (関数withを利用)
+</code></pre>
+</div>
+
+<pre class="example">
+[1] 126708000
+[1] 793554.5
+[1] 609719
+[1] 72000
+[1] 3160000
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgdfe4444">
+<h3 id="orgdfe4444">関数 <code>apply()</code></h3>
+<p>
+列あるいは行ごとの計算を行う
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >apply(X, MARGIN, FUN)
+</code></pre>
+</div></li>
+<li>関数の引数
+<ul>
+<li><code>X</code>: データフレーム</li>
+<li><code>MARGIN</code>: 行(1)か列(2)かを指定</li>
+<li><code>FUN</code>: 計算すべき統計量の関数</li>
+
+</ul></li>
+<li>総和や平均は専用の関数も用意されている<br />
+<b><code>rowSums()/colSums()</code>, <code>rowMeans()/colMeans()</code></b></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orga17106b">
+<h3 id="orga17106b">関数 <code>apply()</code> の例</h3>
+<ul>
+<li><p>
+抽出したデータの集計を行う
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >x &lt;- subset(myData, select=婚姻:勤女) # 抽出
+colMeans(x) # 各列の平均
+apply(x, 2, max) # 列ごとの最大値
+sapply(x, max)   # 上と同じ (help(sapply)を参照)
+## 自作関数の適用 (関数に名前を付けずに利用できる)
+apply(x, 2, function(z){sum(z&gt;mean(z))}) # 平均より大きいデータ数
+</code></pre>
+</div>
+
+<pre class="example">
+      婚姻       離婚       失業       勤男       勤女 
+  4.437021   1.631064   4.221277 410.702128 296.659574
+  婚姻   離婚   失業   勤男   勤女 
+  6.19   2.41   6.30 444.00 336.00
+  婚姻   離婚   失業   勤男   勤女 
+  6.19   2.41   6.30 444.00 336.00
+婚姻 離婚 失業 勤男 勤女 
+  20   22   25   27   22
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org3d5fb0c">
+<h3 id="org3d5fb0c">関数 <code>aggregate()</code></h3>
+<p>
+各行をグループにまとめて統計量を計算する
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >aggregate(x, by, FUN)
+</code></pre>
+</div></li>
+<li>関数の引数
+<ul>
+<li><code>x</code>: データフレーム</li>
+<li><code>by</code>: 各行が属するグループを指定するベクトルをリストで与える(複数可)</li>
+<li><code>FUN</code>: 求めたい統計量を計算するための関数</li>
+
+</ul></li>
+<li><i>(<code>x</code> がベクトルの場合には関数 <code>tapply()</code> も利用可)</i></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org8449079">
+<h3 id="org8449079">関数 <code>aggregate()</code> の例 (1/6)</h3>
+<ul>
+<li><p>
+同じ値を持つグループごとの平均値を求める
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 人口から面積まで地方ごとの平均値を計算
+x &lt;- subset(myData,select=人口:面積)
+aggregate(x, by=list(地方=myArea$地方), FUN=mean) 
+</code></pre>
+</div>
+
+<pre class="example">
+    地方    人口     若年      老人      面積
+1   関東 6178286 737000.0 1564000.0  463329.3
+2   近畿 3204429 395714.3  898714.3  473223.6
+3   九州 1795000 243875.0  511000.0  556395.0
+4   四国  947000 112250.0  305750.0  470091.5
+5   中国 1473800 186400.0  448600.0  638433.4
+6   中部 2372889 302888.9  667555.6  742297.6
+7   東北 1472667 169333.3  452666.7 1115790.7
+8 北海道 5320000 588000.0 1632000.0 7842078.0
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org6d7044f">
+<h3 id="org6d7044f">関数 <code>aggregate()</code> の例 (2/6)</h3>
+<ul>
+<li><p>
+代入せずにまとめて書くことも可能
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >aggregate(subset(myData,select=人口:面積),
+	  by=list(地方=myArea$地方),
+	  FUN=mean) 
+</code></pre>
+</div>
+
+<pre class="example">
+    地方    人口     若年      老人      面積
+1   関東 6178286 737000.0 1564000.0  463329.3
+2   近畿 3204429 395714.3  898714.3  473223.6
+3   九州 1795000 243875.0  511000.0  556395.0
+4   四国  947000 112250.0  305750.0  470091.5
+5   中国 1473800 186400.0  448600.0  638433.4
+6   中部 2372889 302888.9  667555.6  742297.6
+7   東北 1472667 169333.3  452666.7 1115790.7
+8 北海道 5320000 588000.0 1632000.0 7842078.0
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org66be800">
+<h3 id="org66be800">関数 <code>aggregate()</code> の例 (3/6)</h3>
+<ul>
+<li><p>
+以下も同じ結果を返す
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >y &lt;- data.frame(x,地方=myArea$地方) 
+aggregate( . ~ 地方, data=y, FUN=mean)
+</code></pre>
+</div>
+
+<pre class="example">
+    地方    人口     若年      老人      面積
+1   関東 6178286 737000.0 1564000.0  463329.3
+2   近畿 3204429 395714.3  898714.3  473223.6
+3   九州 1795000 243875.0  511000.0  556395.0
+4   四国  947000 112250.0  305750.0  470091.5
+5   中国 1473800 186400.0  448600.0  638433.4
+6   中部 2372889 302888.9  667555.6  742297.6
+7   東北 1472667 169333.3  452666.7 1115790.7
+8 北海道 5320000 588000.0 1632000.0 7842078.0
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org5bb7b9e">
+<h3 id="org5bb7b9e">関数 <code>aggregate()</code> の例 (4/6)</h3>
+<ul>
+<li><p>
+まとめて書くことも可能
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
+	  data=data.frame(subset(myData,select=人口:面積),
+			  地方=myArea$地方), 
+	  FUN=mean)
+</code></pre>
+</div>
+
+<pre class="example">
+    地方    人口     若年      老人      面積
+1   関東 6178286 737000.0 1564000.0  463329.3
+2   近畿 3204429 395714.3  898714.3  473223.6
+3   九州 1795000 243875.0  511000.0  556395.0
+4   四国  947000 112250.0  305750.0  470091.5
+5   中国 1473800 186400.0  448600.0  638433.4
+6   中部 2372889 302888.9  667555.6  742297.6
+7   東北 1472667 169333.3  452666.7 1115790.7
+8 北海道 5320000 588000.0 1632000.0 7842078.0
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org4053340">
+<h3 id="org4053340">関数 <code>aggregate()</code> の例 (5/6)</h3>
+<ul>
+<li><p>
+複数の条件でグループ分け
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
+aggregate(x, by=list(地方=myArea$地方,
+		     過疎=with(myData, 人口&lt;=median(人口))),
+	  FUN=mean)
+</code></pre>
+</div>
+
+<pre class="example">
+     地方  過疎      人口     若年      老人      面積
+1    関東 FALSE 6178285.7 737000.0 1564000.0  463329.3
+2    近畿 FALSE 4681250.0 573750.0 1305500.0  517317.2
+3    九州 FALSE 3436000.0 456000.0  957500.0  619800.0
+4    中国 FALSE 2368000.0 305500.0  688000.0  779697.5
+5    中部 FALSE 3510200.0 451400.0  973200.0  994346.8
+6    東北 FALSE 2102500.0 250000.0  600000.0 1053306.0
+7  北海道 FALSE 5320000.0 588000.0 1632000.0 7842078.0
+8    近畿  TRUE 1235333.3 158333.3  356333.3  414432.0
+9    九州  TRUE 1248000.0 173166.7  362166.7  535260.0
+10   四国  TRUE  947000.0 112250.0  305750.0  470091.5
+11   中国  TRUE  877666.7 107000.0  289000.0  544257.3
+12   中部  TRUE  951250.0 117250.0  285500.0  427236.0
+13   東北  TRUE 1157750.0 129000.0  379000.0 1147033.0
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org60ff472">
+<h3 id="org60ff472">関数 <code>aggregate()</code> の例 (6/6)</h3>
+<ul>
+<li><p>
+別の書き方
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
+	  data=data.frame(subset(myData,select=人口:面積),
+			  地方=myArea$地方,
+			  過疎=with(myData, 人口&lt;=median(人口))))
+</code></pre>
+</div>
+
+<pre class="example">
+     地方  過疎      人口     若年      老人      面積
+1    関東 FALSE 6178285.7 737000.0 1564000.0  463329.3
+2    近畿 FALSE 4681250.0 573750.0 1305500.0  517317.2
+3    九州 FALSE 3436000.0 456000.0  957500.0  619800.0
+4    中国 FALSE 2368000.0 305500.0  688000.0  779697.5
+5    中部 FALSE 3510200.0 451400.0  973200.0  994346.8
+6    東北 FALSE 2102500.0 250000.0  600000.0 1053306.0
+7  北海道 FALSE 5320000.0 588000.0 1632000.0 7842078.0
+8    近畿  TRUE 1235333.3 158333.3  356333.3  414432.0
+9    九州  TRUE 1248000.0 173166.7  362166.7  535260.0
+10   四国  TRUE  947000.0 112250.0  305750.0  470091.5
+11   中国  TRUE  877666.7 107000.0  289000.0  544257.3
+12   中部  TRUE  951250.0 117250.0  285500.0  427236.0
+13   東北  TRUE 1157750.0 129000.0  379000.0 1147033.0
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orgf482be3" data-background="#fef4f4">
+<h2 id="orgf482be3">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orga241223" data-background="#fef4f4">
+<h3 id="orga241223">練習問題</h3>
+<p>
+サンプルデータ(jpdata)の整理をしてみよう．
+</p>
+<ul>
+<li>県別の人口密度を求めよ</li>
+<li>地方別の人口密度を求めよ<br />
+(県ごとに人口が異なるので単純に人口密度を平均してはいけない)</li>
+<li>地方別の婚姻率・離婚率(1000人当たり)を概算せよ<br />
+(「人口1000人当たり」とあるが，
+ 若年層は婚姻不可として除いた
+ 「婚姻可能な人口1000人当たり」
+ で置き換えて計算しなさい)</li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/notes/notes.js"></script>
+<script src="./reveal.js/plugin/search/search.js"></script>
+<script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: true,
+fragmentInURL: true,
+hashOneBasedIndex: false,
+pdfSeparateFragments: false,
+
+overview: true,
+
+transition: 'fade',
+transitionSpeed: 'default',
+chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }},
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+{ src: './reveal.js/plugin/menu/menu.js'},
+{ src: './reveal.js/plugin/chalkboard/chalkboard.js'}]
+
+});
+</script>
+</body>
+</html>

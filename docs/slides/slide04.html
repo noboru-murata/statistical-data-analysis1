@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>データの可視化</title>
+<meta name="author" content="村田 昇"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-state="no-toc-progress">
+<!-- This is an HTML template for the title slide. -->
+<!-- Embed logos as necessary. -->
+<!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
+<div class="talk-title">
+    <h1 class="no-toc-progress">データの可視化</h1>
+</div>
+<div class="talk-subtitle">
+    <p></p>
+</div>
+<div class="keyboard-usage">
+    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+</div>
+<div class="talk-author">
+  <p>村田 昇<br />
+  2020.05.08</p>
+</div>
+
+</section>
+
+<section>
+<section id="slide-org57c234d">
+<h2 id="org57c234d">可視化の重要性</h2>
+<div class="outline-text-2" id="text-org57c234d">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org80160c7">
+<h3 id="org80160c7">可視化のための機能</h3>
+<ul>
+<li>データの特徴や傾向を把握するために効果的</li>
+<li>Rはきわめて多彩な作図機能を持つ</li>
+<li><code>package::graphics</code> 
+に含まれる代表的な描画関数を取り上げて解説する
+<ul>
+<li>描画関連の関数は色，
+線の種類や太さ，
+あるいは図中の文字の大きさなどを指定することができる</li>
+<li>用意されている多彩なオプションは説明しきれないため，
+必要に応じて関数 <code>help()</code> (ヘルプ)と
+と関数 <code>example()</code> (例題)
+を参照のこと</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org6823f43">
+<h3 id="org6823f43">(参考) 図の保存</h3>
+<ul>
+<li>RStudioの機能を使う場合:
+<ol>
+<li>右下ペインの&ldquo;Plots&rdquo;タブの&ldquo;Export&rdquo;をクリック</li>
+<li>形式やサイズを指定する <br />
+<i>(クリップボードにコピーもできる)</i></li>
+
+</ol></li>
+<li><p>
+コンソール / R Scriptで実行する場合:
+</p>
+<ul>
+<li><code>help(pdf)</code> : PDFファイルに保存</li>
+<li><code>help(png)</code> : PNGファイルに保存</li>
+<li><code>help(dev.copy)</code> : &ldquo;graphic device&rdquo; 間でコピー</li>
+
+</ul>
+<p>
+などを参照
+</p></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org54a9b95">
+<h2 id="org54a9b95">基本的な描画</h2>
+<div class="outline-text-2" id="text-org54a9b95">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orge8228ca">
+<h3 id="orge8228ca">関数 <code>plot()</code></h3>
+<p>
+ベクトルデータの描画を行う
+</p>
+<ul>
+<li><p>
+基本書式 
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >plot(x, y=NULL, type="p", xlim=NULL, ylim=NULL,
+     main=NULL, xlab=NULL, ylab=NULL, ...) # ...はその他のオプション
+</code></pre>
+</div></li>
+<li>関数の引数
+<ul>
+<li><code>x</code>, <code>y</code> : ベクトル． <code>y</code> は省略可能．</li>
+<li><code>type</code>: 描画タイプ．既定値は <code>p</code> (点)．
+<code>l</code> (折れ線)など指定可</li>
+<li><code>xlim/ylim</code>: \(x/y\) 軸の範囲．既定値は自動的に決定</li>
+<li><code>main</code>: 図のタイトル．既定値は空白</li>
+<li><code>xlab</code>: \(x\) 軸のラベル名．既定値は <code>Index</code></li>
+<li><code>ylab</code>: \(y\) 軸のラベル名．既定値は <code>x</code> のオブジェクト名</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orge55eda0">
+<h3 id="orge55eda0">関数 <code>plot()</code> のオプション</h3>
+<ul>
+<li>よく利用されるその他のオプション (<code>...</code> の部分)
+<ul>
+<li><code>col</code>: 色の指定．
+<code>"red"</code> や <code>"blue"</code> など． <br />
+<i>(指定可能な色は関数 <code>colors()</code> で照会できる)</i></li>
+<li><code>pch</code>: 点の形．
+詳細は <code>help(points)</code> を参照</li>
+<li><code>lty</code>: 線のタイプ．
+実線・破線など．タイプ名もしくは数字で指定．
+詳細は <code>help(par)</code> を参照</li>
+<li><code>lwd</code>: 線の太さ．数字で指定</li>
+<li><code>cex</code>: 文字の大きさ．
+既定値の何倍にするかを指定</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org643a8b0">
+<h3 id="org643a8b0">ベクトルの描画の例 (1/3)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## plot(x) の場合 
+x &lt;- pi/6*(0:12) # 30度(pi/6)おきに1周期分 (0-2*pi)
+plot(sin(x)) # x軸はベクトルの要素番号(Index)，y軸はsin(x)の値を描画
+</code></pre>
+</div>
+
+
+<div id="orgb3489df" class="figure">
+<p><img src="figs/graph-plot1.png" alt="graph-plot1.png" height="100%" />
+</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgcea16f8">
+<h3 id="orgcea16f8">ベクトルの描画の例 (2/3)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## plot(x,y) の場合
+x &lt;- pi/6*(0:12)
+plot(x, sin(x)) # x の値に対する y=sin(x) の値を対応づけて描画
+</code></pre>
+</div>
+
+
+<div id="org8932901" class="figure">
+<p><img src="figs/graph-plot2.png" alt="graph-plot2.png" height="100%" />
+</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org7c0a9a1">
+<h3 id="org7c0a9a1">ベクトルの描画の例 (3/3)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## オプションを追加
+x &lt;- pi/6*(0:12)
+plot(x,sin(x),type="l",lwd=3,col="blue",ylab="y=sin(x)") 
+</code></pre>
+</div>
+
+
+<div id="orgfa93837" class="figure">
+<p><img src="figs/graph-plot3.png" alt="graph-plot3.png" height="100%" />
+</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgb5ff9ac">
+<h3 id="orgb5ff9ac">重ね描き</h3>
+<ul>
+<li><p>
+別のベクトルを点として重ね描きする場合
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >points(x, y=NULL, ...) # plotと同様なオプションが指定可
+</code></pre>
+</div></li>
+<li><p>
+別のベクトルを線として重ね描きする場合
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >lines(x, y=NULL, ...) # plotと同様なオプションが指定可
+</code></pre>
+</div></li>
+<li><p>
+文字を重ね描きする場合
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >text(x, y=NULL, labels, ...) # labelsに文字列を指定
+</code></pre>
+</div></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgf2c606a">
+<h3 id="orgf2c606a">重ね描きの例</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## ベクトルデータの重ね描き
+x &lt;- seq(0, 4*pi, by=0.5)
+y &lt;- sin(x)
+z &lt;- cos(x)
+plot(x, y, type="b", pch="x", ylim=c(-2,2), col="red") # "b"="p+l"
+points(x, z, col="blue", pch="C") # 点を追加. pchは文字も指定できる
+lines(x, z, col="cyan", lwd=3) # 折れ線を追加
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="org16977ef" class="figure">
+<p><img src="figs/graph-plot4.png" alt="graph-plot4.png" height="100%" />
+</p>
+<p><span class="figure-number">Figure 4: </span>ベクトルデータの重ね描き</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org9781349">
+<h3 id="org9781349">関数 <code>curve()</code></h3>
+<p>
+1変数関数の描画を行う
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >curve(expr, from=NULL, to=NULL, add=FALSE,
+      type="l", xname="x", xlab=xname, ylab=NULL, ...)
+## plot(x, y=0, to=1, ...) でもほぼ同じ
+</code></pre>
+</div></li>
+<li>関数の引数
+<ul>
+<li><code>expr</code>: 1変数関数 (関数名)</li>
+<li><code>from</code>: \(x\) 軸の左端</li>
+<li><code>to</code>: \(x\) 軸の右端</li>
+<li><code>add</code>: TRUE で重ね描きする</li>
+<li><code>xname</code>: \(x\) 軸の変数名</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org6ebd4f6">
+<h3 id="org6ebd4f6">関数の描画の例 (1/2)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数の描画
+curve(sin, from=0, to=4*pi, 
+      col="blue", lwd=2, # グラフの線の色と太さ
+      xlab="time", ylab="sin/cos") # x/y軸のラベルの文字列を指定
+curve(cos, 
+      add=TRUE, # グラフを上書き
+      col="red", lwd=2)
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="orgdf9d364" class="figure">
+<p><img src="figs/graph-plot5.png" alt="graph-plot5.png" height="100%" /> 
+</p>
+<p><span class="figure-number">Figure 5: </span>関数の描画</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgbceefe8">
+<h3 id="orgbceefe8">関数の描画の例 (2/2)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数とベクトルデータの重ね描き
+x &lt;- seq(0, 4*pi, by=0.25)
+y &lt;- sin(x) + rep(c(-0.2, 0.1), len=length(x))
+plot(x, y, type="p", pch="x", ylim=c(-2,2), col="red") 
+lines(x, y, col="blue", lwd=2) # 折れ線を追加
+curve(sin, add=TRUE, col="orange", lwd=3)
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="org90d42c9" class="figure">
+<p><img src="figs/graph-plot6.png" alt="graph-plot6.png" height="100%" />
+</p>
+<p><span class="figure-number">Figure 6: </span>関数とベクトルデータの重ね描き</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org786db7e">
+<h3 id="org786db7e">散布図</h3>
+<ul>
+<li>2種類のデータ \(x_1,\dots,x_N\)
+および \(y_1,\dots,y_N\) が与えられたとき，
+同じ index を持つ点 \((x_1,y_1),\dotsc,(x_N,y_N)\) を
+平面上に描画した図</li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgf4c7735">
+<h3 id="orgf4c7735">関数 <code>plot()</code></h3>
+<p>
+ベクトルデータの散布図を作成する
+</p>
+<ul>
+<li><p>
+基本書式 (既出の機能)
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >plot(x, y=NULL, ...)
+</code></pre>
+</div>
+<ul>
+<li><code>x</code>: 1種類目のデータ \(x_1,\dots,x_N\)</li>
+<li><code>y</code>: 2種類目のデータ \(y_1,\dots,y_N\)</li>
+<li><code>...</code>: &ldquo;ベクトルの描画&rdquo;と同じオプションが利用可能</li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org3ff6510">
+<h3 id="org3ff6510">関数 <code>plot()</code></h3>
+<p>
+データフレーム <code>x</code> の変数A，Bの散布図を作成する
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >plot(B ~ A, data=x, ...)
+</code></pre>
+</div>
+<ul>
+<li><code>x</code>: データフレーム</li>
+<li><code>A,B</code>: 変数名 (データフレームの列名)</li>
+
+</ul></li>
+<li>データフレーム <code>x</code> に対して
+<code>plot(x)</code> を実行すると，
+すべての変数のペアに対する散布図が
+作成される(散布図行列; <code>pairs()</code> 後述)</li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd11078a">
+<h3 id="orgd11078a">散布図の例</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## データフレームを用いた散布図
+plot(Ozone ~ Wind, data=airquality,
+     pch="*", col="red", cex=2) # cexは点の大きさの倍率を指定
+</code></pre>
+</div>
+
+
+<div id="orga16aae2" class="figure">
+<p><img src="figs/graph-plot7.png" alt="graph-plot7.png" height="100%" />
+</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org7ad338e">
+<h3 id="org7ad338e">(参考) 日本語に関する注意</h3>
+<p>
+日本語を含む図で文字化けが起こった場合 <br />
+(主にMacOS)
+</p>
+<ul>
+<li><p>
+関数 <code>par</code> の <code>family</code> オプションでフォントを指定 <br />
+ヒラギノ角ゴシックW4を指定する場合
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >par(family="HiraginoSans-W4") # 数字を変えると太さが変わる
+</code></pre>
+</div></li>
+<li>以下のサイトなども参考になる <br />
+<a href="https://oku.edu.mie-u.ac.jp/~okumura/stat/font.html">https://oku.edu.mie-u.ac.jp/~okumura/stat/font.html</a></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org511b11e" data-background="#fef4f4">
+<h2 id="org511b11e">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgaa14993" data-background="#fef4f4">
+<h3 id="orgaa14993">練習問題</h3>
+<ul>
+<li><code>jpdata1/3.csv</code> (前回配布のデータ)を用いて以下の問に答えよ．
+<ul>
+<li>婚姻・離婚率の散布図を描け．</li>
+<li>地方別に異なる点の形状を用いた散布図を描け．</li>
+<li>それ以外にも様々な散布図を描画してみよう．</li>
+<li><p>
+(参考) 読み込み方: 
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
+myData &lt;- read.csv(file="data/jpdata1.csv",fileEncoding="utf8",row.names=1)
+myArea &lt;- read.csv(file="data/jpdata3.csv",fileEncoding="utf8")
+</code></pre>
+</div></li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orgf375f4f">
+<h2 id="orgf375f4f">分布の視覚化</h2>
+<div class="outline-text-2" id="text-orgf375f4f">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org32fa865">
+<h3 id="org32fa865">ヒストグラム</h3>
+<ul>
+<li>データの値の範囲をいくつかの区間に分割し，
+各区間に含まれるデータ数を棒グラフにしたもの</li>
+<li>棒グラフの横幅が区間に対応し, 面積が区間に含まれるデータの個数に比例するグラフを作成する</li>
+<li>データの分布の仕方(どのあたりに値が集中しているか, どの程度値にばらつきがあるかなど)を可視化するのに有効</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org3b3cf3d">
+<h3 id="org3b3cf3d">関数 <code>hist()</code></h3>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >hist(x, breaks="Sturges", freq, ...) # plotと同様なオプションが指定可
+</code></pre>
+</div>
+<ul>
+<li><code>x</code>: ベクトル</li>
+<li><code>breaks</code>: 区間の分割の仕方を指定．
+数字を指定するとデータ範囲をその数字に近い個数に等分割する．
+既定値はSturgesの公式．      
+詳細はヘルプを参照</li>
+<li><code>freq</code>: <code>TRUE</code> (既定値)を指定すると縦軸はデータ数，
+<code>FALSE</code> を指定すると縦軸はデータ数/全データ数．</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org928ef74">
+<h3 id="org928ef74">ヒストグラムの例 (1/2)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数histによるヒストグラムの作図
+myData &lt;- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+par(family="HiraginoSans-W4") # 日本語表示
+hist(myData$気温, 
+     xlab="", ylab="頻度",
+     breaks=25, # ビンの数を約25に設定
+     labels=TRUE, # 各ビンの度数を表示
+     col="green", main="気温のヒストグラム") 
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="orgd7ac520" class="figure">
+<p><img src="figs/graph-hist1.png" alt="graph-hist1.png" height="100%" />
+</p>
+<p><span class="figure-number">Figure 8: </span>ヒストグラム</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org5d24309">
+<h3 id="org5d24309">ヒストグラムの例 (2/2)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数histによるヒストグラムの作図(密度での表示)
+par(family="HiraginoSans-W4") # 日本語表示
+hist(myData$風速, freq=FALSE, # 全体に対する割合で表示
+     xlab="", ylab="密度", breaks=25, 
+     col="lightblue", border="blue", # 長方形の境界の色
+     main="風速の密度") 
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+
+<div id="orgda0272e" class="figure">
+<p><img src="figs/graph-hist2.png" alt="graph-hist2.png" height="100%" />
+</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgef13fcc">
+<h3 id="orgef13fcc">箱ひげ図</h3>
+<ul>
+<li>データの中心，散らばり具合および外れ値を考察するための図 
+(ヒストグラムの簡易版)</li>
+<li>複数のデータの分布の比較の際に有効
+<ul>
+<li>太線で表示された中央値(第2四分位点)</li>
+<li>第1四分位点を下端・第3四分位点を上端とする長方形(箱)</li>
+<li>第1四分位点・第3四分位点からそれぞれ箱の長さの1.5倍以内にあるデータのうちの
+最小の値・最大の値を下端・上端とする直線(ひげ)</li>
+
+</ul></li>
+<li>ひげの外側のデータは点で表示される</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgb7f0a07">
+<h3 id="orgb7f0a07">関数 <code>boxplot()</code></h3>
+<p>
+箱ひげ図を描画する
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >boxplot(x, ...) # plotと同様なオプションが指定可
+</code></pre>
+</div>
+<ul>
+<li><code>x</code>: ベクトルまたはデータフレーム
+<ul>
+<li>ベクトルに対しては単一の箱ひげ図</li>
+<li>データフレーム対しては列ごとの箱ひげ図</li>
+
+</ul></li>
+
+</ul></li>
+
+</ul>
+
+<ul>
+<li><p>
+データフレーム <code>x</code> の
+変数 <code>B</code> を変数 <code>A</code> (質的変数; 性別・植物の種類など)で分類する場合
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >boxplot(B ~ A, data=x, ...)
+</code></pre>
+</div></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org658d68a">
+<h3 id="org658d68a">箱ひげ図の例 (1/2)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数boxplotによる箱ひげ図の作図
+myData &lt;- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+## 基本的な箱ひげ図
+par(family="HiraginoSans-W4") # 日本語表示
+boxplot(subset(myData, select=気温:風速)) # 数値データの一部を抽出
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="orgb881617" class="figure">
+<p><img src="figs/graph-boxplot1.png" alt="graph-boxplot1.png" height="100%" />
+</p>
+<p><span class="figure-number">Figure 10: </span>箱ひげ図</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd7f2a7f">
+<h3 id="orgd7f2a7f">箱ひげ図の例 (2/2)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数boxplotによる箱ひげ図の作図
+myData &lt;- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+## 月ごとに気温を分類
+par(family="HiraginoSans-W4") # 日本語表示
+boxplot(気温 ~ 月, data=myData, col="orange", main="月ごとの気温")
+## 図を回転する場合は horizontal を指定する
+## boxplot(気温 ~ 月, data=myData,
+## 	col="purple", main="月ごとの気温", horizontal=TRUE)
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="org540b92c" class="figure">
+<p><img src="figs/graph-boxplot2.png" alt="graph-boxplot2.png" height="100%" />
+</p>
+<p><span class="figure-number">Figure 11: </span>箱ひげ図</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org227771b">
+<h2 id="org227771b">比率の視覚化</h2>
+<div class="outline-text-2" id="text-org227771b">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org2da5fbb">
+<h3 id="org2da5fbb">関数 <code>barplot()</code></h3>
+<p>
+棒グラフを作成する
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >barplot(x,width=1,space=NULL,beside=FALSE,
+	legend.text=NULL,args.legend=NULL, ...) # ...はplotと同様
+</code></pre>
+</div>
+<ul>
+<li><code>x</code>: ベクトルまたは行列 (データフレームは不可)</li>
+<li><code>width</code>: 棒の幅</li>
+<li><code>space</code>: 棒グラフ間・変数間のスペース</li>
+<li><code>legend.text</code>: 凡例</li>
+<li><code>beside</code>: 複数の変数を縦に並べるか・横に並べるか</li>
+<li><code>args.legend</code>: 関数 <code>legend</code> に渡す引数</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgb8ac309">
+<h3 id="orgb8ac309">棒グラフの例 (1/2)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数barplotによる棒グラフの作図
+myData &lt;- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+## 月ごとに各変数の平均を計算
+par(family="HiraginoSans-W4") # 日本語表示
+x &lt;- aggregate(. ~ 月, FUN=mean,
+	       data=subset(myData, select=c(月,気温:風速)))
+## 基本的な棒グラフ
+barplot(x[,2], # 棒の高さのベクトル
+	col="slateblue", # 棒の色の指定
+	names.arg=x[,1], # x軸のラベル
+	main=names(x)[2]) # タイトル
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="org5f5da9d" class="figure">
+<p><img src="figs/graph-barplot1.png" alt="graph-barplot1.png" height="100%" />
+</p>
+<p><span class="figure-number">Figure 12: </span>棒グラフ</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org482991a">
+<h3 id="org482991a">棒グラフの例 (2/2)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数barplotによる棒グラフの作図
+## 複数の棒グラフ
+par(family="HiraginoSans-W4") # 日本語表示
+barplot(as.matrix(x[ ,-1]), # 第1引数のデータフレームは行列にする
+	col=rainbow(12)[c(8:1,12:9)], # 12色に色分け
+	beside=TRUE, # 棒グラフを横に並べる
+	space=c(1.5, 3), # 棒グラフ間・変数間のスペースを指定
+	legend.text=paste0(x[ ,1], "月"), # 凡例の指定
+	args.legend=list(ncol=2)) # 凡例を2列にして表示
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+
+<div id="org8e3ae8d" class="figure">
+<p><img src="figs/graph-barplot2.png" alt="graph-barplot2.png" height="100%" />
+</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgda2b846">
+<h3 id="orgda2b846">関数 <code>pie()</code></h3>
+<p>
+円グラフを作成する
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >pie(x, clockwise=FALSE, ...) # plotと同様なオプションが指定可
+</code></pre>
+</div>
+<ul>
+<li><code>x</code>: ベクトル</li>
+<li><code>clockwise</code>: 時計回りに書くか否か</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org26d12f9">
+<h3 id="org26d12f9">円グラフの例</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数pieによる円グラフの作図
+myData &lt;- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+z &lt;- hist(myData$日射量, breaks=5, plot=FALSE) # 5つ程度に分類
+x &lt;- z$count
+y &lt;- z$breaks
+names(x) &lt;- paste(y[-length(y)], y[-1], sep="-")
+## 向きと色を調整
+par(family="HiraginoSans-W4") # 日本語表示
+pie(x, clockwise=TRUE, main="日射量別の日数の割合",
+    col=heat.colors(length(x),rev=TRUE))
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+
+<div id="org8d1a9e1" class="figure">
+<p><img src="figs/graph-pie1.png" alt="graph-pie1.png" height="100%" />
+</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org39b7333" data-background="#fef4f4">
+<h2 id="org39b7333">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd9844dd" data-background="#fef4f4">
+<h3 id="orgd9844dd">練習問題</h3>
+<ul>
+<li><code>covid19_tokyo.csv</code> (東京都の新型コロナウイルス感染動向データ)
+を用いて以下の問に答えよ．
+<ul>
+<li>陽性患者数の推移の折線グラフを描け．</li>
+<li>検査実施人数の推移の棒グラフを描け．</li>
+<li>曜日ごとの検査実施件数の箱ひげ図を描け．</li>
+<li><p>
+(参考) 読み込み方:
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >## CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
+myData &lt;- read.csv(file="data/covid19_tokyo.csv",fileEncoding="utf8")
+</code></pre>
+</div></li>
+<li>(参考) covid19データは東京都 (<a href="https://stopcovid19.metro.tokyo.lg.jp/">https://stopcovid19.metro.tokyo.lg.jp/</a>) から取得して整理したもの</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orge3b4250">
+<h2 id="orge3b4250">多次元データの視覚化</h2>
+<div class="outline-text-2" id="text-orge3b4250">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org7219e32">
+<h3 id="org7219e32">関数 <code>pairs()</code></h3>
+<p>
+散布図行列を作成する
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >pairs(x, ...) # plot() でも良い
+</code></pre>
+</div>
+<p>
+<i>(すべての列のペアに対する散布図を行列状に配置)</i>
+</p>
+<ul>
+<li><code>x</code>: データフレーム</li>
+
+</ul></li>
+<li><p>
+変数 <code>A1</code>, \(\dots\), <code>Ak</code> (列名)のみ考える場合
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >pairs(~ A1 + ... + Ak, data=x, ...) # plot() でも良い
+</code></pre>
+</div></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org20da4c1">
+<h3 id="org20da4c1">散布図行列の例</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数pairsによる散布図の作図
+myData &lt;- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+## 表示する項目を指定
+par(family = "HiraginoSans-W4") 
+pairs(~ 気温 + 日射量 + 風速, data=myData,
+      col=rainbow(12)[myData$月]) # 月毎に異なる色で表示
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="org086df03" class="figure">
+<p><img src="figs/graph-pairs1.png" alt="graph-pairs1.png" height="100%" />
+</p>
+<p><span class="figure-number">Figure 15: </span>散布図行列</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org93c25e0">
+<h3 id="org93c25e0">関数 <code>persp()</code></h3>
+<p>
+3次元のグラフを2次元に射影した俯瞰図を描く
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >persp(x, y, z, theta=0, phi=15, expand=1, ...) # ...はplotと同様
+</code></pre>
+</div>
+<ul>
+<li><code>x,y,z</code>: \(x,y,z\) 座標<br />
+(<code>z</code> は
+点(<code>x[i],y[j]</code>)に対応する値を
+\((i,j)\) 成分とする行列で与える必要がある)</li>
+<li><code>theta,phi</code>: 俯瞰の方向を指定する極座標</li>
+<li><code>expand</code>: \(z\) 軸の拡大度</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org256f3f9">
+<h3 id="org256f3f9">3次元俯瞰図の例</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 関数perspによる2変数関数の俯瞰図
+f &lt;- function(x,y) x^2 - y^2
+x &lt;- seq(-3, 3, length=51) # x座標の定義域の分割
+y &lt;- seq(-3, 3, length=51) # y座標の定義域の分割
+z &lt;- outer(x, y, f) # z座標の計算
+## 基本的な俯瞰図
+## persp(x, y, z, col="lightblue")
+## 俯瞰する向きを指定
+persp(x, y, z, theta=30, phi=30, expand=0.5, # 俯瞰する視線の設定
+      col="royalblue", main=expression(z==x^2-y^2))
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+
+<div id="org91a69d8" class="figure">
+<p><img src="figs/graph-plot3d1.png" alt="graph-plot3d1.png" height="100%" />
+</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org969dc0b">
+<h3 id="org969dc0b">3次元グラフのためのパッケージ</h3>
+<p>
+以下は <code>scatterplot3d()</code> の例
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >scatterplot3d(x, color, angle=40, ...) # ...はplotとは若干異なる
+</code></pre>
+</div>
+<ul>
+<li><code>x</code>: \(x,y,z\) 座標を指定するデータフレーム<br />
+(関数 <code>persp()</code> のように直接指定することも可能)</li>
+<li><code>color</code>: 色を指定(<code>col</code> ではない). 既定値は黒</li>
+<li><code>angle</code>: \(x\) 軸と \(y\) 軸の間の角度</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org7b09223">
+<h3 id="org7b09223">3次元散布図の例</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 3次元散布図
+## install.packages("scatterplot3d") # 初めて使う時に必要
+library(scatterplot3d) # パッケージのロード
+myData &lt;- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+par(family = "HiraginoSans-W4") 
+scatterplot3d(subset(myData, select=c(風速, 日射量, 気温)), 
+	      pch=4, color="orchid")
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="org17eaca3" class="figure">
+<p><img src="figs/graph-plot3d2.png" alt="graph-plot3d2.png" height="100%" />
+</p>
+<p><span class="figure-number">Figure 17: </span>3次元散布図</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org4404da1">
+<h2 id="org4404da1">凡例の追加</h2>
+<div class="outline-text-2" id="text-org4404da1">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org1501d78">
+<h3 id="org1501d78">関数 <code>legend()</code></h3>
+<p>
+グラフに凡例を追加する
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >legend(x, y=NULL, legend, ...) # ...はその他のオプション
+</code></pre>
+</div>
+<ul>
+<li><code>x,y</code>: 凡例の位置を指定 (座標やキーワードで指定が可能)</li>
+<li><code>legend</code>: 凡例の文字列ベクトル</li>
+
+</ul></li>
+<li>複雑なオプションは <code>help(legend)</code> を参照</li>
+<li>数式の表示の詳細は <code>help(plotmath)</code> を参照</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org94bb239">
+<h3 id="org94bb239">凡例の例 (1/2)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 凡例の追加
+f &lt;- function(x) exp(-x) * cos(x)
+plot(f, 0, 2*pi, col="red", lwd=2, ylab="")
+g &lt;- function(x) exp(-x) * sin(x)
+curve(g, lty=2, # グラフの線の形式 2は破線
+      add=TRUE, col="blue", lwd=2)
+legend(4, # 凡例の左上のx座標
+       1, # 凡例の左上のy座標
+       legend=c(expression(e^{-x}*cos(x)),expression(e^{-x}*sin(x))),
+       lty=c(1,2), lwd=2, col=c("red","blue"), # 指定はグラフに準拠
+       bty="n", # 凡例の枠線の形式(オプション) "n"は枠線なし
+       y.intersp=2) # 行間の指定(オプション)
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="org17c859c" class="figure">
+<p><img src="figs/graph-legend.png" alt="graph-legend.png" height="100%" />
+</p>
+<p><span class="figure-number">Figure 18: </span>凡例の追加</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd686d6e">
+<h3 id="orgd686d6e">凡例の例 (2/2)</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >## 日本語フォントの指定
+par(family="HiraginoSans-W4") 
+## 東京の気候データから月ごとの気温,降水量,日射量の平均を計算し描画する
+myData &lt;- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+(x &lt;- aggregate(. ~ 月, FUN=mean,
+		data=subset(myData, select=c(月,気温,降水量,日射量))))
+plot(x$気温, type ="b", lwd=3, col="green", ylim=c(0, max(x$気温)+1),
+     xlab="月", ylab="", main="東京の気候データ", axes=FALSE) # 軸は無
+axis(1, 1:12, 1:12); axis(2) # x(1),y(2)軸の作成
+lines(x$降水量, type="h", lwd=3, col="blue") # 棒グラフ
+lines(x$日射量, type="s", lwd=3, lty=2, col="red") # 階段グラフ
+abline(0, 0, lwd=2, lty="dotted") #  y=0の線を引く
+legend("topleft", inset=0.02, # 左上で全体の2%(0.02)内側に良せる
+       legend=c("気温","降水量","日射量"),
+       col=c("green","blue","red"), lwd=3, lty=c(1,1,2))
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+
+<div id="orgb194276" class="figure">
+<p><img src="figs/graph-font.png" alt="graph-font.png" height="100%" />
+</p>
+<p><span class="figure-number">Figure 19: </span>日本語フォントの指定</p>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orga6c4881">
+<h2 id="orga6c4881">補遺</h2>
+<div class="outline-text-2" id="text-orga6c4881">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orga12b23a">
+<h3 id="orga12b23a">関数 <code>par()</code></h3>
+<p>
+グラフィクス環境の設定(複数図の配置, 余白の設定)をする
+</p>
+<ul>
+<li><p>
+基本書式
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >par(tag=value)
+</code></pre>
+</div>
+<ul>
+<li><code>tag</code>: グラフィックスパラメータ</li>
+
+</ul></li>
+<li>描画の際の線の種類や色, 点の形等の既定値を設定することができる</li>
+<li>設定可能なグラフィックスパラメータは <code>help(par)</code> を参照</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org63a92b6">
+<h3 id="org63a92b6">package::ggplot2</h3>
+<ul>
+<li>Rのグラフィック機能を拡張するパッケージの1つ</li>
+<li>統一的な文法で系統的に美しいグラフを描くことを目指して開発</li>
+<li>詳細については <a href="https://docs.ggplot2.org/">https://docs.ggplot2.org/</a> を参照</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org69886c0" data-background="#fef4f4">
+<h2 id="org69886c0">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org7785e51" data-background="#fef4f4">
+<h3 id="org7785e51">練習問題</h3>
+<ul>
+<li><p>
+配布したデータ
+</p>
+<ul>
+<li><code>jpdata1.csv</code></li>
+<li><code>tokyo_weather.csv</code></li>
+<li><code>covid19_tokyo.csv</code></li>
+<li><code>covid19_tokyo_patients.csv</code></li>
+
+</ul>
+<p>
+を用いて以下の問いに答えよ．
+</p>
+<ul>
+<li>3次元の散布図を作成せよ．</li>
+<li>凡例を加えたグラフを作成せよ．</li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/notes/notes.js"></script>
+<script src="./reveal.js/plugin/search/search.js"></script>
+<script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: true,
+fragmentInURL: true,
+hashOneBasedIndex: false,
+pdfSeparateFragments: false,
+
+overview: true,
+
+transition: 'fade',
+transitionSpeed: 'default',
+chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }},
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+{ src: './reveal.js/plugin/menu/menu.js'},
+{ src: './reveal.js/plugin/chalkboard/chalkboard.js'}]
+
+});
+</script>
+</body>
+</html>

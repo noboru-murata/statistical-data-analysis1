@@ -14,22 +14,25 @@
   本講義では．．．
 
 ** 講義資料
-   - [[github:pdfs/note1.pdf][R編]]
-   随時修正します．
+   以下は統計データ解析 I・II の資料です．
+   1. Rの基礎編 [[github:pdfs/note1.pdf][(PDF)]] [[github:zips/script1.zip][(Rscript/Dataset)]] 
+   2. 確率と統計編 [[github:pdfs/note2.pdf][(PDF)]] [[github:zips/script2.zip][(Rscript/Dataset)]] 
+   3. 多変量解析編 [[github:pdfs/note3.pdf][(PDF)]] [[github:zips/script3.zip][(Rscript/Dataset)]] 
+   (随時更新します)
 
+   特に統計データ解析IIでは「Rの基礎」と「確率と統計」を用います．
+   
 ** 参考資料   
-  必要な参考書については講義中に指示します．
-
+   その他，必要な参考書等については講義中に指示します．
 
 * 講義1
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture01
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide01" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide01.pdf][PDF file]]
    
 * 講義2
@@ -37,123 +40,134 @@
   :EXPORT_FILE_NAME: lecture02
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide02" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide02.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide02.R][RScript]]
 
 * 講義3
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture03
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide03" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide03.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide03.R][RScript]]
 
 * 講義4
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture04
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide04" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide04.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide04.R][RScript]]
 
 * 講義5
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture05
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide05" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide05.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide05.R][RScript]]
 
 * 講義6
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture06
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide06" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide06.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide06.R][RScript]]
 
 * 講義7
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture07
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide07" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide07.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide07.R][RScript]]
 
 * 講義8
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture08
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide08" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide08.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide08.R][RScript]]
 
 * 講義9
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture09
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide09" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide09.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide09.R][RScript]]
 
 * 講義10
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture10
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide10" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide10.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide10.R][RScript]]
 
 * 講義11
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture11
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide11" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide11.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide11.R][RScript]]
 
 * 講義12
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture12
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  準備中
-** COMMENT スライド
+** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide12" >}}
-** COMMENT ハンドアウト
+** ハンドアウト
    - [[github:pdfs/slide12.pdf][PDF file]]
+** 解答例
+   - [[github:code/slide12.R][RScript]]
 
-* 講義13
+* COMMENT 講義13
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture13
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -164,7 +178,10 @@
 ** COMMENT ハンドアウト
    - [[github:pdfs/slide13.pdf][PDF file]]
 
-* 講義14
+** COMMENT 解答例
+   - [[github:code/slide13.R][RScript]]
+
+* COMMENT 講義14
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture14
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -174,17 +191,56 @@
    #+html: {{< myslide base="statistical-data-analysis1" name="slide14" >}}
 ** COMMENT ハンドアウト
    - [[github:pdfs/slide14.pdf][PDF file]]
+** COMMENT 解答例
+   - [[github:code/slide14.R][RScript]]
 
-* COMMENT お知らせ
-  おしらせは以下を利用     
-
-* COMMENT 講義の進め方
+* COMMENT お知らせの雛形
+  :PROPERTIES:
+  :EXPORT_HUGO_SECTION: ./post
+  :EXPORT_FILE_NAME: post0
+  :EXPORT_DATE: <2020-09-19 Sat>
+  :END:
+  
+* スライドの使い方
   :PROPERTIES:
   :EXPORT_HUGO_SECTION: ./post
   :EXPORT_FILE_NAME: post1
+  :EXPORT_DATE: <2020-09-21 Mon>
+  :END:
+  スライドは
+  [[https://revealjs.com][reveal.js]]
+  を使って作っています．
+  
+  スライドを click して "?" を入力すると
+  shortcut key が表示されますが，
+  これ以外にも以下の key などが使えます．
+
+** フルスクリーン
+   - f フルスクリーン表示
+   - esc 元に戻る
+** 黒板
+   - w スライドと黒板の切り替え (toggle)
+   - x/y チョークの色の切り替え (巡回)
+   - c 消去
+** メモ書き
+   - e 編集モードの切り替え (toggle)
+   - x/y ペンの色の切り替え (巡回)
+   - c 消去
+     
+* 確率シミュレーションの例
+  :PROPERTIES:
+  :EXPORT_HUGO_SECTION: ./post
+  :EXPORT_FILE_NAME: post2
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  感染症の確率シミュレーションにはいろいろな考え方があります．
+  COVID-19 に関連して解説記事も出ています．
+  - [[https://www.iwanami.co.jp/kagaku/Kagaku_202005_Makino_preprint.pdf][牧野淳一郎: 3.11以後の科学リテラシー, 科学, 岩波書店]]
+  - [[http://www001.upp.so-net.ne.jp/rise/images/新型コロナ一考察.pdf][小田垣孝: 新型コロナウイルスの蔓延に関する一考察]]
 
+  人と人の関係をモデル化したグラフ上の感染シミュレーションの例を下記に示します．
+  - [[https://github.com/noboru-murata/epidemic-model][感染症の確率シミュレーション]] 
+   
 * COMMENT ローカル変数
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)

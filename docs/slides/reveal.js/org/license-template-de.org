@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2018-2020 Jens Lechtenbörger
+# SPDX-License-Identifier: CC0-1.0
+
+* Lizenzangaben
+  :PROPERTIES:
+  :reveal_data_state: no-toc-progress
+  :HTML_HEADLINE_CLASS: no-toc-progress
+  :CUSTOM_ID: license
+  :UNNUMBERED: notoc
+  :END:
+
+{{{licensepreamble}}}
+
+#+BEGIN_SRC emacs-lisp :results html :exports results
+(oer-reveal-license-to-fmt 'html)
+#+END_SRC
+#+BEGIN_SRC emacs-lisp :results latex :exports results
+(oer-reveal-license-to-fmt 'pdf)
+#+END_SRC

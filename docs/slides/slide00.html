@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>ガイダンス</title>
+<meta name="author" content="村田 昇"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/oer-reveal.css" id="theme"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/toc-style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/lib/font/source-sans-pro/source-sans-pro.css"/>
+
+<link rel="stylesheet" href="./myconf.css"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body prefix="dc: http://purl.org/dc/elements/1.1/ dcterms: http://purl.org/dc/terms/ dcmitype: http://purl.org/dc/dcmitype/ cc: http://creativecommons.org/ns#" typeof="dcmitype:InteractiveResource">
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-state="no-toc-progress">
+<!-- This is an HTML template for the title slide. -->
+<!-- Embed logos as necessary. -->
+<!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
+<div class="talk-title">
+    <h1 class="no-toc-progress">ガイダンス</h1>
+</div>
+<div class="talk-subtitle">
+    <p></p>
+</div>
+<div class="keyboard-usage">
+    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+</div>
+<div class="talk-author">
+  <p>村田 昇<br />
+  2020.04.10</p>
+</div>
+
+</section>
+
+<section>
+<section id="slide-orga89cbe9">
+<h2 id="orga89cbe9">講義概要</h2>
+<div class="outline-text-2" id="text-orga89cbe9">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgf2a3f27">
+<h3 id="orgf2a3f27">講義の内容</h3>
+<ul>
+<li>講義題目: <b>数理科学続論I</b> / <b>知能社会情報学講義II</b></li>
+<li>担当: 村田 昇</li>
+<li>授業の目標:
+<ul>
+<li>統計ソフトウェア <b>R</b> の基本的な使い方を習得する</li>
+<li>シミュレーションによって確率的現象を体験する</li>
+<li>統計学で利用される確率分布の考え方に慣れる</li>
+<li>記述統計量と標本分布に関する基本的な事項に習熟する</li>
+<li>推定・検定法，分散分析・回帰分析の基礎を理解する</li>
+<li>Rを用いて実データの統計分析を行う</li>
+
+</ul></li>
+<li>数理科学科で同内容の講義  <b>統計データ解析I</b></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org53f3c92">
+<h3 id="org53f3c92">受講の注意</h3>
+<ul>
+<li>微分積分学と線形代数学を既習であることが望ましい</li>
+<li>自身でRの環境を準備すること</li>
+<li>講義資料
+<ul>
+<li>LMSを利用して配布</li>
+<li>事前に目を通しておくことが望ましい</li>
+
+</ul></li>
+<li>成績評価
+<ul>
+<li>期末レポートにより評価</li>
+<li>確率シミュレーションまたはデータ解析を行う</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org17747e3">
+<h3 id="org17747e3">講義計画 (予定)</h3>
+<ul>
+<li>統計ソフトウェアR入門</li>
+<li>データのプロット</li>
+<li>極限定理</li>
+<li>確率シミュレーション</li>
+<li>確率分布</li>
+<li>基礎的な記述統計量とデータの集約</li>
+<li>推定</li>
+<li>検定</li>
+<li>分散分析</li>
+<li>回帰分析</li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/js/reveal.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: true,
+fragmentInURL: true,
+hashOneBasedIndex: false,
+pdfSeparateFragments: false,
+
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'fade', // see README of reveal.js for options
+transitionSpeed: 'default',
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+ { src: './reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: './reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: './reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+</script>
+</body>
+</html>
