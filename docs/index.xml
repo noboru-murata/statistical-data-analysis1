@@ -8,6 +8,28 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 19 Sep 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://noboru-murata.github.io/statistical-data-analysis1/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>概要</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/_index-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/_index-2/</guid>
+      <description>本講義では，前半はR言語の基本的な使い方を解説し，後半はR言語を利用した数値シミュレーションを行いながら，確率論や推測統計の基礎を学びます．
+講義資料 以下は統計データ解析 I・II の資料です．
+ Rの基礎編 (PDF) (Rscript/Dataset) 確率と統計編 (PDF) (Rscript/Dataset) 多変量解析編 (PDF) (Rscript/Dataset)  (随時更新します)
+特に統計データ解析IIでは「Rの基礎」と「確率と統計」を用います．
+参考資料 その他，必要な参考書等については講義中に指示します．</description>
+    </item>
+    
+    <item>
+      <title>講義1</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture01-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture01-2/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  </description>
+    </item>
+    
+    <item>
       <title>講義1</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture01/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
@@ -18,10 +40,28 @@
     
     <item>
       <title>講義2</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture02-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture02-2/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義2</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture02/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
       
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture02/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義3</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture03-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture03-2/</guid>
       <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
     </item>
     
@@ -36,10 +76,28 @@
     
     <item>
       <title>講義4</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture04-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture04-2/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義4</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture04/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
       
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture04/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義5</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture05-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture05-2/</guid>
       <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
     </item>
     
@@ -54,10 +112,28 @@
     
     <item>
       <title>講義6</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture06-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture06-2/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義6</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture06/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
       
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture06/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義7</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture07-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture07-2/</guid>
       <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
     </item>
     
@@ -72,10 +148,28 @@
     
     <item>
       <title>講義8</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture08-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture08-2/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義8</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture08/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
       
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture08/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義9</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture09-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture09-2/</guid>
       <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
     </item>
     
@@ -90,10 +184,28 @@
     
     <item>
       <title>講義10</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture10-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture10-2/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義10</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture10/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
       
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture10/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義11</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture11-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture11-2/</guid>
       <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
     </item>
     
@@ -108,11 +220,31 @@
     
     <item>
       <title>講義12</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture12-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture12-2/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義12</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture12/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
       
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture12/</guid>
       <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>スライドの使い方</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/post/post1-2/</link>
+      <pubDate>Mon, 21 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/post/post1-2/</guid>
+      <description>スライドは reveal.js を使って作っています．
+スライドを click して &amp;ldquo;?&amp;rdquo; を入力すると shortcut key が表示されますが，これ以外にも以下の key などが使えます．
+フルスクリーン  f フルスクリーン表示 esc 元に戻る  黒板  w スライドと黒板の切り替え (toggle) x/y チョークの色の切り替え (巡回) c 消去  メモ書き  e 編集モードの切り替え (toggle) x/y ペンの色の切り替え (巡回) c 消去  </description>
     </item>
     
     <item>
@@ -124,6 +256,17 @@
       <description>スライドは reveal.js を使って作っています．
 スライドを click して &amp;ldquo;?&amp;rdquo; を入力すると shortcut key が表示されますが，これ以外にも以下の key などが使えます．
 フルスクリーン  f フルスクリーン表示 esc 元に戻る  黒板  w スライドと黒板の切り替え (toggle) x/y チョークの色の切り替え (巡回) c 消去  メモ書き  e 編集モードの切り替え (toggle) x/y ペンの色の切り替え (巡回) c 消去  </description>
+    </item>
+    
+    <item>
+      <title>確率シミュレーションの例</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/post/post2-2/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/post/post2-2/</guid>
+      <description>感染症の確率シミュレーションにはいろいろな考え方があります． COVID-19 に関連して解説記事も出ています．
+ 牧野淳一郎: 3.11以後の科学リテラシー, 科学, 岩波書店 小田垣孝: 新型コロナウイルスの蔓延に関する一考察  人と人の関係をモデル化したグラフ上の感染シミュレーションの例を下記に示します．
+ 感染症の確率シミュレーション  </description>
     </item>
     
     <item>
