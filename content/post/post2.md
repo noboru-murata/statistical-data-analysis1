@@ -14,4 +14,4 @@ COVID-19 に関連して解説記事も出ています．
 
 人と人の関係をモデル化したグラフ上の感染シミュレーションの例を下記に示します．
 
--   [感染症の確率シミュレーション](https://github.com/noboru-murata/epidemic-model)
+-   [感染症の確率シミュレーション](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/epidemic.pdf)

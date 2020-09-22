@@ -246,7 +246,7 @@
   - [[http://www001.upp.so-net.ne.jp/rise/images/新型コロナ一考察.pdf][小田垣孝: 新型コロナウイルスの蔓延に関する一考察]]
 
   人と人の関係をモデル化したグラフ上の感染シミュレーションの例を下記に示します．
-  - [[https://github.com/noboru-murata/epidemic-model][感染症の確率シミュレーション]] 
+  - [[github:pdfs/epidemic.pdf][感染症の確率シミュレーション]] 
    
 * COMMENT ローカル変数
 # Local Variables:
