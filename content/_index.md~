@@ -11,11 +11,17 @@ weight = 1001
 
 ## 講義資料 {#講義資料}
 
--   [R編](https://noboru-murata.github.io/multivariate-analysis/pdfs/note1.pdf)
+以下は統計データ解析 I・II の資料です．
 
-随時修正します．
+1.  Rの基礎編 [(PDF)](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/note1.pdf) [(Rscript/Dataset)](https://noboru-murata.github.io/statistical-data-analysis1/zips/script1.zip)
+2.  確率と統計編 [(PDF)](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/note2.pdf) [(Rscript/Dataset)](https://noboru-murata.github.io/statistical-data-analysis1/zips/script2.zip)
+3.  多変量解析編 [(PDF)](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/note3.pdf) [(Rscript/Dataset)](https://noboru-murata.github.io/statistical-data-analysis1/zips/script3.zip)
+
+(随時更新します)
+
+特に統計データ解析IIでは「Rの基礎」と「確率と統計」を用います．
 
 
 ## 参考資料 {#参考資料}
 
-必要な参考書については講義中に指示します．
+その他，必要な参考書等については講義中に指示します．
