@@ -1,7 +1,8 @@
 #+TITLE: Rの基本的な操作
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 2020.04.17
+#+DATE: 
+# Time-stamp: <2021-04-02 16:14:46 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -10,7 +11,14 @@
 # C-c '
 :end:
 
-* COMMENT tangle用
+#+begin_src R :eval no :exports none :tangle yes
+  ### 第01回 練習問題解答例
+#+end_src
+#+begin_src R :exports none
+  setwd("~/Desktop/lectures/u-tokyo/spring/slide")
+#+end_src
+
+* COMMENT メモ
 
 * R言語の概要
 ** R言語とは
@@ -34,7 +42,7 @@
    - グラフによる視覚化
    - プログラムによる処理の自動化
    - 擬似乱数による不確定性を含む現象の模擬 \\
-     [[color:darkgreen][確率的シミュレーション・モンテカルロ法]]
+     *確率的シミュレーション・モンテカルロ法*
 
 ** データ形式の分類
    - 構造化データ
@@ -47,7 +55,8 @@
      - データの整理や比較がそのままでは困難
      - [[color:darkgreen][文書，画像，動画，音声]]
 
-* (参考) R および RStudio の導入方法
+
+* COMMENT (参考) R および RStudio の導入方法
 ** Rのインストール手順
    1. _R: The R project for Statistical Computing_
       にアクセス
@@ -86,6 +95,7 @@
      から自分の環境に合わせて OS を選択
   3. ダウンロードしたインストーラを起動
   4. 指示に従って RStudio をインストールする
+
 
 * RStudio のインターフェース
 ** 起動画面
@@ -143,6 +153,7 @@
 #    :reveal_background: #fef4f4
 #    :END:
 #    RStudioを起動し上記の方法で終了してみよう
+
 
 * 基本的な使い方
 ** 式の入力
@@ -233,16 +244,17 @@
 #      #+end_src
 #      コンソール上部にも記載されている
 
-** 演習
+** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   以下の計算を行うRsciptを作成し保存してみよう
-   - $123\times456-789$
-   - $(2^{2^5}+1)\div641$
-   - $\sin^2(\pi/3)+\cos^2(\pi/3)$
-   - 適当な数学関数を試す
+   - 以下の計算を行うRsciptを作成し保存してみよう
+     - $123\times456-789$
+     - $(2^{2^5}+1)\div641$
+     - $\sin^2(\pi/3)+\cos^2(\pi/3)$
+     - 適当な数学関数を試す
 
+* より進んだ使い方
 ** 関数の実行
    - 関数の取り扱いは一般的な計算機言語とほぼ同様
    - 関数は引数とその値を指定して実行
@@ -314,7 +326,6 @@
    # - コンソール上で上下キーを打つことで，
    #   以前に実行したコマンドを再表示できる
 
-
 ** ヘルプ機能
    - 各関数の詳細(機能，引数名，引数の既定値，実行例など)を記述した
      ヘルプが用意されている
@@ -380,15 +391,15 @@
    #   #+end_src
    #   ~require()~ を用いると1度読み込んだものは再読み込みしない？
 
-** 演習
+** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   講義で用いるパッケージを導入して，
-   その中の関数について調べてみよう
-   - package e1071 を導入する
-   - 関数 kurtosis を調べる
-   - 関数 kurtosis を呼出す
+   - 講義で用いるパッケージを導入して，
+     その中の関数について調べてみよう
+     - package e1071 を導入する
+     - 関数 kurtosis を調べる
+     - 関数 kurtosis を呼出す
    # *swir* パッケージを導入して
    # 関数 ~swirl()~ を実行してみよう
 
@@ -454,7 +465,7 @@
        rev(x)    
      #+end_src
 
-** 演習
+** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
@@ -524,7 +535,7 @@
    - 行列の高次元版として配列(array)が用意されている
    - 関数 ~rownames()/colnames()~ を用いると行と列に名前を付けることができる
 
-** 演習
+** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
@@ -566,6 +577,7 @@
        L1$first      # 方法1
        L2[["first"]] # 方法2
      #+end_src
+
 * データフレーム
 ** データフレームとは
    - 長さの等しいベクトルを束ねたリスト
@@ -589,7 +601,7 @@
    - データフレームは *行列* でもある\\
      行数がベクトルの長さ(個体数), 列数が変数の個数(観測項目の数)の行列と同様にアクセスできる
 
-** 演習
+** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
@@ -606,10 +618,6 @@
    - データフレームを操作してみよう
      - 数学の列を取り出す
      - Cathyの行を取り出す
-
-
-  
-
 
 * COMMENT ローカル変数
 # Local Variables:

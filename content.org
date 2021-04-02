@@ -3,6 +3,7 @@
 #+HUGO_WEIGHT: auto
 #+author: Noboru Murata
 #+link: github https://noboru-murata.github.io/statistical-data-analysis1/
+#+STARTUP: hidestars content
 # C-c C-e H A (generate MDs for all subtrees)
 
 * 概要
@@ -26,7 +27,7 @@
 
    特に統計データ解析Iでは「Rの基礎」と「確率と統計」を用います．
    
-** 参考資料   
+** 参考資料
    その他，必要な参考書等については講義中に指示します．
 
    秋期に開講する統計データ解析IIの資料は
@@ -208,11 +209,21 @@
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
   
-* スライドの使い方
+* R/RStudioの導入方法
   :PROPERTIES:
   :EXPORT_HUGO_SECTION: ./post
   :EXPORT_FILE_NAME: post1
-  :EXPORT_DATE: <2020-09-21 Mon>
+  :EXPORT_DATE: <2021-04-02 Fri>
+  :END:
+** スライド
+   {{< myslide base="statistical-data-analysis1" name="install" >}}
+** ハンドアウト
+   - [[github:pdfs/install.pdf][PDF file]]
+* スライドの使い方
+  :PROPERTIES:
+  :EXPORT_HUGO_SECTION: ./post
+  :EXPORT_FILE_NAME: post2
+  :EXPORT_DATE: <2021-04-02 Fri>
   :END:
   スライドは
   [[https://revealjs.com][reveal.js]]
@@ -234,10 +245,10 @@
    - x/y ペンの色の切り替え (巡回)
    - c 消去
      
-* 確率シミュレーションの例
+* COMMENT 確率シミュレーションの例
   :PROPERTIES:
   :EXPORT_HUGO_SECTION: ./post
-  :EXPORT_FILE_NAME: post2
+  :EXPORT_FILE_NAME: post3
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
   感染症の確率シミュレーションにはいろいろな考え方があります．

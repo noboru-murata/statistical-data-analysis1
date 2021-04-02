@@ -1,34 +1,16 @@
 +++
-title = "スライドの使い方"
+title = "R/RStudioの導入方法"
 author = ["Noboru Murata"]
-date = 2020-09-21T00:00:00+09:00
+date = 2021-04-02T00:00:00+09:00
 draft = false
 weight = 1015
 +++
 
-スライドは
-[reveal.js](https://revealjs.com)
-を使って作っています．
+## スライド {#スライド}
 
-スライドを click して "?" を入力すると
-shortcut key が表示されますが，これ以外にも以下の key などが使えます．
+{{< myslide base="statistical-data-analysis1" name="install" >}}
 
 
-## フルスクリーン {#フルスクリーン}
+## ハンドアウト {#ハンドアウト}
 
--   f フルスクリーン表示
--   esc 元に戻る
-
-
-## 黒板 {#黒板}
-
--   w スライドと黒板の切り替え (toggle)
--   x/y チョークの色の切り替え (巡回)
--   c 消去
-
-
-## メモ書き {#メモ書き}
-
--   e 編集モードの切り替え (toggle)
--   x/y ペンの色の切り替え (巡回)
--   c 消去
+-   [PDF file](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/install.pdf)

@@ -1,16 +1,14 @@
 #+TITLE: ガイダンス
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 2020.04.10
-:preamble:
-#+INCLUDE: "./myconf.org"
+#+DATE: 
+# Time-stamp: <2021-04-02 16:02:59 mura>
+:reveal:
+#+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
 # C-c C-x C-v でinlineを切り替え
-# <l C-i でlatex block
-# C-c ' でblock内編集
-#+OPTIONS: LaTeX:t    
-#+PROPERTY: results output
-#+PROPERTY: exports both
+# <m C-i でlatex block (math env用)
+# C-c '
 :end:
 
 * 講義概要
@@ -28,14 +26,18 @@
      # 後期 月曜5限/木曜5限？
 
 ** 受講の注意
-   - 微分積分学と線形代数学を既習であることが望ましい
+   - 以下の科目は既習であることが望ましい
+     - 微分積分学
+     - 線形代数学
    - 自身でRの環境を準備すること
+     - R (R言語の本体)
+     - RStudio (Rの開発環境)
      # - 以下の条件の受講者の人数に応じて講義室を変更する
      #   - PCを持ち込める人
      #   - tabletなら持ち込める人
      #   - 何も持ち込めない人
    - 講義資料
-     - LMSを利用して配布
+     - LMS/Webを利用して配布
      - 事前に目を通しておくことが望ましい
    - 成績評価
      - 期末レポートにより評価
@@ -52,3 +54,10 @@
    - 検定
    - 分散分析
    - 回帰分析
+
+
+* COMMENT ローカル変数
+# Local Variables:
+# org-latex-listings: minted
+# End:
+   

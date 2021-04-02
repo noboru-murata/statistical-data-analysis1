@@ -1,8 +1,5 @@
-# Local IspellDict: en
-# #+INCLUDE: "~/.emacs.d/straight/repos/oer-reveal/org/config.org"
-# #+INCLUDE: "~/.emacs.d/oer-reveal-org/config.org"
-# -*- eval: (visual-line-mode) -*-
-
+# Based on Jens Lechtenbörger's org/config.org @ https://gitlab.com/oer/oer-reveal
+# original license identifiers are:
 # SPDX-FileCopyrightText: 2017-2019 Jens Lechtenbörger
 # SPDX-License-Identifier: CC-BY-SA-4.0
 
@@ -11,7 +8,7 @@
 
 # Enable: browser history, fragment IDs in URLs, mouse wheel, links between presentations
 #+OPTIONS: reveal_history:t reveal_fragmentinurl:t
-#+OPTIONS: reveal_mousewheel:t reveal_inter_presentation_links:t
+#+OPTIONS: reveal_mousewheel:nil reveal_inter_presentation_links:t
 
 # Disable separate PDF pages for each fragment.  Just use one per slide.
 #+OPTIONS: reveal_pdfseparatefragments:nil
@@ -46,6 +43,20 @@
 # size calculations.
 #+REVEAL_SLIDE_FOOTER: <br>
 #+OPTIONS: reveal_toc_footer:t
+
+# Use menu/chalkboard plugins
+# chalkboard keybind
+# e(dit): notes; w(rite): chalkboard;
+# c(lear): notes/chalkboard; r(eset): notes/chalkbord
+# x/y: next/previous color; d(ownload): draw data; 
+# spotlight keybind
+# t(oggle): spotlight; q(uark)/q(uit): presentation
+#+REVEAL_EXTERNAL_PLUGINS: (( menu . "{ src: '%splugin/menu/menu.js'}") (chalkboard . "{ src: '%splugin/chalkboard/chalkboard.js'}") (spotlight . "{ src: '%splugin/spotlight/spotlight.js'}"))
+#+REVEAL_EXTRA_OPTIONS: spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}}
+# Use custom title slide.
+#+REVEAL_TITLE_SLIDE: ./reveal.js/title-slide/mycourse-title.html
+# Use my css 
+#+REVEAL_EXTRA_CSS: ./reveal.js/dist/theme/mycourse.css
 
 # Set a default bib file.
 #+MACRO: bibliographyfile bibliography:references.bib
@@ -107,63 +118,6 @@
 #+MACRO: greencode (eval (format "@@html:<code><span style=\"color:darkgreen; font-size:smaller;\">%s</span></code>@@ @@latex:\\gverb|%s|@@" (org-html-encode-plain-text $1) $1))
 #+MACRO: bluecode (eval (format "@@html:<code><span style=\"color:darkblue; font-size:smaller;\">%s</span></code>@@ @@latex:\\bverb|%s|@@" (org-html-encode-plain-text $1) $1))
 
-# Function to insert an agenda at position of choice.  Insert the
-# following line where your agenda should appear: #+CALL: insert-agenda()
-# #+name: insert-agenda
-# #+begin_src emacs-lisp :var agenda-heading="Agenda" :var agenda-heading-depth=1 :var include-depth=1 :results value raw :exports none
-#     (concat (make-string agenda-heading-depth ?*)
-#             " " agenda-heading "\n"
-#             ":PROPERTIES:
-#   :UNNUMBERED: notoc
-#   :reveal_data_state: no-toc-progress
-#   :HTML_HEADLINE_CLASS: no-toc-progress
-#   :END:
-#   ,#+REVEAL_TOC: headlines "
-#             (format "%s\n" include-depth)
-#             "#+LATEX: \\renewcommand{\\printtoctitle}[1]{}\n"
-#             "#+LATEX: \\tableofcontents\n\n")
-# #+end_src
-
-# To display images with license information, some macros are
-# available.
-# See emacs-reveal-howto for sample use:
-# https://gitlab.com/oer/emacs-reveal-howto
-#
-# First, revealimg() for horizontally centered images, caption
-# underneath, license text rotated to the right.
-# Macro revealimg() expects up to six arguments, a filename for a
-# file with meta-data about an image and up to five optional
-# arguments: a caption, the maximum height of image in HTML, e.g.,
-# 50vh, a list of CSS classes (space separated, containing "figure"),
-# an attribute specifying whether
-# - a long (default/nil),
-# - a short (t; in this case `oer-reveal--short-license-template' is
-#   used, which by default just produces "Figure under <license>",
-#   where "Figure" is hyperlinked to its source and "<license>" should
-#   typically be a  permissive license that does not require further
-#   attribution such as CC0 or Public Domain), or
-# - no license (none)
-# should be used (arguments are documented for function
-# oer-reveal--export-attribution-helper), and a list of space
-# separated additional attributes to assign to the figure’s div
-# element.
-#
-# Second, reveallicense() displays an image inline in the surrouding
-# paragraph or list, aligned to the right.  Again, license information
-# is rotated to the right of the image.
-# Macro reveallicense() expects up to six arguments, the filename
-# for meta-data and optionally the maximum height, CSS classes (space
-# separated, containing "figure"), an indicator for short license (as
-# described above for revealimg()), an indicator whether the image
-# is an SVG to be embedded as XML code into the HTML document, and a
-# list of space separated additional attributes to assign to the
-# figure’s div element.
-# Embedding SVG directly is useful for single-file export with
-# :reveal-single-file and for animated SVGs.
-# Note that SVG images can also be used with revealimg().  In that case,
-# they are just used in img elements, which is not possible if option
-# :reveal-single-file is used.
-#
 # Concerning LaTeX export, the file extension is stripped for
 # includegraphics commands, so a compatible format must be available.
 # GIF images cannot be exported to LaTeX; variable
@@ -191,14 +145,7 @@
 # This macro uses oer-reveal-export-image-grid in oer-reveal.el.
 #+MACRO: revealgrid (eval (oer-reveal-export-image-grid $1 $2 $3 $4 $5 $6 $7))
 
-# Use menu/chalkboard plugins
-#+REVEAL_EXTERNAL_PLUGINS: (( menu . "{ src: '%splugin/menu/menu.js'}") (chalkboard . "{ src: '%splugin/chalkboard/chalkboard.js'}"))
-#+REVEAL_EXTRA_OPTIONS: chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }}
-# Use custom title slide.
-#+REVEAL_TITLE_SLIDE: ./reveal.js/title-slide/mycourse-title.html
-# Use my css 
-#+REVEAL_EXTRA_CSS: ./reveal.js/dist/theme/mycourse.css
-# define my options/properties
+# define my options/properties 
 #+OPTIONS: date:t H:4 num:nil toc:nil \n:nil
 #+OPTIONS: @:t ::t |:t ^:t -:t f:t *:t TeX:t LaTeX:t 
 #+OPTIONS: skip:nil d:nil todo:t pri:nil tags:not-in-toc

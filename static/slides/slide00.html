@@ -7,30 +7,22 @@
 <style type="text/css">
 .underline { text-decoration: underline; }
 </style>
-<link rel="stylesheet" href="./reveal.js/css/reveal.css"/>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
 
-<link rel="stylesheet" href="./reveal.js/css/theme/oer-reveal.css" id="theme"/>
+<link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
 
-<link rel="stylesheet" href="./reveal.js/css/theme/toc-style.css"/>
+<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
 
-<link rel="stylesheet" href="./reveal.js/lib/font/source-sans-pro/source-sans-pro.css"/>
+<link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./myconf.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
 
-<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-<script>
-    if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = './reveal.js/css/print/pdf.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-    }
-</script>
+<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
 </head>
-<body prefix="dc: http://purl.org/dc/elements/1.1/ dcterms: http://purl.org/dc/terms/ dcmitype: http://purl.org/dc/dcmitype/ cc: http://creativecommons.org/ns#" typeof="dcmitype:InteractiveResource">
+<body>
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide" data-state="no-toc-progress">
@@ -48,20 +40,20 @@
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
-  2020.04.10</p>
+  </p>
 </div>
 
 </section>
 
 <section>
-<section id="slide-orga89cbe9">
-<h2 id="orga89cbe9">講義概要</h2>
-<div class="outline-text-2" id="text-orga89cbe9">
+<section id="slide-orge5d9e6f">
+<h2 id="orge5d9e6f">講義概要</h2>
+<div class="outline-text-2" id="text-orge5d9e6f">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgf2a3f27">
-<h3 id="orgf2a3f27">講義の内容</h3>
+<section id="slide-org87c674d">
+<h3 id="org87c674d">講義の内容</h3>
 <ul>
 <li>講義題目: <b>数理科学続論I</b> / <b>知能社会情報学講義II</b></li>
 <li>担当: 村田 昇</li>
@@ -81,14 +73,24 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org53f3c92">
-<h3 id="org53f3c92">受講の注意</h3>
+<section id="slide-org3ca6697">
+<h3 id="org3ca6697">受講の注意</h3>
 <ul>
-<li>微分積分学と線形代数学を既習であることが望ましい</li>
-<li>自身でRの環境を準備すること</li>
+<li>以下の科目は既習であることが望ましい
+<ul>
+<li>微分積分学</li>
+<li>線形代数学</li>
+
+</ul></li>
+<li>自身でRの環境を準備すること
+<ul>
+<li>R (R言語の本体)</li>
+<li>RStudio (Rの開発環境)</li>
+
+</ul></li>
 <li>講義資料
 <ul>
-<li>LMSを利用して配布</li>
+<li>LMS/Webを利用して配布</li>
 <li>事前に目を通しておくことが望ましい</li>
 
 </ul></li>
@@ -103,8 +105,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org17747e3">
-<h3 id="org17747e3">講義計画 (予定)</h3>
+<section id="slide-org972d757">
+<h3 id="org972d757">講義計画 (予定)</h3>
 <ul>
 <li>統計ソフトウェアR入門</li>
 <li>データのプロット</li>
@@ -123,7 +125,11 @@
 </section>
 </div>
 </div>
-<script src="./reveal.js/js/reveal.js"></script>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/notes/notes.js"></script>
+<script src="./reveal.js/plugin/search/search.js"></script>
+<script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
@@ -143,15 +149,17 @@ pdfSeparateFragments: false,
 
 overview: true,
 
-theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-transition: Reveal.getQueryHash().transition || 'fade', // see README of reveal.js for options
+transition: 'fade',
 transitionSpeed: 'default',
+chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }},
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
- { src: './reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
- { src: './reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } },
- { src: './reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }]
+{ src: './reveal.js/plugin/menu/menu.js'},
+{ src: './reveal.js/plugin/chalkboard/chalkboard.js'}]
 
 });
 </script>
