@@ -39,11 +39,12 @@
   :EXPORT_FILE_NAME: lecture01
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  <2021-04-02 Fri> 更新 
 ** スライド
    {{< myslide base="statistical-data-analysis1" name="slide01" >}}
 ** ハンドアウト
    - [[github:pdfs/slide01.pdf][PDF file]]
-** 更新 <2021-04-02 Fri>
+
    
 * 講義2
   :PROPERTIES:

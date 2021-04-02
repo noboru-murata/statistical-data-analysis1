@@ -6,6 +6,9 @@ draft = false
 weight = 1002
 +++
 
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-04-02 Fri&gt; </span></span> 更新
+
+
 ## スライド {#スライド}
 
 {{< myslide base="statistical-data-analysis1" name="slide01" >}}
@@ -14,6 +17,3 @@ weight = 1002
 ## ハンドアウト {#ハンドアウト}
 
 -   [PDF file](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide01.pdf)
-
-
-## 更新 <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-04-02 Fri&gt;</span></span> {#更新}
