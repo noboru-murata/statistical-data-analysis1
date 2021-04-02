@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>R および RStudio の導入方法</title>
+<meta name="author" content="村田 昇"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-state="no-toc-progress">
+<!-- This is an HTML template for the title slide. -->
+<!-- Embed logos as necessary. -->
+<!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
+<div class="talk-title">
+    <h1 class="no-toc-progress">R および RStudio の導入方法</h1>
+</div>
+<div class="talk-subtitle">
+    <p>R 環境の構築</p>
+</div>
+<div class="keyboard-usage">
+    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+</div>
+<div class="talk-author">
+  <p>村田 昇<br />
+  </p>
+</div>
+
+</section>
+
+<section>
+<section id="slide-org022a878">
+<h2 id="org022a878">Rのインストール手順</h2>
+<div class="outline-text-2" id="text-org022a878">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgeef6f34">
+<h3 id="orgeef6f34">準備</h3>
+<ol>
+<li><span class="underline">R: The R project for Statistical Computing</span>
+にアクセス
+<ul>
+<li><a href="http://www.r-project.org/">http://www.r-project.org/</a> を直接入力</li>
+<li>または <span style="color:orange;">&ldquo;r install&rdquo;</span> などで検索</li>
+
+</ul></li>
+<li><span class="underline">download R</span>
+というリンクをクリック</li>
+<li>CRANのミラーサイトを選ぶ:
+<ul>
+<li>どれでも利用可だが <span style="color:orange;">&ldquo;Japan&rdquo; のいずれか</span> を選ぶと良い</li>
+<li>OSごとにインストール方法が異なるので注意</li>
+
+</ul></li>
+
+</ol>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org624827e">
+<h3 id="org624827e">Windowsの場合</h3>
+<ol>
+<li><span class="underline">Download R for Windows</span>
+をクリック</li>
+<li><span class="underline">base</span>
+をクリック</li>
+<li><span class="underline">Download R (バージョン名) for Windows</span>
+をクリック</li>
+<li>ダウンロードされたインストーラを起動</li>
+<li>指示に従って R をインストールする</li>
+
+</ol>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orge144830">
+<h3 id="orge144830">Macの場合</h3>
+<ol>
+<li><span class="underline">Download R for (Mac) OS X</span>
+をクリック</li>
+<li><span class="underline">R-(バージョン名).pkg</span>
+をクリック</li>
+<li>ダウンロードされたインストーラを起動</li>
+<li>指示に従って R をインストールする</li>
+
+</ol>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orgf0030d8">
+<h2 id="orgf0030d8">RStudioのインストール手順</h2>
+<ol>
+<li><span class="underline">Download RStudio - RStudio</span>
+にアクセス
+<ul>
+<li><a href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a></li>
+<li><span style="color:orange;">&ldquo;rstudio install&rdquo;</span> などで検索</li>
+
+</ul></li>
+<li><span class="underline">Installers for Supported Platforms</span>
+から自分の環境に合わせて OS を選択</li>
+<li>ダウンロードしたインストーラを起動</li>
+<li>指示に従って RStudio をインストールする</li>
+
+</ol>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/notes/notes.js"></script>
+<script src="./reveal.js/plugin/search/search.js"></script>
+<script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: true,
+fragmentInURL: true,
+hashOneBasedIndex: false,
+pdfSeparateFragments: false,
+
+overview: true,
+
+transition: 'fade',
+transitionSpeed: 'default',
+chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }},
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+{ src: './reveal.js/plugin/menu/menu.js'},
+{ src: './reveal.js/plugin/chalkboard/chalkboard.js'}]
+
+});
+</script>
+</body>
+</html>
