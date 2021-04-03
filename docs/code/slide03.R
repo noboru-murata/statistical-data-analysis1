@@ -1,207 +1,216 @@
 ### 例題1
-### データフレームの操作
+### Hamilton-Cayleyの定理の確認
 
-## 抽出する行番号のベクトルで指定
-airquality[1:10,] # 1-10行を抽出
+## 行列を作成 (好きに設定してよい)
+(A <- matrix(1:4,2,2)-diag(rep(3,2)))
 
-## 条件に合致する行はTRUE (NAは欠損値)
-airquality[1:16,]$Ozone>100 # 条件の指定
-airquality[1:16,]$Ozone>100 & airquality[1:16,]$Wind<=5 # 条件のAND
-with(airquality[1:16,], Ozone>100 & Wind<=5) # 上と同じ(短い書き方)
-with(airquality[1:24,], Ozone>100 | Wind<=5) # 条件のOR
-
-## 関数whichでTRUEの番号を抽出
-which(with(airquality, Ozone>100 & Wind<=5)) # 全データから抽出
-
-## 行の抽出
-airquality[which(with(airquality, Ozone>100 & Wind<=5)), ]
-
-## 列番号のベクトルで指定
-airquality[which(with(airquality, Ozone>100 & Wind<=5)), c(1,5,6)]
-
-## 複数の列の場合
-airquality[which(with(airquality, Ozone>100 & Wind<=5)), 
-           c("Month","Day")]
-
-## 1つの列の場合は以下でも良い (ただしベクトルになる)
-airquality[which(with(airquality, Ozone>100 & Wind<=5)),]$Month
-
-### 例題2
-### 関数subsetの使い方
-
-subset(airquality,
-       subset = Ozone>100 & Wind<=5,
-       select = c(1,5,6))
-subset(airquality,
-       Ozone>100 & Wind<=5, # 順序通りなら引数の名前は省略可
-       c(Month,Day)) # 名前は$の後と同じ扱い
-
-## Ozoneに欠測(NA)がなく, かつDayが5か10のWindからDayまでの列を抽出
-subset(airquality, 
-       subset = !is.na(Ozone) & Day %in% c(5,10),
-       select = Wind:Day)
-
-## Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
-subset(airquality,
-       subset = Ozone>120 | Wind <= 3,
-       select = -Temp)
+## 左辺を計算
+A%*%A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
 
 ### 練習1.1
-### 7月のオゾン濃度
-subset(airquality,
-       subset = Month == 7,
-       select = Ozone)
+### 1から10までの2乗値からなるベクトル
+1:10 # 1から10までのベクトル
+1:10 * 1:10 # 2乗値のベクトル
 
 ### 練習1.2
-### 風速時速10マイル以上かつ気温が華氏80度以上
-subset(airquality,
-       subset = Wind >= 10 & Temp >=80)
+### 1から10までの和
+1:10 %*% rep(1,10) # (1,2,...,10)と(1,1,...,1)の内積
 
 ### 練習1.3
-### 日射量が欠測でないデータの月と日
-subset(airquality,
-       subset = !is.na(Ozone) & !is.na(Solar.R),
-       select = c(Month,Day)) # 
-subset(airquality, # 書き方はいろいろある
-       subset = !(is.na(Ozone) | is.na(Solar.R)),
-       select = Month:Day) # c(Month,Day)と同じ
+### 九九の表
+matrix(rep(1:9,9),9,9) # 行ごとに1から9を並べる
+matrix(rep(1:9,9),9,9,byrow=TRUE) # 列ごとに1から9を並べる
+matrix(rep(1:9,9),9,9) * matrix(rep(1:9,9),9,9,byrow=TRUE)
+
+### 練習1.4
+### 30度の回転行列の2乗は60度の回転行列
+theta <- pi/6 # 30度のラジアン値
+R30 <- matrix(c(cos(theta),sin(theta),
+                -sin(theta),cos(theta)),2,2)
+R60 <- matrix(c(cos(2*theta),sin(2*theta),
+                -sin(2*theta),cos(2*theta)),2,2)
+R30 # 30度の回転行列
+R30 %*% R30 # 30度の回転行列の2乗
+R60 # 60度の回転行列
+
+### 例題2
+### 3元連立1次方程式の解法
+
+## 行列とベクトルを作成 (好きに設定してよい)
+## rnorm(9) は正規乱数を9つ作成する(第5回で詳しく説明)
+(A <- matrix(rnorm(9),3,3)+diag(rep(1,3)))
+(b <- 1:3)
+
+## 解を計算
+(x <- solve(A,b))
+A%*%x # 結果の確認(b になるはず)
+
+### 練習2.1
+### 1から10までの2乗値からなるベクトル
+(1:10)^2 # ^2も関数として成分ごとに計算される
+
+### 練習2.2
+### 回転してもベクトルの長さが変わらないことを確認
+## 回転行列とベクトルを作成 (好きに設定してよい)
+theta <- 2*pi/3 # 120度のラジアン値
+(R <- matrix(c(cos(theta),sin(theta),
+              -sin(theta),cos(theta)),2,2))
+(x <- 1:2)
+(y <- R %*% x) # xを回転してyを作成
+## 長さの2乗はベクトルの内積で計算できる
+x %*% x # xの長さの2乗
+as.vector(y) %*% as.vector(y) # yの長さの2乗
+
+### 練習2.3
+### エラーになる理由を考察
+A %*% b # 列ベクトル (3x1型行列)
+b %*% A # 行ベクトル (1x3型行列)
+A %*% b + b %*% A # 大きさが異なるので計算できない
 
 ### 例題3
-### CSVファイルの操作
+### if文の例
 
-## 関数write.csvの使い方
-(myData <- subset(airquality, 
-                  subset = Ozone>120,
-                  select = -Temp)) # データフレームの作成
-dim(myData) # データフレームの大きさを確認
-write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
-
-## 関数read.csvの使い方
-(newdata <- read.csv(file="data/mydata.csv",
-                     row.names=1)) # 1列目を行名に指定
-dim(newdata) # 正しく読み込めたか大きさを確認
+if(20200724 %% 19 == 0) {# %% は余りを計算
+    print("割り切れます")
+    print(20200724 %/% 19) # 商を表示
+} else { # {}で囲まれたブロックが1つのプログラム
+    print("割り切れません")
+    print(20200724 %% 19) # 余りを表示
+}
 
 ### 例題4
-### RDataファイルの操作
+### for文の例
 
-## 関数saveの使い方
-(myDat1 <- subset(airquality, Temp>95, select=-Ozone)) 
-(myDat2 <- subset(airquality, Temp<57, select=-Ozone)) 
-dim(myDat1); dim(myDat2) # 大きさを確認
-save(myDat1,myDat2,file="data/mydata.rdata") # RData形式で書き出し
-
-## 関数loadの使い方
-(myDat1 <- subset(airquality, Ozone > 160)) # 新たに作成
-load(file="data/mydata.rdata") # RData形式の読み込み
-myDat1 # saveしたときの名前で読み込まれ上書きされる
-myDat2
-
-### 練習2
-### サンプルデータの読み込み
-
-myData <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
-myItem <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
-myArea <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
-
-### データ操作の例
-## 項目名の内容を確認
-myItem
-## 最初の6県を表示
-head(myData)
-## 最後の6県を表示
-tail(myData)
-## 地方名を確認
-myArea
-## 人口の最大値を見る
-with(myData,max(人口))
-## どの都道府県か調べる
-with(myData,which.max(人口)) # 行番号が返る
-myData[with(myData,which.max(人口)),] 
-## 人口の多い都道府県を調べる
-with(myData,order(人口,decreasing=TRUE)) # 行番号を取得
-rownames(myData)[with(myData,order(人口,decreasing=TRUE))] # 県名を表示
+print(LETTERS) # LETTERS ベクトルの内容を表示
+for(i in c(20,15,11,25,15)) {
+    print(LETTERS[i]) # 順番に表示
+}
 
 ### 例題5
-### データを集約する関数
+### while文の例
 
-myData <- read.csv(file="data/jpdata1.csv",
-                   row.names=1, fileEncoding="utf8")
-## 一度読み込んでいれば上の行は不要
-sum(myData$人口) # 全国の総人口 (列名で選択)
-mean(myData[,4]) # 面積の平均値 (行列として列を選択)
-median(myData[[4]]) # 面積の中央値 (リストとして列を選択)
-min(myData["若年"])  # 若年人口の最小値 (列名で選択)
-with(myData,max(老人))  # 老年人口の最大値 (関数withを利用)
+n <- 20200809 # 分解の対象
+p <- 2 # 最初に調べる数
+while(n != 1){ # 商が1になるまで計算する
+    for(i in p:n){ # pからnまで順に調べる
+        if(n%%i == 0) { # 余りが0か確認
+            print(i) # 割り切った数を表示
+            n <- n/i # 商を計算して分解の対象を更新
+            p <- i # 最初に調べる数を更新
+            break # for文を途中で終了
+        }  
+    }
+}
 
 ### 例題6
-### 関数applyの使い方
+### 三角形の面積を計算する関数
 
-x <- subset(myData, select=婚姻:勤女) # 抽出
-colMeans(x) # 各列の平均
-apply(x, 2, max) # 列ごとの最大値
-sapply(x, max)   # 上と同じ (help(sapply)を参照)
-## 自作関数の適用 (関数に名前を付けずに利用できる)
-apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
-
-### 例題7
-### 関数aggregateの使い方
-
-## 人口から面積まで地方ごとの平均値を計算
-x <- subset(myData,select=人口:面積)
-aggregate(x, by=list(地方=myArea$地方), FUN=mean)
-
-aggregate(subset(myData,select=人口:面積),
-          by=list(地方=myArea$地方),
-          FUN=mean)
-
-y <- data.frame(x,地方=myArea$地方) 
-aggregate( . ~ 地方, data=y, FUN=mean)
-
-aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-          data=data.frame(subset(myData,select=人口:面積),
-                          地方=myArea$地方), 
-          FUN=mean)
-
-## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-aggregate(x, by=list(地方=myArea$地方,
-                     過疎=with(myData, 人口<=median(人口))),
-          FUN=mean)
-
-aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
-          data=data.frame(subset(myData,select=人口:面積),
-                          地方=myArea$地方,
-                          過疎=with(myData, 人口<=median(人口))))
+area <- function(x,y,z){
+    s <- (x+y+z)/2
+    S <- (s*(s-x)*(s-y)*(s-z))^(1/2)
+    ## S <- sqrt(s*(s-x)*(s-y)*(s-z)) # 平方根を求める関数を用いても良い
+  return(S)
+}
+area(3,4,5) # 直角三角形で検算
+area(12,13,5)
 
 ### 練習3.1
-### 県別の人口密度 (人口/面積)
-with(myData,人口/面積) # 値のみ返す
-## 人口密度に関係するデータをまとめてデータフレームを作成
-(myDat1 <- data.frame(subset(myData,select=c(人口,面積)),
-                      人口密度=with(myData,人口/面積)))
+### 階乗を計算する関数
+## for文を用いた関数
+fact1 <- function(n){
+    val <- 1
+    for(i in 1:n){
+        val <- val*i
+    }
+    return(val)
+}
+fact1(0) # 間違い
+fact1(1)
+fact1(2)
+fact1(3)
+fact1(4)
+## if文を用いた修正版
+fact2 <- function(n){
+    if(n==0){
+        return(1)
+    } else {
+        val <- 1
+        for(i in 1:n){
+            val <- val*i
+        }
+        return(val)
+    }
+}
+fact2(0) # 正しい
+fact2(1)
+fact2(2)
+fact2(3)
+fact2(4)
+## while文を用いた関数
+fact3 <- function(n){
+    val <- 1
+    while(n>0){
+        val <- val*n
+        n <- n-1
+    }
+    return(val)
+}
+fact3(0)
+fact3(1)
+fact3(2)
+fact3(3)
+fact3(4)
 
 ### 練習3.2
-### 地方別の人口密度 (地方の総人口/地方の総面積)
-## 地方ごとに人口と面積の合計を計算
-(myDat2 <- aggregate(subset(myData,select=c("人口","面積")),
-                     by=list(地方=myArea$地方), FUN=sum))
-## 人口密度を計算して追加
-(myDat2 <- data.frame(myDat2, 
-                      人口密度=with(myDat2,人口/面積)))
+### Fibonacci数を返す関数
+fibo <- function(n){
+    f0 <- 0 # 第0項の設定
+    f1 <- 1 # 第1項の設定
+    if(n<0) {
+        print("計算できません")
+        return(NA) # 欠損値を返す
+    }
+    if(n==0) { # n=0の場合
+        return(f0)
+    }
+    if(n==1) { # n=1の場合
+        return(f1)
+    }
+    for(i in 2:n) { # n>=2の場合
+        fn <- f1 + f0 # fn = fn-1 + fn-2 の計算
+        f0 <- f1 # fn-2 の値の更新
+        f1 <- fn # fn-1 の値の更新
+    }
+    return(fn) # 計算結果を返す
+}
 
 ### 練習3.3
-### 地方別の婚姻率・離婚率
-## 婚姻可能な人口を推計
-(tmp <- data.frame(subset(myData, select=婚姻:離婚),
-                   婚姻可能=with(myData,人口-若年)))
-## 婚姻率と離婚率から人数を推計
-(tmp <- data.frame(tmp,
-                  婚姻数=with(tmp, 婚姻可能*婚姻/1000),
-                  離婚数=with(tmp, 婚姻可能*離婚/1000),
-                  地方=myArea$地方))
-## 地方別の婚姻・離婚数を集計
-(myDat3 <- aggregate(. ~ 地方, FUN=sum,
-                     data=subset(tmp,select=-c(婚姻,離婚))))
-## 婚姻率・離婚率を計算して追加
-(myDat3 <- data.frame(myDat3,
-                      婚姻率=with(myDat3,婚姻数/婚姻可能*1000),
-                      離婚率=with(myDat3,離婚数/婚姻可能*1000)))
+### 行列の列の平均を計算する関数
+colave <- function(X) {
+    ave <- rep(0,length=ncol(X)) # 平均を記録するベクトルを用意
+    for(i in 1:ncol(X)){ # 列ごとに計算
+        ave[i] <- sum(X[,i])/nrow(X) # 平均の定義に従って計算
+        ## ave[i] <- mean(X[,i]) # 平均を計算する関数を用いても良い
+    }
+    return(ave)
+}
+(A <- matrix(1:12,3,4,byrow=TRUE))
+colave(A)
+
+### 練習3.4
+### ベクトルと行列を扱えるように修正
+colave <- function(X){ 
+    if(is.vector(X)){
+        ave <- mean(X)
+    } else {
+        ave <- rep(0,length=ncol(X))
+        for(i in 1:ncol(X)){
+            ave[i] <- mean(X[,i])
+        }
+    }
+    return(ave)
+}
+(A <- matrix(1:12,3,4,byrow=TRUE))
+colave(A)
+(x <- 1:12)
+colave(x)

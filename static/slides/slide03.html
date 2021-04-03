@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>データの整理と集計</title>
+<title>ベクトル・行列の演算と関数</title>
 <meta name="author" content="村田 昇"/>
 <style type="text/css">
 .underline { text-decoration: underline; }
@@ -21,6 +21,7 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
 <link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 <div class="reveal">
@@ -30,7 +31,7 @@
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
 <div class="talk-title">
-    <h1 class="no-toc-progress">データの整理と集計</h1>
+    <h1 class="no-toc-progress">ベクトル・行列の演算と関数</h1>
 </div>
 <div class="talk-subtitle">
     <p></p>
@@ -40,1058 +41,708 @@
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
-  2020.05.01</p>
+  2020.04.24</p>
 </div>
 
 </section>
 
 <section>
-<section id="slide-org5c7bac9">
-<h2 id="org5c7bac9">データフレームの操作</h2>
-<div class="outline-text-2" id="text-org5c7bac9">
+<section id="slide-org459f7c4">
+<h2 id="org459f7c4">ベクトルの計算</h2>
+<div class="outline-text-2" id="text-org459f7c4">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgf2bcedc">
-<h3 id="orgf2bcedc">Rに用意されているデータ構造</h3>
-<p>
-下記は代表的なもので，これ以外にもある
-</p>
+<section id="slide-org1d70862">
+<h3 id="org1d70862">ベクトルの表記</h3>
 <ul>
-<li>ベクトル (vector)</li>
-<li>行列 (matrix)</li>
-<li>リスト (list)</li>
-<li><b>データフレーム (data frame)</b></li>
-<li>配列 (array)</li>
+<li><p>
+ベクトルは太字で，要素は下付き添字で表す
+</p>
+
+<div>
+\begin{equation}
+  \boldsymbol{a}
+  =(a_{1},a_{2},\dotsc,a_{k})
+\end{equation}
+
+</div>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >a &lt;- c(a1,a2,...,ak) # k次元ベクトルの作成
+</code></pre>
+</div></li>
+<li><p>
+別の書き方:
+</p>
+
+<div>
+\begin{equation}
+  (\boldsymbol{a})_{i}
+  =\text{(ベクトル $\boldsymbol{a}$ の第 $i$ 成分)}  
+\end{equation}
+
+</div></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9adaa4d">
-<h3 id="org9adaa4d">データフレームからの項目の抽出</h3>
+<section id="slide-org1bd7ee4">
+<h3 id="org1bd7ee4">ベクトルの加法</h3>
 <ul>
-<li>添字の番号を指定</li>
-<li>要素の名前で指定</li>
-<li><b>除外</b>: マイナス記号(-)をつけて指定</li>
 <li><p>
-論理値で指定
+<b>同じ長さのベクトル</b> の和および差: <br />
+<i>数値の和と差のように扱うことができる</i>
 </p>
-<ul>
-<li><code>TRUE</code>: 要素の選択</li>
-<li><code>FALSE</code>: 要素の <b>除外</b></li>
+
+<div>
+\begin{equation}
+  \boldsymbol{a}\pm\boldsymbol{b}
+  =(a_{1}\pm b_{1},a_{2}\pm b_{2},\dotsc,a_{k}\pm b_{k})
+\end{equation}
+
+</div>
+<div>
+\begin{equation}
+  (\boldsymbol{a}\pm\boldsymbol{b})_{i}
+  =a_{i}\pm b_{i}
+\end{equation}
+
+</div>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >a + b # 同じ長さのベクトル a,b の和
+a - b # ベクトルの差
+</code></pre>
+</div></li>
 
 </ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgb8f1c0c">
+<h3 id="orgb8f1c0c">ベクトルの乗法</h3>
+<ul>
+<li><b>同じ長さの2つのベクトル</b> の乗法: <br />
+<i>(2種類ある)</i>
+<ul>
+<li>成分ごとの積 (Hadamard積; 要素積)</li>
+<li>ベクトルの内積</li>
+
+</ul></li>
+<li>データ解析ではどちらも良く用いられる</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org616d57d">
+<h3 id="org616d57d">Hadamard積</h3>
+<ul>
+<li><p>
+<b>同じ長さのベクトル</b> の成分ごとの積
+</p>
+
+<div>
+\begin{equation}
+  \boldsymbol{a}\circ\boldsymbol{b}
+  =(a_{1}b_{1},a_{2}b_{2},\dotsc,a_{k}b_{k})
+\end{equation}
+
+</div>
+<div>
+\begin{equation}
+  (\boldsymbol{a}\circ\boldsymbol{b})_{i}
+  =a_{i}b_{i}
+\end{equation}
+
+</div>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >a * b # ベクトルの成分ごとの積
+a / b # 成分ごとの商も計算可
+</code></pre>
+</div></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orga8992d1">
+<h3 id="orga8992d1">内積</h3>
+<ul>
+<li><p>
+<b>同じ長さのベクトル</b> の内積
+</p>
+
+<div>
+\begin{align}
+  \boldsymbol{a}\cdot\boldsymbol{b}
+  &=a_{1}b_{1}+a_{2}b_{2}+\dotsb+a_{k}b_{k}\\
+  &=\sum_{i=1}^{k}a_{i}b_{i}
+\end{align}
+
+</div>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >a %*% b # ベクトルの内積
+</code></pre>
+</div></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orga995651">
+<h2 id="orga995651">行列の計算</h2>
+<div class="outline-text-2" id="text-orga995651">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org11f2e83">
+<h3 id="org11f2e83">行列の表記</h3>
+<ul>
+<li><p>
+行列は大文字で，要素は下付き添字で表す
+</p>
+
+<div>
+\begin{equation}
+  A
+  =
+  \begin{pmatrix}
+    a_{11}&a_{12}&\dots&a_{1n}\\
+    a_{21}&a_{22}&\dots&a_{2n}\\
+    \vdots&&\ddots&\vdots\\
+    a_{m1}&a_{m2}&\dots&a_{mn}
+  \end{pmatrix}
+\end{equation}
+
+</div>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >A &lt;- matrix(c(a11,a21,...,amn),m,n) # m x n 行列の作成
+</code></pre>
+</div></li>
+<li><p>
+別の書き方:
+</p>
+
+<div>
+\begin{equation}
+  (A)_{ij}
+  =\text{(行列 $A$ の $ij$ 成分)}
+\end{equation}
+
+</div></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orga482d62">
+<h3 id="orga482d62">行列の加法</h3>
+<ul>
+<li><p>
+<b>同じ大きさの行列</b> の和および差: <br />
+<i>ベクトルと同じように記述することができる</i>
+</p>
+
+<div>
+\begin{equation}
+  (A\pm B)_{ij}=a_{ij}\pm b_{ij}
+\end{equation}
+
+</div>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >A + B # 同じサイズの行列の和
+A - B # 行列の差
+</code></pre>
+</div></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org721b6b1">
+<h3 id="org721b6b1">行列の乗法</h3>
+<ul>
+<li>2つの行列の乗法: <br />
+<i>(2種類ある)</i>
+<ul>
+<li><b>同じ大きさの行列</b> の成分ごとの積 (Hadamard積; 要素積)</li>
+<li><b>\(n\times m\) 型行列と \(m\times l\) 型行列</b> の積</li>
+
+</ul></li>
+<li>データ解析ではどちらも良く用いられる</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org8e39109">
+<h3 id="org8e39109">Hadamard積</h3>
+<ul>
+<li><p>
+<b>同じ大きさの行列</b> の成分ごとの積
+</p>
+
+<div>
+\begin{equation}
+  (A\circ B)_{ij}=a_{ij}b_{ij}
+\end{equation}
+
+</div>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >A * B # 行列の成分ごとの積
+A / B # 成分ごとの商も計算可
+</code></pre>
+</div></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd08110f">
+<h3 id="orgd08110f">行列の積</h3>
+<ul>
+<li><p>
+<b>\(n\times m\) 型行列 \(A\) と \(m\times l\) 型行列 \(B\)</b> の積
+</p>
+
+<div>
+\begin{equation}
+  (AB)_{ij}=\sum_{k=1}^{m}a_{ik}b_{kj}
+  \quad\text{($AB$は$n\times l$行列)}
+\end{equation}
+
+</div>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >A %*% B # 行列の積
+</code></pre>
+</div></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgecd4b58">
+<h3 id="orgecd4b58">行列式とトレース</h3>
+<ul>
+<li><p>
+<b>\(n\) 次正方行列</b> \(A\) の行列式 \(\det(A)\)
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >det(A) # 行列式
+</code></pre>
+</div></li>
+<li><p>
+<b>\(n\) 次正方行列</b> \(A\) のトレース(対角成分の総和)
+</p>
+
+<div>
+\begin{equation}
+  \mathrm{trace}(A)=\sum_{i=1}^{n}a_{ii}
+\end{equation}
+
+</div>
+
 <p>
-(欠損値 <code>NA</code> が含まれると正しく指定できない場合があるので注意)
+関数は用意されていないので以下を利用:
+</p>
+<ul>
+<li>関数 <code>diag()</code>: 行列の対角成分を取り出す(ベクトル)</li>
+<li>関数 <code>sum()</code>: ベクトルの総和を計算する</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre><code class=" R" >sum(diag(A)) # 行列のトレース
+</code></pre>
+</div></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org57ec7d8" data-background="#fef4f4">
+<h2 id="org57ec7d8">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgc3f193b" data-background="#fef4f4">
+<h3 id="orgc3f193b">例題</h3>
+<ul>
+<li><p>
+適当な2次正方行列 \(A\) で
+Hamilton-Cayleyの定理
+</p>
+
+<div>
+\begin{equation}
+  A^2-\mathrm{trace}(A)A+\det(A)E_{2}=O_{2}
+\end{equation}
+
+</div>
+
+<p>
+の成立を確認せよ．<br />
+ただし \(E_{2}\) は2次単位行列，\(O_{2}\) は2次正方零行列
 </p></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3679b41">
-<h3 id="org3679b41">データ例</h3>
-<ul>
-<li><b><code>datasets::airquality</code></b> (Rに準備されている)<br />
-<b>New York Air Quality Measurements</b>
-<ul>
-<li>Description:
-Daily air quality measurements in New York, May to September 1973.</li>
-<li>Format: 
-A data frame with 153 observations on 6 variables.
-<ul>
-<li>[,1]   Ozone   numeric Ozone (ppb)</li>
-<li>[,2]   Solar.R numeric Solar R (lang)</li>
-<li>[,3]   Wind    numeric Wind (mph)</li>
-<li>[,4]   Temp    numeric Temperature (degrees F)</li>
-<li>[,5]   Month   numeric Month (1&#x2013;12)</li>
-<li>[,6]   Day     numeric Day of month (1&#x2013;31)</li>
-
-</ul></li>
-<li>(<code>help(airquality)</code> または <code>?ariquality</code> で詳細を確認)</li>
-
-</ul></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org93cb7e9">
-<h3 id="org93cb7e9">行の抽出 (1/3)</h3>
-<ul>
-<li><p>
-行番号による指定
-</p>
+<section id="slide-orgb4e84e5" data-background="#fef4f4">
+<h3 id="orgb4e84e5">解答例</h3>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 抽出する行番号のベクトルで指定
-airquality[1:10,] # 1-10行を抽出
+<pre><code class=" R" >## 行列を作成 (好きに設定してよい)
+(A &lt;- matrix(1:4,2,2)-diag(rep(3,2)))
 </code></pre>
 </div>
 
 <pre class="example">
-   Ozone Solar.R Wind Temp Month Day
-1     41     190  7.4   67     5   1
-2     36     118  8.0   72     5   2
-3     12     149 12.6   74     5   3
-4     18     313 11.5   62     5   4
-5     NA      NA 14.3   56     5   5
-6     28      NA 14.9   66     5   6
-7     23     299  8.6   65     5   7
-8     19      99 13.8   59     5   8
-9      8      19 20.1   61     5   9
-10    NA     194  8.6   69     5  10
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org1f17757">
-<h3 id="org1f17757">行の抽出 (2/3)</h3>
-<ul>
-<li><p>
-条件の指定
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 条件に合致する行はTRUE (NAは欠損値)
-airquality[1:16,]$Ozone&gt;100 # 条件の指定
-airquality[1:16,]$Ozone&gt;100 &amp; airquality[1:16,]$Wind&lt;=5 # 条件のAND
-with(airquality[1:16,], Ozone&gt;100 &amp; Wind&lt;=5) # 上と同じ(短い書き方)
-with(airquality[1:24,], Ozone&gt;100 | Wind&lt;=5) # 条件のOR
-</code></pre>
-</div>
-
-<pre class="example">
- [1] FALSE FALSE FALSE FALSE    NA FALSE FALSE FALSE FALSE    NA FALSE FALSE
-[13] FALSE FALSE FALSE FALSE
- [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[13] FALSE FALSE FALSE FALSE
- [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[13] FALSE FALSE FALSE FALSE
- [1] FALSE FALSE FALSE FALSE    NA FALSE FALSE FALSE FALSE    NA FALSE FALSE
-[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org67ccf9f">
-<h3 id="org67ccf9f">行の抽出 (3/3)</h3>
-<ul>
-<li><p>
-条件に合致する行番号の抽出
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 関数whichでTRUEの番号を抽出
-which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)) # 全データから抽出
-</code></pre>
-</div>
-
-<pre class="example">
-[1]  62  99 117 121
-</pre></li>
-
-<li><p>
-条件に合致する行の抽出
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 行の抽出
-airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), ] 
-</code></pre>
-</div>
-
-<pre class="example">
-    Ozone Solar.R Wind Temp Month Day
-62    135     269  4.1   84     7   1
-99    122     255  4.0   89     8   7
-117   168     238  3.4   81     8  25
-121   118     225  2.3   94     8  29
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgbb5d97b">
-<h3 id="orgbb5d97b">列の抽出 (1/2)</h3>
-<ul>
-<li><p>
-列番号による指定
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 列番号のベクトルで指定
-airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), c(1,5,6)] 
-</code></pre>
-</div>
-
-<pre class="example">
-    Ozone Month Day
-62    135     7   1
-99    122     8   7
-117   168     8  25
-121   118     8  29
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org02a94c2">
-<h3 id="org02a94c2">列の抽出 (2/2)</h3>
-<ul>
-<li><p>
-列名による指定
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 複数の列の場合
-airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), 
-	   c("Month","Day")] 
-</code></pre>
-</div>
-
-<pre class="example">
-    Month Day
-62      7   1
-99      8   7
-117     8  25
-121     8  29
+     [,1] [,2]
+[1,]   -2    3
+[2,]    2    1
 </pre>
 
 
 <div class="org-src-container">
 
-<pre><code class=" R" >## 1つの列の場合は以下でも良い (ただしベクトルになる)
-airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)),]$Month
+<pre><code class=" R" >## 左辺を計算
+A%*%A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
 </code></pre>
 </div>
 
 <pre class="example">
-[1] 7 8 8 8
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orge1006b1">
-<h3 id="orge1006b1">関数 <code>subset()</code></h3>
-<p>
-複合的な条件を指定してデータを整理する
-</p>
-<ul>
-<li><p>
-基本書式
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >subset(x,subset,select,drop=FALSE)
-</code></pre>
-</div></li>
-<li>関数の引数
-<ul>
-<li><code>x</code>:  データフレーム</li>
-<li><code>subset</code>: 抽出する行の条件</li>
-<li><code>select</code>: 列の選択(未指定の場合は全ての列)</li>
-<li><code>drop</code>: 結果が1行または1列の場合ベクトルとする(TRUE)かデータフレームとする(FALSE)か</li>
-
-</ul></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org9cd3e72">
-<h3 id="org9cd3e72">関数 <code>subset()</code> の例 (1/3)</h3>
-<ul>
-<li><p>
-前出の例の書き換え
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >subset(airquality,
-       subset = Ozone&gt;100 &amp; Wind&lt;=5,
-       select = c(1,5,6))
-subset(airquality,
-       Ozone&gt;100 &amp; Wind&lt;=5, # 順序通りなら引数の名前は省略可
-       c(Month,Day)) # 名前は$の後と同じ扱い
-</code></pre>
-</div>
-
-<pre class="example">
-    Ozone Month Day
-62    135     7   1
-99    122     8   7
-117   168     8  25
-121   118     8  29
-    Month Day
-62      7   1
-99      8   7
-117     8  25
-121     8  29
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgf0024e3">
-<h3 id="orgf0024e3">関数 <code>subset()</code> の例 (2/3)</h3>
-<ul>
-<li><p>
-いろいろな記述の仕方
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## Ozoneに欠測(NA)がなく, かつDayが5か10のWindからDayまでの列を抽出
-subset(airquality, 
-       subset = !is.na(Ozone) &amp; Day %in% c(5,10),
-       select = Wind:Day)
-</code></pre>
-</div>
-
-<pre class="example">
-    Wind Temp Month Day
-41  11.5   87     6  10
-66   4.6   83     7   5
-71   7.4   89     7  10
-97   7.4   85     8   5
-128  7.4   87     9   5
-133  9.7   73     9  10
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgfe732ab">
-<h3 id="orgfe732ab">関数 <code>subset()</code> の例 (3/3)</h3>
-<ul>
-<li><p>
-いろいろな記述の仕方
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
-subset(airquality,
-       subset = Ozone&gt;120 | Wind &lt;= 3,
-       select = -Temp)
-</code></pre>
-</div>
-
-<pre class="example">
-    Ozone Solar.R Wind Month Day
-53     NA      59  1.7     6  22
-62    135     269  4.1     7   1
-99    122     255  4.0     8   7
-117   168     238  3.4     8  25
-121   118     225  2.3     8  29
-126    73     183  2.8     9   3
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-orge19a5ce" data-background="#fef4f4">
-<h2 id="orge19a5ce">演習</h2>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org8f8d3b2" data-background="#fef4f4">
-<h3 id="org8f8d3b2">練習問題</h3>
-<ul>
-<li><code>datasets::airquality</code> に対して
-以下の条件を満たすデータを取り出しなさい．
-<ul>
-<li>7月のオゾン濃度 (<code>Ozone</code>)</li>
-<li>風速 (<code>Wind</code>) が時速10マイル以上で，
-かつ気温 (<code>Temp</code>) が華氏80度以上の日のデータ</li>
-<li>オゾン (<code>Ozone</code>) も日射量 (<code>Solar.R</code>) も
-欠測 (<code>NA</code>) でないデータの月 (<code>Month</code>) と日 (<code>Day</code>)</li>
-
-</ul></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org71313d6">
-<h2 id="org71313d6">ファイルの取り扱い</h2>
-<div class="outline-text-2" id="text-org71313d6">
-</div>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org596a814">
-<h3 id="org596a814">データファイルの読み書き</h3>
-<ul>
-<li>実際の解析においては以下の操作が必要
-<ul>
-<li>収集されたデータを読み込む</li>
-<li>整理したデータを保存する</li>
-
-</ul></li>
-<li>Rで利用可能なデータファイル
-<ul>
-<li>CSV形式(comma separated values): テキストファイル</li>
-<li>RData形式: Rの内部表現を用いたバイナリーファイル</li>
-<li>(Excel形式: RStudio の読み込み機能が利用可能)</li>
-
-</ul></li>
-<li>データフレームを対象とした扱いを整理する</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgf036fb5">
-<h3 id="orgf036fb5">作業ディレクトリ</h3>
-<ul>
-<li>Rは <b>作業ディレクトリ</b> で実行される
-<ul>
-<li>ファイルは作業ディレクトリに存在するものとして扱われる</li>
-<li>それ以外のファイルを扱う場合はパスを含めて指定する</li>
-
-</ul></li>
-<li>作業ディレクトリの確認の仕方
-<ul>
-<li>コンソールの上部の表示</li>
-<li>関数 <code>getwd()</code></li>
-
-</ul></li>
-<li>作業ディレクトリの変更の仕方
-<ul>
-<li><b>Session</b> メニューの <b>Set Working Directory</b> で指定
-<ul>
-<li>読み込んだファイルの場所を選択</li>
-<li>File Pane の場所を選択</li>
-<li>ディレクトリを直接選択</li>
-
-</ul></li>
-<li>関数 <code>setwd()</code></li>
-
-</ul></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orge51cd92">
-<h3 id="orge51cd92">関数 <code>getwd()/setwd()</code> の例</h3>
-<ul>
-<li>コンソール / R Scriptからの作業ディレクトリの操作</li>
-
-</ul>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 作業ディレクトリの確認 (環境によって実行結果が異なる)
-getwd()
-## 作業ディレクトリの移動 (環境によって指定の仕方も異なる)
-setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダに移動
-</code></pre>
-</div>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orge3f9dcd">
-<h3 id="orge3f9dcd">関数 <code>write.csv()</code></h3>
-<p>
-データフレームをCSVファイルへ書き出す
-</p>
-<ul>
-<li><p>
-基本書式
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >write.csv(x, file="ファイル名")
-</code></pre>
-</div></li>
-<li>関数の引数
-<ul>
-<li><code>x</code>: 書き出すデータフレーム</li>
-<li><code>file</code>: 書き出すファイルの名前<br />
-(作業ディレクトリ下，またはパスを指定)</li>
-
-</ul></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org51e6245">
-<h3 id="org51e6245">関数 <code>write.csv()</code> の例</h3>
-<ul>
-<li><p>
-CSVファイルの書き出し
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 関数write.csvの使い方
-(myData &lt;- subset(airquality, 
-		  subset = Ozone&gt;120,
-		  select = -Temp)) # データフレームの作成
-dim(myData) # データフレームの大きさを確認
-write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
-</code></pre>
-</div>
-
-<pre class="example">
-    Ozone Solar.R Wind Month Day
-62    135     269  4.1     7   1
-99    122     255  4.0     8   7
-117   168     238  3.4     8  25
-[1] 3 5
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org680a04f">
-<h3 id="org680a04f">関数 <code>read.csv()</code></h3>
-<p>
-CSVファイルからデータフレームを読み込む
-</p>
-<ul>
-<li><p>
-基本書式
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >read.csv(file="ファイル名", header=TRUE,
-	 row.names, fileEncoding)      
-</code></pre>
-</div></li>
-<li>関数の引数
-<ul>
-<li><code>file</code>: 読み込むファイルの名前<br />
-(作業ディレクトリ下，またはパスを指定)</li>
-<li><code>header</code>: 1行目を列名として使うか否か</li>
-<li><code>row.names</code>: 行名の指定<br />
-(行名を含む列番号/列名，または行名の直接指定が可能)</li>
-<li><code>fileEncoding</code>: 文字コードの指定<br />
-(日本語の場合，主に使うのは <b>&ldquo;utf8&rdquo;,&ldquo;sjis&rdquo;</b>)</li>
-
-</ul></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgd517621">
-<h3 id="orgd517621">関数 <code>read.csv()</code> の例</h3>
-<ul>
-<li><p>
-CSVファイルの読み込み 
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 関数read.csvの使い方
-(newdata &lt;- read.csv(file="data/mydata.csv",
-		     row.names=1)) # 1列目を行名に指定
-dim(newdata) # 正しく読み込めたか大きさを確認
-</code></pre>
-</div>
-
-<pre class="example">
-    Ozone Solar.R Wind Month Day
-62    135     269  4.1     7   1
-99    122     255  4.0     8   7
-117   168     238  3.4     8  25
-[1] 3 5
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgf11e3c1">
-<h3 id="orgf11e3c1">関数 <code>save()</code></h3>
-<p>
-RDataファイルへ書き出す
-</p>
-<ul>
-<li><p>
-基本書式
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >save(..., file="ファイル名")
-</code></pre>
-</div></li>
-<li>関数の引数
-<ul>
-<li><code>...</code>: 保存するオブジェクト名<br />
-(複数可，データフレーム以外も可)</li>
-<li><code>file</code>: 書き出すファイルの名前<br />
-(作業ディレクトリ下，またはパスを指定)</li>
-
-</ul></li>
-<li>CSV形式と異なり，
-<b>複数</b> のデータフレームを1つのファイルに保存することができる</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org7529ac8">
-<h3 id="org7529ac8">関数 <code>save()</code> の例</h3>
-<ul>
-<li><p>
-RDataファイルの書き出し
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 関数saveの使い方
-(myDat1 &lt;- subset(airquality, Temp&gt;95, select=-Ozone)) 
-(myDat2 &lt;- subset(airquality, Temp&lt;57, select=-Ozone)) 
-dim(myDat1); dim(myDat2) # 大きさを確認
-save(myDat1,myDat2,file="data/mydata.rdata") # RData形式で書き出し
-</code></pre>
-</div>
-
-<pre class="example">
-    Solar.R Wind Temp Month Day
-120     203  9.7   97     8  28
-122     237  6.3   96     8  30
-  Solar.R Wind Temp Month Day
-5      NA 14.3   56     5   5
-[1] 2 5
-[1] 1 5
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgef5fca1">
-<h3 id="orgef5fca1">関数 <code>load()</code></h3>
-<p>
-RDataファイルから読み込む
-</p>
-<ul>
-<li><p>
-基本書式
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >load(file="ファイル名")
-</code></pre>
-</div></li>
-<li>関数の引数
-<ul>
-<li><code>file</code>: 読み込むファイルの名前<br />
-(作業ディレクトリ下，またはパスを指定)</li>
-
-</ul></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org212a6a9">
-<h3 id="org212a6a9">関数 <code>load()</code> の例</h3>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 関数loadの使い方
-(myDat1 &lt;- subset(airquality, Ozone &gt; 160)) # 新たに作成
-load(file="data/mydata.rdata") # RData形式の読み込み
-myDat1 # saveしたときの名前で読み込まれ上書きされる
-myDat2 
-</code></pre>
-</div>
-
-<pre class="example">
-    Ozone Solar.R Wind Temp Month Day
-117   168     238  3.4   81     8  25
-    Solar.R Wind Temp Month Day
-120     203  9.7   97     8  28
-122     237  6.3   96     8  30
-  Solar.R Wind Temp Month Day
-5      NA 14.3   56     5   5
+             [,1]         [,2]
+[1,] 1.776357e-15 0.000000e+00
+[2,] 0.000000e+00 1.776357e-15
 </pre>
 
 <div class="slide-footer"><br></div>
 </section>
-</section>
-<section>
-<section id="slide-orgc66dfa4" data-background="#fef4f4">
-<h2 id="orgc66dfa4">演習</h2>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgeb7b773" data-background="#fef4f4">
-<h3 id="orgeb7b773">練習問題</h3>
+<section id="slide-org7b0792c" data-background="#fef4f4">
+<h3 id="org7b0792c">練習問題</h3>
 <ul>
-<li>以下のデータを読み込み，データの操作を行ってみよう．
-<ul>
-<li>データファイル (文字コード: utf8)
-<ul>
-<li>jpdata1.csv: 県別の対象データ</li>
-<li>jpdata2.csv: 対象データの内容</li>
-<li>jpdata3.csv: 県別と地域の対応関係</li>
-
-</ul></li>
-<li><a href="https://www.e-stat.go.jp">https://www.e-stat.go.jp</a> より取得したデータ<br />
-(地域から探す / 全県を選択 / 項目を選択してダウンロード)</li>
+<li>1から10の2乗値からなるベクトルを作成せよ．</li>
+<li>1から10までの和を計算せよ．</li>
+<li>行列を用いて九九の表を作成せよ．</li>
 <li><p>
-作業ディレクトリに置いて，以下のように読み込む
+30度の回転行列を2回乗ずると60度の回転行列となることを確認せよ．
 </p>
-<div class="org-src-container">
 
-<pre><code class=" R" >myData &lt;- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
-myItem &lt;- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
-myArea &lt;- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
-</code></pre>
+<div>
+\begin{equation}
+  \text{(回転行列)}
+  =
+  \begin{pmatrix}
+    \cos(\theta)&-\sin(\theta)\\
+    \sin(\theta)& \cos(\theta)
+  \end{pmatrix}
+\end{equation}
+
 </div></li>
-
-</ul></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgcfd0477">
-<h2 id="orgcfd0477">データの集計</h2>
-<div class="outline-text-2" id="text-orgcfd0477">
+<section id="slide-org5179eaa">
+<h2 id="org5179eaa">ベクトルと行列の計算</h2>
+<div class="outline-text-2" id="text-org5179eaa">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd84bef4">
-<h3 id="orgd84bef4">集約のための関数</h3>
+<section id="slide-org45fb524">
+<h3 id="org45fb524">ベクトルと行列の乗法</h3>
 <ul>
-<li>データを集約するための基本的な関数は用意されている
-<ul>
-<li>関数 <code>sum()</code>: 総和</li>
-<li>関数 <code>mean()</code>: 平均</li>
-<li>関数 <code>max()</code>: 最大値</li>
-<li>関数 <code>min()</code>: 最小値</li>
-
-</ul></li>
-
-</ul>
-
-<ul>
-<li>(これ以外にも集約を行なう関数は沢山ある)</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org2763eeb">
-<h3 id="org2763eeb">関数の例</h3>
-<ul>
+<li>列(縦)ベクトル・行(横)ベクトルという <b>区別はない</b></li>
+<li>行列とベクトルの順序で適切に判断される</li>
 <li><p>
-練習問題のデータの集計を行う
+計算結果は <b>行列</b> で表現される
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >myData &lt;- read.csv(file="data/jpdata1.csv",
-		   row.names=1, fileEncoding="utf8")
-## 一度読み込んでいれば上の行は不要
-sum(myData$人口) # 全国の総人口 (列名で選択)
-mean(myData[,4]) # 面積の平均値 (行列として列を選択)
-median(myData[[4]]) # 面積の中央値 (リストとして列を選択)
-min(myData["若年"])  # 若年人口の最小値 (列名で選択)
-with(myData,max(老人))  # 老年人口の最大値 (関数withを利用)
+<pre><code class=" R" >A &lt;- matrix(1:4,2,2); b &lt;- c(5,6) # 行列とベクトルを作成
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >A %*% b # 行列 x ベクトル = 列ベクトル
 </code></pre>
 </div>
 
 <pre class="example">
-[1] 126708000
-[1] 793554.5
-[1] 609719
-[1] 72000
-[1] 3160000
+     [,1]
+[1,]   23
+[2,]   34
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class=" R" >b %*% A # ベクトル x 行列 = 行ベクトル
+</code></pre>
+</div>
+
+<pre class="example">
+     [,1] [,2]
+[1,]   17   39
 </pre></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgdfe4444">
-<h3 id="orgdfe4444">関数 <code>apply()</code></h3>
-<p>
-列あるいは行ごとの計算を行う
-</p>
+<section id="slide-org23fd249">
+<h3 id="org23fd249">連立1次方程式の解法</h3>
 <ul>
 <li><p>
-基本書式
+連立1次方程式
+</p>
+<ul>
+<li>\(A\) : \(n\) 次正則行列</li>
+<li>\(\boldsymbol{b},\boldsymbol{x}\) : \(n\) 次元列ベクトル</li>
+
+</ul>
+
+<div>
+\begin{align}
+  A\boldsymbol{x}&=\boldsymbol{b}
+  &&\text{(連立1次方程式)}\\
+  \boldsymbol{x}&=A^{-1}\boldsymbol{b}
+  &&\text{(解;$A$が正則な場合)}
+\end{align}
+
+</div></li>
+<li><p>
+解を求めるには関数 <code>solve()</code> を利用する
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >apply(X, MARGIN, FUN)
+<pre><code class=" R" >x &lt;- solve(A, b)    
 </code></pre>
 </div></li>
-<li>関数の引数
-<ul>
-<li><code>X</code>: データフレーム</li>
-<li><code>MARGIN</code>: 行(1)か列(2)かを指定</li>
-<li><code>FUN</code>: 計算すべき統計量の関数</li>
-
-</ul></li>
-<li>総和や平均は専用の関数も用意されている<br />
-<b><code>rowSums()/colSums()</code>, <code>rowMeans()/colMeans()</code></b></li>
+<li>ベクトル \(\boldsymbol{b}\) の代わりに行列も扱える</li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga17106b">
-<h3 id="orga17106b">関数 <code>apply()</code> の例</h3>
+<section id="slide-orgcbba217">
+<h3 id="orgcbba217">逆行列</h3>
 <ul>
 <li><p>
-抽出したデータの集計を行う
+正則な \(n\) 次正方行列 \(A\) の逆行列 \(A^{-1}\)
 </p>
-<div class="org-src-container">
 
-<pre><code class=" R" >x &lt;- subset(myData, select=婚姻:勤女) # 抽出
-colMeans(x) # 各列の平均
-apply(x, 2, max) # 列ごとの最大値
-sapply(x, max)   # 上と同じ (help(sapply)を参照)
-## 自作関数の適用 (関数に名前を付けずに利用できる)
-apply(x, 2, function(z){sum(z&gt;mean(z))}) # 平均より大きいデータ数
-</code></pre>
+<div>
+\begin{equation}
+  AA^{-1}=A^{-1}A=E_{n}
+  \quad\text{($E_{n}$は$n$次単位行列)}
+\end{equation}
+
+</div></li>
+<li><p>
+関数 <code>solve()</code> を利用して求めることができる
+</p>
+
+<div>
+\begin{align}
+  AX&=E_{n}\\
+  X&=A^{-1}E_{n}=A^{-1}
+\end{align}
+
 </div>
 
-<pre class="example">
-      婚姻       離婚       失業       勤男       勤女 
-  4.437021   1.631064   4.221277 410.702128 296.659574
-  婚姻   離婚   失業   勤男   勤女 
-  6.19   2.41   6.30 444.00 336.00
-  婚姻   離婚   失業   勤男   勤女 
-  6.19   2.41   6.30 444.00 336.00
-婚姻 離婚 失業 勤男 勤女 
-  20   22   25   27   22
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org3d5fb0c">
-<h3 id="org3d5fb0c">関数 <code>aggregate()</code></h3>
-<p>
-各行をグループにまとめて統計量を計算する
-</p>
-<ul>
-<li><p>
-基本書式
-</p>
 <div class="org-src-container">
 
-<pre><code class=" R" >aggregate(x, by, FUN)
+<pre><code class=" R" >solve(A,B) # AX=B の解Xを求める
+solve(A) # 逆行列 (Bが単位行列の場合省略できる)
 </code></pre>
 </div></li>
-<li>関数の引数
-<ul>
-<li><code>x</code>: データフレーム</li>
-<li><code>by</code>: 各行が属するグループを指定するベクトルをリストで与える(複数可)</li>
-<li><code>FUN</code>: 求めたい統計量を計算するための関数</li>
-
-</ul></li>
-<li><i>(<code>x</code> がベクトルの場合には関数 <code>tapply()</code> も利用可)</i></li>
+<li><i>(他にもいくつか方法は用意されている)</i></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8449079">
-<h3 id="org8449079">関数 <code>aggregate()</code> の例 (1/6)</h3>
+<section id="slide-org063070a">
+<h3 id="org063070a">関数の適用</h3>
 <ul>
+<li>ベクトルや行列に関数( \(\sin,\exp,\dots\) など)を適用すると
+成分ごとに計算した結果が返される</li>
 <li><p>
-同じ値を持つグループごとの平均値を求める
+<span style="color:darkgreen;">ベクトル \(\boldsymbol{a}\) ，行列 \(A\) に関数 \(\sin\) を適用</span>
 </p>
+
+<div>
+\begin{equation}
+  (\sin(\boldsymbol{a}))_{i}=\sin(a_{i})
+\end{equation}
+
+</div>
+
 <div class="org-src-container">
 
-<pre><code class=" R" >## 人口から面積まで地方ごとの平均値を計算
-x &lt;- subset(myData,select=人口:面積)
-aggregate(x, by=list(地方=myArea$地方), FUN=mean) 
+<pre><code class=" R" >sin(a) # 成分ごとに計算される．sin(a)[i]=sin(a[i])
 </code></pre>
 </div>
 
-<pre class="example">
-    地方    人口     若年      老人      面積
-1   関東 6178286 737000.0 1564000.0  463329.3
-2   近畿 3204429 395714.3  898714.3  473223.6
-3   九州 1795000 243875.0  511000.0  556395.0
-4   四国  947000 112250.0  305750.0  470091.5
-5   中国 1473800 186400.0  448600.0  638433.4
-6   中部 2372889 302888.9  667555.6  742297.6
-7   東北 1472667 169333.3  452666.7 1115790.7
-8 北海道 5320000 588000.0 1632000.0 7842078.0
-</pre></li>
+<div>
+\begin{equation}
+  (\sin(A))_{ij}=\sin(a_{ij})
+\end{equation}
+
+</div>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
+</code></pre>
+</div></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6d7044f">
-<h3 id="org6d7044f">関数 <code>aggregate()</code> の例 (2/6)</h3>
+</section>
+<section>
+<section id="slide-org6cb4d83" data-background="#fef4f4">
+<h2 id="org6cb4d83">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org52a8809" data-background="#fef4f4">
+<h3 id="org52a8809">例題</h3>
 <ul>
 <li><p>
-代入せずにまとめて書くことも可能
+適当な3次正方行列 \(A\) と3次元ベクトル \(\boldsymbol{b}\) を作成して
+\(\boldsymbol{x}\) に関する連立1次方程式
 </p>
+
+<div>
+\begin{equation}
+  A\boldsymbol{x}=\boldsymbol{b}
+\end{equation}
+
+</div>
+
+<p>
+を解け
+</p></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org7f02ed0" data-background="#fef4f4">
+<h3 id="org7f02ed0">解答例</h3>
 <div class="org-src-container">
 
-<pre><code class=" R" >aggregate(subset(myData,select=人口:面積),
-	  by=list(地方=myArea$地方),
-	  FUN=mean) 
+<pre><code class=" R" >## 行列とベクトルを作成 (好きに設定してよい)
+## rnorm(9) は正規乱数を9つ作成する(第5回で詳しく説明)
+(A &lt;- matrix(rnorm(9),3,3)+diag(rep(1,3)))
+(b &lt;- 1:3)
 </code></pre>
 </div>
 
 <pre class="example">
-    地方    人口     若年      老人      面積
-1   関東 6178286 737000.0 1564000.0  463329.3
-2   近畿 3204429 395714.3  898714.3  473223.6
-3   九州 1795000 243875.0  511000.0  556395.0
-4   四国  947000 112250.0  305750.0  470091.5
-5   中国 1473800 186400.0  448600.0  638433.4
-6   中部 2372889 302888.9  667555.6  742297.6
-7   東北 1472667 169333.3  452666.7 1115790.7
-8 北海道 5320000 588000.0 1632000.0 7842078.0
-</pre></li>
+            [,1]      [,2]      [,3]
+[1,] -0.09749043 0.3947415 0.2967005
+[2,] -0.56872113 0.1885099 1.7646626
+[3,] -0.89090895 1.2002971 0.6061940
+[1] 1 2 3
+</pre>
 
-</ul>
+
+<div class="org-src-container">
+
+<pre><code class=" R" >## 解を計算
+(x &lt;- solve(A,b))
+A%*%x # 結果の確認(b になるはず)
+</code></pre>
+</div>
+
+<pre class="example">
+[1] -0.3435397  1.8264578  0.8275329
+     [,1]
+[1,]    1
+[2,]    2
+[3,]    3
+</pre>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org66be800">
-<h3 id="org66be800">関数 <code>aggregate()</code> の例 (3/6)</h3>
+<section id="slide-org6ce43f6" data-background="#fef4f4">
+<h3 id="org6ce43f6">練習問題</h3>
 <ul>
+<li>1から10の2乗値からなるベクトルを作成せよ．</li>
+<li>2次元ベクトルを回転行列で変換しても長さが変わらないことを確かめよ．</li>
 <li><p>
-以下も同じ結果を返す
+例題の \(A\) と \(\boldsymbol{b}\) を用いて
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >y &lt;- data.frame(x,地方=myArea$地方) 
-aggregate( . ~ 地方, data=y, FUN=mean)
+<pre><code class=" R" >A %*% b + b %*% A   
 </code></pre>
 </div>
-
-<pre class="example">
-    地方    人口     若年      老人      面積
-1   関東 6178286 737000.0 1564000.0  463329.3
-2   近畿 3204429 395714.3  898714.3  473223.6
-3   九州 1795000 243875.0  511000.0  556395.0
-4   四国  947000 112250.0  305750.0  470091.5
-5   中国 1473800 186400.0  448600.0  638433.4
-6   中部 2372889 302888.9  667555.6  742297.6
-7   東北 1472667 169333.3  452666.7 1115790.7
-8 北海道 5320000 588000.0 1632000.0 7842078.0
-</pre></li>
+<p>
+を計算するとエラーになるが，何故そうなるか理由を考えよ．
+</p></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5bb7b9e">
-<h3 id="org5bb7b9e">関数 <code>aggregate()</code> の例 (4/6)</h3>
+</section>
+<section>
+<section id="slide-orgb6b0cb6">
+<h2 id="orgb6b0cb6">関数の定義</h2>
+<div class="outline-text-2" id="text-orgb6b0cb6">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org895c3bb">
+<h3 id="org895c3bb">自作関数</h3>
 <ul>
+<li>他の言語と同様にRでも関数を定義できる</li>
+<li>関数の定義には関数 <code>function()</code> を利用する</li>
 <li><p>
-まとめて書くことも可能
+<span style="color:darkgreen;">半径 r から球の体積と表面積を求める関数</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-	  data=data.frame(subset(myData,select=人口:面積),
-			  地方=myArea$地方), 
-	  FUN=mean)
+<pre><code class=" R" >myfunc &lt;- function(r){
+    V &lt;- (4/3) * pi * r^3 # 球の体積
+    S &lt;- 4 * pi * r^2     # 球の表面積
+    out &lt;- c(V,S) # 返り値のベクトルを作る
+    names(out) &lt;- c("volume", "area") # 返り値の要素に名前を付ける
+    return(out) # 値を返す
+}
+myfunc(1) # 実行
 </code></pre>
 </div>
 
 <pre class="example">
-    地方    人口     若年      老人      面積
-1   関東 6178286 737000.0 1564000.0  463329.3
-2   近畿 3204429 395714.3  898714.3  473223.6
-3   九州 1795000 243875.0  511000.0  556395.0
-4   四国  947000 112250.0  305750.0  470091.5
-5   中国 1473800 186400.0  448600.0  638433.4
-6   中部 2372889 302888.9  667555.6  742297.6
-7   東北 1472667 169333.3  452666.7 1115790.7
-8 北海道 5320000 588000.0 1632000.0 7842078.0
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org4053340">
-<h3 id="org4053340">関数 <code>aggregate()</code> の例 (5/6)</h3>
-<ul>
-<li><p>
-複数の条件でグループ分け
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-aggregate(x, by=list(地方=myArea$地方,
-		     過疎=with(myData, 人口&lt;=median(人口))),
-	  FUN=mean)
-</code></pre>
-</div>
-
-<pre class="example">
-     地方  過疎      人口     若年      老人      面積
-1    関東 FALSE 6178285.7 737000.0 1564000.0  463329.3
-2    近畿 FALSE 4681250.0 573750.0 1305500.0  517317.2
-3    九州 FALSE 3436000.0 456000.0  957500.0  619800.0
-4    中国 FALSE 2368000.0 305500.0  688000.0  779697.5
-5    中部 FALSE 3510200.0 451400.0  973200.0  994346.8
-6    東北 FALSE 2102500.0 250000.0  600000.0 1053306.0
-7  北海道 FALSE 5320000.0 588000.0 1632000.0 7842078.0
-8    近畿  TRUE 1235333.3 158333.3  356333.3  414432.0
-9    九州  TRUE 1248000.0 173166.7  362166.7  535260.0
-10   四国  TRUE  947000.0 112250.0  305750.0  470091.5
-11   中国  TRUE  877666.7 107000.0  289000.0  544257.3
-12   中部  TRUE  951250.0 117250.0  285500.0  427236.0
-13   東北  TRUE 1157750.0 129000.0  379000.0 1147033.0
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org60ff472">
-<h3 id="org60ff472">関数 <code>aggregate()</code> の例 (6/6)</h3>
-<ul>
-<li><p>
-別の書き方
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
-	  data=data.frame(subset(myData,select=人口:面積),
-			  地方=myArea$地方,
-			  過疎=with(myData, 人口&lt;=median(人口))))
-</code></pre>
-</div>
-
-<pre class="example">
-     地方  過疎      人口     若年      老人      面積
-1    関東 FALSE 6178285.7 737000.0 1564000.0  463329.3
-2    近畿 FALSE 4681250.0 573750.0 1305500.0  517317.2
-3    九州 FALSE 3436000.0 456000.0  957500.0  619800.0
-4    中国 FALSE 2368000.0 305500.0  688000.0  779697.5
-5    中部 FALSE 3510200.0 451400.0  973200.0  994346.8
-6    東北 FALSE 2102500.0 250000.0  600000.0 1053306.0
-7  北海道 FALSE 5320000.0 588000.0 1632000.0 7842078.0
-8    近畿  TRUE 1235333.3 158333.3  356333.3  414432.0
-9    九州  TRUE 1248000.0 173166.7  362166.7  535260.0
-10   四国  TRUE  947000.0 112250.0  305750.0  470091.5
-11   中国  TRUE  877666.7 107000.0  289000.0  544257.3
-12   中部  TRUE  951250.0 117250.0  285500.0  427236.0
-13   東北  TRUE 1157750.0 129000.0  379000.0 1147033.0
+ volume     area 
+4.18879 12.56637
 </pre></li>
 
 </ul>
@@ -1100,24 +751,249 @@ aggregate(x, by=list(地方=myArea$地方,
 </section>
 </section>
 <section>
-<section id="slide-orgf482be3" data-background="#fef4f4">
-<h2 id="orgf482be3">演習</h2>
+<section id="slide-org85a8a51">
+<h2 id="org85a8a51">制御構造</h2>
+<div class="outline-text-2" id="text-org85a8a51">
+</div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga241223" data-background="#fef4f4">
-<h3 id="orga241223">練習問題</h3>
-<p>
-サンプルデータ(jpdata)の整理をしてみよう．
-</p>
+<section id="slide-orgf7b3bd3">
+<h3 id="orgf7b3bd3">制御文</h3>
 <ul>
-<li>県別の人口密度を求めよ</li>
-<li>地方別の人口密度を求めよ<br />
-(県ごとに人口が異なるので単純に人口密度を平均してはいけない)</li>
-<li>地方別の婚姻率・離婚率(1000人当たり)を概算せよ<br />
-(「人口1000人当たり」とあるが，
- 若年層は婚姻不可として除いた
- 「婚姻可能な人口1000人当たり」
- で置き換えて計算しなさい)</li>
+<li>最適化や数値計算などを行うためには，
+条件分岐や繰り返しを行うための仕組みが必要となる</li>
+<li>R言語を含む多くの計算機言語では
+<ul>
+<li><code>if</code>  (条件分岐)</li>
+<li><code>for</code>  (繰り返し・回数指定)</li>
+<li><code>while</code>  (繰り返し・条件指定)</li>
+
+</ul></li>
+<li>これを <b>制御文</b> と言う</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org6ce201f">
+<h3 id="org6ce201f"><code>if</code> 文</h3>
+<ul>
+<li><p>
+条件Aが <b>真</b> のときプログラムXを実行する
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >if(条件A) プログラムX
+</code></pre>
+</div></li>
+<li><p>
+上記の <code>if</code> 文に条件Aが <b>偽</b> のときプログラムYを実行することを追加する
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >if(条件A) プログラムX else プログラムY    
+</code></pre>
+</div></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org4f7d09f">
+<h3 id="org4f7d09f"><code>if</code> 文の例</h3>
+<ul>
+<li><p>
+<span style="color:darkgreen;">20200724が19で割り切れるか?</span>
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >if(20200724 %% 19 == 0) {# %% は余りを計算
+    print("割り切れます")
+    print(20200724 %/% 19) # 商を表示
+} else { # {}で囲まれたブロックが1つのプログラム
+    print("割り切れません")
+    print(20200724 %% 19) # 余りを表示
+} 
+</code></pre>
+</div>
+
+<pre class="example">
+[1] "割り切れます"
+[1] 1063196
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org77d267d">
+<h3 id="org77d267d"><code>for</code> 文</h3>
+<ul>
+<li><p>
+ベクトル <code>V</code> の要素を <b>順に</b> 変数 <code>i</code> に代入して
+プログラムXを繰り返し実行する
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >for(i in V) プログラムX
+</code></pre>
+</div></li>
+<li>プログラムXは変数 <code>i</code> によって実行内容が変わる</li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org690a812">
+<h3 id="org690a812"><code>for</code> 文の例</h3>
+<ul>
+<li><p>
+<span style="color:darkgreen;">アルファベットの20,15,11,25,15番目を表示</span>
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >print(LETTERS) # LETTERS ベクトルの内容を表示
+for(i in c(20,15,11,25,15)) {
+    print(LETTERS[i]) # 順番に表示
+}
+</code></pre>
+</div>
+
+<pre class="example">
+ [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S"
+[20] "T" "U" "V" "W" "X" "Y" "Z"
+[1] "T"
+[1] "O"
+[1] "K"
+[1] "Y"
+[1] "O"
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org37ac1f2">
+<h3 id="org37ac1f2"><code>while</code> 文</h3>
+<ul>
+<li><p>
+条件Aが <b>真</b> である限りプログラムXを繰り返す
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >while(条件A) プログラムX
+</code></pre>
+</div></li>
+<li>プログラムXは実行するたびに実行内容が変わり，
+いつか条件Aが満たされなくなるように書く</li>
+<li><i>(<code>repeat</code> 文というものもある)</i></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgb54417a">
+<h3 id="orgb54417a"><code>while</code> 文の例</h3>
+<ul>
+<li><p>
+<span style="color:darkgreen;">20200809を素因数分解する</span>
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >n &lt;- 20200809 # 分解の対象
+p &lt;- 2 # 最初に調べる数
+while(n != 1){ # 商が1になるまで計算する
+    for(i in p:n){ # pからnまで順に調べる
+	if(n%%i == 0) { # 余りが0か確認
+	    print(i) # 割り切った数を表示
+	    n &lt;- n/i # 商を計算して分解の対象を更新
+	    p &lt;- i # 最初に調べる数を更新
+	    break # for文を途中で終了
+	}  
+    }
+}
+</code></pre>
+</div>
+
+<pre class="example">
+[1] 3
+[1] 31
+[1] 281
+[1] 773
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orgcdcfc9f" data-background="#fef4f4">
+<h2 id="orgcdcfc9f">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orge0e1e0c" data-background="#fef4f4">
+<h3 id="orge0e1e0c">例題</h3>
+<ul>
+<li>三角形の3辺の長さ \(x,y,z\) を与えると
+面積 \(S\) を計算する関数を作成せよ．</li>
+<li><p>
+参考: <b>ヘロンの公式</b> より
+</p>
+
+<div>
+\begin{equation}
+  S=\sqrt{s(s-x)(s-y)(s-z)},\qquad
+  s=\frac{x+y+z}{2}
+\end{equation}
+
+</div>
+
+<p>
+が成り立つ．
+</p></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd0cdeef" data-background="#fef4f4">
+<h3 id="orgd0cdeef">解答例</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >area &lt;- function(x,y,z){
+    s &lt;- (x+y+z)/2
+    S &lt;- (s*(s-x)*(s-y)*(s-z))^(1/2)
+    ## S &lt;- sqrt(s*(s-x)*(s-y)*(s-z)) # 平方根を求める関数を用いても良い
+  return(S)
+}
+area(3,4,5) # 直角三角形で検算
+area(12,13,5)
+</code></pre>
+</div>
+
+<pre class="example">
+[1] 6
+[1] 30
+</pre>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org8a19a1d" data-background="#fef4f4">
+<h3 id="org8a19a1d">演習</h3>
+<ul>
+<li>非負の整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ．</li>
+<li><p>
+整数 \(n\) の Fibonacci数を求める関数を作成せよ．
+</p>
+
+<div>
+\begin{align}
+  F_{0}&=0\\
+  F_{1}&=1\\
+  F_{n}&=F_{n-1}+F_{n-2}
+\end{align}
+
+</div></li>
+<li>行列 \(X\) が与えられたとき，各列の平均を計算する関数を作成せよ．</li>
+<li>前問で \(X\) がベクトルの場合にはその平均を計算するように修正せよ．<br />
+<i>(関数 <code>is.vector()</code> が利用できる)</i></li>
 
 </ul>
 <div class="slide-footer"><br></div>

@@ -6,7 +6,7 @@ draft = false
 weight = 1002
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-04-02 Fri&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-04-03 Sat&gt;</span></span>
 
 
 ## スライド {#スライド}
@@ -17,3 +17,8 @@ weight = 1002
 ## ハンドアウト {#ハンドアウト}
 
 -   [PDF file](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide01.pdf)
+
+
+## 解答例 {#解答例}
+
+-   [RScript](https://noboru-murata.github.io/statistical-data-analysis1/code/slide01.R)

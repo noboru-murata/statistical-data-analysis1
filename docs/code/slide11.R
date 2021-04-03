@@ -1,61 +1,98 @@
-### 練習1
-### 一元配置分散分析
-## 気候データによる例
-## 曜日ごとの気温に差があるか否かを分散分析
+### 練習1.1
+### t検定のMonte-Carlo実験
+n <- 10
+mu0 <- 5
+sd0 <- 3
+mc <- 10000
+alpha <- 0.05
+myTrial <- function(n){ 
+    result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
+    return(result$p.value)}
+myData <- replicate(mc, myTrial(n))
+hist(myData,xlab="p value") # p.valueの分布を見る
+table(myData<alpha)/mc # alpha以下の結果の数を調べる=サイズ
+
+### 練習1.2
+### 視聴率の検定
+### X は正規分布ではないが，nが十分大きい場合には
+### 区間推定と同様に正規分布(自由度の大きなt分布)で近似される
+n <- 600
+mu0 <- 0.1 # 越えたい視聴率
+mu1 <- 0.11 # 真の視聴率(11%)
+x <- sample(0:1,n,replace=TRUE,prob=c(1-mu1,mu1))
+table(x)
+t.test(x,mu=mu0,alternative="greater")
+## この設定でMonte-Carlo実験を行う
+mc <- 10000
+alpha <- 0.03 # 
+myTrial <- function(n){ 
+    x <- sample(0:1,n,replace=TRUE,prob=c(1-mu1,mu1))
+    result <- t.test(x,mu=mu0,alternative="greater")
+    return(result$p.value)}
+myData <- replicate(mc, myTrial(n))
+hist(myData,xlab="p value") # p.valueの分布を見る
+table(myData<alpha)/mc # alpha以下のデータの数を調べる=検出力
+## n を変えて実験してみる
+n <- 5000
+myData <- replicate(mc, myTrial(n))
+hist(myData,xlab="p value") # p.valueの分布を見る
+table(myData<alpha)/mc # alpha以下のデータの数を調べる=検出力
+
+### 練習2.1
+### 6月の気温の分散の検定
 myData <- read.csv("data/tokyo_weather.csv",
                    fileEncoding="utf8")
-## 曜日の情報を付加
-days <- with(myData,
-             as.Date(paste(年,月,日, sep="-"))) # 日付を作成
-wdays <- weekdays(days) # 各日付の曜日を計算
-myData <- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
-## 箱ひげ図で可視化
-par(family="HiraginoSans-W4") # 日本語フォントの指定
-boxplot(気温 ~ 曜日, data=myData, 
-        col="lavender", main="曜日ごとの気温") 
-aggregate(気温 ~ 曜日, data=myData, FUN=mean)
-aggregate(気温 ~ 曜日, data=myData, FUN=var)
-aggregate(気温 ~ 曜日, data=myData, FUN=sd)
-## 曜日ごとの気温差に関する分散分析
-(myAov <- aov(気温 ~ 曜日, data=myData)) # aovによる分析
-summary(myAov) # 分散分析表の表示(棄却されない)
-model.tables(myAov, type="means")   # 水準(曜日)ごとの平均値
-model.tables(myAov, type="effects") # 水準(曜日)ごとの効果
-## 検定のみ実行する場合
-oneway.test(気温 ~ 曜日, data=myData, var.equal=TRUE) # 等分散での検定
-oneway.test(気温 ~ 曜日, data=myData) # Welchの近似法による検定
+par(family="HiraginoSans-W4") 
+boxplot(気温~月,data=myData, col="lightblue")
+mySummary <- aggregate(気温~月,data=myData,FUN=var)
+plot(mySummary,type="h",col="blue",lwd=3,
+     ylim=c(0,max(mySummary$気温)+1),ylab="気温の分散")
+v0 <- mean(mySummary$気温) # sigma0^2
+x <- subset(myData, subset=月==6, select=気温, drop=TRUE)
+(n <- length(x)) # データ数
+(chi2 <- (n-1)*var(x)/v0) # 検定統計量
+(p <- 1-pchisq(chi2, df=n-1))
+## 分散が最も大きな3月を検定してみる
+x <- subset(myData, subset=月==3, select=気温, drop=TRUE)
+(n <- length(x)) # データ数
+(chi2 <- (n-1)*var(x)/v0) # 検定統計量
+(p <- 1-pchisq(chi2, df=n-1))
 
-## 参考: 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
-myData$月 <- as.factor(myData$月) # 月を因子化
-boxplot(気温 ~ 月, data=myData, 
-        col="lavender", main="月ごとの気温") 
-(myAov <- aov(気温 ~ 月, data=myData)) # aovによる分析
-summary(myAov) # 分散分析表の表示(棄却される)
+### 練習3.1
+### 7月と8月の気温の平均の差の検定
+## install.packages("beeswarm") # consoleからinstallする場合
+library(beeswarm) # boxplot上に散布図を表示するため
+myData <- read.csv("data/tokyo_weather.csv",
+                   fileEncoding="utf8")
+boxplot(気温~月, col="pink",
+        data=myData, subset=月%in%7:8) # 月を限定
+beeswarm(気温~月, add=TRUE, col="red",
+         data=myData, subset=月%in%7:8) # 同じ書き方で良い
+x <- subset(myData,subset=月==7,select=気温,drop=TRUE) 
+y <- subset(myData,subset=月==8,select=気温,drop=TRUE)
+t.test(x,y)
+## 2月と3月でも試してみる
+boxplot(気温~月, col="lightblue",
+        data=myData, subset=月%in%2:3) # 月を限定
+beeswarm(気温~月, add=TRUE, col="blue",
+         data=myData, subset=月%in%2:3) # 同じ書き方で良い
+x <- subset(myData,subset=月==2,select=気温,drop=TRUE) 
+y <- subset(myData,subset=月==3,select=気温,drop=TRUE)
+t.test(x,y)
 
-### 練習2
-### 二元配置分散分析
-## datarium::jobsatisfaction による例
-## 性別(gender)と学歴(education_level)による仕事の満足度
-## 満足度にそれぞれの因子の効果があるかを検証
-## install.packages("datarium") # 検定用のデータが集められている
-library(datarium) # packageの読み込み
-head(jobsatisfaction) # データの一部を見る
-## boxplotによる視覚化
-boxplot(score ~ education_level + gender,
-        data=jobsatisfaction,
-        col=rep(c("lightblue","pink"),each=3))
-## 比較するために表示を工夫してみる
-boxplot(score ~ education_level + gender,
-        data=jobsatisfaction,
-        col=rep(c("yellow","palegreen","royalblue"),2),
-        names=c("","male","","","female",""))
-legend("topleft",inset=0.05,
-       col=c("yellow","palegreen","royalblue"),
-       lwd=3, cex=0.5,
-       legend=c("school","college","university"))
-## 二元配置分散分析
-(myAov <- aov(score ~ gender + education_level,
-              data=jobsatisfaction))
-summary(myAov)
-model.tables(myAov, type="means")  
-model.tables(myAov, type="effects")
+### 練習3.2
+### 3月と6月の気温の分散の比の検定
+boxplot(気温~月, col="lightgreen",
+        data=myData, subset=月%in%c(3,6)) # 月を限定
+beeswarm(気温~月, add=TRUE, col="seagreen",
+         data=myData, subset=月%in%c(3,6)) # 同じ書き方で良い
+x <- subset(myData,subset=月==3,select=気温,drop=TRUE) 
+y <- subset(myData,subset=月==6,select=気温,drop=TRUE)
+var.test(x,y)
+## 2月と6月でも試してみる
+boxplot(気温~月, col="lightgreen",
+        data=myData, subset=月%in%c(2,6)) # 月を限定
+beeswarm(気温~月, add=TRUE, col="seagreen",
+         data=myData, subset=月%in%c(2,6)) # 同じ書き方で良い
+x <- subset(myData,subset=月==2,select=気温,drop=TRUE) 
+var.test(x,y)

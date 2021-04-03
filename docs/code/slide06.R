@@ -1,193 +1,67 @@
 ### 例題1
-### 平均と分散の計算
 
-p <- rep(c(1/9,2/9),3) # 確率の値 (1/9 と 2/9 を交互に3回繰り返す)
-x <- 1:6 # サイコロの目の値
-(mu <- sum(x*p)) # 平均値の計算
-(var <- sum((x-mu)^2*p)) # 分散の計算
-sqrt(var) # 標準偏差
+### 関数sampleの使い方
+x <- 1:10 # サンプリング対象の集合をベクトルとして定義
+set.seed(123) # 乱数のシード値(任意に決めてよい)を指定
+sample(x, 5)  # xから5つの要素を重複なしでランダムに抽出
+sample(x, length(x)) # xの要素のランダムな並べ替えとなる
+sample(x, 5, replace=TRUE) # xから5つの要素を重複ありでランダムに抽出
+sample(1:6, 10, replace=TRUE) # サイコロを10回振る実験の再現
+sample(1:6, 10, prob=6:1, replace=TRUE) # 出る目の確率に偏りがある場合
+
+### 関数rbinomの使い方
+rbinom(10, size=4, prob=0.5) # 確率0.5に対する次数4の二項乱数を10個発生
+rbinom(20, size=4, prob=0.2) # 個数を20, 確率を0.2に変更
+### 関数runifの使い方
+runif(5, min=-1, max=2) # 区間(-1,2)上の一様乱数を5個発生
+runif(5) # 指定しない場合は区間(0,1)が既定値
+
+### 関数set.seedについて
+set.seed(1) # 乱数の初期値をseed=1で指定
+runif(5) 
+set.seed(2) # 乱数の初期値をseed=2で指定
+runif(5)    # seed=1の場合と異なる結果
+set.seed(1) # 乱数の初期値をseed=1で指定
+runif(5)    # 初めのseed=1の場合と同じ結果
+
+### 例題2
+
+### 2つのサイコロを振る試行の Monte-Carlo 法
+## 試行(1回の実験)を行う関数を用意する
+myTrial <- function(){ # この問題では引数は不要
+  dice <- sample(1:6, 2, replace=TRUE) # 2個のサイコロを振る
+  return(dice)
+}
+## 乱数のシード値を指定
+set.seed(202005)
+## Monte-Carlo法を実行
+myData <- replicate(10, # 10回実験
+                    myTrial()) # 実行する関数を指定
+print(myData) # 実験結果は行列として保存されている
 
 ### 練習1
-### 大数の法則
-set.seed(121212) # 乱数のシード値の指定
-## 試行(離散分布の標本平均の計算)を定義する
-myMean <- function(n,p) # 歪んだサイコロの標本平均を計算する関数
-    mean(sample(omega, size=n, prob=p, replace=TRUE))
-omega <- 1:6 # サイコロの目 (以下では固定)
-## 以下の実験で明示的に変えるものを関数の引数としている
-## * n はサイコロを振る回数
-## * p は歪み具合
-## (n,p ともに omega と同じように関数の外側で定義することもできる)
-
-## 基本の実験 
-p <- rep(1:2, 3) # 出現確率の比(奇数1:偶数2)を設定
-mu <- weighted.mean(omega, p) # 理論上の平均
-## n毎に図を作る場合
-for(n in c(10,100,1000)){ # サンプル数を変えて実験
-    xbar <- myMean(n,p) # 1回実験を行う
-    plot(p/sum(p), type="h", col="orange", lwd=4,
-         ylim=c(0,0.3), ylab="probability",
-         main=paste("n =",n)) # 各目の確率を表示
-    abline(v=mu, col="red", lwd=2) # 真の平均
-    abline(v=xbar, col="blue", lwd=2) # 標本平均(1つの観測にもとづく)
+### コイン投げの賭け
+## 試行を行う関数
+myTrial <- function(){ 
+    while(TRUE){ # 永久に回るループ
+        if(sample(c("h","t"),1)=="h"){ # h:head，t:tail
+            return("Alice") # Aliceが表を出して終了
+        }
+        if(sample(c("h","t"),1)=="h"){
+            return("Bob") # Bobが表を出して終了
+        }
+        ## どちらも裏ならもう一度ループ
+    }
 }
-## 多数のnと標本平均を1つの図で比較する場合
-nseq <- seq(10,1000,by=30) # 10から1000まで50おきに調べる
-xbars <- sapply(nseq,function(x)myMean(x,p))
-plot(nseq, xbars, col="blue", 
-     xlab="n", ylab=expression(bar(X))) # 標本平均(1つの観測にもとづく)
-abline(h=mu, col="red", lwd=2) # 真の平均
+## 試行を行ってみる (勝った方の名前が表示される)
+myTrial()
+myTrial()
 
-## サンプル数の違いによる標本平均の分布を比較
-## n毎に図を作る場合
-mc <- 1000 # Monte-Carlo実験の回数
-for(n in c(10,100,1000)){ # サンプル数を変えて実験
-    xbars <- replicate(mc, myMean(n,p)) # mc回繰り返し
-    hist(xbars, breaks=20,
-         col="azure", border="lightblue",
-         xlim=c(1,6), ylim=c(0,200), # 複数の図を同じ領域で描画
-         xlab=expression(bar(X)[n]), 
-         main=paste0("n=",n)) 
-    abline(v=mu, col="red", lwd=2, lty="dotted")
-    abline(h=0, col="grey", lwd=2, lty="solid")
-}
-## 多数のnと標本平均を1つの図で比較する場合
-myData <- data.frame(n=NULL,xbar=NULL) # 空のデータフレームを作成
-for(n in nseq){ # サンプル数を変えて実験
-    xbars <- replicate(mc, myMean(n,p)) # mc回繰り返し
-    myData <- rbind(myData,data.frame(n=rep(n,mc),xbar=xbars))
-}
-boxplot(xbar ~ n, data=myData, col="blue", 
-     xlab="n", ylab=expression(bar(X))) # 標本平均(1つの観測にもとづく)
-abline(h=mu, col="red", lwd=2) # 真の平均
+## Monte-Carlo simulation
+## set.seed(8888) # 実験を再現する場合はシードを指定
+mc <- 10000 # 回数を設定 
+myData <- replicate(mc,myTrial()) 
 
-## 参考(以下は前回提示した解答例で上に含まれないもの)
-## 統計的性質を見るための実験
-p <- rep(1:2, 3) # 出現確率の比(奇数1:偶数2)
-mu <- weighted.mean(omega, p) # 理論上の平均
-mc <- 1000 # Monte-Carlo実験の回数
-n <- 10 # 標本数
-xbars <- replicate(mc, myMean(n,p)) 
-hist(xbars, breaks=20,
-     col="azure", border="lightblue",
-     xlim=c(1,6), ylim=c(0,200), # 描画範囲を指定
-     xlab=expression(bar(X)[n]), 
-     main=paste0("n=",n)) # 回数をタイトルに表示
-abline(v=mu, col="red", lwd=2, lty="dotted") # 理論値
-abline(h=0, col="grey", lwd=2, lty="solid")
-
-## 乱数のシードによる違いを比較
-n <- 100 # 標本数
-for(i in c(12,34,56,78,90)){ # シード値を指定
-    set.seed(i)
-    xbars <- replicate(mc, myMean(n,p)) # mc回繰り返し
-    hist(xbars, breaks=20,
-         col="azure", border="lightblue",
-         xlim=c(1,6), ylim=c(0,200), 
-         xlab=expression(bar(X)[n]), 
-         main=paste0("n=",n)) 
-    abline(v=mu, col="red", lwd=2, lty="dotted")
-    abline(h=0, col="grey", lwd=2, lty="solid")
-}
-
-## 出現確率の違いを比較
-n <- 100 # 標本数
-for(i in 1:5){ # pをランダムに設定して実験
-    p <- runif(length(omega)) # 一様乱数で出現確率を設定
-    mu <- weighted.mean(omega, p) # 理論上の平均
-    xbars <- replicate(mc, myMean(n,p)) # mc回繰り返し
-    hist(xbars, breaks=20,
-         col="azure", border="lightblue",
-         xlim=c(1,6), ylim=c(0,200), 
-         xlab=expression(bar(X)[n]), 
-         main=paste0("n=",n)) 
-    abline(v=mu, col="red", lwd=2, lty="dotted")
-    abline(h=0, col="grey", lwd=2, lty="solid")
-}
-
-### 中心極限定理
-set.seed(232323)    # 乱数のシード値の指定
-## 試行(離散分布の標本平均の計算)を定義する
-myMean <- function(n,p) # 標本平均を計算する関数
-    mean(sample(omega, size=n, prob=p, replace=TRUE))
-omega <- 1:6 # 以下サイコロの場合で実験
-mc <- 10000 # Monte-Carlo実験の繰り返し回数(大数の法則より多めに実験する)
-
-## サンプル数の違いによる分布の比較
-p <- rep(1:2, 3) # 出現確率の比(奇数1:偶数2) (9で割らなくても大丈夫)
-(mu <- weighted.mean(omega, p)) # 理論上の平均
-(sigma <- sqrt( # 理論上の標準偏差(分散の平方根)
-     weighted.mean(omega^2,p)-mu^2)) 
-for(n in c(2,10,100,1000)){ # サンプル数を変えて実験
-    xbars <- replicate(mc, myMean(n,p)) # mc回繰り返し
-    hist(sqrt(n)*(xbars - mu)/sigma, breaks=30,
-         freq=FALSE, # 密度で表示
-         xlim=c(-3, 3), ylim=c(0,0.55),  
-         col="orange", border="orchid",
-         xlab=expression(sqrt(n)*(bar(X)[n]-mu)/sigma),
-         main=paste0("n=",n))
-    curve(dnorm, add=TRUE, col="red", lwd=2) # 理論曲線
-}
-
-## 出現確率の違いによる分布の比較
-n <- 100 # 標本数 (いろいろ変えて実験せよ．nが小さいとpの影響が大きい)
-for(i in 1:5){ # pをランダムに設定して実験
-    p <- runif(length(omega)) # 一様乱数で出現確率を設定
-    mu <- weighted.mean(omega, p) # 理論上の平均
-    sigma <- sqrt( # 理論上の標準偏差(分散の平方根)
-        weighted.mean(omega^2,p)-mu^2)
-    xbars <- replicate(mc, myMean(n,p)) 
-    hist(sqrt(n)*(xbars - mu)/sigma, breaks=30,
-         freq=FALSE, 
-         xlim=c(-3, 3), ylim=c(0,0.55),  
-         col="orange", border="orchid",
-         xlab=expression(sqrt(n)*(bar(X)[n]-mu)/sigma),
-         main=paste0("p=",toString(round(p,2))))
-    curve(dnorm, add=TRUE, col="red", lwd=2) 
-}
-
-### 少数の法則
-set.seed(343434) # 乱数のシード値の指定
-
-## 基本の実験
-n <- 5000    # 1日の総生産量
-p <- 0.002   # 不良品の発生確率
-N <- 5*50*2  # 観測日数(週5日x50週間x2年操業に対応)
-x <- rbinom(N,n,p) # 不良品数
-## x <- replicate(N, rbinom(1,n,p)) # これでも同じ
-(myData <- table(x)) # 不良品数の度数分布表を作成
-## それぞれの不良品数が生じた日数の割合のグラフを作成
-par(family = "HiraginoSans-W4") # 日本語フォントの指定
-plot(myData/N, type="h", col="royalblue", lwd=6, 
-     xlab="不良品数", ylab="発生割合")
-lines(min(x):max(x)+0.4, dpois(min(x):max(x),n*p),
-      type="h", col="red", lwd=6) # 理論上の割合
-legend("topright", inset=1/20, # 右上に配置
-       legend=c("観測値", "理論値"), 
-       col=c("royalblue", "red"), lwd=4) # 凡例
-
-## nの違いを比較
-p <- 0.002
-for(n in c(500,1000,5000,10000)){
-  x <- rbinom(N,n,p) # 不良品数
-  myData <- table(x)/N # 集計
-  par(family = "HiraginoSans-W4") 
-  plot(myData, type="h", col="royalblue", lwd=6, 
-       xlab="不良品数", ylab="発生割合",
-       main=paste("n =",n,"p =",p))
-  lines(min(x):max(x)+0.4, dpois(min(x):max(x),n*p),
-      type="h", col="red", lwd=6) 
-}
-
-## pの違いを比較
-n <- 5000
-for(p in c(0.001,0.002,0.005,0.01)){
-  x <- rbinom(N,n,p) # 不良品数
-  myData <- table(x)/N # 集計
-  par(family = "HiraginoSans-W4") 
-  plot(myData, type="h", col="royalblue", lwd=6, 
-       xlab="不良品数", ylab="発生割合",
-       main=paste("n =",n,"p =",p))
-  lines(min(x):max(x)+0.4, dpois(min(x):max(x),n*p),
-      type="h", col="red", lwd=6) 
-}
+## 簡単な集計 (この賭けは先手が有理なはず)
+table(myData) # 頻度を表示する
+table(myData)/mc # 勝率の計算

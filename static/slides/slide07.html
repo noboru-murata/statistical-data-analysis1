@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>確率分布</title>
+<title>極限定理</title>
 <meta name="author" content="村田 昇"/>
 <style type="text/css">
 .underline { text-decoration: underline; }
@@ -31,100 +31,222 @@
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
 <div class="talk-title">
-    <h1 class="no-toc-progress">確率分布</h1>
+    <h1 class="no-toc-progress">極限定理</h1>
 </div>
 <div class="talk-subtitle">
-    <p>いろいろな離散分布と連続分布</p>
+    <p>大数の法則・中心極限定理・少数の法則</p>
 </div>
 <div class="keyboard-usage">
     <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
-  2020.06.05</p>
+  2020.05.29</p>
 </div>
 
 </section>
 
 <section>
-<section id="slide-orgcc78bc3">
-<h2 id="orgcc78bc3">一般の確率変数</h2>
-<div class="outline-text-2" id="text-orgcc78bc3">
+<section id="slide-orgbc1d09b">
+<h2 id="orgbc1d09b">基本事項の復習</h2>
+<div class="outline-text-2" id="text-orgbc1d09b">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge000405">
-<h3 id="orge000405">確率分布</h3>
+<section id="slide-org2161111">
+<h3 id="org2161111">確率変数</h3>
 <ul>
-<li>確率変数 \(X\) : 
-<ul>
-<li>値がランダムに決定される変数</li>
-<li>任意の区間 \([a,b]\) に含まれる確率が定められている</li>
-
-</ul></li>
-<li>確率分布 \(P\) (または単に分布):
-<ul>
+<li>乱数の数学モデル: 値がランダムに決定される変数</li>
+<li>任意の区間 \([a,b]\) に含まれる確率が定められている <br />
+(数学的には厳密性を欠くが，本講義ではこの定義)</li>
 <li><p>
-区間 \([a,b]\) \((a\leq b)\) に \(X\) が含まれる確率
+確率変数 \(X\) が区間 \([a,b]\) \((a\leq b)\) に含まれる確率
 </p>
 <div>
 \begin{equation}
   P(a\leq X\leq b)
 \end{equation}
 
+</div>
+
+<p>
+(特に \(a=b\) のとき \(P(X=a)\) と書く)
+</p></li>
+<li>本章では有限個の値のみをとる確率変数を考える <br />
+(無限個の値，特に連続的な値については次回以降)</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orge280994">
+<h3 id="orge280994">平均と分散</h3>
+<ul>
+<li>確率変数 \(X\) の取りうる値が有限個: \(x_1,x_2,\dotsc,x_N\)</li>
+<li><p>
+<b>平均</b> もしくは <b>期待値</b>
+</p>
+<div>
+\begin{equation}
+  \mathbb{E}[X]:=\sum_{i=1}^Nx_iP(X=x_i)
+\end{equation}
+
 </div></li>
 
-<li>「確率変数 \(X\) は確率分布 \(P\) に従う」という</li>
-<li>現象の理解のためには実現値より確率分布にこそ興味がある</li>
+<li><p>
+<b>分散</b> (\(=\text{標準偏差}^{2}\))
+</p>
+<div>
+\begin{equation}
+  \mathrm{Var}(X)
+  :=\mathbb{E}[(X-\mathbb{E}[X])^2]
+  % =\sum_{i=1}^N(x_i-\mathbb{E}[X])^2P(X=x_i)\\
+  =\mathbb{E}[X^2]-\mathbb{E}[X]^2
+\end{equation}
 
-</ul></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org21d6e87">
-<h3 id="org21d6e87">極限定理</h3>
-<ul>
-<li>大数の法則，
-中心極限定理，
-少数の法則など</li>
-<li>緩やかな条件のもとで一般の確率変数の列についても成立する
-<ul>
-<li>大数の強法則は平均が存在すれば成立する <br />
-(平均と分散は後に定義する)</li>
-<li>2次のモーメントをもたない(計算できない)場合には
-中心極限定理は成立しない <br />
-(そもそも分散が定義できない)</li>
-
-</ul></li>
+</div></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9d5d2a6">
-<h3 id="org9d5d2a6">確率変数列の独立性</h3>
+<section id="slide-org15ed1f1">
+<h3 id="org15ed1f1">例題</h3>
 <ul>
+<li><p>
+問題
+</p>
+<blockquote>
+<p>
+確率変数 \(X\) は
+偶数の出る確率が奇数の2倍のサイコロの目を表すとする．
+</p>
+<div>
+\begin{align*}
+  &P(X=1)=P(X=3)=P(X=5)=1/9\\ 
+  &P(X=2)=P(X=4)=P(X=6)=2/9
+\end{align*}
+
+</div>
+
+<p>
+このとき \(X\) の平均と分散を求めよ．
+</p>
+</blockquote>
+<div class="slide-footer"><br></div>
+</section>
+<section></li>
+<li><p>
+解答 (計算例)
+</p>
+<blockquote>
+<p>
+\(X\) の平均は
+</p>
+<div>
+\begin{equation}
+  \mathbb{E}[X]=\sum_{x=1}^6xP(X=x)
+  ={11}/{3}=3.6666\dots
+\end{equation}
+
+</div>
+
+<p>
+\(X\) の分散は
+</p>
+<div>
+\begin{align}
+  \mathbb{E}[X^2]&=\sum_{x=1}^6x^2P(X=x)={49}/{3}\\
+  \mathrm{Var}(X)&={49}/{3}-{121}/{9}={26}/{9}=2.88\dots
+\end{align}
+
+</div>
+</blockquote>
+<div class="slide-footer"><br></div>
+</section>
+<section></li>
+<li><p>
+解答 (Rでの計算例)
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >p &lt;- rep(c(1/9,2/9),3) # 確率の値 (1/9 と 2/9 を交互に3回繰り返す)
+x &lt;- 1:6 # サイコロの目の値
+(mu &lt;- sum(x*p)) # 平均値の計算
+(var &lt;- sum((x-mu)^2*p)) # 分散の計算
+sqrt(var) # 標準偏差
+</code></pre>
+</div>
+
+<pre class="example">
+[1] 3.666667
+[1] 2.888889
+[1] 1.699673
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org04491f4">
+<h2 id="org04491f4">独立性と同分布性</h2>
+<div class="outline-text-2" id="text-org04491f4">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org796a71e">
+<h3 id="org796a71e">同時分布</h3>
+<ul>
+<li>観測データは確率変数の集合</li>
+<li>確率変数の <b>列</b> \(X_1,X_2,\dotsc,X_n\) に対する考察が重要</li>
 <li><p>
 定義
 </p>
 <blockquote>
 <p>
-\(n\) 個の確率変数 \(X_{1},X_{2},\dotsc,X_n\) が <b>独立</b> であるとは，
-\(a_i\leq b_i\) \((i=1,\dots,n)\) なる
-任意の実数 \(a_{1},b_{1},\dots,a_n,b_n\) に対して
+&ldquo;\(X_1\) が \(x_1\) という値をとり，
+\(X_2\) が \(x_2\) という値をとり， \(\dots\) ，
+\(X_n\) が \(x_n\) という値をとる&rdquo;
+という事象が起きる確率を
+<b>同時分布</b>
+という
+</p>
+<div>
+\begin{equation}
+  P(X_1=x_1,X_2=x_2,\dots,X_n=x_n)
+\end{equation}
+
+</div>
+</blockquote></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org20b5240">
+<h3 id="org20b5240">独立性</h3>
+<ul>
+<li>無関係にサンプリングされた観測データの性質</li>
+<li><p>
+定義
+</p>
+<blockquote>
+<p>
+確率変数列 \(X_1,X_2,\dotsc,X_n\) が <b>独立</b> であるとは，
+任意の \(n\) 個の実数 \(x_1,x_2,\dotsc,x_n\) に対して
 </p>
 <div>
 \begin{multline}
-  P(a_{1}\leq X_{1}\leq b_{1},a_{2}\leq X_{2}\leq b_{2},\dots,a_n\leq X_n\leq b_n)\\
-  =P(a_{1}\leq X_{1}\leq b_{1})P(a_{2}\leq X_{2}\leq b_{2})\cdots P(a_n\leq X_n\leq b_n)
+  P(X_1=x_1,X_2=x_2,\dotsc,X_n=x_n)\\
+  =P(X_1=x_1)\cdot P(X_2=x_2)\cdots P(X_n=x_n)
 \end{multline}
 
 </div>
 
 <p>
-が成り立つことをいう．
+が成り立つことをいう
 </p>
 </blockquote></li>
 
@@ -132,26 +254,54 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org816f435">
-<h3 id="org816f435">確率変数列の同分布性</h3>
+<section id="slide-org3f21b29">
+<h3 id="org3f21b29">同分布性</h3>
 <ul>
+<li>同一の法則に従って生成された観測データの性質</li>
 <li><p>
 定義
 </p>
 <blockquote>
 <p>
-\(n\) 個の確率変数 \(X_{1},X_{2},\dotsc,X_n\) が <b>同分布</b> であるとは，
-\(a\leq b\) なる任意の実数 \(a,b\) に対して
+確率変数列 \(X_1,X_2,\dotsc,X_n\) が <b>同分布</b> であるとは，
+任意の実数 \(x\) に対して
 </p>
 <div>
 \begin{equation}
-  P(a\leq X_{1}\leq b)=P(a\leq X_{2}\leq b)=\cdots=P(a\leq X_n\leq b)
+  P(X_1=x)=P(X_2=x)=\cdots=P(X_n=x)
 \end{equation}
 
 </div>
 
 <p>
-が成り立つことをいう．
+が成り立つことをいう
+</p>
+</blockquote></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org4718404">
+<h3 id="org4718404">独立同分布性</h3>
+<ul>
+<li>一般に分析対象のデータには
+<b>独立性</b> と <b>同分布性</b> 
+が同時に仮定される</li>
+<li><p>
+定義
+</p>
+<blockquote>
+<p>
+独立かつ同分布な確率変数列を
+<b>独立同分布</b>
+もしくは
+<b>i.i.d.</b> 
+であるという
+</p>
+
+<p>
+(i.i.d. はindependent and identically distributedの略)
 </p>
 </blockquote></li>
 
@@ -161,729 +311,261 @@
 </section>
 </section>
 <section>
-<section id="slide-orgbb489a1">
-<h2 id="orgbb489a1">離散分布</h2>
-<div class="outline-text-2" id="text-orgbb489a1">
+<section id="slide-org998c964">
+<h2 id="org998c964">大数の法則</h2>
+<div class="outline-text-2" id="text-org998c964">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6ccff0c">
-<h3 id="org6ccff0c">離散分布</h3>
+<section id="slide-orgc17f40d">
+<h3 id="orgc17f40d">大数の法則の概要</h3>
 <ul>
-<li>離散型確率変数:
+<li>同一の法則に従って生成された集団から
+<b>ランダムな</b> 観測を多数繰り返すと，
+<b>観測値の平均</b> は <b>真の平均値</b> に近づく</li>
+<li>具体的な例: 
 <ul>
-<li>取りうる値が有限個 <br />
-もしくは可算無限個 (例えば整数値のみとる場合)</li>
+<li>歪みの無いコインの表が出た回数の割合</li>
+<li>視聴率の調査</li>
 
 </ul></li>
-<li>離散分布:
-<ul>
-<li>離散型確率変数の確率分布</li>
-<li>\(X=x\) となる確率 \(P(X=x)\) で完全に決定される</li>
-<li>関数 \(f(x)=P(X=x)\) を 
-<b>確率関数</b> (<b>確率質量関数</b>) 
-と呼ぶ</li>
-
-</ul></li>
+<li>この法則を数学的に定式化した定理が <b>大数の法則</b></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9559825">
-<h3 id="org9559825">離散分布の平均</h3>
+<section id="slide-org70174b7">
+<h3 id="org70174b7">無限列の独立性と同分布性</h3>
 <ul>
+<li>無限列に対しては任意の部分列について考える</li>
 <li><p>
-定義
+独立性
 </p>
 <blockquote>
 <p>
-以下の右辺が定義できる(絶対収束する)とき
-離散型の確率変数 
-\(X\) の <b>平均</b> (または <b>期待値</b> )を
+\(X_1,X_2,\dotsc\) が <b>独立</b> であるとは，
+任意の正整数 \(n\) に対して \(X_1,X_2,\dotsc,X_n\) が
+独立であることをいう
 </p>
-<div>
-\begin{equation}
-  \mathbb{E}[X]:=\sum_{x\in\mathcal{X}}xP(X=x)
-\end{equation}
-
-</div>
-
-<p>
-で定義する．
-</p>
-
-<p>
-ただし 
-\(\mathcal{X}\) は \(X\) の取りうる値(無限個も可)の集合
-</p>
-</blockquote>
-<ul>
-<li>級数 \(\sum_{x\in\mathcal{X}}xP(X=x)\) が
-定義できない場合は
-\(X\) は <b>平均をもたない</b> とする</li>
-
-</ul></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-<section>
-<ul>
-<li><p>
-確率変数の変換 \(\varphi(X)\) の期待値
-</p>
-<blockquote>
-<div>
-\begin{equation}
-  \mathbb{E}[\varphi(X)]:=\sum_{x\in\mathcal{X}}\varphi(x)P(X=x)
-\end{equation}
-
-</div>
 </blockquote></li>
 <li><p>
-\(p\) 次の <b>モーメント</b> (あるいは <b>積率</b> )
+同分布性
 </p>
 <blockquote>
-<div>
-\begin{equation}
-  \mathbb{E}[X^p]=\sum_{x\in\mathcal{X}}x^pP(X=x)
-\end{equation}
-
-</div>
-</blockquote>
-<ul>
-<li>\(X\) が正整数 \(p\) 次のモーメントをもてば，
-\(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ</li>
-
-</ul></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orga22516c">
-<h3 id="orga22516c">離散分布の分散</h3>
-<ul>
+<p>
+\(X_1,X_2,\dotsc\) が <b>同分布</b> であるとは，
+任意の正整数 \(n\) に対して \(X_1,X_2,\dotsc,X_n\) が
+同分布であることをいう
+</p>
+</blockquote></li>
 <li><p>
-定義
+独立同分布性
 </p>
 <blockquote>
-<div>
-\begin{align}
-  \mathrm{Var}(X)
-  :=&\mathbb{E}[(X-\mathbb{E}[X])^2]\\
-  =&\sum_{x\in\mathcal{X}}(x-\mathbb{E}[X])^2P(X=x)
-\end{align}
-
-</div>
-</blockquote>
-<ul>
-<li>\(X\) が <b>2次のモーメントをもつ</b> ときのみ定義できる</li>
-<li>分散の平方根\(\sqrt{\mathrm{Var}(X)}\) を <b>標準偏差</b> と呼ぶ</li>
-
-</ul></li>
+<p>
+\(X_1,X_2,\dotsc\) が <b>独立同分布</b>
+もしくは <b>i.i.d.</b> であるとは，
+\(X_1,X_2,\dotsc\) が独立かつ同分布であることをいう
+</p>
+</blockquote></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-</section>
-<section>
-<section id="slide-orgae8a89e">
-<h2 id="orgae8a89e">離散一様分布</h2>
-<div class="outline-text-2" id="text-orgae8a89e">
-</div>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org94d648a">
-<h3 id="org94d648a">離散一様分布の確率関数</h3>
+<section id="slide-org016c45a">
+<h3 id="org016c45a">大数の強法則</h3>
 <ul>
-<li>集合 \(\{x_{1},\dotsc,x_n\}\) 上の離散一様分布: <br />
-相異なる実数
-\(x_{1},\dotsc,x_n\) 
-を箱(壺)から取り出す試行</li>
 <li><p>
-確率関数: 
+定理
+</p>
+<blockquote>
+<p>
+\(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
+その平均を \(\mu\) とする．
+このとき,  \(X_1,\dotsc,X_n\) の標本平均
 </p>
 <div>
 \begin{equation}
-  f(x)=\frac{1}{n},\quad
-  x\in\{x_{1},\dots,x_n\}
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org8efeec7">
-<h3 id="org8efeec7">離散一様分布の平均と分散</h3>
-<ul>
-<li><p>
-平均:
-</p>
-<div>
-\begin{equation}
-  \mathbb{E}[X]
-  =\sum_{i=1}^nx_if(x_i)
-  =\frac{1}{n}\sum_{i=1}^nx_i=\bar{x}
-\end{equation}
-
-</div></li>
-
-<li><p>
-分散:
-</p>
-<div>
-\begin{equation}
-  \mathrm{Var}(X)
-  =\sum_{i=1}^n(x_i-\mathbb{E}[X])^2f(x_i)
-  =\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org9a52f53">
-<h3 id="org9a52f53">離散一様分布に従う乱数</h3>
-<ul>
-<li>歪みのないサイコロを1回投げたときに出る目の分布は, 
-集合 \(\{1,\dots,6\}\) 上の離散一様分布に従う</li>
-<li><p>
-乱数の発生は
-<code>sample()</code> が利用できる( <code>replace=TRUE</code>; 復元抽出)
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >a &lt;- 1:6 # サンプリング対象の集合をベクトルとして定義
-sample(a, size=20, replace=TRUE) # 離散一様分布(20個)
-</code></pre>
-</div>
-
-<pre class="example">
-[1] 6 2 3 1 3 5 4 5 1 2 4 6 6 5 1 1 5 1 6 4
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org70455ad">
-<h2 id="org70455ad">二項分布</h2>
-<div class="outline-text-2" id="text-org70455ad">
-</div>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org3a33aa2">
-<h3 id="org3a33aa2">二項分布の確率関数</h3>
-<ul>
-<li>試行回数 \(n\) , 成功確率 \(p\) の二項分布: <br />
-確率 \(p\) で成功する試行を \(n\) 回行った総成功回数</li>
-<li><p>
-確率関数:
-</p>
-<div>
-\begin{equation}
-  f(x)=\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x},\quad x=0,1,\dots,n
-\end{equation}
-
-</div></li>
-
-<li>平均は \(np\) , 分散は \(np(1-p)\) で与えられる</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orge9edd8f">
-<h3 id="orge9edd8f">二項分布の平均と分散</h3>
-<ul>
-<li><p>
-平均:
-</p>
-<div>
-\begin{align}
-  \mathbb{E}[X]
-  &=\sum_{x=0}^nxf(x)=\sum_{x=0}^nx\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x}\\
-  &=\sum_{x=1}^n\frac{n!}{(x-1)!(n-x)!}p^x(1-p)^{n-x}\\
-  % &=\sum_{x=0}^{n-1}\frac{n!}{x!(n-x-1)!}p^{x+1}(1-p)^{n-x-1}\\
-  &=np\sum_{x=0}^{n-1}\Bigl({n-1\atop x}\Bigr)p^{x}(1-p)^{n-1-x}\\
-  &=np
-\end{align}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org0dafa5c">
-<h3 id="org0dafa5c">二項分布の平均と分散</h3>
-<ul>
-<li><p>
-2次モーメント:
-</p>
-<div>
-\begin{align}
-  \mathbb{E}[X^2]
-  &=\sum_{x=0}^nx^2f(x)
-   =\sum_{x=0}^nx(x-1)\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x}+\mathbb{E}[X]\\
-  % &=\sum_{x=2}^n\frac{n!}{(x-2)!(n-x)!}p^x(1-p)^{n-x}+np\\
-  % &=\sum_{x=0}^{n-2}\frac{n!}{x!(n-x-2)!}p^{x+2}(1-p)^{n-x-2}+np\\
-  &=n(n-1)p^2\sum_{x=0}^{n-2}\Bigl({n-2\atop x}\Bigr)p^{x}(1-p)^{n-2-x}+np\\
-  &=n(n-1)p^2+np
-    =(np)^2+np(1-p)
-\end{align}
-
-</div></li>
-
-<li><p>
-分散: 
-</p>
-<div>
-\begin{equation}
-  \mathrm{Var}(X)
-  =\mathbb{E}[X^2]-\mathbb{E}[X]^2
-  =np(1-p)
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org4b75580">
-<h3 id="org4b75580">二項分布に従う乱数</h3>
-<ul>
-<li>表が出る確率が \(p\) のコインを \(n\) 回投げたときに表が出る回数は，
-試行回数 \(n\) ，成功確率 \(p\) の二項分布に従う</li>
-<li>試行回数1の二項分布を <b>Bernoulli分布</b> と呼ぶ</li>
-<li><p>
-乱数の発生は <code>rbinom()</code> を用いる
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >rbinom(10, size=1, prob=0.2) # Bernoulli分布(10個)
-rbinom(20, size=5, prob=0.6) # 二項分布(20個)
-</code></pre>
-</div>
-
-<pre class="example">
-[1] 0 0 0 1 0 0 0 0 1 0
-[1] 3 4 5 2 2 4 3 2 2 4 4 1 3 4 4 4 4 3 5 4
-</pre></li>
-
-<li>確率関数は <code>dbinom()</code> で計算できる</li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org04b2e78" data-background="#fef4f4">
-<h2 id="org04b2e78">演習</h2>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgc8ae89a">
-<h3 id="orgc8ae89a">数値実験の雛形(離散分布)</h3>
-<ul>
-<li>人工的に生成した乱数と理論曲線(確率関数)との比較を行う</li>
-<li><p>
-数値実験の雛形は以下のようになる
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >mc &lt;- 10000 # 実験回数を指定
-myRandom &lt;- function(){...} # 乱数生成のプログラム
-myDist &lt;- function(){...} # 必要であれば理論曲線を定義
-	  # ただし多くの場合 d"乱数名"で定義されているので不要
-myData &lt;- replicate(mc, myRandom()) # Monte-Carlo実験
-myTable &lt;- table(myData)/mc # 同じ値の頻度から確率を計算
-plot(myTable, type="h", lwd=3, col="blue") # 乱数の分布の表示
-myRange &lt;- min(myData):max(myData) # 乱数の範囲を取得
-lines(myRange + 0.3, myDist(myRange),
-      type="h", lwd=3, col="red") # ずらして表示
-</code></pre>
-</div></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org2b07292" data-background="#fef4f4">
-<h3 id="org2b07292">練習問題</h3>
-<ul>
-<li>二項分布に関して以下を考察せよ．
-<ul>
-<li>平均と分散の計算を確認しなさい．</li>
-<li>\(X_{1},\dotsc,X_n\) を成功確率 \(p\) の
-Bernoulli分布に従う独立同分布な確率変数列とする．
-このとき \(\sum_{i=1}^nX_i\) の分布は，
-試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う．
-これをグラフに描画して確認しなさい．</li>
-
-</ul></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-orga197d4d">
-<h2 id="orga197d4d">Poisson分布</h2>
-<div class="outline-text-2" id="text-orga197d4d">
-</div>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org35cb2ab">
-<h3 id="org35cb2ab">Poisson分布の確率関数</h3>
-<ul>
-<li>強度 \(\lambda\) のPoisson分布: \(P_o(\lambda)\) (\(\lambda > 0\))<br />
-少数の法則に現れた滅多に起こらない事象の起こる回数の分布</li>
-<li><p>
-確率関数:
-</p>
-<div>
-\begin{equation}
-  f(x)=\frac{\lambda^x}{x!}e^{-\lambda},\quad x=0,1,\dotsc
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orge7a5c88">
-<h3 id="orge7a5c88">Poisson分布の平均</h3>
-<ul>
-<li><p>
-平均:
-</p>
-<div>
-\begin{align}
-  \mathbb{E}[X]
-  &=\sum_{x=0}^\infty xf(x)=\sum_{x=0}^\infty x\frac{\lambda^x}{x!}e^{-\lambda}
-    =e^{-\lambda}\sum_{x=1}^\infty\frac{\lambda^x}{(x-1)!}\\
-  &=\lambda e^{-\lambda}\sum_{x=0}^\infty\frac{\lambda^x}{x!}
-    =\lambda
-\end{align}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org0d791b1">
-<h3 id="org0d791b1">Poisson分布の分散</h3>
-<ul>
-<li><p>
-2次モーメント:
-</p>
-<div>
-\begin{align}
-  \mathbb{E}[X^2]
-  &=\sum_{x=0}^\infty x^2f(x)
-    =\sum_{x=0}^\infty x(x-1)\frac{\lambda^x}{x!}e^{-\lambda}+\mathbb{E}[X]\\
-  &=e^{-\lambda}\sum_{x=2}^\infty\frac{\lambda^x}{(x-2)!}+\lambda
-    =\lambda^2 e^{-\lambda}\sum_{x=0}^\infty\frac{\lambda^x}{x!}+\lambda\\
-  &=\lambda^2+\lambda
-\end{align}
-
-</div></li>
-
-<li><p>
-分散: 
-</p>
-<div>
-\begin{equation}
-  \mathrm{Var}(X)
-  =\mathbb{E}[X^2]-\mathbb{E}[X]^2=\lambda
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgb59f645">
-<h3 id="orgb59f645">Poisson分布に従う乱数</h3>
-<ul>
-<li>一定時間に放射性物質から放射される粒子の数や，
-一定時間に発生する交通事故の数などはPoisson分布に従うことが知られている</li>
-<li>発生確率が低い事象が十分長い期間で起こる回数の分布は
-Poisson分布で近似できる (少数の法則)</li>
-<li><p>
-乱数の発生は <code>rpois()</code> を用いる
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >rpois(15, lambda=1) # 強度1のPoisson分布(15個)
-rpois(15, lambda=10) # 強度10のPoisson分布(15個)
-</code></pre>
-</div>
-
-<pre class="example">
-[1] 3 0 1 0 2 2 1 0 1 2 2 0 1 3 0
-[1] 10  7  7 10 11 12  8  9 11  7  9 16  9 12 10
-</pre></li>
-
-<li>確率関数は <code>dpois()</code> で計算できる</li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org6ebf04f" data-background="#fef4f4">
-<h2 id="org6ebf04f">演習</h2>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org8416053" data-background="#fef4f4">
-<h3 id="org8416053">練習問題</h3>
-<ul>
-<li>Poisson分布に関して以下を考察せよ．
-<ul>
-<li>平均と分散の計算を確認しなさい．</li>
-<li>\(X,Y\) を独立な2つの確率変数とし，
-それぞれ強度 \(\lambda_{1},\lambda_{2}\) のPoisson分布に従うとする．
-このとき, 和 \(X+Y\) の分布は
-強度 \(\lambda_{1}+\lambda_{2}\) のPoisson分布に従う．
-これをグラフに描画して確認しなさい．</li>
-
-</ul></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org3e8cbcc">
-<h2 id="org3e8cbcc">幾何分布</h2>
-<div class="outline-text-2" id="text-org3e8cbcc">
-</div>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgdd42315">
-<h3 id="orgdd42315">幾何分布の確率関数</h3>
-<ul>
-<li>成功確率 \(p\) の幾何分布: \((0 < p\leq 1)\) <br />
-成功するまでの回数の分布</li>
-<li><p>
-確率関数:
-</p>
-<div>
-\begin{equation}
-  f(x)=p(1-p)^x,\quad x=0,1,\dots
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org3804873">
-<h3 id="org3804873">幾何分布の平均</h3>
-<ul>
-<li><p>
-平均: 
-</p>
-<div>
-\begin{align}
-  \mathbb{E}[X]
-  &=\sum_{x=0}^\infty xf(x)=\sum_{x=0}^\infty xp(1-p)^x
-   =p(1-p)\sum_{x=1}^\infty x(1-p)^{x-1}\\
-  &=-p(1-p)\frac{d}{dp}\sum_{x=1}^\infty(1-p)^x
-    =-p(1-p)\frac{d}{dp}\frac{1-p}{p}\\
-  &=-p(1-p)\cdot\Bigl(-\frac{1}{p^2}\Bigr)
-    =\frac{1-p}{p}
-\end{align}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org8a5dcda">
-<h3 id="org8a5dcda">幾何分布の分散</h3>
-<ul>
-<li><p>
-2次モーメント:
-</p>
-<div>
-\begin{align}
-  \mathbb{E}[X^2]
-  &=\sum_{x=0}^\infty x^2f(x)=\sum_{x=0}^\infty x(x-1)p(1-p)^x+\mathbb{E}[X]\\
-  % &=p(1-p)^2\sum_{x=2}^\infty x(x-1)p(1-p)^{x-2}+\frac{1-p}{p}\\
-  % &=p(1-p)^2\frac{d^2}{dp^2}\sum_{x=2}^\infty (1-p)^{x}+\frac{1-p}{p}\\
-  % &=p(1-p)^2\frac{d^2}{dp^2}\frac{(1-p)^2}{p}+\frac{1-p}{p}\\
-  % &=p(1-p)^2\frac{2}{p^3}+\frac{1-p}{p}
-  &=2\Bigl(\frac{1-p}{p}\Bigr)^2+\frac{1-p}{p}
-\end{align}
-
-</div></li>
-
-<li><p>
-分散: 
-</p>
-<div>
-\begin{equation}
-  \mathrm{Var}(X)
-  =\mathbb{E}[X^2]-\mathbb{E}[X]^2
-  =\frac{1-p}{p^2}
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgcea9009">
-<h3 id="orgcea9009">幾何分布に従う乱数</h3>
-<ul>
-<li>表が出る確率が \(p\) のコインを投げ続けて，
-初めて表が出るまでに出た裏の回数は，
-成功確率 \(p\) の幾何分布に従う</li>
-<li><p>
-乱数の発生は <code>rgeom()</code> を用いる
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >rgeom(15, prob=0.1) # 成功確率0.1の幾何分布(15個)
-</code></pre>
-</div>
-
-<pre class="example">
-[1]  0 18 21  7 14 15  5 15 10  1  8 34 26  8 19
-</pre></li>
-
-<li>確率関数は <code>dgeom()</code> で計算できる</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org2b0ab14">
-<h2 id="org2b0ab14">連続分布</h2>
-<div class="outline-text-2" id="text-org2b0ab14">
-</div>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgebeaf7c">
-<h3 id="orgebeaf7c">連続分布</h3>
-<ul>
-<li>連続型確率変数:
-<ul>
-<li>取りうる値が任意の実数またはある範囲の実数<br />
-取りうる値のパターンが数多いため実数で近似</li>
-
-</ul></li>
-<li>連続分布:
-<ul>
-<li>連続型の確率変数の確率分布</li>
-<li><p>
-非負の値をとる実数上の関数 \(f\) の積分で表される
-</p>
-<div>
-\begin{equation}
-  P(a\leq X\leq b)=\int_{a}^b f(x)dx \quad(a < b)
-\end{equation}
-
-</div></li>
-
-<li>関数 \(f\) を <b>確率密度関数</b> (または <b>密度</b>)と呼ぶ</li>
-
-</ul></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org6f54f02">
-<h3 id="org6f54f02">連続分布の平均</h3>
-<ul>
-<li><p>
-連続型の確率変数 \(X\) の平均: <br />
-積分 \(\int_{-\infty}^\infty xf(x)dx\) が絶対収束するとき
-\(X\) の <b>平均</b> (または <b>期待値</b>)を
-</p>
-<div>
-\begin{equation}
-  \mathbb{E}[X]:=\int_{-\infty}^\infty xf(x)dx
+  \bar{X}_n := \frac{1}{n}\sum_{i=1}^nX_i
 \end{equation}
 
 </div>
 
 <p>
-で定義する
+が \(n\to\infty\) のとき \(\mu\) に収束する確率は1である．
+</p>
+
+<p>
+これを
+&ldquo;\(\bar{X}_{n}\) は
+\(n\to\infty\) のとき \(\mu\) に <b>概収束</b> する&rdquo;
+という．
+</p>
+</blockquote></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org9c8d24d">
+<h3 id="org9c8d24d">数値実験の設計</h3>
+<ul>
+<li>適当な分布を設定する <br />
+(簡単な例は偏りのあるサイコロ)</li>
+<li>そこから得られた \(n\) 個の確率変数(乱数)の標本平均を計算する</li>
+<li><p>
+真の平均と標本平均を比較する
+</p>
+<blockquote>
+<p>
+標本平均は観測データに依存するので，
+統計的な性質を見るには繰り返し実験(Monte-Carlo法)を行う
+</p>
+</blockquote></li>
+<li>\(n\) を大きくしたときの性質を観察する</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org5ba6799" data-background="#fef4f4">
+<h2 id="org5ba6799">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org1746701" data-background="#fef4f4">
+<h3 id="org1746701">練習問題</h3>
+<ul>
+<li>大数の法則の数値実験を行いなさい．
+<ul>
+<li>歪んだサイコロを例として，
+n回サイコロを振って標本平均(期待値)を求めたとき，
+nの値に応じて真の値と標本平均がどのくらい異なるか調べなさい．</li>
+<li>nの値ごとに多数回実験を行い，
+標本平均の分布がnの値とともにどのように変化するか調べなさい．</li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orgd4ffc90">
+<h2 id="orgd4ffc90">中心極限定理</h2>
+<div class="outline-text-2" id="text-orgd4ffc90">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org43885b8">
+<h3 id="org43885b8">中心極限定理の概要</h3>
+<ul>
+<li>大数の法則の主張: 
+<ul>
+<li>\(n\) を大きくすると標本平均 \(\bar{X}_n\) は真の平均 \(\mu\) に近づく</li>
+<li>推定誤差 \(\bar{X}_n-\mu\) は \(n\) を大きくすると0に近づく</li>
+<li>どの程度の大きさになるのか定量的な評価は与えていない</li>
+
+</ul></li>
+<li>誤差の評価の定量化:
+<ul>
+<li><p>
+推定誤差がある区間 \([\alpha,\beta]\) に入る確率で定量的に評価可能
+</p>
+<div>
+\begin{equation}
+  P(\alpha\leq \bar{X}_n-\mu\leq \beta)
+\end{equation}
+
+</div></li>
+
+<li>上式の正確な計算は一般には困難</li>
+
+</ul></li>
+<li>サンプル数が大きい場合の定量的な評価の近似方法を述べたのが <b>中心極限定理</b></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org83a424c">
+<h3 id="org83a424c">中心極限定理</h3>
+<ul>
+<li><p>
+定理
+</p>
+<blockquote>
+<p>
+\(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
+その平均を \(\mu\) ，標準偏差を \(\sigma\) とする．
+このとき，すべての実数 \(a < b\) に対して
+</p>
+<div>
+\begin{equation}
+  P\Bigl(a\leq\frac{\sqrt{n}(\bar{X}_n-\mu)}{\sigma}\leq b \Bigr)
+  \to\frac{1}{\sqrt{2\pi}}\int_a^be^{-\frac{x^2}{2}}dx\quad
+  (n\to\infty)
+\end{equation}
+
+</div>
+
+<p>
+が成り立つ．
+</p>
+</blockquote></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd530f04">
+<h3 id="orgd530f04">中心極限定理の意味</h3>
+<ul>
+<li><p>
+\(X_i\) の分布が何であっても，
+サンプル数 \(n\) が十分大きければ，
+標本平均と真の平均の差
+\(\bar{X}_n-\mu\) 
+の分布は，
+<b>標準正規分布</b>
+</p>
+<div>
+\begin{equation}
+  P\Bigl(a\frac{\sigma}{\sqrt{n}}\leq\bar{X}_n-\mu\leq
+  b\frac{\sigma}{\sqrt{n}} \Bigr)
+  \simeq
+  \frac{1}{\sqrt{2\pi}}\int_a^be^{-\frac{x^2}{2}}dx
+\end{equation}
+
+</div>
+
+<p>
+で近似できる
 </p></li>
-<li>積分 \(\int_{-\infty}^\infty xf(x)dx\) が
-絶対収束しない場合は<br />
-\(X\) は <b>平均をもたない</b> とする</li>
+<li>被積分関数
+\(\phi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\)
+を 
+<b>標準正規密度</b> 
+という</li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section>
+<section id="slide-orgdadc6cf">
+<h3 id="orgdadc6cf">数値実験の設計</h3>
 <ul>
-<li><p>
-確率変数の変換 \(\varphi(X)\) の期待値:
-</p>
-<div>
-\begin{equation}
-  \mathbb{E}[\varphi(X)]:=\int_{-\infty}^\infty\varphi(x)f(x)dx
-\end{equation}
-
-</div></li>
-
-<li><p>
-\(p\) 次の <b>モーメント</b> (あるいは <b>積率</b> ):
-</p>
-<div>
-\begin{equation}
-  \mathbb{E}[X^p]=\int_{-\infty}^\infty x^pf(x)dx
-\end{equation}
-
-</div></li>
-
-<li>\(X\) が正整数 \(p\) 次のモーメントをもてば，
-\(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgc39058d">
-<h3 id="orgc39058d">連続分布の分散</h3>
-<ul>
-<li><p>
-分散:
-</p>
-<div>
-\begin{align}
-  \mathrm{Var}(X):=& \mathbb{E}[(X-\mathbb{E}[X])^2]=\mathbb{E}[X^2]-\mathbb{E}[X]^2\\
-  =&\int_{-\infty}^\infty(x-\mathbb{E}[X])^2f(x)dx
-\end{align}
-
-</div></li>
-
-<li>\(X\) が <b>2次のモーメントをもつ</b> ときのみ定義できる</li>
-<li>分散の平方根 \(\sqrt{\mathrm{Var}(X)}\) を <b>標準偏差</b> と呼ぶ</li>
+<li>\(\sqrt{n}(\bar{X}_n-\mu)/\sigma\) の分布と
+標準正規分布を比較する</li>
+<li>中心極限定理が正しければ，
+十分小さいビン \([a,b]\) におけるヒストグラムの高さは \(\phi(a)\) で近似できる</li>
+<li>\(\sqrt{n}(\bar{X}_n-\mu)/\sigma\) のヒストグラムに
+標準正規密度 \(\phi(x)\) を重ね書きすることで近似の度合いを評価できる</li>
+<li>密度表示は <code>hist()</code> で <code>freq=FALSE</code> に指定する</li>
+<li>標準正規密度 \(\phi(x)\) は <code>dnorm()</code> で計算する</li>
 
 </ul>
 
@@ -891,213 +573,131 @@ rpois(15, lambda=10) # 強度10のPoisson分布(15個)
 </section>
 </section>
 <section>
-<section id="slide-orga5f23f8">
-<h2 id="orga5f23f8">一様分布</h2>
-<div class="outline-text-2" id="text-orga5f23f8">
+<section id="slide-org62f0ded" data-background="#fef4f4">
+<h2 id="org62f0ded">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org74729da" data-background="#fef4f4">
+<h3 id="org74729da">練習問題</h3>
+<ul>
+<li>中心極限定理の数値実験を行いなさい．
+<ul>
+<li>歪んだサイコロを例として，
+n回サイコロを振って標本平均(期待値)を求めたとき，
+nが大きければ正規化した値は標準正規分布に従うことを確認しなさい．</li>
+<li>確率(歪み具合)が異なっても，
+上記の性質は変わらないことを確認しなさい．</li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org904aff0">
+<h2 id="org904aff0">少数の法則</h2>
+<div class="outline-text-2" id="text-org904aff0">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcf72ccf">
-<h3 id="orgcf72ccf">一様分布の密度関数</h3>
+<section id="slide-org540a08f">
+<h3 id="org540a08f">少数の法則の概要</h3>
 <ul>
-<li>区間 \((a,b)\) 上の一様分布: \(U(a,b)\) <br />
-区間 \((a,b)\) のランダムな値の選択を表す分布</li>
-<li><p>
-確率密度関数:
-</p>
-<div>
-\begin{equation}
-  f(x)=
-  \begin{cases}
-    \frac{1}{b-a} & (a < x < b)\\
-    0 & (\text{上記以外のとき})
-  \end{cases}
-\end{equation}
+<li>滅多に起きない事が起こる回数に関する法則</li>
+<li>典型的な例:
+<ul>
+<li>ある製品の不良品率 \(p\) はとても小さいとする</li>
+<li>一日に \(n\) 個(非常に多数とする)生産するとき，
+不良品は平均的には \(\lambda=np\) 個発生するが，
+日によって不良品の個数 \(S_n\) には多少のばらつきが生じる</li>
+<li>個数 \(S_n\) は確率変数であるが，
+\(S_n\) がとる値の確率法則は
+強度 \(\lambda\) の <b>Poisson分布</b> で近似できることが知られている</li>
 
-</div></li>
+</ul></li>
+<li>これを正確に述べたのが <b>少数の法則</b></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org980b11a">
-<h3 id="org980b11a">一様分布の平均</h3>
+<section id="slide-org8740c6f">
+<h3 id="org8740c6f">少数の法則</h3>
 <ul>
 <li><p>
-平均:
+定理
+</p>
+<blockquote>
+<p>
+\(X_1,X_2,\dotsc,X_n\) を独立な確率変数列とし，
+各 \(i=1,2,\dotsc,n\) について 
+\(X_i\) は確率 \(p_{n,i}\) で 1 を，
+確率 \(1-p_{n,i}\) で 0 をとるとする:
 </p>
 <div>
 \begin{align}
-  \mathbb{E}[X]
-  &=\int_{-\infty}^\infty xf(x)dx
-    =\frac{1}{b-a}\int_a^bxdx\\
-  &=\frac{b^2-a^2}{2(b-a)}
-    =\frac{a+b}{2}
+  &P(X_i=1)=p_{n,i},\\
+  &P(X_i=0)=1-p_{n,i}\quad
+    (i=1,2,\dots,n).
 \end{align}
 
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org988a8cb">
-<h3 id="org988a8cb">一様分布の分散</h3>
-<ul>
-<li><p>
-2次モーメント:
-</p>
-<div>
-\begin{align}
-  \mathbb{E}[X^2]
-  &=\int_{-\infty}^\infty x^2f(x)dx
-    =\frac{1}{b-a}\int_a^bx^2dx\\
-  &=\frac{b^3-a^3}{3(b-a)}
-    =\frac{a^2+ab+b^2}{3}
-\end{align}
-
-</div></li>
-
-<li><p>
-分散:
-</p>
-<div>
-\begin{align}
-  \mathrm{Var}(X)
-  &=\mathbb{E}[X^2]-\mathbb{E}[X]^2
-  % =\frac{a^2+ab+b^2}{3}-\frac{a^2+2ab+b^2}{4}\\
-  % &=\frac{a^2-2ab+b^2}{12}
-      =\frac{(b-a)^2}{12}
-\end{align}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org21b7b25">
-<h3 id="org21b7b25">一様分布に従う乱数</h3>
-<ul>
-<li><p>
-乱数の発生は <code>runif()</code> を用いる
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >runif(8) # 区間(0,1)上の一様乱数(8個)
-runif(8,min=-1,max=1) # 区間(-1,1)上の一様乱数(8個)
-</code></pre>
 </div>
-
-<pre class="example">
-[1] 0.47385819 0.08748756 0.98690171 0.71915830 0.41529928 0.38989352 0.46861521
-[8] 0.64477472
-[1]  0.3008065  0.6484344  0.6364492  0.7553193  0.4596046 -0.5859930 -0.8481569
-[8] -0.3126305
-</pre></li>
-
-<li>確率密度関数は <code>dunif()</code> で計算できる</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org4c9a777">
-<h2 id="org4c9a777">正規分布</h2>
-<div class="outline-text-2" id="text-org4c9a777">
-</div>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org2c48382">
-<h3 id="org2c48382">正規分布の密度関数</h3>
-<ul>
-<li>平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布: \(N(\mu,\sigma^2)\) <br />
-(\(\mu\) は実数, \(\sigma\) は正の実数)</li>
-<li><p>
-確率密度関数:
-</p>
-<div>
-\begin{equation}
-  f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\Bigl(-\frac{(x-\mu)^2}{2\sigma^2}\Bigr)
-\end{equation}
-
-</div></li>
-
-<li>平均0, 分散1の正規分布を <b>標準正規分布</b> と呼ぶ</li>
-<li><b>Gauss分布</b> と呼ぶこともある</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org8d393c2">
-<h3 id="org8d393c2">正規分布の特徴付け</h3>
-<ul>
-<li>物理実験等の観測誤差の分布はしばしば正規分布でモデル化される</li>
-<li>真の平均を標本平均で推定した際の推定誤差の確率分布は，
-サンプル数が大きくなるに従って正規分布に近づいていく
-(<b>中心極限定理</b>)</li>
-
-</ul>
+</blockquote>
 <div class="slide-footer"><br></div>
 </section>
 <section>
-<ul>
-<li>中心極限定理の特殊な形 (de Moivre-Laplaceの定理)
-<ul>
-<li>\(X_{1},\dotsc,X_n\) を成功確率 \(p\) のBernoulli分布に従う
-独立同分布な確率変数列とする</li>
-<li>\(Y=\sum_{i=1}^nX_i\) は試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う</li>
-<li>Bernoulli分布は平均 \(p\) , 分散 \(p(1-p)\) である</li>
-<li><p>
-中心極限定理により
+<blockquote>
+<p>
+このとき
+ある正の実数 \(\lambda\) が存在して, \(n\to\infty\) のとき
 </p>
 <div>
 \begin{equation}
-    \frac{\sum_{i=1}^nX_i-np}{\sqrt{np(1-p)}}
-    =\frac{\sqrt{n}(\frac{1}{n}\sum_{i=1}^nX_i-p)}{\sqrt{p(1-p)}}
-    =\frac{Y-np}{\sqrt{np(1-p)}}
+  \max_{i=1,2,\dots,n}p_{n,i}\to0,\quad
+  \sum_{i=1}^np_{n,i}\to\lambda
 \end{equation}
 
 </div>
 
 <p>
-の分布は標準正規分布で近似できる
-</p></li>
-<li>\(p\) が非常に小さい場合，
-特に \(np\) がそれほど大きくならない程度に \(p\) が小さい場合は，
-\((Y-np)/\sqrt{np(1-p)}\) の分布の正規近似よりも，
-\(Y\) の分布は強度 \(np\) のPoisson分布による近似の方が精度がよい (少数の法則)</li>
+ならば，任意の整数 \(k\geq0\) に対して以下が成り立つ:
+</p>
+<div>
+\begin{equation}
+  P\Bigl(\sum_{i=1}^nX_i=k\Bigr)
+  \to e^{-\lambda}\frac{\lambda^k}{k!}
+  \quad(n\to\infty).
+\end{equation}
 
-</ul></li>
+</div>
+</blockquote></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org81bdb35">
-<h3 id="org81bdb35">正規分布に従う乱数</h3>
+<section id="slide-org622bfe5">
+<h3 id="org622bfe5">補足</h3>
 <ul>
 <li><p>
-乱数の発生は <code>rnorm()</code> を用いる
+確率変数の取りうる値が0以上の整数全体で，
+値が整数 \(k\geq0\) となる確率が
 </p>
-<div class="org-src-container">
+<div>
+\begin{equation}
+  e^{-\lambda}\frac{\lambda^k}{k!}
+\end{equation}
 
-<pre><code class=" R" >rnorm(8) # 標準正規乱数(8個)
-rnorm(8,mean=1,sd=2) # 平均1分散4=2^2の正規乱数
-</code></pre>
 </div>
 
-<pre class="example">
-[1] -0.58874863 -0.90512145 -0.19477861  0.98108128 -0.44605689  0.18122666
-[7] -0.08087869  0.14048019
-[1]  1.0476702  2.6054855 -1.0415927  1.8246488  2.9265158  0.9851683  0.8973632
-[8]  2.8045098
-</pre></li>
-
-<li>確率密度関数は <code>dnorm()</code> で計算できる</li>
+<p>
+で与えられるものを，
+強度 \(\lambda\) の <b>Poisson型確率変数</b> ，
+その確率法則を強度 \(\lambda\) のPoisson分布と呼ぶ
+</p></li>
+<li>定理の \(\sum_{i=1}^nX_i\) が不良品の例の \(S_n\) に対応する</li>
+<li>Poisson分布の確率の値は <code>dpois()</code> で計算できる</li>
 
 </ul>
 
@@ -1105,584 +705,92 @@ rnorm(8,mean=1,sd=2) # 平均1分散4=2^2の正規乱数
 </section>
 </section>
 <section>
-<section id="slide-orgd921e96" data-background="#fef4f4">
-<h2 id="orgd921e96">演習</h2>
+<section id="slide-org30d7abe" data-background="#fef4f4">
+<h2 id="org30d7abe">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8fd8e78">
-<h3 id="org8fd8e78">数値実験の雛形(連続)</h3>
+<section id="slide-orga74274f" data-background="#fef4f4">
+<h3 id="orga74274f">練習問題</h3>
 <ul>
-<li>人工的に生成した乱数と理論曲線(確率密度)との比較を行う</li>
-<li><p>
-数値実験の雛形は以下のようになる
-</p>
-<div class="org-src-container">
+<li>少数の法則の数値実験を行いなさい．
+<ul>
+<li>1日の総生産量 (\(n\)) が 5000，
+不良品の発生確率 (\(p\)) が 0.002 である工場を例として，
+2年間の操業(週5日x50週間)
+において観測される不良品数の分布を確認しなさい．</li>
+<li>母数 \(n,p\) の変更によって結果がどのように変わるか観察せよ．</li>
 
-<pre><code class=" R" >mc &lt;- 10000 # 実験回数を指定
-myRandom &lt;- function(){...} # 乱数生成のプログラム
-myDist &lt;- function(){...} # 必要であれば理論曲線を定義
-	  # ただし多くの場合 d"乱数名"で定義されているので不要
-myData &lt;- replicate(mc, myRandom()) # Monte-Carlo実験
-hist(myData, freq=FALSE) # 乱数の分布(密度)の表示
-curve(myDist(x), add=TRUE) # 理論曲線(確率密度) 変数xを明示した方が良い
-</code></pre>
-</div></li>
+</ul></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgf56fa7f" data-background="#fef4f4">
-<h3 id="orgf56fa7f">練習問題</h3>
-<ul>
-<li>正規分布に関して以下を考察せよ．
+</section>
+<section>
+<section id="slide-org592e480">
+<h2 id="org592e480">補遺</h2>
+<div class="outline-text-2" id="text-org592e480">
+</div>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-orgd705570">
+<h3 id="orgd705570">重複対数の法則</h3>
 <ul>
 <li><p>
-\(U_{1},U_{2}\) を \((0,1)\) 上の
-一様分布に従う独立な確率変数とする．
+定理
+</p>
+<blockquote>
+<p>
+\(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
+その平均を \(\mu\) ，標準偏差を \(\sigma\) とする．
 このとき
 </p>
 <div>
 \begin{align}
-  X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
-  X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
+  &\limsup_{n\to\infty}
+    \frac{\sqrt{n}(\bar{X}_{n}-\mu)}
+    {\sqrt{2\sigma^2\log\log n}}
+    =1\quad\text{a.s.},\\
+  &\liminf_{n\to\infty}
+    \frac{\sqrt{n}(\bar{X}_{n}-\mu)}
+    {\sqrt{2\sigma^2\log\log n}}
+    =-1\quad\text{a.s.}
 \end{align}
 
 </div>
 
 <p>
-とおくと，
-\(X_{1},X_{2}\) は独立かつともに標準正規分布に従う．
-これをグラフに描画して確認せよ. <br />
-(この変換をBox-Muller変換と呼ぶ)
-</p></li>
-
-</ul></li>
+が成り立つ．
+</p>
+</blockquote></li>
 
 </ul>
+
 <div class="slide-footer"><br></div>
 </section>
-</section>
-<section>
-<section id="slide-org20170de">
-<h2 id="org20170de">ガンマ分布</h2>
-<div class="outline-text-2" id="text-org20170de">
-</div>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgfaf9e3e">
-<h3 id="orgfaf9e3e">ガンマ分布の密度関数</h3>
+<section id="slide-orgad613d1">
+<h3 id="orgad613d1">Hartman-Wintnerの定理</h3>
 <ul>
-<li>パラメータ \(\nu\) , \(\alpha\) のガンマ分布: <br />
-\(\Gamma(\nu,\alpha)\) または \(G(\alpha,\nu)\) 
-(\(\nu > 0\) , \(\alpha > 0\))</li>
 <li><p>
-確率密度関数:
+定理
+</p>
+<blockquote>
+<p>
+前定理の条件のもと，列
 </p>
 <div>
 \begin{equation}
-  f(x)=
-  \begin{cases}
-    \frac{\alpha^\nu }{\Gamma(\nu)}
-    x^{\nu-1}e^{-\alpha x}&(x>0)\\
-    0&(x\leq0)
-  \end{cases}
+  \Bigl(\frac{\sqrt{n}(\bar{X}_{n}-\mu)}
+    {\sqrt{2\sigma^2\log\log n}}\Bigr)_{n=3}^\infty
 \end{equation}
 
 </div>
 
 <p>
-ただしガンマ関数 \(\Gamma(\nu)\) は以下で定義される:
+のある部分列の収束先となるような実数全体の集合を \(C\) とすると，
+\(C\) が閉区間 \([-1,1]\) に一致する確率は1である. 
 </p>
-<div>
-\begin{equation}
-  \Gamma(\nu)=\int_0^\infty x^{\nu-1}e^{-x}dx
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org05bd645">
-<h3 id="org05bd645">ガンマ分布の性質</h3>
-<ul>
-<li>\(\nu,\alpha\) はそれぞれ <b>形状パラメータ</b> ， <b>レート</b> と呼ばれることがある</li>
-<li>平均は \(\nu/\alpha\) , 分散は \(\nu/\alpha^2\) で与えられる</li>
-<li>ガンマ分布は応用上重要な確率分布を含む
-<ul>
-<li>指数分布</li>
-<li>\(\chi^2\) 分布</li>
-
-</ul></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org13cafa2">
-<h3 id="org13cafa2">ガンマ分布に従う乱数</h3>
-<ul>
-<li><p>
-乱数の発生は <code>rgamma()</code> を用いる
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >rgamma(8, shape=3, rate=1) # ガンマ分布(8個)
-rgamma(8, shape=1, rate=3) # 異なるパラメタのガンマ分布(8個)
-</code></pre>
-</div>
-
-<pre class="example">
-[1] 4.1443301 0.8725531 6.1533139 6.0187516 3.3896760 3.3813319 6.5995410
-[8] 1.5279655
-[1] 0.4850558 0.2310308 0.8941003 1.0826680 0.1093455 0.2288634 0.1252330
-[8] 0.3664670
-</pre></li>
-
-</ul>
-<ul>
-<li>確率密度関数は <code>dgamma()</code> で計算できる</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org26ae884">
-<h3 id="org26ae884">指数分布の密度関数</h3>
-<ul>
-<li><p>
-パラメータ \(\lambda\) の指数分布: \(\mathrm{Exp}(\lambda)\) 
-(\(\lambda > 0\))
-</p>
-<div>
-\begin{equation}
-  f(x)=\Gamma(1,\lambda)=
-  \begin{cases}
-    \lambda e^{-\lambda x}&(x>0)\\
-    0&(x\leq0)
-  \end{cases}
-\end{equation}
-
-</div></li>
-
-<li>\(\lambda\) は <b>レート</b> と呼ばれることがある</li>
-<li>平均，分散はそれぞれ \(\lambda^{-1}\) , \(\lambda^{-2}\) で与えられる</li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orga74c86d">
-<h3 id="orga74c86d">指数分布に従う乱数</h3>
-<ul>
-<li><p>
-乱数の発生は <code>rexp()</code> を用いる
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >rexp(8) # レート1の指数分布(8個)
-rexp(8, rate=0.5) # レート0.5の指数分布(8個)
-</code></pre>
-</div>
-
-<pre class="example">
-[1] 1.5026167 1.9870160 0.3061365 0.4057118 0.2219479 1.0155996 0.3801996
-[8] 0.2637430
-[1] 1.6645007 1.2054624 1.1435457 2.4488304 0.1720684 1.1824341 4.8300636
-[8] 0.9370825
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgbd3e241">
-<h3 id="orgbd3e241">\(\chi^2\) 分布の密度関数</h3>
-<ul>
-<li><p>
-自由度 \(k\) の \(\chi^2\) 分布: \(\chi^2(k)\) 
-(\(k > 0\))
-</p>
-<div>
-\begin{equation}
-  f(x)=\Gamma(k/2,1/2)=
-  \begin{cases}
-    \frac{1}{2^{k/2}\Gamma(k/2)}
-    x^{k/2-1}e^{-x/2}&(x>0)\\
-    0&(x\leq0)
-  \end{cases}
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org272a155">
-<h3 id="org272a155">\(\chi^2\) 分布の特徴付け</h3>
-<ul>
-<li>\(\chi^2\) は <b>カイ二乗</b> と読む</li>
-<li>平均, 分散はそれぞれ \(k\) , \(2k\) で与えられる</li>
-<li>標準正規分布に従う \(k\) 個の独立な確率変数の
-二乗和は自由度 \(k\) の \(\chi^2\) 分布に従う</li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org167f218">
-<h3 id="org167f218">\(\chi^2\) 分布に従う乱数</h3>
-<ul>
-<li><p>
-乱数の発生は <code>rchisq()</code> を用いる
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >rchisq(8, df=1) # 自由度1のカイ二乗分布(8個)
-rchisq(8, df=4) # 自由度4のカイ二乗分布(8個)
-</code></pre>
-</div>
-
-<pre class="example">
-[1] 0.3487949 2.1260487 0.2267617 1.1827720 0.2075892 4.4608965 0.5937668
-[8] 1.5546574
-[1] 3.5223560 3.6815173 1.4384045 5.6844315 5.7680972 3.0634039 1.3294695
-[8] 0.8933206
-</pre></li>
-
-</ul>
-<ul>
-<li>確率密度関数は <code>dchisq()</code> で計算できる</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org1f67621" data-background="#fef4f4">
-<h2 id="org1f67621">演習</h2>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org58853b4" data-background="#fef4f4">
-<h3 id="org58853b4">練習問題</h3>
-<ul>
-<li>\(\chi^2\) 分布に関して以下を考察せよ．
-<ul>
-<li>標準正規分布に従う \(k\) 個の独立な確率変数の
-二乗和は自由度 \(k\) の \(\chi^2\) 分布に従うことを
-確認しなさい．</li>
-
-</ul></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org14a0557">
-<h2 id="org14a0557">\(t\) 分布</h2>
-<div class="outline-text-2" id="text-org14a0557">
-</div>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org5e0cb37">
-<h3 id="org5e0cb37">\(t\) 分布の密度関数</h3>
-<ul>
-<li>自由度 \(\nu\) の(Studentの) \(t\) 分布: \(t(\nu)\) 
-(\(\nu > 0\))</li>
-<li><p>
-確率密度関数:
-</p>
-<div>
-\begin{equation}
-  f(x)=
-  \frac{1}{\sqrt{\pi \nu}}
-  \frac{\Gamma((\nu+1)/2)}{\Gamma(\nu/2)}
-  \left(1+\frac{x^2}{\nu}\right)^{-(\nu+1)/2}
-\end{equation}
-
-</div></li>
-
-<li><b>Student</b> は \(t\) 分布を導入した統計学者Gossetのペンネーム</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgc094c84">
-<h3 id="orgc094c84">\(t\) 分布の平均と分散</h3>
-<ul>
-<li><p>
-平均:
-</p>
-<div>
-\begin{equation}
-  \mathbb{E}[X]
-  =0 \quad\text{(ただし$\nu>1$)}
-\end{equation}
-
-</div></li>
-
-<li><p>
-分散:
-</p>
-<div>
-\begin{equation}
-  \mathrm{Var}(X)
-  =\frac{\nu}{\nu-2} \quad\text{(ただし $\nu>2$)}
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org47ee4b2">
-<h3 id="org47ee4b2">\(t\) 分布の特徴付け</h3>
-<ul>
-<li><p>
-\(Z\) を標準正規分布に従う確率変数，
-\(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
-\(Z,Y\) は独立であるとする．
-このとき確率変数
-</p>
-<div>
-\begin{equation}
-  \frac{Z}{\sqrt{Y/k}}
-\end{equation}
-
-</div>
-
-<p>
-は自由度 \(k\) の \(t\) 分布に従う
-</p></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org38eb696">
-<h3 id="org38eb696">\(t\) 分布に従う乱数</h3>
-<ul>
-<li><p>
-乱数の発生は <code>rt()</code> を用いる
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >rt(8, df=1) # 自由度1のt分布(8個)
-rt(8, df=4) # 自由度4のt分布(8個)
-</code></pre>
-</div>
-
-<pre class="example">
-[1] -5.5759656  1.0504720 -0.8745357  2.5571818  0.8021242 -0.5929234  2.9485058
-[8]  0.7158809
-[1] -1.012476457 -0.341989672 -1.162000129 -0.003165148 -0.819826462
-[6] -2.128720455  0.756734326  1.068591058
-</pre></li>
-
-</ul>
-<ul>
-<li>確率密度関数は <code>dt()</code> で計算できる</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org02ef6dd" data-background="#fef4f4">
-<h2 id="org02ef6dd">演習</h2>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-orgd4f81fd" data-background="#fef4f4">
-<h3 id="orgd4f81fd">練習問題</h3>
-<ul>
-<li>\(t\) 分布に関して以下を考察せよ．
-<ul>
-<li><p>
-\(Z\) を標準正規分布に従う確率変数，
-\(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
-\(Z,Y\) は独立であるとする．
-このとき確率変数
-</p>
-<div>
-\begin{equation}
-  \frac{Z}{\sqrt{Y/k}}
-\end{equation}
-
-</div>
-
-<p>
-は自由度 \(k\) の \(t\) 分布に従うことを確認しなさい．
-</p></li>
-
-</ul></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org3d245b0">
-<h2 id="org3d245b0">\(F\) 分布</h2>
-<div class="outline-text-2" id="text-org3d245b0">
-</div>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org32c514a">
-<h3 id="org32c514a">\(F\) 分布の密度関数</h3>
-<ul>
-<li>自由度 \(\nu_{1},\nu_{2}\) の \(F\) 分布: \(F(\nu_{1},\nu_{2})\) 
-(\(\nu_{1} > 0, \nu_{2} > 0\))</li>
-<li><p>
-確率密度関数:
-</p>
-<div>
-\begin{equation}
-  f(x)=
-  \begin{cases}
-    \frac{(\nu_{1}/\nu_{2})^{\nu_{1}/2}}{B(\nu_{1}/2,\nu_{2}/2)}
-    \frac{x^{\nu_{1}/2-1}}{(1+\nu_{1}x/\nu_{2})^{(\nu_{1}+\nu_{2})/2}}&(x>0)\\
-    0&(x\leq0)
-  \end{cases}
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org72ea976">
-<h3 id="org72ea976">\(F\) 分布の平均と分散</h3>
-<ul>
-<li><p>
-平均: 
-</p>
-<div>
-\begin{equation}
-  \mathbb{E}[X]
-  =\frac{\nu_{2}}{\nu_{2}-2} \quad \text{(ただし$\nu_{2}>2$)}
-\end{equation}
-
-</div></li>
-
-<li><p>
-分散:
-</p>
-<div>
-\begin{equation}
-  \mathrm{Var}(X)
-  =\frac{2\nu_{2}^2(\nu_{1}+\nu_{2}-2)}{\nu_{1}(\nu_{2}-2)^2(\nu_{2}-4)}
-  \quad\text{(ただし$\nu_{2}>4$)}
-\end{equation}
-
-</div></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org4d3fb74">
-<h3 id="org4d3fb74">\(F\) 分布の特徴付け</h3>
-<ul>
-<li><p>
-\(Y_{1},Y_{2}\) をそれぞれ自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う独立な
-確率変数とする．このとき, 確率変数
-</p>
-<div>
-\begin{equation}
-  \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
-\end{equation}
-
-</div>
-
-<p>
-は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従う
-</p></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org5474b58">
-<h3 id="org5474b58">\(F\) 分布に従う乱数</h3>
-<ul>
-<li><p>
-乱数の発生は <code>rf()</code> を用いる
-</p>
-<div class="org-src-container">
-
-<pre><code class=" R" >rf(10, df1=4, df2=7) # 自由度4,7のF分布(10個)
-rf(10, df1=7, df2=12) # 自由度7,12のF分布(10個)
-</code></pre>
-</div>
-
-<pre class="example">
-[1] 1.0675196 1.2728579 1.2626670 0.2541252 0.1392948 0.2816800 2.1045012
-[8] 1.6308342 0.4926887 1.6412659
-[1] 0.5367658 0.8356888 0.2413827 0.5117070 0.5996200 0.5726973 2.5516939
-[8] 1.5756754 2.0332580 0.6517360
-</pre></li>
-
-</ul>
-<ul>
-<li>確率密度関数は <code>df()</code> で計算できる</li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-</section>
-<section>
-<section id="slide-org30ef39e" data-background="#fef4f4">
-<h2 id="org30ef39e">演習</h2>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org75d353e" data-background="#fef4f4">
-<h3 id="org75d353e">練習問題</h3>
-<ul>
-<li>\(F\) 分布に関して以下を考察せよ．
-<ul>
-<li><p>
-\(Y_{1},Y_{2}\) をそれぞれ
-自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う
-独立な確率変数とする．
-このとき, 確率変数
-</p>
-<div>
-\begin{equation}
-  \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
-\end{equation}
-
-</div>
-
-<p>
-は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従うことを確認しなさい．
-</p></li>
-
-</ul></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org0fd6d5b" data-background="#fef4f4">
-<h3 id="org0fd6d5b">課題</h3>
-<ul>
-<li>来週までに自身の興味のあるデータを収集しておく
-<ul>
-<li>データ収集の方法を整理しておく</li>
-<li>講義で利用する</li>
-
-</ul></li>
-<li>参考となるサイト
-<ul>
-<li>e-Stat (総務省) <a href="https://www.e-stat.go.jp">https://www.e-stat.go.jp</a></li>
-<li>気象庁 <a href="http://www.jma.go.jp/jma/index.html">http://www.jma.go.jp/jma/index.html</a></li>
-<li>World Bank <a href="https://data.worldbank.org">https://data.worldbank.org</a></li>
-<li>Yahoo! finance <a href="https://finance.yahoo.com">https://finance.yahoo.com</a></li>
-
-</ul></li>
+</blockquote></li>
 
 </ul>
 <div class="slide-footer"><br></div>

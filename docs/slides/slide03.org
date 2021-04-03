@@ -1,7 +1,7 @@
-#+TITLE: データの整理と集計
+#+TITLE: ベクトル・行列の演算と関数
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 2020.05.01
+#+DATE: 2020.04.24
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -12,539 +12,677 @@
 
 * COMMENT tangle用
 
-#+begin_src R :exports none
-  setwd("~/Desktop/lectures/u-tokyo/spring/slide")
-#+end_src
 #+begin_src R :exports none :tangle yes
-  ### 第3回 演習問題解答例
+  ### 第2回 演習問題解答例
 #+end_src
 
-* データフレームの操作
-** Rに用意されているデータ構造
-   下記は代表的なもので，これ以外にもある
-   - ベクトル (vector)
-   - 行列 (matrix)
-   - リスト (list) 
-   - *データフレーム (data frame)*
-   - 配列 (array)
-
-** データフレームからの項目の抽出
-   - 添字の番号を指定
-   - 要素の名前で指定
-   - *除外*: マイナス記号(-)をつけて指定
-   - 論理値で指定
-     - ~TRUE~: 要素の選択
-     - ~FALSE~: 要素の *除外*
-     (欠損値 ~NA~ が含まれると正しく指定できない場合があるので注意)
-
-** データ例
-   - *~datasets::airquality~* (Rに準備されている)\\
-     *New York Air Quality Measurements*
-     - Description:
-       Daily air quality measurements in New York, May to September 1973.
-     - Format: 
-       A data frame with 153 observations on 6 variables.
-       - [,1]   Ozone   numeric Ozone (ppb)
-       - [,2]   Solar.R numeric Solar R (lang)
-       - [,3]   Wind    numeric Wind (mph)
-       - [,4]   Temp    numeric Temperature (degrees F)
-       - [,5]   Month   numeric Month (1--12)
-       - [,6]   Day     numeric Day of month (1--31)
-     - (~help(airquality)~ または ~?ariquality~ で詳細を確認)
-
-** 行の抽出 (1/3)
-   - 行番号による指定
-     #+begin_src R :exports none :tangle yes
-       ### 例題1
-       ### データフレームの操作
+* ベクトルの計算
+** ベクトルの表記
+   - ベクトルは太字で，要素は下付き添字で表す
+     # #+begin_export latex
+     \begin{equation}
+       \boldsymbol{a}
+       =(a_{1},a_{2},\dotsc,a_{k})
+     \end{equation}
+     # #+end_export
+     #+begin_src R :exports code
+       a <- c(a1,a2,...,ak) # k次元ベクトルの作成
      #+end_src
-     #+begin_src R :tangle yes
-       ## 抽出する行番号のベクトルで指定
-       airquality[1:10,] # 1-10行を抽出
+   - 別の書き方:
+     # #+begin_export latex
+     \begin{equation}
+       (\boldsymbol{a})_{i}
+       =\text{(ベクトル $\boldsymbol{a}$ の第 $i$ 成分)}  
+     \end{equation}
+     # #+end_export
+     # $(\boldsymbol{a})_{i}=$ (ベクトル $\boldsymbol{a}$ の第 $i$ 成分)
+   # - 対応するRのオブジェクトはタイプライタ体で表記する
+   #   #+begin_src R :exports code
+   #   a
+   #   #+end_src
+   #   # % 
+   
+** ベクトルの加法
+   - *同じ長さのベクトル* の和および差: \\
+     /数値の和と差のように扱うことができる/
+     # #+begin_export latex
+     \begin{equation}
+       \boldsymbol{a}\pm\boldsymbol{b}
+       =(a_{1}\pm b_{1},a_{2}\pm b_{2},\dotsc,a_{k}\pm b_{k})
+     \end{equation}
+     \begin{equation}
+       (\boldsymbol{a}\pm\boldsymbol{b})_{i}
+       =a_{i}\pm b_{i}
+     \end{equation}
+     # #+end_export
+     #+begin_src R :exports code
+       a + b # 同じ長さのベクトル a,b の和
+       a - b # ベクトルの差
      #+end_src
+     # ~a, b~ が同じ長さのベクトルであればによって和を計算できる
 
-** 行の抽出 (2/3)
-   - 条件の指定
-     #+begin_src R :tangle yes
-       ## 条件に合致する行はTRUE (NAは欠損値)
-       airquality[1:16,]$Ozone>100 # 条件の指定
-       airquality[1:16,]$Ozone>100 & airquality[1:16,]$Wind<=5 # 条件のAND
-       with(airquality[1:16,], Ozone>100 & Wind<=5) # 上と同じ(短い書き方)
-       with(airquality[1:24,], Ozone>100 | Wind<=5) # 条件のOR
-     #+end_src
+** ベクトルの乗法
+   - *同じ長さの2つのベクトル* の乗法: \\
+     /(2種類ある)/
+     - 成分ごとの積 (Hadamard積; 要素積)
+     - ベクトルの内積
+   - データ解析ではどちらも良く用いられる
 
-** 行の抽出 (3/3)
-   - 条件に合致する行番号の抽出
-     #+begin_src R :tangle yes
-       ## 関数whichでTRUEの番号を抽出
-       which(with(airquality, Ozone>100 & Wind<=5)) # 全データから抽出
+** Hadamard積 
+   - *同じ長さのベクトル* の成分ごとの積
+     # #+begin_export latex
+     \begin{equation}
+       \boldsymbol{a}\circ\boldsymbol{b}
+       =(a_{1}b_{1},a_{2}b_{2},\dotsc,a_{k}b_{k})
+     \end{equation}
+     \begin{equation}
+       (\boldsymbol{a}\circ\boldsymbol{b})_{i}
+       =a_{i}b_{i}
+     \end{equation}
+     # #+end_export
+     #+begin_src R :exports code
+       a * b # ベクトルの成分ごとの積
+       a / b # 成分ごとの商も計算可
      #+end_src
-   - 条件に合致する行の抽出
-     #+begin_src R :tangle yes
-       ## 行の抽出
-       airquality[which(with(airquality, Ozone>100 & Wind<=5)), ] 
-     #+end_src
-
-** 列の抽出 (1/2)
-   - 列番号による指定
-     #+begin_src R :tangle yes
-       ## 列番号のベクトルで指定
-       airquality[which(with(airquality, Ozone>100 & Wind<=5)), c(1,5,6)] 
-     #+end_src
-
-** 列の抽出 (2/2)
-   - 列名による指定
-     #+begin_src R :tangle yes
-       ## 複数の列の場合
-       airquality[which(with(airquality, Ozone>100 & Wind<=5)), 
-                  c("Month","Day")] 
-     #+end_src
-     #+begin_src R :tangle yes
-       ## 1つの列の場合は以下でも良い (ただしベクトルになる)
-       airquality[which(with(airquality, Ozone>100 & Wind<=5)),]$Month
+** 内積
+   - *同じ長さのベクトル* の内積
+     # #+begin_export latex
+     \begin{align}
+       \boldsymbol{a}\cdot\boldsymbol{b}
+       &=a_{1}b_{1}+a_{2}b_{2}+\dotsb+a_{k}b_{k}\\
+       &=\sum_{i=1}^{k}a_{i}b_{i}
+     \end{align}
+     # #+end_export
+     #+begin_src R :exports code
+       a %*% b # ベクトルの内積
      #+end_src
 
-** 関数 ~subset()~
-   複合的な条件を指定してデータを整理する
-   - 基本書式
-     #+begin_src R :eval no
-       subset(x,subset,select,drop=FALSE)
+* 行列の計算
+** 行列の表記
+   - 行列は大文字で，要素は下付き添字で表す
+     # #+begin_export latex
+     \begin{equation}
+       A
+       =
+       \begin{pmatrix}
+         a_{11}&a_{12}&\dots&a_{1n}\\
+         a_{21}&a_{22}&\dots&a_{2n}\\
+         \vdots&&\ddots&\vdots\\
+         a_{m1}&a_{m2}&\dots&a_{mn}
+       \end{pmatrix}
+     \end{equation}
+     # #+end_export
+     #+begin_src R :exports code
+        A <- matrix(c(a11,a21,...,amn),m,n) # m x n 行列の作成
      #+end_src
-   - 関数の引数
-     - ~x~:  データフレーム 
-     - ~subset~: 抽出する行の条件
-     - ~select~: 列の選択(未指定の場合は全ての列)
-     - ~drop~: 結果が1行または1列の場合ベクトルとする(TRUE)かデータフレームとする(FALSE)か
+   - 別の書き方:
+     # #+begin_export latex
+     \begin{equation}
+       (A)_{ij}
+       =\text{(行列 $A$ の $ij$ 成分)}
+     \end{equation}
+     # #+end_export
+     # $(A)_{ij}=$ (行列 $A$ の $ij$ 成分)
+   # - (対応するRオブジェクトはタイプライタ体)
 
-** 関数 ~subset()~ の例 (1/3)
-   - 前出の例の書き換え
-     #+begin_src R :exports none :tangle yes
-       ### 例題2
-       ### 関数subsetの使い方
-     #+end_src
-     #+begin_src R :tangle yes
-       subset(airquality,
-              subset = Ozone>100 & Wind<=5,
-              select = c(1,5,6))
-       subset(airquality,
-              Ozone>100 & Wind<=5, # 順序通りなら引数の名前は省略可
-              c(Month,Day)) # 名前は$の後と同じ扱い
+** 行列の加法
+   - *同じ大きさの行列* の和および差: \\
+     /ベクトルと同じように記述することができる/
+     # #+begin_export latex
+     \begin{equation}
+       (A\pm B)_{ij}=a_{ij}\pm b_{ij}
+     \end{equation}
+     # #+end_export
+     #+begin_src R :exports code
+       A + B # 同じサイズの行列の和
+       A - B # 行列の差
      #+end_src
 
-** 関数 ~subset()~ の例 (2/3)
-   - いろいろな記述の仕方
-     #+begin_src R :tangle yes
-       ## Ozoneに欠測(NA)がなく, かつDayが5か10のWindからDayまでの列を抽出
-       subset(airquality, 
-              subset = !is.na(Ozone) & Day %in% c(5,10),
-              select = Wind:Day)
+** 行列の乗法
+   - 2つの行列の乗法: \\
+     /(2種類ある)/
+     - *同じ大きさの行列* の成分ごとの積 (Hadamard積; 要素積)
+     - *$n\times m$ 型行列と $m\times l$ 型行列* の積
+   - データ解析ではどちらも良く用いられる
+
+** Hadamard積
+   - *同じ大きさの行列* の成分ごとの積
+     # #+begin_export latex
+     \begin{equation}
+       (A\circ B)_{ij}=a_{ij}b_{ij}
+     \end{equation}
+     # #+end_export
+     #+begin_src R :exports code
+       A * B # 行列の成分ごとの積
+       A / B # 成分ごとの商も計算可
      #+end_src
-** 関数 ~subset()~ の例 (3/3)
-   - いろいろな記述の仕方
-     #+begin_src R :tangle yes
-       ## Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
-       subset(airquality,
-              subset = Ozone>120 | Wind <= 3,
-              select = -Temp)
+** 行列の積
+   - *$n\times m$ 型行列 $A$ と $m\times l$ 型行列 $B$* の積
+     # #+begin_export latex
+     \begin{equation}
+       (AB)_{ij}=\sum_{k=1}^{m}a_{ik}b_{kj}
+       \quad\text{($AB$は$n\times l$行列)}
+     \end{equation}
+     # #+end_export
+     #+begin_src R :exports code
+       A %*% B # 行列の積
+     #+end_src
+
+** 行列式とトレース
+   - *$n$ 次正方行列* $A$ の行列式 $\det(A)$
+     #+begin_src R :exports code
+       det(A) # 行列式
+     #+end_src
+   - *$n$ 次正方行列* $A$ のトレース(対角成分の総和)
+     # #+begin_export latex
+     \begin{equation}
+       \mathrm{trace}(A)=\sum_{i=1}^{n}a_{ii}
+     \end{equation}
+     # #+end_export
+     関数は用意されていないので以下を利用:
+     - 関数 ~diag()~: 行列の対角成分を取り出す(ベクトル)
+     - 関数 ~sum()~: ベクトルの総和を計算する 
+     #+begin_src R :exports code
+       sum(diag(A)) # 行列のトレース
      #+end_src
 
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
   :END:
+** 例題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   - 適当な2次正方行列 $A$ で
+     Hamilton-Cayleyの定理
+     # #+begin_export latex
+     \begin{equation}
+       A^2-\mathrm{trace}(A)A+\det(A)E_{2}=O_{2}
+     \end{equation}
+     # #+end_export
+     の成立を確認せよ．\\
+     ただし $E_{2}$ は2次単位行列，$O_{2}$ は2次正方零行列
+** 解答例
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   #+begin_src R :exports none :tangle yes
+     ### 例題1
+     ### Hamilton-Cayleyの定理の確認
+   #+end_src
+   #+begin_src R :exports both :results output :tangle yes
+     ## 行列を作成 (好きに設定してよい)
+     (A <- matrix(1:4,2,2)-diag(rep(3,2)))
+   #+end_src
+   #+begin_src R :exports both :results output :tangle yes
+     ## 左辺を計算
+     A%*%A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
+   #+end_src
+
 ** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - ~datasets::airquality~ に対して
-     以下の条件を満たすデータを取り出しなさい．
-     - 7月のオゾン濃度 (~Ozone~)
-       #+begin_src R :exports none :tangle yes
-         ### 練習1.1
-         ### 7月のオゾン濃度
-         subset(airquality,
-                subset = Month == 7,
-                select = Ozone)
-       #+end_src
-     - 風速 (~Wind~) が時速10マイル以上で，
-       かつ気温 (~Temp~) が華氏80度以上の日のデータ
-       #+begin_src R :exports none :tangle yes
-         ### 練習1.2
-         ### 風速時速10マイル以上かつ気温が華氏80度以上
-         subset(airquality,
-                subset = Wind >= 10 & Temp >=80)
-       #+end_src
-     - オゾン (~Ozone~) も日射量 (~Solar.R~) も
-       欠測 (~NA~) でないデータの月 (~Month~) と日 (~Day~)
-       #+begin_src R :exports none :tangle yes
-         ### 練習1.3
-         ### 日射量が欠測でないデータの月と日
-         subset(airquality,
-                subset = !is.na(Ozone) & !is.na(Solar.R),
-                select = c(Month,Day)) # 
-         subset(airquality, # 書き方はいろいろある
-                subset = !(is.na(Ozone) | is.na(Solar.R)),
-                select = Month:Day) # c(Month,Day)と同じ
-       #+end_src
-       
-* ファイルの取り扱い
-** データファイルの読み書き
-   - 実際の解析においては以下の操作が必要
-     - 収集されたデータを読み込む
-     - 整理したデータを保存する
-   - Rで利用可能なデータファイル
-     - CSV形式(comma separated values): テキストファイル
-     - RData形式: Rの内部表現を用いたバイナリーファイル
-     - (Excel形式: RStudio の読み込み機能が利用可能)
-   - データフレームを対象とした扱いを整理する
-
-** 作業ディレクトリ
-   - Rは *作業ディレクトリ* で実行される
-     - ファイルは作業ディレクトリに存在するものとして扱われる
-     - それ以外のファイルを扱う場合はパスを含めて指定する
-   - 作業ディレクトリの確認の仕方
-     - コンソールの上部の表示
-     - 関数 ~getwd()~
-   - 作業ディレクトリの変更の仕方
-     - *Session* メニューの *Set Working Directory* で指定
-       - 読み込んだファイルの場所を選択
-       - File Pane の場所を選択
-       - ディレクトリを直接選択
-     - 関数 ~setwd()~
-
-** 関数 ~getwd()/setwd()~ の例
-   - コンソール / R Scriptからの作業ディレクトリの操作
-   #+begin_src R :eval no
-     ## 作業ディレクトリの確認 (環境によって実行結果が異なる)
-     getwd()
-     ## 作業ディレクトリの移動 (環境によって指定の仕方も異なる)
-     setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダに移動
-   #+end_src
-   # #+begin_src R :exports none
-   #   setwd("~/Desktop/lectures/u-tokyo/spring/slide/data/")
-   # #+end_src
-
-** 関数 ~write.csv()~
-   データフレームをCSVファイルへ書き出す
-   - 基本書式
-     #+begin_src R :eval no
-       write.csv(x, file="ファイル名")
+   - 1から10の2乗値からなるベクトルを作成せよ．
+     #+begin_src R :exports none :tangle yes
+       ### 練習1.1
+       ### 1から10までの2乗値からなるベクトル
+       1:10 # 1から10までのベクトル
+       1:10 * 1:10 # 2乗値のベクトル
      #+end_src
-   - 関数の引数
-     - ~x~: 書き出すデータフレーム
-     - ~file~: 書き出すファイルの名前\\
-       (作業ディレクトリ下，またはパスを指定)
-   #   - (他にも細かいオプションがあるのでヘルプを参照)
+   - 1から10までの和を計算せよ．
+     #+begin_src R :exports none :tangle yes
+       ### 練習1.2
+       ### 1から10までの和
+       1:10 %*% rep(1,10) # (1,2,...,10)と(1,1,...,1)の内積
+     #+end_src
+   - 行列を用いて九九の表を作成せよ．
+     #+begin_src R :exports none :tangle yes
+       ### 練習1.3
+       ### 九九の表
+       matrix(rep(1:9,9),9,9) # 行ごとに1から9を並べる
+       matrix(rep(1:9,9),9,9,byrow=TRUE) # 列ごとに1から9を並べる
+       matrix(rep(1:9,9),9,9) * matrix(rep(1:9,9),9,9,byrow=TRUE)
+     #+end_src
+   - 30度の回転行列を2回乗ずると60度の回転行列となることを確認せよ．
+     # #+begin_export latex
+     \begin{equation}
+       \text{(回転行列)}
+       =
+       \begin{pmatrix}
+         \cos(\theta)&-\sin(\theta)\\
+         \sin(\theta)& \cos(\theta)
+       \end{pmatrix}
+     \end{equation}
+     # #+end_export
+     #+begin_src R :exports none :tangle yes
+       ### 練習1.4
+       ### 30度の回転行列の2乗は60度の回転行列
+       theta <- pi/6 # 30度のラジアン値
+       R30 <- matrix(c(cos(theta),sin(theta),
+                       -sin(theta),cos(theta)),2,2)
+       R60 <- matrix(c(cos(2*theta),sin(2*theta),
+                       -sin(2*theta),cos(2*theta)),2,2)
+       R30 # 30度の回転行列
+       R30 %*% R30 # 30度の回転行列の2乗
+       R60 # 60度の回転行列
+     #+end_src
 
-** 関数 ~write.csv()~ の例
-   - CSVファイルの書き出し
+* ベクトルと行列の計算
+** ベクトルと行列の乗法
+   - 列(縦)ベクトル・行(横)ベクトルという *区別はない*
+   - 行列とベクトルの順序で適切に判断される
+   - 計算結果は *行列* で表現される
+     #+begin_src R
+       A <- matrix(1:4,2,2); b <- c(5,6) # 行列とベクトルを作成
+     #+end_src
+     #+begin_src R
+       A %*% b # 行列 x ベクトル = 列ベクトル
+     #+end_src
+     #+begin_src R
+       b %*% A # ベクトル x 行列 = 行ベクトル
+     #+end_src
+
+** 連立1次方程式の解法
+   - 連立1次方程式
+     - $A$ : $n$ 次正則行列
+     - $\boldsymbol{b},\boldsymbol{x}$ : $n$ 次元列ベクトル
+     # #+begin_export latex
+     \begin{align}
+       A\boldsymbol{x}&=\boldsymbol{b}
+       &&\text{(連立1次方程式)}\\
+       \boldsymbol{x}&=A^{-1}\boldsymbol{b}
+       &&\text{(解;$A$が正則な場合)}
+     \end{align}
+     # #+end_export
+   - 解を求めるには関数 ~solve()~ を利用する
+     #+begin_src R :exports code
+     x <- solve(A, b)    
+     #+end_src
+   - ベクトル $\boldsymbol{b}$ の代わりに行列も扱える
+
+** 逆行列
+   - 正則な $n$ 次正方行列 $A$ の逆行列 $A^{-1}$
+     # #+begin_export latex
+     \begin{equation}
+       AA^{-1}=A^{-1}A=E_{n}
+       \quad\text{($E_{n}$は$n$次単位行列)}
+     \end{equation}
+     # #+end_export
+   - 関数 ~solve()~ を利用して求めることができる
+     # #+begin_export latex
+     \begin{align}
+       AX&=E_{n}\\
+       X&=A^{-1}E_{n}=A^{-1}
+     \end{align}
+     # #+end_export
+     #+begin_src R :exports code
+       solve(A,B) # AX=B の解Xを求める
+       solve(A) # 逆行列 (Bが単位行列の場合省略できる)
+     #+end_src
+   - /(他にもいくつか方法は用意されている)/
+
+** 関数の適用
+   - ベクトルや行列に関数( $\sin,\exp,\dots$ など)を適用すると
+     成分ごとに計算した結果が返される
+   - [[color:darkgreen][ベクトル $\boldsymbol{a}$ ，行列 $A$ に関数 $\sin$ を適用]]
+     # #+begin_export latex
+     \begin{equation}
+       (\sin(\boldsymbol{a}))_{i}=\sin(a_{i})
+     \end{equation}
+     # #+end_export
+     #+begin_src R :exports code
+       sin(a) # 成分ごとに計算される．sin(a)[i]=sin(a[i])
+     #+end_src
+     # #+begin_export latex
+     \begin{equation}
+       (\sin(A))_{ij}=\sin(a_{ij})
+     \end{equation}
+     # #+end_export
+     #+begin_src R :exports code
+      sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
+     #+end_src
+
+* 演習
+  :PROPERTIES:
+  :reveal_background: #fef4f4
+  :END:
+** 例題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   - 適当な3次正方行列 $A$ と3次元ベクトル $\boldsymbol{b}$ を作成して
+     $\boldsymbol{x}$ に関する連立1次方程式
+     # #+begin_export latex
+     \begin{equation}
+       A\boldsymbol{x}=\boldsymbol{b}
+     \end{equation}
+     # #+end_export
+     を解け
+** 解答例
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   #+begin_src R :exports none :tangle yes
+     ### 例題2
+     ### 3元連立1次方程式の解法
+   #+end_src
+   #+begin_src R :exports both :results output :tangle yes
+     ## 行列とベクトルを作成 (好きに設定してよい)
+     ## rnorm(9) は正規乱数を9つ作成する(第5回で詳しく説明)
+     (A <- matrix(rnorm(9),3,3)+diag(rep(1,3)))
+     (b <- 1:3)
+   #+end_src
+   #+begin_src R :exports both :results output :tangle yes
+     ## 解を計算
+     (x <- solve(A,b))
+     A%*%x # 結果の確認(b になるはず)
+   #+end_src
+** 練習問題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   - 1から10の2乗値からなるベクトルを作成せよ．
+     #+begin_src R :exports none :tangle yes
+        ### 練習2.1
+        ### 1から10までの2乗値からなるベクトル
+        (1:10)^2 # ^2も関数として成分ごとに計算される
+     #+end_src
+   - 2次元ベクトルを回転行列で変換しても長さが変わらないことを確かめよ．
+     #+begin_src R :exports none :tangle yes
+       ### 練習2.2
+       ### 回転してもベクトルの長さが変わらないことを確認
+       ## 回転行列とベクトルを作成 (好きに設定してよい)
+       theta <- 2*pi/3 # 120度のラジアン値
+       (R <- matrix(c(cos(theta),sin(theta),
+                     -sin(theta),cos(theta)),2,2))
+       (x <- 1:2)
+       (y <- R %*% x) # xを回転してyを作成
+       ## 長さの2乗はベクトルの内積で計算できる
+       x %*% x # xの長さの2乗
+       as.vector(y) %*% as.vector(y) # yの長さの2乗
+     #+end_src
+   - 例題の $A$ と $\boldsymbol{b}$ を用いて
+     #+begin_src R :exports code
+       A %*% b + b %*% A   
+     #+end_src
+     を計算するとエラーになるが，何故そうなるか理由を考えよ．
+     #+begin_src R :exports none :tangle yes
+       ### 練習2.3
+       ### エラーになる理由を考察
+       A %*% b # 列ベクトル (3x1型行列)
+       b %*% A # 行ベクトル (1x3型行列)
+       A %*% b + b %*% A # 大きさが異なるので計算できない   
+     #+end_src
+
+* 関数の定義
+** 自作関数
+   - 他の言語と同様にRでも関数を定義できる   
+   - 関数の定義には関数 ~function()~ を利用する 
+   - [[color:darkgreen][半径 r から球の体積と表面積を求める関数]]
+     #+begin_src R 
+       myfunc <- function(r){
+           V <- (4/3) * pi * r^3 # 球の体積
+           S <- 4 * pi * r^2     # 球の表面積
+           out <- c(V,S) # 返り値のベクトルを作る
+           names(out) <- c("volume", "area") # 返り値の要素に名前を付ける
+           return(out) # 値を返す
+       }
+       myfunc(1) # 実行
+     #+end_src
+
+* 制御構造
+** 制御文
+   - 最適化や数値計算などを行うためには，
+     条件分岐や繰り返しを行うための仕組みが必要となる
+   - R言語を含む多くの計算機言語では
+     - ~if~  (条件分岐)
+     - ~for~  (繰り返し・回数指定)
+     - ~while~  (繰り返し・条件指定)
+   - これを *制御文* と言う 
+
+** ~if~ 文
+   - 条件Aが *真* のときプログラムXを実行する
+     #+begin_src R :exports code
+       if(条件A) プログラムX
+     #+end_src
+   - 上記の ~if~ 文に条件Aが *偽* のときプログラムYを実行することを追加する
+     #+begin_src R :exports code
+       if(条件A) プログラムX else プログラムY    
+     #+end_src
+** ~if~ 文の例
+   - [[color:darkgreen][20200724が19で割り切れるか?]]
      #+begin_src R :exports none :tangle yes
        ### 例題3
-       ### CSVファイルの操作
+       ### if文の例
      #+end_src
      #+begin_src R :tangle yes
-       ## 関数write.csvの使い方
-       (myData <- subset(airquality, 
-                         subset = Ozone>120,
-                         select = -Temp)) # データフレームの作成
-       dim(myData) # データフレームの大きさを確認
-       write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
+       if(20200724 %% 19 == 0) {# %% は余りを計算
+           print("割り切れます")
+           print(20200724 %/% 19) # 商を表示
+       } else { # {}で囲まれたブロックが1つのプログラム
+           print("割り切れません")
+           print(20200724 %% 19) # 余りを表示
+       } 
      #+end_src
-
-** 関数 ~read.csv()~
-   CSVファイルからデータフレームを読み込む
-   - 基本書式
-     #+begin_src R :eval no
-       read.csv(file="ファイル名", header=TRUE,
-                row.names, fileEncoding)      
+** ~for~ 文
+   - ベクトル ~V~ の要素を *順に* 変数 ~i~ に代入して
+     プログラムXを繰り返し実行する
+     #+begin_src R :exports code
+       for(i in V) プログラムX
      #+end_src
-   - 関数の引数
-     - ~file~: 読み込むファイルの名前\\
-       (作業ディレクトリ下，またはパスを指定)
-     - ~header~: 1行目を列名として使うか否か
-     - ~row.names~: 行名の指定\\
-       (行名を含む列番号/列名，または行名の直接指定が可能)
-     - ~fileEncoding~: 文字コードの指定\\
-       (日本語の場合，主に使うのは *"utf8","sjis"*)
-   #   - (他にも細かいオプションがあるのでヘルプを参照)
-   #     関数 ~read.table()~ , ~scan()~ なども参照
-
-** 関数 ~read.csv()~ の例
-   - CSVファイルの読み込み 
-     #+begin_src R :tangle yes
-       ## 関数read.csvの使い方
-       (newdata <- read.csv(file="data/mydata.csv",
-                            row.names=1)) # 1列目を行名に指定
-       dim(newdata) # 正しく読み込めたか大きさを確認
-     #+end_src
-
-** 関数 ~save()~
-   RDataファイルへ書き出す
-   - 基本書式
-     #+begin_src R :eval never
-       save(..., file="ファイル名")
-     #+end_src
-   - 関数の引数
-     - ~...~: 保存するオブジェクト名\\
-       (複数可，データフレーム以外も可)
-     - ~file~: 書き出すファイルの名前\\
-       (作業ディレクトリ下，またはパスを指定)
-   - CSV形式と異なり，
-     *複数* のデータフレームを1つのファイルに保存することができる
-
-** 関数 ~save()~ の例
-   - RDataファイルの書き出し
+   - プログラムXは変数 ~i~ によって実行内容が変わる
+** ~for~ 文の例
+   - [[color:darkgreen][アルファベットの20,15,11,25,15番目を表示]]
      #+begin_src R :exports none :tangle yes
        ### 例題4
-       ### RDataファイルの操作
+       ### for文の例
      #+end_src
      #+begin_src R :tangle yes
-       ## 関数saveの使い方
-       (myDat1 <- subset(airquality, Temp>95, select=-Ozone)) 
-       (myDat2 <- subset(airquality, Temp<57, select=-Ozone)) 
-       dim(myDat1); dim(myDat2) # 大きさを確認
-       save(myDat1,myDat2,file="data/mydata.rdata") # RData形式で書き出し
+       print(LETTERS) # LETTERS ベクトルの内容を表示
+       for(i in c(20,15,11,25,15)) {
+           print(LETTERS[i]) # 順番に表示
+       }
      #+end_src
-
-** 関数 ~load()~ 
-   RDataファイルから読み込む
-   - 基本書式
-     #+begin_src R :eval no
-       load(file="ファイル名")
+** ~while~ 文
+   - 条件Aが *真* である限りプログラムXを繰り返す
+     #+begin_src R :exports code
+       while(条件A) プログラムX
      #+end_src
-   - 関数の引数
-     - ~file~: 読み込むファイルの名前\\
-       (作業ディレクトリ下，またはパスを指定)
-
-** 関数 ~load()~ の例
-   #+begin_src R :tangle yes
-     ## 関数loadの使い方
-     (myDat1 <- subset(airquality, Ozone > 160)) # 新たに作成
-     load(file="data/mydata.rdata") # RData形式の読み込み
-     myDat1 # saveしたときの名前で読み込まれ上書きされる
-     myDat2 
-   #+end_src
-
-* 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
-** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 以下のデータを読み込み，データの操作を行ってみよう．
-     - データファイル (文字コード: utf8)
-       - jpdata1.csv: 県別の対象データ
-       - jpdata2.csv: 対象データの内容
-       - jpdata3.csv: 県別と地域の対応関係
-     - https://www.e-stat.go.jp より取得したデータ\\
-       (地域から探す / 全県を選択 / 項目を選択してダウンロード)
-     - 作業ディレクトリに置いて，以下のように読み込む
-       #+begin_src R :exports none :tangle yes
-         ### 練習2
-         ### サンプルデータの読み込み
-       #+end_src
-       #+begin_src R :exports code :tangle yes
-         myData <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
-         myItem <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
-         myArea <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
-       #+end_src
-       #+begin_src R :exports none :tangle yes
-         ### データ操作の例
-         ## 項目名の内容を確認
-         myItem
-         ## 最初の6県を表示
-         head(myData)
-         ## 最後の6県を表示
-         tail(myData)
-         ## 地方名を確認
-         myArea
-         ## 人口の最大値を見る
-         with(myData,max(人口))
-         ## どの都道府県か調べる
-         with(myData,which.max(人口)) # 行番号が返る
-         myData[with(myData,which.max(人口)),] 
-         ## 人口の多い都道府県を調べる
-         with(myData,order(人口,decreasing=TRUE)) # 行番号を取得
-         rownames(myData)[with(myData,order(人口,decreasing=TRUE))] # 県名を表示
-       #+end_src
-
-* データの集計
-** 集約のための関数
-   - データを集約するための基本的な関数は用意されている
-     - 関数 ~sum()~: 総和
-     - 関数 ~mean()~: 平均
-     - 関数 ~max()~: 最大値
-     - 関数 ~min()~: 最小値
-   #     - 関数 ~summary()~: 基本統計量
-   - (これ以外にも集約を行なう関数は沢山ある)
-
-** 関数の例
-   - 練習問題のデータの集計を行う
+   - プログラムXは実行するたびに実行内容が変わり，
+     いつか条件Aが満たされなくなるように書く
+   - /(~repeat~ 文というものもある)/
+** ~while~ 文の例
+   - [[color:darkgreen][20200809を素因数分解する]]
      #+begin_src R :exports none :tangle yes
        ### 例題5
-       ### データを集約する関数
+       ### while文の例
      #+end_src
      #+begin_src R :tangle yes
-       myData <- read.csv(file="data/jpdata1.csv",
-                          row.names=1, fileEncoding="utf8")
-       ## 一度読み込んでいれば上の行は不要
-       sum(myData$人口) # 全国の総人口 (列名で選択)
-       mean(myData[,4]) # 面積の平均値 (行列として列を選択)
-       median(myData[[4]]) # 面積の中央値 (リストとして列を選択)
-       min(myData["若年"])  # 若年人口の最小値 (列名で選択)
-       with(myData,max(老人))  # 老年人口の最大値 (関数withを利用)
+       n <- 20200809 # 分解の対象
+       p <- 2 # 最初に調べる数
+       while(n != 1){ # 商が1になるまで計算する
+           for(i in p:n){ # pからnまで順に調べる
+               if(n%%i == 0) { # 余りが0か確認
+                   print(i) # 割り切った数を表示
+                   n <- n/i # 商を計算して分解の対象を更新
+                   p <- i # 最初に調べる数を更新
+                   break # for文を途中で終了
+               }  
+           }
+       }
      #+end_src
-
-** 関数 ~apply()~
-   列あるいは行ごとの計算を行う
-   - 基本書式
-     #+begin_src R :eval no
-       apply(X, MARGIN, FUN)
-     #+end_src
-   - 関数の引数
-     - ~X~: データフレーム
-     - ~MARGIN~: 行(1)か列(2)かを指定
-     - ~FUN~: 計算すべき統計量の関数
-   - 総和や平均は専用の関数も用意されている\\
-     *~rowSums()/colSums()~, ~rowMeans()/colMeans()~*
-
-** 関数 ~apply()~ の例
-   - 抽出したデータの集計を行う
-     #+begin_src R :exports none :tangle yes
-       ### 例題6
-       ### 関数applyの使い方
-     #+end_src
-     #+begin_src R :tangle yes
-       x <- subset(myData, select=婚姻:勤女) # 抽出
-       colMeans(x) # 各列の平均
-       apply(x, 2, max) # 列ごとの最大値
-       sapply(x, max)   # 上と同じ (help(sapply)を参照)
-       ## 自作関数の適用 (関数に名前を付けずに利用できる)
-       apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
-     #+end_src
-
-** 関数 ~aggregate()~
-   各行をグループにまとめて統計量を計算する
-   - 基本書式
-     #+begin_src R :eval no
-       aggregate(x, by, FUN)
-     #+end_src
-   - 関数の引数
-     - ~x~: データフレーム
-     - ~by~: 各行が属するグループを指定するベクトルをリストで与える(複数可)
-     - ~FUN~: 求めたい統計量を計算するための関数
-   - /(~x~ がベクトルの場合には関数 ~tapply()~ も利用可)/
-
-** 関数 ~aggregate()~ の例 (1/6)
-   - 同じ値を持つグループごとの平均値を求める
-     #+begin_src R :exports none :tangle yes
-       ### 例題7
-       ### 関数aggregateの使い方
-     #+end_src
-     #+begin_src R :tangle yes
-       ## 人口から面積まで地方ごとの平均値を計算
-       x <- subset(myData,select=人口:面積)
-       aggregate(x, by=list(地方=myArea$地方), FUN=mean) 
-     #+end_src
-
-** 関数 ~aggregate()~ の例 (2/6)
-   - 代入せずにまとめて書くことも可能
-     #+begin_src R :tangle yes
-       aggregate(subset(myData,select=人口:面積),
-                 by=list(地方=myArea$地方),
-                 FUN=mean) 
-     #+end_src
-
-** 関数 ~aggregate()~ の例 (3/6)
-   - 以下も同じ結果を返す
-     #+begin_src R :tangle yes
-       y <- data.frame(x,地方=myArea$地方) 
-       aggregate( . ~ 地方, data=y, FUN=mean)
-     #+end_src
-
-** 関数 ~aggregate()~ の例 (4/6)
-   - まとめて書くことも可能
-     #+begin_src R :tangle yes
-       aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-                 data=data.frame(subset(myData,select=人口:面積),
-                                 地方=myArea$地方), 
-                 FUN=mean)
-     #+end_src
-
-** 関数 ~aggregate()~ の例 (5/6)
-   - 複数の条件でグループ分け
-     #+begin_src R :tangle yes
-       ## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-       aggregate(x, by=list(地方=myArea$地方,
-                            過疎=with(myData, 人口<=median(人口))),
-                 FUN=mean)
-     #+end_src
-
-** 関数 ~aggregate()~ の例 (6/6)
-   - 別の書き方
-     #+begin_src R :tangle yes
-       aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
-                 data=data.frame(subset(myData,select=人口:面積),
-                                 地方=myArea$地方,
-                                 過疎=with(myData, 人口<=median(人口))))
-     #+end_src
+   # ** ~repeat~ 文
+   #    - プログラムXを繰り返し実行
+   #      #+begin_src R :exports code
+   #        repeat プログラムX
+   #      #+end_src
+   #    - プログラムXには
+   #      #+begin_src R :exports code
+   #        if(条件A) break
+   #      #+end_src
+   #      という記述が含まれている必要がある．
+   #      この記述は，「条件Aが成立したら繰り返しをやめる」という意味
 
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
   :END:
-** 練習問題
+** 例題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   サンプルデータ(jpdata)の整理をしてみよう．
-   - 県別の人口密度を求めよ
+   - 三角形の3辺の長さ $x,y,z$ を与えると
+     面積 $S$ を計算する関数を作成せよ．
+   - 参考: *ヘロンの公式* より
+     # #+begin_export latex
+     \begin{equation}
+       S=\sqrt{s(s-x)(s-y)(s-z)},\qquad
+       s=\frac{x+y+z}{2}
+     \end{equation}
+     # #+end_export
+     が成り立つ．
+** 解答例
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   #+begin_src R :exports none :tangle yes
+     ### 例題6
+     ### 三角形の面積を計算する関数
+   #+end_src
+   #+begin_src R :exports both :results output :tangle yes
+     area <- function(x,y,z){
+         s <- (x+y+z)/2
+         S <- (s*(s-x)*(s-y)*(s-z))^(1/2)
+         ## S <- sqrt(s*(s-x)*(s-y)*(s-z)) # 平方根を求める関数を用いても良い
+       return(S)
+     }
+     area(3,4,5) # 直角三角形で検算
+     area(12,13,5)
+   #+end_src
+** 演習
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   - 非負の整数 $n$ の階乗 $n!$ を求める関数を作成せよ．
      #+begin_src R :exports none :tangle yes
        ### 練習3.1
-       ### 県別の人口密度 (人口/面積)
-       with(myData,人口/面積) # 値のみ返す
-       ## 人口密度に関係するデータをまとめてデータフレームを作成
-       (myDat1 <- data.frame(subset(myData,select=c(人口,面積)),
-                             人口密度=with(myData,人口/面積)))
+       ### 階乗を計算する関数
+       ## for文を用いた関数
+       fact1 <- function(n){
+           val <- 1
+           for(i in 1:n){
+               val <- val*i
+           }
+           return(val)
+       }
+       fact1(0) # 間違い
+       fact1(1)
+       fact1(2)
+       fact1(3)
+       fact1(4)
+       ## if文を用いた修正版
+       fact2 <- function(n){
+           if(n==0){
+               return(1)
+           } else {
+               val <- 1
+               for(i in 1:n){
+                   val <- val*i
+               }
+               return(val)
+           }
+       }
+       fact2(0) # 正しい
+       fact2(1)
+       fact2(2)
+       fact2(3)
+       fact2(4)
+       ## while文を用いた関数
+       fact3 <- function(n){
+           val <- 1
+           while(n>0){
+               val <- val*n
+               n <- n-1
+           }
+           return(val)
+       }
+       fact3(0)
+       fact3(1)
+       fact3(2)
+       fact3(3)
+       fact3(4)
      #+end_src
-   - 地方別の人口密度を求めよ\\
-     (県ごとに人口が異なるので単純に人口密度を平均してはいけない)
+   - 整数 $n$ の Fibonacci数を求める関数を作成せよ．
+     # #+begin_export latex
+     \begin{align}
+       F_{0}&=0\\
+       F_{1}&=1\\
+       F_{n}&=F_{n-1}+F_{n-2}
+     \end{align}
+     # #+end_export
      #+begin_src R :exports none :tangle yes
        ### 練習3.2
-       ### 地方別の人口密度 (地方の総人口/地方の総面積)
-       ## 地方ごとに人口と面積の合計を計算
-       (myDat2 <- aggregate(subset(myData,select=c("人口","面積")),
-                            by=list(地方=myArea$地方), FUN=sum))
-       ## 人口密度を計算して追加
-       (myDat2 <- data.frame(myDat2, 
-                             人口密度=with(myDat2,人口/面積)))
+       ### Fibonacci数を返す関数
+       fibo <- function(n){
+           f0 <- 0 # 第0項の設定
+           f1 <- 1 # 第1項の設定
+           if(n<0) {
+               print("計算できません")
+               return(NA) # 欠損値を返す
+           }
+           if(n==0) { # n=0の場合
+               return(f0)
+           }
+           if(n==1) { # n=1の場合
+               return(f1)
+           }
+           for(i in 2:n) { # n>=2の場合
+               fn <- f1 + f0 # fn = fn-1 + fn-2 の計算
+               f0 <- f1 # fn-2 の値の更新
+               f1 <- fn # fn-1 の値の更新
+           }
+           return(fn) # 計算結果を返す
+       }
      #+end_src
-   - 地方別の婚姻率・離婚率(1000人当たり)を概算せよ\\
-     (「人口1000人当たり」とあるが，
-      若年層は婚姻不可として除いた
-      「婚姻可能な人口1000人当たり」
-      で置き換えて計算しなさい)
+   - 行列 $X$ が与えられたとき，各列の平均を計算する関数を作成せよ．
      #+begin_src R :exports none :tangle yes
        ### 練習3.3
-       ### 地方別の婚姻率・離婚率
-       ## 婚姻可能な人口を推計
-       (tmp <- data.frame(subset(myData, select=婚姻:離婚),
-                          婚姻可能=with(myData,人口-若年)))
-       ## 婚姻率と離婚率から人数を推計
-       (tmp <- data.frame(tmp,
-                         婚姻数=with(tmp, 婚姻可能*婚姻/1000),
-                         離婚数=with(tmp, 婚姻可能*離婚/1000),
-                         地方=myArea$地方))
-       ## 地方別の婚姻・離婚数を集計
-       (myDat3 <- aggregate(. ~ 地方, FUN=sum,
-                            data=subset(tmp,select=-c(婚姻,離婚))))
-       ## 婚姻率・離婚率を計算して追加
-       (myDat3 <- data.frame(myDat3,
-                             婚姻率=with(myDat3,婚姻数/婚姻可能*1000),
-                             離婚率=with(myDat3,離婚数/婚姻可能*1000)))
+       ### 行列の列の平均を計算する関数
+       colave <- function(X) {
+           ave <- rep(0,length=ncol(X)) # 平均を記録するベクトルを用意
+           for(i in 1:ncol(X)){ # 列ごとに計算
+               ave[i] <- sum(X[,i])/nrow(X) # 平均の定義に従って計算
+               ## ave[i] <- mean(X[,i]) # 平均を計算する関数を用いても良い
+           }
+           return(ave)
+       }
+       (A <- matrix(1:12,3,4,byrow=TRUE))
+       colave(A)
      #+end_src
+   - 前問で $X$ がベクトルの場合にはその平均を計算するように修正せよ．\\
+     /(関数 ~is.vector()~ が利用できる)/
+     #+begin_src R :exports none :tangle yes
+       ### 練習3.4
+       ### ベクトルと行列を扱えるように修正
+       colave <- function(X){ 
+           if(is.vector(X)){
+               ave <- mean(X)
+           } else {
+               ave <- rep(0,length=ncol(X))
+               for(i in 1:ncol(X)){
+                   ave[i] <- mean(X[,i])
+               }
+           }
+           return(ave)
+       }
+       (A <- matrix(1:12,3,4,byrow=TRUE))
+       colave(A)
+       (x <- 1:12)
+       colave(x)
+     #+end_src
+
 
 
 * COMMENT ローカル変数

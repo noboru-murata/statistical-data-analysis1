@@ -1,119 +1,189 @@
+### 離散一様分布に従う乱数
+
+a <- 1:6 # サンプリング対象の集合をベクトルとして定義
+sample(a, size=20, replace=TRUE) # 離散一様分布(20個)
+
+### 二項分布に従う乱数
+
+rbinom(10, size=1, prob=0.2) # Bernoulli分布(10個)
+rbinom(20, size=5, prob=0.6) # 二項分布(20個)
+
 ### 練習1
-### 平均・分散・標準偏差の計算
-## データの読み込み
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-## 全データによる計算
-(mu <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=mean))
-(s2 <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=var))
-(s <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=sd))
-## 毎月5日のデータによる計算
-apply(subset(myData,subset=日==5,select=c(気温,日射量,風速)),2,FUN=mean)
-apply(subset(myData,subset=日==5,select=c(気温,日射量,風速)),2,FUN=var)
-apply(subset(myData,subset=日==5,select=c(気温,日射量,風速)),2,FUN=sd)
-## 5の付く日のデータによる計算
-apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=mean)
-apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=var)
-apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=sd)
-## ランダムに選択した36日で推定した場合のばらつき
-mc <- 5000 # 実験回数を指定
-myItems <- c("気温","日射量","風速")
-myFuncs <- c("mean","var","sd")
-myTruth <- list(mu,s2,s)
-inum <- 1; fnum <- 1 # 気温の標本平均の例
-myTrial <- function(){
-    idx <- sample(1:nrow(myData),36) # 重複なしで36行選ぶ
-    apply(subset(myData[idx,],select=myItems[inum]),2,FUN=myFuncs[fnum])}
-xbars <- replicate(mc,myTrial())
-par(family="HiraginoSans-W4") 
-hist(xbars, breaks=40, freq=FALSE,
-     col="lightblue", border="blue",
-     xlab=myItems[inum], main=paste(myItems[inum],"の",myFuncs[fnum],"の推定"))
-abline(v=myTruth[[fnum]][inum],col="red",lwd=2)
-## 全ての組み合わせは for 文で実行可能
-for(inum in 1:3){
-    for(fnum in 1:3){
-        myTrial <- function(){
-            idx <- sample(1:nrow(myData),36) # 重複なしで36行選ぶ
-            apply(subset(myData[idx,],select=myItems[inum]),2,FUN=myFuncs[fnum])}
-        xbars <- replicate(mc,myTrial())
-        par(family="HiraginoSans-W4") 
-        hist(xbars, breaks=40, freq=FALSE,
-             col="lightblue", border="blue",
-             xlab=myItems[inum], main=paste(myItems[inum],"の",myFuncs[fnum],"の推定"))
-        abline(v=myTruth[[fnum]][inum],col="red",lwd=2)
-    }
-}
+### 二項分布
+mc <- 10000 # 実験回数を指定
+m <- 16 
+p <- 0.6
+myRandom <- function(){ # Bernolli分布をm個生成して合計
+  sum(rbinom(m, size=1, prob=p))}
+myData <- replicate(mc, myRandom())
+myTable <- table(myData)/mc # 出現確率ごとの表(度数分布表)を作成
+par(family="HiraginoSans-W4") # 日本語フォントの指定
+plot(myTable, type="h", lwd=5, col="royalblue",
+     xlab="値", ylab="確率",
+     main=paste0("二項分布(試行回数", m, ", 成功確率", p, ")"))
+myRange <- min(myData):max(myData) # 範囲を取得
+lines(myRange + 0.3, dbinom(myRange, size=m, prob=p),
+      type="h", col="red", lwd=5) # 理論上の出現確率
+legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+       col=c("royalblue", "red"), lwd=5) # 凡例を作成
+
+### Poisson分布に従う乱数
+
+rpois(15, lambda=1) # 強度1のPoisson分布(15個)
+rpois(15, lambda=10) # 強度10のPoisson分布(15個)
 
 ### 練習2
-### 歪度と超過尖度の計算
-library(e1071)
-## データの読み込み
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-## 全データによる計算
-(skew <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=skewness))
-(kurt <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=kurtosis))
-## 5の付く日のデータによる計算
-apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=skewness)
-apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=kurtosis)
-## ヒストグラムの描画と
-myItems <- c("気温","日射量","風速")
-par(family="HiraginoSans-W4") 
-## 全ての組み合わせは for 文で実行可能
-for(inum in 1:3){
-    x <- myData[,myItems[inum]] # ベクトルにする必要がある
-    ## x <- subset(myData, select=myItems[inum], drop=TRUE) # でもよい
-    par(family="HiraginoSans-W4") 
-    hist(x, breaks=30, freq=FALSE,
-         col="lightgreen", border="green",
-         xlab=myItems[inum], main=myItems[inum])
-    curve(dnorm(x,mean=mean(x),sd=sd(x)), add=TRUE,
-          col="orange", lwd=2)
-}
+### Poisson分布
+mc <- 10000 
+lambda1 <- 5
+lambda2 <- 12
+myRandom <- function(){ # 2つのPoisson分布の和
+  rpois(1, lambda=lambda1)+rpois(1, lambda=lambda2)}
+myData <- replicate(mc, myRandom())
+myTable <- table(myData)/mc 
+par(family="HiraginoSans-W4") # 日本語フォントの指定
+plot(myTable, type="h", lwd=5, col="royalblue",
+	      xlab="値", ylab="確率",
+     main=paste0("Poisson分布(強度", lambda1+lambda2, ")"))
+myRange <- min(myData):max(myData) 
+lines(myRange + 0.3,
+      dpois(myRange, lambda=lambda1+lambda2), 
+      type="h", col="red", lwd=5) # 理論上の出現確率
+legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+       col=c("royalblue", "red"), lwd=5)
+
+### 幾何分布に従う乱数
+
+rgeom(15, prob=0.1) # 成功確率0.1の幾何分布(15個)
+
+### 一様分布に従う乱数
+
+runif(8) # 区間(0,1)上の一様乱数(8個)
+runif(8,min=-1,max=1) # 区間(-1,1)上の一様乱数(8個)
+
+### 正規分布に従う乱数
+
+rnorm(8) # 標準正規乱数(8個)
+rnorm(8,mean=1,sd=2) # 平均1分散4=2^2の正規乱数
 
 ### 練習3
-### 共分散と相関の計算
-## データの読み込み
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-## 共分散・相関行列の計算
-x <- subset(myData,select=c(気温,降水量,日射量,降雪量,風速,気圧,湿度)) # 数値データ
-(myCov <- cov(x))
-(myCor <- cor(x))
-myCor==min(myCor) # 負の最大相関の位置を確認 (気温と気圧)
-myCor==max(myCor-diag(diag(myCor))) # 対角を除く最大相関の位置を確認 (気温と湿度)
-abs(myCor)==min(abs(myCor)) # 最小相関の位置を確認 (降雪量と風速)
-## 散布図の描画
-par(family="HiraginoSans-W4") 
-pairs(~ 気温 + 気圧, data=myData, col="blue")
-pairs(~ 気温 + 湿度, data=myData, col="red")
-pairs(~ 降雪量 + 風速, data=myData, col="grey")
-pairs(x, col="orange") # 数値データを全部表示してみる
+### 正規分布
+mc <- 10000 # 実験回数を指定
+myRandom <- function(){ # 一方の分布を確認する
+  u1 <- runif(1)
+  u2 <- runif(1)
+  return(sqrt(-2*log(u1))*cos(2*pi*u2))}
+myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+par(family="HiraginoSans-W4") # 日本語フォントの指定
+hist(myData, freq=FALSE, breaks=40,
+     col="lightblue", border="white", 
+     xlab="x", main=paste0("標準正規分布")) # ヒストグラム(密度表示)
+curve(dnorm(x, mean=0, sd=1), add=TRUE, 
+      col="red", lwd=3) # 理論上の確率密度関数
+legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+       col=c("lightblue", "red"), lwd=3) # 凡例を作成
+## Box-Muller法で作られる2つの確率変数の関係を調べる
+boxmuller <- function(){
+  u1 <- runif(1)
+  u2 <- runif(1)
+  x1 <- sqrt(-2*log(u1))*cos(2*pi*u2)
+  x2 <- sqrt(-2*log(u1))*sin(2*pi*u2)
+  return(c(x1,x2))
+}
+x <- replicate(mc, boxmuller()) # 2行xmc列の行列が得られる
+par(family="HiraginoSans-W4") # 日本語フォントの指定
+plot(x[1,],x[2,],xlab="x1",ylab="x2") # 散布図を描く
+## 以下では同じ分布なのでx1,x2はまとめて計算
+mu <- round(mean(x),2)
+sigma <- round(sd(x),2)
+hist(x, freq=FALSE, breaks=40, col="lightblue", border="white",
+
+     main=paste0("正規分布(平均", mu, ", 分散", sigma^2, ")")) # ヒストグラム(密度表示)
+curve(dnorm(x, mean=mu, sd=sigma), add=TRUE, 
+      col="red", lwd=3) # 理論上の確率密度関数
+legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+       col=c("lightblue", "red"), lwd=3) # 凡例を作成
+
+### ガンマ分布に従う乱数
+
+rgamma(8, shape=3, rate=1) # ガンマ分布(8個)
+rgamma(8, shape=1, rate=3) # 異なるパラメタのガンマ分布(8個)
+
+### 指数分布に従う乱数
+
+rexp(8) # レート1の指数分布(8個)
+rexp(8, rate=0.5) # レート0.5の指数分布(8個)
+
+### カイ二乗分布に従う乱数
+
+rchisq(8, df=1) # 自由度1のカイ二乗分布(8個)
+rchisq(8, df=4) # 自由度4のカイ二乗分布(8個)
 
 ### 練習4
-### 分位点と最頻値の計算
-## データの読み込み
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-## 気温の分位点
-## 全データによる計算
-(myTruth <- summary(subset(myData,select=気温,drop=TRUE)))
-## 5の付く日のデータによる計算
-summary(subset(myData,subset=日%in%c(5,15,25),select=気温,drop=TRUE))
-## ランダムに選択した36日で推定した場合のばらつき
-mc <- 5000 # 実験回数を指定
-myFuncs <- c("min","1Q","median","mean","3Q","max")
-myTrial <- function(){
-    idx <- sample(1:nrow(myData),36) # 重複なしで36行選ぶ
-    summary(subset(myData[idx,],select=気温,drop=TRUE))}
-quants <- replicate(mc,myTrial())
-## ヒストグラムの表示
-for(fnum in 1:6) {
-    par(family="HiraginoSans-W4") 
-    hist(quants[fnum,], breaks=40, freq=FALSE,
-         col="lightblue", border="blue",
-         xlab="気温", main=paste("気温の",myFuncs[fnum],"の推定"))
-    abline(v=myTruth[fnum],col="red",lwd=2)
-}
-## 最多風向の最頻値
-(myTable <- table(subset(myData,select=最多風向))) # 頻度表
-max(myTable) # 最大値 
-which.max(myTable) # 最頻値の表の位置
-names(which.max(myTable)) # 最頻値の項目名
+### カイ二乗分布
+mc <- 10000 # 実験回数を指定
+k <- 8 # 自由度を設定
+myRandom <- function(){ 
+  sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
+myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+par(family="HiraginoSans-W4") # 日本語フォントの指定
+hist(myData, freq=FALSE, breaks=25,
+     col="lightblue", border="white", 
+     xlab="x", main=bquote(paste(chi^2,"分布(自由度",.(k),")"))) 
+curve(dchisq(x, k), # 理論曲線(確率密度)
+      add=TRUE, col="red", lwd=3) 
+legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+       col=c("lightblue", "red"), lwd=3)
+
+### t分布に従う乱数
+
+rt(8, df=1) # 自由度1のt分布(8個)
+rt(8, df=4) # 自由度4のt分布(8個)
+
+### 練習5
+### t分布
+mc <- 10000 # 実験回数を指定
+k <- 7
+myRandom <- function(){ 
+  y <- rchisq(1, df=k) # 自由度kのカイ2乗分布
+  # y <- sum(rnorm(k)^2) # 正規乱数を用いてもよい
+  z <- rnorm(1) # 標準正規乱数
+  return(z/sqrt(y/k))}
+myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+par(family="HiraginoSans-W4") # 日本語フォントの指定
+hist(myData, freq=FALSE, breaks=40,
+     col="lightblue", border="white",  
+     xlab="x", main=bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")")))
+curve(dt(x, df=k), # 確率密度関数(理論)
+      add=TRUE, col="red", lwd=3) 
+legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+       col=c("lightblue", "red"), lwd=3)
+
+### F分布に従う乱数
+
+rf(10, df1=4, df2=7) # 自由度4,7のF分布(10個)
+rf(10, df1=7, df2=12) # 自由度7,12のF分布(10個)
+
+### 練習6
+### F分布
+mc <- 10000 # 実験回数を指定
+k1 <- 20
+k2 <- 10
+myRandom <- function(){ 
+  y1 <- rchisq(1, df=k1) # 自由度20のカイ二乗分布
+  y2 <- rchisq(1, df=k2) # 自由度10のカイ二乗分布
+  ## y1 <- sum(rnorm(k1)^2) # 正規乱数を用いてもよい
+  ## y2 <- sum(rnorm(k2)^2) 
+  return((y1/k1)/(y2/k2))}
+myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+par(family="HiraginoSans-W4") # 日本語フォントの指定
+hist(myData, freq=FALSE, breaks=40,
+     col="lightblue", border="white",
+     xlab="x",
+     main=bquote(paste(frac(Y[1]/k[1],Y[2]/k[2]),
+		       " (",k[1]==.(k1),
+		       ", ",k[2]==.(k2),")"))) 
+curve(df(x, df1=k1, df2=k2), # 確率密度関数(理論)
+      add=TRUE, col="red", lwd=3) 
+legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+       col=c("lightblue", "red"), lwd=3)

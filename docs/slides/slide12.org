@@ -1,8 +1,8 @@
-#+TITLE: 回帰分析
-#+SUBTITLE: 変数間の関係を推測する
+#+TITLE: 分散分析
+#+SUBTITLE: 複数のグループ間の違いを検証する
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 2020.07.10
+#+DATE: 2020.07.03
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -12,135 +12,288 @@
 :end:
 
 * COMMENT tangle用
-
+ 
 #+begin_src R :exports none
   setwd("~/Desktop/lectures/u-tokyo/spring/slide")
 #+end_src
-#+begin_src R :eval no :exports none :tangle yes
-  ### 第12回 演習問題解答例
+#+begin_src R :exports none :tangle yes
+  ### 第11回 演習問題解答例
 #+end_src
 
-* 回帰分析
-** 回帰分析
-   - データのある変量をその他の変量を用いて説明・予測するモデル
-     (*回帰モデル*)を構築するための分析法
-   - 変量の分類
-     - 説明される側: *目的変数* (または被説明，従属，応答変数など)
-     - 説明する側: *説明変数* (または独立変数，共変量など)
-   - 目的変数・説明変数ともに複数個あってもよい 
-     - 目的変数は通常は1つ (複数の場合は個別に回帰モデルを構築)
-     - 説明変数は，1つの場合を *単回帰*, 2つ以上の場合を *重回帰*
-     - この講義では単回帰のみ扱う
-
-** 回帰モデル
-   - $X$: 説明変数
-   - $Y$: 目的変数
-   - $Y$ を $X$ で説明する関係式として一次関数を考える:
+* 分散分析とは
+** 分散分析
+   - 平均の差の検定: \\
+     *2つのグループ間* で平均の差があるか否か
+   - 分散分析: \\
+     *2つ以上のグループ間* で平均の差があるか否か
+   - 分散分析における仮説の例:
      #+begin_quote
+     - ある小売店について"売上高は月によって差があるか"
+     - ある銘柄の株価について"収益率は曜日によって差があるか"
+     #+end_quote
+
+** 基本的な考え方
+   - データの変動を分解:
+     - グループ間での変動
+     - 観測誤差のみに起因する変動
+   - 変動の大きさを比較:
+     - 平均に差がない: 自由度を除いて両者に本質的な差がない
+     - 平均に差がある: グループ間の変動が増してより大きくなる
+   - 分散分析は *"データの変動の分析"* \\
+     (変動=不確定性)
+
+* 分散の比の検定 (再掲)
+** 分散の比の検定
+   - 2種類のデータの分散が等しいか否かを検定する
      #+begin_src latex
        \begin{equation}
-         Y=\alpha+\beta X\quad\text{(線形回帰モデル)}
+         H_0:\sigma_1^2=\sigma_2^2\quad\text{vs}\quad H_1:\sigma_1^2\neq\sigma_2^2
        \end{equation}
      #+end_src
-     #+end_quote
-     - $\alpha$: *定数項*
-     - $\beta$: $X$ の *回帰係数*
-   - *注意*: 非線形な関係への対応
-     - 適切な変数変換(二乗, 対数など)を施して線形な関係に変換
-     - 弱い非線形性を線形で近似
-
-* 回帰係数の点推定
-** 回帰係数の点推定
-   - $n$ 個の説明変数と目的変数の組 $(X,Y)$ を観測
-     #+begin_quote
+** 考え方
+   - $X_1,\dotsc,X_m$ の不偏分散: $s_1^2$
+   - $Y_1,\dotsc,Y_n$ の不偏分散: $s_2^2$
+   - このとき $s_1^2,s_2^2$ は独立でそれぞれ
+     - $(m{-}1)s_1^2/\sigma_1^2$
+       自由度 $m{-}1$ の $\chi^2$ 分布に従う
+     - $(n{-}1)s_2^2/\sigma_2^2$
+       は自由度 $n{-}1$ の $\chi^2$ 分布に従う
+   - 検定統計量:
      #+begin_src latex
        \begin{equation}
-         (X_1,Y_1),(X_2,Y_2),\dotsc,(X_n,Y_n)
+         F=\frac{s_1^2}{s_2^2}
        \end{equation}
      #+end_src
-     #+end_quote
-   - 回帰モデル: データには観測誤差が含まれる
-     #+begin_quote
+   - 帰無分布は自由度 $m{-}1,n{-}1$ の $F$ 分布
+  
+** 両側検定の棄却域
+   - 有意水準を選択: $\alpha\in(0,1)$
+   - 自由度 $m{-}1,n{-}1$ の $F$ 分布の
+     $\alpha/2,\,1{-}\alpha/2$ 分位点:
+     $F_{\alpha/2}(m{-}1,n{-}1)$,
+     $F_{1{-}\alpha/2}(m{-}1,n{-}1)$
+   - $H_0$ の下では以下が成立:
      #+begin_src latex
        \begin{equation}
-         Y_i=\alpha+\beta X_i+\epsilon_i,\quad i=1,\dotsc,n.
+         P(F < F_{\alpha/2}(m{-}1,n{-}1)
+         \text{ または }F > F_{1{-}\alpha/2}(m{-}1,n{-}1))=\alpha
        \end{equation}
      #+end_src
-     #+end_quote
-     - $\epsilon_1,\epsilon_2,\dotsc,\epsilon_n$: *誤差項* または *撹乱項*
-   - 線形回帰モデルのパラメータ $\alpha,\beta$ を推定
-
-** 分析における仮定
-   - 説明変数 $X_1,\dotsc,X_n$ は確率変数ではなく確定値
-   - 一定値ではない ($X_1=\cdots=X_n$ ではない)
-   - 誤差項 $\epsilon_1,\dotsc,\epsilon_n$ は
-     独立同分布な確率変数列
-   - 誤差項は 平均0, 分散 $\sigma^2$ 
-
-** 最小二乗法
-   - 係数 $\alpha,\beta$ の回帰式で説明できない
-     目的変数の変動:
-     #+begin_quote
+   - 第一種過誤の上限が $\alpha$ の棄却域:
      #+begin_src latex
        \begin{equation}
-         e_i(\alpha,\beta)=Y_i-(\alpha+\beta X_i)\quad (i=1,\dotsc,n)
+         R_{\alpha}=
+         \left(0,F_{\alpha/2}(m{-}1,n{-}1)\right)
+         \cup\left(F_{1{-}\alpha/2}(m{-}1,n{-}1),\infty\right)
        \end{equation}
      #+end_src
-     #+end_quote
-   - 回帰モデルの当てはまりがよい \\
-     $\Leftrightarrow$
-     $e_1(\alpha,\beta),\dotsc,e_n(\alpha,\beta)$ の絶対値が小さい
    #+reveal: split
-   - 方針
-     #+begin_quote
-     $e_1(\alpha,\beta),\dotsc,e_n(\alpha,\beta)$ の平方和 (*残差平方和*)
-     を最小にするように $\alpha,\beta$ を決定
+   - データから検定統計量 $F$ の値を計算
+   - 以下の場合，帰無仮説を棄却
      #+begin_src latex
        \begin{equation}
-         S(\alpha,\beta):=\sum_{i=1}^ne_i(\alpha,\beta)^2
-         =\sum_{i=1}^n\{Y_i-(\alpha+\beta X_i)\}^2
+         F < F_{\alpha/2}(m{-}1,n{-}1)
+         \text{ または }F>F_{1{-}\alpha/2}(m{-}1,n{-}1)
        \end{equation}
      #+end_src
-     #+end_quote
-   - $(\hat{\alpha},\hat{\beta})$: *最小二乗推定量*
+* 一元配置
+** 一元配置の問題設定
+   - グループ分けが1種類:
+     $p$ グループ $A_1,A_2,\dotsc,A_p$
+   - 各グループ $i$ ごとに $n_i$ 個のデータを観測
+     #+begin_src latex
+       \begin{equation}
+         Y_{i1},Y_{i2},\dotsc,Y_{in_i},\quad (i=1,2,\dotsc,p)
+       \end{equation}
+     #+end_src
      #+begin_quote
-     $S(\alpha,\beta)$ を最小にするパラメータの組 $(\alpha,\beta)$
+     例: 小売店の売上高の問題
+     - $A_1,A_2,\dotsc,A_p$: 月
+     - $Y_{i1},Y_{i2},\dotsc,Y_{in_i}$: $i$ 月の各日における売上高
      #+end_quote
+
+** 一元配置のモデル
+   - 分散分析の用語:
+     - *因子*: グループ分けのこと (月ごと)
+     - *水準*: 因子内の各グループのこと (1月，2月，3月，…)
+   - 観測データのモデル:
+     #+begin_src latex
+       \begin{equation}
+         Y_{ij}=\mu_i+\varepsilon_{ij}\quad(i=1,\dotsc,p;\;j=1,\dotsc,n_i).
+       \end{equation}
+     #+end_src
+   - モデルの仮定:
+     - 水準 $A_i$ における観測データの平均値 $\mu_i$ は定数
+     - $\varepsilon_{ij}$ は独立同分布(平均0, 分散 $\sigma^2$ の正規分布)
+
+** 一元配置の検定
+   - 検定問題
+     #+begin_quote
+     各水準 $A_1,A_2,\dotsc,A_p$ の平均に差があるか否かを検定する
+     #+end_quote
+     - 帰無仮説: 全ての水準で平均に差はない
+     - 対立仮説: 平均の異なる水準がある
+       #+begin_src latex
+         \begin{equation}
+           H_0:\mu_1=\cdots=\mu_p\quad\text{vs}\quad
+           H_1:\text{ある$i,j$に対して}\mu_i\neq\mu_j.
+         \end{equation}
+       #+end_src
+
+** 分析の考え方
+  - データの変動から因子間での変動と観測誤差の変動を抽出して比較
+  - 各種平均: ($n=\sum_{i=1}^pn_i$ は全サンプル数)
+    #+begin_quote
+    #+begin_src latex
+      \begin{align}
+        &\text{(全データの標本平均)}
+        &\bar{Y}_{\cdot\cdot}&=\frac{1}{n}\sum_{i=1}^p\sum_{j=1}^{n_i}Y_{ij},\\
+        &\text{(水準$A_i$の標本平均)}
+        &\bar{Y}_{i\cdot}&=\frac{1}{n_i}\sum_{j=1}^{n_i}Y_{ij}\quad
+                           (i=1,\dotsc,p).
+      \end{align}
+    #+end_src
+    #+end_quote
+  #+reveal: split
+  - 各種変動:
+    #+begin_quote
+    #+begin_src latex
+      \begin{align}
+        &\text{(全変動)}
+        &SS_T&=\sum_{i=1}^p\sum_{j=1}^{n_i}(Y_{ij}-\bar{Y}_{\cdot\cdot})^2,\\
+        &\text{(級内変動)}
+        &SS_W&=\sum_{i=1}^p\sum_{j=1}^{n_i}(Y_{ij}-\bar{Y}_{i\cdot})^2,\\
+        &\text{(級間変動)}
+        &SS_B&=\sum_{i=1}^p\sum_{j=1}^{n_i}(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2
+               =\sum_{i=1}^pn_i(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2.
+      \end{align}
+    #+end_src
+    #+end_quote
+    - *級内変動*: 各水準内でのデータの変動 (観測誤差に起因)
+    - *級間変動*: 水準間でのデータの変動
    #+reveal: split
-   - 最小二乗推定量
+   - 変動の分解:
      #+begin_quote
      #+begin_src latex
        \begin{equation}
-         \hat{\beta}
-         =\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\sum_{i=1}^n(X_i-\bar{X})^2},
-         \quad
-         \hat{\alpha}=\bar{Y}-\hat{\beta}\bar{X}
-       \end{equation}
-     #+end_src
-     ただし
-     #+begin_src latex
-       \begin{equation}
-         \bar{X}=\frac{1}{n}\sum_{i=1}^nX_i,\quad
-         \bar{Y}=\frac{1}{n}\sum_{i=1}^nY_i.
+         \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }n{-}1}
+         =\underbrace{\text{(級内変動) }SS_W}_{\text{自由度 }n{-}p}
+         +\underbrace{\text{(級間変動) }SS_B}_{\text{自由度 }p{-}1}
        \end{equation}
      #+end_src
      #+end_quote
+   - 帰無仮説 $H_0$ が正しい:
+     - 水準内・水準間でのデータの変動はともに観測誤差が原因
+     - 自由度を除けば本質的な違いはない
+     - $SS_W/(n{-}p)$, $SS_B/(p{-}1)$ はともに $\sigma^2$ の不偏推定量
+   - 対立仮説 $H_1$ が正しい:
+     - 水準間での変動は観測誤差と平均値の差に影響される
+     - $SS_B$ は $SS_W$ より本質的に大きくなる
 
-   # 回帰モデルの推定には通常 *最小二乗法* が用いられる
-   # - $S(\alpha,\beta)$: *残差平方和*
+** 一元配置の検定
+   - 検定統計量:
+     #+begin_src latex
+       \begin{equation}
+         F=\frac{SS_B/(p{-}1)}{SS_W/(n{-}p)}
+       \end{equation}
+     #+end_src
+   - 帰無仮説の下で次の事実が成り立つ:
+     - $SS_B,SS_W$ は独立
+     - $SS_B$ は自由度 $p{-}1$ の $\chi^2$ 分布に従う
+     - $SS_W$ は自由度 $n{-}p$ の $\chi^2$ 分布に従う
+   - 帰無分布は自由度 $p{-}1,n{-}p$ の $F$ 分布
+   - 対立仮説の下 $F$ は大きな値をとるので右片側検定
 
-** 回帰分析の関数
+** 棄却域を用いる場合
+   - 有意水準を選択: $\alpha\in(0,1)$
+   - 自由度 $p{-}1,n{-}p$ の $F$ 分布の $1{-}\alpha$ 分位点:
+     $F_{1{-}\alpha}(p{-}1,n{-}p)$
+   - $H_0$ の下で以下が成立:
+     #+begin_src latex
+       \begin{equation}
+         P(F>F_{1{-}\alpha}(p{-}1,n{-}p))=\alpha
+       \end{equation}
+     #+end_src
+   - 第一種過誤の上限が $\alpha$ となる棄却域:
+     #+begin_src latex
+       \begin{equation}
+         R_{\alpha}=
+         \left(F_{1{-}\alpha}(p{-}1,n{-}p),\infty\right)
+       \end{equation}
+     #+end_src
+   #+reveal: split
+   - データから検定統計量 $F$ の値を計算
+   - 以下の場合，帰無仮説を棄却
+     #+begin_src latex
+       \begin{equation}
+         F>F_{1{-}\alpha}(p{-}1,n{-}p)
+       \end{equation}
+     #+end_src
+** $p$ 値を用いる場合
+   - $p$ 値を用いる方法: $p$ 値を計算
+     #+begin_src latex
+       \begin{equation}
+         \text{($p$値)}=\int_{F}^\infty f(x)dx
+       \end{equation}
+     #+end_src
+     ($f(x)$ は自由度 $p{-}1,n{-}p$ の $F$ 分布の密度)
+   - $p$ 値が $\alpha$ 未満なら帰無仮説を棄却
+
+** 分散分析表 (一元配置の場合)
+   |--------+---------+--------+----------------+--------+------------------------------------+---|
+   |        | 自由度  | 平方和 | 平均平方和     | $F$ 値 | $p$ 値                             |   |
+   |--------+---------+--------+----------------+--------+------------------------------------+---|
+   | 級間   | $p{-}1$ | $SS_B$ | $SS_B/(p{-}1)$ | $F$    | $\mathstrut\int_{F}^\infty f(x)dx$ |   |
+   | 級内   | $n{-}p$ | $SS_W$ | $SS_W/(n{-}p)$ |        |                                    |   |
+   |--------+---------+--------+----------------+--------+------------------------------------+---|
+   | 全変動 | $n{-}1$ | $SS_T$ |                |        |                                    |   |
+   |--------+---------+--------+----------------+--------+------------------------------------+---|
+
+** モデルの別表現
+   - 各水準の平均値の相対効果による定式化:
+     - 因子 $A$ 全体の平均効果: $\mu$
+     - 平均 $\mu$ を基準とした各水準 $A_i$ の相対的な効果: $\alpha_i$
+     - 平均値の別表現:
+       #+begin_src latex
+         \begin{equation}
+           \mu_i=\mu+\alpha_i,\quad
+           \mu=\frac{1}{n}\sum_{i=1}^pn_i\mu_i,\quad
+           \sum_{i=1}^pn_i\alpha_i=0
+       \end{equation}
+       #+end_src
+   - 帰無仮説 $H_0$ は以下と同等:
+     #+begin_src latex
+       \begin{equation}
+         \alpha_1=\cdots=\alpha_p=0
+       \end{equation}
+     #+end_src
+
+** 分散分析の関数
    - 基本書式 
      #+begin_src R :eval no
-       lm(formula, data, subset, na.action, ...)
+       aov(formula, data)
      #+end_src
    - 関数の引数
-     - ~formula~ : 式．(目的変数 ~ 説明変数)
+     - ~formula~: 式，一元配置の場合は (観測値 ~ 因子)
      - ~data~: データフレーム
-     - ~subset~: 対象とする部分データ
+   - 分散分析表の表示
+     #+begin_src R :eval no
+       summary(aovの結果)
+       model.tables(aovの結果, type="means")   # 平均値
+       model.tables(aovの結果, type="effects") # 効果
+     #+end_src
+** 分散分析の関数(検定のみ)
+   - 基本書式 
+     #+begin_src R :eval no
+       oneway.test(formula, data, subset, na.action, var.equal = FALSE)
+     #+end_src
+   - 関数の引数
+     - ~formula~: 式
+     - ~data~: データフレーム
+     - ~subset~: subsetの指定
      - ~na.action~: 欠損値の扱い
-     - ~...~: 他のオプション．詳細は ~help(lm)~ を参照
-
+     - ~var.equal~: 等分散を仮定する場合は ~TRUE~
+   
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
@@ -149,158 +302,288 @@
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - 東京の気象データを用いて，
-     必要であれば適当な期間を抽出し，
-     日射量から気温を説明する回帰モデルを構成しなさい．
+   - 東京都の気候データ (~tokyo_weather.csv~) の
+     気温の項目について以下の問に答えよ．
+     - 曜日ごとの気温の平均と分散を求めよ．
+       #+begin_src R :eval no
+         ## 週日を因子(factor)とするには例えば以下のような項目を加えればよい
+         myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+         days <- with(myData, # 日付を取り出して整形する
+                      as.Date(paste(年,月,日, sep="-"))) 
+         wdays <- weekdays(days) # 各日付の曜日を計算
+         myData <- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
+       #+end_src
+     - 曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．
      #+begin_src R :eval no :exports none :tangle yes
        ### 練習1
-       ### 回帰モデルの点推定
+       ### 一元配置分散分析
        ## 気候データによる例
+       ## 曜日ごとの気温に差があるか否かを分散分析
        myData <- read.csv("data/tokyo_weather.csv",
                           fileEncoding="utf8")
-       ## データの散布図 (1年分)
-       par(family="HiraginoSans-W4") 
-       plot(気温 ~ 日射量, data=myData, pch=20, col="blue")
-       ## 
-       (myModel <- lm(気温 ~ 日射量, data=myData)) # 気温を日射量で説明
-       ## 回帰直線の図示 (重ね描き)
-       abline(reg=myModel, col="red", lwd=2)
-       ## 期間を限って分析する
-       ## データの散布図 (夏のモデル)
-       plot(気温 ~ 日射量, data=myData, subset=月%in%7:9,
-            pch=20, col="orange")
-       (myMode2 <- lm(気温 ~ 日射量, data=myData, subset=月%in%7:9)) 
-       abline(reg=myMode2, col="red", lwd=2)
+       ## 曜日の情報を付加
+       days <- with(myData,
+                    as.Date(paste(年,月,日, sep="-"))) # 日付を作成
+       wdays <- weekdays(days) # 各日付の曜日を計算
+       myData <- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
+       ## 箱ひげ図で可視化
+       par(family="HiraginoSans-W4") # 日本語フォントの指定
+       boxplot(気温 ~ 曜日, data=myData, 
+               col="lavender", main="曜日ごとの気温") 
+       aggregate(気温 ~ 曜日, data=myData, FUN=mean)
+       aggregate(気温 ~ 曜日, data=myData, FUN=var)
+       aggregate(気温 ~ 曜日, data=myData, FUN=sd)
+       ## 曜日ごとの気温差に関する分散分析
+       (myAov <- aov(気温 ~ 曜日, data=myData)) # aovによる分析
+       summary(myAov) # 分散分析表の表示(棄却されない)
+       model.tables(myAov, type="means")   # 水準(曜日)ごとの平均値
+       model.tables(myAov, type="effects") # 水準(曜日)ごとの効果
+       ## 検定のみ実行する場合
+       oneway.test(気温 ~ 曜日, data=myData, var.equal=TRUE) # 等分散での検定
+       oneway.test(気温 ~ 曜日, data=myData) # Welchの近似法による検定
+
+       ## 参考: 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
+       myData$月 <- as.factor(myData$月) # 月を因子化
+       boxplot(気温 ~ 月, data=myData, 
+               col="lavender", main="月ごとの気温") 
+       (myAov <- aov(気温 ~ 月, data=myData)) # aovによる分析
+       summary(myAov) # 分散分析表の表示(棄却される)
      #+end_src
+
+* 二元配置
+** 二元配置の問題
+  - 因子が2種類ある場合
+    - 一方の因子の水準の平均値に差があるか否かを検定
+    - もう一方の因子の水準で平均値に差があるかは不問
+  - 例: 複数の薬の効能を複数の被験者に投与する治験
+    - "薬の種類"と"被験者番号"の2種類の因子
+    - "薬の種類"という因子での薬の効能の差を検証したい
+    - "被験者番号"という因子で効能に差があることは許容したい
+      (薬の効き目には個人差があると考えられるため)
+
+** 二元配置のモデル
+  - 2種類の因子 $A, B$
+    - 因子 $A$ には $a$ 個の水準: $A_1,\dotsc,A_a$
+    - 因子 $B$ には $b$ 個の水準: $B_1,\dotsc,B_b$
+    - 因子 $A,B$ の水準がそれぞれ $A_i,B_j$ である観測値: $Y_{ij}$
+    - (各水準ごとに1つの観測値が得られる一番簡単な場合を想定)
+  - 観測データのモデル:
+    #+begin_src latex
+      \begin{equation}
+        Y_{ij}=\alpha_i+\beta_j+\varepsilon_{ij}\quad
+        (i=1,\dotsc,a;\;j=1,\dotsc,b).
+      \end{equation}
+    #+end_src
+  - モデルの仮定:
+    - $\alpha_i,\beta_j$ は定数，それぞれ因子 $A,B$ の水準 $A_i,B_j$ における効果
+    - $\varepsilon_{ij}$ は独立同分布 (平均0, 分散 $\sigma^2$ の正規分布)
+
+** 二元配置の例
+  - 例: 複数の薬の治験の問題
+    - 因子
+      - 因子 $A$: "薬の種類"
+      - 因子 $B$: "被験者番号"
+    - 効果
+      - $\alpha_i$: 薬 $A_i$ の効能
+      - $\beta_j$: 被験者 $B_j$ 固有の薬の効きやすさ
+    - 薬の効能に差があるか否かという検定
+
+** 二元配置の検定
+   - 検定問題
+     #+begin_quote
+     因子 $A$ の各水準の効果に差があるか否かを検定する
+     #+end_quote
+     - 帰無仮説: 因子 $A$ の効果 $\alpha_{i}$ に差はない
+     - 対立仮説: 因子 $A$ の効果に差のあるものがある
+       #+begin_src latex
+         \begin{equation}
+           H_0:\alpha_1=\cdots=\alpha_a\quad\text{vs}\quad
+           H_1:\text{ある$i_1,i_2$に対して}\alpha_{i_1}\neq\alpha_{i_2}.
+         \end{equation}
+       #+end_src
+
+** 分析の考え方
+  - データの変動から因子間での変動と観測誤差の変動を抽出して比較
+  - 各種平均: ($n=ab$)
+    #+begin_quote
+    #+begin_src latex
+      \begin{align}
+        &\text{(全データの標本平均)}
+        &\bar{Y}_{\cdot\cdot}&=\frac{1}{n}\sum_{i=1}^a\sum_{j=1}^{b}Y_{ij},\\
+        &\text{(水準$A_i$の標本平均)}
+        &\bar{Y}_{i\cdot}&=\frac{1}{b}\sum_{j=1}^bY_{ij}\quad
+                           (i=1,\dotsc,a),\\
+        &\text{(水準$B_j$の標本平均)}
+        &\bar{Y}_{\cdot j}&=\frac{1}{a}\sum_{i=1}^aY_{ij}\quad
+                            (j=1,\dotsc,b).
+      \end{align}
+    #+end_src
+    #+end_quote
+  #+reveal: split
+  - 因子効果の推定量としての標本平均:
+    #+begin_quote
+    #+begin_src latex
+      \begin{align}
+        \bar{Y}_{i\cdot}
+        &\to\alpha_i+\frac{1}{b}\sum_{j=1}^b\beta_j,\\
+        \bar{Y}_{\cdot j}
+        &\to\frac{1}{a}\sum_{i=1}^a\alpha_i+\beta_j,\\
+        \bar{Y}_{\cdot\cdot}
+        &\to\frac{1}{ab}\sum_{i=1}^a\sum_{j=1}^b(\alpha_i+\beta_j)=\frac{1}{a}\sum_{i=1}^a\alpha_i+\frac{1}{b}\sum_{j=1}^b\beta_j
+      \end{align}
+      \begin{equation}
+        Y_{ij}-\bar{Y}_{i\cdot}
+        -\bar{Y}_{\cdot j}+\bar{Y}_{\cdot\cdot}
+        \to\varepsilon_{ij}
+      \end{equation}
+    #+end_src
+    #+end_quote
+  #+reveal: split
+  - 各種変動:
+    #+begin_quote
+    #+begin_src latex
+      \begin{align}
+        &\text{(行間変動)}
+        &SS_A&=b\sum_{i=1}^a(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2,\\
+        &\text{(列間変動)}
+        &SS_B&=a\sum_{j=1}^b(\bar{Y}_{\cdot j}-\bar{Y}_{\cdot\cdot})^2,\\
+        &\text{(誤差変動)}
+        &SS_E&=\sum_{i=1}^a\sum_{j=1}^b(Y_{ij}-\bar{Y}_{i\cdot}
+               -\bar{Y}_{\cdot j}+\bar{Y}_{\cdot\cdot})^2.
+      \end{align}
+    #+end_src
+    #+end_quote
+    - *行間変動*: 水準 $A$ 内でのデータの変動
+    - *列間変動*: 水準 $B$ 内でのデータの変動
+  #+reveal: split
+  - 変動の分解:
+    #+begin_quote
+    #+begin_src latex
+      \begin{multline}
+        \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }ab-1}
+        =\underbrace{\text{(行間変動) }SS_A}_{\text{自由度 }a-1}\\
+        +\underbrace{\text{(列間変動) }SS_B}_{\text{自由度 }b-1}
+        +\underbrace{\text{(誤差変動) }SS_E}_{\text{自由度 }(a-1)(b-1)}
+      \end{multline}
+    #+end_src
+    #+end_quote
+  - 帰無仮説 $H_0$ が正しい:
+    - 変動 $SS_A,SS_E$ はともに観測誤差のみが原因で生じる
+    - 自由度を除けば本質的な違いはない
+    - $SS_A/(a{-}1)$, $SS_E/\{(a{-}1)(b{-}1)\}$ は $\sigma^2$ の不偏推定量
+  #+reveal: split
+  - 変動の分解:
+    #+begin_quote
+    #+begin_src latex
+      \begin{multline}
+        \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }ab-1}
+        =\underbrace{\text{(行間変動) }SS_A}_{\text{自由度 }a-1}\\
+        +\underbrace{\text{(列間変動) }SS_B}_{\text{自由度 }b-1}
+        +\underbrace{\text{(誤差変動) }SS_E}_{\text{自由度 }(a-1)(b-1)}
+      \end{multline}
+    #+end_src
+    #+end_quote
+  - 対立仮説 $H_1$ が正しい:
+    - 因子 $A$ 内の水準間での効果 $\alpha_1,\dotsc,\alpha_a$ の差に影響される
+    - $SS_A$ は $SS_E$ より本質的に大きくなる
+
+** 二元配置の検定
+  - 検定統計量:
+    #+begin_src latex
+      \begin{equation}
+        F_A=\frac{SS_A/(a{-}1)}{SS_E/\{(a{-}1)(b{-}1)\}}
+      \end{equation}
+    #+end_src
+  - 帰無仮説の下で次の事実が成り立つ:
+    - $SS_A,SS_E$ は独立
+    - $SS_A$ は自由度 $a{-}1$ の $\chi^2$ 分布に従う
+    - $SS_E$ は自由度 $(a{-}1)(b{-}1)$ の $\chi^2$ 分布に従う
+  - 帰無仮説の下 $F_A$ は自由度 $a{-}1,(a{-}1)(b{-}1)$ の $F$ 分布に従う
+  - 対立仮説の下 $F_A$ は大きな値をとるので右片側検定
+
+** 棄却域を用いる場合
+  - 有意水準: $\alpha\in(0,1)$
+  - 自由度 $a{-}1,(a{-}1)(b{-}1)$ の $F$ 分布の $1{-}\alpha$ 分位点:
+    $F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))$
+  - $H_0$ の下で以下が成立:
+    #+begin_src latex
+      \begin{equation}
+        P(F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)))=\alpha
+      \end{equation}
+    #+end_src
+  - 第一種過誤の上限が $\alpha$ となる棄却域:
+    #+begin_src latex
+      \begin{equation}
+        R_{\alpha}=
+        (F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)),\infty)
+      \end{equation}
+    #+end_src
+  #+reveal: split
+  - データから検定統計量 $F_A$ の値を計算
+  - 以下の場合，帰無仮説を棄却
+    \begin{equation}
+      F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))
+    \end{equation}
+** $p$ 値を用いる場合
+  - 値を計算
+    \begin{equation}
+      \text{($p$値)}=\int_{F_A}^\infty f(x)dx
+    \end{equation}
+    ($f$ は自由度 $a{-}1,(a{-}1)(b{-}1)$ の $F$ 分布の確率密度関数)
+  - $p$ 値が $\alpha$ 未満なら帰無仮説を棄却
+
+** 分散分析表 (二元配置の場合)
+   |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
+   |                | 自由度           | 平方和 | 平均平方和                                 | $F\text{値}$ | $p\text{値}$                                                   |
+   |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
+   | $\text{因子}A$ | $a{-}1$          | $SS_A$ | $\displaystyle\frac{SS_A}{a{-}1}$          | $F_A$        | $\displaystyle\int_{F_A}^\infty f_{a{-}1,(a{-}1)(b{-}1)}(x)dx$ |
+   | $\text{因子}B$ | $b{-}1$          | $SS_B$ | $\displaystyle\frac{SS_B}{b{-}1}$          | $F_B$        | $\displaystyle\int_{F_B}^\infty f_{b{-}1,(a{-}1)(b{-}1)}(x)dx$ |
+   |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
+   | $\text{誤差}$  | $(a{-}1)(b{-}1)$ | $SS_E$ | $\displaystyle\frac{SS_E}{(a{-}1)(b{-}1)}$ |              |                                                                |
+   |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
    
-* 回帰係数の区間推定
-** 誤差項に関する仮定
-   - $\epsilon_i$ は正規分布に従う
-   - 上の仮定より
-     $\hat{\alpha},\hat{\beta}$ は *正規分布* に従う
-   - 点推定の平均と分散
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         &\mathbb{E}[\hat{\alpha}]=\alpha,
-         &&\mathbb{E}[\hat{\beta}]=\beta,\\
-         &\mathrm{Var}(\hat{\alpha})=\frac{\sigma^2\sum_{i=1}^{n}X_i^2}{n\sum_i(X_i-\bar{X})^2},
-         &&\mathrm{Var}(\hat{\beta})=\frac{\sigma^2}{n\sum_{i=1}^{n}(X_i-\bar{X})^2}
-       \end{align}
-     #+end_src
-     #+end_quote
-   - $\sigma^2$ が *既知なら* 正規分布を用いて信頼区間を構成
+  # 因子 $A$ ではなく因子 $B$ の水準間の平均の差に関心がある場合は，
+  # $A$ と $B$ の役割を入れ替えて同様の議論を行えばよい  
 
-** 誤差分散の推定
-   - 一般に $\sigma^2$ は *既知でない* ためデータから推定
-     - $\epsilon_i$ の平均は0
-     - $\sigma^2$ は $\epsilon_i$ の共通の分散
-   - 誤差と回帰式の関係:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \epsilon_i=Y_i-(\alpha+\beta X_i)
-         \quad(i=1,\dotsc,n)      
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - $\sigma^2$ の自然な推定量(良いとは限らない):
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \hat{\sigma}^2
-         =\frac{1}{n}\sum_{i=1}^n\hat{\epsilon}_i^2
-         \quad\text{ただし}\quad\hat{\epsilon}_i
-         =Y_i-(\hat{\alpha}+\hat{\beta}X_i),\quad(i=1,\dotsc,n)
-       \end{equation}
-     #+end_src
-     #+end_quote
-   #+reveal: split
-   - *残差* $\hat{\epsilon}_1,\dotsc,\hat{\epsilon}_n$ の性質
-     (資料; 正規方程式):
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \sum\hat{\epsilon}_i=0,\quad
-         \sum\hat{\epsilon}_iX_i=0.
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - 残差の二乗平均の性質 (標本分散と同様の計算):
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathbb{E}[\hat{\epsilon}_i^2]=\sigma^2(n{-}2)/n\quad(i=1,\dotsc,n)      
-         % \mathbb{E}[\hat{\epsilon}_i^2]=\frac{n{-}2}{n}\sigma^2\quad(i=1,\dotsc,n)      
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - $\sigma^{2}$ の不偏推定量:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \hat{\sigma}^2=\frac{1}{n{-}2}\sum_{i=1}^n\hat{\epsilon}_i^2.
-       \end{equation}
-     #+end_src
-     #+end_quote
+** モデルの別表現
+  相対効果による定式化:
+  - モデルの書き換え:
+    #+begin_quote
+    #+begin_src latex
+      \begin{align}
+        \mu^*&=\bar{\alpha}+\bar{\beta},&
+                                          \alpha^*_i&=\alpha_i-\bar{\alpha},&
+                                                                              \beta^*_j&=\beta_j-\bar{\beta}\\
+             &&\bar{\alpha}&=\frac{1}{a}\sum_{i=1}^a\alpha_i,
+                                                    &\bar{\beta}&=\frac{1}{b}\sum_{j=1}^b\beta_j
+      \end{align}
+      \begin{equation}
+        Y_{ij}=\mu^*+\alpha^*_i+\beta^*_j+\varepsilon_{ij}\quad
+        (i=1,\dotsc,a;\;j=1,\dotsc,b)
+      \end{equation}
+      \begin{equation}
+        \text{ただし }\sum_{i=1}^a\alpha^*_i=\sum_{j=1}^b\beta^*_j=0
+      \end{equation}
+    #+end_src
+    #+end_quote
+  #+reveal: split
+  - 帰無仮説 $H_0$ は以下と同等:
+    #+begin_src latex
+      \begin{equation}
+        \alpha^*_1=\cdots=\alpha^*_a=0
+      \end{equation}
+    #+end_src
 
-** 回帰係数の性質
-   - $\hat{\alpha},\hat{\beta}$ の分散の推定量 (資料; Gauss-Markovの定理):
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathrm{s.e.}(\hat{\alpha})^2
-         =\frac{\hat{\sigma}^2\sum_iX_i^2}{n\sum_i(X_i-\bar{X})^2},
-         \quad
-         \mathrm{s.e.}(\hat{\beta})^2
-         =\frac{\hat{\sigma}^2}{\sum_i(X_i-\bar{X})^2}
-       \end{equation}
-     #+end_src
-     #+end_quote
-     - $\mathrm{s.e.}(\hat{\alpha}),\mathrm{s.e.}(\hat{\beta})$ は *標準誤差* と呼ばれる
-   - 以下は $\hat{\beta}$ と独立で自由度 $n{-}2$ の $\chi^2$ 分布に従う:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \frac{(n{-}2)\mathrm{s.e.}(\hat{\beta})^2}{\mathrm{Var}(\hat{\beta})}
-       \end{equation}
-     #+end_src
-     #+end_quote
-** 回帰係数の区間推定
-   - 以下の確率変数は自由度 $n{-}2$ の $t$ 分布に従う:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \frac{\hat{\beta}-\beta}{\mathrm{s.e.}(\hat{\beta})}
-         =
-         \frac{(\hat{\beta}-\beta)/\sqrt{\mathrm{Var}(\hat{\beta})}}{\sqrt{(n{-}2)\mathrm{s.e.}(\hat{\beta})^{2}/(n{-}2)\mathrm{Var}(\hat{\beta})}}
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - $\gamma\in(0,1)$ に対する $\beta$ の $1-\gamma$ 信頼区間:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \left[
-           \hat{\beta}-t_{1{-}\gamma/2}(n{-}2)\cdot \mathrm{s.e.}(\hat{\beta}),\;
-           \hat{\beta}+t_{1{-}\gamma/2}(n{-}2)\cdot \mathrm{s.e.}(\hat{\beta})
-         \right]  
-       \end{equation}
-     #+end_src
-     #+end_quote
-
-
-** 区間推定の関数
+** 分散分析の関数
    - 基本書式 
      #+begin_src R :eval no
-       confint(object, parm, level = 0.95, ...)
+       aov(formula, data)
      #+end_src
    - 関数の引数
-     - ~object~ : 関数 ~lm~ で推定したモデル
-     - ~parm~: 区間推定をするパラメタ．指定しなければ全て
-     - ~level~: 信頼係数
-     - ~...~: 他のオプション．詳細は ~help(confint)~ を参照
-
+     - ~formula~: 式，二元配置の場合は (観測値 ~ 因子 + 因子)
+     - ~data~: データフレーム
+   - 分散分析表などは同様
+     
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
@@ -309,271 +592,49 @@
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - 前問で作成した回帰モデルについて
-     区間推定を行いなさい．
+   - パッケージ ~datarium~ をインストールして，
+     そこに含まれている ~jobsatisfaction~ データ
+     (性別 (~gender~) と学歴 (~education_level~) の違いによる
+     仕事の満足度 (~score~) を収集したデータ) 
+     について以下の問に答えよ．
+     #+begin_src R :eval no
+       ## パッケージのインストールと読み込みは以下のように行うことができる
+       install.packages("datarium") # インストール
+       library(datarium) # 読み込み
+     #+end_src
+     - データを適当な方法で可視化しなさい．
+     - それぞれの因子で満足度の平均に違いがあるか
+       二元配置の分散分析を用いて検討しなさい．
      #+begin_src R :eval no :exports none :tangle yes
        ### 練習2
-       ### 回帰モデルの区間推定
-       ## 気候データによる例
-       ## 前問で構成したモデルを用いる
-       ## myModel: 1年分のモデル 
-       confint(myModel)
-       ## 区間推定を視覚化
-       plot(気温 ~ 日射量, data=model.frame(myModel), pch=20, col="blue")
-       xrange <- with(myData,range(日射量)) # 日射量の範囲を取得
-       x <- seq(xrange[1], xrange[2], by=0.5) # 適当な刻み幅で説明変数を用意
-       y <- predict(myModel, newdata=data.frame(日射量=x), # 予測値を計算
-                    interval="confidence", level=0.95) # 信頼区間を付与
-       matlines(x, y, lwd=2,
-                lty=c(1,2,2), col=c("red","pink","pink"))
-       ## myMode2: 夏のモデル 
-       confint(myMode2)
-       plot(気温 ~ 日射量, data=model.frame(myMode2), pch=20, col="orange")
-       y <- predict(myMode2, newdata=data.frame(日射量=x),
-                    interval="confidence", level=0.95)
-       matlines(x, y, lwd=2,
-                lty=c(1,2,2), col=c("red","pink","pink"))
+       ### 二元配置分散分析
+       ## datarium::jobsatisfaction による例
+       ## 性別(gender)と学歴(education_level)による仕事の満足度
+       ## 満足度にそれぞれの因子の効果があるかを検証
+       ## install.packages("datarium") # 検定用のデータが集められている
+       library(datarium) # packageの読み込み
+       head(jobsatisfaction) # データの一部を見る
+       ## boxplotによる視覚化
+       boxplot(score ~ education_level + gender,
+               data=jobsatisfaction,
+               col=rep(c("lightblue","pink"),each=3))
+       ## 比較するために表示を工夫してみる
+       boxplot(score ~ education_level + gender,
+               data=jobsatisfaction,
+               col=rep(c("yellow","palegreen","royalblue"),2),
+               names=c("","male","","","female",""))
+       legend("topleft",inset=0.05,
+              col=c("yellow","palegreen","royalblue"),
+              lwd=3, cex=0.5,
+              legend=c("school","college","university"))
+       ## 二元配置分散分析
+       (myAov <- aov(score ~ gender + education_level,
+                     data=jobsatisfaction))
+       summary(myAov)
+       model.tables(myAov, type="means")  
+       model.tables(myAov, type="effects")
      #+end_src
 
-* 回帰係数の有意性検定
-** 回帰係数の有意性
-   - 説明変数 $X$ が目的変数 $Y$ を説明・予測するのに本当に役立っているかを検証:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         H_0:\beta=0\qquad\text{vs}\qquad H_1:\beta\neq0
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - $\beta$ の *有意性の検定*:
-     帰無仮説 $H_0$ が有意水準 $\gamma$ で棄却されるとき，
-     $\beta$ は有意水準 $\gamma$ で *有意である* 
-   # 条件(C)を仮定して検定の方法を考える
-
-** 回帰係数の有意性検定
-   - 帰無仮説 $H_0$ が正しければ以下の統計量
-     は自由度 $n{-}2$ の $t$ 分布に従う 
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         t=\frac{\hat{\beta}}{\mathrm{s.e.}(\hat{\beta})}
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - 対立仮説 $H_1$ が正しければ, 
-     $\hat{\beta}$ は0でない値 $\beta$ に近い値を取ることが期待されるため，
-     $|t|$ は0から離れた値を取る
-   #+reveal: split
-   - 棄却域による検定: 有意水準を $\gamma\in(0,1)$ とし，
-     $\hat{\beta}$ の *$t$ 値* が以下の場合には帰無仮説を棄却
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         |t| > t_{1-\gamma/2}(n{-}2)
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - $p$ 値による検定: 以下で定義される $\hat{\beta}$ の *$p$ 値* が
-     $\gamma$ 未満の場合に帰無仮説を棄却
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \text{($p$値)}=2\int_{|t|}^\infty f(x)dx
-       \end{equation}
-     #+end_src
-     #+end_quote
-   # - 回帰における $t$ 値と $p$ 値:
-   # - 検定統計量の値: $\hat{\beta}$ の *$t$ 値*
-   # - 検定の $p$ 値: $\hat{\beta}$ の *$p$ 値* 
-
-** 係数の検定のための関数
-   - 基本書式 
-     #+begin_src R :eval no
-       summary(object)
-     #+end_src
-   - 関数の引数
-     - ~object~ : 関数 ~lm~ で推定したモデル
-   - 出力
-     - ~coefficients~ : 係数とt値
-     - ~fstatistics~ : F値
-
-* 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
-** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 前問で作成した回帰モデルについて
-     係数の検定を行いなさい．
-     #+begin_src R :eval no :exports none :tangle yes
-       ### 練習3
-       ### 回帰モデルの係数の検定
-       ## 気候データによる例
-       ## 前問で構成したモデルを用いる
-       ## myModel: 1年分のモデル
-       summary(myModel)
-       ## 情報が多いので，整理してみる
-       summary(myModel)$coef # 名前は識別できれば途中まででも可
-       summary(myModel)$fstat
-       ## myMode2: 夏のモデル
-       summary(myMode2)
-       coef(summary(myMode2)) # 関数coefでも可
-     #+end_src
-
-* 決定係数
-** 決定係数
-   - $X$ が $Y$ の変動をどの程度説明できるかを数量化
-   - *決定係数* (あるいは *寄与率*):
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         R^{2}:=
-         \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}
-       \end{equation}
-     #+end_src
-     #+end_quote
-     ただし，
-     $\hat{Y}_{i}$ は
-     *あてはめ値* または *予測値* と呼ばれる
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \hat{Y}_{i}:=
-         \hat{\alpha}+\hat{\beta}X_{i}\quad(i=1,\dotsc,n).  
-       \end{equation}
-     #+end_src
-     #+end_quote
-   #+reveal: split
-   - 以下の等式が成立:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         &\hat{\epsilon}_i
-           =Y_i-\hat{Y}_i\quad (i=1,\dotsc,n)\\
-         &\sum_{i=1}^{n}\hat{\epsilon}_i=0,\\
-         &\frac{1}{n}\sum_{i=1}^nY_i=\bar{Y},\\
-         &\frac{1}{n}\sum_{i=1}^n\hat{Y}_i=\bar{Y}.
-       \end{align}
-     #+end_src
-     #+end_quote
-   #+reveal: split
-   - 決定係数:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         R^{2}:=
-         \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - $R^2$ の意味
-     - $R^2$ の分子: あてはめ値の(標本平均まわりでの)変動
-     - $R^2$ の分母: 目的変数の(標本平均まわりでの)変動
-   - 回帰式が目的変数の変動をどの位説明できるか評価
-   - 大きいほど説明力が高いと解釈される
-
-** 決定係数の別表現
-   - $R^2$ は以下のように書き直すことも可能:
-     - 目的変数の観測データとあてはめ値の相関の二乗:
-       #+begin_quote
-       #+begin_src latex
-         \begin{equation}
-           R^{2}=
-           \left\{
-             \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})(Y_{i}-\bar{Y})}{\sqrt{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}\cdot\sqrt{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}}
-           \right\}^{2}
-         \end{equation}
-       #+end_src
-       #+end_quote
-     - 説明変数と目的変数の観測データの間の相関の二乗:
-       #+begin_quote
-       #+begin_src latex
-         \begin{equation}
-           R^{2}=
-           \left\{
-             \frac{\sum_{i=1}^{n}(X_{i}-\bar{X})(Y_{i}-\bar{Y})}{\sqrt{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}\cdot\sqrt{\sum_{i=1}^{n}(X_{i}-\bar{X})^{2}}}
-           \right\}^{2}
-         \end{equation}
-       #+end_src
-       #+end_quote
-
-** 自由度調整済み決定係数
-   - 不偏分散による $R^2$ の修正:
-     - 残差 $\epsilon_i$ と目的変数 $Y_i$ の標本分散による表現:
-       #+begin_quote
-       #+begin_src latex
-         \begin{equation}
-           R^{2}
-           =1-\frac{\frac{1}{n}\sum_{i=1}^{n}\hat{\epsilon}_{i}^{2}}{\frac{1}{n}\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}.
-         \end{equation}
-       #+end_src
-       #+end_quote
-     - 標本分散を対応する不偏推定量で置き換え:
-       #+begin_quote
-       #+begin_src latex
-         \begin{equation}
-           \bar{R}^{2}
-           =1-\frac{\frac{1}{n{-}2}\sum_{i=1}^{n}\hat{\epsilon}_{i}^{2}}{\frac{1}{n-1}\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}.
-         \end{equation}
-       #+end_src
-       #+end_quote
-   - *自由度調整済み決定係数* (または寄与率)
-
-** 決定係数のための関数
-   - 基本書式 
-     #+begin_src R :eval no
-       summary(object)
-     #+end_src
-   - 関数の引数
-     - ~object~ : 関数 ~lm~ で推定したモデル
-   - 出力
-     - ~r.squareds~ : 決定係数
-     - ~adj.r.squareds~ : 自由度調整済み決定係数
-
-* 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
-** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 前問で作成した回帰モデルについて
-     決定係数を確認しなさい．
-   - 説明変数として降水量を用いた回帰モデルについて
-     検討しなさい．
-     #+begin_src R :eval no :exports none :tangle yes
-       ### 練習3
-       ### 回帰モデルの係数の検定
-       ## 気候データによる例
-       ## 前問で構成したモデルを用いる
-       ## myModel: 1年分のモデル (気温~日射量)
-       summary(myModel)$r.squared
-       summary(myModel)$adj.r.squared
-
-       ## myMode2: 夏のモデル (気温~日射量)
-       summary(myMode2)$r.squared
-       summary(myMode2)$adj.r.squared
-
-       ## 降水量と気温の関係を調べる
-       (myMode3 <- lm(気温 ~ 降水量, data=myData)) 
-       (myMode4 <- lm(気温 ~ 降水量, data=myData, subset=月%in%7:9)) 
-
-       ## myModel3: 1年分のモデル (気温~降水量)
-       plot(気温 ~ 降水量, data=model.frame(myMode3), pch=20, col="blue")
-       abline(reg=myMode3, col="red", lwd=2)
-       summary(myMode3)
-       ## myMode3 に有意性はないことがわかる
-
-       ## myMode4: 夏のモデル (気温~降水量)
-       plot(気温 ~ 降水量, data=model.frame(myMode4), pch=20, col="orange")
-       abline(reg=myMode4, col="red", lwd=2)
-       summary(myMode4)
-       ## 夏場は雨が降ると気温が下がる傾向が有意にあることが読み取れる
-       ## 決定係数が低いのはそもそも気温のばらつきが大きいことに起因すると考えられる
-     #+end_src
 
 * COMMENT ローカル変数
 # Local Variables:
@@ -583,4 +644,3 @@
    
    
    
-     

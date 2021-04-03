@@ -1,143 +1,119 @@
 ### 練習1
-### 一様分布の平均の推定
-set.seed(1234) # 乱数のシード値の指定
-## 平均値の推定を行う関数(標本平均，x1，最大最小)
-myMeanEst <- function(n, min, max){
-    x <- runif(n, min=min, max=max)
-    return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
-}
-## 実験の設定 
-n <- 10 # 観測データのサンプル数
-mc <- 10000 # 実験回数
-a <- 0; b <- 50 # 一様乱数の区間
-myData <- as.data.frame(t( # mc行 x 3種に変換(転置)
-    replicate(mc, myMeanEst(n, min=a, max=b))
-))
-## replicate は3行 x mc 列の行列を返すことに注意
-## ここでは data.frame として扱うために型を変換している
-head(myData) # 実験結果の表示
-apply(myData,2,mean) # 推定値の平均 (colMeans(myData)も可)
-apply(myData,2,var)  # 推定値の分散
-## もう少し詳しくみてみる
-summary(myData) # 四分位点を表示
-for(i in 1:3) { # それぞれのヒストグラムを書いてみる
-    hist(myData[,i], breaks=40, 
-         xlim=c(a,b), ylim=c(0,2000), # 同じ大きさの図にする
-         col="pink", border="brown",
-         xlab="est", main=names(myData)[i])
-}
-
-### 練習2
-### ガンマ分布による風速データのモデル化
-## データの取得
+### 平均・分散・標準偏差の計算
+## データの読み込み
 myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-## 以下では関数 with を利用しているが，myDataから風速を取り出しておいても良い
-
-## 練習2.1
-## ヒストグラムの描画
-par(family="HiraginoSans-W4") # 日本語フォントの指定
-with(myData, hist(風速, breaks=30, freq=FALSE, # 密度
-                  col="skyblue", border="blue",
-                  main="風速のヒストグラム", xlab="風速 [m/s]", ylab="密度"))
-## 練習2.2
-## ガンマ関数による最尤推定
-library(stats4) # 関数mleを利用
-## ガンマ分布の最尤推定量
-mle.gamma <- function(x, # 観測データ
-                      nu0=1, # nuの初期値
-                      alpha0=1, # alphaの初期値
-                      verbose=FALSE){ # debug用に追加
-    ## 負の対数尤度関数を定義 (最小化を考えるため)
-    ll <- function(nu, alpha) # nuとalphaの関数として定義 
-        suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
-    ## suppressWarnings は定義域外で評価された際の警告を表示させない
-    ## 最尤推定(負の尤度の最小化)
-    est <- mle(minuslogl=ll, # 負の対数尤度関数
-               start=list(nu=nu0, alpha=alpha0), # 初期値
-               method="BFGS", # 最適化方法 (選択可能)
-               nobs=length(x)) # 観測データ数
-    if(verbose) { 
-        return(est) # verbose=TRUEならmleの結果を全て返す
-    } else {
-        return(coef(est)) # 推定値のみ返す
+## 全データによる計算
+(mu <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=mean))
+(s2 <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=var))
+(s <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=sd))
+## 毎月5日のデータによる計算
+apply(subset(myData,subset=日==5,select=c(気温,日射量,風速)),2,FUN=mean)
+apply(subset(myData,subset=日==5,select=c(気温,日射量,風速)),2,FUN=var)
+apply(subset(myData,subset=日==5,select=c(気温,日射量,風速)),2,FUN=sd)
+## 5の付く日のデータによる計算
+apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=mean)
+apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=var)
+apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=sd)
+## ランダムに選択した36日で推定した場合のばらつき
+mc <- 5000 # 実験回数を指定
+myItems <- c("気温","日射量","風速")
+myFuncs <- c("mean","var","sd")
+myTruth <- list(mu,s2,s)
+inum <- 1; fnum <- 1 # 気温の標本平均の例
+myTrial <- function(){
+    idx <- sample(1:nrow(myData),36) # 重複なしで36行選ぶ
+    apply(subset(myData[idx,],select=myItems[inum]),2,FUN=myFuncs[fnum])}
+xbars <- replicate(mc,myTrial())
+par(family="HiraginoSans-W4") 
+hist(xbars, breaks=40, freq=FALSE,
+     col="lightblue", border="blue",
+     xlab=myItems[inum], main=paste(myItems[inum],"の",myFuncs[fnum],"の推定"))
+abline(v=myTruth[[fnum]][inum],col="red",lwd=2)
+## 全ての組み合わせは for 文で実行可能
+for(inum in 1:3){
+    for(fnum in 1:3){
+        myTrial <- function(){
+            idx <- sample(1:nrow(myData),36) # 重複なしで36行選ぶ
+            apply(subset(myData[idx,],select=myItems[inum]),2,FUN=myFuncs[fnum])}
+        xbars <- replicate(mc,myTrial())
+        par(family="HiraginoSans-W4") 
+        hist(xbars, breaks=40, freq=FALSE,
+             col="lightblue", border="blue",
+             xlab=myItems[inum], main=paste(myItems[inum],"の",myFuncs[fnum],"の推定"))
+        abline(v=myTruth[[fnum]][inum],col="red",lwd=2)
     }
 }
-(theta <- with(myData, mle.gamma(風速))) # 最尤推定
-## 練習2.3
-## 結果の重ね描き
-curve(dgamma(x, theta[1], theta[2]), # あてはめたガンマ分布の密度関数
-      add=TRUE, col="orange", lwd=3)
 
 ### 練習2
-### 補遺: シミュレーションによる一致性の検証
-set.seed(5678) # 乱数のシード値の指定
-nu <- 5; alpha <- 2 # 真のパラメタ
-mc <- 2000 # 実験回数 (計算が重いので少なめにしている)
-for(n in c(10, 100, 300)){ # データ数を変えて実験
-    ## Monte-Carlo実験
-    myEst <- data.frame(t( # 推定値のdata.frame
-        replicate(mc, mle.gamma(rgamma(n, nu, alpha)))
-    ))
-    ## 結果をヒストグラムで表示
-    hist(myEst$nu, breaks=30, col="skyblue1", border="skyblue4",
-         xlim=c(0, 20), main=paste0("n=",n), xlab=expression(nu))
-    abline(h=0, lwd=2, lty="dotted") # x軸 (y=0) を表示
-    abline(v=nu, col="tomato", lwd=2, lty="solid") # nuの真値
-    hist(myEst$alpha, breaks=30, col="seagreen1", border="seagreen4",
-         xlim=c(0, 10), main=paste0("n=",n), xlab=expression(alpha))
-    abline(h=0, lwd=2, lty="dotted")  # x軸 (y=0) を表示
-    abline(v=alpha, col="tomato", lwd=2, lty="solid") # alphaの真値
-}
-
-### 練習3
-### 日射量データの区間推定
-## データの取得
+### 歪度と超過尖度の計算
+library(e1071)
+## データの読み込み
 myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-## 以下では関数 with を利用しているが，myDataから風速を取り出しておいても良い
-
-## 練習3.1
-## 全データによる平均値の計算
-(mu <- with(myData, mean(日射量))) # 真値
-
-## 練習3.2
-## 50点による90%信頼区間
-set.seed(1357) # 乱数のシード値の指定
-n <- 50
-idx <- sample(nrow(myData),n) # データの抽出
-(xbar <- with(myData[idx,], mean(日射量))) # 標本平均
-(s <- with(myData[idx,], sd(日射量))) # 標本標準偏差
-z95 <- qnorm(0.95) # 標準正規分布の0.95分位点
-(ci <- c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
-
-## 練習3.3
-## 信頼区間の正答率の評価
-mc <- 100
-myTrial <- function(n){ # nを変えて実験できるように
-    idx <- sample(nrow(myData),n)
-    xbar <- with(myData[idx,], mean(日射量)) # 標本平均
-    s <- with(myData[idx,], sd(日射量)) # 標本標準偏差
-    return(c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
+## 全データによる計算
+(skew <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=skewness))
+(kurt <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=kurtosis))
+## 5の付く日のデータによる計算
+apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=skewness)
+apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=kurtosis)
+## ヒストグラムの描画と
+myItems <- c("気温","日射量","風速")
+par(family="HiraginoSans-W4") 
+## 全ての組み合わせは for 文で実行可能
+for(inum in 1:3){
+    x <- myData[,myItems[inum]] # ベクトルにする必要がある
+    ## x <- subset(myData, select=myItems[inum], drop=TRUE) # でもよい
+    par(family="HiraginoSans-W4") 
+    hist(x, breaks=30, freq=FALSE,
+         col="lightgreen", border="green",
+         xlab=myItems[inum], main=myItems[inum])
+    curve(dnorm(x,mean=mean(x),sd=sd(x)), add=TRUE,
+          col="orange", lwd=2)
 }
-myCIs <- as.data.frame(t( # confidence intervals
-    replicate(mc,myTrial(n))
-))
-apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"]))
-table(apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"])))
 
 ### 練習3
-### 補遺: 信頼区間について多数で評価する
-mc <- 2000
-myCIs <- as.data.frame(t(
-    replicate(mc,myTrial(n))
-))
-table(apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"])))/mc # 確率を見る
-### 補遺: グラフを描いてみる
-k <- 20 
-idx <- sample(nrow(myCIs),k) # k個選んで描く
-plot(x=1:k,type="n",
-     ylim=c(min(myCIs),max(myCIs)),
-     xlab="index", ylab="confidence intervals") # 枠だけ描く
-abline(h=mu, col="orange", lwd=2)
-with(myCIs[idx,],
-     arrows(x0=1:k,y0=U,y1=L,code=3,
-            angle=90,length=1/20,col="blue"))
+### 共分散と相関の計算
+## データの読み込み
+myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+## 共分散・相関行列の計算
+x <- subset(myData,select=c(気温,降水量,日射量,降雪量,風速,気圧,湿度)) # 数値データ
+(myCov <- cov(x))
+(myCor <- cor(x))
+myCor==min(myCor) # 負の最大相関の位置を確認 (気温と気圧)
+myCor==max(myCor-diag(diag(myCor))) # 対角を除く最大相関の位置を確認 (気温と湿度)
+abs(myCor)==min(abs(myCor)) # 最小相関の位置を確認 (降雪量と風速)
+## 散布図の描画
+par(family="HiraginoSans-W4") 
+pairs(~ 気温 + 気圧, data=myData, col="blue")
+pairs(~ 気温 + 湿度, data=myData, col="red")
+pairs(~ 降雪量 + 風速, data=myData, col="grey")
+pairs(x, col="orange") # 数値データを全部表示してみる
+
+### 練習4
+### 分位点と最頻値の計算
+## データの読み込み
+myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+## 気温の分位点
+## 全データによる計算
+(myTruth <- summary(subset(myData,select=気温,drop=TRUE)))
+## 5の付く日のデータによる計算
+summary(subset(myData,subset=日%in%c(5,15,25),select=気温,drop=TRUE))
+## ランダムに選択した36日で推定した場合のばらつき
+mc <- 5000 # 実験回数を指定
+myFuncs <- c("min","1Q","median","mean","3Q","max")
+myTrial <- function(){
+    idx <- sample(1:nrow(myData),36) # 重複なしで36行選ぶ
+    summary(subset(myData[idx,],select=気温,drop=TRUE))}
+quants <- replicate(mc,myTrial())
+## ヒストグラムの表示
+for(fnum in 1:6) {
+    par(family="HiraginoSans-W4") 
+    hist(quants[fnum,], breaks=40, freq=FALSE,
+         col="lightblue", border="blue",
+         xlab="気温", main=paste("気温の",myFuncs[fnum],"の推定"))
+    abline(v=myTruth[fnum],col="red",lwd=2)
+}
+## 最多風向の最頻値
+(myTable <- table(subset(myData,select=最多風向))) # 頻度表
+max(myTable) # 最大値 
+which.max(myTable) # 最頻値の表の位置
+names(which.max(myTable)) # 最頻値の項目名

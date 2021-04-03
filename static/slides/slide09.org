@@ -1,8 +1,8 @@
-#+TITLE: 推定
-#+SUBTITLE: 確率分布を推定する
+#+TITLE: 記述統計量
+#+SUBTITLE: 基礎的な記述統計量とデータの集約
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 2020.06.19
+#+DATE: 2020.06.12
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -17,145 +17,185 @@
   setwd("~/Desktop/lectures/u-tokyo/spring/slide")
 #+end_src
 #+begin_src R :exports none :tangle yes
-  ### 第9回 演習問題解答例
+  ### 第8回 演習問題解答例
 #+end_src
 
-* 推定とは
-** 統計解析の目的
-   - 観測データを確率変数の実現値と考えてモデル化
-   - 観測データの背後の確率分布を *推定*
-     - 分布のもつ特性量(平均や分散など)を評価する
-     - 分布そのもの(確率関数や確率密度)を決定する
-   - 統計学で広く利用されている推定方法を説明
-     - 点推定
-     - 区間推定
+* 基礎的な記述統計量
+** 記述統計量
+   - *記述統計量* : (または要約統計量・基本統計量)
+     - データを簡潔に要約して表すための統計値
+     - その集団全体の特徴を表す重要な指標
+     - ヒストグラム・密度関数・箱ひげ図などのグラフと併用
+   - 比較的良く用いられる統計量を以下の観点で分類
+     - モーメント
+     - 順序
+     - 頻度
 
-** 推定の標準的な枠組
-   - 観測データは独立同分布な確率変数列 $X_1,X_2,\dots,X_n$ 
-   - $X_i$ の従う共通の法則 $\mathcal{L}$ を想定
-     - $\mathcal{L}$ として全ての分布を考察対象とすることは困難
-       - 対象とする範囲が広くなりすぎる
-       - データ数 $n$ が大きくないと意味のある結論を導き出せない
-     - 確率分布 $\mathcal{L}$ を特徴づけるパラメタ $\theta$ を考察対象
-       - $\mathcal{L}$ の平均・分散・歪度・尖度など
-       - $\mathcal{L}$ の確率関数・確率密度関数のパラメタ
+** 記述統計量の推定
+   - 記述統計量は背後の確率分布(集団全体)で決まる量
+   - 一般に確率分布は未知
+   - 手に入るのは(少数の)サンプル(観測データ) \\
+     (観測データを $X_1,X_2,\dots,X_n$ で表す)
+   - *推定* = 観測データから知りたい量を計算する方法
+   - 真の値と観測データによる推定には *差* がある 
 
-* 点推定
-** 点推定
-   - 定義
-     #+begin_quote
-     点推定とは
-     $\mathcal{L}$ 
-     に含まれるパラメタ $\theta$ を $X_1,\dotsc,X_n$ の関数
-     #+begin_src latex
-       \begin{equation}
-         \hat{\theta}=\hat{\theta}(X_1,\dots,X_n)
-       \end{equation}
-     #+end_src
-     で推定することで，
-     $\hat{\theta}$ を $\theta$ の *推定量* と呼ぶ．
-     #+end_quote
-   - 記述統計量は分布のパラメタの1つ
-     #+begin_quote
-     例: 
-     $\mathcal{L}$ の平均 $\mu$ を
-     標本平均 $\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$ によって
-     推定することが点推定であり,
-     $\bar{X}$ は $\mu$ の推定量となる．
-     #+end_quote
+** 独立同分布性
+   - 統計解析における重要な仮定とその帰結:
+     - 確率変数 $X_{1},X_{2},\dotsc,X_{n}$ が *同分布* \\
+       共通の平均 $\mu$ および分散 $\sigma^2$ を考えることができる \\
+       (適切な次数のモーメントの存在を仮定)
+     - 確率変数 $X_{1},X_{2},\dotsc,X_{n}$ が *独立同分布* \\
+       標本平均はサンプル数 $n\to\infty$ のとき確率1で真の平均に収束 \\
+       *(大数の強法則)*
+   - データは *偏っていない* ことを仮定している
 
-** 良い推定量
-   - 一般に1つのパラメタの推定量は無数に存在
-   - 推定量の良さの代表的な基準: *不偏性・一致性*
-     - $\hat{\theta}$ が $\theta$ の不偏推定量:
+     # - 確率変数 $X_{1},X_{2},\dotsc,X_{n}$ が *独立同分布* \\
+     #   標本平均・標本分散・標本標準偏差は
+     #   それぞれ $n\to\infty$ のとき確率1で
+     #   真の平均 $\mu$ ・分散 $\sigma^2$ ・標準偏差 $\sigma$ に収束 \\
+     #   *(大数の強法則)*
+
+** 推定量の一致性
+   - サンプル数が大きい場合に「まともな」推定量となる根拠の1つ
+     - *(強)一致性* (consistency): \\
+       推定量がサンプル数 $n\to\infty$ のとき確率1で真の値に収束する性質
+     - *(強)一致推定量* : 一致性をもつ推定量
+     # - 標本平均・標本分散・標本標準偏差は
+     #   平均・分散・標準偏差の一致推定量
+
+** 推定量の不偏性
+   - サンプル数が小さい場合の推定量の良さに関する性質の1つ
+     - *不偏性* (unbiasedness): \\
+       推定量 $\hat{\theta}$
+       が不偏であるとは, $\hat{\theta}$
+       の平均が真の値 $\theta$ となる性質
        #+begin_src latex
          \begin{equation}
-           E[\hat{\theta}]=\theta
+           \mathbb{E}[\hat{\theta}]=\theta
          \end{equation}
        #+end_src
-     -  $\hat{\theta}$ が $\theta$ の(強)一致推定量:
-       #+begin_src latex
-         \begin{equation}
-           \text{$\hat{\theta}$ が $\theta$ に収束する確率が1}\quad (n\to\infty)
-         \end{equation}
-       #+end_src
-     #+begin_quote
-     例: 
-     標本平均, 不偏分散はそれぞれ
-     $\mathcal{L}$ の平均, 分散の不偏かつ一致性をもつ推定量
-     #+end_quote
+     - *不偏推定量* : 不偏性をもつ推定量
 
-** 良い不偏推定量
-   - 一般に不偏推定量も複数存在
-     #+begin_quote
-     例: $\mathcal{L}$ の平均 $\mu$ の不偏推定量:
-     - 標本平均 $\bar{X}$ 
-     - $X_1$ 
-     - $X_1,\dots,X_n$ のメディアン
-       ( $\mathcal{L}$ が $x=\mu$ に関して対称な場合)
-     #+end_quote
-   - 不偏推定量の良さを評価する基準が必要
-   - *一様最小分散不偏推定量*:
-     #+begin_quote
-     $\theta$ の任意の不偏推定量 $\hat{\theta}'$ 
-     に対して推定値のばらつき(分散)が最も小さいもの
+* "モーメント"に基づく記述統計量
+** 平均
+   - *平均* (mean): 
      #+begin_src latex
        \begin{equation}
-         \mathrm{Var}(\hat{\theta})\le\mathrm{Var}(\hat{\theta}')
+         \mu=\mathbb{E}[X]
        \end{equation}
      #+end_src
-     #+end_quote
-
-** Cramer-Raoの不等式
-   - 定理
-     #+begin_quote
-     $\mathcal{L}$ は1次元パラメタ $\theta$ を含む連続分布とし，
-     その確率密度関数 $f_\theta(x)$ は $\theta$ に関して
-     偏微分可能であるとする．
-     このとき，緩やかな仮定の下で，
-     $\theta$ の任意の不偏推定量 $\hat{\theta}$ に対して
-     以下の不等式が成り立つ:
-     #+begin_src latex
-       \begin{equation}%\label{cr-bound}
-         \mathrm{Var}(\hat{\theta})\ge \frac{1}{nI(\theta)}.
-       \end{equation}
-     #+end_src
-     ただし
+   - *標本平均* (sample mean):
      #+begin_src latex
        \begin{equation}
-	 I(\theta)=\int_{-\infty}^\infty
-	 \left(\frac{\partial}{\partial\theta}\log f_\theta(x)\right)^2
-	 f_\theta(x)dx.
+         \bar{X}
+         =\frac{1}{n}\sum_{i=1}^{n}X_{i}
+         =\frac{X_{1}+\dotsb+X_{n}}{n}
+         % =\frac{X_1+X_2+\cdots+X_n}{n}
        \end{equation}
      #+end_src
-     #+end_quote
+     データの代表値を表す記述統計量
+** 分散・標準偏差
+   - *分散* (variance): 
+     #+begin_src latex
+       \begin{equation}
+         \mathrm{Var}(X)=\sigma^{2}=\mathbb{E}[(X-\mu)^{2}]
+       \end{equation}
+     #+end_src
+   - *標本分散* (sample variance):
+     #+begin_src latex
+       \begin{equation}
+         S^{2}
+         =\frac{1}{n}\sum_{i=1}^n(X_{i}-\bar{X})^{2}
+         =\frac{(X_{1}-\bar{X})^{2}+\dotsb+(X_{n}-\bar{X})^{2}}{n}
+         % =\frac{(X_1-\bar{X})^2+(X_2-\bar{X})^2+\cdots+(X_n-\bar{X})^2}{n}
+       \end{equation}
+     #+end_src
+     データのばらつき具合を表す記述統計量
+   - *標本標準偏差* (sample standard deviation): \\
+     標本分散の平方根
 
-** 一様最小分散不偏推定量
-   - 用語の定義
-     - 下界 $1/(nI(\theta))$ : *Cramer-Rao下界*
-     - $I(\theta)$ : *Fisher情報量*
-   - 定理 (Cramer-Raoの不等式の系)
-     #+begin_quote
-     $\theta$ の不偏推定量 $\hat{\theta}$ で
-     分散がCramer-Rao下界 $1/(nI(\theta))$ に一致するものが存在すれば，
-     それは一様最小分散不偏推定量となる．
-     #+end_quote
+** 標本平均・分散の不偏性
+  - 標本平均は $\mu$ の *不偏推定量である*:
+    #+begin_src latex
+      \begin{equation}
+        \mathbb{E}[\bar{X}]=\mu
+      \end{equation}
+    #+end_src
+  - 標本分散は $\sigma^2$ の *不偏推定量ではない*:
+    #+begin_src latex
+      \begin{equation}
+        \mathbb{E}[S^2]=\frac{n-1}{n}\sigma^2
+      \end{equation}
+    #+end_src
+    (標本分散は平均的には真の分散を *過小推定* する)
 
-** 例: 正規分布モデルの標本平均
-   - $\mathcal{L}$ は平均 $\mu$ , 分散 $\sigma^2$ の正規分布
-     - 平均パラメタ $\mu$ に関するFisher情報量:
-       #+begin_src latex
-         \begin{align}
-           I(\mu)=\frac{1}{\sqrt{2\pi\sigma^2}}
-           \int_{-\infty}^\infty\frac{(x-\mu)^2}{\sigma^4}
-           e^{-\frac{(x-\mu)^2}{2\sigma^2}}dx
-           =\frac{1}{\sigma^2}
-         \end{align}
-       #+end_src
-     - Cramer-Rao下界: $\sigma^2/n$ 
-     - 標本平均 $\bar{X}$ の分散: $\sigma^2/n$ (=Cramer-Rao下界)
-   - $\bar{X}$ は $\mu$ の一様最小分散不偏推定量
+** 不偏分散
+   - 不偏性を担保した分散の推定量
+   - バイアス補正:
+     標本分散に $n/(n-1)$ を乗じたもの
+     #+begin_src latex
+       \begin{equation}
+         s^2=\frac{n}{n-1}S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2
+       \end{equation}
+     #+end_src
+     は $\sigma^2$ の不偏推定量となる
+   # - 不偏分散の計算: ~var()~
+   # - わざわざ不偏性を持たない $S^2$ を $\sigma^2$ の推定量として使う理由は通常ないので,
+   #   補正した $s^2$ を *標本分散* と呼ぶこともあるが，
+   #   バイアス補正をしていることを強調するために通常 *不偏分散* と呼ぶ
 
+** 標本標準偏差
+   - 標本標準偏差: 通常, 不偏分散の平方根 $s$ を指す
+   - 一般に $s$ は標準偏差 $\sigma$ の *不偏推定量ではない*
+   # - 標本標準偏差の計算: ~sd()~
+
+** 平均・分散・標準偏差の計算
+   - 基本書式
+     #+begin_src R :eval no
+       mean(x, trim = 0, na.rm = FALSE, ...) # 標本平均
+       var(x, na.rm = FALSE, ... ) # 不偏分散
+       sd(x, na.rm = FALSE) # 標本標準偏差
+     #+end_src
+   - 関数の引数
+     - ~x~: ベクトル，データフレームなど
+     - ~na.rm~: 欠損値を取り除くか否か
+
+** 標準化
+   - 複数データの分析のために単位や基準を揃える
+   - データ $X_{1},X_{2},\dotsc,X_{n}$ の標準化:
+     #+begin_src latex
+       \begin{equation}
+         Z_{i}=\frac{X_i-\bar{X}}{s}\quad(i=1,2,\dotsc,n)
+       \end{equation}
+     #+end_src
+     ( $s$ の代わりに $S$ で割って定義する文献もある)
+   - 定義から $Z_{1},Z_{2},\dotsc,Z_{n}$ の
+     標本平均は0, 不偏分散は1 に規格化される
+   - $Z_{i}$: *標準得点* あるいは *Zスコア*
+     # (そうなるようにデータを一次変換したものが標準化)
+
+** 偏差値
+   - 別の基準での標準化
+     - 教育学や心理学では, 平均50, 標準偏差10が好まれる
+   - 標本平均50, 標準偏差10に線形変換:
+     #+begin_src latex
+       \begin{equation}
+         T_{i}=10Z_{i}+50\quad(i=1,\dotsc,n)
+       \end{equation}
+     #+end_src
+   - $T_{i}$:
+     *偏差値得点* あるいは *Tスコア* 
+
+** 標準化の計算
+   - 基本書式
+     #+begin_src R :eval no
+       scale(x, center = TRUE, scale = TRUE) # 標準化
+       10 * scale(x) + 50 # 偏差値得点に変換
+     #+end_src
+   - 関数の引数
+     - ~x~: ベクトル，データフレームなど
+     - ~center~: 中心化(平均0)するか否か
+     - ~scale~: 正規化(分散1)するか否か
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
@@ -164,671 +204,178 @@
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - $X$ を一様乱数に従う確率変数とし，
-     平均値の推定量として以下を考える．
-     それぞれの推定量の分散を比較しなさい．
-     - 標本平均 (mean)
-     - 中央値 (median)
-     - 最大値と最小値の平均 ((max+min)/2)
-   - ヒント: 以下のような関数を作り，Monte-Carlo実験を行えばよい
-     #+begin_src R :eval no
-       myMeanEst <- function(n, min, max){ # 観測データ数
-           x <- runif(n, min=min, max=max) # 一様乱数を生成，範囲は引数から
-           return(c(xbar=mean(x),med=median(x),mid=(max(x)+min(x))/2))
-       } # 3つまとめて計算する関数
-     #+end_src
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習1
-     ### 一様分布の平均の推定
-     set.seed(1234) # 乱数のシード値の指定
-     ## 平均値の推定を行う関数(標本平均，x1，最大最小)
-     myMeanEst <- function(n, min, max){
-         x <- runif(n, min=min, max=max)
-         return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
-     }
-     ## 実験の設定 
-     n <- 10 # 観測データのサンプル数
-     mc <- 10000 # 実験回数
-     a <- 0; b <- 50 # 一様乱数の区間
-     myData <- as.data.frame(t( # mc行 x 3種に変換(転置)
-         replicate(mc, myMeanEst(n, min=a, max=b))
-     ))
-     ## replicate は3行 x mc 列の行列を返すことに注意
-     ## ここでは data.frame として扱うために型を変換している
-     head(myData) # 実験結果の表示
-     apply(myData,2,mean) # 推定値の平均 (colMeans(myData)も可)
-     apply(myData,2,var)  # 推定値の分散
-     ## もう少し詳しくみてみる
-     summary(myData) # 四分位点を表示
-     for(i in 1:3) { # それぞれのヒストグラムを書いてみる
-         hist(myData[,i], breaks=40, 
-              xlim=c(a,b), ylim=c(0,2000), # 同じ大きさの図にする
-              col="pink", border="brown",
-              xlab="est", main=names(myData)[i])
-     }
-   #+end_src
-
-* 最尤法
-** 離散分布の場合
-   - 観測値 $X_1=x_1,X_2=x_2,\dots,X_n=x_n$ の同時確率
-     - 確率関数: $f_{\boldsymbol{\theta}}(x)$ 
-     - 確率関数のパラメタ: $\boldsymbol{\theta}:=(\theta_1,\dots,\theta_p)$ 
-     - 独立な確率変数の同時確率:
-       #+begin_src latex
-         \begin{align}
-           & P(X_1=x_1,X_2=x_2,\dots,X_n=x_n)
-             =\prod_{i=1}^nP(X_i=x_i)\\
-           &=
-              \prod_{i=1}^nf_{\boldsymbol{\theta}}(x_i)
-              =f_{\boldsymbol{\theta}}(x_1)\cdot
-              f_{\boldsymbol{\theta}}(x_2)\cdots
-              f_{\boldsymbol{\theta}}(x_n)
-         \end{align}
-       #+end_src
-
-** 尤度関数
-   - 定義
-     #+begin_quote
-     パラメタ $\boldsymbol{\theta}$ に対して
-     観測データ $X_1,X_2,\dots,X_n$ が得られる理論上の確率
-     #+begin_src latex
-       \begin{equation}
-         L(\boldsymbol{\theta})
-         :=\prod_{i=1}^nf_{\boldsymbol{\theta}}(X_i)
-       \end{equation}
-     #+end_src
-     を
-     $\boldsymbol{\theta}$ の 
-     *尤度* と言い，
-     $\boldsymbol{\theta}$ の関数 $L$ を *尤度関数* と呼ぶ．
-     #+end_quote
-     - 観測データ 
-       $X_1,X_2,\dots,X_n$ 
-       が現れるのにパラメタ 
-       $\boldsymbol{\theta}$ 
-       の値がどの程度尤もらしいかを測る尺度
-
-** 最尤法
-   - 最尤法: 
-     #+begin_quote
-     観測データに対して「最も尤もらしい」パラメタ値
-     を $\boldsymbol{\theta}$ の推定量として採用する方法
-     を最尤法という．
-     #+end_quote
-   - 最尤推定量:
-     #+begin_quote
-     $\Theta$ を尤度関数の定義域として，
-     尤度関数を最大とする  $\hat{\boldsymbol{\theta}}$ 
-     #+begin_src latex
-       \begin{equation}
-         L(\hat{\boldsymbol{\theta}})
-         =\max_{\boldsymbol{\theta}\in\Theta}L(\boldsymbol{\theta}).
-       \end{equation}
-     #+end_src
-     を 
-     $\boldsymbol{\theta}$ 
-     の *最尤推定量* という．
-
-     以下のように表現することもある．
-     #+begin_src latex
-       \begin{equation}
-         \hat{\boldsymbol{\theta}}
-         =\arg\max_{\boldsymbol{\theta}\in\Theta}L(\boldsymbol{\theta}).
-       \end{equation}
-     #+end_src
-
-
-     #+end_quote
-
-** 最尤推定量の計算
-   - *対数尤度関数*:
-     \begin{equation}
-       \ell(\boldsymbol{\theta})
-       :=\log L(\boldsymbol{\theta})
-       =\sum_{i=1}^n\log f_{\boldsymbol{\theta}}(X_i).
-     \end{equation}
-     - 対数関数は狭義増加
-     - $\ell(\boldsymbol{\theta})$ の最大化と $L(\boldsymbol{\theta})$ の最大化は同義
-     - 扱い易い和の形なのでこちらを用いることが多い
-     - 大数の法則を用いて対数尤度関数の収束が議論できる
-   - 最尤推定量の性質
-     #+begin_quote
-     広い範囲の確率分布に対して最尤推定量は *一致性* を持つ
-     #+end_quote
-
-** 連続分布の場合
-   - *確率密度関数* $f_{\boldsymbol{\theta}}(x)$ を用いて尤度を定義
-   - *尤度関数*: 
-     \begin{equation}
-       L(\boldsymbol{\theta})
-       =\prod_{i=1}^nf_{\boldsymbol{\theta}}(x_i)
-       =f_{\boldsymbol{\theta}}(x_1)\cdot
-       f_{\boldsymbol{\theta}}(x_2)\cdots
-       f_{\boldsymbol{\theta}}(x_n)
-     \end{equation}
-   - *対数尤度関数*:
-     \begin{equation}
-       \ell(\boldsymbol{\theta})
-       :=\log L(\boldsymbol{\theta})
-       =\sum_{i=1}^n\log f_{\boldsymbol{\theta}}(X_i)
-     \end{equation}
-
-** 例: Poisson分布の最尤推定
-   - $\mathcal{L}$ をパラメタ $\lambda>0$ のPoisson分布でモデル化
-     - 対数尤度関数 (未知パラメタ: $\lambda$ )
-       #+begin_src latex
-         \begin{equation}
-           \ell(\lambda)=\sum_{i=1}^n\log\frac{\lambda^{X_i}}{X_i!}e^{-\lambda}
-           =\sum_{i=1}^n(X_i\log\lambda-\log X_i!)-n\lambda
-         \end{equation}
-       #+end_src
-     - 少なくとも1つの $i$ について $X_i>0$ を仮定する
-   #+reveal: split
-   - (Poisson分布のつづき)
-     - $\ell(\lambda)$ の微分: 
-       #+begin_src latex
-         \begin{equation}
-           \ell'(\lambda)=\frac{1}{\lambda}\sum_{i=1}^nX_i-n,\quad
-           \ell''(\lambda)=-\frac{1}{\lambda^2}\sum_{i=1}^nX_i<0
-         \end{equation}
-       #+end_src
-     - 方程式 $\ell'(\lambda)=0$ の解が $\ell(\lambda)$ を最大化
-     - $\lambda$ の最尤推定量:
-       #+begin_src latex
-         \begin{equation}
-           \hat{\lambda}=\frac{1}{n}\sum_{i=1}^nX_i
-         \end{equation}
-       #+end_src
-
-** 例: 指数分布の最尤推定
-   - $\mathcal{L}$ をパラメタ $\lambda>0$ の指数分布でモデル化
-     - 対数尤度関数 (未知パラメタ: $\lambda$ )
-       #+begin_src latex
-         \begin{equation}
-           \ell(\lambda)=\sum_{i=1}^n\log\lambda e^{-\lambda X_i}
-           =n\log\lambda-\lambda\sum_{i=1}^nX_i
-         \end{equation}
-       #+end_src
-   #+reveal: split
-   - (指数分布のつづき)
-     - $\ell(\lambda)$ の微分: 
-       #+begin_src latex
-         \begin{equation}
-           \ell'(\lambda)=\frac{n}{\lambda}-\sum_{i=1}^nX_i,\quad
-           \ell''(\lambda)=-\frac{n}{\lambda^2}<0
-         \end{equation}
-       #+end_src
-     - 方程式 $\ell'(\lambda)=0$ の解が $\ell(\lambda)$ を最大化
-     - $\lambda$ の最尤推定量:
-       #+begin_src latex
-         \begin{equation}
-           \hat{\lambda}=\frac{1}{\frac{1}{n}\sum_{i=1}^nX_i}
-         \end{equation}
-       #+end_src
-
-** 例: ガンマ分布の最尤推定
-   - $\mathcal{L}$ をパラメタ $\nu,\alpha>0$ のガンマ分布でモデル化
-     - 対数尤度関数 (未知パラメタ: $\nu,\alpha$ )
-       #+begin_src latex
-         \begin{align}
-           \ell(\nu,\alpha)
-           &=\sum_{i=1}^n\log\frac{\alpha^\nu}{\Gamma(\nu)}X_i^{\nu-1}e^{-\alpha X_i}\\
-           &=n\nu\log\alpha-n\log\Gamma(\nu)+\sum_{i=1}^n\{(\nu-1)\log X_i-\alpha X_i\}
-         \end{align}
-       #+end_src
-     - $\ell(\nu,\alpha)$ を最大化する $\nu,\alpha$ は解析的に求まらないので実際の計算では数値的に求める
-   #+reveal: split
-   - Rでの計算例 (ガンマ分布の最尤推定量の例)
-     #+begin_src R :eval no
-       library(stats4) # 関数mleを利用するため
-       ## 数値最適化のためには尤度関数を最初に評価する初期値が必要
-       mle.gamma <- function(x, # 観測データ
-                             nu0=1, alpha0=1){ # nu, alphaの初期値
-	   ## 負の対数尤度関数を定義 (最小化を考えるため)
-	   ll <- function(nu, alpha) # nuとalphaの関数として定義 
-               suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
-	   ## suppressWarnings は定義域外で評価された際の警告を表示させない
-	   ## 最尤推定(負の尤度の最小化)
-	   est <- mle(minuslogl=ll, # 負の対数尤度関数
-		      start=list(nu=nu0, alpha=alpha0), # 初期値
-		      method="BFGS", # 最適化方法 (選択可能)
-		      nobs=length(x)) # 観測データ数
-	   return(coef(est)) # 推定値のみ返す
-       }
-     #+end_src
-   # % - 数値計算の際に対数尤度関数の勾配(偏導関数からなるベクトル)があると便利なので計算しておく: 
-   # %   \begin{align}
-   # %     \frac{\partial\ell}{\partial\nu}(\nu,\alpha)
-   # %     &=n\log\alpha-n\psi(\nu)+\sum_{i=1}^n\log X_i,\\
-   # %     \frac{\partial\ell}{\partial\alpha}(\nu,\alpha)
-   # %     &=\frac{n\nu}{\alpha}-\sum_{i=1}^nX_i
-   # %   \end{align}
-   # %   ここに,  $ \psi(\nu)=\frac{d}{d\nu}\log\Gamma(\nu) $ であり, ディガンマ関数と呼ばれる(Rでは\fun{digamma}で計算できる)
-
-* 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
-** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 東京都の気候データ (~tokyo_weather.csv~) の
-     風速の項目について以下の問に答えよ．
+   - 東京都の気候データ (~tokyo_weather.csv~) の中の
+     気温, 日射量, 風速の項目について以下の問に答えよ．
      #+begin_src R :eval no
        myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
      #+end_src
-     - 全データを用いてヒストグラム(密度)を作成しなさい．
-     - ガンマ分布でモデル化して最尤推定を行いなさい．
-     - 推定した結果をヒストグラムに描き加えて比較しなさい．
-   - 自身で収集したデータを用いて，モデル化と最尤推定を試みよ．
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習2
-     ### ガンマ分布による風速データのモデル化
-     ## データの取得
+     - 全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数365)
+     - 毎月5日のデータのみを用いて各項目の平均・分散・標準偏差を求めよ．(データ数12)
+     - 5の付く日(各月の5,15,25)のデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数36)
+     - ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，
+       推定量のばらつきを確認せよ．
+   #+begin_src R :exports none :tangle yes
+     ### 練習1
+     ### 平均・分散・標準偏差の計算
+     ## データの読み込み
      myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-     ## 以下では関数 with を利用しているが，myDataから風速を取り出しておいても良い
-
-     ## 練習2.1
-     ## ヒストグラムの描画
-     par(family="HiraginoSans-W4") # 日本語フォントの指定
-     with(myData, hist(風速, breaks=30, freq=FALSE, # 密度
-                       col="skyblue", border="blue",
-                       main="風速のヒストグラム", xlab="風速 [m/s]", ylab="密度"))
-     ## 練習2.2
-     ## ガンマ関数による最尤推定
-     library(stats4) # 関数mleを利用
-     ## ガンマ分布の最尤推定量
-     mle.gamma <- function(x, # 観測データ
-                           nu0=1, # nuの初期値
-                           alpha0=1, # alphaの初期値
-                           verbose=FALSE){ # debug用に追加
-         ## 負の対数尤度関数を定義 (最小化を考えるため)
-         ll <- function(nu, alpha) # nuとalphaの関数として定義 
-             suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
-         ## suppressWarnings は定義域外で評価された際の警告を表示させない
-         ## 最尤推定(負の尤度の最小化)
-         est <- mle(minuslogl=ll, # 負の対数尤度関数
-                    start=list(nu=nu0, alpha=alpha0), # 初期値
-                    method="BFGS", # 最適化方法 (選択可能)
-                    nobs=length(x)) # 観測データ数
-         if(verbose) { 
-             return(est) # verbose=TRUEならmleの結果を全て返す
-         } else {
-             return(coef(est)) # 推定値のみ返す
+     ## 全データによる計算
+     (mu <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=mean))
+     (s2 <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=var))
+     (s <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=sd))
+     ## 毎月5日のデータによる計算
+     apply(subset(myData,subset=日==5,select=c(気温,日射量,風速)),2,FUN=mean)
+     apply(subset(myData,subset=日==5,select=c(気温,日射量,風速)),2,FUN=var)
+     apply(subset(myData,subset=日==5,select=c(気温,日射量,風速)),2,FUN=sd)
+     ## 5の付く日のデータによる計算
+     apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=mean)
+     apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=var)
+     apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=sd)
+     ## ランダムに選択した36日で推定した場合のばらつき
+     mc <- 5000 # 実験回数を指定
+     myItems <- c("気温","日射量","風速")
+     myFuncs <- c("mean","var","sd")
+     myTruth <- list(mu,s2,s)
+     inum <- 1; fnum <- 1 # 気温の標本平均の例
+     myTrial <- function(){
+	 idx <- sample(1:nrow(myData),36) # 重複なしで36行選ぶ
+	 apply(subset(myData[idx,],select=myItems[inum]),2,FUN=myFuncs[fnum])}
+     xbars <- replicate(mc,myTrial())
+     par(family="HiraginoSans-W4") 
+     hist(xbars, breaks=40, freq=FALSE,
+          col="lightblue", border="blue",
+	  xlab=myItems[inum], main=paste(myItems[inum],"の",myFuncs[fnum],"の推定"))
+     abline(v=myTruth[[fnum]][inum],col="red",lwd=2)
+     ## 全ての組み合わせは for 文で実行可能
+     for(inum in 1:3){
+         for(fnum in 1:3){
+             myTrial <- function(){
+                 idx <- sample(1:nrow(myData),36) # 重複なしで36行選ぶ
+                 apply(subset(myData[idx,],select=myItems[inum]),2,FUN=myFuncs[fnum])}
+             xbars <- replicate(mc,myTrial())
+             par(family="HiraginoSans-W4") 
+             hist(xbars, breaks=40, freq=FALSE,
+                  col="lightblue", border="blue",
+                  xlab=myItems[inum], main=paste(myItems[inum],"の",myFuncs[fnum],"の推定"))
+             abline(v=myTruth[[fnum]][inum],col="red",lwd=2)
          }
      }
-     (theta <- with(myData, mle.gamma(風速))) # 最尤推定
-     ## 練習2.3
-     ## 結果の重ね描き
-     curve(dgamma(x, theta[1], theta[2]), # あてはめたガンマ分布の密度関数
-           add=TRUE, col="orange", lwd=3) 
    #+end_src
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習2
-     ### 補遺: シミュレーションによる一致性の検証
-     set.seed(5678) # 乱数のシード値の指定
-     nu <- 5; alpha <- 2 # 真のパラメタ
-     mc <- 2000 # 実験回数 (計算が重いので少なめにしている)
-     for(n in c(10, 100, 300)){ # データ数を変えて実験
-         ## Monte-Carlo実験
-         myEst <- data.frame(t( # 推定値のdata.frame
-             replicate(mc, mle.gamma(rgamma(n, nu, alpha)))
-         ))
-         ## 結果をヒストグラムで表示
-         hist(myEst$nu, breaks=30, col="skyblue1", border="skyblue4",
-              xlim=c(0, 20), main=paste0("n=",n), xlab=expression(nu))
-         abline(h=0, lwd=2, lty="dotted") # x軸 (y=0) を表示
-         abline(v=nu, col="tomato", lwd=2, lty="solid") # nuの真値
-         hist(myEst$alpha, breaks=30, col="seagreen1", border="seagreen4",
-              xlim=c(0, 10), main=paste0("n=",n), xlab=expression(alpha))
-         abline(h=0, lwd=2, lty="dotted")  # x軸 (y=0) を表示
-         abline(v=alpha, col="tomato", lwd=2, lty="solid") # alphaの真値
-     }
-   #+end_src
-
-* 区間推定
-** 推定誤差
-   - 推定量 $\hat{\theta}$ には推定誤差が必ず存在
-   - 推定結果の定量評価には推定誤差の評価が重要
-     - "誤差 $\hat{\theta}-\theta$ が
-       区間 $[l,u]$ の内側にある確率が $1{-}\alpha$ 以上 " \\
-       ("外側にある確率が $\alpha$ 以下" と言い換えてもよい)
-       #+begin_src latex
-         \begin{equation}
-           P(l\le\hat{\theta}-\theta\le u)\ge 1{-}\alpha
-         \end{equation}
-       #+end_src
-   - パラメタの範囲の推定に書き換え
-     - " $\theta$ が含まれる確率が $1{-}\alpha$ 以上となるような区間
-       $[\hat{\theta}-u,\hat{\theta}-l]$ を推定"
-       #+begin_src latex
-         \begin{equation}
-           P(\hat{\theta}-u\le\theta\le \hat{\theta}-l)\ge 1{-}\alpha
-         \end{equation}
-       #+end_src
-   # 
-   # % - *区間推定*: 固定した $\alpha\in(0,1)$ に対し $l,u$ を観測データから推定
-
-** 区間推定
-   - 定義
-     #+begin_quote
-     区間推定とは
-     未知パラメタ $\theta$ とある値 $\alpha\in(0,1)$ に対して
-     以下を満たす確率変数 $L,U$ を観測データから求めることをいう．
-     #+begin_src latex
-       \begin{equation}
-         P(L\le\theta\le U)\ge 1{-}\alpha
-       \end{equation}
-     #+end_src
-     #+end_quote
-     - 区間 $[L,U]$ : $1{-}\alpha$ *信頼区間* ($100(1{-}\alpha)$ % と書くことも多い)
-     - $L$ : $1{-}\alpha$ *下側信頼限界*
-     - $U$ : $1{-}\alpha$ *上側信頼限界*
-     - $1{-}\alpha$ : *信頼係数*
-       ($\alpha=0.01,0.05,0.1$ とすることが多い)
-
-** 信頼区間の性質
-   - 信頼区間は幅が狭いほど推定精度が良い
-     - 真のパラメタが取りうる値の範囲を限定することになるため
-   - 最も推定精度の良い $1{-}\alpha$ 信頼区間 $[L,U]$
-     #+begin_src latex
-       \begin{equation}
-         P(L\le\theta\le U)=1{-}\alpha
-       \end{equation}
-     #+end_src
-     - 信頼区間の幅が狭いほど $P(L\le\theta\le U)$ は小さくなるため
-   - 実行可能である限り
-     $1{-}\alpha$ 信頼区間 $[L,U]$ は上式を満たすように
-     $L,U$ を決定する
-
-* 正規母集団の区間推定
-** 平均の区間推定 (分散既知)
-   - 正規分布に従う独立な確率変数の重み付き和は正規分布に従う
-   - 一般の場合
-     #+begin_quote
-     $Z_1,Z_2,\dots,Z_k$ を独立な確率変数列とし，
-     各 $i=1,2,\dots,k$ に対して $Z_i$ は平均 $\mu_i$ ，
-     分散 $\sigma_i^2$ の正規分布に従うとする．
-     このとき $a_0,a_1,\dots,a_k$ を $(k+1)$ 個の0でない実数とすると，
-     $a_0+\sum_{i=1}^ka_iZ_i$ は
-     平均 $a_0+\sum_{i=1}^ka_i\mu_i$ ，
-     分散 $\sum_{i=1}^ka_i^2\sigma_i^2$ の正規分布に従う．
-     #+end_quote
-   #+reveal: split
-   - 同分布の場合
-     #+begin_quote
-     $k=n$, $\mu_i=\mu$, $\sigma_i^2=\sigma^2$, $a_0=0$,
-     $a_i=1/n\;(i=1,\dots,n)$
-     #+begin_src latex
-       \begin{equation}
-         \bar{X}=\frac{1}{n}\sum_{i=1}^nX_i \quad\text{(標本平均)}
-       \end{equation}
-     #+end_src
-     は平均 $\mu$ , 分散 $\sigma^2/n$ の正規分布に従う．
-     #+end_quote
-   #+reveal: split
-   - 同分布を標準化した場合
-     #+begin_quote
-     $k=1$ , $\mu_1=\mu$ , $\sigma_1^2=\sigma^2/n$ ,
-     $a_0=-\sqrt{n}\mu/\sigma$ , $a_1=\sqrt{n}/\sigma$
-     #+begin_src latex
-       \begin{equation}
-         Z=\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}
-       \end{equation}
-     #+end_src
-     は標準正規分布に従う．
-     #+end_quote
-   - 標準化した確率変数の確率
-     #+begin_quote
-     $z_{1{-}\alpha/2}$ を標準正規分布の
-     $1{-}\alpha/2$ 分位点とすれば
-     #+begin_src latex
-     \begin{equation}
-       P\Bigl(-z_{1{-}\alpha/2}\le\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}
-	 \le z_{1{-}\alpha/2}\Bigr)=1{-}\alpha
-     \end{equation}
-     #+end_src
-     #+end_quote
-   #+reveal: split
-   - 信頼区間の構成
-     #+begin_quote
-     $\mu$ について解くと
-     #+begin_src latex
-       \begin{equation}
-         P\left(\bar{X}-z_{1{-}\alpha/2}\cdot\frac{\sigma}{\sqrt{n}}\le\mu
-	 \le\bar{X}+z_{1{-}\alpha/2}\cdot\frac{\sigma}{\sqrt{n}}\right)=1{-}\alpha
-       \end{equation}
-     #+end_src
-     となるので，
-     $\sigma$ が既知の場合の平均 $\mu$ の $1{-}\alpha$ *信頼区間* は
-     以下で構成される．
-     #+begin_src latex
-       \begin{equation}
-         \left[\bar{X}-z_{1{-}\alpha/2}\cdot\frac{\sigma}{\sqrt{n}},\;
-         \bar{X}+z_{1{-}\alpha/2}\cdot\frac{\sigma}{\sqrt{n}}\right]
-       \end{equation}
-     #+end_src
-     #+end_quote
-
-** 平均の区間推定 (分散未知)
-   - $\chi^2$ 分布の特徴付け
-     - 標準正規分布に従う $k$ 個の独立な確率変数の
-       二乗和は自由度 $k$ の $\chi^2$ 分布に従う
-   - $t$ 分布の特徴付け
-     - $Z$ を標準正規分布に従う確率変数，
-       $Y$ を自由度 $k$ の $\chi^2$ 分布に従う確率変数とし，
-       $Z,Y$ は独立であるとする．
-       このとき確率変数
-       #+begin_src latex
-         \begin{equation}
-           \frac{Z}{\sqrt{Y/k}}
-         \end{equation}
-       #+end_src
-       は自由度 $k$ の $t$ 分布に従う
-   #+reveal: split
-   - 標本平均と不偏分散の性質
-     #+begin_quote
-     $X_1,X_2,\dots,X_n$ は独立同分布な確率変数列で，
-     平均 $\mu$ ，分散 $\sigma^2$ の正規分布に従うとする．
-     不偏分散を
-     #+begin_src latex
-       \begin{equation}
-         s^2=\frac{1}{n{-}1}\sum_{i=1}^n(X_i-\bar{X})^2
-       \end{equation}
-     #+end_src
-     とすると， $\bar{X}$ と $s^2$ は独立であり，
-     確率変数 $(n{-}1)s^2/\sigma^2$ は自由度 $n{-}1$ の $\chi^2$ 分布に従う．
-     #+end_quote
-   #+reveal: split
-   - 標準化した確率変数の性質
-     #+begin_quote
-     前の命題と $\sqrt{n}(\bar{X}-\mu)/\sigma$ が標準正規分布に従うこ
-     とから，
-     確率変数
-     #+begin_src latex
-       \begin{equation}
-         T=
-         \frac{\sqrt{n}(\bar{X}-\mu)}{s}
-         =\frac{\sqrt{n}(\bar{X}-\mu)/\sigma}
-           {\sqrt{(n{-}1)s^2/\sigma^2\big/(n{-}1)}}
-         % =\frac{\sqrt{n}(\bar{X}-\mu)/\sigma}
-         %   {\sqrt{\frac{(n{-}1)s^2}{\sigma^2}\Big/(n{-}1)}}
-       \end{equation}
-     #+end_src
-     は自由度 $n{-}1$ の $t$ 分布に従う．
-     #+end_quote
-   #+reveal: split
-   - 信頼区間の構成
-     #+begin_quote
-     $t_{1{-}\alpha/2}(n{-}1)$ を自由度 $n{-}1$ の $t$ 分布の
-     $1{-}\alpha/2$ 分位点とすれば
-     #+begin_src latex
-       \begin{equation}
-         P\left(-t_{1{-}\alpha/2}(n{-}1)\le\frac{\sqrt{n}(\bar{X}-\mu)}{s}
-	 \le t_{1{-}\alpha/2}(n{-}1)\right)=1{-}\alpha
-       \end{equation}
-     #+end_src
-     となるので，
-     分散が未知の場合の平均 $\mu$ の $1{-}\alpha$ *信頼区間* は
-     以下で構成される．
-     #+begin_src latex
-       \begin{equation}
-         \left[\bar{X}-t_{1{-}\alpha/2}(n{-}1)\cdot\frac{s}{\sqrt{n}},\;
-         \bar{X}+t_{1{-}\alpha/2}(n{-}1)\cdot\frac{s}{\sqrt{n}}\right]
-       \end{equation}
-     #+end_src
-     #+end_quote
-
-** 分散の区間推定
-   - 不偏分散の性質
-     #+begin_quote
-     $(n{-}1)s^2/\sigma^2$ は自由度 $n{-}1$ の $\chi^2$ 分布に従う
-     #+end_quote
-   - 不偏分散の確率
-     #+begin_quote
-     $\chi^2_{\alpha/2}(n{-}1)$ ,  $\chi^2_{1{-}\alpha/2}(n{-}1)$ を
-     それぞれ自由度 $n{-}1$ の $\chi^2$ 分布の
-     $\alpha/2, 1{-}\alpha/2$ 分位点とすれば
-     #+begin_src latex
-       \begin{equation}
-         P\left(\chi^2_{\alpha/2}(n{-}1)\le\frac{(n{-}1)s^2}{\sigma^2}
-           \le\chi^2_{1{-}\alpha/2}(n{-}1)\right)
-         =1{-}\alpha
-       \end{equation}
-     #+end_src
-     #+end_quote
-   #+reveal: split
-   - 信頼区間の構成
-     #+begin_quote
-     $\sigma^2$ について解くと
-     #+begin_src latex
-       \begin{equation}
-         P\left(\frac{(n{-}1)s^2}{\chi^2_{1{-}\alpha/2}(n{-}1)}
-           \le\sigma^2\le\frac{(n{-}1)s^2}{\chi^2_{\alpha/2}(n{-}1)}\right)
-         =1{-}\alpha
-       \end{equation}
-     #+end_src
-     となるので，
-     $\sigma^2$ の $1{-}\alpha$ *信頼区間* は以下で構成される．
-     #+begin_src latex
-       \begin{equation}
-	 \left[\frac{(n{-}1)s^2}{\chi^2_{1{-}\alpha/2}(n{-}1)},
-           \frac{(n{-}1)s^2}{\chi^2_{\alpha/2}(n{-}1)}\right]
-       \end{equation}
-     #+end_src
-     #+end_quote
-
-* 漸近正規性にもとづく区間推定
-** 推定量の漸近正規性
-   - *漸近正規性*
-     #+begin_quote
-     多くの推定量 $\hat{\theta}$ の分布は正規分布で近似できる
-     #+end_quote
-     - モーメントに基づく記述統計量は漸近正規性をもつ
-     - 最尤推定量は広い範囲の確率分布に対して漸近正規性をもつ
-     - いずれも中心極限定理にもとづく
-   - 正規分布を用いて近似的に信頼区間を構成することができる
-   # - 推定誤差の分布が正規分布で近似できる場合
-
-** 標本平均の漸近正規性
-   - 定理
-     #+begin_quote
-     確率分布 $\mathcal{L}$ が2次のモーメントを持てば，
-     $\mathcal{L}$ の平均 $\mu$ の推定量である標本平均
-     は漸近正規性をもつ．
-     #+begin_src latex
-       \begin{equation}
-         \bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-       \end{equation}
-     #+end_src
-     $\mathcal{L}$ の標準偏差を $\sigma$ とすれば, 
-     任意の $a\le b$ に対して以下が成立する．
-     ($\phi$ は標準正規分布の確率密度関数)
-     #+begin_src latex
-       \begin{equation}
-         P\left(a\le\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}
-           \le b\right)\to\int_a^b\phi(x)dx\quad(n\to\infty)
-       \end{equation}
-     #+end_src
-     #+end_quote
-** 平均の区間推定 (分散既知)
-   - 標本平均の確率
-     #+begin_quote
-     $z_{1{-}\alpha/2}$ を標準正規分布の
-     $1{-}\alpha/2$ 分位点とすれば
-     #+begin_src latex
-       \begin{equation}
-         P\left(-z_{1{-}\alpha/2}\le\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}
-           \le z_{1{-}\alpha/2}\right)\to1{-}\alpha\quad(n\to\infty)
-       \end{equation}
-     #+end_src
-     となるので，
-     $\mu$ について解くと以下が成り立つ．
-     #+begin_src latex
-       \begin{multline}
-         P\left(\bar{X}-z_{1{-}\alpha/2}\cdot\frac{\sigma}{\sqrt{n}}
-           \le\mu \le\bar{X}+z_{1{-}\alpha/2}\cdot\frac{\sigma}{\sqrt{n}}\right)\\
-         \to1{-}\alpha\quad(n\to\infty)
-       \end{multline}
-     #+end_src
-     #+end_quote
-   #+reveal: split
-   - 信頼区間の構成
-     #+begin_quote
-     $\sigma$ が既知の場合の平均 $\mu$ の $1{-}\alpha$ *信頼区間*
-     は以下で構成される．
-     #+begin_src latex
-       \begin{equation}
-         \left[\bar{X}-z_{1{-}\alpha/2}\cdot\frac{\sigma}{\sqrt{n}},\;
-           \bar{X}+z_{1{-}\alpha/2}\cdot\frac{\sigma}{\sqrt{n}}\right]
-       \end{equation}
-     #+end_src
-     (サンプル数 $n$ が十分大きい場合に近似的に正しい)
-     #+end_quote
    
-** 平均の区間推定 (分散未知)
-   - $\sigma$ をその一致推定量 $\hat{\sigma}$ で置き換えてもそのまま成立する
-     - $\hat{\sigma}$ としては例えば不偏分散の平方根を用いる
-       #+begin_src latex
-         \begin{equation}
-           \hat{\sigma}=\sqrt{\frac{1}{n{-}1}\sum_{i=1}^n(X_i-\bar{X})^2}
-         \end{equation}
-       #+end_src
-     - 実問題で平均はわからないが，分散はわかるという場合はあまりない
-     - $t$ -分布は自由度 $n\to\infty$ で標準正規分布になる
+* 歪度と尖度
+** 歪度と尖度
+   - 正規分布からのずれを調べるための統計量
+   - 正規分布の特徴: 
+     - 確率分布のうち最も基本的なもの *(中心極限定理)*
+     - 平均と分散を決めると完全に決定される
+   - 正規分布に従うデータでは標本平均と標本分散(不偏分散)を考えれば十分
+   - 現実には正規分布では捉えきれない特徴をもつデータも多い
+
+** 歪度
+   - 分布の非対称性を表す統計量
+   - *歪度* (skewness): 
+     平均 $\mu$ , 分散 $\sigma^2$ で
+     3次モーメントをもつ確率変数 $X$ 
+     に対して以下で定義
+     #+begin_src latex
+       \begin{equation}
+         \mathrm{skewness}=\frac{\mathbb{E}[(X-\mu)^3]}{\sigma^3}
+       \end{equation}
+     #+end_src
+   - 左右に対称的な分布の歪度は0 (正規分布の歪度は0)
+     - 歪度が正の場合: 分布の右の裾の方が重い
+     - 歪度が負の場合: 分布の左の裾の方が重い
+   - 正の歪度をもつ分布の例:
+     - ガンマ分布 $\Gamma(\nu,\alpha)$ の歪度は $2/\sqrt{\nu}$
+
+** 尖度
+   - 平均の周囲の分布の尖り具合を表す統計量
+   - *尖度* (kurtosis):
+     4次のモーメントをもつ確率変数 $X$
+     #+begin_src latex
+       \begin{equation}
+         \mathrm{kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}
+       \end{equation}
+     #+end_src
+   - *超過尖度* (excess kurtosis):
+     正規分布との比較のため尖度から正規分布の尖度3を引いた量
+     #+begin_src latex
+       \begin{equation}
+         \mathrm{excess\ kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}-3
+       \end{equation}
+     #+end_src
+     (こちらを単に尖度と呼ぶ文献もあるので注意)
+** 超過尖度
+   - 正規分布と比較して
+     - 超過尖度が正の場合: 平均の周囲の分布の形状が尖っている
+     - 超過尖度が負の場合: 分布の形状は丸みを帯びている
+       #+begin_quote
+       正の場合，正規分布に比べて平均まわりの密度が
+       分布の裾の方にまわっていることが多いため,
+       正規分布より裾が重いと解釈されることが多い
+       #+end_quote
+   - 正の超過尖度をもつ分布の例:
+     - 自由度 $\nu>4$ をもつ $t$ 分布 $t(\nu)$ の超過尖度は $6/(\nu-4)$ \\
+       ($\nu\leq 4$ のときは $t(\nu)$ は4次モーメントをもたない)
+     - ガンマ分布 $\Gamma(\nu,\alpha)$ の超過尖度は $6/\nu$
    #+reveal: split
-   - 信頼区間の構成
-     #+begin_quote
-     $\sigma$ が未知の場合の平均 $\mu$ の $1{-}\alpha$ *信頼区間*
-     は以下で構成される．
+   #+begin_leftcol  
+   #+begin_src R :file figs/sk_tdist.png :exports results :results graphics
+     par(family="HiraginoSans-W4")
+     curve(dt(x,df=10), from=-3, to=3,
+           col="blue", lwd=3,
+           ylab="密度", main="t分布 (自由度 10; 歪度0, 超過尖度1)")
+   #+end_src
+   #+NAME: fig:sk_tdist
+   #+ATTR_HTML: :width 100%
+   #+ATTR_LATEX: :width 0.6\linewidth
+   [[file:figs/sk_tdist.png]]
+   #+end_leftcol  
+   #+begin_rightcol  
+   #+begin_src R :file figs/sk_gamma.png :exports results :results graphics
+     par(family="HiraginoSans-W4")
+     curve(dgamma(x,shape=4,rate=1), from=0, to=10,
+           col="blue", lwd=3,
+           ylab="密度", main="Gamma分布 (形状4，レート1; 歪度1, 超過尖度1.5)")
+   #+end_src
+   #+NAME: fig:sk_gamma
+   #+ATTR_HTML: :width 100%
+   #+ATTR_LATEX: :width 0.6\linewidth
+   [[file:figs/sk_gamma.png]]
+   #+end_rightcol  
+
+** 標本歪度と標本尖度
+   - 観測データ $X_{1},X_{2},\dotsc,X_{n}$ からの歪度と尖度の推定
+   - *標本歪度* (sample skewness): 
      #+begin_src latex
        \begin{equation}
-         \left[\bar{X}-z_{1{-}\alpha/2}\cdot\frac{\hat{\sigma}}{\sqrt{n}},\;
-           \bar{X}+z_{1{-}\alpha/2}\cdot\frac{\hat{\sigma}}{\sqrt{n}}\right]
+         \mathrm{skewness}=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^3}{s^3}
        \end{equation}
      #+end_src
-     (サンプル数 $n$ が十分大きい場合に近似的に正しい)
-     #+end_quote
-** 最尤推定量の区間推定
-   - 定理 (最尤推定量の漸近正規性)
-     #+begin_quote
-     $\mathcal{L}$ が1次元パラメタ $\theta$ を含む連続分布とするとき，
-     最尤推定量 $\hat\theta$ は
-     平均 $\theta$ (真の値)，
-     分散 $1/(nI(\hat\theta))$ の正規分布で近似できる．
-     #+end_quote
-   - 信頼区間の構成
-     #+begin_quote
-     $\theta$ の $1{-}\alpha$ *信頼区間* は以下で構成される．
+   - *標本尖度* (sample kurtosis):
      #+begin_src latex
        \begin{equation}
-         \left[\hat{\theta}-z_{1{-}\alpha/2}\cdot\frac{1}{\sqrt{nI(\hat\theta)}},\;
-           \hat{\theta}+z_{1{-}\alpha/2}\cdot\frac{1}{\sqrt{nI(\hat\theta)}}\right]  
+         \mathrm{kurtosis}=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^4}{s^4}
        \end{equation}
      #+end_src
-     (サンプル数 $n$ が十分大きい場合に近似的に正しい)
+   - 分子の計算は $1/n$ としているが，別の場合もあるので注意
+** 歪度と尖度の計算
+   - 歪度・尖度を計算する関数はRの標準機能にはないので
+     ~package::e1071~ を利用 (自作してもよい)
+     #+begin_quote
+     標本歪度・標本尖度の値は標本平均・分散に比べて
+     *ばらつきが大きい* ので，
+     サンプル数が少ない場合の計算結果の解釈には注意が必要
      #+end_quote
+   - 基本書式
+     #+begin_src R :eval no
+       skewness(x, na.rm = FALSE, type = 3) # 標本歪度
+       kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
+     #+end_src
+   - 関数の引数
+     - ~x~: ベクトル，データフレームなど
+     - ~na.rm~: 欠損値を取り除くか否か
+     - ~type~: 計算法の指定(通常は既定値でよい)
 
 * 演習
   :PROPERTIES:
@@ -838,71 +385,283 @@
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - 東京都の気候データ (~tokyo_weather.csv~) の
-     日射量の項目について以下の問に答えよ．
-     - 全データによる平均値を計算しなさい．
-     - ランダムに抽出した50点を用いて，平均値の0.9(90%)信頼区間を求めなさい．
-     - 上記の推定を100回繰り返した際，真の値(全データによる平均値)が信頼区間に何回含まれるか確認しなさい．
-   - 自身で収集したデータで区間推定を試みよ．
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習3
-     ### 日射量データの区間推定
-     ## データの取得
+   - 東京都の気候データ (~tokyo_weather.csv~) の中の
+     気温, 日射量, 風速の項目について以下の問に答えよ．
+     - 全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数365)
+     - 5のつく日のデータのみを用いて各項目の歪度と超過尖度を求めよ．(データ数36)
+     - それぞれの値から正規分布から逸脱していると思われる項目はいずれか考察せよ．
+     - 各データのヒストグラムを描き，データから計算される平均と分散を持つ正規分布と比較せよ．
+   #+begin_src R :exports none :tangle yes
+     ### 練習2
+     ### 歪度と超過尖度の計算
+     library(e1071)
+     ## データの読み込み
      myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-     ## 以下では関数 with を利用しているが，myDataから風速を取り出しておいても良い
-
-     ## 練習3.1
-     ## 全データによる平均値の計算
-     (mu <- with(myData, mean(日射量))) # 真値
-
-     ## 練習3.2
-     ## 50点による90%信頼区間
-     set.seed(1357) # 乱数のシード値の指定
-     n <- 50
-     idx <- sample(nrow(myData),n) # データの抽出
-     (xbar <- with(myData[idx,], mean(日射量))) # 標本平均
-     (s <- with(myData[idx,], sd(日射量))) # 標本標準偏差
-     z95 <- qnorm(0.95) # 標準正規分布の0.95分位点
-     (ci <- c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
-
-     ## 練習3.3
-     ## 信頼区間の正答率の評価
-     mc <- 100
-     myTrial <- function(n){ # nを変えて実験できるように
-         idx <- sample(nrow(myData),n)
-         xbar <- with(myData[idx,], mean(日射量)) # 標本平均
-         s <- with(myData[idx,], sd(日射量)) # 標本標準偏差
-         return(c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
+     ## 全データによる計算
+     (skew <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=skewness))
+     (kurt <- apply(subset(myData,select=c(気温,日射量,風速)),2,FUN=kurtosis))
+     ## 5の付く日のデータによる計算
+     apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=skewness)
+     apply(subset(myData,subset=日%in%c(5,15,25),select=c(気温,日射量,風速)),2,FUN=kurtosis)
+     ## ヒストグラムの描画と
+     myItems <- c("気温","日射量","風速")
+     par(family="HiraginoSans-W4") 
+     ## 全ての組み合わせは for 文で実行可能
+     for(inum in 1:3){
+         x <- myData[,myItems[inum]] # ベクトルにする必要がある
+         ## x <- subset(myData, select=myItems[inum], drop=TRUE) # でもよい
+         par(family="HiraginoSans-W4") 
+         hist(x, breaks=30, freq=FALSE,
+              col="lightgreen", border="green",
+              xlab=myItems[inum], main=myItems[inum])
+         curve(dnorm(x,mean=mean(x),sd=sd(x)), add=TRUE,
+               col="orange", lwd=2)
      }
-     myCIs <- as.data.frame(t( # confidence intervals
-         replicate(mc,myTrial(n))
-     ))
-     apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"]))
-     table(apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"])))
    #+end_src
-   #+begin_src R :eval no :exports none :tangle yes
+
+
+* 相関と共分散
+** 共分散
+   - 複数のデータ間の関係を知るための記述統計量
+   - *共分散* (covariance):
+     #+begin_src latex
+       \begin{equation}
+         \mathrm{Cov}(X,Y)=\mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])]
+       \end{equation}
+     #+end_src
+   - *標本共分散* (sample covariance): \\
+     $X_1,X_2,\dots,X_n$ および $Y_1,Y_2,\dots,Y_n$ に対して
+     #+begin_src latex
+       \begin{equation}
+         \mathrm{Cov}(X,Y)=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{n-1}
+       \end{equation}
+     #+end_src
+     # ただし$\bar{x},\bar{y}$は
+     # $x_1,x_2,\dotsc,x_N$ および $y_1,y_2,\dotsc,y_N$ の平均
+** 相関
+   - 複数のデータ間の正規化した記述統計量
+   - *相関* (correlation): \\
+     #+begin_src latex
+       \begin{equation}
+         \rho=\frac{\mathrm{Cov}(X,Y)}{\sqrt{\mathrm{Var}(X)\mathrm{Var}(Y)}}
+       \end{equation}
+     #+end_src
+   - *標本相関* (sample correlation): \\
+     $X_1,X_2,\dots,X_n$ および $Y_1,Y_2,\dots,Y_n$ に対して
+     #+begin_src latex
+       \begin{equation}
+         \rho=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}
+         {\sqrt{\sum_{i=1}^n(X_i-\bar{X})^2}\sqrt{\sum_{i=1}^n(Y_i-\bar{Y})^2}}
+       \end{equation}
+     #+end_src
+   #+reveal: split
+   - 直感的には2種類のデータ間の比例関係の大きさ
+   - 相関の値は $-1$ 以上 $1$ 以下
+     - $1$ に近いほど正の比例関係が強い
+     - $-1$ に近いほど負の比例関係が強い
+     # ただし$\bar{x},\bar{y}$は
+     # $x_1,x_2,\dotsc,x_N$ および $y_1,y_2,\dotsc,y_N$ の平均
+
+** 相関と共分散の計算
+   - 基本書式
+     #+begin_src R :eval no
+       cov(x, y = NULL, use = "everything", 
+           method = c("pearson", "kendall", "spearman")) # 共分散
+       cor(x, y = NULL, use = "everything", 
+           method = c("pearson", "kendall", "spearman")) # 相関
+     #+end_src
+   - 関数の引数
+     - ~x,y~: ベクトル，データフレームなど (データフレームの時は列間の共分散行列，相関行列を計算)
+     - ~use~: 欠損値などの扱いに関する指定
+     - ~method~: 計算法の指定(通常は既定値 ~pearson~ でよい)
+
+* 演習
+  :PROPERTIES:
+  :reveal_background: #fef4f4
+  :END:
+** 練習問題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   - 東京都の気候データ (~tokyo_weather.csv~) の中の
+     気温, 降水量, 日射量, 降雪量, 風速, 気圧, 湿度 (数値データ)
+     の項目について以下の問に答えよ．
+     - それぞれの項目間の共分散，および相関を求めよ．
+     - 相関の高い項目の組(絶対値が大きい)，および相関の低い項目の組(0に近い)を求めよ．
+     - その項目同士の散布図を描け．
+   #+begin_src R :exports none :tangle yes
      ### 練習3
-     ### 補遺: 信頼区間について多数で評価する
-     mc <- 2000
-     myCIs <- as.data.frame(t(
-         replicate(mc,myTrial(n))
-     ))
-     table(apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"])))/mc # 確率を見る
-     ### 補遺: グラフを描いてみる
-     k <- 20 
-     idx <- sample(nrow(myCIs),k) # k個選んで描く
-     plot(x=1:k,type="n",
-          ylim=c(min(myCIs),max(myCIs)),
-          xlab="index", ylab="confidence intervals") # 枠だけ描く
-     abline(h=mu, col="orange", lwd=2)
-     with(myCIs[idx,],
-          arrows(x0=1:k,y0=U,y1=L,code=3,
-                 angle=90,length=1/20,col="blue"))
+     ### 共分散と相関の計算
+     ## データの読み込み
+     myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+     ## 共分散・相関行列の計算
+     x <- subset(myData,select=c(気温,降水量,日射量,降雪量,風速,気圧,湿度)) # 数値データ
+     (myCov <- cov(x))
+     (myCor <- cor(x))
+     myCor==min(myCor) # 負の最大相関の位置を確認 (気温と気圧)
+     myCor==max(myCor-diag(diag(myCor))) # 対角を除く最大相関の位置を確認 (気温と湿度)
+     abs(myCor)==min(abs(myCor)) # 最小相関の位置を確認 (降雪量と風速)
+     ## 散布図の描画
+     par(family="HiraginoSans-W4") 
+     pairs(~ 気温 + 気圧, data=myData, col="blue")
+     pairs(~ 気温 + 湿度, data=myData, col="red")
+     pairs(~ 降雪量 + 風速, data=myData, col="grey")
+     pairs(x, col="orange") # 数値データを全部表示してみる
+   #+end_src
+   
+* "順序"に基づく統計量
+** 中央値
+   - データの順序にもとづく記述統計量
+   - *中央値* もしくは *メディアン* (median):
+     #+begin_src latex
+       \begin{equation}
+         X_{(1)}\leq X_{(2)}\leq\cdots\leq X_{(n)}
+       \end{equation}
+     #+end_src
+     データを昇順に並べ替えたとき中央にくる値
+     - $n$ が奇数の場合: $X_{((n+1)/2)}$
+     - $n$ が偶数の場合: $(X_{(n/2)}+X_{(n/2+1)})/2$
+   - 中央値は平均と同様にデータを代表する値
+   - データ中の *外れ値* (異常な値)の影響を受けにくい
+
+** 分位点
+   - $100\alpha$ % *分位点* (percentile/quantile): \\
+     メディアンの一般化
+   - $\alpha\in[0,1]$ に対して,
+     その点以下のデータの個数が全体の約 $100\alpha$ % になるような点
+     - *第1四分位点*: 25%分位点
+     - *第2四分位点*: 50%分位点 (中央値と等価)
+     - *第3四分位点*: 75%分位点
+
+** 中央値・分位点の計算
+   - 基本書式
+     #+begin_src R :eval no
+       median(x, na.rm = FALSE, ...) # 中央値
+       quantile(x, probs = seq(0, 1, 0.25), na.rm = FALSE,
+                names = TRUE, type = 7, ...) # 分位点
+       summary(x) # 最大，最小，四分位点，平均を計算する
+     #+end_src
+   - 関数の引数
+     - ~x~: ベクトル
+     - ~na.rm~: 欠損値を取り除くか否か
+     - ~probs~: 計算する分位点の値
+     - ~names~: 出力に関する指定，多数の分位点を計算する場合は ~FALSE~ とした方がよい
+     - ~type~: 計算法の指定( ~help(quantile)~ を参照)
+	
+** 連続分布の分位点
+   - 分位点は推定や検定において重要な役割を果たす
+   - 連続分布の $100\alpha$ *%分位点* :
+     #+begin_quote
+     $0<\alpha<1$ に対して，その分布に従う確率変数を $X$ としたとき，
+     不等式
+     #+begin_src latex
+       \begin{equation}
+         P(X\leq x)\geq\alpha
+       \end{equation}
+     #+end_src
+     を満たす実数 $x$ のうち最小のもの．
+     
+     そのような実数は常に存在し, それを $q_\alpha$ とすると
+     #+begin_src latex
+       \begin{equation}
+         P(X\leq q_\alpha)=\alpha
+       \end{equation}
+     #+end_src
+     が成り立つ．
+     #+end_quote
+   #+reveal: split
+   - 分位点の性質
+     #+begin_quote
+     $X_1,X_2,\dots,X_n$ が独立同分布な確率変数の列のとき,
+     $X_1,X_2,\dots,X_n$ の $100\alpha$ %分位点は，
+     $n\to\infty$ のとき $X_1,X_2,\dots,X_n$ の従う
+     分布の $100\alpha$ %分位点の *一致推定量* となる．
+     #+end_quote
+
+** 分布の分位点の計算
+   - 基本書式
+     #+begin_src R :eval no
+       # 正規分布の例
+       qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
+       # xxx分布の場合は以下の形式
+       qxxx(p, "分布の特性を決める option の指定") 
+     #+end_src
+   - 関数の引数
+     - ~p~: 分位点 (100p%)
+     - ~mean, sd~: 正規分布の特性を決めるoption
+     - ~lower.tail~: ~TRUE~ なら $P(X\le x)$ を計算，
+       ~FALSE~ なら逆
+     - ~log.p~: 出力を対数とするか否か (値が小さい場合に利用)
+
+** ばらつきの指標
+   - 分位点を利用したデータのばらつきの指標
+   - *範囲* (range): \\
+     最大値と最小値の差 (外れ値の影響を大きく受ける)
+   - *四分位範囲* (interquantile range): \\
+     第3四分位点と第1四分位点の差
+   - *中央絶対偏差* (median absolute deviation): \\
+     $X_1,X_2,\dots,X_n$ の中央値を $m$ としたとき,
+     $|X_1-m|,|X_2-m|,\dots,|X_n-m|$ の中央値
+
+* "頻度"に基づく統計量
+** 頻度に基づく統計量
+   - *最頻値* もしくは *モード* (mode): データの中で最も頻度が高く現れる値
+   - データが有限個の値を取る場合に特に有効
+   - データが連続で無限に多くの値を取ることができる場合には
+     注意が必要
+     - 連続なデータの場合でも有限個の観測データに対してモードは定義できる
+     - ただし，偶々観測値として現れた値なのでその意味はよく考えなくてはならない
+     - 必要に応じて, 例えば区分的に集計するなどの工夫をすることもある
+
+* 演習
+  :PROPERTIES:
+  :reveal_background: #fef4f4
+  :END:
+** 練習問題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   - 東京都の気候データ (~tokyo_weather.csv~) の中の
+     気温(数値データ)と最多風向(ラベルデータ)を用いて
+     以下の問に答えよ．
+     - 全てのデータを用いて気温の四分位点を求めよ．(データ数365)
+     - 5の付く日(各月の5,15,25)の気温の四分位点を求めよ．(データ数36)
+     - ランダムに選んだ36日分のデータで気温の四分位点がどのくらいばらつくか確認せよ．
+     - 風向の最頻値を求めなさい．
+   #+begin_src R :exports none :tangle yes
+     ### 練習4
+     ### 分位点と最頻値の計算
+     ## データの読み込み
+     myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+     ## 気温の分位点
+     ## 全データによる計算
+     (myTruth <- summary(subset(myData,select=気温,drop=TRUE)))
+     ## 5の付く日のデータによる計算
+     summary(subset(myData,subset=日%in%c(5,15,25),select=気温,drop=TRUE))
+     ## ランダムに選択した36日で推定した場合のばらつき
+     mc <- 5000 # 実験回数を指定
+     myFuncs <- c("min","1Q","median","mean","3Q","max")
+     myTrial <- function(){
+	 idx <- sample(1:nrow(myData),36) # 重複なしで36行選ぶ
+	 summary(subset(myData[idx,],select=気温,drop=TRUE))}
+     quants <- replicate(mc,myTrial())
+     ## ヒストグラムの表示
+     for(fnum in 1:6) {
+         par(family="HiraginoSans-W4") 
+         hist(quants[fnum,], breaks=40, freq=FALSE,
+              col="lightblue", border="blue",
+              xlab="気温", main=paste("気温の",myFuncs[fnum],"の推定"))
+         abline(v=myTruth[fnum],col="red",lwd=2)
+     }
+     ## 最多風向の最頻値
+     (myTable <- table(subset(myData,select=最多風向))) # 頻度表
+     max(myTable) # 最大値 
+     which.max(myTable) # 最頻値の表の位置
+     names(which.max(myTable)) # 最頻値の項目名
    #+end_src
 
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted
 # End:
-   
    
