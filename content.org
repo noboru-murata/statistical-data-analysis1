@@ -44,7 +44,6 @@
    {{< myslide base="statistical-data-analysis1" name="slide01" >}}
 ** ハンドアウト
    - [[github:pdfs/slide01.pdf][PDF file]]
-   
 ** 解答例
    - [[github:code/slide01.R][RScript]]
 
@@ -53,6 +52,7 @@
   :EXPORT_FILE_NAME: lecture02
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide02" >}}
 ** ハンドアウト
@@ -65,6 +65,7 @@
   :EXPORT_FILE_NAME: lecture03
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide03" >}}
 ** ハンドアウト
@@ -77,6 +78,7 @@
   :EXPORT_FILE_NAME: lecture04
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide04" >}}
 ** ハンドアウト
@@ -89,6 +91,7 @@
   :EXPORT_FILE_NAME: lecture05
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide05" >}}
 ** ハンドアウト
@@ -101,6 +104,7 @@
   :EXPORT_FILE_NAME: lecture06
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide06" >}}
 ** ハンドアウト
@@ -113,6 +117,7 @@
   :EXPORT_FILE_NAME: lecture07
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide07" >}}
 ** ハンドアウト
@@ -125,6 +130,7 @@
   :EXPORT_FILE_NAME: lecture08
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide08" >}}
 ** ハンドアウト
@@ -137,6 +143,7 @@
   :EXPORT_FILE_NAME: lecture09
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide09" >}}
 ** ハンドアウト
@@ -149,6 +156,7 @@
   :EXPORT_FILE_NAME: lecture10
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide10" >}}
 ** ハンドアウト
@@ -161,6 +169,7 @@
   :EXPORT_FILE_NAME: lecture11
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide11" >}}
 ** ハンドアウト
@@ -173,6 +182,7 @@
   :EXPORT_FILE_NAME: lecture12
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
+  更新中
 ** スライド
    #+html: {{< myslide base="statistical-data-analysis1" name="slide12" >}}
 ** ハンドアウト
@@ -211,6 +221,7 @@
   :EXPORT_FILE_NAME: lecture13
   :EXPORT_DATE: <2021-04-03 Sat>
   :END:
+  更新中
 ** スライド
    {{< myslide base="statistical-data-analysis1" name="slide13" >}}
 ** ハンドアウト

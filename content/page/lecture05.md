@@ -6,6 +6,9 @@ draft = false
 weight = 1006
 +++
 
+更新中
+
+
 ## スライド {#スライド}
 
 {{< myslide base="statistical-data-analysis1" name="slide05" >}}
