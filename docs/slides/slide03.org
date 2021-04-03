@@ -1,7 +1,9 @@
-#+TITLE: ベクトル・行列の演算と関数
+#+TITLE: 関数と制御構造
+#+SUBTITLE: 関数の定義と分岐・繰り返し処理
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 2020.04.24
+#+DATE: 
+# Time-stamp: <2021-04-03 13:23:17 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -10,412 +12,61 @@
 # C-c '
 :end:
 
-* COMMENT tangle用
+* 講義の内容
+  - R言語における関数
+  - 引数の扱い方 (引数名・順序・既定値)
+  - 自作関数の定義
+  - 制御構造 (条件分岐・繰り返し)
+    
+  #+begin_src R :eval no :exports none :tangle yes
+    ### 第03回 練習問題解答例
+  #+end_src
+  #+begin_src R :exports none
+    setwd("~/Desktop/lectures/u-tokyo/spring/slide")
+  #+end_src
+  
 
-#+begin_src R :exports none :tangle yes
-  ### 第2回 演習問題解答例
-#+end_src
-
-* ベクトルの計算
-** ベクトルの表記
-   - ベクトルは太字で，要素は下付き添字で表す
-     # #+begin_export latex
-     \begin{equation}
-       \boldsymbol{a}
-       =(a_{1},a_{2},\dotsc,a_{k})
-     \end{equation}
-     # #+end_export
-     #+begin_src R :exports code
-       a <- c(a1,a2,...,ak) # k次元ベクトルの作成
+* COMMENT メモ
+  - 関数の使い方，引数の扱い，順番，既定値
+    
+* R言語における関数
+** 関数
+   - 関数の取り扱いは一般的な計算機言語とほぼ同様
+   - 関数は引数とその値を指定して実行
+   - ただし引数名は順序を守れば省略可能
+   - [[color:darkgreen][関数の呼び出し方]]
+     #+begin_src R :eval no
+       f(arg1=value1, arg2=value2) 
+       ## arg1, arg2 は引数の名前，value1, value2 は引数に渡す値を表す
+       f(value1, value2) # 上と同値．順序に注意
      #+end_src
-   - 別の書き方:
-     # #+begin_export latex
-     \begin{equation}
-       (\boldsymbol{a})_{i}
-       =\text{(ベクトル $\boldsymbol{a}$ の第 $i$ 成分)}  
-     \end{equation}
-     # #+end_export
-     # $(\boldsymbol{a})_{i}=$ (ベクトル $\boldsymbol{a}$ の第 $i$ 成分)
-   # - 対応するRのオブジェクトはタイプライタ体で表記する
-   #   #+begin_src R :exports code
-   #   a
-   #   #+end_src
-   #   # % 
+
+   # - 引数が存在しない，
+   #  もしくはすべての引数に対し既定値が設定されている関数もある．
+   #  例えば ~f~ がそのような関数だった場合，
+   #  コンソール上で
+   #  #+begin_src R :exports code
+   #  f()    
+   #  #+end_src
+   #  を実行すると引数=既定値として関数の内容が実行される
+   # - 典型例はRを終了する関数 ~q()~
+** 関数の実行例
+   - [[color:darkgreen][正弦関数の計算]]
+     #+begin_src R :exports both :results output
+       sin(x = pi/2) 
+       sin(pi/2) # 上と同値
+     #+end_src
+   - [[color:darkgreen][対数関数の計算]] (xやbに適当な数値を代入せよ)
+     #+begin_src R :eval no
+       log(x, b) # 底をbとする対数
+       log(x=x, base=b) #上と同値
+       log(base=b, x=x) #上と同値
+       log(b,x) # = log(x=b,base=x) 
+       log(x) # 自然対数 =log(x,base=exp(1))
+     #+end_src
+
+** 引数
    
-** ベクトルの加法
-   - *同じ長さのベクトル* の和および差: \\
-     /数値の和と差のように扱うことができる/
-     # #+begin_export latex
-     \begin{equation}
-       \boldsymbol{a}\pm\boldsymbol{b}
-       =(a_{1}\pm b_{1},a_{2}\pm b_{2},\dotsc,a_{k}\pm b_{k})
-     \end{equation}
-     \begin{equation}
-       (\boldsymbol{a}\pm\boldsymbol{b})_{i}
-       =a_{i}\pm b_{i}
-     \end{equation}
-     # #+end_export
-     #+begin_src R :exports code
-       a + b # 同じ長さのベクトル a,b の和
-       a - b # ベクトルの差
-     #+end_src
-     # ~a, b~ が同じ長さのベクトルであればによって和を計算できる
-
-** ベクトルの乗法
-   - *同じ長さの2つのベクトル* の乗法: \\
-     /(2種類ある)/
-     - 成分ごとの積 (Hadamard積; 要素積)
-     - ベクトルの内積
-   - データ解析ではどちらも良く用いられる
-
-** Hadamard積 
-   - *同じ長さのベクトル* の成分ごとの積
-     # #+begin_export latex
-     \begin{equation}
-       \boldsymbol{a}\circ\boldsymbol{b}
-       =(a_{1}b_{1},a_{2}b_{2},\dotsc,a_{k}b_{k})
-     \end{equation}
-     \begin{equation}
-       (\boldsymbol{a}\circ\boldsymbol{b})_{i}
-       =a_{i}b_{i}
-     \end{equation}
-     # #+end_export
-     #+begin_src R :exports code
-       a * b # ベクトルの成分ごとの積
-       a / b # 成分ごとの商も計算可
-     #+end_src
-** 内積
-   - *同じ長さのベクトル* の内積
-     # #+begin_export latex
-     \begin{align}
-       \boldsymbol{a}\cdot\boldsymbol{b}
-       &=a_{1}b_{1}+a_{2}b_{2}+\dotsb+a_{k}b_{k}\\
-       &=\sum_{i=1}^{k}a_{i}b_{i}
-     \end{align}
-     # #+end_export
-     #+begin_src R :exports code
-       a %*% b # ベクトルの内積
-     #+end_src
-
-* 行列の計算
-** 行列の表記
-   - 行列は大文字で，要素は下付き添字で表す
-     # #+begin_export latex
-     \begin{equation}
-       A
-       =
-       \begin{pmatrix}
-         a_{11}&a_{12}&\dots&a_{1n}\\
-         a_{21}&a_{22}&\dots&a_{2n}\\
-         \vdots&&\ddots&\vdots\\
-         a_{m1}&a_{m2}&\dots&a_{mn}
-       \end{pmatrix}
-     \end{equation}
-     # #+end_export
-     #+begin_src R :exports code
-        A <- matrix(c(a11,a21,...,amn),m,n) # m x n 行列の作成
-     #+end_src
-   - 別の書き方:
-     # #+begin_export latex
-     \begin{equation}
-       (A)_{ij}
-       =\text{(行列 $A$ の $ij$ 成分)}
-     \end{equation}
-     # #+end_export
-     # $(A)_{ij}=$ (行列 $A$ の $ij$ 成分)
-   # - (対応するRオブジェクトはタイプライタ体)
-
-** 行列の加法
-   - *同じ大きさの行列* の和および差: \\
-     /ベクトルと同じように記述することができる/
-     # #+begin_export latex
-     \begin{equation}
-       (A\pm B)_{ij}=a_{ij}\pm b_{ij}
-     \end{equation}
-     # #+end_export
-     #+begin_src R :exports code
-       A + B # 同じサイズの行列の和
-       A - B # 行列の差
-     #+end_src
-
-** 行列の乗法
-   - 2つの行列の乗法: \\
-     /(2種類ある)/
-     - *同じ大きさの行列* の成分ごとの積 (Hadamard積; 要素積)
-     - *$n\times m$ 型行列と $m\times l$ 型行列* の積
-   - データ解析ではどちらも良く用いられる
-
-** Hadamard積
-   - *同じ大きさの行列* の成分ごとの積
-     # #+begin_export latex
-     \begin{equation}
-       (A\circ B)_{ij}=a_{ij}b_{ij}
-     \end{equation}
-     # #+end_export
-     #+begin_src R :exports code
-       A * B # 行列の成分ごとの積
-       A / B # 成分ごとの商も計算可
-     #+end_src
-** 行列の積
-   - *$n\times m$ 型行列 $A$ と $m\times l$ 型行列 $B$* の積
-     # #+begin_export latex
-     \begin{equation}
-       (AB)_{ij}=\sum_{k=1}^{m}a_{ik}b_{kj}
-       \quad\text{($AB$は$n\times l$行列)}
-     \end{equation}
-     # #+end_export
-     #+begin_src R :exports code
-       A %*% B # 行列の積
-     #+end_src
-
-** 行列式とトレース
-   - *$n$ 次正方行列* $A$ の行列式 $\det(A)$
-     #+begin_src R :exports code
-       det(A) # 行列式
-     #+end_src
-   - *$n$ 次正方行列* $A$ のトレース(対角成分の総和)
-     # #+begin_export latex
-     \begin{equation}
-       \mathrm{trace}(A)=\sum_{i=1}^{n}a_{ii}
-     \end{equation}
-     # #+end_export
-     関数は用意されていないので以下を利用:
-     - 関数 ~diag()~: 行列の対角成分を取り出す(ベクトル)
-     - 関数 ~sum()~: ベクトルの総和を計算する 
-     #+begin_src R :exports code
-       sum(diag(A)) # 行列のトレース
-     #+end_src
-
-* 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
-** 例題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 適当な2次正方行列 $A$ で
-     Hamilton-Cayleyの定理
-     # #+begin_export latex
-     \begin{equation}
-       A^2-\mathrm{trace}(A)A+\det(A)E_{2}=O_{2}
-     \end{equation}
-     # #+end_export
-     の成立を確認せよ．\\
-     ただし $E_{2}$ は2次単位行列，$O_{2}$ は2次正方零行列
-** 解答例
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   #+begin_src R :exports none :tangle yes
-     ### 例題1
-     ### Hamilton-Cayleyの定理の確認
-   #+end_src
-   #+begin_src R :exports both :results output :tangle yes
-     ## 行列を作成 (好きに設定してよい)
-     (A <- matrix(1:4,2,2)-diag(rep(3,2)))
-   #+end_src
-   #+begin_src R :exports both :results output :tangle yes
-     ## 左辺を計算
-     A%*%A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
-   #+end_src
-
-** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 1から10の2乗値からなるベクトルを作成せよ．
-     #+begin_src R :exports none :tangle yes
-       ### 練習1.1
-       ### 1から10までの2乗値からなるベクトル
-       1:10 # 1から10までのベクトル
-       1:10 * 1:10 # 2乗値のベクトル
-     #+end_src
-   - 1から10までの和を計算せよ．
-     #+begin_src R :exports none :tangle yes
-       ### 練習1.2
-       ### 1から10までの和
-       1:10 %*% rep(1,10) # (1,2,...,10)と(1,1,...,1)の内積
-     #+end_src
-   - 行列を用いて九九の表を作成せよ．
-     #+begin_src R :exports none :tangle yes
-       ### 練習1.3
-       ### 九九の表
-       matrix(rep(1:9,9),9,9) # 行ごとに1から9を並べる
-       matrix(rep(1:9,9),9,9,byrow=TRUE) # 列ごとに1から9を並べる
-       matrix(rep(1:9,9),9,9) * matrix(rep(1:9,9),9,9,byrow=TRUE)
-     #+end_src
-   - 30度の回転行列を2回乗ずると60度の回転行列となることを確認せよ．
-     # #+begin_export latex
-     \begin{equation}
-       \text{(回転行列)}
-       =
-       \begin{pmatrix}
-         \cos(\theta)&-\sin(\theta)\\
-         \sin(\theta)& \cos(\theta)
-       \end{pmatrix}
-     \end{equation}
-     # #+end_export
-     #+begin_src R :exports none :tangle yes
-       ### 練習1.4
-       ### 30度の回転行列の2乗は60度の回転行列
-       theta <- pi/6 # 30度のラジアン値
-       R30 <- matrix(c(cos(theta),sin(theta),
-                       -sin(theta),cos(theta)),2,2)
-       R60 <- matrix(c(cos(2*theta),sin(2*theta),
-                       -sin(2*theta),cos(2*theta)),2,2)
-       R30 # 30度の回転行列
-       R30 %*% R30 # 30度の回転行列の2乗
-       R60 # 60度の回転行列
-     #+end_src
-
-* ベクトルと行列の計算
-** ベクトルと行列の乗法
-   - 列(縦)ベクトル・行(横)ベクトルという *区別はない*
-   - 行列とベクトルの順序で適切に判断される
-   - 計算結果は *行列* で表現される
-     #+begin_src R
-       A <- matrix(1:4,2,2); b <- c(5,6) # 行列とベクトルを作成
-     #+end_src
-     #+begin_src R
-       A %*% b # 行列 x ベクトル = 列ベクトル
-     #+end_src
-     #+begin_src R
-       b %*% A # ベクトル x 行列 = 行ベクトル
-     #+end_src
-
-** 連立1次方程式の解法
-   - 連立1次方程式
-     - $A$ : $n$ 次正則行列
-     - $\boldsymbol{b},\boldsymbol{x}$ : $n$ 次元列ベクトル
-     # #+begin_export latex
-     \begin{align}
-       A\boldsymbol{x}&=\boldsymbol{b}
-       &&\text{(連立1次方程式)}\\
-       \boldsymbol{x}&=A^{-1}\boldsymbol{b}
-       &&\text{(解;$A$が正則な場合)}
-     \end{align}
-     # #+end_export
-   - 解を求めるには関数 ~solve()~ を利用する
-     #+begin_src R :exports code
-     x <- solve(A, b)    
-     #+end_src
-   - ベクトル $\boldsymbol{b}$ の代わりに行列も扱える
-
-** 逆行列
-   - 正則な $n$ 次正方行列 $A$ の逆行列 $A^{-1}$
-     # #+begin_export latex
-     \begin{equation}
-       AA^{-1}=A^{-1}A=E_{n}
-       \quad\text{($E_{n}$は$n$次単位行列)}
-     \end{equation}
-     # #+end_export
-   - 関数 ~solve()~ を利用して求めることができる
-     # #+begin_export latex
-     \begin{align}
-       AX&=E_{n}\\
-       X&=A^{-1}E_{n}=A^{-1}
-     \end{align}
-     # #+end_export
-     #+begin_src R :exports code
-       solve(A,B) # AX=B の解Xを求める
-       solve(A) # 逆行列 (Bが単位行列の場合省略できる)
-     #+end_src
-   - /(他にもいくつか方法は用意されている)/
-
-** 関数の適用
-   - ベクトルや行列に関数( $\sin,\exp,\dots$ など)を適用すると
-     成分ごとに計算した結果が返される
-   - [[color:darkgreen][ベクトル $\boldsymbol{a}$ ，行列 $A$ に関数 $\sin$ を適用]]
-     # #+begin_export latex
-     \begin{equation}
-       (\sin(\boldsymbol{a}))_{i}=\sin(a_{i})
-     \end{equation}
-     # #+end_export
-     #+begin_src R :exports code
-       sin(a) # 成分ごとに計算される．sin(a)[i]=sin(a[i])
-     #+end_src
-     # #+begin_export latex
-     \begin{equation}
-       (\sin(A))_{ij}=\sin(a_{ij})
-     \end{equation}
-     # #+end_export
-     #+begin_src R :exports code
-      sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
-     #+end_src
-
-* 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
-** 例題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 適当な3次正方行列 $A$ と3次元ベクトル $\boldsymbol{b}$ を作成して
-     $\boldsymbol{x}$ に関する連立1次方程式
-     # #+begin_export latex
-     \begin{equation}
-       A\boldsymbol{x}=\boldsymbol{b}
-     \end{equation}
-     # #+end_export
-     を解け
-** 解答例
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   #+begin_src R :exports none :tangle yes
-     ### 例題2
-     ### 3元連立1次方程式の解法
-   #+end_src
-   #+begin_src R :exports both :results output :tangle yes
-     ## 行列とベクトルを作成 (好きに設定してよい)
-     ## rnorm(9) は正規乱数を9つ作成する(第5回で詳しく説明)
-     (A <- matrix(rnorm(9),3,3)+diag(rep(1,3)))
-     (b <- 1:3)
-   #+end_src
-   #+begin_src R :exports both :results output :tangle yes
-     ## 解を計算
-     (x <- solve(A,b))
-     A%*%x # 結果の確認(b になるはず)
-   #+end_src
-** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 1から10の2乗値からなるベクトルを作成せよ．
-     #+begin_src R :exports none :tangle yes
-        ### 練習2.1
-        ### 1から10までの2乗値からなるベクトル
-        (1:10)^2 # ^2も関数として成分ごとに計算される
-     #+end_src
-   - 2次元ベクトルを回転行列で変換しても長さが変わらないことを確かめよ．
-     #+begin_src R :exports none :tangle yes
-       ### 練習2.2
-       ### 回転してもベクトルの長さが変わらないことを確認
-       ## 回転行列とベクトルを作成 (好きに設定してよい)
-       theta <- 2*pi/3 # 120度のラジアン値
-       (R <- matrix(c(cos(theta),sin(theta),
-                     -sin(theta),cos(theta)),2,2))
-       (x <- 1:2)
-       (y <- R %*% x) # xを回転してyを作成
-       ## 長さの2乗はベクトルの内積で計算できる
-       x %*% x # xの長さの2乗
-       as.vector(y) %*% as.vector(y) # yの長さの2乗
-     #+end_src
-   - 例題の $A$ と $\boldsymbol{b}$ を用いて
-     #+begin_src R :exports code
-       A %*% b + b %*% A   
-     #+end_src
-     を計算するとエラーになるが，何故そうなるか理由を考えよ．
-     #+begin_src R :exports none :tangle yes
-       ### 練習2.3
-       ### エラーになる理由を考察
-       A %*% b # 列ベクトル (3x1型行列)
-       b %*% A # 行ベクトル (1x3型行列)
-       A %*% b + b %*% A # 大きさが異なるので計算できない   
-     #+end_src
-
 * 関数の定義
 ** 自作関数
    - 他の言語と同様にRでも関数を定義できる   

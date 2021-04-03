@@ -1,7 +1,9 @@
-#+TITLE: ベクトル・行列の演算と関数
+#+TITLE: データ構造
+#+SUBTITLE: R言語で扱うデータ構造とその演算
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 2020.04.24
+#+DATE: 
+# Time-stamp: <2021-04-03 14:25:19 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -10,12 +12,245 @@
 # C-c '
 :end:
 
-* COMMENT tangle用
+* 講義の内容
+  - R言語のデータ構造
+  - ベクトルの計算
+  - 行列の計算
+  - ベクトルと行列の計算
 
-#+begin_src R :exports none :tangle yes
-  ### 第2回 演習問題解答例
-#+end_src
+  #+begin_src R :eval no :exports none :tangle yes
+    ### 第02回 練習問題解答例
+  #+end_src
+  #+begin_src R :exports none
+    setwd("~/Desktop/lectures/u-tokyo/spring/slide")
+  #+end_src
 
+* COMMENT メモ
+  - 前回を踏まえデータ構造を復習
+  - ベクトルと行列の計算を総括
+
+* R言語のデータ構造
+** Rの基本的なデータ構造
+   - 下記は基本的なもの
+     - ベクトル (vector)
+     - 行列 (matrix)
+     - リスト (list) 
+     - データフレーム (data frame)
+     - 配列 (array)
+   - /[[color:gray][パッケージなどで拡張することができる]]/
+
+** ベクトルとは
+   - スカラー値(単一の値)の集合 
+   - スカラー値として扱われる主なもの
+     - 数値 (実数や複素数)
+     - 文字列 ('や"で囲まれた文字．"foo"，"bar"など)
+     - 論理値 ( ~TRUE~ , ~FALSE~ )
+   - Rオブジェクトの多くはベクトルとして扱われる\\
+     /[[color:gray][スカラーは長さ1のベクトルとして扱われる]]/
+
+** ベクトルの生成と操作
+   - 数値や文字列の要素からなるベクトルの生成:
+     #+begin_src R :exports both :results output
+       (x <- c("Alice","Bob","Cathy","David")) # 文字列のベクトル
+       (y <- c(1,-2,3,-4,5)) # 数値のベクトル
+       (z <- c("apple","berry","cat","dog","elephant")) # 文字列のベクトル
+       ## 外側の () は代入した結果の表示．print() と同義
+     #+end_src
+   #+reveal: split
+   - ベクトルの長さの取得:
+     #+begin_src R :exports both :results output
+       length(x)    
+     #+end_src
+   - ベクトルの要素の取得:
+     #+begin_src R :exports both :results output
+       x[3] # xの第3要素 (ベクトルの添え字は1から始まる)
+       y[c(1,3,4)] # 複数の要素 = c(y[1],y[3],y[4])
+     #+end_src
+   #+reveal: split
+   - 実数 ~a~ から ~b~ まで
+     1ずつ変化するベクトル:
+     #+begin_src R :exports both :results output
+       a <- 8; b <- 15 # 変数 a,b に値を代入
+       a:b # a < b の場合は1ずつ増加する系列が作成される
+       a <- 29.5; b <- 24
+       a:b # 逆の場合は1ずつ減少する系列が作成される
+       29.5:24 # 直接数値を書いてもよい
+     #+end_src
+   - 実数 ~a~ から ~b~ まで
+     ~c~ ずつ変化するベクトル:
+     #+begin_src R :exports both :results output
+       a <- 1; b <- 16; c <- 2 # 変数 a,b,c に値を代入
+       seq(a,b,by=c) # from=a,to=b と明示してもよい    
+     #+end_src
+   #+reveal: split
+   - ベクトルの反転:
+     #+begin_src R :exports both :results output
+       rev(x)
+     #+end_src
+   - ベクトルの繰り返し:
+     #+begin_src R
+       n <- 3 # 変数 n に値を代入
+       rep(y,n) # 長さは length(y) * n 
+     #+end_src
+   - ベクトルの結合:
+     #+begin_src R
+       c(x,z) # 異なる属性のものは結合できない．c(x,y) を試みよ
+     #+end_src
+
+** 行列の生成と操作
+   - すべての要素が ~a~ である $m\times n$ 行列:
+     #+begin_src R :exports code
+       matrix(a,m,n)     
+     #+end_src
+   - 長さ $mn$ のベクトル ~x~ を $m\times n$ 行列に変換:
+     # # #+begin_export latex
+     # \begin{equation}
+     #   x=(x_{11},\dots,x_{m1},x_{21},\dots,x_{2n},\dots,x_{m1},\dots,x_{mn})
+     # \end{equation}
+     # # #+end_export
+     #+begin_src R :exports code
+       x <- c(x11,...,xm1,x12,...,xm2,...,x1n,...,xmn)
+       matrix(x,m,n)    
+     #+end_src
+     # ただし
+     # % $x=(x_{11},\dotsc,x_{m1},x_{21},\dotsc,x_{m1},\dotsc,x_{mn})$
+     # % $(x_{ij})_{1\leq i\leq m,1\leq n}$
+   - 関数 ~as.vector()~ を用いたベクトル化:
+     #+begin_src R :exports code
+       x <- as.vector(matrix(x,m,n))
+     #+end_src 
+   #+reveal: split
+   - 行列のサイズの取得: 
+     #+begin_src R :exports code
+       dim(X) # 長さ2のベクトル
+       nrow(X) # 行数
+       ncol(X) # 列数
+     #+end_src
+   # - 関数 ~dim()~ によるベクトルから行列への変換:
+   #   #+begin_src R :exports code
+   #     dim(x) <- c(m,n) # = matrix(x,m,n)
+   #   #+end_src
+   - 行列の成分の取得:
+     #+begin_src R :exports code
+       X[i,j] # (i,j)成分
+       X[i, ] # 第i行
+       X[ ,j] # 第j列
+       X[c(1,3),2:4] # 1，3行と，2〜4列からなる部分行列
+     #+end_src
+     # ベクトルの場合と同様に，
+     # 添え字をベクトルで指定することで部分行列の取り出しも可能
+   - 長さが等しい複数のベクトルの結合:
+     #+begin_src R :exports code
+       rbind(x, y, ...) # 行ベクトルとして結合
+       cbind(x, y, ...) # 列ベクトルとして結合
+     #+end_src
+     # ~cbind()/rbind()~ は行列の結合にも使える
+** 行列の生成と操作 (補足)
+   - 関数 ~cbind()/rbind()~ は行数/列数が等しい行列を横/縦に結合できる
+   - 行列の高次元版として配列(array)が用意されている
+   - 関数 ~rownames()/colnames()~ を用いると行と列に名前を付けることができる
+
+
+** リストとは
+   - 異なる構造のデータを1つにまとめたもの
+   - リストの各要素は異なる型であって構わない
+   - 本講義のデータ解析ではほとんど用いない
+   - Rの関数の操作ではときどき必要
+** リストの生成と操作
+   - リストの生成:
+     #+begin_src R :exports code
+       L <- list(x,y) # x,yを要素とするリスト
+       L[[i]] # リストの第i要素
+     #+end_src
+   - リストの各要素に名前を付与:
+     #+begin_src R :exports code
+       L1 <- list(first=x, second=y) # 方法1
+       L2 <- list(x,y)               # 方法2
+       names(L2) <- c("first","second")
+     #+end_src
+   - 名前によるリストの要素の取得:
+     #+begin_src R :exports code
+       L1$first      # 方法1
+       L2[["first"]] # 方法2
+     #+end_src
+** データフレームとは
+   - 長さの等しいベクトルを束ねたリスト
+     # (データ型はバラバラでも良い)
+   - いくつかの個体について，いくつかの属性を集計したデータ
+   - [[color:darkgreen][ある小学校の1年生の身長・体重・性別・血液型]]
+     - 各成分はある個体のある属性に関する観測データ
+     - 個体数は集計項目に関わらず変化しないが，
+       集計項目によっては定量的データ・定性的データの違いが出てくるので
+       データ型は変わりうる
+   - 実データの多くは表形式で与えられるため，
+     実データに則したデータ構造
+** データフレームの生成と操作
+   - データフレームの生成:
+     #+begin_src R :exports code
+       data.frame(A=x,B=y,C=z) # x,y,zは同じ長さ，各列はA,B,Cという名前
+     #+end_src
+   - データフレームは *リスト* でもある\\
+     リストと同様にして各変数にアクセスできる
+   - データフレームは *行列* でもある\\
+     行数がベクトルの長さ(個体数), 列数が変数の個数(観測項目の数)の行列と同様にアクセスできる
+
+
+* 演習
+  :PROPERTIES:
+  :reveal_background: #fef4f4
+  :END:
+** 練習問題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   ベクトルの操作に慣れよう
+   - 以下に示すベクトルを作成してみよう
+     - 1から10までの自然数のベクトル
+     - 1以上30以下の奇数を昇順に並べたベクトル
+     - すべての要素が1からなる長さ10のベクトル
+   - 作成したベクトルを操作してみよう
+     - ベクトルの長さを求める
+     - 3番目の要素を取り出す
+     - 最後の要素を取り出す
+
+** 練習問題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   行列の操作に慣れよう
+   - 以下に示す行列を作成してみよう
+     # #+begin_export latex
+     \begin{equation*}
+       \begin{pmatrix}
+         1  & 2  & 3  \\
+         4  & 5  & 6 
+       \end{pmatrix}
+     \end{equation*}
+     # #+end_export
+   - 行列を操作してみよう
+     - 2行2列成分を取り出す
+     - 転置行列を作成する
+     - 行名をつける
+   
+** 練習問題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   データフレームの操作に慣れよう
+   - 次の表に対応するデータフレームを作成してみよう
+     |-------+------+------+------|
+     |       | 国語 | 数学 | 英語 |
+     |-------+------+------+------|
+     | Alice |   90 |   25 |   65 |
+     | Bob   |   80 |   50 |  100 |
+     | Cathy |   70 |   75 |   70 |
+     | David |   60 |  100 |   40 |
+     |-------+------+------+------|
+   - データフレームを操作してみよう
+     - 数学の列を取り出す
+     - Cathyの行を取り出す
+
+    
 * ベクトルの計算
 ** ベクトルの表記
    - ベクトルは太字で，要素は下付き添字で表す
@@ -96,6 +331,7 @@
      #+begin_src R :exports code
        a %*% b # ベクトルの内積
      #+end_src
+
 
 * 行列の計算
 ** 行列の表記
@@ -186,6 +422,7 @@
        sum(diag(A)) # 行列のトレース
      #+end_src
 
+
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
@@ -219,7 +456,6 @@
      ## 左辺を計算
      A%*%A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
    #+end_src
-
 ** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
@@ -268,6 +504,7 @@
        R30 %*% R30 # 30度の回転行列の2乗
        R60 # 60度の回転行列
      #+end_src
+
 
 * ベクトルと行列の計算
 ** ベクトルと行列の乗法
@@ -344,6 +581,7 @@
       sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
      #+end_src
 
+
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
@@ -416,7 +654,8 @@
        A %*% b + b %*% A # 大きさが異なるので計算できない   
      #+end_src
 
-* 関数の定義
+
+* COMMENT 関数の定義
 ** 自作関数
    - 他の言語と同様にRでも関数を定義できる   
    - 関数の定義には関数 ~function()~ を利用する 
@@ -432,7 +671,7 @@
        myfunc(1) # 実行
      #+end_src
 
-* 制御構造
+* COMMENT 制御構造
 ** 制御文
    - 最適化や数値計算などを行うためには，
      条件分岐や繰り返しを行うための仕組みが必要となる
@@ -525,7 +764,7 @@
    #      という記述が含まれている必要がある．
    #      この記述は，「条件Aが成立したら繰り返しをやめる」という意味
 
-* 演習
+* COMMENT 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
   :END:
