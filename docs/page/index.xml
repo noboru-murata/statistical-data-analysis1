@@ -6,7 +6,7 @@
     <description>Recent content in Pages on 統計データ解析I</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 19 Sep 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://noboru-murata.github.io/statistical-data-analysis1/page/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Apr 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://noboru-murata.github.io/statistical-data-analysis1/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>講義1</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture01/</link>
@@ -113,6 +113,15 @@
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
       
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture12/</guid>
+      <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
+    </item>
+    
+    <item>
+      <title>講義13</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture13/</link>
+      <pubDate>Sat, 03 Apr 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture13/</guid>
       <description>スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
     </item>
     
