@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-03 14:27:15 mura>
+# Time-stamp: <2021-04-06 15:13:23 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -147,7 +147,7 @@
      - 読み込んだファイルの場所を選択
      - *Files Pane* の場所を選択
      - ディレクトリを直接選択
-   - /[[color:gray][次回以降に使いながら説明]]
+   - /[[color:gray][次回以降に使いながら説明]]/
 
 ** 終了時の注意
    - 終了時に以下のメッセージが表示される場合がある
@@ -267,8 +267,7 @@
      - 適当な数学関数を試す
        
    #+begin_src R :eval no :exports none :tangle yes
-     ### 基本的な使い方
-     ### 練習問題
+     ### 練習問題 基本的な使い方
      123 * 456 - 789
      (2^2^5 + 1) / 641 # 羃乗の優先順位に注意
      sin(pi/3)^2 + cos(pi/3)^2
@@ -514,9 +513,7 @@
      - Cathyの行を取り出す
 
    #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題
-     ### データフレームの取り扱い
-
+     ### 練習問題 データフレームの取り扱い
      ## データフレームの作成
      df <- data.frame(
          literature=c(90,80,70,60),

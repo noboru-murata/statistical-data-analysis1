@@ -1,9 +1,9 @@
 #+TITLE: 関数と制御構造
-#+SUBTITLE: 関数の定義と分岐・繰り返し処理
+#+SUBTITLE: 関数の定義とプログラムの作成
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-03 13:23:17 mura>
+# Time-stamp: <2021-04-06 15:51:17 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -29,6 +29,7 @@
 * COMMENT メモ
   - 関数の使い方，引数の扱い，順番，既定値
     
+
 * R言語における関数
 ** 関数
    - 関数の取り扱いは一般的な計算機言語とほぼ同様
@@ -67,6 +68,7 @@
 
 ** 引数
    
+
 * 関数の定義
 ** 自作関数
    - 他の言語と同様にRでも関数を定義できる   
@@ -82,6 +84,7 @@
        }
        myfunc(1) # 実行
      #+end_src
+
 
 * 制御構造
 ** 制御文
@@ -176,6 +179,7 @@
    #      という記述が含まれている必要がある．
    #      この記述は，「条件Aが成立したら繰り返しをやめる」という意味
 
+
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
@@ -199,8 +203,7 @@
    :reveal_background: #fef4f4
    :END:
    #+begin_src R :exports none :tangle yes
-     ### 例題6
-     ### 三角形の面積を計算する関数
+     ### 例題 三角形の面積を計算する関数
    #+end_src
    #+begin_src R :exports both :results output :tangle yes
      area <- function(x,y,z){
@@ -212,7 +215,7 @@
      area(3,4,5) # 直角三角形で検算
      area(12,13,5)
    #+end_src
-** 演習
+** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
