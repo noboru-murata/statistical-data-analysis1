@@ -2,86 +2,10 @@
 # C-c C-e h h
 * Zoom 録画
 
-** 第2回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年10月2日 04:40 PM 大阪、札幌、東京
+** 第1回
+トピック: 数理科学続論 I / 知能社会情報学講義Ⅱ（統計データ解析Ⅰ）
+日付: 2021年4月9日 04:40 PM 大阪、札幌、東京
 
 ミーティングの記録:
-https://zoom.us/rec/share/jKHF15xOp4rK-d8WMPSIILfnuqHGumgXcWfeCNB2sgR0fb4gKrdBHKfsb-vljo1s.nd2fztb_ey8qwLX6
+https://u-tokyo-ac-jp.zoom.us/rec/share/YbiyOqd0xLMX6z-o_0KgJREhdsKOtkO6NeC1tZfbaiF7EErLVu_pZ4vHnIGOsMMt.3oNlCOiTopZCG-dR
 
-** 第3回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年10月9日 04:39 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/0B5kVCS_VTr9KbZYna5Gr2MNBCASSQHA4JbfduICxuapIFDGnN9UgFOEQrvKgA0.AX4WsyoIDXySQmyL
-
-** 第4回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年10月16日 04:39 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/YMfJTR78M1_oGtygy9vj54kHgYNru6gieX3vS2qDvFHdOoWr_mvufDp2k42HIbua.z8paP6EjcmJ_-I8Y
-
-** 第5回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年10月23日 04:40 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/AEN3nn0s-3YzFbMtwcWEc016e5o_wUatwtDSGuWvEnyPRTZq--3eXPt5pfNaqmM.BUQufbJIkO-cVJqT
-
-** 第6回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年10月30日 04:40 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/6yqaHrmVYO6tuut_F-P7KN4mrHlcM_IWnBbJs4yhcVW9W5mI7Iqk5PmkM193yY8m.621MzQvZm7vFwrf9
-
-** 第7回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年11月6日 04:39 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/n4xh-HEXMRqvmBSFY2b8hDj0_tjL3ZLrHL1zeOTfklBjQKq0pCwd-OwcT1YOlzMw.gmhi7MDjH_Xf4aop
-
-** 第8回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年11月13日 04:39 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/xx17cPKC97tn9HVgimTtjG-1O2QRnJ5ybaJ7gteZotw2q4eumywyFt5KXdF2C1iP.uXJ_xBXo0JyAt-c1
-
-** 第9回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年11月27日 04:40 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/9ksRc7jutlI16F4lDHTDm1W5wnBmjOjFkrHIP2aAb3e5FKGDsbcTEUJdWU5RG-lw.GThtDfqMmtZxaLRa
-
-** 第10回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年12月4日 04:39 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/RxG6QDvTWvx4_LcEGnAl_NQkD3hDXQErBZcqgE-xlI4FK4PppuuHzs_JfIUCImsx.1iTUBWYuTtxrO3VW
-
-** 第11回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年12月11日 04:42 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/ohiObQjuAVXmYxBMQZzNRnfGXWBYaFstBSyTmW7UsQexAMavo5F40UKD4FNKnwGZ.tUouJA2UZHqjDlY3
-
-** 第12回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年12月18日 04:40 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/os_DYvPq1skvl4Wlau5KMhKLuymDDH84pxWZEQEXxvvpV1dwlep4_1_loRYhrpxS.c2TOa7eGZRU1Kd9p
-
-** 第13回
-トピック: 数理科学続論J / 知能社会情報学講義III
-日付: 2020年12月25日 04:41 PM 大阪、札幌、東京
-
-ミーティングの記録:
-https://zoom.us/rec/share/_Kjy3J5KBa7lK5iQTvP89cYk7u7mAQduTtVud_NInHxGwTEPMfVOSk9K-xd8W_4X.12unBaVcUj89SldK
