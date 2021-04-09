@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-06 15:51:17 mura>
+# Time-stamp: <2021-04-09 16:39:11 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -33,8 +33,8 @@
 * R言語における関数
 ** 関数
    - 関数の取り扱いは一般的な計算機言語とほぼ同様
-   - 関数は引数とその値を指定して実行
-   - ただし引数名は順序を守れば省略可能
+   - 関数は引数とその値を指定して実行 (引数がない場合もある)
+   - 引数名は順序を守れば省略可能
    - [[color:darkgreen][関数の呼び出し方]]
      #+begin_src R :eval no
        f(arg1=value1, arg2=value2) 
@@ -42,15 +42,6 @@
        f(value1, value2) # 上と同値．順序に注意
      #+end_src
 
-   # - 引数が存在しない，
-   #  もしくはすべての引数に対し既定値が設定されている関数もある．
-   #  例えば ~f~ がそのような関数だった場合，
-   #  コンソール上で
-   #  #+begin_src R :exports code
-   #  f()    
-   #  #+end_src
-   #  を実行すると引数=既定値として関数の内容が実行される
-   # - 典型例はRを終了する関数 ~q()~
 ** 関数の実行例
    - [[color:darkgreen][正弦関数の計算]]
      #+begin_src R :exports both :results output
@@ -67,12 +58,42 @@
      #+end_src
 
 ** 引数
+   - 関数の引数および返値を確認する help
+     - 引数 Arguments
+     - 返値 Values
+   - 引数の省略すると既定値が用いられる
+   - 例は何が良い?練習でも使うので2つくらい欲しい
+
+** 既定値を持つ関数の実行例
+   - [[color:darkgreen][対数関数の計算]] (xやbに適当な数値を代入せよ)
+     #+begin_src R :eval no
+       log(x, b) # 底をbとする対数
+       log(x=x, base=b) #上と同値
+       log(base=b, x=x) #上と同値
+       log(b,x) # = log(x=b,base=x) 
+       log(x) # 自然対数 =log(x,base=exp(1))
+     #+end_src
+
+* 演習
+  :PROPERTIES:
+  :reveal_background: #fef4f4
+  :END:
+** 練習問題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   何かの関数を調べさせる
+   計算させる
+   2つくらい組み合わせて計算してもらう
    
 
 * 関数の定義
 ** 自作関数
    - 他の言語と同様にRでも関数を定義できる   
    - 関数の定義には関数 ~function()~ を利用する 
+     functionの記法を書く
+
+** 自作関数の例
    - [[color:darkgreen][半径 r から球の体積と表面積を求める関数]]
      #+begin_src R 
        myfunc <- function(r){
@@ -86,6 +107,35 @@
      #+end_src
 
 
+* 演習
+  :PROPERTIES:
+  :reveal_background: #fef4f4
+  :END:
+** 例題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+** 解答例
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   #+begin_src R :exports none :tangle yes
+     ### 例題 三角形の面積を計算する関数
+   #+end_src
+   #+begin_src R :exports both :results output :tangle yes
+   #+end_src
+** 練習問題
+   :PROPERTIES:
+   :reveal_background: #fef4f4
+   :END:
+   - 非負の整数 $n$ の階乗 $n!$ を求める関数を作成せよ．
+     prodを使えばよいか
+     #+begin_src R :exports none :tangle yes
+       ### 練習3.1
+       ### 階乗を計算する関数
+       ## for文を用いた関数
+     #+end_src
+   
 * 制御構造
 ** 制御文
    - 最適化や数値計算などを行うためには，

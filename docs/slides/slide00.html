@@ -33,7 +33,7 @@
     <h1 class="no-toc-progress">ガイダンス</h1>
 </div>
 <div class="talk-subtitle">
-    <p></p>
+    <p>講義の概要と進め方</p>
 </div>
 <div class="keyboard-usage">
     <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
@@ -46,14 +46,14 @@
 </section>
 
 <section>
-<section id="slide-orge5d9e6f">
-<h2 id="orge5d9e6f">講義概要</h2>
-<div class="outline-text-2" id="text-orge5d9e6f">
+<section id="slide-orgb7740b0">
+<h2 id="orgb7740b0">講義概要</h2>
+<div class="outline-text-2" id="text-orgb7740b0">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org87c674d">
-<h3 id="org87c674d">講義の内容</h3>
+<section id="slide-org3568053">
+<h3 id="org3568053">講義の内容</h3>
 <ul>
 <li>講義題目: <b>数理科学続論I</b> / <b>知能社会情報学講義II</b></li>
 <li>担当: 村田 昇</li>
@@ -73,8 +73,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3ca6697">
-<h3 id="org3ca6697">受講の注意</h3>
+<section id="slide-org4d7fdd0">
+<h3 id="org4d7fdd0">受講の注意</h3>
 <ul>
 <li>以下の科目は既習であることが望ましい
 <ul>
@@ -90,14 +90,14 @@
 </ul></li>
 <li>講義資料
 <ul>
-<li>LMS/Webを利用して配布</li>
+<li>Webを利用して配布</li>
 <li>事前に目を通しておくことが望ましい</li>
 
 </ul></li>
 <li>成績評価
 <ul>
 <li>期末レポートにより評価</li>
-<li>確率シミュレーションまたはデータ解析を行う</li>
+<li>確率シミュレーションまたはデータ解析</li>
 
 </ul></li>
 
@@ -105,8 +105,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org972d757">
-<h3 id="org972d757">講義計画 (予定)</h3>
+<section id="slide-orgd6f1178">
+<h3 id="orgd6f1178">講義計画 (予定)</h3>
 <ul>
 <li>統計ソフトウェアR入門</li>
 <li>データのプロット</li>
@@ -142,7 +142,7 @@ center: true,
 slideNumber: 'c',
 rollingLinks: false,
 keyboard: true,
-mouseWheel: true,
+mouseWheel: false,
 fragmentInURL: true,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
@@ -151,7 +151,7 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }},
+spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
 
 // Plugins with reveal.js 4.x
 plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
@@ -159,7 +159,8 @@ plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
 // Optional libraries used to extend reveal.js
 dependencies: [
 { src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'}]
+{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
+{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
 
 });
 </script>
