@@ -47,8 +47,8 @@
 </section>
 
 <section>
-<section id="slide-org39114b8">
-<h2 id="org39114b8">講義の内容</h2>
+<section id="slide-org534b362">
+<h2 id="org534b362">講義の内容</h2>
 <ul>
 <li>R言語における関数</li>
 <li>引数の扱い方 (引数名・順序・既定値)</li>
@@ -61,18 +61,18 @@
 </section>
 </section>
 <section>
-<section id="slide-org8ec25b2">
-<h2 id="org8ec25b2">R言語における関数</h2>
-<div class="outline-text-2" id="text-org8ec25b2">
+<section id="slide-orgbb69fc7">
+<h2 id="orgbb69fc7">R言語における関数</h2>
+<div class="outline-text-2" id="text-orgbb69fc7">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org72fea92">
-<h3 id="org72fea92">関数</h3>
+<section id="slide-org9de20c1">
+<h3 id="org9de20c1">関数</h3>
 <ul>
 <li>関数の取り扱いは一般的な計算機言語とほぼ同様</li>
-<li>関数は引数とその値を指定して実行</li>
-<li>ただし引数名は順序を守れば省略可能</li>
+<li>関数は引数とその値を指定して実行 (引数がない場合もある)</li>
+<li>引数名は順序を守れば省略可能</li>
 <li><p>
 <span style="color:darkgreen;">関数の呼び出し方</span>
 </p>
@@ -85,10 +85,11 @@ f(value1, value2) # 上と同値．順序に注意
 </div></li>
 
 </ul>
+
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgebc15bd">
-<h3 id="orgebc15bd">関数の実行例</h3>
+<section id="slide-orgb10918c">
+<h3 id="orgb10918c">関数の実行例</h3>
 <ul>
 <li><p>
 <span style="color:darkgreen;">正弦関数の計算</span>
@@ -122,25 +123,82 @@ log(x) # 自然対数 =log(x,base=exp(1))
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4d443b8">
-<h3 id="org4d443b8">引数</h3>
+<section id="slide-org714535e">
+<h3 id="org714535e">引数</h3>
+<ul>
+<li>関数の引数および返値を確認する help
+<ul>
+<li>引数 Arguments</li>
+<li>返値 Values</li>
+
+</ul></li>
+<li>引数の省略すると既定値が用いられる</li>
+<li>例は何が良い?練習でも使うので2つくらい欲しい</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org7c80289">
+<h3 id="org7c80289">既定値を持つ関数の実行例</h3>
+<ul>
+<li><p>
+<span style="color:darkgreen;">対数関数の計算</span> (xやbに適当な数値を代入せよ)
+</p>
+<div class="org-src-container">
+
+<pre><code class=" R" >log(x, b) # 底をbとする対数
+log(x=x, base=b) #上と同値
+log(base=b, x=x) #上と同値
+log(b,x) # = log(x=b,base=x) 
+log(x) # 自然対数 =log(x,base=exp(1))
+</code></pre>
+</div></li>
+
+</ul>
 
 
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org3b4499f">
-<h2 id="org3b4499f">関数の定義</h2>
-<div class="outline-text-2" id="text-org3b4499f">
+<section id="slide-org3837f27" data-background="#fef4f4">
+<h2 id="org3837f27">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org2a853f9" data-background="#fef4f4">
+<h3 id="org2a853f9">練習問題</h3>
+<p>
+何かの関数を調べさせる
+計算させる
+2つくらい組み合わせて計算してもらう
+</p>
+
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org6405136">
+<h2 id="org6405136">関数の定義</h2>
+<div class="outline-text-2" id="text-org6405136">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbc512a3">
-<h3 id="orgbc512a3">自作関数</h3>
+<section id="slide-orgea03c65">
+<h3 id="orgea03c65">自作関数</h3>
 <ul>
 <li>他の言語と同様にRでも関数を定義できる</li>
-<li>関数の定義には関数 <code>function()</code> を利用する</li>
+<li>関数の定義には関数 <code>function()</code> を利用する 
+functionの記法を書く</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org6044ea2">
+<h3 id="org6044ea2">自作関数の例</h3>
+<ul>
 <li><p>
 <span style="color:darkgreen;">半径 r から球の体積と表面積を求める関数</span>
 </p>
@@ -169,14 +227,43 @@ myfunc(1) # 実行
 </section>
 </section>
 <section>
-<section id="slide-org185e743">
-<h2 id="org185e743">制御構造</h2>
-<div class="outline-text-2" id="text-org185e743">
+<section id="slide-orgd9cc90a" data-background="#fef4f4">
+<h2 id="orgd9cc90a">演習</h2>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org1f42341" data-background="#fef4f4">
+<h3 id="org1f42341">例題</h3>
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org04470d3" data-background="#fef4f4">
+<h3 id="org04470d3">解答例</h3>
+<div class="org-src-container">
+
+<pre><code class=" R" >
+</code></pre>
+</div>
+
+<div class="slide-footer"><br></div>
+</section>
+<section id="slide-org97e816a" data-background="#fef4f4">
+<h3 id="org97e816a">練習問題</h3>
+<ul>
+<li>非負の整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ．
+prodを使えばよいか</li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org2ccab87">
+<h2 id="org2ccab87">制御構造</h2>
+<div class="outline-text-2" id="text-org2ccab87">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2a90ec7">
-<h3 id="org2a90ec7">制御文</h3>
+<section id="slide-orgac41a18">
+<h3 id="orgac41a18">制御文</h3>
 <ul>
 <li>最適化や数値計算などを行うためには，
 条件分岐や繰り返しを行うための仕組みが必要となる</li>
@@ -193,8 +280,8 @@ myfunc(1) # 実行
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2330991">
-<h3 id="org2330991"><code>if</code> 文</h3>
+<section id="slide-org7e99ce9">
+<h3 id="org7e99ce9"><code>if</code> 文</h3>
 <ul>
 <li><p>
 条件Aが <b>真</b> のときプログラムXを実行する
@@ -216,8 +303,8 @@ myfunc(1) # 実行
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org91e68f4">
-<h3 id="org91e68f4"><code>if</code> 文の例</h3>
+<section id="slide-org1d17310">
+<h3 id="org1d17310"><code>if</code> 文の例</h3>
 <ul>
 <li><p>
 <span style="color:darkgreen;">20200724が19で割り切れるか?</span>
@@ -235,7 +322,7 @@ myfunc(1) # 実行
 </div>
 
 <pre class="example">
-[1] "\u5272り\u5207れます"
+[1] "割り切れます"
 [1] 1063196
 </pre></li>
 
@@ -243,8 +330,8 @@ myfunc(1) # 実行
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgba26c94">
-<h3 id="orgba26c94"><code>for</code> 文</h3>
+<section id="slide-orgce32f8e">
+<h3 id="orgce32f8e"><code>for</code> 文</h3>
 <ul>
 <li><p>
 ベクトル <code>V</code> の要素を <b>順に</b> 変数 <code>i</code> に代入して
@@ -260,8 +347,8 @@ myfunc(1) # 実行
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org0f8e247">
-<h3 id="org0f8e247"><code>for</code> 文の例</h3>
+<section id="slide-org19cde8d">
+<h3 id="org19cde8d"><code>for</code> 文の例</h3>
 <ul>
 <li><p>
 <span style="color:darkgreen;">アルファベットの20,15,11,25,15番目を表示</span>
@@ -276,8 +363,8 @@ for(i in c(20,15,11,25,15)) {
 </div>
 
 <pre class="example">
- [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M"
-[14] "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z"
+ [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S"
+[20] "T" "U" "V" "W" "X" "Y" "Z"
 [1] "T"
 [1] "O"
 [1] "K"
@@ -289,8 +376,8 @@ for(i in c(20,15,11,25,15)) {
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org515ff17">
-<h3 id="org515ff17"><code>while</code> 文</h3>
+<section id="slide-org539c7bc">
+<h3 id="org539c7bc"><code>while</code> 文</h3>
 <ul>
 <li><p>
 条件Aが <b>真</b> である限りプログラムXを繰り返す
@@ -307,8 +394,8 @@ for(i in c(20,15,11,25,15)) {
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org828ab5d">
-<h3 id="org828ab5d"><code>while</code> 文の例</h3>
+<section id="slide-org9608e82">
+<h3 id="org9608e82"><code>while</code> 文の例</h3>
 <ul>
 <li><p>
 <span style="color:darkgreen;">20200809を素因数分解する</span>
@@ -344,12 +431,12 @@ while(n != 1){ # 商が1になるまで計算する
 </section>
 </section>
 <section>
-<section id="slide-orgeca34db" data-background="#fef4f4">
-<h2 id="orgeca34db">演習</h2>
+<section id="slide-orgc47b463" data-background="#fef4f4">
+<h2 id="orgc47b463">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb035ebf" data-background="#fef4f4">
-<h3 id="orgb035ebf">例題</h3>
+<section id="slide-org13f6fb9" data-background="#fef4f4">
+<h3 id="org13f6fb9">例題</h3>
 <ul>
 <li>三角形の3辺の長さ \(x,y,z\) を与えると
 面積 \(S\) を計算する関数を作成せよ．</li>
@@ -372,8 +459,8 @@ while(n != 1){ # 商が1になるまで計算する
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfd471fe" data-background="#fef4f4">
-<h3 id="orgfd471fe">解答例</h3>
+<section id="slide-org9050c74" data-background="#fef4f4">
+<h3 id="org9050c74">解答例</h3>
 <div class="org-src-container">
 
 <pre><code class=" R" >area &lt;- function(x,y,z){
@@ -394,8 +481,8 @@ area(12,13,5)
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4459782" data-background="#fef4f4">
-<h3 id="org4459782">練習問題</h3>
+<section id="slide-orgf7a5314" data-background="#fef4f4">
+<h3 id="orgf7a5314">練習問題</h3>
 <ul>
 <li>非負の整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ．</li>
 <li><p>

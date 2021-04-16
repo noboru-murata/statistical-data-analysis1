@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-06 15:48:42 mura>
+# Time-stamp: <2021-04-16 13:49:01 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -91,12 +91,16 @@
      #+end_src
    - ベクトルの繰り返し:
      #+begin_src R
-       n <- 3 # 変数 n に値を代入
-       rep(y,n) # 長さは length(y) * n 
+       rep(y,3) # 長さは length(y) * 3
+       rep(y,times=3) # 単純に繰り返す．上記と同様
+       rep(y,each=3)  # 各要素を繰り返す
+       rep(y,length.out=12)  # 繰り返した結果の長さを指定する
      #+end_src
+   #+reveal: split
    - ベクトルの結合:
      #+begin_src R
-       c(x,z) # 異なる属性のものは結合できない．c(x,y) を試みよ
+       c(x,z) # 同じ属性のもの単純に結合される
+       c(x,y) # 異なる属性のものは結合できないので属性が書き換えられる
      #+end_src
 
 ** 行列とは
@@ -294,6 +298,7 @@
      BAZ
    #+end_src
 
+
 * ベクトルの計算
 ** ベクトルの表記
    - ベクトルは太字で，要素は下付き添字で表す
@@ -335,10 +340,10 @@
      #+end_src
 
 ** ベクトルの乗法
-   - *同じ長さの2つのベクトル* の乗法: \\
-     /[[color:gray][2種類ある]]/
+   - *同じ長さの2つのベクトル* の乗法: 
      - 成分ごとの積 (Hadamard積; 要素積)
      - ベクトルの内積
+     /[[color:gray][2種類ある]]/
    - データ解析ではどちらも良く用いられる
 
 ** Hadamard積 
@@ -420,10 +425,10 @@
      #+end_src
 
 ** 行列の乗法
-   - 2つの行列の乗法: \\
-     /[[color:gray][2種類ある]]/
+   - 2つの行列の乗法: 
      - *同じ大きさの行列* の成分ごとの積 (Hadamard積; 要素積)
      - *$n\times m$ 型行列と $m\times l$ 型行列* の積
+     /[[color:gray][2種類ある]]/
    - データ解析ではどちらも良く用いられる
 
 ** Hadamard積
@@ -452,7 +457,13 @@
      #+end_src
 
 ** 行列式
-   - *$n$ 次正方行列* $A$ の行列式 $\det(A)$
+   - *$n$ 次正方行列* $A$ の行列式
+     #+begin_src latex
+       \begin{equation}
+         \det(A)\quad (=|A|)
+       \end{equation}
+     #+end_src
+     - 正方行列でなければ定義されないことに注意
    - Rの書式
      #+begin_src R :eval no
        det(A) # 行列式
@@ -465,8 +476,7 @@
          \mathrm{trace}(A)=\sum_{i=1}^{n}a_{ii}
        \end{equation}
      #+end_src
-   - Rの書式
-     関数は用意されていないので以下を利用:
+   - Rの書式 (関数は用意されていないので以下を利用):
      #+begin_src R :eval no
        sum(diag(A)) # 行列のトレース
      #+end_src
@@ -540,9 +550,12 @@
      matrix(rep(1:9,9),9,9) # 行ごとに1から9を並べる
      matrix(rep(1:9,9),9,9,byrow=TRUE) # 列ごとに1から9を並べる
      matrix(rep(1:9,9),9,9) * matrix(rep(1:9,9),9,9,byrow=TRUE)
-     FOO <- matrix(rep(1:9,9),9,9) 
+     (FOO <- matrix(rep(1:9,9),9,9))
      FOO * t(FOO) # 行列とその転置を利用してもよい
-
+     (BAR <- matrix(1:9,9,1)) 
+     BAR %*% t(BAR) # 行列による別の方法
+     (BAZ <- 1:9); BAZ %o% BAZ # 講義の範囲外の方法
+     
      ## 30度の回転行列の2乗は60度の回転行列
      theta <- pi/6 # 30度のラジアン値
      (R30 <- # 30度の回転行列

@@ -52,8 +52,11 @@ sum(1:10) # 関数sum()はベクトルの成分の合計を計算することも
 matrix(rep(1:9,9),9,9) # 行ごとに1から9を並べる
 matrix(rep(1:9,9),9,9,byrow=TRUE) # 列ごとに1から9を並べる
 matrix(rep(1:9,9),9,9) * matrix(rep(1:9,9),9,9,byrow=TRUE)
-FOO <- matrix(rep(1:9,9),9,9) 
+(FOO <- matrix(rep(1:9,9),9,9))
 FOO * t(FOO) # 行列とその転置を利用してもよい
+(BAR <- matrix(1:9,9,1)) 
+BAR %*% t(BAR) # 行列による別の方法
+(BAZ <- 1:9); BAZ %o% BAZ # 講義の範囲外の方法
 
 ## 30度の回転行列の2乗は60度の回転行列
 theta <- pi/6 # 30度のラジアン値

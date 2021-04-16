@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-09 16:39:11 mura>
+# Time-stamp: <2021-04-15 22:28:32 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -74,6 +74,7 @@
        log(x) # 自然対数 =log(x,base=exp(1))
      #+end_src
 
+
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
@@ -105,7 +106,8 @@
        }
        myfunc(1) # 実行
      #+end_src
-
+** 自作関数の例
+   もう一つ例を作る 既定値あり
 
 * 演習
   :PROPERTIES:
@@ -136,6 +138,7 @@
        ## for文を用いた関数
      #+end_src
    
+
 * 制御構造
 ** 制御文
    - 最適化や数値計算などを行うためには，

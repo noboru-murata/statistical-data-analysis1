@@ -1,4 +1,4 @@
-MSG = debug
+MSG = "2021 version"
 
 all: html
 
