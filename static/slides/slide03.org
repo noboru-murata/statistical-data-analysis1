@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-15 22:28:32 mura>
+# Time-stamp: <2021-04-16 16:10:53 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -33,7 +33,8 @@
 * R言語における関数
 ** 関数
    - 関数の取り扱いは一般的な計算機言語とほぼ同様
-   - 関数は引数とその値を指定して実行 (引数がない場合もある)
+   - 関数は引数とその値を指定して実行 \\
+     /[[color:gray][引数がない場合もある]]/
    - 引数名は順序を守れば省略可能
    - [[color:darkgreen][関数の呼び出し方]]
      #+begin_src R :eval no
@@ -46,32 +47,51 @@
    - [[color:darkgreen][正弦関数の計算]]
      #+begin_src R :exports both :results output
        sin(x = pi/2) 
-       sin(pi/2) # 上と同値
+       sin(pi/2) # 上と同値 (引数と値の関係が明かなら引数名は省略可能)
      #+end_src
-   - [[color:darkgreen][対数関数の計算]] (xやbに適当な数値を代入せよ)
+   - [[color:darkgreen][対数関数の計算]] 
      #+begin_src R :eval no
-       log(x, b) # 底をbとする対数
-       log(x=x, base=b) #上と同値
-       log(base=b, x=x) #上と同値
-       log(b,x) # = log(x=b,base=x) 
-       log(x) # 自然対数 =log(x,base=exp(1))
+       x <- 16; b <- 2 # xやbに適当な数値を代入する
+       log(x=x, base=b) # 底をbとする対数
+       log(x, b) # 上と同値
+       log(base=b, x=x) # 上と同値
+       log(b,x) # 上と異なる (=log(x=b,base=x))
+       log(x) # 自然対数 (既定値による計算 =log(x,base=exp(1)))
      #+end_src
 
 ** 引数
-   - 関数の引数および返値を確認する help
-     - 引数 Arguments
-     - 返値 Values
-   - 引数の省略すると既定値が用いられる
-   - 例は何が良い?練習でも使うので2つくらい欲しい
-
-** 既定値を持つ関数の実行例
-   - [[color:darkgreen][対数関数の計算]] (xやbに適当な数値を代入せよ)
+   - ヘルプにより関数の引数および返値を確認できる
+     - 引数については "Arguments" の項を参照
+     - 返値については "Values" の項を参照
+   - 引数を省略すると既定値 (default) が用いられる
+   - [[color:darkgreen][ヘルプによる関数仕様の表示]]
      #+begin_src R :eval no
-       log(x, b) # 底をbとする対数
-       log(x=x, base=b) #上と同値
-       log(base=b, x=x) #上と同値
-       log(b,x) # = log(x=b,base=x) 
-       log(x) # 自然対数 =log(x,base=exp(1))
+       ## 正規乱数を生成する関数
+       help(rnorm) # Help Pane から指定しても良い
+       ## ヒストグラムを表示する関数
+       ?hist
+     #+end_src
+
+** 既定値を持つ関数の実行例 (1/2)
+   - [[color:darkgreen][正規乱数の生成]] 
+     #+begin_src R
+       rnorm(7) # 平均0 分散1 の正規乱数を7個生成
+       rnorm(7, mean=10) # 平均10 分散1 の正規乱数を7個生成
+       rnorm(sd=0.1, n=7) # 平均0 分散0.01 の正規乱数を7個生成
+       rnorm(n=7, mean=2, sd=2) # 平均2 分散4 の正規乱数を7個生成
+     #+end_src
+
+** 既定値を持つ関数の実行例 (2/2)
+   - [[color:darkgreen][ヒストグラムの表示]] 
+     #+begin_src R
+       foo <- rnorm(n=10000, mean=50, sd=10) # 平均50 標準偏差10 の正規乱数
+       hist(foo) # データ以外全て既定値で表示
+       hist(foo, # 既定値のいくつかを変更する
+            breaks=30, # ビンを30程度に調整する
+            col="lightgreen", # 色の指定
+            main="mathematics", # タイトルの指定
+            xlab="score") # x軸ラベルの指定
+       ## Plots Pane に着目
      #+end_src
 
 
@@ -79,11 +99,11 @@
   :PROPERTIES:
   :reveal_background: #fef4f4
   :END:
-** 練習問題
+** COMMENT 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   何かの関数を調べさせる
+   -何かの関数を調べさせる
    計算させる
    2つくらい組み合わせて計算してもらう
    
@@ -93,21 +113,38 @@
    - 他の言語と同様にRでも関数を定義できる   
    - 関数の定義には関数 ~function()~ を利用する 
      functionの記法を書く
+     #+begin_src R :eval no
+       関数名 <- function(引数){ # 計算ブロックの開始
+           ## このブロック内に必要な手続きを記述する．複数行に渡って構わない
+           return(返値) # 計算結果を明示的に示す
+       } # ブロックの終了
+     #+end_src
 
 ** 自作関数の例
    - [[color:darkgreen][半径 r から球の体積と表面積を求める関数]]
      #+begin_src R 
-       myfunc <- function(r){
+       foo <- function(r){
            V <- (4/3) * pi * r^3 # 球の体積
            S <- 4 * pi * r^2     # 球の表面積
            out <- c(V,S) # 返り値のベクトルを作る
            names(out) <- c("volume", "area") # 返り値の要素に名前を付ける
            return(out) # 値を返す
        }
-       myfunc(1) # 実行
+       foo(2) # 実行
      #+end_src
 ** 自作関数の例
-   もう一つ例を作る 既定値あり
+   - [[color:darkgreen][初項 a 公比 r の等比数列の最初のn項 (既定値は5)]]
+     #+begin_src R 
+       bar <- function(a, r, n=5){
+           out <- a*r^(1:n-1)
+           return(out) # 値を返す
+       }
+       bar(1,2) # 初項1 公比2 の最初の5項
+       bar(1,2,10) # 初項1 公比2 の最初の10項
+       bar(n=10,1,2) # 変数名を指定して位置を変えることができる
+       bar(r=0.5,n=10,a=512) # 同上
+     #+end_src
+
 
 * 演習
   :PROPERTIES:
@@ -117,6 +154,17 @@
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
+   - 三角形の3辺の長さ $x,y,z$ を与えると
+     面積 $S$ を計算する関数を作成せよ．
+     - 参考: *ヘロンの公式* より
+       #+begin_src latex
+         \begin{equation}
+           S=\sqrt{s(s-x)(s-y)(s-z)},\quad
+           s=\frac{x+y+z}{2}
+         \end{equation}
+       #+end_src
+       が成り立つ．
+
 ** 解答例
    :PROPERTIES:
    :reveal_background: #fef4f4
@@ -125,20 +173,47 @@
      ### 例題 三角形の面積を計算する関数
    #+end_src
    #+begin_src R :exports both :results output :tangle yes
+     myHeron <- function(x,y,z){
+         s <- (x+y+z)/2 # 補助変数 s の計算
+         S <- sqrt(s*(s-x)*(s-y)*(s-z)) # ヘロンの公式による面積の計算
+         return(S)
+     }
+     myHeron(3,4,5) # よく知られた直角三角形を使って計算結果を確認する
+     myHeron(12,13,5) 
    #+end_src
+
 ** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - 非負の整数 $n$ の階乗 $n!$ を求める関数を作成せよ．
-     prodを使えばよいか
-     #+begin_src R :exports none :tangle yes
-       ### 練習3.1
-       ### 階乗を計算する関数
-       ## for文を用いた関数
-     #+end_src
-   
+   - 1から整数 $n$までの和を求める関数を作成せよ．
+     - 関数 ~sum()~ を調べてみよ (help(sum))
+     - 等差数列の和を利用してもよい
+   - 整数 $n$ の階乗 $n!$ を求める関数を作成せよ．
+     - 関数 ~prod()~ を調べてみよ (help(prod))
 
+   #+begin_src R :exports none :tangle yes
+     ### 練習問題
+     ## 和を計算する関数
+     mySum <- function(n){
+         out <- sum(1:n) # 1からnまでの整数を生成して和を求める
+         return(out)
+     }
+     mySum(10) # 1から10までの和は?
+     ## 別解
+     mySum <- function(n){
+         out <- n*(n+1)/2 # 等差数列の和を利用した場合
+         return(out)
+     }
+
+     ## 階乗を計算する関数
+     myFact <- function(n){
+         out <- prod(1:n) # 1からnまでの整数を生成して積を求める
+         return(out)
+     }
+     myFact(5) # 5! は?
+   #+end_src
+	  
 * 制御構造
 ** 制御文
    - 最適化や数値計算などを行うためには，
@@ -158,21 +233,22 @@
      #+begin_src R :exports code
        if(条件A) プログラムX else プログラムY    
      #+end_src
+
 ** ~if~ 文の例
-   - [[color:darkgreen][20200724が19で割り切れるか?]]
+   - [[color:darkgreen][20210423が19で割り切れるか?]]
      #+begin_src R :exports none :tangle yes
-       ### 例題3
-       ### if文の例
+       ### 例題 if文の例
      #+end_src
      #+begin_src R :tangle yes
-       if(20200724 %% 19 == 0) {# %% は余りを計算
-           print("割り切れます")
+       if(20210423 %% 19 == 0) {# %% は余りを計算
+           print("割り切れます") 
            print(20200724 %/% 19) # 商を表示
        } else { # {}で囲まれたブロックが1つのプログラム
            print("割り切れません")
-           print(20200724 %% 19) # 余りを表示
+           print(20210423 %% 19) # 余りを表示
        } 
      #+end_src
+
 ** ~for~ 文
    - ベクトル ~V~ の要素を *順に* 変数 ~i~ に代入して
      プログラムXを繰り返し実行する
@@ -183,8 +259,7 @@
 ** ~for~ 文の例
    - [[color:darkgreen][アルファベットの20,15,11,25,15番目を表示]]
      #+begin_src R :exports none :tangle yes
-       ### 例題4
-       ### for文の例
+       ### 例題 for文の例
      #+end_src
      #+begin_src R :tangle yes
        print(LETTERS) # LETTERS ベクトルの内容を表示
@@ -192,6 +267,7 @@
            print(LETTERS[i]) # 順番に表示
        }
      #+end_src
+
 ** ~while~ 文
    - 条件Aが *真* である限りプログラムXを繰り返す
      #+begin_src R :exports code
@@ -203,8 +279,7 @@
 ** ~while~ 文の例
    - [[color:darkgreen][20200809を素因数分解する]]
      #+begin_src R :exports none :tangle yes
-       ### 例題5
-       ### while文の例
+       ### 例題 while文の例
      #+end_src
      #+begin_src R :tangle yes
        n <- 20200809 # 分解の対象
@@ -241,86 +316,78 @@
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - 三角形の3辺の長さ $x,y,z$ を与えると
-     面積 $S$ を計算する関数を作成せよ．
-   - 参考: *ヘロンの公式* より
-     # #+begin_export latex
-     \begin{equation}
-       S=\sqrt{s(s-x)(s-y)(s-z)},\qquad
-       s=\frac{x+y+z}{2}
-     \end{equation}
-     # #+end_export
-     が成り立つ．
+   - 制御構造を利用して非負の整数 $n$ の階乗 $n!$ を求める関数を作成せよ．
+     - 関数 ~prod()~ を用いないこと
+
 ** 解答例
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   #+begin_src R :exports none :tangle yes
-     ### 例題 三角形の面積を計算する関数
+   - ~for~ 文を用いた例
+
+   #+begin_src R :eval no :exports none :tangle yes
+     ### 例題 nの階乗を求める関数 (for文)
    #+end_src
    #+begin_src R :exports both :results output :tangle yes
-     area <- function(x,y,z){
-         s <- (x+y+z)/2
-         S <- (s*(s-x)*(s-y)*(s-z))^(1/2)
-         ## S <- sqrt(s*(s-x)*(s-y)*(s-z)) # 平方根を求める関数を用いても良い
-       return(S)
+     myFact1 <- function(n){
+         val <- 1 # 初期値の代入
+         for(i in 1:n){ # 1からnまで順に掛ける
+             val <- val*i
+         }
+         return(val) # 計算結果を返す
      }
-     area(3,4,5) # 直角三角形で検算
-     area(12,13,5)
+     myFact1(0) # 間違い (0!=1)
+     myFact1(1) # 正しい
+     myFact1(2) # 正しい
+     myFact1(3) # 正しい
+     myFact1(4) # 正しい
    #+end_src
+
+   #+reveal: split
+   - if文を用いた修正版
+
+   #+begin_src R :exports both :results output :tangle yes
+     myFact2 <- function(n){
+         if(n==0){ # n=0 か確認して分岐する
+             return(1)
+         } else {
+             val <- 1
+             for(i in 1:n){
+                 val <- val*i
+             }
+             return(val)
+         }
+     }
+     myFact2(0) # 正しい
+     myFact2(1) # 正しい
+     myFact2(2) # 正しい
+     myFact2(3) # 正しい
+     myFact2(4) # 正しい
+   #+end_src
+   
+   #+reveal: split
+   - while文を用いた例
+
+   #+begin_src R :exports both :results output :tangle yes
+     myFact3 <- function(n){
+         val <- 1 # 初期値の代入
+         while(n>0){ # nから1まで順に掛ける．nが0なら計算しない
+             val <- val*n
+             n <- n-1
+         }
+         return(val)
+     }
+     myFact3(0) # 正しい
+     myFact3(1) # 正しい
+     myFact3(2) # 正しい
+     myFact3(3) # 正しい
+     myFact3(4) # 正しい
+   #+end_src
+
 ** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - 非負の整数 $n$ の階乗 $n!$ を求める関数を作成せよ．
-     #+begin_src R :exports none :tangle yes
-       ### 練習3.1
-       ### 階乗を計算する関数
-       ## for文を用いた関数
-       fact1 <- function(n){
-           val <- 1
-           for(i in 1:n){
-               val <- val*i
-           }
-           return(val)
-       }
-       fact1(0) # 間違い
-       fact1(1)
-       fact1(2)
-       fact1(3)
-       fact1(4)
-       ## if文を用いた修正版
-       fact2 <- function(n){
-           if(n==0){
-               return(1)
-           } else {
-               val <- 1
-               for(i in 1:n){
-                   val <- val*i
-               }
-               return(val)
-           }
-       }
-       fact2(0) # 正しい
-       fact2(1)
-       fact2(2)
-       fact2(3)
-       fact2(4)
-       ## while文を用いた関数
-       fact3 <- function(n){
-           val <- 1
-           while(n>0){
-               val <- val*n
-               n <- n-1
-           }
-           return(val)
-       }
-       fact3(0)
-       fact3(1)
-       fact3(2)
-       fact3(3)
-       fact3(4)
-     #+end_src
    - 整数 $n$ の Fibonacci数を求める関数を作成せよ．
      # #+begin_export latex
      \begin{align}
@@ -329,6 +396,7 @@
        F_{n}&=F_{n-1}+F_{n-2}
      \end{align}
      # #+end_export
+
      #+begin_src R :exports none :tangle yes
        ### 練習3.2
        ### Fibonacci数を返す関数
@@ -369,7 +437,7 @@
        colave(A)
      #+end_src
    - 前問で $X$ がベクトルの場合にはその平均を計算するように修正せよ．\\
-     /(関数 ~is.vector()~ が利用できる)/
+     /[[color:gray][関数 ~is.vector()~ が利用できる]]/
      #+begin_src R :exports none :tangle yes
        ### 練習3.4
        ### ベクトルと行列を扱えるように修正
@@ -389,8 +457,6 @@
        (x <- 1:12)
        colave(x)
      #+end_src
-
-
 
 * COMMENT ローカル変数
 # Local Variables:

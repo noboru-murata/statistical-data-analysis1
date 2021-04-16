@@ -1,93 +1,53 @@
-### 例題1
-### Hamilton-Cayleyの定理の確認
+### 第03回 練習問題解答例
 
-## 行列を作成 (好きに設定してよい)
-(A <- matrix(1:4,2,2)-diag(rep(3,2)))
+### 例題 三角形の面積を計算する関数
 
-## 左辺を計算
-A%*%A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
+myHeron <- function(x,y,z){
+    s <- (x+y+z)/2 # 補助変数 s の計算
+    S <- sqrt(s*(s-x)*(s-y)*(s-z)) # ヘロンの公式による面積の計算
+    return(S)
+}
+myHeron(3,4,5) # よく知られた直角三角形を使って計算結果を確認する
+myHeron(12,13,5)
 
-### 練習1.1
-### 1から10までの2乗値からなるベクトル
-1:10 # 1から10までのベクトル
-1:10 * 1:10 # 2乗値のベクトル
+### 練習問題
+## 和を計算する関数
+mySum <- function(n){
+    out <- sum(1:n) # 1からnまでの整数を生成して和を求める
+    return(out)
+}
+mySum(10) # 1から10までの和は?
+## 別解
+mySum <- function(n){
+    out <- n*(n+1)/2 # 等差数列の和を利用した場合
+    return(out)
+}
 
-### 練習1.2
-### 1から10までの和
-1:10 %*% rep(1,10) # (1,2,...,10)と(1,1,...,1)の内積
+## 階乗を計算する関数
+myFact <- function(n){
+    out <- prod(1:n) # 1からnまでの整数を生成して積を求める
+    return(out)
+}
+myFact(5) # 5! は?
 
-### 練習1.3
-### 九九の表
-matrix(rep(1:9,9),9,9) # 行ごとに1から9を並べる
-matrix(rep(1:9,9),9,9,byrow=TRUE) # 列ごとに1から9を並べる
-matrix(rep(1:9,9),9,9) * matrix(rep(1:9,9),9,9,byrow=TRUE)
+### 例題 if文の例
 
-### 練習1.4
-### 30度の回転行列の2乗は60度の回転行列
-theta <- pi/6 # 30度のラジアン値
-R30 <- matrix(c(cos(theta),sin(theta),
-                -sin(theta),cos(theta)),2,2)
-R60 <- matrix(c(cos(2*theta),sin(2*theta),
-                -sin(2*theta),cos(2*theta)),2,2)
-R30 # 30度の回転行列
-R30 %*% R30 # 30度の回転行列の2乗
-R60 # 60度の回転行列
-
-### 例題2
-### 3元連立1次方程式の解法
-
-## 行列とベクトルを作成 (好きに設定してよい)
-## rnorm(9) は正規乱数を9つ作成する(第5回で詳しく説明)
-(A <- matrix(rnorm(9),3,3)+diag(rep(1,3)))
-(b <- 1:3)
-
-## 解を計算
-(x <- solve(A,b))
-A%*%x # 結果の確認(b になるはず)
-
-### 練習2.1
-### 1から10までの2乗値からなるベクトル
-(1:10)^2 # ^2も関数として成分ごとに計算される
-
-### 練習2.2
-### 回転してもベクトルの長さが変わらないことを確認
-## 回転行列とベクトルを作成 (好きに設定してよい)
-theta <- 2*pi/3 # 120度のラジアン値
-(R <- matrix(c(cos(theta),sin(theta),
-              -sin(theta),cos(theta)),2,2))
-(x <- 1:2)
-(y <- R %*% x) # xを回転してyを作成
-## 長さの2乗はベクトルの内積で計算できる
-x %*% x # xの長さの2乗
-as.vector(y) %*% as.vector(y) # yの長さの2乗
-
-### 練習2.3
-### エラーになる理由を考察
-A %*% b # 列ベクトル (3x1型行列)
-b %*% A # 行ベクトル (1x3型行列)
-A %*% b + b %*% A # 大きさが異なるので計算できない
-
-### 例題3
-### if文の例
-
-if(20200724 %% 19 == 0) {# %% は余りを計算
-    print("割り切れます")
+if(20210423 %% 19 == 0) {# %% は余りを計算
+    print("割り切れます") 
     print(20200724 %/% 19) # 商を表示
 } else { # {}で囲まれたブロックが1つのプログラム
     print("割り切れません")
-    print(20200724 %% 19) # 余りを表示
+    print(20210423 %% 19) # 余りを表示
 }
 
-### 例題4
-### for文の例
+### 例題 for文の例
 
 print(LETTERS) # LETTERS ベクトルの内容を表示
 for(i in c(20,15,11,25,15)) {
     print(LETTERS[i]) # 順番に表示
 }
 
-### 例題5
-### while文の例
+### 例題 while文の例
 
 n <- 20200809 # 分解の対象
 p <- 2 # 最初に調べる数
@@ -102,36 +62,23 @@ while(n != 1){ # 商が1になるまで計算する
     }
 }
 
-### 例題6
-### 三角形の面積を計算する関数
+### 例題 nの階乗を求める関数 (for文)
 
-area <- function(x,y,z){
-    s <- (x+y+z)/2
-    S <- (s*(s-x)*(s-y)*(s-z))^(1/2)
-    ## S <- sqrt(s*(s-x)*(s-y)*(s-z)) # 平方根を求める関数を用いても良い
-  return(S)
-}
-area(3,4,5) # 直角三角形で検算
-area(12,13,5)
-
-### 練習3.1
-### 階乗を計算する関数
-## for文を用いた関数
-fact1 <- function(n){
-    val <- 1
-    for(i in 1:n){
+myFact1 <- function(n){
+    val <- 1 # 初期値の代入
+    for(i in 1:n){ # 1からnまで順に掛ける
         val <- val*i
     }
-    return(val)
+    return(val) # 計算結果を返す
 }
-fact1(0) # 間違い
-fact1(1)
-fact1(2)
-fact1(3)
-fact1(4)
-## if文を用いた修正版
-fact2 <- function(n){
-    if(n==0){
+myFact1(0) # 間違い (0!=1)
+myFact1(1) # 正しい
+myFact1(2) # 正しい
+myFact1(3) # 正しい
+myFact1(4) # 正しい
+
+myFact2 <- function(n){
+    if(n==0){ # n=0 か確認して分岐する
         return(1)
     } else {
         val <- 1
@@ -141,25 +88,25 @@ fact2 <- function(n){
         return(val)
     }
 }
-fact2(0) # 正しい
-fact2(1)
-fact2(2)
-fact2(3)
-fact2(4)
-## while文を用いた関数
-fact3 <- function(n){
-    val <- 1
-    while(n>0){
+myFact2(0) # 正しい
+myFact2(1) # 正しい
+myFact2(2) # 正しい
+myFact2(3) # 正しい
+myFact2(4) # 正しい
+
+myFact3 <- function(n){
+    val <- 1 # 初期値の代入
+    while(n>0){ # nから1まで順に掛ける．nが0なら計算しない
         val <- val*n
         n <- n-1
     }
     return(val)
 }
-fact3(0)
-fact3(1)
-fact3(2)
-fact3(3)
-fact3(4)
+myFact3(0) # 正しい
+myFact3(1) # 正しい
+myFact3(2) # 正しい
+myFact3(3) # 正しい
+myFact3(4) # 正しい
 
 ### 練習3.2
 ### Fibonacci数を返す関数
