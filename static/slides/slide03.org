@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-16 16:10:53 mura>
+# Time-stamp: <2021-04-22 18:46:39 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -31,6 +31,10 @@
     
 
 * R言語における関数
+  #+begin_src R :exports none :tangle yes
+    ### R言語における関数で用いた例
+  #+end_src
+
 ** 関数
    - 関数の取り扱いは一般的な計算機言語とほぼ同様
    - 関数は引数とその値を指定して実行 \\
@@ -45,13 +49,14 @@
 
 ** 関数の実行例
    - [[color:darkgreen][正弦関数の計算]]
-     #+begin_src R :exports both :results output
-       sin(x = pi/2) 
+     #+begin_src R :tangle yes
+       sin(x = pi/2) # "引数名 = 値" で指定 
        sin(pi/2) # 上と同値 (引数と値の関係が明かなら引数名は省略可能)
      #+end_src
    - [[color:darkgreen][対数関数の計算]] 
-     #+begin_src R :eval no
-       x <- 16; b <- 2 # xやbに適当な数値を代入する
+     #+begin_src R :eval no :tangle yes
+       help(log) # ヘルプを表示して使い方を確認する
+       x <- 16; b <- 2 # xやbに適当な数値を代入する．複数コマンドは ; で区切る
        log(x=x, base=b) # 底をbとする対数
        log(x, b) # 上と同値
        log(base=b, x=x) # 上と同値
@@ -59,13 +64,13 @@
        log(x) # 自然対数 (既定値による計算 =log(x,base=exp(1)))
      #+end_src
 
-** 引数
+** 引数と返値
    - ヘルプにより関数の引数および返値を確認できる
      - 引数については "Arguments" の項を参照
      - 返値については "Values" の項を参照
    - 引数を省略すると既定値 (default) が用いられる
    - [[color:darkgreen][ヘルプによる関数仕様の表示]]
-     #+begin_src R :eval no
+     #+begin_src R :eval no :tangle yes
        ## 正規乱数を生成する関数
        help(rnorm) # Help Pane から指定しても良い
        ## ヒストグラムを表示する関数
@@ -74,7 +79,7 @@
 
 ** 既定値を持つ関数の実行例 (1/2)
    - [[color:darkgreen][正規乱数の生成]] 
-     #+begin_src R
+     #+begin_src R :tangle yes
        rnorm(7) # 平均0 分散1 の正規乱数を7個生成
        rnorm(7, mean=10) # 平均10 分散1 の正規乱数を7個生成
        rnorm(sd=0.1, n=7) # 平均0 分散0.01 の正規乱数を7個生成
@@ -83,7 +88,7 @@
 
 ** 既定値を持つ関数の実行例 (2/2)
    - [[color:darkgreen][ヒストグラムの表示]] 
-     #+begin_src R
+     #+begin_src R :tangle yes
        foo <- rnorm(n=10000, mean=50, sd=10) # 平均50 標準偏差10 の正規乱数
        hist(foo) # データ以外全て既定値で表示
        hist(foo, # 既定値のいくつかを変更する
@@ -99,30 +104,54 @@
   :PROPERTIES:
   :reveal_background: #fef4f4
   :END:
-** COMMENT 練習問題
+** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   -何かの関数を調べさせる
-   計算させる
-   2つくらい組み合わせて計算してもらう
-   
+   - ヘルプ機能 (Help Pane, 関数 ~help(),?~)
+     を用いて ~sample~ を調べてみよう
+   - サイコロを1回振る試行を模擬してみよう
+   - サイコロを10回振る試行を模擬してみよう
+     - 引数 replace を調べよ
+   - 1が出易いサイコロを作ってみよう
+     - 引数 prob を調べよ
+   - 1から6をランダムに並べ替えてみよう 
+
+   #+begin_src R :eval no :exports none :tangle yes
+     ### 練習問題 関数の使い方
+     ## sample を調べる
+     help(sample)
+     ## サイコロを1回振る試行
+     sample(x=1:6, size=1)
+     ## サイコロを10回振る試行
+     sample(x=1:6, size=10) # エラーになる
+     sample(x=1:6, size=10, replace=TRUE)
+     ## 1が他の目の3倍出易いサイコロ
+     sample(1:6, 10, replace=TRUE, prob=c(3,rep(1,5))) # 引数の一部を省略
+     ## 1から6をランダムに並べ替える
+     sample(1:6, 6) # 既定値ではreplaceしない(復元抽出)ので並べ替えになる
+   #+end_src
+
 
 * 関数の定義
+  #+begin_src R :exports none :tangle yes
+    ### 関数の定義で用いた例
+  #+end_src
+
 ** 自作関数
    - 他の言語と同様にRでも関数を定義できる   
    - 関数の定義には関数 ~function()~ を利用する 
-     functionの記法を書く
      #+begin_src R :eval no
+       ## 関数 function() 記法
        関数名 <- function(引数){ # 計算ブロックの開始
            ## このブロック内に必要な手続きを記述する．複数行に渡って構わない
            return(返値) # 計算結果を明示的に示す
        } # ブロックの終了
      #+end_src
 
-** 自作関数の例
+** 自作関数の例 
    - [[color:darkgreen][半径 r から球の体積と表面積を求める関数]]
-     #+begin_src R 
+     #+begin_src R :tangle yes
        foo <- function(r){
            V <- (4/3) * pi * r^3 # 球の体積
            S <- 4 * pi * r^2     # 球の表面積
@@ -130,18 +159,19 @@
            names(out) <- c("volume", "area") # 返り値の要素に名前を付ける
            return(out) # 値を返す
        }
-       foo(2) # 実行
+       foo(r=2) # 実行
+       foo(3) 
      #+end_src
-** 自作関数の例
+   #+reveal: split
    - [[color:darkgreen][初項 a 公比 r の等比数列の最初のn項 (既定値は5)]]
-     #+begin_src R 
+     #+begin_src R :tangle yes
        bar <- function(a, r, n=5){
            out <- a*r^(1:n-1)
            return(out) # 値を返す
        }
        bar(1,2) # 初項1 公比2 の最初の5項
        bar(1,2,10) # 初項1 公比2 の最初の10項
-       bar(n=10,1,2) # 変数名を指定して位置を変えることができる
+       bar(n=10,1,2) # 変数名を指定すると引数の位置を変えることができる
        bar(r=0.5,n=10,a=512) # 同上
      #+end_src
 
@@ -173,10 +203,10 @@
      ### 例題 三角形の面積を計算する関数
    #+end_src
    #+begin_src R :exports both :results output :tangle yes
-     myHeron <- function(x,y,z){
+     myHeron <- function(x,y,z){ # 関数名は上書きされるので独特の名前にするのがお薦め
          s <- (x+y+z)/2 # 補助変数 s の計算
          S <- sqrt(s*(s-x)*(s-y)*(s-z)) # ヘロンの公式による面積の計算
-         return(S)
+         return(S) # 面積を返す
      }
      myHeron(3,4,5) # よく知られた直角三角形を使って計算結果を確認する
      myHeron(12,13,5) 
@@ -186,27 +216,27 @@
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - 1から整数 $n$までの和を求める関数を作成せよ．
-     - 関数 ~sum()~ を調べてみよ (help(sum))
+   - 1から整数 \(n\) までの和を求める関数を作成せよ
+     - 関数 ~sum()~ を調べよ (~help(sum)~)
      - 等差数列の和を利用してもよい
-   - 整数 $n$ の階乗 $n!$ を求める関数を作成せよ．
-     - 関数 ~prod()~ を調べてみよ (help(prod))
+   - 整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ
+     - 関数 ~prod()~ を調べよ (~help(prod)~)
 
    #+begin_src R :exports none :tangle yes
-     ### 練習問題
-     ## 和を計算する関数
+     ### 練習問題 自作関数の定義
+     ## 和 (summation) を計算する関数
      mySum <- function(n){
          out <- sum(1:n) # 1からnまでの整数を生成して和を求める
          return(out)
      }
      mySum(10) # 1から10までの和は?
      ## 別解
-     mySum <- function(n){
+     mySum2 <- function(n){
          out <- n*(n+1)/2 # 等差数列の和を利用した場合
          return(out)
      }
-
-     ## 階乗を計算する関数
+     mySum2(10)
+     ## 階乗 (factorial) を計算する関数
      myFact <- function(n){
          out <- prod(1:n) # 1からnまでの整数を生成して積を求める
          return(out)
@@ -214,7 +244,12 @@
      myFact(5) # 5! は?
    #+end_src
 	  
+
 * 制御構造
+  #+begin_src R :exports none :tangle yes
+    ### 制御構造で用いた例
+  #+end_src
+
 ** 制御文
    - 最適化や数値計算などを行うためには，
      条件分岐や繰り返しを行うための仕組みが必要となる
@@ -222,27 +257,24 @@
      - ~if~  (条件分岐)
      - ~for~  (繰り返し・回数指定)
      - ~while~  (繰り返し・条件指定)
-   - これを *制御文* と言う 
+     などの *制御文* が利用可能
 
 ** ~if~ 文
    - 条件Aが *真* のときプログラムXを実行する
-     #+begin_src R :exports code
-       if(条件A) プログラムX
+     #+begin_src R :eval no
+       if(条件A) {プログラムX} # 括弧内は複数行に渡ってよい
      #+end_src
    - 上記の ~if~ 文に条件Aが *偽* のときプログラムYを実行することを追加する
-     #+begin_src R :exports code
-       if(条件A) プログラムX else プログラムY    
+     #+begin_src R :eval no
+       if(条件A) {プログラムX} else {プログラムY}    
      #+end_src
 
 ** ~if~ 文の例
    - [[color:darkgreen][20210423が19で割り切れるか?]]
-     #+begin_src R :exports none :tangle yes
-       ### 例題 if文の例
-     #+end_src
      #+begin_src R :tangle yes
        if(20210423 %% 19 == 0) {# %% は余りを計算
            print("割り切れます") 
-           print(20200724 %/% 19) # 商を表示
+           print(20210423 %/% 19) # 商を表示
        } else { # {}で囲まれたブロックが1つのプログラム
            print("割り切れません")
            print(20210423 %% 19) # 余りを表示
@@ -252,15 +284,13 @@
 ** ~for~ 文
    - ベクトル ~V~ の要素を *順に* 変数 ~i~ に代入して
      プログラムXを繰り返し実行する
-     #+begin_src R :exports code
-       for(i in V) プログラムX
+     #+begin_src R :eval no
+       for(i in V) {プログラムX}
      #+end_src
-   - プログラムXは変数 ~i~ によって実行内容が変わる
+   - プログラムXは変数 ~i~ によって実行内容が変わってよい
+
 ** ~for~ 文の例
    - [[color:darkgreen][アルファベットの20,15,11,25,15番目を表示]]
-     #+begin_src R :exports none :tangle yes
-       ### 例題 for文の例
-     #+end_src
      #+begin_src R :tangle yes
        print(LETTERS) # LETTERS ベクトルの内容を表示
        for(i in c(20,15,11,25,15)) {
@@ -270,21 +300,18 @@
 
 ** ~while~ 文
    - 条件Aが *真* である限りプログラムXを繰り返す
-     #+begin_src R :exports code
-       while(条件A) プログラムX
+     #+begin_src R :eval no
+       while(条件A) {プログラムX}
      #+end_src
    - プログラムXは実行するたびに実行内容が変わり，
      いつか条件Aが満たされなくなるように書く
-   - /(~repeat~ 文というものもある)/
+   - /[[color:gray][~repeat~ 文というものもあるので調べてみよ]]/
 ** ~while~ 文の例
-   - [[color:darkgreen][20200809を素因数分解する]]
-     #+begin_src R :exports none :tangle yes
-       ### 例題 while文の例
-     #+end_src
+   - [[color:darkgreen][5!を素因数分解する]]
      #+begin_src R :tangle yes
-       n <- 20200809 # 分解の対象
+       n <- myFact(5) # 分解の対象
        p <- 2 # 最初に調べる数
-       while(n != 1){ # 商が1になるまで計算する
+       while(n != 1){ # 商(for文の中で計算している)が1になるまで計算する
            for(i in p:n){ # pからnまで順に調べる
                if(n%%i == 0) { # 余りが0か確認
                    print(i) # 割り切った数を表示
@@ -336,11 +363,11 @@
          }
          return(val) # 計算結果を返す
      }
-     myFact1(0) # 間違い (0!=1)
-     myFact1(1) # 正しい
-     myFact1(2) # 正しい
-     myFact1(3) # 正しい
      myFact1(4) # 正しい
+     myFact1(3) # 正しい
+     myFact1(2) # 正しい
+     myFact1(1) # 正しい
+     myFact1(0) # 間違い (0!=1)
    #+end_src
 
    #+reveal: split
@@ -352,17 +379,17 @@
              return(1)
          } else {
              val <- 1
-             for(i in 1:n){
+             for(i in 1:n){ 
                  val <- val*i
              }
              return(val)
          }
      }
-     myFact2(0) # 正しい
-     myFact2(1) # 正しい
-     myFact2(2) # 正しい
-     myFact2(3) # 正しい
      myFact2(4) # 正しい
+     myFact2(3) # 正しい
+     myFact2(2) # 正しい
+     myFact2(1) # 正しい
+     myFact2(0) # 正しい
    #+end_src
    
    #+reveal: split
@@ -377,85 +404,89 @@
          }
          return(val)
      }
-     myFact3(0) # 正しい
-     myFact3(1) # 正しい
-     myFact3(2) # 正しい
-     myFact3(3) # 正しい
      myFact3(4) # 正しい
+     myFact3(3) # 正しい
+     myFact3(2) # 正しい
+     myFact3(1) # 正しい
+     myFact3(0) # 正しい
    #+end_src
 
 ** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - 整数 $n$ の Fibonacci数を求める関数を作成せよ．
-     # #+begin_export latex
-     \begin{align}
-       F_{0}&=0\\
-       F_{1}&=1\\
-       F_{n}&=F_{n-1}+F_{n-2}
-     \end{align}
-     # #+end_export
-
-     #+begin_src R :exports none :tangle yes
-       ### 練習3.2
-       ### Fibonacci数を返す関数
-       fibo <- function(n){
-           f0 <- 0 # 第0項の設定
-           f1 <- 1 # 第1項の設定
-           if(n<0) {
-               print("計算できません")
-               return(NA) # 欠損値を返す
-           }
-           if(n==0) { # n=0の場合
-               return(f0)
-           }
-           if(n==1) { # n=1の場合
-               return(f1)
-           }
-           for(i in 2:n) { # n>=2の場合
-               fn <- f1 + f0 # fn = fn-1 + fn-2 の計算
-               f0 <- f1 # fn-2 の値の更新
-               f1 <- fn # fn-1 の値の更新
-           }
-           return(fn) # 計算結果を返す
-       }
-     #+end_src
-   - 行列 $X$ が与えられたとき，各列の平均を計算する関数を作成せよ．
-     #+begin_src R :exports none :tangle yes
-       ### 練習3.3
-       ### 行列の列の平均を計算する関数
-       colave <- function(X) {
-           ave <- rep(0,length=ncol(X)) # 平均を記録するベクトルを用意
-           for(i in 1:ncol(X)){ # 列ごとに計算
-               ave[i] <- sum(X[,i])/nrow(X) # 平均の定義に従って計算
-               ## ave[i] <- mean(X[,i]) # 平均を計算する関数を用いても良い
-           }
-           return(ave)
-       }
-       (A <- matrix(1:12,3,4,byrow=TRUE))
-       colave(A)
-     #+end_src
-   - 前問で $X$ がベクトルの場合にはその平均を計算するように修正せよ．\\
+   - 整数 $n$ の Fibonacci 数を求める関数を作成せよ
+     - Fibonacci 数は以下の漸化式で計算される
+       #+begin_quote
+       #+begin_src latex
+         \begin{align}
+           F_{0}&=0\\
+           F_{1}&=1\\
+           F_{n}&=F_{n-1}+F_{n-2}
+         \end{align}
+       #+end_src
+       #+end_quote
+   - 行列 $X$ が与えられたとき，各列の平均を計算する関数を作成せよ
+   - 前問で $X$ がベクトルの場合にはその平均を計算するように修正せよ \\
      /[[color:gray][関数 ~is.vector()~ が利用できる]]/
-     #+begin_src R :exports none :tangle yes
-       ### 練習3.4
-       ### ベクトルと行列を扱えるように修正
-       colave <- function(X){ 
-           if(is.vector(X)){
-               ave <- mean(X)
-           } else {
-               ave <- rep(0,length=ncol(X))
-               for(i in 1:ncol(X)){
-                   ave[i] <- mean(X[,i])
-               }
-           }
-           return(ave)
-       }
-       (A <- matrix(1:12,3,4,byrow=TRUE))
-       colave(A)
-       (x <- 1:12)
-       colave(x)
+
+   #+begin_src R :exports none :tangle yes
+     ### 練習問題 制御構造
+     ## Fibonacci 数を返す関数
+     myFibo <- function(n){
+         f0 <- 0 # 第0項の設定
+         f1 <- 1 # 第1項の設定
+         if(n<0) {
+             print("計算できません")
+             return(NA) # 欠損値を返す
+         }
+         if(n==0) { # n=0の場合
+               return(f0)
+         }
+         if(n==1) { # n=1の場合
+             return(f1)
+         }
+         for(i in 2:n) { # n>=2の場合
+             fn <- f1 + f0 # fn = fn-1 + fn-2 の計算
+             f0 <- f1 # fn-2 の値の更新
+             f1 <- fn # fn-1 の値の更新
+         }
+         return(fn) # 計算結果を返す
+     }
+     ## Fibonacci 数を6項目まで計算
+     c(myFibo(1),myFibo(2),myFibo(3),myFibo(4),myFibo(5),myFibo(6))
+     ## 同じ関数に別の値を入れて計算する方法はいくつか用意されている
+     sapply(1:30, myFibo)
+     
+     ## 行列の列の平均を計算する関数
+     myColAve <- function(X) {
+         ave <- rep(0,length=ncol(X)) # 平均を記録するベクトルを用意
+         for(i in 1:ncol(X)){ # 列ごとに計算
+             ave[i] <- sum(X[,i])/nrow(X) # 平均の定義に従って計算
+             ## ave[i] <- mean(X[,i]) # 平均を計算する関数を用いても良い
+         }
+         return(ave)
+     }
+     (A <- matrix(1:12,3,4,byrow=TRUE))
+     myColAve(A) # 正しい答えを返す
+     (x <- 1:12)
+     myColAve(x) # うまく動かない
+
+     ## ベクトルと行列を扱えるように修正
+     myColAve <- function(X){ 
+         if(is.vector(X)){ # ベクトルとそれ以外の場合分け
+             ave <- mean(X)
+         } else { # ベクトル以外は行列と想定して計算
+             ave <- rep(0,length=ncol(X))
+             for(i in 1:ncol(X)){
+                 ave[i] <- mean(X[,i])
+             }
+         }
+         return(ave)
+     }
+     myColAve(A)
+     myColAve(x) # 正しい答えを返す
+     ##
      #+end_src
 
 * COMMENT ローカル変数

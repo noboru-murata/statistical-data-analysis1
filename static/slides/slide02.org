@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-16 16:07:33 mura>
+# Time-stamp: <2021-04-21 15:19:06 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -50,7 +50,7 @@
      - 数値 (実数や複素数)
      - 文字列 ('や"で囲まれた文字．"foo"，"bar"など)
      - 論理値 ( ~TRUE~ , ~FALSE~ )
-   - Rオブジェクトの多くはベクトルとして扱われる\\
+   - Rオブジェクトの多くはベクトルとして扱われる \\
      /[[color:gray][スカラーは長さ1のベクトルとして扱われる]]/
 
 ** ベクトルの生成と操作
