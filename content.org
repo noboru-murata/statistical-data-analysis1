@@ -78,13 +78,15 @@
   :EXPORT_FILE_NAME: lecture04
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  昨年度資料
+  <2021-04-23 Fri> 更新
 ** スライド
    {{< myslide base="statistical-data-analysis1" name="slide04" >}}
 ** ハンドアウト
    - [[github:pdfs/slide04.pdf][PDF file]]
 ** 解答例
    - [[github:code/slide04.R][RScript]]
+** 練習用データ
+   - [[github:zips/jpdata.zip][jpdata]]
 
 * 講義5
   :PROPERTIES:
