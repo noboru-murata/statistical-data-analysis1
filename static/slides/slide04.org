@@ -2,7 +2,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-24 16:45:47 mura>
+# Time-stamp: <2021-04-24 17:11:34 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -412,7 +412,7 @@
        min(myData["若年"])  # 若年人口の最小値 (列名で選択)
        with(myData,max(老人))  # 老年人口の最大値 (関数 with() を利用)
      #+end_src
-     #+begin_src R :eval no :tangle yes
+     #+begin_src R :eval no :exports none :tangle yes
        ### 日本語に不具合がある場合
        myDataEn <- read.csv(file="data/jpdata1-en.csv", row.names=1)
        ## 一度読み込んでいれば上の行は不要
@@ -448,7 +448,7 @@
        apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
      #+end_src
      
-     #+begin_src R :eval no :tangle yes
+     #+begin_src R :eval no :exports none :tangle yes
        ### 日本語に不具合がある場合
        x <- subset(myDataEn, select=marriage:unemployed) # 抽出
        colMeans(x) # 各列の平均
@@ -514,7 +514,7 @@
                                  過疎=with(myData, 人口<=median(人口))))
      #+end_src
 
-     #+begin_src R :eval no :tangle yes
+     #+begin_src R :eval no :exports none :tangle yes
        ### 日本語に不具合がある場合
        ## 人口から面積まで地方ごとの平均値を計算
        x <- subset(myDataEn,select=population:area)
