@@ -151,7 +151,7 @@ min(myDataEn["young_population"])  # 若年人口の最小値 (列名で選択)
 with(myDataEn,max(old_population))  # 老年人口の最大値 (関数 with() を利用)
 
 ### 関数applyの使い方
-x <- subset(myData, select=婚姻:勤女) # 抽出
+x <- subset(myData, select=婚姻:失業) # 抽出
 colMeans(x) # 各列の平均
 apply(x, 2, max) # 列ごとの最大値
 sapply(x, max)   # 上と同じ (help(sapply)を参照)
@@ -159,7 +159,7 @@ sapply(x, max)   # 上と同じ (help(sapply)を参照)
 apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
 
 ### 日本語に不具合がある場合
-x <- subset(myDataEn, select=marriage:working_hours_female) # 抽出
+x <- subset(myDataEn, select=marriage:unemployed) # 抽出
 colMeans(x) # 各列の平均
 apply(x, 2, max) # 列ごとの最大値
 sapply(x, max)   # 上と同じ (help(sapply)を参照)
@@ -224,29 +224,62 @@ aggregate( . ~ region + depop, FUN=mean,
 with(myData,人口/面積) # 値のみ返す
 ## 人口密度に関係するデータをまとめてデータフレームを作成
 (myDat1 <- data.frame(subset(myData,select=c(人口,面積)),
-                        人口密度=with(myData,人口/面積)))
+		      人口密度=with(myData,人口/面積)))
 
 ### 地方別の人口密度 (地方の総人口/地方の総面積)
 ## 地方ごとに人口と面積の合計を計算
-(myDat2 <- aggregate(subset(myData,select=c("人口","面積")),
-                       by=list(地方=myArea$地方), FUN=sum))
+(myDat2 <- aggregate(subset(myData,select=c(人口,面積)),
+		     by=list(地方=myArea$地方), FUN=sum))
 ## 人口密度を計算して追加
 (myDat2 <- data.frame(myDat2, 
-                      人口密度=with(myDat2,人口/面積)))
+		      人口密度=with(myDat2,人口/面積)))
 
 ### 地方別の婚姻率・離婚率
 ## 婚姻可能な人口を推計
 (tmp <- data.frame(subset(myData, select=婚姻:離婚),
-                   婚姻可能=with(myData,人口-若年)))
+		   婚姻可能=with(myData,人口-若年)))
 ## 婚姻率と離婚率から人数を推計
 (tmp <- data.frame(tmp,
-                   婚姻数=with(tmp, 婚姻可能*婚姻/1000),
-                   離婚数=with(tmp, 婚姻可能*離婚/1000),
-                   地方=myArea$地方))
+		   婚姻数=with(tmp, 婚姻可能*婚姻/1000),
+		   離婚数=with(tmp, 婚姻可能*離婚/1000),
+		   地方=myArea$地方))
 ## 地方別の婚姻・離婚数を集計
 (myDat3 <- aggregate(. ~ 地方, FUN=sum,
-                     data=subset(tmp,select=-c(婚姻,離婚))))
+		     data=subset(tmp,select=-c(婚姻,離婚))))
 ## 婚姻率・離婚率を計算して追加
 (myDat3 <- data.frame(myDat3,
-                      婚姻率=with(myDat3,婚姻数/婚姻可能*1000),
-                      離婚率=with(myDat3,離婚数/婚姻可能*1000)))
+		      婚姻率=with(myDat3,婚姻数/婚姻可能*1000),
+		      離婚率=with(myDat3,離婚数/婚姻可能*1000)))
+
+### 日本語に不具合がある場合
+
+### 県別の人口密度 (人口/面積)
+with(myDataEn,population/area) # 値のみ返す
+## 人口密度に関係するデータをまとめてデータフレームを作成
+(myDat1En <- data.frame(subset(myDataEn,select=c(population,area)),
+			density=with(myDataEn,population/area)))
+
+### 地方別の人口密度 (地方の総人口/地方の総面積)
+## 地方ごとに人口と面積の合計を計算
+(myDat2En <- aggregate(subset(myDataEn,select=c(population,area)),
+		       by=list(region=myAreaEn$region), FUN=sum))
+## 人口密度を計算して追加
+(myDat2En <- data.frame(myDat2En, 
+			density=with(myDat2En,population/area)))
+
+### 地方別の婚姻率・離婚率
+## 婚姻可能な人口を推計
+(tmp <- data.frame(subset(myDataEn, select=marriage:divorce),
+		   marriageable=with(myDataEn,population-young_population)))
+## 婚姻率と離婚率から人数を推計
+(tmp <- data.frame(tmp,
+		   nmarriage=with(tmp, marriageable*marriage/1000),
+		   ndivorce=with(tmp, marriageable*divorce/1000),
+		   region=myAreaEn$region))
+## 地方別の婚姻・離婚数を集計
+(myDat3En <- aggregate(. ~ region, FUN=sum,
+		       data=subset(tmp,select=-c(marriage,divorce))))
+## 婚姻率・離婚率を計算して追加
+(myDat3En <- data.frame(myDat3En,
+			ratio_marriage=with(myDat3En,nmarriage/marriageable*1000),
+			ratio_divorce=with(myDat3En,ndivorce/marriageable*1000)))

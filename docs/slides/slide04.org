@@ -2,7 +2,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-23 16:08:05 mura>
+# Time-stamp: <2021-04-24 16:45:47 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -122,12 +122,12 @@
    - 基本書式
      #+begin_src R :eval no
        subset(x, subset, select, drop=FALSE)
-       # x:  データフレーム 
-       # subset: 抽出する行の条件
-       # select: 列の選択(未指定の場合は全ての列)
-       # drop: 結果が1行または1列の場合の扱い．ベクトル(TRUE)・データフレーム(FALSE)
-       #+end_src
-
+       ## x:  データフレーム 
+       ## subset: 抽出する行の条件
+       ## select: 列の選択(未指定の場合は全ての列)
+       ## drop: 結果が1行または1列の場合の扱い．ベクトル(TRUE)・データフレーム(FALSE)
+     #+end_src
+       
 ** 関数 ~subset()~ の例
    - 前出の例の書き換え
      #+begin_src R :tangle yes
@@ -155,7 +155,7 @@
               subset = Ozone>120 | Wind <= 3,
               select = -Temp)
      #+end_src
-
+     
 
 * 演習
   :PROPERTIES:
@@ -192,7 +192,7 @@
             subset = !(is.na(Ozone) | is.na(Solar.R)),
             select = Month:Day) # もともと並んでいるので c(Month,Day) と同じ
    #+end_src
-       
+   
 
 * ファイルの取り扱い
   #+begin_src R :exports none :tangle yes
@@ -238,8 +238,8 @@
    - 基本書式
      #+begin_src R :eval no
        write.csv(x, file="ファイル名")
-       # x: 書き出すデータフレーム
-       # file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
+       ## x: 書き出すデータフレーム
+       ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
      #+end_src
      - 他にも細かい指定ができるので詳しくはヘルプを参照
 
@@ -254,17 +254,17 @@
        ## 作業ディレクトリの中に data というフォルダを用意しておく
        write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
      #+end_src
-
+     
 ** 関数 ~read.csv()~
    - CSVファイルからデータフレームを読み込む関数
    - 基本書式
      #+begin_src R :eval no
        read.csv(file="ファイル名", header=TRUE,
-                row.names, fileEncoding)      
-       # file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
-       # header: 1行目を列名として使うか否か
-       # row.names: 行名の指定 (行名を含む列番号/列名，または行名の直接指定が可能)
-       # fileEncoding: 文字コードの指定 (日本語の場合，主に使うのは *"utf8","sjis"*)
+		row.names, fileEncoding)      
+       ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
+       ## header: 1行目を列名として使うか否か
+       ## row.names: 行名の指定 (行名を含む列番号/列名，または行名の直接指定が可能)
+       ## fileEncoding: 文字コードの指定 (日本語の場合，主に使うのは *"utf8","sjis"*)
      #+end_src
      - 他にも細かい指定ができるので詳しくはヘルプを参照
      - 関数 ~read.table()~ , ~scan()~ なども参照
@@ -277,14 +277,14 @@
                             row.names=1)) # 1列目を行名に指定
        dim(newdata) # 正しく読み込めたか大きさを確認
      #+end_src
-
+     
 ** 関数 ~save()~
    - RData ファイルへ書き出す関数
    - 基本書式
-     #+begin_src R :eval never
+     #+begin_src R :eval no
        save(..., file="ファイル名")
-       # ...: 保存するオブジェクト名 (複数可，データフレーム以外も可)
-       # file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
+       ## ...: 保存するオブジェクト名 (複数可，データフレーム以外も可)
+       ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
      #+end_src
      - CSV形式と異なり，
        *複数* のデータフレームを1つのファイルに保存することができる
@@ -298,25 +298,26 @@
        dim(myDat1); dim(myDat2) # 大きさを確認
        save(myDat1,myDat2,file="data/mydata.rdata") # RData形式で書き出し
      #+end_src
-
+     
 ** 関数 ~load()~ 
    - RDataファイルから読み込む関数
    - 基本書式
      #+begin_src R :eval no
        load(file="ファイル名")
-       # file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
+       ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
      #+end_src
      - 同じ名前のオブジェクトがあると上書きされるので注意
-
+       
 ** 関数 ~load()~ の例
-   #+begin_src R :tangle yes
-     ## 関数 load() の使い方 (RDataファイルの操作)
-     (myDat1 <- subset(airquality, Ozone > 160)) # 新たに作成
-     load(file="data/mydata.rdata") # RData形式の読み込み
-     myDat1 # saveしたときの名前で読み込まれ上書きされる
-     myDat2 
-   #+end_src
-
+   - RDataファイルの読み込み
+     #+begin_src R :tangle yes
+       ## 関数 load() の使い方 (RDataファイルの操作)
+       (myDat1 <- subset(airquality, Ozone > 160)) # 新たに作成
+       load(file="data/mydata.rdata") # RData形式の読み込み
+       myDat1 # saveしたときの名前で読み込まれ上書きされる
+       myDat2 
+     #+end_src
+   
 
 * 演習
   :PROPERTIES:
@@ -427,9 +428,9 @@
    - 基本書式
      #+begin_src R :eval no
        apply(X, MARGIN, FUN)
-       # X: データフレーム
-       # MARGIN: 行(1)か列(2)かを指定
-       # FUN: 計算すべき統計量の関数
+       ## X: データフレーム
+       ## MARGIN: 行(1)か列(2)かを指定
+       ## FUN: 計算すべき統計量の関数
      #+end_src
      - 総和や平均は専用の関数も用意されている
        - *~rowSums()/colSums()~*
@@ -439,17 +440,17 @@
    - 抽出したデータの集計を行う
      #+begin_src R :tangle yes
        ### 関数applyの使い方
-       x <- subset(myData, select=婚姻:勤女) # 抽出
+       x <- subset(myData, select=婚姻:失業) # 抽出
        colMeans(x) # 各列の平均
        apply(x, 2, max) # 列ごとの最大値
        sapply(x, max)   # 上と同じ (help(sapply)を参照)
        ## 自作関数の適用 (関数に名前を付けずに利用できる)
        apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
      #+end_src
-
+     
      #+begin_src R :eval no :tangle yes
        ### 日本語に不具合がある場合
-       x <- subset(myDataEn, select=marriage:working_hours_female) # 抽出
+       x <- subset(myDataEn, select=marriage:unemployed) # 抽出
        colMeans(x) # 各列の平均
        apply(x, 2, max) # 列ごとの最大値
        sapply(x, max)   # 上と同じ (help(sapply)を参照)
@@ -461,9 +462,9 @@
    - 基本書式
      #+begin_src R :eval no
        aggregate(x, by, FUN)
-       # x: データフレーム
-       # by: 各行が属するグループを指定するベクトルをリストで与える(複数可)
-       # FUN: 求めたい統計量を計算するための関数
+       ## x: データフレーム
+       ## by: 各行が属するグループを指定するベクトルをリストで与える(複数可)
+       ## FUN: 求めたい統計量を計算するための関数
      #+end_src
      - 同様な目的に関数 ~tapply()~ も利用可
 
@@ -566,34 +567,69 @@
      with(myData,人口/面積) # 値のみ返す
      ## 人口密度に関係するデータをまとめてデータフレームを作成
      (myDat1 <- data.frame(subset(myData,select=c(人口,面積)),
-                             人口密度=with(myData,人口/面積)))
+			   人口密度=with(myData,人口/面積)))
 
      ### 地方別の人口密度 (地方の総人口/地方の総面積)
      ## 地方ごとに人口と面積の合計を計算
-     (myDat2 <- aggregate(subset(myData,select=c("人口","面積")),
-                            by=list(地方=myArea$地方), FUN=sum))
+     (myDat2 <- aggregate(subset(myData,select=c(人口,面積)),
+			  by=list(地方=myArea$地方), FUN=sum))
      ## 人口密度を計算して追加
      (myDat2 <- data.frame(myDat2, 
-                           人口密度=with(myDat2,人口/面積)))
+			   人口密度=with(myDat2,人口/面積)))
 
      ### 地方別の婚姻率・離婚率
      ## 婚姻可能な人口を推計
      (tmp <- data.frame(subset(myData, select=婚姻:離婚),
-                        婚姻可能=with(myData,人口-若年)))
+			婚姻可能=with(myData,人口-若年)))
      ## 婚姻率と離婚率から人数を推計
      (tmp <- data.frame(tmp,
-                        婚姻数=with(tmp, 婚姻可能*婚姻/1000),
-                        離婚数=with(tmp, 婚姻可能*離婚/1000),
-                        地方=myArea$地方))
+			婚姻数=with(tmp, 婚姻可能*婚姻/1000),
+			離婚数=with(tmp, 婚姻可能*離婚/1000),
+			地方=myArea$地方))
      ## 地方別の婚姻・離婚数を集計
      (myDat3 <- aggregate(. ~ 地方, FUN=sum,
-                          data=subset(tmp,select=-c(婚姻,離婚))))
+			  data=subset(tmp,select=-c(婚姻,離婚))))
      ## 婚姻率・離婚率を計算して追加
      (myDat3 <- data.frame(myDat3,
-                           婚姻率=with(myDat3,婚姻数/婚姻可能*1000),
-                           離婚率=with(myDat3,離婚数/婚姻可能*1000)))
-     #+end_src
+			   婚姻率=with(myDat3,婚姻数/婚姻可能*1000),
+			   離婚率=with(myDat3,離婚数/婚姻可能*1000)))
+   #+end_src
+     
+   #+begin_src R :exports none :tangle yes
+     ### 日本語に不具合がある場合
 
+     ### 県別の人口密度 (人口/面積)
+     with(myDataEn,population/area) # 値のみ返す
+     ## 人口密度に関係するデータをまとめてデータフレームを作成
+     (myDat1En <- data.frame(subset(myDataEn,select=c(population,area)),
+			     density=with(myDataEn,population/area)))
+
+     ### 地方別の人口密度 (地方の総人口/地方の総面積)
+     ## 地方ごとに人口と面積の合計を計算
+     (myDat2En <- aggregate(subset(myDataEn,select=c(population,area)),
+			    by=list(region=myAreaEn$region), FUN=sum))
+     ## 人口密度を計算して追加
+     (myDat2En <- data.frame(myDat2En, 
+			     density=with(myDat2En,population/area)))
+
+     ### 地方別の婚姻率・離婚率
+     ## 婚姻可能な人口を推計
+     (tmp <- data.frame(subset(myDataEn, select=marriage:divorce),
+			marriageable=with(myDataEn,population-young_population)))
+     ## 婚姻率と離婚率から人数を推計
+     (tmp <- data.frame(tmp,
+			nmarriage=with(tmp, marriageable*marriage/1000),
+			ndivorce=with(tmp, marriageable*divorce/1000),
+			region=myAreaEn$region))
+     ## 地方別の婚姻・離婚数を集計
+     (myDat3En <- aggregate(. ~ region, FUN=sum,
+			    data=subset(tmp,select=-c(marriage,divorce))))
+     ## 婚姻率・離婚率を計算して追加
+     (myDat3En <- data.frame(myDat3En,
+			     ratio_marriage=with(myDat3En,nmarriage/marriageable*1000),
+			     ratio_divorce=with(myDat3En,ndivorce/marriageable*1000)))
+   #+end_src
+     
 
 * COMMENT ローカル変数
 # Local Variables:

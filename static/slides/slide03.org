@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-22 18:46:39 mura>
+# Time-stamp: <2021-04-23 21:52:36 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -307,21 +307,39 @@
      いつか条件Aが満たされなくなるように書く
    - /[[color:gray][~repeat~ 文というものもあるので調べてみよ]]/
 ** ~while~ 文の例
-   - [[color:darkgreen][5!を素因数分解する]]
+   - [[color:darkgreen][素因数分解する]]
      #+begin_src R :tangle yes
-       n <- myFact(5) # 分解の対象
+       n <- 20210423 # 分解の対象．2*2*3*19/myFact(5) なども試してみよ
        p <- 2 # 最初に調べる数
        while(n != 1){ # 商(for文の中で計算している)が1になるまで計算する
-           for(i in p:n){ # pからnまで順に調べる
-               if(n%%i == 0) { # 余りが0か確認
-                   print(i) # 割り切った数を表示
-                   n <- n/i # 商を計算して分解の対象を更新
-                   p <- i # 最初に調べる数を更新
-                   break # for文を途中で終了
-               }  
-           }
+           if(n%%p == 0) { # 余りが0か確認
+               print(p) # 割り切った数を表示
+               n <- n/p # 商を計算して分解の対象を更新
+           } else {
+               p <- p+1 # 割り切れない場合は次の数を調べる
+           } # 更新される p は素数とは限らないが，上手く動く理由は考えてみよ
        }
      #+end_src
+
+     #   while(n != 1){ # 商(for文の中で計算している)が1になるまで計算する
+     #       if(n%%p == 0) { # 余りが0か確認
+     #           print(p) # 割り切った数を表示
+     #           n <- n/p # 商を計算して分解の対象を更新
+     #       } else {
+     #           p <- ifelse(p==2,p+1,p+2) # ifelse(p>2,p+2,p+1)
+     #       } # 更新される p は素数とは限らないが，上手く動く理由は考えてみよ
+     #   }
+     # # while(n != 1){ # 商(for文の中で計算している)が1になるまで計算する
+     #     for(i in p:n){ # pからnまで順に調べる
+     #         if(n%%i == 0) { # 余りが0か確認
+     #             print(i) # 割り切った数を表示
+     #             n <- n/i # 商を計算して分解の対象を更新
+     #             p <- i # 最初に調べる数を更新
+     #             break # for文を途中で終了
+     #         }  
+     #     }
+     # }
+
    # ** ~repeat~ 文
    #    - プログラムXを繰り返し実行
    #      #+begin_src R :exports code
