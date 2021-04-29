@@ -1,8 +1,9 @@
 #+TITLE: データの整理と集計
+#+SUBTITLE: データフレームのより進んだ操作
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-24 17:11:34 mura>
+# Time-stamp: <2021-04-29 18:41:17 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -152,7 +153,7 @@
      #+begin_src R :tangle yes
        ## Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
        subset(airquality,
-              subset = Ozone>120 | Wind <= 3,
+              subset = Ozone>120 | Wind<=3,
               select = -Temp)
      #+end_src
      
@@ -177,12 +178,12 @@
      ### 練習問題 関数 subset() によるデータフレームの操作
      ## 7月のオゾン濃度
      subset(airquality,
-            subset = Month == 7,
+            subset = Month==7,
             select = Ozone)
 
      ## 風速時速10マイル以上かつ気温が華氏80度以上
      subset(airquality,
-            subset = Wind >= 10 & Temp >=80)
+            subset = Wind>=10 & Temp>=80)
 
      ## 日射量が欠測でないデータの月と日
      subset(airquality,
@@ -379,9 +380,11 @@
      myAreaEn
      ## 人口の最大値を見る
      with(myDataEn,max(population))
+     ## 人口の最大値を与える県の番号を見る (help(which.max)を参照)
+     with(myDataEn,which.max(population))
      ## どの都道府県の人口多いか調べる
      myDataEn[with(myDataEn,which.max(population)),] 
-     ## 人口の多い順に都道府県を並べる
+     ## 人口の多い順に都道府県を並べる (help(order)を参照)
      rownames(myDataEn)[with(myDataEn,order(population,decreasing=TRUE))]
    #+end_src
 
@@ -484,17 +487,17 @@
                  FUN=mean) 
      #+end_src
    #+reveal: split
-   - 以下も同じ結果を返す
+   - 以下も同じ結果を返す (~help(transform)~ を参照)
      #+begin_src R :tangle yes
-       y <- data.frame(x,地方=myArea$地方) 
+       y <- transform(x,地方=myArea$地方) # データフレームを変更
        aggregate( . ~ 地方, data=y, FUN=mean)
      #+end_src
    #+reveal: split
    - まとめて書くことも可能
      #+begin_src R :tangle yes
        aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-                 data=data.frame(subset(myData,select=人口:面積),
-                                 地方=myArea$地方), 
+                 data=transform(subset(myData,select=人口:面積),
+                                地方=myArea$地方), 
                  FUN=mean)
      #+end_src
    #+reveal: split
@@ -506,14 +509,14 @@
                  FUN=mean)
      #+end_src
    #+reveal: split
-   - 別の書き方
+   - 別の書き方 (~help(transform)~ を参照)
      #+begin_src R :tangle yes
        aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
-                 data=data.frame(subset(myData,select=人口:面積),
-                                 地方=myArea$地方,
-                                 過疎=with(myData, 人口<=median(人口))))
+                 data=transform(subset(myData,select=人口:面積),
+                                地方=myArea$地方,
+                                過疎=人口<=median(人口)))
      #+end_src
-
+     
      #+begin_src R :eval no :exports none :tangle yes
        ### 日本語に不具合がある場合
        ## 人口から面積まで地方ごとの平均値を計算
@@ -524,11 +527,11 @@
                  by=list(region=myAreaEn$region),
                  FUN=mean) 
 
-       y <- data.frame(x,region=myAreaEn$region) 
+       y <- transform(x,region=myAreaEn$region) 
        aggregate( . ~ region, data=y, FUN=mean)
 
        aggregate( . ~ region, # 右辺で条件付けて左辺(右辺以外)を計算
-                 data=data.frame(subset(myDataEn,select=population:area),
+                 data=transform(subset(myDataEn,select=population:area),
                                  region=myAreaEn$region), 
                  FUN=mean)
 
@@ -538,9 +541,9 @@
                  FUN=mean)
 
        aggregate( . ~ region + depop, FUN=mean, 
-                 data=data.frame(subset(myDataEn,select=population:area),
-                                 region=myAreaEn$region,
-                                 depop=with(myDataEn, population<=median(population))))
+                 data=transform(subset(myDataEn,select=population:area),
+                                region=myAreaEn$region,
+                                depop=population<=median(population)))
      #+end_src
 
 * 演習
@@ -566,33 +569,36 @@
      ### 県別の人口密度 (人口/面積)
      with(myData,人口/面積) # 値のみ返す
      ## 人口密度に関係するデータをまとめてデータフレームを作成
-     (myDat1 <- data.frame(subset(myData,select=c(人口,面積)),
-			   人口密度=with(myData,人口/面積)))
+     (myDat1 <- transform(subset(myData,select=c(人口,面積)),
+                          人口密度=人口/面積))
+     ## 以下でも同じデータフレームを作成できる
+     ## (myDat1 <- data.frame(subset(myData,select=c(人口,面積)),
+     ##			   人口密度=with(myData,人口/面積)))
 
      ### 地方別の人口密度 (地方の総人口/地方の総面積)
      ## 地方ごとに人口と面積の合計を計算
      (myDat2 <- aggregate(subset(myData,select=c(人口,面積)),
 			  by=list(地方=myArea$地方), FUN=sum))
      ## 人口密度を計算して追加
-     (myDat2 <- data.frame(myDat2, 
-			   人口密度=with(myDat2,人口/面積)))
+     (myDat2 <- transform(myDat2, 
+                          人口密度=人口/面積))
 
      ### 地方別の婚姻率・離婚率
      ## 婚姻可能な人口を推計
-     (tmp <- data.frame(subset(myData, select=婚姻:離婚),
-			婚姻可能=with(myData,人口-若年)))
+     (tmp <- transform(subset(myData, select=婚姻:離婚), # 人口，若年は含まない
+                       婚姻可能=with(myData,人口-若年))) 
      ## 婚姻率と離婚率から人数を推計
-     (tmp <- data.frame(tmp,
-			婚姻数=with(tmp, 婚姻可能*婚姻/1000),
-			離婚数=with(tmp, 婚姻可能*離婚/1000),
-			地方=myArea$地方))
+     (tmp <- transform(tmp,
+                       婚姻数=婚姻可能*婚姻/1000,
+                       離婚数=婚姻可能*離婚/1000,
+                       地方=myArea$地方))
      ## 地方別の婚姻・離婚数を集計
      (myDat3 <- aggregate(. ~ 地方, FUN=sum,
 			  data=subset(tmp,select=-c(婚姻,離婚))))
      ## 婚姻率・離婚率を計算して追加
-     (myDat3 <- data.frame(myDat3,
-			   婚姻率=with(myDat3,婚姻数/婚姻可能*1000),
-			   離婚率=with(myDat3,離婚数/婚姻可能*1000)))
+     (myDat3 <- transform(myDat3,
+                          婚姻率=婚姻数/婚姻可能*1000,
+                          離婚率=離婚数/婚姻可能*1000))
    #+end_src
      
    #+begin_src R :exports none :tangle yes
@@ -601,33 +607,33 @@
      ### 県別の人口密度 (人口/面積)
      with(myDataEn,population/area) # 値のみ返す
      ## 人口密度に関係するデータをまとめてデータフレームを作成
-     (myDat1En <- data.frame(subset(myDataEn,select=c(population,area)),
-			     density=with(myDataEn,population/area)))
+     (myDat1En <- transform(subset(myDataEn,select=c(population,area)),
+                            density=population/area))
 
      ### 地方別の人口密度 (地方の総人口/地方の総面積)
      ## 地方ごとに人口と面積の合計を計算
      (myDat2En <- aggregate(subset(myDataEn,select=c(population,area)),
 			    by=list(region=myAreaEn$region), FUN=sum))
      ## 人口密度を計算して追加
-     (myDat2En <- data.frame(myDat2En, 
-			     density=with(myDat2En,population/area)))
+     (myDat2En <- transform(myDat2En, 
+                            density=population/area))
 
      ### 地方別の婚姻率・離婚率
      ## 婚姻可能な人口を推計
-     (tmp <- data.frame(subset(myDataEn, select=marriage:divorce),
-			marriageable=with(myDataEn,population-young_population)))
+     (tmp <- transform(subset(myDataEn, select=marriage:divorce),
+                       marriageable=with(myDataEn,population-young_population)))
      ## 婚姻率と離婚率から人数を推計
-     (tmp <- data.frame(tmp,
-			nmarriage=with(tmp, marriageable*marriage/1000),
-			ndivorce=with(tmp, marriageable*divorce/1000),
-			region=myAreaEn$region))
+     (tmp <- transform(tmp,
+                       nmarriage=marriageable*marriage/1000,
+                       ndivorce=marriageable*divorce/1000,
+                       region=myAreaEn$region))
      ## 地方別の婚姻・離婚数を集計
      (myDat3En <- aggregate(. ~ region, FUN=sum,
 			    data=subset(tmp,select=-c(marriage,divorce))))
      ## 婚姻率・離婚率を計算して追加
-     (myDat3En <- data.frame(myDat3En,
-			     ratio_marriage=with(myDat3En,nmarriage/marriageable*1000),
-			     ratio_divorce=with(myDat3En,ndivorce/marriageable*1000)))
+     (myDat3En <- transform(myDat3En,
+                            ratio_marriage=nmarriage/marriageable*1000,
+                            ratio_divorce=ndivorce/marriageable*1000))
    #+end_src
      
 
