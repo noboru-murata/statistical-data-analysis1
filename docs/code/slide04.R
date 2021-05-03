@@ -77,9 +77,9 @@ dim(myData) # データフレームの大きさを確認
 write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
 
 ## 関数 read.csv() の使い方 (CSVファイルの操作)
-(newdata <- read.csv(file="data/mydata.csv", # 前の例のファイル
+(newData <- read.csv(file="data/mydata.csv", # 前の例のファイル
                      row.names=1)) # 1列目を行名に指定
-dim(newdata) # 正しく読み込めたか大きさを確認
+dim(newData) # 正しく読み込めたか大きさを確認
 
 ### 関数 save() の使い方 (RDataファイルの操作)
 (myDat1 <- subset(airquality, Temp>95, select=-Ozone)) 
@@ -241,16 +241,16 @@ with(myData,人口/面積) # 値のみ返す
 
 ### 地方別の婚姻率・離婚率
 ## 婚姻可能な人口を推計
-(tmp <- transform(subset(myData, select=婚姻:離婚), # 人口，若年は含まない
+(foo <- transform(subset(myData, select=婚姻:離婚), # 人口，若年は含まない
                   婚姻可能=with(myData,人口-若年))) 
 ## 婚姻率と離婚率から人数を推計
-(tmp <- transform(tmp,
+(foo <- transform(foo,
                   婚姻数=婚姻可能*婚姻/1000,
                   離婚数=婚姻可能*離婚/1000,
                   地方=myArea$地方))
 ## 地方別の婚姻・離婚数を集計
 (myDat3 <- aggregate(. ~ 地方, FUN=sum,
-		     data=subset(tmp,select=-c(婚姻,離婚))))
+		     data=subset(foo,select=-c(婚姻,離婚))))
 ## 婚姻率・離婚率を計算して追加
 (myDat3 <- transform(myDat3,
                      婚姻率=婚姻数/婚姻可能*1000,
@@ -274,16 +274,16 @@ with(myDataEn,population/area) # 値のみ返す
 
 ### 地方別の婚姻率・離婚率
 ## 婚姻可能な人口を推計
-(tmp <- transform(subset(myDataEn, select=marriage:divorce),
+(foo <- transform(subset(myDataEn, select=marriage:divorce),
                   marriageable=with(myDataEn,population-young_population)))
 ## 婚姻率と離婚率から人数を推計
-(tmp <- transform(tmp,
+(foo <- transform(foo,
                   nmarriage=marriageable*marriage/1000,
                   ndivorce=marriageable*divorce/1000,
                   region=myAreaEn$region))
 ## 地方別の婚姻・離婚数を集計
 (myDat3En <- aggregate(. ~ region, FUN=sum,
-		       data=subset(tmp,select=-c(marriage,divorce))))
+		       data=subset(foo,select=-c(marriage,divorce))))
 ## 婚姻率・離婚率を計算して追加
 (myDat3En <- transform(myDat3En,
                        ratio_marriage=nmarriage/marriageable*1000,

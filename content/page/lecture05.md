@@ -6,7 +6,7 @@ draft = false
 weight = 1006
 +++
 
-昨年度資料
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-05-03 Mon&gt; </span></span> 更新
 
 
 ## スライド {#スライド}
@@ -22,3 +22,8 @@ weight = 1006
 ## 解答例 {#解答例}
 
 -   [RScript](https://noboru-murata.github.io/statistical-data-analysis1/code/slide05.R)
+
+
+## 練習用データ {#練習用データ}
+
+-   [tokyo](https://noboru-murata.github.io/statistical-data-analysis1/zips/tokyo.zip)

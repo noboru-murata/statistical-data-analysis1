@@ -1,16 +1,16 @@
-## plot(x) の場合 
+### 第05回 練習問題解答例
+
+### 基本的な描画で用いた例
+
 x <- pi/6*(0:12) # 30度(pi/6)おきに1周期分 (0-2*pi)
 plot(sin(x)) # x軸はベクトルの要素番号(Index)，y軸はsin(x)の値を描画
 
-## plot(x,y) の場合
 x <- pi/6*(0:12)
 plot(x, sin(x)) # x の値に対する y=sin(x) の値を対応づけて描画
 
-## オプションを追加
 x <- pi/6*(0:12)
 plot(x,sin(x),type="l",lwd=3,col="blue",ylab="y=sin(x)")
 
-## ベクトルデータの重ね描き
 x <- seq(0, 4*pi, by=0.5)
 y <- sin(x)
 z <- cos(x)
@@ -18,7 +18,6 @@ plot(x, y, type="b", pch="x", ylim=c(-2,2), col="red") # "b"="p+l"
 points(x, z, col="blue", pch="C") # 点を追加. pchは文字も指定できる
 lines(x, z, col="cyan", lwd=3) # 折れ線を追加
 
-## 関数の描画
 curve(sin, from=0, to=4*pi, 
       col="blue", lwd=2, # グラフの線の色と太さ
       xlab="time", ylab="sin/cos") # x/y軸のラベルの文字列を指定
@@ -26,131 +25,149 @@ curve(cos,
       add=TRUE, # グラフを上書き
       col="red", lwd=2)
 
-## 関数とベクトルデータの重ね描き
 x <- seq(0, 4*pi, by=0.25)
 y <- sin(x) + rep(c(-0.2, 0.1), len=length(x))
 plot(x, y, type="p", pch="x", ylim=c(-2,2), col="red") 
 lines(x, y, col="blue", lwd=2) # 折れ線を追加
 curve(sin, add=TRUE, col="orange", lwd=3)
 
-## データフレームを用いた散布図
 plot(Ozone ~ Wind, data=airquality,
      pch="*", col="red", cex=2) # cexは点の大きさの倍率を指定
 
-### 練習1.1
-### 婚姻・離婚率の散布図
+### 練習問題 関数 plot() による描画
 ## データの読み込み
-myData <- read.csv(file="data/jpdata1.csv",fileEncoding="utf8",row.names=1)
-myArea <- read.csv(file="data/jpdata3.csv",fileEncoding="utf8")
-## 散布図
-par(family="HiraginoSans-W4") # 日本語表示
-plot(離婚 ~ 婚姻, data=myData, col="cyan", pch=19)
-with(myData, text(婚姻,離婚,labels=rownames(myData)))
+JP.data <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
+JP.area <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
 
-### 練習1.2
-### 地方別に異なる記号の散布図
-plot(離婚 ~ 婚姻, data=myData, col="red", pch=myArea$コード)
-with(myData, text(婚姻,離婚,col="gray",cex=0.5,
-		  labels=rownames(myData)))
+## jpdata1 に jpdata3 を付加する
+JP.data <- cbind(JP.data,JP.area)
 
-## 関数histによるヒストグラムの作図
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+## 婚姻・離婚率の散布図
+par(family="HiraginoSans-W4") # 日本語表示 (macOSの場合)
+plot(離婚 ~ 婚姻, data=JP.data, # データフレームを用いた散布図の指定
+     col="green", # 点の色を指定
+     pch=19) # 点の形を指定 (help(points)参照)
+with(JP.data, text(婚姻,離婚,labels=県名)) # X軸, Y軸 の順に注意
+## 関数 text() には引数 data はないが，関数 with() を利用するとよい
+
+## 地方別に異なる記号の散布図
+plot(離婚 ~ 婚姻, data=JP.data,
+     col="red", 
+     pch=コード)
+with(JP.data, text(婚姻,離婚,labels=県名,
+                  col="gray", # 文字の色を指定
+                  cex=0.5)) # 文字の大きさを指定(既定値は1)
+
+### 分布の視覚化で用いた例
+
+TW.data <- read.csv("data/tokyo_weather.csv") # 東京都の気象データの読み込み
 par(family="HiraginoSans-W4") # 日本語表示
-hist(myData$気温, 
-     xlab="", ylab="頻度",
+hist(TW.data$temp, 
+     xlab="気温(℃)", ylab="頻度",
      breaks=25, # ビンの数を約25に設定
      labels=TRUE, # 各ビンの度数を表示
-     col="green", main="気温のヒストグラム")
+     col="lightpink", main="気温のヒストグラム")
 
-## 関数histによるヒストグラムの作図(密度での表示)
 par(family="HiraginoSans-W4") # 日本語表示
-hist(myData$風速, freq=FALSE, # 全体に対する割合で表示
-     xlab="", ylab="密度", breaks=25, 
+hist(TW.data$wind, freq=FALSE, # 全体に対する割合で表示
+     xlab="風速(m/s)", ylab="密度", breaks=25, 
      col="lightblue", border="blue", # 長方形の境界の色
      main="風速の密度")
 
-## 関数boxplotによる箱ひげ図の作図
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
 ## 基本的な箱ひげ図
 par(family="HiraginoSans-W4") # 日本語表示
-boxplot(subset(myData, select=気温:風速)) # 数値データの一部を抽出
+boxplot(subset(TW.data, select=c(temp:snow,wind)), # 数値データの一部を抽出
+        names=c("気温","降雨","日射","降雪","風速")) # 各箱ひげ図の名前を指定
+## names を指定しなければ列名が使われる
 
-## 関数boxplotによる箱ひげ図の作図
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
 ## 月ごとに気温を分類
 par(family="HiraginoSans-W4") # 日本語表示
-boxplot(気温 ~ 月, data=myData, col="orange", main="月ごとの気温")
+boxplot(temp ~ month, data=TW.data,
+        col="orange",
+        xlab="月",ylab="気温",main="月ごとの気温")
 ## 図を回転する場合は horizontal を指定する
 ## boxplot(気温 ~ 月, data=myData,
 ## 	col="purple", main="月ごとの気温", horizontal=TRUE)
 
-## 関数barplotによる棒グラフの作図
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+### 比率の視覚化で用いた例
+
 ## 月ごとに各変数の平均を計算
 par(family="HiraginoSans-W4") # 日本語表示
-x <- aggregate(. ~ 月, FUN=mean,
-	       data=subset(myData, select=c(月,気温:風速)))
+(foo <- aggregate(. ~ month, FUN=mean,
+                  data=subset(TW.data, select=c(month,temp:snow,wind))))
 ## 基本的な棒グラフ
-barplot(x[,2], # 棒の高さのベクトル
-	col="slateblue", # 棒の色の指定
-	names.arg=x[,1], # x軸のラベル
-	main=names(x)[2]) # タイトル
+barplot(foo$temp, # 棒の高さのベクトル
+        col="slateblue", # 棒の色の指定
+        names.arg=foo$month, # x軸のラベル
+        xlab="月",main="平均気温") # タイトル
 
-## 関数barplotによる棒グラフの作図
-## 複数の棒グラフ
 par(family="HiraginoSans-W4") # 日本語表示
-barplot(as.matrix(x[ ,-1]), # 第1引数のデータフレームは行列にする
-	col=rainbow(12)[c(8:1,12:9)], # 12色に色分け
-	beside=TRUE, # 棒グラフを横に並べる
-	space=c(1.5, 3), # 棒グラフ間・変数間のスペースを指定
-	legend.text=paste0(x[ ,1], "月"), # 凡例の指定
-	args.legend=list(ncol=2)) # 凡例を2列にして表示
+barplot(as.matrix(foo[ ,-1]), # 第1引数のデータフレームは行列にする
+        col=rainbow(12)[c(8:1,12:9)], # 12色に色分け
+        beside=TRUE, # 各列ごとの棒グラフを横に並べる
+        space=c(1.5, 3), # 棒グラフ間・変数間のスペースを指定
+        names.arg=c("気温","降雨","日射","降雪","風速"), # 各列の名前を指定．指定しなければ列名が使われる
+        legend.text=paste0(foo$month,"月"), # 凡例の指定
+        args.legend=list(ncol=2)) # 凡例を2列にして表示
 
-## 関数pieによる円グラフの作図
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-z <- hist(myData$日射量, breaks=5, plot=FALSE) # 5つ程度に分類
-x <- z$count
-y <- z$breaks
-names(x) <- paste(y[-length(y)], y[-1], sep="-")
-## 向きと色を調整
+## ヒストグラムの機能を用いてデータの集計を行う
+foo <- hist(TW.data$solar, breaks=5, plot=FALSE) # 5つ程度に分類
+bar <- foo$count # 各ビン内のデータ数
+baz <- foo$breaks # ビンの境界
+names(bar) <- paste(baz[-length(baz)],baz[-1],sep="-") # ビンの範囲の文字列を作成
+## 向きと色を調整して描画
 par(family="HiraginoSans-W4") # 日本語表示
-pie(x, clockwise=TRUE, main="日射量別の日数の割合",
-    col=heat.colors(length(x),rev=TRUE))
+pie(bar, clockwise=TRUE, main="日射量別の日数の割合",
+    col=heat.colors(length(bar),rev=TRUE)) # 日射量が高いほど赤を濃く指定
 
-### 練習2.1
-### 陽性患者数の推移 (折れ線グラフ)
+### 練習問題 東京都の感染動向データによる例
+## 陽性患者数の推移 (折れ線グラフ)
 ## データの読み込み
-myData <- read.csv(file="data/covid19_tokyo.csv",fileEncoding="utf8")
+TC.data <- read.csv(file="data/tokyo_covid19_2021.csv",fileEncoding="utf8")
+names(TC.data)[1] <- "年月日" # CSVファイルの1列目の名前が空白なので定義しておく
+TC.data <- transform(TC.data,年月日=as.Date(年月日)) # 日付の属性を変えておく
+
 ## 折れ線グラフ
 par(family="HiraginoSans-W4") # 日本語表示
-plot(myData$陽性患者数, type="l", col="red", ylab="陽性患者数") 
-## 日付ラベルの作成例
-days <- as.Date(with(myData,paste("2020",月,日, sep="-"))) # 2020-月-日
-plot(days,myData$陽性患者数, type="l", col="red", ylab="陽性患者数")
+plot(TC.data$陽性者数, type="l", col="red", ylab="陽性者数") 
+## 日付ラベルを用いた作図の例
+with(TC.data,
+     plot(年月日,陽性者数,
+          type="l", col="red", ylab="陽性者数"))
+## 日付は月日から文字列操作で作ることもできる
+## days <- with(TC.data,as.Date(paste("2021",月,日,sep="-"))) # 2021-月-日
 
-### 練習2.2
-### 検査実施人数の推移 (棒グラフ)
-par(family="HiraginoSans-W4") # 日本語表示
-barplot(myData$検査実施人数, col="lightblue", ylab="検査実施人数") # 棒グラフ
-plot(myData$検査実施人数, type="h", # 棒が多い場合はこういう方法もある
-     col="blue", ylab="検査実施人数") 
+## x軸のラベルのフォーマットを指定する例
+plot(陽性者数 ~ 年月日, data=TC.data, xaxt="n",
+     type="l", col="red", ylab="陽性者数")
+axis.Date(1, TC.data$年月日, format="%m/%d", labels=TRUE) #x軸ラベルを書く
+
+## 検査実施人数の推移 (棒グラフ)
+barplot(TC.data$総検査実施件数, col="lightblue", ylab="検査実施件数") # 棒グラフ
+plot(TC.data$総検査実施件数, type="h", # 棒が多い場合はこういう方法もある
+     col="blue", ylab="検査実施件数") 
 ## 日付ラベルの付加
-plot(days, myData$検査実施人数, type="h", col="blue", ylab="検査実施人数") 
+with(TC.data,
+     plot(年月日, 総検査実施件数, type="h", col="blue", ylab="検査実施人数")) 
 grid(col="darkgray") # 格子線の追加
 
-### 練習2.3
-### 曜日ごとの検査実施件数 (箱ひげ図)
-par(family="HiraginoSans-W4") # 日本語表示
-boxplot(検査実施件数 ~ 曜日, data=myData, col=cm.colors(7))
+## 曜日ごとの検査実施件数 (箱ひげ図)
+boxplot(総検査実施件数 ~ 曜日, data=TC.data, col=cm.colors(7))
+## 曜日の並び順を修正
+TC.data <- transform(TC.data,
+                     曜日=factor(曜日,
+                                 levels=c("日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"), # 順序を指定
+                                 labels=c("日","月","火","水","木","金","土"))) # 名称を変更
+boxplot(総検査実施件数 ~ 曜日, data=TC.data, col=cm.colors(7))
 
-## 関数pairsによる散布図の作図
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
+### 多次元データの視覚化で用いた例
+
 ## 表示する項目を指定
 par(family = "HiraginoSans-W4") 
-pairs(~ 気温 + 日射量 + 風速, data=myData,
-      col=rainbow(12)[myData$月]) # 月毎に異なる色で表示
+pairs(~ temp + solar + wind, data=TW.data,
+      labels=c("気温","日射","風速"), # 指定しなければ列名が使われる
+      col=rainbow(12)[TW.data$month]) # 月毎に異なる色で表示
 
-## 関数perspによる2変数関数の俯瞰図
 f <- function(x,y) x^2 - y^2
 x <- seq(-3, 3, length=51) # x座標の定義域の分割
 y <- seq(-3, 3, length=51) # y座標の定義域の分割
@@ -161,15 +178,15 @@ z <- outer(x, y, f) # z座標の計算
 persp(x, y, z, theta=30, phi=30, expand=0.5, # 俯瞰する視線の設定
       col="royalblue", main=expression(z==x^2-y^2))
 
-## 3次元散布図
 ## install.packages("scatterplot3d") # 初めて使う時に必要
 library(scatterplot3d) # パッケージのロード
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
 par(family = "HiraginoSans-W4") 
-scatterplot3d(subset(myData, select=c(風速, 日射量, 気温)), 
-	      pch=4, color="orchid")
+scatterplot3d(subset(TW.data, select=c(wind, solar, temp)),
+              xlab="風速",ylab="日射",zlab="気温", # 指定しなければ列名が使われる
+              pch=4, color="orchid")
 
-## 凡例の追加
+### 凡例の追加で用いた例
+
 f <- function(x) exp(-x) * cos(x)
 plot(f, 0, 2*pi, col="red", lwd=2, ylab="")
 g <- function(x) exp(-x) * sin(x)
@@ -184,67 +201,61 @@ legend(4, # 凡例の左上のx座標
 
 ## 日本語フォントの指定
 par(family="HiraginoSans-W4") 
-## 東京の気候データから月ごとの気温,降水量,日射量の平均を計算し描画する
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-(x <- aggregate(. ~ 月, FUN=mean,
-		data=subset(myData, select=c(月,気温,降水量,日射量))))
-plot(x$気温, type ="b", lwd=3, col="green", ylim=c(0, max(x$気温)+1),
+## 東京の気象データから月ごとの気温,降水量,日射量の平均を計算し描画する
+(foo <- aggregate(. ~ month, FUN=mean,
+                  data=subset(TW.data, select=c(month,temp,rain,solar))))
+plot(foo$temp, type ="b", lwd=3, col="green", ylim=c(0, max(foo$temp)+1),
      xlab="月", ylab="", main="東京の気候データ", axes=FALSE) # 軸は無
 axis(1, 1:12, 1:12); axis(2) # x(1),y(2)軸の作成
-lines(x$降水量, type="h", lwd=3, col="blue") # 棒グラフ
-lines(x$日射量, type="s", lwd=3, lty=2, col="red") # 階段グラフ
+lines(foo$rain, type="h", lwd=3, col="blue") # 棒グラフ
+lines(foo$solar, type="s", lwd=3, lty=2, col="red") # 階段グラフ
 abline(0, 0, lwd=2, lty="dotted") #  y=0の線を引く
 legend("topleft", inset=0.02, # 左上で全体の2%(0.02)内側に良せる
        legend=c("気温","降水量","日射量"),
        col=c("green","blue","red"), lwd=3, lty=c(1,1,2))
 
-### 練習3.1
-### 3次元の散布図 (jpdat1.csvを用いた例)
-## データの読み込み
-myData <- read.csv(file="data/jpdata1.csv",fileEncoding="utf8",row.names=1)
-## 散布図
+### 練習問題
+## 3次元の散布図 (jpdat1/3.csvを用いた例)
 par(family="HiraginoSans-W4") # 日本語表示
-scatterplot3d(subset(myData, select=c(婚姻,離婚,失業)), 
-	      pch=19, color="blue")
-pairs(subset(myData, select=c(婚姻,離婚,失業)), col="blue") # 三面図で見てみる
+scatterplot3d(subset(JP.data, select=c(婚姻,離婚,失業)), 
+              pch=19, color="blue")
+pairs(subset(JP.data, select=c(婚姻,離婚,失業)), col="blue") # 三面図で見てみる
 
-### 練習3.2
-### 凡例の追加 (covid19_tokyo.csvを用いた例)
+### 凡例の追加 (tokyo_covid19_2021.csvを用いた例)
 ## データの読み込み
-myData <- read.csv(file="data/covid19_tokyo.csv",fileEncoding="utf8")
-days <- as.Date(with(myData,paste("2020",月,日, sep="-"))) # 日付ラベル
-## 
 par(family="HiraginoSans-W4") # 日本語表示
-plot(days,myData$検査実施人数, type="h", col="blue", xlab="日付", ylab="人数")
-abline(h=seq(0,500,by=100), lty=2, col="darkgray") # 補助線の追加
-lines(days,myData$陽性患者数, col="red")
+plot(総検査実施件数/10 ~ 年月日, data=TC.data,
+     type="h", col="blue", xlab="日付", ylab="人数")
+abline(h=seq(0,2000,by=100), lty=2, col="darkgray") # 補助線の追加
+lines(陽性者数 ~ 年月日, data=TC.data, col="red") 
 title(main="検査実績の推移") 
-legend("topleft", inset=0.01, 
-       legend=c("検査実施人数","陽性患者数"),
+legend("topright", inset=0.01, 
+       legend=c("検査実施件数/10","陽性者数"),
        col=c("blue","red"), lwd=3, lty=1)
 
-### 凡例の追加 (covid19_tokyo_patients.csvを用いた例)
+### 凡例の追加 (tokyo_covid19_patients_2021.csvを用いた例)
 ## データの読み込み
-myData <- read.csv(file="data/covid19_tokyo_patients.csv")
+TCP.data <- read.csv(file="data/covid19_tokyo_patients.csv")
 ## 簡単な集計には関数table()を使うとよい
-table(subset(myData,select=c(患者_年代))) # 名前のついたベクトル
-barplot(table(subset(myData,select=c(患者_年代))))
+table(subset(TCP.data, select=c(患者_年代))) # 名前のついたベクトル
+barplot(table(subset(TCP.data, select=c(患者_年代))))
 ## 月別の年齢分布を調べる
-x <-with(myData,data.frame(age=患者_年代,
-		    month=months(as.Date(公表_年月日))))
-(tab1 <- table(x)) # (年齢 x 月) の患者数の表(行列)
-(tab2 <- apply(tab1,2,function(z){z/sum(z)})) # 月ごとの年齢分布
+foo <-with(TCP.data,
+           data.frame(age=患者_年代,
+                      month=months(as.Date(公表_年月日))))
+(bar <- table(foo)) # (年齢 x 月) の患者数の表(行列)
+(baz <- apply(bar, 2, function(z){z/sum(z)})) # 月ごとの年齢分布
 ## 描画
 par(family="HiraginoSans-W4") # 日本語表示
-barplot(tab1, # 人数のグラフ
-	col=rainbow(13), # 13色に色分け
-	beside=TRUE, # 棒グラフを横に並べる
-	space=c(1.5, 3), # 棒グラフ間・変数間のスペースを指定
-	legend.text=rownames(tab1), # 凡例の指定, 2列，縮小, 左上に表示
-	args.legend=list(ncol=2,cex=0.5,x="topleft",inset=0.01)) 
-barplot(tab2, # 比率のグラフ
-	col=rainbow(13), # 13色に色分け
-	beside=TRUE, # 棒グラフを横に並べる
-	space=c(1.5, 3), # 棒グラフ間・変数間のスペースを指定
-	legend.text=rownames(tab1), # 凡例の指定，2列，縮小
-	args.legend=list(ncol=2,cex=0.5))
+barplot(bar, # 人数のグラフ
+        col=rainbow(13), # 13色に色分け
+        beside=TRUE, # 棒グラフを横に並べる
+        space=c(1.5, 3), # 棒グラフ間・変数間のスペースを指定
+        legend.text=rownames(bar), # 凡例の指定, 2列，縮小, 左上に表示
+        args.legend=list(ncol=2,cex=0.5,x="topleft",inset=0.01)) 
+barplot(baz, # 比率のグラフ
+        col=rainbow(13), # 13色に色分け
+        beside=TRUE, # 棒グラフを横に並べる
+        space=c(1.5, 3), # 棒グラフ間・変数間のスペースを指定
+        legend.text=rownames(baz), # 凡例の指定，2列，縮小
+        args.legend=list(ncol=2,cex=0.5))
