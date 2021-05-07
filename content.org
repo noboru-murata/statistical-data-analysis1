@@ -108,7 +108,7 @@
   :EXPORT_FILE_NAME: lecture06
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  昨年度資料
+  <2021-05-07 Fri> 更新
 ** スライド
    {{< myslide base="statistical-data-analysis1" name="slide06" >}}
 ** ハンドアウト

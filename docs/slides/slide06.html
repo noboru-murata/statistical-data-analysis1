@@ -34,27 +34,40 @@
     <h1 class="no-toc-progress">確率シミュレーション</h1>
 </div>
 <div class="talk-subtitle">
-    <p></p>
+    <p>乱数を用いた数値実験</p>
 </div>
 <div class="keyboard-usage">
     <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
-  2020.05.22</p>
+  </p>
 </div>
 
 </section>
 
 <section>
-<section id="slide-org47ca2ac">
-<h2 id="org47ca2ac">計算機による数値実験</h2>
-<div class="outline-text-2" id="text-org47ca2ac">
+<section id="slide-org7a07057">
+<h2 id="org7a07057">講義の内容</h2>
+<ul>
+<li>計算機による数値実験</li>
+<li>乱数</li>
+<li>乱数を用いた数値実験</li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org208dbaf">
+<h2 id="org208dbaf">計算機による数値実験</h2>
+<div class="outline-text-2" id="text-org208dbaf">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbf5fa6b">
-<h3 id="orgbf5fa6b">データ解析の枠組</h3>
+<section id="slide-orgac7555c">
+<h3 id="orgac7555c">データ解析の枠組</h3>
 <ul>
 <li>分析の目的:
 <ul>
@@ -82,8 +95,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb818128">
-<h3 id="orgb818128">データのもつべき性質</h3>
+<section id="slide-org28b3d17">
+<h3 id="org28b3d17">データのもつべき性質</h3>
 <ul>
 <li>偏った一部のデータから全体の性質の推測は困難:
 <ul>
@@ -111,8 +124,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3c9963f">
-<h3 id="org3c9963f">理論解析と数値実験</h3>
+<section id="slide-orga418996">
+<h3 id="orga418996">理論解析と数値実験</h3>
 <ul>
 <li><p>
 <b>問題</b> 
@@ -123,13 +136,13 @@
 にデータを収集することで課題が解決できる根拠は？
 </p>
 </blockquote></li>
-<li>厳密な意味での解答: 
+<li>厳密な意味での解答
 <ul>
 <li>(測度論的)確率論</li>
 <li>その理解のための他の数学分野</li>
 
 </ul></li>
-<li>乱数を使った数値実験:
+<li>乱数を使った数値実験
 <ul>
 <li>計算機上でランダムネスを実現</li>
 <li>ランダムネスから結論される数学的結果を直接観察</li>
@@ -138,18 +151,19 @@
 
 </ul>
 
+
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org7d30409">
-<h2 id="org7d30409">乱数</h2>
-<div class="outline-text-2" id="text-org7d30409">
+<section id="slide-org6b923cd">
+<h2 id="org6b923cd">乱数</h2>
+<div class="outline-text-2" id="text-org6b923cd">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfff3ed6">
-<h3 id="orgfff3ed6">擬似乱数</h3>
+<section id="slide-orgec3b796">
+<h3 id="orgec3b796">擬似乱数</h3>
 <ul>
 <li>コンピューターで生成された数列:
 <ul>
@@ -170,8 +184,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgedba0d5">
-<h3 id="orgedba0d5">基本的な乱数</h3>
+<section id="slide-org8e24cef">
+<h3 id="org8e24cef">基本的な乱数</h3>
 <ul>
 <li><b>ランダムサンプリング</b> (無作為抽出)<br />
 与えられた集合の要素をランダムに抽出する乱数</li>
@@ -179,14 +193,14 @@
 確率 \(p\) で表が出るコインを \(n\) 回投げた際の表の数</li>
 <li><b>一様乱数</b> (区間 \((a,b)\) 上の一様乱数) <br />
 決まった区間 \((a, b)\) からランダムに発生する乱数</li>
-<li>(これ以外にも種々の乱数が存在)</li>
+<li><i><span style="color:gray;">これ以外にも種々の乱数が存在</span></i></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org66b66a9">
-<h3 id="org66b66a9">乱数を発生する関数</h3>
+<section id="slide-orgf2d5d9a">
+<h3 id="orgf2d5d9a">乱数を発生する関数</h3>
 <ul>
 <li>Rには様々な確率分布に従う乱数が実装されている
 <ul>
@@ -201,11 +215,15 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2421958">
-<h3 id="org2421958">関数の利用例 (1/3)</h3>
+<section id="slide-org9e59aa0">
+<h3 id="org9e59aa0">関数の利用例</h3>
+<ul>
+<li><p>
+関数 <code>sample()</code> の使い方
+</p>
 <div class="org-src-container">
 
-<pre><code class=" R" >### 関数sampleの使い方
+<pre><code class=" R" >### 関数 sample()
 x &lt;- 1:10 # サンプリング対象の集合をベクトルとして定義
 set.seed(123) # 乱数のシード値(任意に決めてよい)を指定
 sample(x, 5)  # xから5つの要素を重複なしでランダムに抽出
@@ -222,15 +240,20 @@ sample(1:6, 10, prob=6:1, replace=TRUE) # 出る目の確率に偏りがある�
 [1] 9 9 9 3 8
  [1] 2 2 1 6 3 4 6 1 3 5
  [1] 1 1 2 2 2 1 1 1 2 1
-</pre>
+</pre></li>
+
+</ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgdf6ac52">
-<h3 id="orgdf6ac52">関数の利用例 (2/3)</h3>
+<section>
+<ul>
+<li><p>
+関数 <code>rbinom()</code> の使い方
+</p>
 <div class="org-src-container">
 
-<pre><code class=" R" >### 関数rbinomの使い方
+<pre><code class=" R" >### 関数 rbinom()
 rbinom(10, size=4, prob=0.5) # 確率0.5に対する次数4の二項乱数を10個発生
 rbinom(20, size=4, prob=0.2) # 個数を20, 確率を0.2に変更
 ### 関数runifの使い方
@@ -242,17 +265,23 @@ runif(5) # 指定しない場合は区間(0,1)が既定値
 <pre class="example">
  [1] 3 0 2 3 1 2 1 1 3 3
  [1] 0 1 0 0 0 1 1 1 1 1 1 1 1 1 0 1 0 0 1 0
-[1] -0.6665937 -0.2691416  1.0041668  0.2529403  1.3645875
+[1] -0.6665937 -0.2691416  1.0041668  0.2529403
+[5]  1.3645875
 [1] 0.1028646 0.4348927 0.9849570 0.8930511 0.8864691
-</pre>
+</pre></li>
+
+</ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org939df72">
-<h3 id="org939df72">関数の利用例 (3/3)</h3>
+<section>
+<ul>
+<li><p>
+関数 <code>set.seed()</code> について
+</p>
 <div class="org-src-container">
 
-<pre><code class=" R" >### 関数set.seedについて
+<pre><code class=" R" >### 関数 set.seed()
 set.seed(1) # 乱数の初期値をseed=1で指定
 runif(5) 
 set.seed(2) # 乱数の初期値をseed=2で指定
@@ -266,20 +295,23 @@ runif(5)    # 初めのseed=1の場合と同じ結果
 [1] 0.2655087 0.3721239 0.5728534 0.9082078 0.2016819
 [1] 0.1848823 0.7023740 0.5733263 0.1680519 0.9438393
 [1] 0.2655087 0.3721239 0.5728534 0.9082078 0.2016819
-</pre>
+</pre></li>
+
+</ul>
+
 
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org8a6b3d5">
-<h2 id="org8a6b3d5">乱数を用いた数値実験</h2>
-<div class="outline-text-2" id="text-org8a6b3d5">
+<section id="slide-org02ac9c4">
+<h2 id="org02ac9c4">乱数を用いた数値実験</h2>
+<div class="outline-text-2" id="text-org02ac9c4">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga39bbad">
-<h3 id="orga39bbad">Monte-Carlo法</h3>
+<section id="slide-orgcfe2dee">
+<h3 id="orgcfe2dee">Monte-Carlo法</h3>
 <ul>
 <li>確率的現象の理解
 <ul>
@@ -308,34 +340,27 @@ runif(5)    # 初めのseed=1の場合と同じ結果
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgeced35c">
-<h3 id="orgeced35c">関数 <code>replicate()</code></h3>
-<p>
-指定した回数繰り返して関数(プログラム)を評価する
-</p>
+<section id="slide-org7cce4a4">
+<h3 id="org7cce4a4">関数 <code>replicate()</code></h3>
 <ul>
 <li><p>
-基本書式 
+指定した回数繰り返して関数(プログラム)を評価する関数
 </p>
 <div class="org-src-container">
 
 <pre><code class=" R" >replicate(n, expr, simplify = "array")
+## n: 繰り返し回数 
+## expr: 評価する関数 (1回の実験に相当)
+## simplify: 出力の形式を指定
 </code></pre>
 </div></li>
-<li>関数の引数
-<ul>
-<li><code>n</code> : 繰り返し回数</li>
-<li><code>expr</code>: 評価する関数 (1回の実験に相当)</li>
-<li><code>simplify</code>: 出力の形式を指定</li>
-
-</ul></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgca6855b">
-<h3 id="orgca6855b">関数 <code>replecate()</code> の例</h3>
+<section id="slide-org6bc5676">
+<h3 id="org6bc5676">関数 <code>replecate()</code> の例</h3>
 <ul>
 <li><p>
 2つのサイコロを振る試行
@@ -365,16 +390,17 @@ print(myData) # 実験結果は行列として保存されている
 
 </ul>
 
+
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org1f2862e" data-background="#fef4f4">
-<h2 id="org1f2862e">演習</h2>
+<section id="slide-orgc5d2318" data-background="#fef4f4">
+<h2 id="orgc5d2318">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7d3fdd1" data-background="#fef4f4">
-<h3 id="org7d3fdd1">練習問題</h3>
+<section id="slide-org7c9f2cb" data-background="#fef4f4">
+<h3 id="org7c9f2cb">練習問題</h3>
 <ul>
 <li><p>
 コイン投げの賭け
@@ -395,14 +421,14 @@ Alice と Bob の二人で交互にコインを投げる．
 </section>
 </section>
 <section>
-<section id="slide-orge0c5aca">
-<h2 id="orge0c5aca">例題</h2>
-<div class="outline-text-2" id="text-orge0c5aca">
+<section id="slide-org44aa49c">
+<h2 id="org44aa49c">例題</h2>
+<div class="outline-text-2" id="text-org44aa49c">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org248dc08">
-<h3 id="org248dc08">Buffonの針</h3>
+<section id="slide-org694e2cb">
+<h3 id="org694e2cb">Buffonの針</h3>
 <blockquote>
 <p>
 2次元平面上に等間隔 \(d\) で平行線が引いてある．
@@ -415,8 +441,8 @@ Alice と Bob の二人で交互にコインを投げる．
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd5d3bd2">
-<h3 id="orgd5d3bd2">Monty Hall 問題</h3>
+<section id="slide-orgb6116fa">
+<h3 id="orgb6116fa">Monty Hall 問題</h3>
 <blockquote>
 <p>
 ゲームの参加者の前に閉まった3つのドアがあって，
@@ -436,8 +462,8 @@ Alice と Bob の二人で交互にコインを投げる．
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge3abc2d">
-<h3 id="orge3abc2d">St Petersburgのパラドックス</h3>
+<section id="slide-org2a6fa48">
+<h3 id="org2a6fa48">St Petersburgのパラドックス</h3>
 <blockquote>
 <p>
 偏りのないコインを表が出るまで投げ続け，賞金を貰うゲームを考える．
@@ -469,8 +495,8 @@ Alice と Bob の二人で交互にコインを投げる．
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8456c39">
-<h3 id="org8456c39">秘書問題</h3>
+<section id="slide-org0df9108">
+<h3 id="org0df9108">秘書問題</h3>
 <blockquote>
 <p>
 以下の条件のもと秘書を1人雇うとする．
@@ -512,7 +538,7 @@ center: true,
 slideNumber: 'c',
 rollingLinks: false,
 keyboard: true,
-mouseWheel: true,
+mouseWheel: false,
 fragmentInURL: true,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
@@ -521,7 +547,7 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }},
+spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
 
 // Plugins with reveal.js 4.x
 plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
@@ -529,7 +555,8 @@ plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
 // Optional libraries used to extend reveal.js
 dependencies: [
 { src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'}]
+{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
+{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
 
 });
 </script>
