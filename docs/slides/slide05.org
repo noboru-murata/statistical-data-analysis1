@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-05-03 22:30:10 mura>
+# Time-stamp: <2021-05-07 15:46:21 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -49,13 +49,54 @@
    - RStudioの機能を使う場合:
      1. 右下ペインの"Plots"タブの"Export"をクリック
      2. 形式やサイズを指定する \\
-	/(クリップボードにコピーもできる)/
+	/[[color:gray][クリップボードにコピーもできる]]/
    - コンソール / R Scriptで実行する場合:
      - ~help(pdf)~ : PDFファイルに保存
      - ~help(png)~ : PNGファイルに保存
      - ~help(dev.copy)~ : "graphic device" 間でコピー
      などを参照
 
+** サンプルデータの説明
+   - ~jpdata~
+     - https://www.e-stat.go.jp (統計局)
+       - 地域から探す / 全県を選択 / 項目を選択してダウンロード
+       - 日本語が扱えることを想定して日本語
+       - 英語のために -en を用意
+     - データファイル (文字コード: utf8)
+       - jpdata1.csv: 県別の対象データ
+       - jpdata2.csv: 対象データの内容
+       - jpdata3.csv: 県別と地域の対応関係
+     - 作業ディレクトリのdata内に置いて読み込む場合
+       #+begin_src R :eval no
+         JP.data <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
+         JP.item <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
+         JP.area <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
+       #+end_src
+   #+reveal: split
+   - ~tokyo_weather~
+     - [[https://www.jma.go.jp]] (気象庁)
+       - 各種データ・資料 / 過去の地点気象データ・ダウンロード
+       - 地点 / 項目 / 期間を選択してダウンロード
+     - データ項目
+       #+begin_quote
+       平均気温(℃),降水量の合計(mm),合計全天日射量(MJ/㎡),降雪量合計(cm),最多風向(16方位),平均風速(m/s),平均現地気圧(hPa),平均湿度(％),平均雲量(10分比),天気概況(昼：06時〜18時),天気概況(夜：18時〜翌日06時)
+       #+end_quote
+     - 作業ディレクトリのdata内に置いて読み込む場合
+       #+begin_src R :eval no
+         TW.data <- read.csv(file="data/tokyo_weather.csv")
+       #+end_src
+   #+reveal: split
+   - ~tokyo_covid19~
+     - [[https://stopcovid19.metro.tokyo.lg.jp]] (東京都)
+     - データ項目
+       #+begin_quote
+       新規陽性患者数,検査実施数,7119相談件数
+       #+end_quote
+     - 作業ディレクトリのdata内に置いて読み込む場合
+       #+begin_src R :eval no
+	 TC.data <- read.csv(file="data/tokyo_covid19_2021.csv", fileEncoding="utf8")
+       #+end_src
+    
 
 * 基本的な描画
   #+begin_src R :exports none :tangle yes
