@@ -101,7 +101,7 @@
 ** 解答例
    - [[github:code/slide05.R][RScript]]
 ** 練習用データ
-   - [[github:zips/tokyo.zip][tokyo]]
+   - [[github:zips/tokyo.zip][tokyo]] (修正版を掲載しました <2021-05-08 Sat>)
 
 * 講義6
   :PROPERTIES:

@@ -26,4 +26,4 @@ weight = 1006
 
 ## 練習用データ {#練習用データ}
 
--   [tokyo](https://noboru-murata.github.io/statistical-data-analysis1/zips/tokyo.zip)
+-   [tokyo](https://noboru-murata.github.io/statistical-data-analysis1/zips/tokyo.zip) (修正版を掲載しました <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-05-08 Sat&gt;</span></span>)
