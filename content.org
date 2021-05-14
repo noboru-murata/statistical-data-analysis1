@@ -108,13 +108,15 @@
   :EXPORT_FILE_NAME: lecture06
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  <2021-05-07 Fri> 更新
+  <2021-05-14 Fri> 更新
 ** スライド
    {{< myslide base="statistical-data-analysis1" name="slide06" >}}
 ** ハンドアウト
    - [[github:pdfs/slide06.pdf][PDF file]]
 ** 解答例
    - [[github:code/slide06.R][RScript]]
+   - [[github:zips/mc.zip][確率シミュレーションの例]]
+   - [[github:zips/epidemic.zip][確率シミュレーションの例 (追加)]]
 
 * 講義7
   :PROPERTIES:

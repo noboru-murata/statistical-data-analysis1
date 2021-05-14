@@ -1,5 +1,9 @@
-# SPDX-FileCopyrightText: 2019 Jens Lechtenbörger
+# SPDX-FileCopyrightText: 2019-2020 Jens Lechtenbörger
 # SPDX-License-Identifier: GPL-3.0-or-later
+
+# This file is deprecated.  Version 3.3.0 of org-re-reveal includes
+# support for notes on the title slide via variable
+# org-re-reveal-title-slide-notes.
 
 # Functions to (mis-) use the subtitle to display usage notes and to
 # embed speaker notes for the title slide.  For example, first

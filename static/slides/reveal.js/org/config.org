@@ -60,8 +60,13 @@
 # Square Bracket Close ]
 #+MACRO: BC @@latex:\char93{}@@@@html:&#93;@@
 
-# MACRO for forced line break, e.g., in titles.
+# Macro for forced line break, e.g., in titles.
 #+MACRO: BR @@latex:\\@@@@html:<br />@@
+
+# Macro to generate abbr element in HTML.  If a second argument is given, it
+# defines the title attribute.  For LaTeX, output first attribute as is and
+# ignore second one.
+#+MACRO: abbr (eval (concat "@@latex:" $1 "@@@@html:<abbr" (if (< 0 (length $2)) (concat " title=\"" $2 "\"") "") ">" $1 "</abbr>@@"))
 
 # Setup for PDF generation via LaTeX export.
 #+LATEX_CLASS_OPTIONS: [a4paper]
@@ -128,7 +133,7 @@
 # Macro revealimg() expects up to six arguments, a filename for a
 # file with meta-data about an image and up to five optional
 # arguments: a caption, the maximum height of image in HTML, e.g.,
-# 50vh, a list of CSS classes (space separated, containing "figure"),
+# 50rh, a list of CSS classes (space separated, containing "figure"),
 # an attribute specifying whether
 # - a long (default/nil),
 # - a short (t; in this case `oer-reveal--short-license-template' is
@@ -141,6 +146,16 @@
 # oer-reveal--export-attribution-helper), and a list of space
 # separated additional attributes to assign to the figure’s div
 # element.
+# Note the above unit "rv" for an image’s max-height, added in version
+# 3.10.0 of oer-reveal.  Previously, "vh" was recommended here, but
+# that does not work properly with scaling of reveal.js when the
+# screen’s resolution is larger than the slide height with reveal.js
+# (previously leading to images that might overflow).  Just use rh
+# where you would otherwise use vh.  With rv, oer-reveal replaces your
+# unit with a pixel value that is computed from your slides’ height.
+# E.g., if you use 10rh with a slide height of 700, then your image’s
+# style includes a max-height of 70px, which is scaled properly by
+# reveal.js.
 #
 # Second, reveallicense() displays an image inline in the surrouding
 # paragraph or list, aligned to the right.  Again, license information
@@ -173,8 +188,8 @@
 # Its six or seven arguments are as follows:
 # 1. Unique grid number (e.g., starting from one)
 # 2. File with names of images to position on the grid
-# 3. Height of the grid as percentage of the height of the viewport
-#    (used with CSS unit vh)
+# 3. Height of the grid as percentage of the height of the slide
+#    (without unit)
 # 4/5. Numbers of (a) columns and (b) rows of the grid
 # 6. Grid-template-areas to specify what image to position on what
 #    grid cell(s); see, e.g.:

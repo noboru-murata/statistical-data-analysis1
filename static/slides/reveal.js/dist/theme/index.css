@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2017-2019 Jens Lechtenbörger
+ * SPDX-FileCopyrightText: 2017-2020 Jens Lechtenbörger
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
@@ -61,6 +61,7 @@ img {
 pre {
     border: 1px solid #ccc;
     box-shadow: none;
+    overflow-x: auto;
     margin: 1em; }
 
 code {
@@ -73,3 +74,32 @@ code {
 .status {
   margin: 1.5rem 0 0 0;
   font-size: 90%; }
+
+div.figure, table {
+  text-align: center;
+  margin: 20px auto; }
+
+div.figure img {
+  max-width: 90%;
+  float: none; }
+
+table th {
+  background-color: #a0a0a0;
+  font-weight: bold; }
+
+table tr:nth-child(odd) {
+  background-color: whitesmoke; }
+
+/* Display license of image rotated, in smaller font. */
+div.figure p:nth-child(3) {
+  opacity: 0.66;
+  font-size: 0.8em;
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+  margin-top: -1em;
+  line-height: 1.1;
+  -webkit-transform: rotate(-90deg) translate(100%);
+          transform: rotate(-90deg) translate(100%);
+  -webkit-transform-origin: top right;
+          transform-origin: top right; }

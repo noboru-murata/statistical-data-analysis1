@@ -76,26 +76,36 @@
 #+LaTeX_CLASS_OPTIONS: [10pt,oneside,fleqn]
 #+LATEX_HEADER: \usepackage[style=plain,list=minted]{myhandout}
 #+LATEX_HEADER: \usepackage[backend=biber,style=alphabetic]{biblatex}
-#+LATEX_HEADER: \addbibresource{references.bib}
+#+LATEX_HEADER: \addbibresource{papers.bib}
+#+LATEX_HEADER: \addbibresource{books.bib}
+# #+LATEX_HEADER: \addbibresource{references.bib}
 #+LATEX_HEADER: \newenvironment{notes}{\par\footnotesize}{\par}
 #+LATEX_HEADER: \newenvironment{NOTES}{\par\footnotesize}{\par}
 #+LATEX_HEADER: \newenvironment{leftcol}{\relax}{\relax}
 #+LATEX_HEADER: \newenvironment{rightcol}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{leftcol30}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{leftcol40}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{leftcol60}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{leftcol70}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{rightcol30}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{rightcol40}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{rightcol60}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{rightcol70}{\relax}{\relax}
 # #+LATEX_HEADER: \newenvironment{leftcol}{\begin{minipage}{.49\textwidth}}{\end{minipage}}
 # #+LATEX_HEADER: \newenvironment{rightcol}{\begin{minipage}{.49\textwidth}}{\end{minipage}}
-#+LATEX_HEADER: \newenvironment{leftcol30}{\begin{minipage}{.29\textwidth}}{\end{minipage}}
-#+LATEX_HEADER: \newenvironment{leftcol40}{\begin{minipage}{.39\textwidth}}{\end{minipage}}
-#+LATEX_HEADER: \newenvironment{leftcol60}{\begin{minipage}{.59\textwidth}}{\end{minipage}}
-#+LATEX_HEADER: \newenvironment{leftcol70}{\begin{minipage}{.69\textwidth}}{\end{minipage}}
-#+LATEX_HEADER: \newenvironment{rightcol30}{\begin{minipage}{.29\textwidth}}{\end{minipage}}
-#+LATEX_HEADER: \newenvironment{rightcol40}{\begin{minipage}{.39\textwidth}}{\end{minipage}}
-#+LATEX_HEADER: \newenvironment{rightcol60}{\begin{minipage}{.59\textwidth}}{\end{minipage}}
-#+LATEX_HEADER: \newenvironment{rightcol70}{\begin{minipage}{.69\textwidth}}{\end{minipage}}
-#+LATEX_HEADER: \usepackage{newunicodechar}
-#+LATEX_HEADER: \newunicodechar{≈}{$\approx$}
-#+LATEX_HEADER: \newunicodechar{⋮}{\vdots}
-#+LATEX_HEADER: \newunicodechar{ }{~}
-#+LATEX_HEADER: \usepackage{xcolor}
+# #+LATEX_HEADER: \newenvironment{leftcol30}{\begin{minipage}{.29\textwidth}}{\end{minipage}}
+# #+LATEX_HEADER: \newenvironment{leftcol40}{\begin{minipage}{.39\textwidth}}{\end{minipage}}
+# #+LATEX_HEADER: \newenvironment{leftcol60}{\begin{minipage}{.59\textwidth}}{\end{minipage}}
+# #+LATEX_HEADER: \newenvironment{leftcol70}{\begin{minipage}{.69\textwidth}}{\end{minipage}}
+# #+LATEX_HEADER: \newenvironment{rightcol30}{\begin{minipage}{.29\textwidth}}{\end{minipage}}
+# #+LATEX_HEADER: \newenvironment{rightcol40}{\begin{minipage}{.39\textwidth}}{\end{minipage}}
+# #+LATEX_HEADER: \newenvironment{rightcol60}{\begin{minipage}{.59\textwidth}}{\end{minipage}}
+# #+LATEX_HEADER: \newenvironment{rightcol70}{\begin{minipage}{.69\textwidth}}{\end{minipage}}
+# #+LATEX_HEADER: \usepackage{newunicodechar}
+# #+LATEX_HEADER: \newunicodechar{≈}{$\approx$}
+# #+LATEX_HEADER: \newunicodechar{⋮}{\vdots}
+# #+LATEX_HEADER: \newunicodechar{ }{~}
+# #+LATEX_HEADER: \usepackage{xcolor}
 #+LATEX_HEADER: \definecolor{darkred}{named}{myDarkRed}
 #+LATEX_HEADER: \definecolor{darkgreen}{named}{myDarkGreen}
 #+LATEX_HEADER: \definecolor{darkblue}{named}{myDarkBlue}
@@ -105,11 +115,11 @@
 # #+LATEX_HEADER: \definecolor{darkblue}{rgb}{0.0, 0.1, 0.3}
 # #+LATEX_HEADER: \definecolor{darkorange}{rgb}{1.0, 0.55, 0.0}
 #+LATEX_HEADER: \definecolor{sienna}{rgb}{0.53, 0.18, 0.09}
-#+LATEX_HEADER: \hypersetup{colorlinks,linkcolor=darkblue,citecolor=darkblue,urlcolor=darkgreen}
-#+LATEX_HEADER: \usepackage{newverbs}
-#+LATEX_HEADER: \newverbcommand{\rverb}{\color{darkred}}{}
-#+LATEX_HEADER: \newverbcommand{\gverb}{\color{darkgreen}}{}
-#+LATEX_HEADER: \newverbcommand{\bverb}{\color{darkblue}}{}
+# #+LATEX_HEADER: \hypersetup{colorlinks,linkcolor=darkblue,citecolor=darkblue,urlcolor=darkgreen}
+# #+LATEX_HEADER: \usepackage{newverbs}
+# #+LATEX_HEADER: \newverbcommand{\rverb}{\color{darkred}}{}
+# #+LATEX_HEADER: \newverbcommand{\gverb}{\color{darkgreen}}{}
+# #+LATEX_HEADER: \newverbcommand{\bverb}{\color{darkblue}}{}
 #+LATEX_HEADER: \parindent=0pt
 
 # Macros to display code in different colors.
