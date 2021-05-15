@@ -2,7 +2,8 @@
 #+SUBTITLE: 大数の法則・中心極限定理・少数の法則
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 2020.05.29
+#+DATE: 
+# Time-stamp: <2021-05-15 12:01:37 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -11,39 +12,56 @@
 # C-c '
 :end:
 
-* COMMENT tangle用
+* 講義の内容
+  - 独立な確率変数の性質
+  - 大数の法則
+  - 中心極限定理
+  - 少数の法則
 
-#+begin_src R :exports none
-  setwd("~/Desktop/lectures/u-tokyo/spring/slide")
-#+end_src
-#+begin_src R :exports none :tangle yes
-  ### 第6回 演習問題解答例
-#+end_src
+  #+begin_src R :eval no :exports none :tangle yes
+    ### 第07回 練習問題解答例
+  #+end_src
+  #+begin_src R :exports none
+    setwd("~/Desktop/lectures/u-tokyo/spring/slide")
+  #+end_src
 
-* 基本事項の復習
+
+* COMMENT メモ
+
+
+* 基本事項の確認
+  #+begin_src R :exports none :tangle yes
+    ### 基本事項の確認で用いた例
+  #+end_src
+  
 ** 確率変数
    - 乱数の数学モデル: 値がランダムに決定される変数
-   - 任意の区間 $[a,b]$ に含まれる確率が定められている \\
-     (数学的には厳密性を欠くが，本講義ではこの定義)
-   - 確率変数 $X$ が区間 $[a,b]$ $(a\leq b)$ に含まれる確率
+   - 任意の区間 \([a,b]\) に含まれる確率が定められている 
+     - [[color:gray][数学的には厳密性を欠くが，本講義ではこの定義]]
+   - 確率変数 \(X\) が区間 \([a,b]\) \((a\leq b)\) に含まれる確率
+     #+begin_quote
      #+begin_src latex
      \begin{equation}
        P(a\leq X\leq b)
      \end{equation}
      #+end_src
-     (特に $a=b$ のとき $P(X=a)$ と書く)
-   - 本章では有限個の値のみをとる確率変数を考える \\
-     (無限個の値，特に連続的な値については次回以降)
+     (特に \(a=b\) のとき \(P(X=a)\) と書く)
+     #+end_quote
+   - 今回では有限個の値のみをとる確率変数を考える
+     - [[color:gray][無限個の値，特に連続的な値については次回以降]]
 
 ** 平均と分散
-   - 確率変数 $X$ の取りうる値が有限個: $x_1,x_2,\dotsc,x_N$
+   - 確率変数 \(X\) の観測値: \(x_1,x_2,\dotsc,x_N\)
    - *平均* もしくは *期待値*
+     #+begin_quote
      #+begin_src latex
      \begin{equation}
        \mathbb{E}[X]:=\sum_{i=1}^Nx_iP(X=x_i)
      \end{equation}
      #+end_src
-   - *分散* ($=\text{標準偏差}^{2}$)
+     #+end_quote
+   - *分散* (\(=\text{標準偏差}^{2}\))
+     #+begin_quote
      #+begin_src latex
      \begin{equation}
        \mathrm{Var}(X)
@@ -52,11 +70,12 @@
        =\mathbb{E}[X^2]-\mathbb{E}[X]^2
      \end{equation}
      #+end_src
+     #+end_quote
 
 ** 例題
    - 問題
      #+begin_quote
-     確率変数 $X$ は
+     確率変数 \(X\) は
      偶数の出る確率が奇数の2倍のサイコロの目を表すとする．
      #+begin_src latex
      \begin{align*}
@@ -64,19 +83,19 @@
        &P(X=2)=P(X=4)=P(X=6)=2/9
      \end{align*}
      #+end_src
-     このとき $X$ の平均と分散を求めよ．
+     このとき \(X\) の平均と分散を求めよ．
      #+end_quote
-     #+reveal: split
+   #+reveal: split
    - 解答 (計算例)
      #+begin_quote
-     $X$ の平均は
+     \(X\) の平均は
      #+begin_src latex
      \begin{equation}
        \mathbb{E}[X]=\sum_{x=1}^6xP(X=x)
        ={11}/{3}=3.6666\dots
      \end{equation}
      #+end_src
-     $X$ の分散は
+     \(X\) の分散は
      #+begin_src latex
      \begin{align}
        \mathbb{E}[X^2]&=\sum_{x=1}^6x^2P(X=x)={49}/{3}\\
@@ -84,13 +103,10 @@
      \end{align}
      #+end_src
      #+end_quote
-     #+reveal: split
+   #+reveal: split
    - 解答 (Rでの計算例)
-     #+begin_src R :exports none :tangle yes
-       ### 例題1
-       ### 平均と分散の計算
-     #+end_src
      #+begin_src R :tangle yes
+       ### 平均と分散の計算
        p <- rep(c(1/9,2/9),3) # 確率の値 (1/9 と 2/9 を交互に3回繰り返す)
        x <- 1:6 # サイコロの目の値
        (mu <- sum(x*p)) # 平均値の計算
@@ -98,15 +114,16 @@
        sqrt(var) # 標準偏差
      #+end_src
 
+
 * 独立性と同分布性
 ** 同時分布
    - 観測データは確率変数の集合
-   - 確率変数の *列* $X_1,X_2,\dotsc,X_n$ に対する考察が重要
+   - *確率変数列* \(X_1,X_2,\dotsc,X_n\) に対する考察が重要
    - 定義
      #+begin_quote
-     "$X_1$ が $x_1$ という値をとり，
-     $X_2$ が $x_2$ という値をとり， $\dots$ ，
-     $X_n$ が $x_n$ という値をとる"
+     "\(X_1\) が \(x_1\) という値をとり，
+     \(X_2\) が \(x_2\) という値をとり， \(\dots\) ，
+     \(X_n\) が \(x_n\) という値をとる"
      という事象が起きる確率を
      *同時分布*
      という
@@ -121,8 +138,8 @@
    - 無関係にサンプリングされた観測データの性質
    - 定義
      #+begin_quote
-     確率変数列 $X_1,X_2,\dotsc,X_n$ が *独立* であるとは，
-     任意の $n$ 個の実数 $x_1,x_2,\dotsc,x_n$ に対して
+     確率変数列 \(X_1,X_2,\dotsc,X_n\) が *独立* であるとは，
+     任意の \(n\) 個の実数 \(x_1,x_2,\dotsc,x_n\) に対して
      #+begin_src latex
        \begin{multline}
          P(X_1=x_1,X_2=x_2,\dotsc,X_n=x_n)\\
@@ -132,15 +149,15 @@
      が成り立つことをいう
      #+end_quote
      # 直感的には
-     # すべての$i=1,\dots,n$について,
-     # $X_i$がとる値は$X_1,\dotsc,X_{i-1},X_{i+1},\dotsc,X_n$がとる値と無関係に定まるということ
+     # すべての\(i=1,\dots,n\)について,
+     # \(X_i\)がとる値は\(X_1,\dotsc,X_{i-1},X_{i+1},\dotsc,X_n\)がとる値と無関係に定まるということ
 
 ** 同分布性
    - 同一の法則に従って生成された観測データの性質
    - 定義
      #+begin_quote
-     確率変数列 $X_1,X_2,\dotsc,X_n$ が *同分布* であるとは，
-     任意の実数 $x$ に対して
+     確率変数列 \(X_1,X_2,\dotsc,X_n\) が *同分布* であるとは，
+     任意の実数 \(x\) に対して
      #+begin_src latex
        \begin{equation}
          P(X_1=x)=P(X_2=x)=\cdots=P(X_n=x)
@@ -160,73 +177,79 @@
      もしくは
      *i.i.d.* 
      であるという
-
-     (i.i.d. はindependent and identically distributedの略)
      #+end_quote
-
-* 大数の法則
-** 大数の法則の概要
-   - 同一の法則に従って生成された集団から
-     *ランダムな* 観測を多数繰り返すと，
-     *観測値の平均* は *真の平均値* に近づく
-     # % 分析対象の一部を\alert{ランダムに}収集したデータのみを用いて(標本)平
-     # % 均を計算しても, データのサンプル数が十分大きければ, その平均値は集団
-     # % 全体の平均値に近い値であると考えられることは, 経験則としてよく知られ
-   - 具体的な例: 
-     - 歪みの無いコインの表が出た回数の割合
-     - 視聴率の調査
-   - この法則を数学的に定式化した定理が *大数の法則*
-
+     - i.i.d. はindependent and identically distributedの略
 ** 無限列の独立性と同分布性
    - 無限列に対しては任意の部分列について考える
    - 独立性
      #+begin_quote
-     $X_1,X_2,\dotsc$ が *独立* であるとは，
-     任意の正整数 $n$ に対して $X_1,X_2,\dotsc,X_n$ が
+     \(X_1,X_2,\dotsc\) が *独立* であるとは，
+     任意の正整数 \(n\) に対して \(X_1,X_2,\dotsc,X_n\) が
      独立であることをいう
      #+end_quote
    - 同分布性
      #+begin_quote
-     $X_1,X_2,\dotsc$ が *同分布* であるとは，
-     任意の正整数 $n$ に対して $X_1,X_2,\dotsc,X_n$ が
+     \(X_1,X_2,\dotsc\) が *同分布* であるとは，
+     任意の正整数 \(n\) に対して \(X_1,X_2,\dotsc,X_n\) が
      同分布であることをいう
      #+end_quote
    - 独立同分布性
      #+begin_quote
-     $X_1,X_2,\dotsc$ が *独立同分布*
+     \(X_1,X_2,\dotsc\) が *独立同分布*
      もしくは *i.i.d.* であるとは，
-     $X_1,X_2,\dotsc$ が独立かつ同分布であることをいう
+     \(X_1,X_2,\dotsc\) が独立かつ同分布であることをいう
      #+end_quote
+
+
+
+* 大数の法則
+** 大数の法則の概要
+   - 要点
+     #+begin_quote
+     同一の法則に従って生成された集団から
+     *ランダム* な観測を多数繰り返すと，
+     *観測値の平均* は *真の平均値* に近づく
+     #+end_quote
+     # % 分析対象の一部を\alert{ランダムに}収集したデータのみを用いて(標本)平
+     # % 均を計算しても, データのサンプル数が十分大きければ, その平均値は集団
+     # % 全体の平均値に近い値であると考えられることは, 経験則としてよく知られ
+   - 具体的な例: 
+     - [[color:darkgreen][歪みの無いコインの表が出た回数の割合]]
+     - [[color:darkgreen][視聴率の調査]]
+   - この法則を数学的に定式化した定理が *大数の法則*
 
 ** 大数の強法則
    - 定理
      #+begin_quote
-     $X_1,X_2,\dotsc$ を独立同分布な確率変数列とし，
-     その平均を $\mu$ とする．
-     このとき,  $X_1,\dotsc,X_n$ の標本平均
+     \(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
+     その平均を \(\mu\) とする．
+     このとき,  \(X_1,\dotsc,X_n\) の標本平均
      #+begin_src latex
        \begin{equation}
          \bar{X}_n := \frac{1}{n}\sum_{i=1}^nX_i
        \end{equation}
      #+end_src
-     が $n\to\infty$ のとき $\mu$ に収束する確率は1である．
+     が \(n\to\infty\) のとき \(\mu\) に収束する確率は1である．
 
      これを
-     "$\bar{X}_{n}$ は
-     $n\to\infty$ のとき $\mu$ に *概収束* する"
+     "\(\bar{X}_{n}\) は
+     \(n\to\infty\) のとき \(\mu\) に *概収束* する"
      という．
      #+end_quote
 
 ** 数値実験の設計
-   - 適当な分布を設定する \\
-     (簡単な例は偏りのあるサイコロ)
-   - そこから得られた $n$ 個の確率変数(乱数)の標本平均を計算する
-   - 真の平均と標本平均を比較する
+   - 方針
      #+begin_quote
+     真の平均と標本平均を比較する．
+
      標本平均は観測データに依存するので，
-     統計的な性質を見るには繰り返し実験(Monte-Carlo法)を行う
+     統計的な性質を見るには繰り返し実験 (Monte-Carlo法) を行う．
      #+end_quote
-   - $n$ を大きくしたときの性質を観察する
+     - 適当な分布を設定する
+       - [[color:darkgreen][簡単な例は偏りのあるサイコロ]]
+     - \(n\) 個の確率変数(乱数)の標本平均を計算する
+     - 真の平均と標本平均の差を計算する
+     - \(n\) を大きくしたときの差の性質を観察する
 
 * 演習
   :PROPERTIES:
@@ -245,13 +268,13 @@
      # - 乱数のシード値・出現確率の変更・乱数の変更などを
      #   行っても大数の法則が成立することを確認しなさい．
      # - サンプル数の増減によって精度がどの程度変わるか観察しなさい．
+
    #+begin_src R :exports none :tangle yes
-     ### 練習1
-     ### 大数の法則
+     ### 練習問題 大数の法則
      set.seed(121212) # 乱数のシード値の指定
      ## 試行(離散分布の標本平均の計算)を定義する
-     myMean <- function(n,p) # 歪んだサイコロの標本平均を計算する関数
-         mean(sample(omega, size=n, prob=p, replace=TRUE))
+     myMean <- function(n,p){ # 歪んだサイコロの標本平均を計算する関数
+         mean(sample(omega, size=n, prob=p, replace=TRUE))}
      omega <- 1:6 # サイコロの目 (以下では固定)
      ## 以下の実験で明示的に変えるものを関数の引数としている
      ## * n はサイコロを振る回数
@@ -302,7 +325,7 @@
    #+end_src
 
    #+begin_src R :exports none :tangle yes
-     ## 参考(以下は前回提示した解答例で上に含まれないもの)
+     ## 参考
      ## 統計的性質を見るための実験
      p <- rep(1:2, 3) # 出現確率の比(奇数1:偶数2)
      mu <- weighted.mean(omega, p) # 理論上の平均
@@ -350,25 +373,27 @@
 * 中心極限定理
 ** 中心極限定理の概要
    - 大数の法則の主張: 
-     - $n$ を大きくすると標本平均 $\bar{X}_n$ は真の平均 $\mu$ に近づく
-     - 推定誤差 $\bar{X}_n-\mu$ は $n$ を大きくすると0に近づく
+     - \(n\) を大きくすると標本平均 \(\bar{X}_n\) は真の平均 \(\mu\) に近づく
+     - 推定誤差 \(\bar{X}_n-\mu\) は \(n\) を大きくすると0に近づく
      - どの程度の大きさになるのか定量的な評価は与えていない
    - 誤差の評価の定量化:
-     - 推定誤差がある区間 $[\alpha,\beta]$ に入る確率で定量的に評価可能
+     - 推定誤差がある区間 \([\alpha,\beta]\) に入る確率で定量的に評価可能
+       #+begin_quote
        #+begin_src latex
        \begin{equation}
          P(\alpha\leq \bar{X}_n-\mu\leq \beta)
        \end{equation}
        #+end_src
+       #+end_quote
      - 上式の正確な計算は一般には困難
    - サンプル数が大きい場合の定量的な評価の近似方法を述べたのが *中心極限定理*
 
 ** 中心極限定理
    - 定理
      #+begin_quote
-     $X_1,X_2,\dotsc$ を独立同分布な確率変数列とし，
-     その平均を $\mu$ ，標準偏差を $\sigma$ とする．
-     このとき，すべての実数 $a < b$ に対して
+     \(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
+     その平均を \(\mu\) ，標準偏差を \(\sigma\) とする．
+     このとき，すべての実数 \(a < b\) に対して
      #+begin_src latex
        \begin{equation}
          P\Bigl(a\leq\frac{\sqrt{n}(\bar{X}_n-\mu)}{\sigma}\leq b \Bigr)
@@ -380,12 +405,14 @@
      #+end_quote
 
 ** 中心極限定理の意味
-   - $X_i$ の分布が何であっても，
-     サンプル数 $n$ が十分大きければ，
+   - \(X_i\) の分布が何であっても，
+     サンプル数 \(n\) が十分大きければ，
      標本平均と真の平均の差
-     $\bar{X}_n-\mu$ 
+     \(\bar{X}_n-\mu\) 
      の分布は，
      *標準正規分布*
+     で近似できる
+     #+begin_quote
      #+begin_src latex
      \begin{equation}
        P\Bigl(a\frac{\sigma}{\sqrt{n}}\leq\bar{X}_n-\mu\leq
@@ -394,23 +421,41 @@
        \frac{1}{\sqrt{2\pi}}\int_a^be^{-\frac{x^2}{2}}dx
      \end{equation}
      #+end_src
-     で近似できる
+     #+end_quote
    - 被積分関数
-     $\phi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$
+     \(\phi(x)=e^{-x^2/2}/\sqrt{2\pi}\)
      を 
      *標準正規密度* 
      という
+     # #+begin_quote
+     # #+begin_src latex
+     #   \begin{equation}
+     #     \phi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}
+     #   \end{equation}
+     # #+end_src
+     # #+end_quote
 
 ** 数値実験の設計
-   - $\sqrt{n}(\bar{X}_n-\mu)/\sigma$ の分布と
-     標準正規分布を比較する
-   - 中心極限定理が正しければ，
-     十分小さいビン $[a,b]$ におけるヒストグラムの高さは $\phi(a)$ で近似できる
-   - $\sqrt{n}(\bar{X}_n-\mu)/\sigma$ のヒストグラムに
-     標準正規密度 $\phi(x)$ を重ね書きすることで近似の度合いを評価できる
-   - 密度表示は ~hist()~ で ~freq=FALSE~ に指定する
-   - 標準正規密度 $\phi(x)$ は ~dnorm()~ で計算する
-     # $\phi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$
+   - 方針
+     #+begin_quote
+     規格化した標本平均と真の平均の差
+     #+begin_src latex
+       \begin{equation}
+         Z=\frac{\sqrt{n}(\bar{X}_n-\mu)}{\sigma}
+       \end{equation}
+     #+end_src
+     の分布と標準正規分布を比較する．
+     #+end_quote
+     - 中心極限定理が正しければ，
+       十分小さいビン \([a,b]\) におけるヒストグラムの高さは
+       \(\phi(a)\) で近似される
+     - \(Z\) のヒストグラムに
+       標準正規密度 \(\phi(x)\) を重ね書きすることで近似の度合いを評価する
+       - 密度表示は ~hist()~ で ~freq=FALSE~ を指定
+       - 標準正規密度 \(\phi(x)\) は関数 ~dnorm()~ で計算
+     # \(\phi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\)
+     # \(\sqrt{n}(\bar{X}_n-\mu)/\sigma\) のヒストグラムに
+
 
 * 演習
   :PROPERTIES:
@@ -429,12 +474,13 @@
      # - 乱数のシード値・出現確率の変更・乱数の変更などを行っても
      #   中心極限定理が成立することを確認しなさい．
      # - サンプル数の増減によって精度がどの程度変わるか観察しなさい．
+
    #+begin_src R :exports none :tangle yes
-     ### 中心極限定理
+     ### 練習問題 中心極限定理
      set.seed(232323)    # 乱数のシード値の指定
      ## 試行(離散分布の標本平均の計算)を定義する
-     myMean <- function(n,p) # 標本平均を計算する関数
-         mean(sample(omega, size=n, prob=p, replace=TRUE))
+     myMean <- function(n,p){ # 標本平均を計算する関数
+         mean(sample(omega, size=n, prob=p, replace=TRUE))}
      omega <- 1:6 # 以下サイコロの場合で実験
      mc <- 10000 # Monte-Carlo実験の繰り返し回数(大数の法則より多めに実験する)
 
@@ -472,26 +518,31 @@
      }
    #+end_src
 
+
 * 少数の法則
 ** 少数の法則の概要
    - 滅多に起きない事が起こる回数に関する法則
    - 典型的な例:
-     - ある製品の不良品率 $p$ はとても小さいとする
-     - 一日に $n$ 個(非常に多数とする)生産するとき，
-       不良品は平均的には $\lambda=np$ 個発生するが，
-       日によって不良品の個数 $S_n$ には多少のばらつきが生じる
-     - 個数 $S_n$ は確率変数であるが，
-       $S_n$ がとる値の確率法則は
-       強度 $\lambda$ の *Poisson分布* で近似できることが知られている
+     - [[color:darkgreen][不良品発生率の低い工場での日々の不良品の個数の分布]]
+       #+begin_quote
+       ある製品の不良品率 \(p\) はとても小さいとする.
+
+       一日に \(n\) 個(非常に多数とする)生産するとき，
+       不良品は平均的には \(\lambda=np\) 個発生するが，
+       日によって不良品の個数 \(S_n\) には多少のばらつきが生じる．
+
+       個数 \(S_n\) は確率変数であり，
+       強度 \(\lambda\) の *Poisson分布* で近似できる．
+       #+end_quote
    - これを正確に述べたのが *少数の法則*
 
 ** 少数の法則
-   - 定理
+   - 定理の前提
      #+begin_quote
-     $X_1,X_2,\dotsc,X_n$ を独立な確率変数列とし，
-     各 $i=1,2,\dotsc,n$ について 
-     $X_i$ は確率 $p_{n,i}$ で 1 を，
-     確率 $1-p_{n,i}$ で 0 をとるとする:
+     \(X_1,X_2,\dotsc,X_n\) を独立な確率変数列とし，
+     各 \(i=1,2,\dotsc,n\) について 
+     \(X_i\) は確率 \(p_{n,i}\) で 1 を，
+     確率 \(1-p_{n,i}\) で 0 をとるとする:
      #+begin_src latex
        \begin{align}
          &P(X_i=1)=p_{n,i},\\
@@ -500,17 +551,18 @@
        \end{align}
      #+end_src
      #+end_quote
-     #+reveal: split
+   #+reveal: split
+   - 定理
      #+begin_quote
      このとき
-     ある正の実数 $\lambda$ が存在して, $n\to\infty$ のとき
+     ある正の実数 \(\lambda\) が存在して, \(n\to\infty\) のとき
      #+begin_src latex
        \begin{equation}
          \max_{i=1,2,\dots,n}p_{n,i}\to0,\quad
          \sum_{i=1}^np_{n,i}\to\lambda
        \end{equation}
      #+end_src
-     ならば，任意の整数 $k\geq0$ に対して以下が成り立つ:
+     ならば，任意の整数 \(k\geq0\) に対して以下が成り立つ:
      #+begin_src latex
        \begin{equation}
          P\Bigl(\sum_{i=1}^nX_i=k\Bigr)
@@ -520,19 +572,36 @@
      #+end_src
      #+end_quote
 
-** 補足
-   - 確率変数の取りうる値が0以上の整数全体で，
-     値が整数 $k\geq0$ となる確率が
+** Poisson 分布
+   - 確率変数 \(X\) の取りうる値が0以上の整数全体で，
+     値が整数 \(k\geq0\) となる確率が
+     #+begin_quote
      #+begin_src latex
      \begin{equation}
-       e^{-\lambda}\frac{\lambda^k}{k!}
+       P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!}
      \end{equation}
      #+end_src
-     で与えられるものを，
-     強度 $\lambda$ の *Poisson型確率変数* ，
-     その確率法則を強度 $\lambda$ のPoisson分布と呼ぶ
-   - 定理の $\sum_{i=1}^nX_i$ が不良品の例の $S_n$ に対応する
-   - Poisson分布の確率の値は ~dpois()~ で計算できる
+     #+end_quote
+     で与えられるものを強度
+     \(\lambda\) の *Poisson 型確率変数* 
+     その確率法則を強度 \(\lambda\) の *Poisson 分布* と呼ぶ
+     - 定理の \(\sum_{i=1}^nX_i\) が不良品の例の \(S_n\) に対応
+     - Poisson 分布の確率の値は関数 ~dpois()~ で計算
+
+** 数値実験の設計
+   - 方針
+     #+begin_quote
+     小さな確率で \(X=1\) となる確率変数を多数観測し，
+     その合計値の分布を調べ，
+     Poisson 分布と比較する．
+     #+end_quote
+     - 確率 \(P(X=1)=p\) を小さな値に設定する
+     - \(n\) 個(非常に多数)の確率変数の合計 \(S_n\) を計算する
+     - \(S_n\) の分布を
+       強度 \(\lambda=pn\) の Poisson分布と比較する
+       - 確率 \(p\) サイズ \(n\) の二項乱数 ~rbinom()~ が利用可能
+       - Poissson 分布の確率値は関数 ~dpois()~ で計算
+
 
 * 演習
   :PROPERTIES:
@@ -543,13 +612,14 @@
    :reveal_background: #fef4f4
    :END:
    - 少数の法則の数値実験を行いなさい．
-     - 1日の総生産量 ($n$) が 5000，
-       不良品の発生確率 ($p$) が 0.002 である工場を例として，
+     - 1日の総生産量 (\(n\)) が 5000，
+       不良品の発生確率 (\(p\)) が 0.002 である工場を例として，
        2年間の操業(週5日x50週間)
        において観測される不良品数の分布を確認しなさい．
-     - 母数 $n,p$ の変更によって結果がどのように変わるか観察せよ．
+     - 母数 \(n,p\) の変更によって結果がどのように変わるか観察せよ．
+
    #+begin_src R :exports none :tangle yes
-     ### 少数の法則
+     ### 練習問題 少数の法則
      set.seed(343434) # 乱数のシード値の指定
 
      ## 基本の実験
@@ -594,14 +664,17 @@
        lines(min(x):max(x)+0.4, dpois(min(x):max(x),n*p),
            type="h", col="red", lwd=6) 
      }
+     ## n が大きくなるに従い，正規分布の形に近付いていくことが観測できる
+     ## 中心極限定理がここでも成り立っていることがわかる
    #+end_src
+
 
 * 補遺
 ** 重複対数の法則
    - 定理
      #+begin_quote
-     $X_1,X_2,\dotsc$ を独立同分布な確率変数列とし，
-     その平均を $\mu$ ，標準偏差を $\sigma$ とする．
+     \(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
+     その平均を \(\mu\) ，標準偏差を \(\sigma\) とする．
      このとき
      #+begin_src latex
      \begin{align}
@@ -617,6 +690,7 @@
      #+end_src
      が成り立つ．
      #+end_quote
+     - 大数の法則と中心極限定理の中間的な評価と考えることができる
 
 ** Hartman-Wintnerの定理
    - 定理
@@ -628,10 +702,9 @@
          {\sqrt{2\sigma^2\log\log n}}\Bigr)_{n=3}^\infty
      \end{equation}
      #+end_src
-     のある部分列の収束先となるような実数全体の集合を $C$ とすると，
-     $C$ が閉区間 $[-1,1]$ に一致する確率は1である. 
+     のある部分列の収束先となるような実数全体の集合を \(C\) とすると，
+     \(C\) が閉区間 \([-1,1]\) に一致する確率は1である. 
      #+end_quote
-
 
 
 * COMMENT ローカル変数

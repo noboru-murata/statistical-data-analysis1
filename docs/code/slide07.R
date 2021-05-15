@@ -1,18 +1,19 @@
-### 例題1
-### 平均と分散の計算
+### 第07回 練習問題解答例
 
+### 基本事項の確認で用いた例
+
+### 平均と分散の計算
 p <- rep(c(1/9,2/9),3) # 確率の値 (1/9 と 2/9 を交互に3回繰り返す)
 x <- 1:6 # サイコロの目の値
 (mu <- sum(x*p)) # 平均値の計算
 (var <- sum((x-mu)^2*p)) # 分散の計算
 sqrt(var) # 標準偏差
 
-### 練習1
-### 大数の法則
+### 練習問題 大数の法則
 set.seed(121212) # 乱数のシード値の指定
 ## 試行(離散分布の標本平均の計算)を定義する
-myMean <- function(n,p) # 歪んだサイコロの標本平均を計算する関数
-    mean(sample(omega, size=n, prob=p, replace=TRUE))
+myMean <- function(n,p){ # 歪んだサイコロの標本平均を計算する関数
+    mean(sample(omega, size=n, prob=p, replace=TRUE))}
 omega <- 1:6 # サイコロの目 (以下では固定)
 ## 以下の実験で明示的に変えるものを関数の引数としている
 ## * n はサイコロを振る回数
@@ -61,7 +62,7 @@ boxplot(xbar ~ n, data=myData, col="blue",
      xlab="n", ylab=expression(bar(X))) # 標本平均(1つの観測にもとづく)
 abline(h=mu, col="red", lwd=2) # 真の平均
 
-## 参考(以下は前回提示した解答例で上に含まれないもの)
+## 参考
 ## 統計的性質を見るための実験
 p <- rep(1:2, 3) # 出現確率の比(奇数1:偶数2)
 mu <- weighted.mean(omega, p) # 理論上の平均
@@ -105,11 +106,11 @@ for(i in 1:5){ # pをランダムに設定して実験
     abline(h=0, col="grey", lwd=2, lty="solid")
 }
 
-### 中心極限定理
+### 練習問題 中心極限定理
 set.seed(232323)    # 乱数のシード値の指定
 ## 試行(離散分布の標本平均の計算)を定義する
-myMean <- function(n,p) # 標本平均を計算する関数
-    mean(sample(omega, size=n, prob=p, replace=TRUE))
+myMean <- function(n,p){ # 標本平均を計算する関数
+    mean(sample(omega, size=n, prob=p, replace=TRUE))}
 omega <- 1:6 # 以下サイコロの場合で実験
 mc <- 10000 # Monte-Carlo実験の繰り返し回数(大数の法則より多めに実験する)
 
@@ -146,7 +147,7 @@ for(i in 1:5){ # pをランダムに設定して実験
     curve(dnorm, add=TRUE, col="red", lwd=2) 
 }
 
-### 少数の法則
+### 練習問題 少数の法則
 set.seed(343434) # 乱数のシード値の指定
 
 ## 基本の実験
@@ -191,3 +192,5 @@ for(p in c(0.001,0.002,0.005,0.01)){
   lines(min(x):max(x)+0.4, dpois(min(x):max(x),n*p),
       type="h", col="red", lwd=6) 
 }
+## n が大きくなるに従い，正規分布の形に近付いていくことが観測できる
+## 中心極限定理がここでも成り立っていることがわかる
