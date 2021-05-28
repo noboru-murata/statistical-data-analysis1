@@ -9,6 +9,11 @@ x <- 1:6 # サイコロの目の値
 (var <- sum((x-mu)^2*p)) # 分散の計算
 sqrt(var) # 標準偏差
 
+## 正規化しないで計算する方法もある
+w <- rep(1:2,3) # 1,2 の繰り返し
+weighted.mean(x,w)
+weighted.mean(x^2,w)-weighted.mean(x,w)^2
+
 ### 練習問題 大数の法則
 set.seed(121212) # 乱数のシード値の指定
 ## 試行(離散分布の標本平均の計算)を定義する
@@ -47,7 +52,7 @@ for(n in c(10,100,1000)){ # サンプル数を変えて実験
     hist(xbars, breaks=20,
          col="azure", border="lightblue",
          xlim=c(1,6), ylim=c(0,200), # 複数の図を同じ領域で描画
-         xlab=expression(bar(X)[n]), 
+         xlab=expression(bar(X)[n]), # help(expression), help(plotmath) 参照
          main=paste0("n=",n)) 
     abline(v=mu, col="red", lwd=2, lty="dotted")
     abline(h=0, col="grey", lwd=2, lty="solid")

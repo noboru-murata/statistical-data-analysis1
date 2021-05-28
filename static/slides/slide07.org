@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-05-15 12:01:37 mura>
+# Time-stamp: <2021-05-28 14:14:46 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -38,7 +38,7 @@
    - 乱数の数学モデル: 値がランダムに決定される変数
    - 任意の区間 \([a,b]\) に含まれる確率が定められている 
      - [[color:gray][数学的には厳密性を欠くが，本講義ではこの定義]]
-   - 確率変数 \(X\) が区間 \([a,b]\) \((a\leq b)\) に含まれる確率
+   - 確率変数 \(X\) が区間 \([a,b]\) \((a\leq b)\) に含まれる確率:
      #+begin_quote
      #+begin_src latex
      \begin{equation}
@@ -47,7 +47,7 @@
      #+end_src
      (特に \(a=b\) のとき \(P(X=a)\) と書く)
      #+end_quote
-   - 今回では有限個の値のみをとる確率変数を考える
+   - 今回は有限個の値のみをとる確率変数を考える
      - [[color:gray][無限個の値，特に連続的な値については次回以降]]
 
 ** 平均と分散
@@ -112,8 +112,13 @@
        (mu <- sum(x*p)) # 平均値の計算
        (var <- sum((x-mu)^2*p)) # 分散の計算
        sqrt(var) # 標準偏差
-     #+end_src
 
+       ## 正規化しないで計算する方法もある
+       w <- rep(1:2,3) # 1,2 の繰り返し
+       weighted.mean(x,w)
+       weighted.mean(x^2,w)-weighted.mean(x,w)^2
+     #+end_src
+       
 
 * 独立性と同分布性
 ** 同時分布
@@ -251,6 +256,7 @@
      - 真の平均と標本平均の差を計算する
      - \(n\) を大きくしたときの差の性質を観察する
 
+
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
@@ -308,7 +314,7 @@
          hist(xbars, breaks=20,
               col="azure", border="lightblue",
               xlim=c(1,6), ylim=c(0,200), # 複数の図を同じ領域で描画
-              xlab=expression(bar(X)[n]), 
+              xlab=expression(bar(X)[n]), # help(expression), help(plotmath) 参照
               main=paste0("n=",n)) 
          abline(v=mu, col="red", lwd=2, lty="dotted")
          abline(h=0, col="grey", lwd=2, lty="solid")
@@ -370,13 +376,14 @@
      }
    #+end_src
 
+
 * 中心極限定理
 ** 中心極限定理の概要
-   - 大数の法則の主張: 
+   - 大数の法則の主張
      - \(n\) を大きくすると標本平均 \(\bar{X}_n\) は真の平均 \(\mu\) に近づく
      - 推定誤差 \(\bar{X}_n-\mu\) は \(n\) を大きくすると0に近づく
      - どの程度の大きさになるのか定量的な評価は与えていない
-   - 誤差の評価の定量化:
+   - 誤差の評価の定量化とは
      - 推定誤差がある区間 \([\alpha,\beta]\) に入る確率で定量的に評価可能
        #+begin_quote
        #+begin_src latex
@@ -422,11 +429,11 @@
      \end{equation}
      #+end_src
      #+end_quote
-   - 被積分関数
-     \(\phi(x)=e^{-x^2/2}/\sqrt{2\pi}\)
-     を 
-     *標準正規密度* 
-     という
+     - 被積分関数
+       \(\phi(x)=e^{-x^2/2}/\sqrt{2\pi}\)
+       を 
+       *標準正規密度* 
+       という
      # #+begin_quote
      # #+begin_src latex
      #   \begin{equation}
@@ -449,8 +456,9 @@
      - 中心極限定理が正しければ，
        十分小さいビン \([a,b]\) におけるヒストグラムの高さは
        \(\phi(a)\) で近似される
-     - \(Z\) のヒストグラムに
-       標準正規密度 \(\phi(x)\) を重ね書きすることで近似の度合いを評価する
+     - \(Z\) を多数観測し分布(ヒストグラム)を求める
+     - \(Z\) の分布と
+       標準正規密度 \(\phi(x)\) を比較する
        - 密度表示は ~hist()~ で ~freq=FALSE~ を指定
        - 標準正規密度 \(\phi(x)\) は関数 ~dnorm()~ で計算
      # \(\phi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\)
@@ -571,6 +579,7 @@
        \end{equation}
      #+end_src
      #+end_quote
+     - 定理の \(\sum_{i=1}^nX_i\) が不良品の例の \(S_n\) に対応
 
 ** Poisson 分布
    - 確率変数 \(X\) の取りうる値が0以上の整数全体で，
@@ -585,8 +594,7 @@
      で与えられるものを強度
      \(\lambda\) の *Poisson 型確率変数* 
      その確率法則を強度 \(\lambda\) の *Poisson 分布* と呼ぶ
-     - 定理の \(\sum_{i=1}^nX_i\) が不良品の例の \(S_n\) に対応
-     - Poisson 分布の確率の値は関数 ~dpois()~ で計算
+   #     - Poisson 分布の確率の値は関数 ~dpois()~ で計算
 
 ** 数値実験の設計
    - 方針
@@ -597,6 +605,7 @@
      #+end_quote
      - 確率 \(P(X=1)=p\) を小さな値に設定する
      - \(n\) 個(非常に多数)の確率変数の合計 \(S_n\) を計算する
+     - \(S_n\) を多数観測し分布を求める
      - \(S_n\) の分布を
        強度 \(\lambda=pn\) の Poisson分布と比較する
        - 確率 \(p\) サイズ \(n\) の二項乱数 ~rbinom()~ が利用可能
@@ -698,8 +707,10 @@
      前定理の条件のもと，列
      #+begin_src latex
      \begin{equation}
-       \Bigl(\frac{\sqrt{n}(\bar{X}_{n}-\mu)}
-         {\sqrt{2\sigma^2\log\log n}}\Bigr)_{n=3}^\infty
+       \left\{
+       \frac{\sqrt{n}(\bar{X}_{n}-\mu)}
+       {\sqrt{2\sigma^2\log\log n}}
+       \right\}_{n=3}^{\infty}
      \end{equation}
      #+end_src
      のある部分列の収束先となるような実数全体の集合を \(C\) とすると，
