@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-25 Tue 09:12 -->
+<!-- 2021-06-04 Fri 14:56 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
+<meta name="generator" content="Org mode" />
 <meta name="author" content="Noboru Murata" />
-<meta name="generator" content="Org Mode" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -40,7 +40,7 @@
   }
   pre.src {
     position: relative;
-    overflow: auto;
+    overflow: visible;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -52,7 +52,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
+  pre.src:hover:before { display: inline;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -194,23 +194,25 @@
   /*]]>*/-->
 </style>
 <script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
 <!--/*--><![CDATA[/*><!--*/
      function CodeHighlightOn(elem, id)
      {
        var target = document.getElementById(id);
        if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
        }
      }
      function CodeHighlightOff(elem, id)
      {
        var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
      }
     /*]]>*///-->
 // @license-end
@@ -218,12 +220,12 @@
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org393b0e3" class="outline-2">
-<h2 id="org393b0e3"><span class="section-number-2">1</span> Zoom 録画</h2>
+<div id="outline-container-org4769515" class="outline-2">
+<h2 id="org4769515"><span class="section-number-2">1</span> Zoom 録画</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org5d66554" class="outline-3">
-<h3 id="org5d66554"><span class="section-number-3">1.1</span> 第1回</h3>
+<div id="outline-container-org49c8ee0" class="outline-3">
+<h3 id="org49c8ee0"><span class="section-number-3">1.1</span> 第1回</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 トピック: 数理科学続論 I / 知能社会情報学講義Ⅱ（統計データ解析Ⅰ）
@@ -238,8 +240,8 @@
 </div>
 
 
-<div id="outline-container-org0d2bafb" class="outline-3">
-<h3 id="org0d2bafb"><span class="section-number-3">1.2</span> 第2回</h3>
+<div id="outline-container-org0982a4f" class="outline-3">
+<h3 id="org0982a4f"><span class="section-number-3">1.2</span> 第2回</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 トピック: 数理科学続論 I / 知能社会情報学講義Ⅱ（統計データ解析Ⅰ）
@@ -254,8 +256,8 @@
 </div>
 
 
-<div id="outline-container-orga8995ee" class="outline-3">
-<h3 id="orga8995ee"><span class="section-number-3">1.3</span> 第3回</h3>
+<div id="outline-container-org4cef1cd" class="outline-3">
+<h3 id="org4cef1cd"><span class="section-number-3">1.3</span> 第3回</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 トピック: 数理科学続論 I / 知能社会情報学講義Ⅱ（統計データ解析Ⅰ）
@@ -270,8 +272,8 @@
 </div>
 
 
-<div id="outline-container-org6a4ac2b" class="outline-3">
-<h3 id="org6a4ac2b"><span class="section-number-3">1.4</span> 第4回</h3>
+<div id="outline-container-org616d813" class="outline-3">
+<h3 id="org616d813"><span class="section-number-3">1.4</span> 第4回</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 トピック: 数理科学続論 I / 知能社会情報学講義Ⅱ（統計データ解析Ⅰ）
@@ -286,8 +288,8 @@
 </div>
 
 
-<div id="outline-container-org76bb9e7" class="outline-3">
-<h3 id="org76bb9e7"><span class="section-number-3">1.5</span> 第5回</h3>
+<div id="outline-container-org1a801a3" class="outline-3">
+<h3 id="org1a801a3"><span class="section-number-3">1.5</span> 第5回</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 トピック: 数理科学続論 I / 知能社会情報学講義Ⅱ（統計データ解析Ⅰ）
@@ -301,8 +303,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgc10c04c" class="outline-3">
-<h3 id="orgc10c04c"><span class="section-number-3">1.6</span> 第6回</h3>
+<div id="outline-container-orga2b2be2" class="outline-3">
+<h3 id="orga2b2be2"><span class="section-number-3">1.6</span> 第6回</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 トピック: 数理科学続論 I / 知能社会情報学講義Ⅱ（統計データ解析Ⅰ）
@@ -315,11 +317,26 @@
 </p>
 </div>
 </div>
+
+<div id="outline-container-org0248715" class="outline-3">
+<h3 id="org0248715"><span class="section-number-3">1.7</span> 第7回</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+トピック: 数理科学続論 I / 知能社会情報学講義Ⅱ（統計データ解析Ⅰ）
+日付: 2021年5月28日 04:40 PM 大阪、札幌、東京
+</p>
+
+<p>
+ミーティングの記録:
+<a href="https://u-tokyo-ac-jp.zoom.us/rec/share/Izxy-sh8_59EnPHzt1OWkfwEYH0DpaLAghKCIf85WDH6pQ4yCH3-v7ClNa1-6XEo.WMSOdpUVj9-DIpjc">https://u-tokyo-ac-jp.zoom.us/rec/share/Izxy-sh8_59EnPHzt1OWkfwEYH0DpaLAghKCIf85WDH6pQ4yCH3-v7ClNa1-6XEo.WMSOdpUVj9-DIpjc</a>
+</p>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Noboru Murata</p>
-<p class="date">Created: 2021-05-25 Tue 09:12</p>
+<p class="date">Created: 2021-06-04 Fri 14:56</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -30,21 +30,21 @@ legend("topright", inset=0.05, legend=c("観測値", "理論値"),
 
 ### Poisson 分布で用いた例
 
-rpois(15, lambda=1) # 強度1のPoisson分布(15個)
-rpois(15, lambda=10) # 強度10のPoisson分布(15個)
+rpois(15, lambda=1) # 強度1の Poisson 分布(15個)
+rpois(15, lambda=10) # 強度10の Poisson 分布(15個)
 
-### 練習問題 Poisson分布
+### 練習問題 Poisson 分布
 mc <- 10000 
 lambda1 <- 5
 lambda2 <- 12
-myRandom <- function(){ # 2つのPoisson分布の和
+myRandom <- function(){ # 2つの Poisson 分布の和
     rpois(1, lambda=lambda1)+rpois(1, lambda=lambda2)}
 myData <- replicate(mc, myRandom())
 myTable <- table(myData)/mc 
 par(family="HiraginoSans-W4") # 日本語フォントの指定
 plot(myTable, type="h", lwd=5, col="royalblue",
      xlab="値", ylab="確率",
-     main=paste0("Poisson分布(強度", lambda1+lambda2, ")"))
+     main=paste0("Poisson 分布(強度", lambda1+lambda2, ")"))
 myRange <- min(myData):max(myData) 
 lines(myRange + 0.3,
       dpois(myRange, lambda=lambda1+lambda2), 

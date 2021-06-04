@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-09 15:29:12 mura>
+# Time-stamp: <2021-05-29 17:14:01 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -41,15 +41,19 @@
 
 ** 講義計画 (予定)
    - 統計ソフトウェアR入門
-   - データのプロット
-   - 極限定理
-   - 確率シミュレーション
-   - 確率分布
-   - 基礎的な記述統計量とデータの集約
-   - 推定
-   - 検定
-   - 分散分析
-   - 回帰分析
+     - R言語の使い方
+     - データの整理
+     - データの視覚化
+     - 確率シミュレーション
+   - 確率
+     - 極限定理
+     - 確率分布
+   - 統計
+     - 基礎的な記述統計量とデータの集約
+     - 推定
+     - 検定
+     - 分散分析
+     - 回帰分析
 
 
 * COMMENT ローカル変数

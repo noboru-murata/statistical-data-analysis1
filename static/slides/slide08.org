@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-05-28 14:26:52 mura>
+# Time-stamp: <2021-06-04 14:50:27 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -41,9 +41,9 @@
      - 区間 \([a,b]\) \((a\leq b)\) に \(X\) が含まれる確率
        #+begin_quote
        #+begin_src latex
-       \begin{equation}
-         P(a\leq X\leq b)
-       \end{equation}
+	 \begin{equation}
+           P(a\leq X\leq b)
+         \end{equation}
        #+end_src
        #+end_quote
      - 「確率変数 \(X\) は確率分布 \(P\) に従う」という
@@ -126,17 +126,17 @@
    - 確率変数の変換 \(\varphi(X)\) の期待値
      #+begin_quote
      #+begin_src latex
-     \begin{equation}
-       \mathbb{E}[\varphi(X)]:=\sum_{x\in\mathcal{X}}\varphi(x)P(X=x)
-     \end{equation}
+       \begin{equation}
+         \mathbb{E}[\varphi(X)]:=\sum_{x\in\mathcal{X}}\varphi(x)P(X=x)
+       \end{equation}
      #+end_src
      #+end_quote
    - \(p\) 次の *モーメント* (あるいは *積率* )
      #+begin_quote
      #+begin_src latex
-     \begin{equation}
-       \mathbb{E}[X^p]=\sum_{x\in\mathcal{X}}x^pP(X=x)
-     \end{equation}
+       \begin{equation}
+         \mathbb{E}[X^p]=\sum_{x\in\mathcal{X}}x^pP(X=x)
+       \end{equation}
      #+end_src
      #+end_quote
      - \(X\) が正整数 \(p\) 次のモーメントをもてば，
@@ -146,11 +146,11 @@
    - 定義
      #+begin_quote
      #+begin_src latex
-     \begin{align}
-       \mathrm{Var}(X)
-       :=&\mathbb{E}[(X-\mathbb{E}[X])^2]\\
-       =&\sum_{x\in\mathcal{X}}(x-\mathbb{E}[X])^2P(X=x)
-     \end{align}
+       \begin{align}
+         \mathrm{Var}(X)
+         :=&\mathbb{E}[(X-\mathbb{E}[X])^2]\\
+         =&\sum_{x\in\mathcal{X}}(x-\mathbb{E}[X])^2P(X=x)
+       \end{align}
      #+end_src
      #+end_quote
      - \(X\) が *2次のモーメントをもつ* ときのみ定義できる
@@ -166,7 +166,7 @@
    - 集合 \(\{x_{1},\dotsc,x_n\}\) 上の離散一様分布: \\
      相異なる実数
      \(x_{1},\dotsc,x_n\) 
-     を箱(壺)から取り出す試行
+     を箱(壺)から無作為に取り出す試行
    - 確率関数:
      #+begin_quote
      #+begin_src latex
@@ -181,21 +181,21 @@
    - 平均:
      #+begin_quote
      #+begin_src latex
-     \begin{equation}
-       \mathbb{E}[X]
-       =\sum_{i=1}^nx_if(x_i)
-       =\frac{1}{n}\sum_{i=1}^nx_i=\bar{x}
-     \end{equation}
+       \begin{equation}
+         \mathbb{E}[X]
+         =\sum_{i=1}^nx_if(x_i)
+         =\frac{1}{n}\sum_{i=1}^nx_i=\bar{x}
+       \end{equation}
      #+end_src
      #+end_quote
    - 分散:
      #+begin_quote
      #+begin_src latex
-     \begin{equation}
-       \mathrm{Var}(X)
-       =\sum_{i=1}^n(x_i-\mathbb{E}[X])^2f(x_i)
-       =\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2
-     \end{equation}
+       \begin{equation}
+         \mathrm{Var}(X)
+         =\sum_{i=1}^n(x_i-\mathbb{E}[X])^2f(x_i)
+         =\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2
+       \end{equation}
      #+end_src
      #+end_quote
    # - \(X\) を集合 \(\{x_{1},\dots,x_n\}\) 上の
@@ -218,17 +218,17 @@
   #+end_src
 
 ** 二項分布の確率関数
-	- 試行回数 \(n\) , 成功確率 \(p\) の二項分布: \\
-	  確率 \(p\) で成功する試行を \(n\) 回行った総成功回数
-	- 確率関数:
-	  #+begin_quote
-	  #+begin_src latex
-	    \begin{equation}
-	      f(x)=\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x},\quad x=0,1,\dots,n
-	    \end{equation}
-	  #+end_src
-	  #+end_quote
-	- 平均は \(np\) , 分散は \(np(1-p)\) で与えられる
+   - 試行回数 \(n\) , 成功確率 \(p\) の二項分布: \\
+     確率 \(p\) で成功する試行を \(n\) 回行った総成功回数
+   - 確率関数:
+     #+begin_quote
+     #+begin_src latex
+       \begin{equation}
+	 f(x)=\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x},\quad x=0,1,\dots,n
+       \end{equation}
+     #+end_src
+     #+end_quote
+   #   - 平均は \(np\) , 分散は \(np(1-p)\) で与えられる
 
 ** 二項分布の平均と分散
    - 平均:
@@ -303,7 +303,7 @@
        mc <- 10000 # 実験回数を指定
        myRandom <- function(){...} # 乱数生成のプログラム
        myDist <- function(){...} # 必要であれば理論曲線を定義
-                 # ただし多くの場合 d"乱数名"で定義されているので不要
+                                        # ただし多くの場合 d"乱数名"で定義されているので不要
        myData <- replicate(mc, myRandom()) # Monte-Carlo実験
        myTable <- table(myData)/mc # 同じ値の頻度から確率を計算
        plot(myTable, type="h", lwd=3, col="blue") # 乱数の分布の表示
@@ -351,7 +351,7 @@
   #+end_src
 
 ** Poisson 分布の確率関数
-   - 強度 \(\lambda\) のPoisson分布: \(P_o(\lambda)\) (\(\lambda > 0\))\\ 
+   - 強度 \(\lambda\) の Poisson 分布: \(Po(\lambda)\) (\(\lambda > 0\))\\ 
      少数の法則に現れた滅多に起こらない事象の起こる回数の分布
    - 確率関数:
      #+begin_quote
@@ -361,6 +361,7 @@
        \end{equation}
      #+end_src
      #+end_quote
+   #   - 平均は \(\lambda\) , 分散は \(\lambda\) で与えられる
 
 ** Poisson 分布の平均
    - 平均:
@@ -402,13 +403,13 @@
 
 ** Poisson 分布に従う乱数
    - 一定時間に放射性物質から放射される粒子の数や，
-     一定時間に発生する交通事故の数などはPoisson分布に従うことが知られている
+     一定時間に発生する交通事故の数などは Poisson 分布に従うことが知られている
    - 発生確率が低い事象が十分長い期間で起こる回数の分布は
-     Poisson分布で近似できる (少数の法則)
+     Poisson 分布で近似できる (少数の法則)
    - 乱数の発生は ~rpois()~ を用いる
      #+begin_src R :tangle yes
-       rpois(15, lambda=1) # 強度1のPoisson分布(15個)
-       rpois(15, lambda=10) # 強度10のPoisson分布(15個)
+       rpois(15, lambda=1) # 強度1の Poisson 分布(15個)
+       rpois(15, lambda=10) # 強度10の Poisson 分布(15個)
      #+end_src
    - 確率関数は ~dpois()~ で計算できる
 
@@ -421,27 +422,27 @@
    :PROPERTIES:
    :reveal_background: #fef4f4
    :END:
-   - Poisson分布に関して以下を考察せよ．
+   - Poisson 分布に関して以下を考察せよ．
      - 平均と分散の計算を確認しなさい．
      - \(X,Y\) を独立な2つの確率変数とし，
-       それぞれ強度 \(\lambda_{1},\lambda_{2}\) のPoisson分布に従うとする．
+       それぞれ強度 \(\lambda_{1},\lambda_{2}\) の Poisson 分布に従うとする．
        このとき, 和 \(X+Y\) の分布は
-       強度 \(\lambda_{1}+\lambda_{2}\) のPoisson分布に従う．
+       強度 \(\lambda_{1}+\lambda_{2}\) の Poisson 分布に従う．
        これをグラフに描画して確認しなさい．
        
    #+begin_src R :exports none :tangle yes
-     ### 練習問題 Poisson分布
+     ### 練習問題 Poisson 分布
      mc <- 10000 
      lambda1 <- 5
      lambda2 <- 12
-     myRandom <- function(){ # 2つのPoisson分布の和
+     myRandom <- function(){ # 2つの Poisson 分布の和
          rpois(1, lambda=lambda1)+rpois(1, lambda=lambda2)}
      myData <- replicate(mc, myRandom())
      myTable <- table(myData)/mc 
      par(family="HiraginoSans-W4") # 日本語フォントの指定
      plot(myTable, type="h", lwd=5, col="royalblue",
           xlab="値", ylab="確率",
-          main=paste0("Poisson分布(強度", lambda1+lambda2, ")"))
+          main=paste0("Poisson 分布(強度", lambda1+lambda2, ")"))
      myRange <- min(myData):max(myData) 
      lines(myRange + 0.3,
            dpois(myRange, lambda=lambda1+lambda2), 
@@ -683,6 +684,7 @@
    - 真の平均を標本平均で推定した際の推定誤差の確率分布は，
      サンプル数が大きくなるに従って正規分布に近づいていく
      (*中心極限定理*)
+
    #+reveal: split
    - 中心極限定理の特殊な形 (de Moivre-Laplaceの定理)
      - \(X_{1},\dotsc,X_n\) を成功確率 \(p\) のBernoulli分布に従う
@@ -693,24 +695,24 @@
        #+begin_quote
        #+begin_src latex
 	 \begin{equation}
-           \frac{\sum_{i=1}^nX_i-np}{\sqrt{np(1-p)}}
-           =\frac{\sqrt{n}(\frac{1}{n}\sum_{i=1}^nX_i-p)}{\sqrt{p(1-p)}}
-           =\frac{Y-np}{\sqrt{np(1-p)}}
-         \end{equation}
+	   \frac{\sum_{i=1}^nX_i-np}{\sqrt{np(1-p)}}
+	   =\frac{\sqrt{n}(\frac{1}{n}\sum_{i=1}^nX_i-p)}{\sqrt{p(1-p)}}
+	   =\frac{Y-np}{\sqrt{np(1-p)}}
+	 \end{equation}
        #+end_src
        #+end_quote
        の分布は標準正規分布で近似できる
      - \(p\) が非常に小さい場合，
        特に \(np\) がそれほど大きくならない程度に \(p\) が小さい場合は，
        \((Y-np)/\sqrt{np(1-p)}\) の分布の正規近似よりも，
-       \(Y\) の分布は強度 \(np\) のPoisson分布による近似の方が精度がよい (少数の法則)
+       \(Y\) の分布は強度 \(np\) の Poisson 分布による近似の方が精度がよい (少数の法則)
 
-   # - \(Y\) を試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う確率変数とすると，
-   #   \(n\) が十分大きいとき \((Y-np)/\sqrt{np(1-p)}\) の分布は標準正規分布で
-   #   近似できる 
-   # ** 二項分布の近似
-   #    - 正規近似の例: ~dist-binom-norm.r~
-   #    - Poisson近似の例: ~dist-binom-pois.r~
+       # - \(Y\) を試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う確率変数とすると，
+       #   \(n\) が十分大きいとき \((Y-np)/\sqrt{np(1-p)}\) の分布は標準正規分布で
+       #   近似できる 
+       # ** 二項分布の近似
+       #    - 正規近似の例: ~dist-binom-norm.r~
+       #    - Poisson 近似の例: ~dist-binom-pois.r~
 
 ** 正規分布に従う乱数
    - 乱数の発生は ~rnorm()~ を用いる
@@ -732,11 +734,12 @@
        mc <- 10000 # 実験回数を指定
        myRandom <- function(){...} # 乱数生成のプログラム
        myDist <- function(){...} # 必要であれば理論曲線を定義
-                 # ただし多くの場合 d"乱数名"で定義されているので不要
+                                        # ただし多くの場合 d"乱数名"で定義されているので不要
        myData <- replicate(mc, myRandom()) # Monte-Carlo実験
        hist(myData, freq=FALSE) # 乱数の分布(密度)の表示
        curve(myDist(x), add=TRUE) # 理論曲線(確率密度) 変数xを明示した方が良い
      #+end_src
+
 ** 練習問題
    :PROPERTIES:
    :reveal_background: #fef4f4
@@ -747,9 +750,9 @@
        このとき
        #+begin_src latex
 	 \begin{align}
-           X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
-           X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
-         \end{align}
+	   X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
+	   X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
+	 \end{align}
        #+end_src
        とおくと，
        \(X_{1},X_{2}\) は独立かつともに標準正規分布に従う．
@@ -794,7 +797,7 @@
      legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
             col=c("lightblue", "red"), lwd=3) # 凡例を作成
    #+end_src
-  
+   
 
 * ガンマ分布
   #+begin_src R :exports none :tangle yes
@@ -1007,9 +1010,9 @@
        このとき確率変数
        #+begin_quote
        #+begin_src latex
-         \begin{equation}
-           \frac{Z}{\sqrt{Y/k}}
-         \end{equation}
+	 \begin{equation}
+	   \frac{Z}{\sqrt{Y/k}}
+	 \end{equation}
        #+end_src
        #+end_quote
        は自由度 \(k\) の \(t\) 分布に従うことを確認しなさい．
