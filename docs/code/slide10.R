@@ -1,5 +1,6 @@
-### 練習1
-### 一様分布の平均の推定
+### 第10回 練習問題解答例
+
+### 練習問題 一様分布の平均の推定
 set.seed(1234) # 乱数のシード値の指定
 ## 平均値の推定を行う関数(標本平均，x1，最大最小)
 myMeanEst <- function(n, min, max){
@@ -27,19 +28,17 @@ for(i in 1:3) { # それぞれのヒストグラムを書いてみる
          xlab="est", main=names(myData)[i])
 }
 
-### 練習2
-### ガンマ分布による風速データのモデル化
+### 練習問題 ガンマ分布による風速データのモデル化
 ## データの取得
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-## 以下では関数 with を利用しているが，myDataから風速を取り出しておいても良い
+TW.data <- read.csv("data/tokyo_weather.csv")
+## 以下では関数 with を利用しているが，TW.data から風速を取り出しておいても良い
 
-## 練習2.1
 ## ヒストグラムの描画
 par(family="HiraginoSans-W4") # 日本語フォントの指定
-with(myData, hist(風速, breaks=30, freq=FALSE, # 密度
-                  col="skyblue", border="blue",
-                  main="風速のヒストグラム", xlab="風速 [m/s]", ylab="密度"))
-## 練習2.2
+with(TW.data, hist(wind, breaks=30, freq=FALSE, # 密度
+                   col="skyblue", border="blue",
+                   main="風速のヒストグラム", xlab="風速 [m/s]", ylab="密度"))
+
 ## ガンマ関数による最尤推定
 library(stats4) # 関数mleを利用
 ## ガンマ分布の最尤推定量
@@ -62,13 +61,12 @@ mle.gamma <- function(x, # 観測データ
         return(coef(est)) # 推定値のみ返す
     }
 }
-(theta <- with(myData, mle.gamma(風速))) # 最尤推定
-## 練習2.3
+(theta <- with(TW.data, mle.gamma(wind))) # 最尤推定
+
 ## 結果の重ね描き
 curve(dgamma(x, theta[1], theta[2]), # あてはめたガンマ分布の密度関数
-      add=TRUE, col="orange", lwd=3)
+      add=TRUE, col="orange", lwd=3) 
 
-### 練習2
 ### 補遺: シミュレーションによる一致性の検証
 set.seed(5678) # 乱数のシード値の指定
 nu <- 5; alpha <- 2 # 真のパラメタ
@@ -89,33 +87,29 @@ for(n in c(10, 100, 300)){ # データ数を変えて実験
     abline(v=alpha, col="tomato", lwd=2, lty="solid") # alphaの真値
 }
 
-### 練習3
-### 日射量データの区間推定
+### 練習問題 日射量データの区間推定
 ## データの取得
-myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-## 以下では関数 with を利用しているが，myDataから風速を取り出しておいても良い
+TW.data <- read.csv("data/tokyo_weather.csv")
+## 以下では関数 with を利用しているが，TW.data から日射量を取り出しておいても良い
 
-## 練習3.1
 ## 全データによる平均値の計算
-(mu <- with(myData, mean(日射量))) # 真値
+(mu <- with(TW.data, mean(solar))) # 真値
 
-## 練習3.2
 ## 50点による90%信頼区間
 set.seed(1357) # 乱数のシード値の指定
 n <- 50
-idx <- sample(nrow(myData),n) # データの抽出
-(xbar <- with(myData[idx,], mean(日射量))) # 標本平均
-(s <- with(myData[idx,], sd(日射量))) # 標本標準偏差
+idx <- sample(nrow(TW.data),n) # データの抽出
+(xbar <- with(TW.data[idx,], mean(solar))) # 標本平均
+(s <- with(TW.data[idx,], sd(solar))) # 標本標準偏差
 z95 <- qnorm(0.95) # 標準正規分布の0.95分位点
 (ci <- c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
 
-## 練習3.3
 ## 信頼区間の正答率の評価
 mc <- 100
 myTrial <- function(n){ # nを変えて実験できるように
-    idx <- sample(nrow(myData),n)
-    xbar <- with(myData[idx,], mean(日射量)) # 標本平均
-    s <- with(myData[idx,], sd(日射量)) # 標本標準偏差
+    idx <- sample(nrow(TW.data),n)
+    xbar <- with(TW.data[idx,], mean(solar)) # 標本平均
+    s <- with(TW.data[idx,], sd(solar)) # 標本標準偏差
     return(c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
 }
 myCIs <- as.data.frame(t( # confidence intervals
@@ -124,7 +118,6 @@ myCIs <- as.data.frame(t( # confidence intervals
 apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"]))
 table(apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"])))
 
-### 練習3
 ### 補遺: 信頼区間について多数で評価する
 mc <- 2000
 myCIs <- as.data.frame(t(
