@@ -41,20 +41,44 @@
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
-  2020.06.19</p>
+  </p>
 </div>
 
 </section>
 
 <section>
-<section id="slide-orgd408a9c">
-<h2 id="orgd408a9c">推定とは</h2>
-<div class="outline-text-2" id="text-orgd408a9c">
+<section id="slide-orgf44b47a">
+<h2 id="orgf44b47a">講義の内容</h2>
+<ul>
+<li>点推定
+<ul>
+<li>不偏推定量</li>
+<li>Cramér-Raoの不等式</li>
+
+</ul></li>
+<li>最尤推定量</li>
+<li>区間推定
+<ul>
+<li>信頼区間</li>
+<li>正規母集団の区間推定</li>
+<li>漸近正規性にもとづく区間推定</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-org612ffd8">
+<h2 id="org612ffd8">推定とは</h2>
+<div class="outline-text-2" id="text-org612ffd8">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3e633d6">
-<h3 id="org3e633d6">統計解析の目的</h3>
+<section id="slide-org444db07">
+<h3 id="org444db07">統計解析の目的</h3>
 <ul>
 <li>観測データを確率変数の実現値と考えてモデル化</li>
 <li>観測データの背後の確率分布を <b>推定</b>
@@ -74,8 +98,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org84821e5">
-<h3 id="org84821e5">推定の標準的な枠組</h3>
+<section id="slide-org678653b">
+<h3 id="org678653b">推定の標準的な枠組</h3>
 <ul>
 <li>観測データは独立同分布な確率変数列 \(X_1,X_2,\dots,X_n\)</li>
 <li>\(X_i\) の従う共通の法則 \(\mathcal{L}\) を想定
@@ -101,14 +125,14 @@
 </section>
 </section>
 <section>
-<section id="slide-orgb1f0125">
-<h2 id="orgb1f0125">点推定</h2>
-<div class="outline-text-2" id="text-orgb1f0125">
+<section id="slide-org11d17bc">
+<h2 id="org11d17bc">点推定</h2>
+<div class="outline-text-2" id="text-org11d17bc">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgaf01bb7">
-<h3 id="orgaf01bb7">点推定</h3>
+<section id="slide-orgc7150e7">
+<h3 id="orgc7150e7">点推定</h3>
 <ul>
 <li><p>
 定義
@@ -148,8 +172,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org91d7e70">
-<h3 id="org91d7e70">良い推定量</h3>
+<section id="slide-orgb5dae76">
+<h3 id="orgb5dae76">良い推定量</h3>
 <ul>
 <li>一般に1つのパラメタの推定量は無数に存在</li>
 <li><p>
@@ -171,7 +195,7 @@
 </p>
 <div>
 \begin{equation}
-  \text{$\hat{\theta}$ が $\theta$ に収束する確率が1}\quad (n\to\infty)
+  \text{\(\hat{\theta}\) が \(\theta\) に収束する確率が1}\quad (n\to\infty)
 \end{equation}
 
 </div></li>
@@ -190,8 +214,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org63350fb">
-<h3 id="org63350fb">良い不偏推定量</h3>
+<section id="slide-orge957d12">
+<h3 id="orge957d12">良い不偏推定量</h3>
 <ul>
 <li><p>
 一般に不偏推定量も複数存在
@@ -229,8 +253,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3bf2f80">
-<h3 id="org3bf2f80">Cramer-Raoの不等式</h3>
+<section id="slide-org4fb6706">
+<h3 id="org4fb6706">Cramér-Raoの不等式</h3>
 <ul>
 <li><p>
 定理
@@ -268,22 +292,22 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgab76281">
-<h3 id="orgab76281">一様最小分散不偏推定量</h3>
+<section id="slide-org3fc67dd">
+<h3 id="org3fc67dd">一様最小分散不偏推定量</h3>
 <ul>
 <li>用語の定義
 <ul>
-<li>下界 \(1/(nI(\theta))\) : <b>Cramer-Rao下界</b></li>
-<li>\(I(\theta)\) : <b>Fisher情報量</b></li>
+<li>下界 \(1/(nI(\theta))\) : <b>Cramér-Rao 下界</b></li>
+<li>\(I(\theta)\) : <b>Fisher 情報量</b></li>
 
 </ul></li>
 <li><p>
-定理 (Cramer-Raoの不等式の系)
+定理 (Cramér-Rao の不等式の系)
 </p>
 <blockquote>
 <p>
 \(\theta\) の不偏推定量 \(\hat{\theta}\) で
-分散がCramer-Rao下界 \(1/(nI(\theta))\) に一致するものが存在すれば，
+分散が Cramér-Rao 下界 \(1/(nI(\theta))\) に一致するものが存在すれば，
 それは一様最小分散不偏推定量となる．
 </p>
 </blockquote></li>
@@ -292,8 +316,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6fa2bd5">
-<h3 id="org6fa2bd5">例: 正規分布モデルの標本平均</h3>
+<section id="slide-org30e1d39">
+<h3 id="org30e1d39">例: 正規分布モデルの標本平均</h3>
 <ul>
 <li>\(\mathcal{L}\) は平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布
 <ul>
@@ -310,8 +334,8 @@
 
 </div></li>
 
-<li>Cramer-Rao下界: \(\sigma^2/n\)</li>
-<li>標本平均 \(\bar{X}\) の分散: \(\sigma^2/n\) (=Cramer-Rao下界)</li>
+<li>Cramér-Rao下界: \(\sigma^2/n\)</li>
+<li>標本平均 \(\bar{X}\) の分散: \(\sigma^2/n\) (=Cramér-Rao下界)</li>
 
 </ul></li>
 <li>\(\bar{X}\) は \(\mu\) の一様最小分散不偏推定量</li>
@@ -322,12 +346,12 @@
 </section>
 </section>
 <section>
-<section id="slide-org8c67b6b" data-background="#fef4f4">
-<h2 id="org8c67b6b">演習</h2>
+<section id="slide-org7b608db" data-background="#fef4f4">
+<h2 id="org7b608db">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org55b735b" data-background="#fef4f4">
-<h3 id="org55b735b">練習問題</h3>
+<section id="slide-orgcf2e9be" data-background="#fef4f4">
+<h3 id="orgcf2e9be">練習問題</h3>
 <ul>
 <li>\(X\) を一様乱数に従う確率変数とし，
 平均値の推定量として以下を考える．
@@ -355,14 +379,14 @@
 </section>
 </section>
 <section>
-<section id="slide-org862fd3e">
-<h2 id="org862fd3e">最尤法</h2>
-<div class="outline-text-2" id="text-org862fd3e">
+<section id="slide-org0e121fa">
+<h2 id="org0e121fa">最尤法</h2>
+<div class="outline-text-2" id="text-org0e121fa">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2b35ba1">
-<h3 id="org2b35ba1">離散分布の場合</h3>
+<section id="slide-org13b912d">
+<h3 id="org13b912d">離散分布の場合</h3>
 <ul>
 <li>観測値 \(X_1=x_1,X_2=x_2,\dots,X_n=x_n\) の同時確率
 <ul>
@@ -390,8 +414,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org36390d4">
-<h3 id="org36390d4">尤度関数</h3>
+<section id="slide-org1e29eb4">
+<h3 id="org1e29eb4">尤度関数</h3>
 <ul>
 <li><p>
 定義
@@ -429,8 +453,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org926d2b3">
-<h3 id="org926d2b3">最尤法</h3>
+<section id="slide-orgc798667">
+<h3 id="orgc798667">最尤法</h3>
 <ul>
 <li><p>
 最尤法: 
@@ -480,8 +504,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org75821ef">
-<h3 id="org75821ef">最尤推定量の計算</h3>
+<section id="slide-orgce9f28d">
+<h3 id="orgce9f28d">最尤推定量の計算</h3>
 <ul>
 <li><p>
 <b>対数尤度関数</b>:
@@ -514,8 +538,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1f3c94e">
-<h3 id="org1f3c94e">連続分布の場合</h3>
+<section id="slide-orgd102152">
+<h3 id="orgd102152">連続分布の場合</h3>
 <ul>
 <li><b>確率密度関数</b> \(f_{\boldsymbol{\theta}}(x)\) を用いて尤度を定義</li>
 <li><p>
@@ -547,8 +571,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgceaacd2">
-<h3 id="orgceaacd2">例: Poisson分布の最尤推定</h3>
+<section id="slide-orga328437">
+<h3 id="orga328437">例: Poisson分布の最尤推定</h3>
 <ul>
 <li>\(\mathcal{L}\) をパラメタ \(\lambda>0\) のPoisson分布でモデル化
 <ul>
@@ -602,8 +626,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org79e17af">
-<h3 id="org79e17af">例: 指数分布の最尤推定</h3>
+<section id="slide-org932de54">
+<h3 id="org932de54">例: 指数分布の最尤推定</h3>
 <ul>
 <li>\(\mathcal{L}\) をパラメタ \(\lambda>0\) の指数分布でモデル化
 <ul>
@@ -656,8 +680,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2724bf5">
-<h3 id="org2724bf5">例: ガンマ分布の最尤推定</h3>
+<section id="slide-org0282008">
+<h3 id="org0282008">例: ガンマ分布の最尤推定</h3>
 <ul>
 <li>\(\mathcal{L}\) をパラメタ \(\nu,\alpha>0\) のガンマ分布でモデル化
 <ul>
@@ -711,12 +735,12 @@ mle.gamma &lt;- function(x, # 観測データ
 </section>
 </section>
 <section>
-<section id="slide-org4c23696" data-background="#fef4f4">
-<h2 id="org4c23696">演習</h2>
+<section id="slide-org02cab3b" data-background="#fef4f4">
+<h2 id="org02cab3b">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org428bc5a" data-background="#fef4f4">
-<h3 id="org428bc5a">練習問題</h3>
+<section id="slide-org1f75c34" data-background="#fef4f4">
+<h3 id="org1f75c34">練習問題</h3>
 <ul>
 <li><p>
 東京都の気候データ (<code>tokyo_weather.csv</code>) の
@@ -740,14 +764,14 @@ mle.gamma &lt;- function(x, # 観測データ
 </section>
 </section>
 <section>
-<section id="slide-org75717be">
-<h2 id="org75717be">区間推定</h2>
-<div class="outline-text-2" id="text-org75717be">
+<section id="slide-org75d3d4e">
+<h2 id="org75d3d4e">区間推定</h2>
+<div class="outline-text-2" id="text-org75d3d4e">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9908f1a">
-<h3 id="org9908f1a">推定誤差</h3>
+<section id="slide-org66d586a">
+<h3 id="org66d586a">推定誤差</h3>
 <ul>
 <li>推定量 \(\hat{\theta}\) には推定誤差が必ず存在</li>
 <li>推定結果の定量評価には推定誤差の評価が重要
@@ -785,8 +809,8 @@ mle.gamma &lt;- function(x, # 観測データ
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge26c1a4">
-<h3 id="orge26c1a4">区間推定</h3>
+<section id="slide-org4ca5ae3">
+<h3 id="org4ca5ae3">区間推定</h3>
 <ul>
 <li><p>
 定義
@@ -817,8 +841,8 @@ mle.gamma &lt;- function(x, # 観測データ
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org435f512">
-<h3 id="org435f512">信頼区間の性質</h3>
+<section id="slide-org7dd21a5">
+<h3 id="org7dd21a5">信頼区間の性質</h3>
 <ul>
 <li>信頼区間は幅が狭いほど推定精度が良い
 <ul>
@@ -849,14 +873,14 @@ mle.gamma &lt;- function(x, # 観測データ
 </section>
 </section>
 <section>
-<section id="slide-org18aaaf2">
-<h2 id="org18aaaf2">正規母集団の区間推定</h2>
-<div class="outline-text-2" id="text-org18aaaf2">
+<section id="slide-orgf8b7232">
+<h2 id="orgf8b7232">正規母集団の区間推定</h2>
+<div class="outline-text-2" id="text-orgf8b7232">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org000407d">
-<h3 id="org000407d">平均の区間推定 (分散既知)</h3>
+<section id="slide-orga1f7590">
+<h3 id="orga1f7590">平均の区間推定 (分散既知)</h3>
 <ul>
 <li>正規分布に従う独立な確率変数の重み付き和は正規分布に従う</li>
 <li><p>
@@ -978,8 +1002,8 @@ mle.gamma &lt;- function(x, # 観測データ
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org33e39ef">
-<h3 id="org33e39ef">平均の区間推定 (分散未知)</h3>
+<section id="slide-org039e35d">
+<h3 id="org039e35d">平均の区間推定 (分散未知)</h3>
 <ul>
 <li>\(\chi^2\) 分布の特徴付け
 <ul>
@@ -1105,8 +1129,8 @@ mle.gamma &lt;- function(x, # 観測データ
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc38e4dc">
-<h3 id="orgc38e4dc">分散の区間推定</h3>
+<section id="slide-org6f56336">
+<h3 id="org6f56336">分散の区間推定</h3>
 <ul>
 <li><p>
 不偏分散の性質
@@ -1175,14 +1199,14 @@ mle.gamma &lt;- function(x, # 観測データ
 </section>
 </section>
 <section>
-<section id="slide-org6412567">
-<h2 id="org6412567">漸近正規性にもとづく区間推定</h2>
-<div class="outline-text-2" id="text-org6412567">
+<section id="slide-org47bd236">
+<h2 id="org47bd236">漸近正規性にもとづく区間推定</h2>
+<div class="outline-text-2" id="text-org47bd236">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb9ab451">
-<h3 id="orgb9ab451">推定量の漸近正規性</h3>
+<section id="slide-org7ebceba">
+<h3 id="org7ebceba">推定量の漸近正規性</h3>
 <ul>
 <li><p>
 <b>漸近正規性</b>
@@ -1204,8 +1228,8 @@ mle.gamma &lt;- function(x, # 観測データ
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7300693">
-<h3 id="org7300693">標本平均の漸近正規性</h3>
+<section id="slide-orga9eff1e">
+<h3 id="orga9eff1e">標本平均の漸近正規性</h3>
 <ul>
 <li><p>
 定理
@@ -1240,8 +1264,8 @@ mle.gamma &lt;- function(x, # 観測データ
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb2e8286">
-<h3 id="orgb2e8286">平均の区間推定 (分散既知)</h3>
+<section id="slide-org2bccf37">
+<h3 id="org2bccf37">平均の区間推定 (分散既知)</h3>
 <ul>
 <li><p>
 標本平均の確率
@@ -1303,8 +1327,8 @@ mle.gamma &lt;- function(x, # 観測データ
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8eaace1">
-<h3 id="org8eaace1">平均の区間推定 (分散未知)</h3>
+<section id="slide-org4ed0d58">
+<h3 id="org4ed0d58">平均の区間推定 (分散未知)</h3>
 <ul>
 <li>\(\sigma\) をその一致推定量 \(\hat{\sigma}\) で置き換えてもそのまま成立する
 <ul>
@@ -1352,8 +1376,8 @@ mle.gamma &lt;- function(x, # 観測データ
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2e906fc">
-<h3 id="org2e906fc">最尤推定量の区間推定</h3>
+<section id="slide-orgabb6f04">
+<h3 id="orgabb6f04">最尤推定量の区間推定</h3>
 <ul>
 <li><p>
 定理 (最尤推定量の漸近正規性)
@@ -1392,12 +1416,12 @@ mle.gamma &lt;- function(x, # 観測データ
 </section>
 </section>
 <section>
-<section id="slide-org383a8d9" data-background="#fef4f4">
-<h2 id="org383a8d9">演習</h2>
+<section id="slide-org2d5bfa7" data-background="#fef4f4">
+<h2 id="org2d5bfa7">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org60fd71f" data-background="#fef4f4">
-<h3 id="org60fd71f">練習問題</h3>
+<section id="slide-org181e76e" data-background="#fef4f4">
+<h3 id="org181e76e">練習問題</h3>
 <ul>
 <li>東京都の気候データ (<code>tokyo_weather.csv</code>) の
 日射量の項目について以下の問に答えよ．
@@ -1432,7 +1456,7 @@ center: true,
 slideNumber: 'c',
 rollingLinks: false,
 keyboard: true,
-mouseWheel: true,
+mouseWheel: false,
 fragmentInURL: true,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
@@ -1441,7 +1465,7 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }},
+spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
 
 // Plugins with reveal.js 4.x
 plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
@@ -1449,7 +1473,8 @@ plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
 // Optional libraries used to extend reveal.js
 dependencies: [
 { src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'}]
+{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
+{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
 
 });
 </script>

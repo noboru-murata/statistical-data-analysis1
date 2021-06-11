@@ -27,9 +27,9 @@ apply(myData,2,FUN=sd)
 mc <- 5000 # 実験回数を指定
 myItems <- c("temp","solar","wind") # 文字列のベクトルとして定義する場合は""が必要
 myFuncs <- c("mean","var","sd")
-myTruth <- list(mu,s2,s)
+myTruth <- list(mu,s2,s) # 各変数ごとの平均，分散，標準偏差ベクトルをまとめておく
 inum <- 1; fnum <- 1 # 気温の標本平均の例
-myTrial <- function(){
+myTrial <- function(){ # return と明示していないが，最後の行が返される
     idx <- sample(1:nrow(TW.data),36) # 重複なしで36行選ぶ
     apply(subset(TW.data[idx,],select=myItems[inum]),2,FUN=myFuncs[fnum])}
 xbars <- replicate(mc,myTrial())
@@ -49,7 +49,8 @@ for(inum in 1:3){
         hist(xbars, breaks=40, freq=FALSE,
              col="lightblue", border="blue",
              xlab=myItems[inum], main=paste(myItems[inum],"の",myFuncs[fnum],"の推定"))
-        abline(v=myTruth[[fnum]][inum],col="red",lwd=2)
+        abline(v=mean(xbars),col="green",lwd=2) # 推定量の平均
+        abline(v=myTruth[[fnum]][inum],col="red",lwd=2) # 真の値
     }
 }
 
@@ -120,6 +121,16 @@ quants <- replicate(mc,myTrial())
 for(fnum in 1:6) {
     par(family="HiraginoSans-W4") 
     hist(quants[fnum,], breaks=40, freq=FALSE,
+         col="lightblue", border="blue",
+         xlab="気温", main=paste("気温の",myFuncs[fnum],"の推定"))
+    abline(v=myTruth[fnum],col="red",lwd=2)
+}
+## ヒストグラムの表示 (定義域とビンを揃えて表示する)
+for(fnum in 1:6) {
+    par(family="HiraginoSans-W4") 
+    hist(quants[fnum,],
+         breaks=pretty(subset(TW.data,select=temp,drop=TRUE),n=50), # 固定
+         freq=FALSE,
          col="lightblue", border="blue",
          xlab="気温", main=paste("気温の",myFuncs[fnum],"の推定"))
     abline(v=myTruth[fnum],col="red",lwd=2)

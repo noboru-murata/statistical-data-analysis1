@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-06-04 15:48:22 mura>
+# Time-stamp: <2021-06-11 15:04:33 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -48,7 +48,7 @@
    - 手に入るのは(少数の)サンプル(観測データ) \\
      (観測データを \(X_1,X_2,\dots,X_n\) で表す)
    - *推定* = 観測データから知りたい量を計算する方法
-   - 真の値と観測データによる推定には *差* がある 
+   - 真の値と観測データによる推定には *差* (誤差)がある 
 
 ** 独立同分布性
    - 統計解析における重要な仮定とその帰結:
@@ -56,7 +56,7 @@
        共通の平均 \(\mu\) および分散 \(\sigma^2\) を考えることができる \\
        (適切な次数のモーメントの存在を仮定)
      - 確率変数 \(X_{1},X_{2},\dotsc,X_{n}\) が *独立同分布* \\
-       標本平均はサンプル数 \(n\to\infty\) のとき確率1で真の平均に収束 \\
+       標本平均はサンプル数 \(n\to\infty\) のとき確率1で真の平均に収束 
        *(大数の強法則)*
    - データは *偏っていない* ことを仮定している
 
@@ -113,6 +113,7 @@
 
 ** 分散・標準偏差
    - *分散* (variance):
+     データのばらつきを表す記述統計量
      #+begin_quote
      #+begin_src latex
        \begin{equation}
@@ -131,12 +132,11 @@
        \end{equation}
      #+end_src
      #+end_quote
-     データのばらつき具合を表す記述統計量
-   - *標本標準偏差* (sample standard deviation): \\
-     標本分散の平方根
+   # - *標本標準偏差* (sample standard deviation):
+   #   標本分散の平方根
 
 ** 標本平均・分散の不偏性
-   - 標本平均は \(\mu\) の *不偏推定量である*:
+   - 標本平均は \(\mu\) の *不偏推定量である*
      #+begin_quote
      #+begin_src latex
        \begin{equation}
@@ -144,7 +144,7 @@
        \end{equation}
      #+end_src
      #+end_quote
-   - 標本分散は \(\sigma^2\) の *不偏推定量ではない*:
+   - 標本分散は \(\sigma^2\) の *不偏推定量ではない*
      #+begin_quote
      #+begin_src latex
        \begin{equation}
@@ -152,7 +152,7 @@
        \end{equation}
      #+end_src
      #+end_quote
-     (標本分散は平均的には真の分散を *過小推定* する)
+     - 標本分散は平均的には真の分散を *過小推定* する
 
 ** 不偏分散
    - 不偏性を担保した分散の推定量
@@ -165,30 +165,31 @@
        \end{equation}
      #+end_src
      #+end_quote
-     は \(\sigma^2\) の不偏推定量となる
+     - \(\sigma^2\) の不偏推定量となる
    # - 不偏分散の計算: ~var()~
    # - わざわざ不偏性を持たない \(S^2\) を \(\sigma^2\) の推定量として使う理由は通常ないので,
    #   補正した \(s^2\) を *標本分散* と呼ぶこともあるが，
    #   バイアス補正をしていることを強調するために通常 *不偏分散* と呼ぶ
 
 ** 標本標準偏差
-   - 標本標準偏差: 通常, 不偏分散の平方根 \(s\) を指す
+   - *標本標準偏差* (sample standard deviation): 通常, 不偏分散の平方根 \(s\) を指す
    - 一般に \(s\) は標準偏差 \(\sigma\) の *不偏推定量ではない*
    # - 標本標準偏差の計算: ~sd()~
 
 ** 平均・分散・標準偏差の計算
    - 基本書式
      #+begin_src R :eval no
-       mean(x, trim = 0, na.rm = FALSE, ...) # 標本平均
-       var(x, na.rm = FALSE, ... ) # 不偏分散
+       mean(x, trim = 0, na.rm = FALSE) # 標本平均
+       var(x, na.rm = FALSE) # 不偏分散
        sd(x, na.rm = FALSE) # 標本標準偏差
        ## x: ベクトル，データフレームなど
        ## na.rm: 欠損値を取り除くか否か
+       ## 欠損の扱いや計算方法については help(mean), help(var), help(sd) を参照
      #+end_src
 
 ** 標準化
-   - 複数データの分析のために単位や基準を揃える
-   - データ \(X_{1},X_{2},\dotsc,X_{n}\) の標準化:
+   - 多次元データの分析のために単位や基準を揃える
+   - データ \(X_{1},X_{2},\dotsc,X_{n}\) の *標準化*:
      #+begin_quote
      #+begin_src latex
        \begin{equation}
@@ -196,9 +197,9 @@
        \end{equation}
      #+end_src
      #+end_quote
-     ( \(s\) の代わりに \(S\) で割って定義する文献もある)
+     - \(s\) の代わりに \(S\) で割って定義する文献もある
    - 定義から \(Z_{1},Z_{2},\dotsc,Z_{n}\) の
-     標本平均は0, 不偏分散は1 に規格化される
+     標本平均は0, 不偏分散は1 に *規格化* される
    - \(Z_{i}\): *標準得点* あるいは *Zスコア*
      # (そうなるようにデータを一次変換したものが標準化)
 
@@ -220,10 +221,10 @@
    - 基本書式
      #+begin_src R :eval no
        scale(x, center = TRUE, scale = TRUE) # 標準化
-       ## x: ベクトル，データフレームなど
-       ## center: 中心化(平均0)するか否か
-       ## scale~: 正規化(分散1)するか否か
-       10 * scale(x) + 50 # 偏差値得点に変換
+       ## x: ベクトル，データフレームなど．データフレームの場合は列ごとに標準化
+       ## center: 中心化(平均0)する (TRUE) か否 (FALSE) か
+       ## scale: 正規化(分散1)する (TRUE) か否 (FALSE) か
+       10 * scale(x) + 50 # 偏差値得点への変換
      #+end_src
 
 
@@ -236,17 +237,22 @@
    :reveal_background: #fef4f4
    :END:
    - 東京都の気候データ (~tokyo_weather.csv~) の中の
-     気温(temp), 日射量(solar), 風速(wind) の項目について以下の問に答えよ．
-     #+begin_src R :eval no
-       TW.data <- read.csv("data/tokyo_weather.csv")
-     #+end_src
-     - 全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数365)
+     #+begin_quote
+     気温 (~temp~) ，
+     日射量 (~solar~) ，
+     風速 (~wind~) 
+     #+end_quote
+     の項目について以下の問に答えよ．
+     # #+begin_src R :eval no
+     #   TW.data <- read.csv("data/tokyo_weather.csv") # 読み込み方の例
+     # #+end_src
+     - 全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数366)
      - 毎月5日のデータのみを用いて各項目の平均・分散・標準偏差を求めよ．(データ数12)
      - 5の付く日(各月の5,15,25)のデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数36)
      - ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，
        推定量のばらつきを確認せよ．
 
-   #+begin_src R :exports none :tangle yes
+   #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 平均・分散・標準偏差の計算
      ## データの読み込み
      TW.data <- read.csv("data/tokyo_weather.csv")
@@ -274,9 +280,9 @@
      mc <- 5000 # 実験回数を指定
      myItems <- c("temp","solar","wind") # 文字列のベクトルとして定義する場合は""が必要
      myFuncs <- c("mean","var","sd")
-     myTruth <- list(mu,s2,s)
+     myTruth <- list(mu,s2,s) # 各変数ごとの平均，分散，標準偏差ベクトルをまとめておく
      inum <- 1; fnum <- 1 # 気温の標本平均の例
-     myTrial <- function(){
+     myTrial <- function(){ # return と明示していないが，最後の行が返される
 	 idx <- sample(1:nrow(TW.data),36) # 重複なしで36行選ぶ
 	 apply(subset(TW.data[idx,],select=myItems[inum]),2,FUN=myFuncs[fnum])}
      xbars <- replicate(mc,myTrial())
@@ -296,7 +302,8 @@
              hist(xbars, breaks=40, freq=FALSE,
                   col="lightblue", border="blue",
                   xlab=myItems[inum], main=paste(myItems[inum],"の",myFuncs[fnum],"の推定"))
-             abline(v=myTruth[[fnum]][inum],col="red",lwd=2)
+             abline(v=mean(xbars),col="green",lwd=2) # 推定量の平均
+             abline(v=myTruth[[fnum]][inum],col="red",lwd=2) # 真の値
          }
      }
    #+end_src
@@ -314,10 +321,9 @@
 ** 歪度
    - 分布の非対称性を表す統計量
    - *歪度* (skewness): 
+     #+begin_quote
      平均 \(\mu\) , 分散 \(\sigma^2\) で
      3次モーメントをもつ確率変数 \(X\) 
-     に対して以下で定義
-     #+begin_quote
      #+begin_src latex
        \begin{equation}
          \mathrm{skewness}=\frac{\mathbb{E}[(X-\mu)^3]}{\sigma^3}
@@ -333,8 +339,8 @@
 ** 尖度
    - 平均の周囲の分布の尖り具合を表す統計量
    - *尖度* (kurtosis):
-     4次のモーメントをもつ確率変数 \(X\)
      #+begin_quote
+     4次のモーメントをもつ確率変数 \(X\)
      #+begin_src latex
        \begin{equation}
          \mathrm{kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}
@@ -342,15 +348,15 @@
      #+end_src
      #+end_quote
    - *超過尖度* (excess kurtosis):
-     正規分布との比較のため尖度から正規分布の尖度3を引いた量
      #+begin_quote
+     正規分布との比較のため正規分布の尖度3を引いた量
      #+begin_src latex
        \begin{equation}
          \mathrm{excess\ kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}-3
        \end{equation}
      #+end_src
      #+end_quote
-     (こちらを単に尖度と呼ぶ文献もあるので注意)
+     - こちらを単に尖度と呼ぶ文献もあるので注意
      
 ** 超過尖度
    - 正規分布と比較して
@@ -361,7 +367,7 @@
        分布の裾の方にまわっていることが多いため,
        正規分布より裾が重いと解釈されることが多い
        #+end_quote
-   - 正の超過尖度をもつ分布の例:
+   - [[color:darkgreen][正の超過尖度をもつ分布の例]]:
      - 自由度 \(\nu>4\) をもつ \(t\) 分布 \(t(\nu)\) の超過尖度は \(6/(\nu-4)\) \\
        (\(\nu\leq 4\) のときは \(t(\nu)\) は4次モーメントをもたない)
      - ガンマ分布 \(\Gamma(\nu,\alpha)\) の超過尖度は \(6/\nu\)
@@ -392,7 +398,7 @@
    #+end_rightcol  
 
 ** 標本歪度と標本尖度
-   - 観測データ \(X_{1},X_{2},\dotsc,X_{n}\) からの歪度と尖度の推定
+   - 観測データ \(X_{1},X_{2},\dotsc,X_{n}\) による推定
    - *標本歪度* (sample skewness):
      #+begin_quote
      #+begin_src latex
@@ -409,7 +415,7 @@
        \end{equation}
      #+end_src
      #+end_quote
-   - 分子の計算は \(1/n\) としているが，別の場合もあるので注意
+     - 分子の計算は \(1/n\) としているが，別の場合もあるので注意
      
 ** 歪度と尖度の計算
    - 歪度・尖度を計算する関数はRの標準機能にはないので
@@ -438,13 +444,18 @@
    :reveal_background: #fef4f4
    :END:
    - 東京都の気候データ (~tokyo_weather.csv~) の中の
-     気温, 日射量, 風速の項目について以下の問に答えよ．
-     - 全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数365)
+     #+begin_quote
+     気温 (~temp~) ，
+     日射量 (~solar~) ，
+     風速 (~wind~) 
+     #+end_quote
+     の項目について以下の問に答えよ．
+     - 全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数366)
      - 5のつく日のデータのみを用いて各項目の歪度と超過尖度を求めよ．(データ数36)
      - それぞれの値から正規分布から逸脱していると思われる項目はいずれか考察せよ．
      - 各データのヒストグラムを描き，データから計算される平均と分散を持つ正規分布と比較せよ．
 
-   #+begin_src R :exports none :tangle yes
+   #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 歪度と超過尖度の計算
      library(e1071)
      ## データの読み込み
@@ -489,8 +500,8 @@
      #+end_src
      #+end_quote
    - *標本共分散* (sample covariance): \\
-     \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) に対して
      #+begin_quote
+     \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) に対して
      #+begin_src latex
        \begin{equation}
          \mathrm{Cov}(X,Y)=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{n-1}
@@ -511,8 +522,8 @@
      #+end_src
      #+end_quote
    - *標本相関* (sample correlation): \\
-     \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) に対して
      #+begin_quote
+     \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) に対して
      #+begin_src latex
        \begin{equation}
          \rho=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}
@@ -535,7 +546,7 @@
            method = c("pearson", "kendall", "spearman")) # 共分散
        cor(x, y = NULL, use = "everything", 
            method = c("pearson", "kendall", "spearman")) # 相関
-       ## x,y: ベクトル，データフレームなど (データフレームの時は列間の共分散行列，相関行列を計算)
+       ## x,y: ベクトル，データフレームなど (データフレームの時は列間の関係を計算)
        ## use: 欠損値などの扱いに関する指定
        ## method: 計算法の指定(通常は既定値 pearson でよい)
      #+end_src
@@ -550,14 +561,17 @@
    :reveal_background: #fef4f4
    :END:
    - 東京都の気候データ (~tokyo_weather.csv~) の中の
-     気温(temp), 降水量(rain), 日射量(solar), 降雪量(snow),
-     風速(wind), 気圧(press), 湿度(humid) (数値データ)
+     #+begin_quote
+     気温 (~temp~), 降水量 (~rain~), 日射量 (~solar~), 降雪量 (~snow~),
+     風速 (~wind~), 気圧 (~press~), 湿度 (~humid~)
+     #+end_quote
+     (いずれも数値データ)
      の項目について以下の問に答えよ．
      - それぞれの項目間の共分散，および相関を求めよ．
      - 相関の高い項目の組(絶対値が大きい)，および相関の低い項目の組(0に近い)を求めよ．
      - その項目同士の散布図を描け．
 
-   #+begin_src R :exports none :tangle yes
+   #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 共分散と相関の計算
      ## データの読み込み
      TW.data <- read.csv("data/tokyo_weather.csv")
@@ -581,7 +595,6 @@
 * "順序"に基づく統計量
 ** 中央値
    - データの順序にもとづく記述統計量
-   - *中央値* もしくは *メディアン* (median):
      #+begin_quote
      #+begin_src latex
        \begin{equation}
@@ -589,15 +602,20 @@
        \end{equation}
      #+end_src
      #+end_quote
+   - *中央値* もしくは *メディアン* (median):
+     #+begin_quote
      データを昇順に並べ替えたとき中央にくる値
+     #+end_quote
      - \(n\) が奇数の場合: \(X_{((n+1)/2)}\)
      - \(n\) が偶数の場合: \((X_{(n/2)}+X_{(n/2+1)})/2\)
    - 中央値は平均と同様にデータを代表する値
    - データ中の *外れ値* (異常な値)の影響を受けにくい
 
 ** 分位点
-   - \(100\alpha\) % *分位点* (percentile/quantile): \\
+   - \(100\alpha\) % *分位点* (percentile/quantile):
+     #+begin_quote
      メディアンの一般化
+     #+end_quote
    - \(\alpha\in[0,1]\) に対して,
      その点以下のデータの個数が全体の約 \(100\alpha\) % になるような点
      - *第1四分位点*: 25%分位点
@@ -607,9 +625,9 @@
 ** 中央値・分位点の計算
    - 基本書式
      #+begin_src R :eval no
-       median(x, na.rm = FALSE, ...) # 中央値
+       median(x, na.rm = FALSE) # 中央値
        quantile(x, probs = seq(0, 1, 0.25), na.rm = FALSE,
-                names = TRUE, type = 7, ...) # 分位点
+                names = TRUE, type = 7) # 分位点
        summary(x) # 最大，最小，四分位点，平均を計算する
        ## x: ベクトル
        ## na.rm: 欠損値を取り除くか否か
@@ -620,29 +638,26 @@
 	
 ** 連続分布の分位点
    - 分位点は推定や検定において重要な役割を果たす
-   - 連続分布の \(100\alpha\) *%分位点* :
+   - 連続分布の \(100\alpha\) % *分位点* :
      #+begin_quote
      \(0<\alpha<1\) に対して，その分布に従う確率変数を \(X\) としたとき，
      不等式
-     #+begin_quote
      #+begin_src latex
        \begin{equation}
          P(X\leq x)\geq\alpha
        \end{equation}
      #+end_src
+     を満たす実数 \(x\) のうち最小のもの
      #+end_quote
-     を満たす実数 \(x\) のうち最小のもの．
-     
-     そのような実数は常に存在し, それを \(q_\alpha\) とすると
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         P(X\leq q_\alpha)=\alpha
-       \end{equation}
-     #+end_src
-     #+end_quote
-     が成り立つ．
-     #+end_quote
+     - そのような実数は常に存在し, それを \(q_\alpha\) とすると
+       #+begin_quote
+       #+begin_src latex
+         \begin{equation}
+           P(X\leq q_\alpha)=\alpha
+         \end{equation}
+       #+end_src
+       #+end_quote
+       が成り立つ．
    #+reveal: split
    - 分位点の性質
      #+begin_quote
@@ -669,18 +684,27 @@
 
 ** ばらつきの指標
    - 分位点を利用したデータのばらつきの指標
-   - *範囲* (range): \\
+   - *範囲* (range):
+     #+begin_quote
      最大値と最小値の差 (外れ値の影響を大きく受ける)
-   - *四分位範囲* (interquantile range): \\
+     #+end_quote
+   - *四分位範囲* (interquantile range):
+     #+begin_quote
      第3四分位点と第1四分位点の差
-   - *中央絶対偏差* (median absolute deviation): \\
+     #+end_quote
+   - *中央絶対偏差* (median absolute deviation):
+     #+begin_quote
      \(X_1,X_2,\dots,X_n\) の中央値を \(m\) としたとき,
      \(|X_1-m|,|X_2-m|,\dots,|X_n-m|\) の中央値
+     #+end_quote
 
 
 * "頻度"に基づく統計量
 ** 頻度に基づく統計量
-   - *最頻値* もしくは *モード* (mode): データの中で最も頻度が高く現れる値
+   - *最頻値* もしくは *モード* (mode):
+     #+begin_quote
+     データの中で最も頻度が高く現れる値
+     #+end_quote
    - データが有限個の値を取る場合に特に有効
    - データが連続で無限に多くの値を取ることができる場合には
      注意が必要
@@ -698,14 +722,17 @@
    :reveal_background: #fef4f4
    :END:
    - 東京都の気候データ (~tokyo_weather.csv~) の中の
-     気温(temp; 数値データ)と最多風向(wdir; ラベルデータ)を用いて
+     #+begin_quote
+     気温 (~temp~; 数値データ)と最多風向 (~wdir~; ラベルデータ)
+     #+end_quote
+     を用いて
      以下の問に答えよ．
-     - 全てのデータを用いて気温の四分位点を求めよ．(データ数365)
+     - 全てのデータを用いて気温の四分位点を求めよ．(データ数366)
      - 5の付く日(各月の5,15,25)の気温の四分位点を求めよ．(データ数36)
      - ランダムに選んだ36日分のデータで気温の四分位点がどのくらいばらつくか確認せよ．
-     - 風向の最頻値を求めなさい．
+     - 風向の最頻値を求めよ．
 
-   #+begin_src R :exports none :tangle yes
+   #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 分位点と最頻値の計算
      ## データの読み込み
      TW.data <- read.csv("data/tokyo_weather.csv")
@@ -725,6 +752,16 @@
      for(fnum in 1:6) {
          par(family="HiraginoSans-W4") 
          hist(quants[fnum,], breaks=40, freq=FALSE,
+              col="lightblue", border="blue",
+              xlab="気温", main=paste("気温の",myFuncs[fnum],"の推定"))
+         abline(v=myTruth[fnum],col="red",lwd=2)
+     }
+     ## ヒストグラムの表示 (定義域とビンを揃えて表示する)
+     for(fnum in 1:6) {
+         par(family="HiraginoSans-W4") 
+         hist(quants[fnum,],
+              breaks=pretty(subset(TW.data,select=temp,drop=TRUE),n=50), # 固定
+              freq=FALSE,
               col="lightblue", border="blue",
               xlab="気温", main=paste("気温の",myFuncs[fnum],"の推定"))
          abline(v=myTruth[fnum],col="red",lwd=2)

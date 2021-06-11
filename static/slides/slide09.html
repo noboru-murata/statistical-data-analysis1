@@ -47,8 +47,8 @@
 </section>
 
 <section>
-<section id="slide-orge0f235f">
-<h2 id="orge0f235f">講義の内容</h2>
+<section id="slide-orgbd405df">
+<h2 id="orgbd405df">講義の内容</h2>
 <ul>
 <li>基本的な記述統計量</li>
 <li>&ldquo;モーメント&rdquo;に基づく記述統計量
@@ -66,14 +66,14 @@
 </section>
 </section>
 <section>
-<section id="slide-org839b951">
-<h2 id="org839b951">基礎的な記述統計量</h2>
-<div class="outline-text-2" id="text-org839b951">
+<section id="slide-org1566764">
+<h2 id="org1566764">基礎的な記述統計量</h2>
+<div class="outline-text-2" id="text-org1566764">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6d1a23a">
-<h3 id="org6d1a23a">記述統計量</h3>
+<section id="slide-org69883f7">
+<h3 id="org69883f7">記述統計量</h3>
 <ul>
 <li><b>記述統計量</b> : (または要約統計量・基本統計量)
 <ul>
@@ -94,22 +94,22 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8288fef">
-<h3 id="org8288fef">記述統計量の推定</h3>
+<section id="slide-orgf3ccd74">
+<h3 id="orgf3ccd74">記述統計量の推定</h3>
 <ul>
 <li>記述統計量は背後の確率分布(集団全体)で決まる量</li>
 <li>一般に確率分布は未知</li>
 <li>手に入るのは(少数の)サンプル(観測データ) <br />
 (観測データを \(X_1,X_2,\dots,X_n\) で表す)</li>
 <li><b>推定</b> = 観測データから知りたい量を計算する方法</li>
-<li>真の値と観測データによる推定には <b>差</b> がある</li>
+<li>真の値と観測データによる推定には <b>差</b> (誤差)がある</li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org77c2219">
-<h3 id="org77c2219">独立同分布性</h3>
+<section id="slide-org5e11de0">
+<h3 id="org5e11de0">独立同分布性</h3>
 <ul>
 <li>統計解析における重要な仮定とその帰結:
 <ul>
@@ -117,7 +117,7 @@
 共通の平均 \(\mu\) および分散 \(\sigma^2\) を考えることができる <br />
 (適切な次数のモーメントの存在を仮定)</li>
 <li>確率変数 \(X_{1},X_{2},\dotsc,X_{n}\) が <b>独立同分布</b> <br />
-標本平均はサンプル数 \(n\to\infty\) のとき確率1で真の平均に収束 <br />
+標本平均はサンプル数 \(n\to\infty\) のとき確率1で真の平均に収束 
 <b>(大数の強法則)</b></li>
 
 </ul></li>
@@ -127,8 +127,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1ca4ee5">
-<h3 id="org1ca4ee5">推定量の一致性</h3>
+<section id="slide-org8c7eea9">
+<h3 id="org8c7eea9">推定量の一致性</h3>
 <ul>
 <li>サンプル数が大きい場合に「まともな」推定量となる根拠の1つ
 <ul>
@@ -142,8 +142,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc50d3f7">
-<h3 id="orgc50d3f7">推定量の不偏性</h3>
+<section id="slide-orge7ec2c5">
+<h3 id="orge7ec2c5">推定量の不偏性</h3>
 <ul>
 <li>サンプル数が小さい場合の推定量の良さに関する性質の1つ
 <ul>
@@ -171,14 +171,14 @@
 </section>
 </section>
 <section>
-<section id="slide-org730b009">
-<h2 id="org730b009">&ldquo;モーメント&rdquo;に基づく記述統計量</h2>
-<div class="outline-text-2" id="text-org730b009">
+<section id="slide-org1d0de6d">
+<h2 id="org1d0de6d">&ldquo;モーメント&rdquo;に基づく記述統計量</h2>
+<div class="outline-text-2" id="text-org1d0de6d">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1922c0f">
-<h3 id="org1922c0f">平均</h3>
+<section id="slide-org5f0b7a7">
+<h3 id="org5f0b7a7">平均</h3>
 <ul>
 <li><p>
 <b>平均</b> (mean):
@@ -213,11 +213,12 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org566845b">
-<h3 id="org566845b">分散・標準偏差</h3>
+<section id="slide-org4cfebe2">
+<h3 id="org4cfebe2">分散・標準偏差</h3>
 <ul>
 <li><p>
 <b>分散</b> (variance):
+データのばらつきを表す記述統計量
 </p>
 <blockquote>
 <div>
@@ -240,22 +241,17 @@
 \end{equation}
 
 </div>
-</blockquote>
-<p>
-データのばらつき具合を表す記述統計量
-</p></li>
-<li><b>標本標準偏差</b> (sample standard deviation): <br />
-標本分散の平方根</li>
+</blockquote></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc8c3e6a">
-<h3 id="orgc8c3e6a">標本平均・分散の不偏性</h3>
+<section id="slide-org4dbf3bb">
+<h3 id="org4dbf3bb">標本平均・分散の不偏性</h3>
 <ul>
 <li><p>
-標本平均は \(\mu\) の <b>不偏推定量である</b>:
+標本平均は \(\mu\) の <b>不偏推定量である</b>
 </p>
 <blockquote>
 <div>
@@ -266,7 +262,7 @@
 </div>
 </blockquote></li>
 <li><p>
-標本分散は \(\sigma^2\) の <b>不偏推定量ではない</b>:
+標本分散は \(\sigma^2\) の <b>不偏推定量ではない</b>
 </p>
 <blockquote>
 <div>
@@ -276,16 +272,17 @@
 
 </div>
 </blockquote>
-<p>
-(標本分散は平均的には真の分散を <b>過小推定</b> する)
-</p></li>
+<ul>
+<li>標本分散は平均的には真の分散を <b>過小推定</b> する</li>
+
+</ul></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5170e17">
-<h3 id="org5170e17">不偏分散</h3>
+<section id="slide-org398f64c">
+<h3 id="org398f64c">不偏分散</h3>
 <ul>
 <li>不偏性を担保した分散の推定量</li>
 <li><p>
@@ -300,37 +297,39 @@
 
 </div>
 </blockquote>
-<p>
-は \(\sigma^2\) の不偏推定量となる
-</p></li>
+<ul>
+<li>\(\sigma^2\) の不偏推定量となる</li>
+
+</ul></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9171458">
-<h3 id="org9171458">標本標準偏差</h3>
+<section id="slide-org85251f5">
+<h3 id="org85251f5">標本標準偏差</h3>
 <ul>
-<li>標本標準偏差: 通常, 不偏分散の平方根 \(s\) を指す</li>
+<li><b>標本標準偏差</b> (sample standard deviation): 通常, 不偏分散の平方根 \(s\) を指す</li>
 <li>一般に \(s\) は標準偏差 \(\sigma\) の <b>不偏推定量ではない</b></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9b3a464">
-<h3 id="org9b3a464">平均・分散・標準偏差の計算</h3>
+<section id="slide-org9de7600">
+<h3 id="org9de7600">平均・分散・標準偏差の計算</h3>
 <ul>
 <li><p>
 基本書式
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >mean(x, trim = 0, na.rm = FALSE, ...) # 標本平均
-var(x, na.rm = FALSE, ... ) # 不偏分散
+<pre><code class=" R" >mean(x, trim = 0, na.rm = FALSE) # 標本平均
+var(x, na.rm = FALSE) # 不偏分散
 sd(x, na.rm = FALSE) # 標本標準偏差
 ## x: ベクトル，データフレームなど
 ## na.rm: 欠損値を取り除くか否か
+## 欠損の扱いや計算方法については help(mean), help(var), help(sd) を参照
 </code></pre>
 </div></li>
 
@@ -338,12 +337,12 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8134be8">
-<h3 id="org8134be8">標準化</h3>
+<section id="slide-orgcaedfb2">
+<h3 id="orgcaedfb2">標準化</h3>
 <ul>
-<li>複数データの分析のために単位や基準を揃える</li>
+<li>多次元データの分析のために単位や基準を揃える</li>
 <li><p>
-データ \(X_{1},X_{2},\dotsc,X_{n}\) の標準化:
+データ \(X_{1},X_{2},\dotsc,X_{n}\) の <b>標準化</b>:
 </p>
 <blockquote>
 <div>
@@ -353,19 +352,20 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 
 </div>
 </blockquote>
-<p>
-( \(s\) の代わりに \(S\) で割って定義する文献もある)
-</p></li>
+<ul>
+<li>\(s\) の代わりに \(S\) で割って定義する文献もある</li>
+
+</ul></li>
 <li>定義から \(Z_{1},Z_{2},\dotsc,Z_{n}\) の
-標本平均は0, 不偏分散は1 に規格化される</li>
+標本平均は0, 不偏分散は1 に <b>規格化</b> される</li>
 <li>\(Z_{i}\): <b>標準得点</b> あるいは <b>Zスコア</b></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb15beb1">
-<h3 id="orgb15beb1">偏差値</h3>
+<section id="slide-orgca17da4">
+<h3 id="orgca17da4">偏差値</h3>
 <ul>
 <li>別の基準での標準化
 <ul>
@@ -390,8 +390,8 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org02cb187">
-<h3 id="org02cb187">標準化の計算</h3>
+<section id="slide-org546a911">
+<h3 id="org546a911">標準化の計算</h3>
 <ul>
 <li><p>
 基本書式
@@ -399,10 +399,10 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 <div class="org-src-container">
 
 <pre><code class=" R" >scale(x, center = TRUE, scale = TRUE) # 標準化
-## x: ベクトル，データフレームなど
-## center: 中心化(平均0)するか否か
-## scale~: 正規化(分散1)するか否か
-10 * scale(x) + 50 # 偏差値得点に変換
+## x: ベクトル，データフレームなど．データフレームの場合は列ごとに標準化
+## center: 中心化(平均0)する (TRUE) か否 (FALSE) か
+## scale: 正規化(分散1)する (TRUE) か否 (FALSE) か
+10 * scale(x) + 50 # 偏差値得点への変換
 </code></pre>
 </div></li>
 
@@ -413,24 +413,29 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 </section>
 </section>
 <section>
-<section id="slide-orged9ea58" data-background="#fef4f4">
-<h2 id="orged9ea58">演習</h2>
+<section id="slide-org732062e" data-background="#fef4f4">
+<h2 id="org732062e">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd895046" data-background="#fef4f4">
-<h3 id="orgd895046">練習問題</h3>
+<section id="slide-orgaf67b32" data-background="#fef4f4">
+<h3 id="orgaf67b32">練習問題</h3>
 <ul>
 <li><p>
 東京都の気候データ (<code>tokyo_weather.csv</code>) の中の
-気温(temp), 日射量(solar), 風速(wind) の項目について以下の問に答えよ．
 </p>
-<div class="org-src-container">
+<blockquote>
+<p>
+気温 (<code>temp</code>) ，
+日射量 (<code>solar</code>) ，
+風速 (<code>wind</code>) 
+</p>
+</blockquote>
+<p>
+の項目について以下の問に答えよ．
+</p>
 
-<pre><code class=" R" >TW.data &lt;- read.csv("data/tokyo_weather.csv")
-</code></pre>
-</div>
 <ul>
-<li>全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数365)</li>
+<li>全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数366)</li>
 <li>毎月5日のデータのみを用いて各項目の平均・分散・標準偏差を求めよ．(データ数12)</li>
 <li>5の付く日(各月の5,15,25)のデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数36)</li>
 <li>ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，
@@ -444,14 +449,14 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 </section>
 </section>
 <section>
-<section id="slide-org0cf2d95">
-<h2 id="org0cf2d95">歪度と尖度</h2>
-<div class="outline-text-2" id="text-org0cf2d95">
+<section id="slide-orgbff46d3">
+<h2 id="orgbff46d3">歪度と尖度</h2>
+<div class="outline-text-2" id="text-orgbff46d3">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org85cf2fb">
-<h3 id="org85cf2fb">歪度と尖度</h3>
+<section id="slide-orge2c31ee">
+<h3 id="orge2c31ee">歪度と尖度</h3>
 <ul>
 <li>正規分布からのずれを調べるための統計量</li>
 <li>正規分布の特徴: 
@@ -467,17 +472,18 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4a71a9f">
-<h3 id="org4a71a9f">歪度</h3>
+<section id="slide-org05627af">
+<h3 id="org05627af">歪度</h3>
 <ul>
 <li>分布の非対称性を表す統計量</li>
 <li><p>
 <b>歪度</b> (skewness): 
-平均 \(\mu\) , 分散 \(\sigma^2\) で
-3次モーメントをもつ確率変数 \(X\) 
-に対して以下で定義
 </p>
 <blockquote>
+<p>
+平均 \(\mu\) , 分散 \(\sigma^2\) で
+3次モーメントをもつ確率変数 \(X\) 
+</p>
 <div>
 \begin{equation}
   \mathrm{skewness}=\frac{\mathbb{E}[(X-\mu)^3]}{\sigma^3}
@@ -501,15 +507,17 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgf0980ec">
-<h3 id="orgf0980ec">尖度</h3>
+<section id="slide-orgeb8e524">
+<h3 id="orgeb8e524">尖度</h3>
 <ul>
 <li>平均の周囲の分布の尖り具合を表す統計量</li>
 <li><p>
 <b>尖度</b> (kurtosis):
-4次のモーメントをもつ確率変数 \(X\)
 </p>
 <blockquote>
+<p>
+4次のモーメントをもつ確率変数 \(X\)
+</p>
 <div>
 \begin{equation}
   \mathrm{kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}
@@ -519,9 +527,11 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 </blockquote></li>
 <li><p>
 <b>超過尖度</b> (excess kurtosis):
-正規分布との比較のため尖度から正規分布の尖度3を引いた量
 </p>
 <blockquote>
+<p>
+正規分布との比較のため正規分布の尖度3を引いた量
+</p>
 <div>
 \begin{equation}
   \mathrm{excess\ kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}-3
@@ -529,16 +539,17 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 
 </div>
 </blockquote>
-<p>
-(こちらを単に尖度と呼ぶ文献もあるので注意)
-</p></li>
+<ul>
+<li>こちらを単に尖度と呼ぶ文献もあるので注意</li>
+
+</ul></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7ad3fe6">
-<h3 id="org7ad3fe6">超過尖度</h3>
+<section id="slide-org06e0b27">
+<h3 id="org06e0b27">超過尖度</h3>
 <ul>
 <li>正規分布と比較して
 <ul>
@@ -555,7 +566,7 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 </blockquote></li>
 
 </ul></li>
-<li>正の超過尖度をもつ分布の例:
+<li><span style="color:darkgreen;">正の超過尖度をもつ分布の例</span>:
 <ul>
 <li>自由度 \(\nu>4\) をもつ \(t\) 分布 \(t(\nu)\) の超過尖度は \(6/(\nu-4)\) <br />
 (\(\nu\leq 4\) のときは \(t(\nu)\) は4次モーメントをもたない)</li>
@@ -569,7 +580,7 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 <section>
 <div class="leftcol">
 
-<div id="orgba09962" class="figure">
+<div id="orgafc5b4a" class="figure">
 <p><img src="figs/sk_tdist.png" alt="sk_tdist.png" width="100%" />
 </p>
 </div>
@@ -577,7 +588,7 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 </div>
 <div class="rightcol">
 
-<div id="org2aef02b" class="figure">
+<div id="org2fa1383" class="figure">
 <p><img src="figs/sk_gamma.png" alt="sk_gamma.png" width="100%" />
 </p>
 </div>
@@ -586,10 +597,10 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5cac2c1">
-<h3 id="org5cac2c1">標本歪度と標本尖度</h3>
+<section id="slide-org6852414">
+<h3 id="org6852414">標本歪度と標本尖度</h3>
 <ul>
-<li>観測データ \(X_{1},X_{2},\dotsc,X_{n}\) からの歪度と尖度の推定</li>
+<li>観測データ \(X_{1},X_{2},\dotsc,X_{n}\) による推定</li>
 <li><p>
 <b>標本歪度</b> (sample skewness):
 </p>
@@ -611,15 +622,18 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 \end{equation}
 
 </div>
-</blockquote></li>
+</blockquote>
+<ul>
 <li>分子の計算は \(1/n\) としているが，別の場合もあるので注意</li>
+
+</ul></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org33977e1">
-<h3 id="org33977e1">歪度と尖度の計算</h3>
+<section id="slide-org2ba7c1a">
+<h3 id="org2ba7c1a">歪度と尖度の計算</h3>
 <ul>
 <li><p>
 歪度・尖度を計算する関数はRの標準機能にはないので
@@ -652,17 +666,28 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 </section>
 </section>
 <section>
-<section id="slide-org9a8ae29" data-background="#fef4f4">
-<h2 id="org9a8ae29">演習</h2>
+<section id="slide-orgf8f6923" data-background="#fef4f4">
+<h2 id="orgf8f6923">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org0db0ad0" data-background="#fef4f4">
-<h3 id="org0db0ad0">練習問題</h3>
+<section id="slide-org270f186" data-background="#fef4f4">
+<h3 id="org270f186">練習問題</h3>
 <ul>
-<li>東京都の気候データ (<code>tokyo_weather.csv</code>) の中の
-気温, 日射量, 風速の項目について以下の問に答えよ．
+<li><p>
+東京都の気候データ (<code>tokyo_weather.csv</code>) の中の
+</p>
+<blockquote>
+<p>
+気温 (<code>temp</code>) ，
+日射量 (<code>solar</code>) ，
+風速 (<code>wind</code>) 
+</p>
+</blockquote>
+<p>
+の項目について以下の問に答えよ．
+</p>
 <ul>
-<li>全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数365)</li>
+<li>全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数366)</li>
 <li>5のつく日のデータのみを用いて各項目の歪度と超過尖度を求めよ．(データ数36)</li>
 <li>それぞれの値から正規分布から逸脱していると思われる項目はいずれか考察せよ．</li>
 <li>各データのヒストグラムを描き，データから計算される平均と分散を持つ正規分布と比較せよ．</li>
@@ -675,14 +700,14 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 </section>
 </section>
 <section>
-<section id="slide-org6a9f70f">
-<h2 id="org6a9f70f">相関と共分散</h2>
-<div class="outline-text-2" id="text-org6a9f70f">
+<section id="slide-orga47cac4">
+<h2 id="orga47cac4">相関と共分散</h2>
+<div class="outline-text-2" id="text-orga47cac4">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcd33220">
-<h3 id="orgcd33220">共分散</h3>
+<section id="slide-orgc7b69df">
+<h3 id="orgc7b69df">共分散</h3>
 <ul>
 <li>複数のデータ間の関係を知るための記述統計量</li>
 <li><p>
@@ -698,9 +723,11 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 </blockquote></li>
 <li><p>
 <b>標本共分散</b> (sample covariance): <br />
-\(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) に対して
 </p>
 <blockquote>
+<p>
+\(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) に対して
+</p>
 <div>
 \begin{equation}
   \mathrm{Cov}(X,Y)=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{n-1}
@@ -713,8 +740,8 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8f70dab">
-<h3 id="org8f70dab">相関</h3>
+<section id="slide-org0cea796">
+<h3 id="org0cea796">相関</h3>
 <ul>
 <li>複数のデータ間の正規化した記述統計量</li>
 <li><p>
@@ -730,9 +757,11 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 </blockquote></li>
 <li><p>
 <b>標本相関</b> (sample correlation): <br />
-\(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) に対して
 </p>
 <blockquote>
+<p>
+\(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) に対して
+</p>
 <div>
 \begin{equation}
   \rho=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}
@@ -759,8 +788,8 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org587ef26">
-<h3 id="org587ef26">相関と共分散の計算</h3>
+<section id="slide-org4666a16">
+<h3 id="org4666a16">相関と共分散の計算</h3>
 <ul>
 <li><p>
 基本書式
@@ -771,7 +800,7 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
     method = c("pearson", "kendall", "spearman")) # 共分散
 cor(x, y = NULL, use = "everything", 
     method = c("pearson", "kendall", "spearman")) # 相関
-## x,y: ベクトル，データフレームなど (データフレームの時は列間の共分散行列，相関行列を計算)
+## x,y: ベクトル，データフレームなど (データフレームの時は列間の関係を計算)
 ## use: 欠損値などの扱いに関する指定
 ## method: 計算法の指定(通常は既定値 pearson でよい)
 </code></pre>
@@ -784,17 +813,26 @@ cor(x, y = NULL, use = "everything",
 </section>
 </section>
 <section>
-<section id="slide-org9d7e7b9" data-background="#fef4f4">
-<h2 id="org9d7e7b9">演習</h2>
+<section id="slide-orgb978052" data-background="#fef4f4">
+<h2 id="orgb978052">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge5bce1b" data-background="#fef4f4">
-<h3 id="orge5bce1b">練習問題</h3>
+<section id="slide-orge334e4e" data-background="#fef4f4">
+<h3 id="orge334e4e">練習問題</h3>
 <ul>
-<li>東京都の気候データ (<code>tokyo_weather.csv</code>) の中の
-気温(temp), 降水量(rain), 日射量(solar), 降雪量(snow),
-風速(wind), 気圧(press), 湿度(humid) (数値データ)
+<li><p>
+東京都の気候データ (<code>tokyo_weather.csv</code>) の中の
+</p>
+<blockquote>
+<p>
+気温 (<code>temp</code>), 降水量 (<code>rain</code>), 日射量 (<code>solar</code>), 降雪量 (<code>snow</code>),
+風速 (<code>wind</code>), 気圧 (<code>press</code>), 湿度 (<code>humid</code>)
+</p>
+</blockquote>
+<p>
+(いずれも数値データ)
 の項目について以下の問に答えよ．
+</p>
 <ul>
 <li>それぞれの項目間の共分散，および相関を求めよ．</li>
 <li>相関の高い項目の組(絶対値が大きい)，および相関の低い項目の組(0に近い)を求めよ．</li>
@@ -808,18 +846,17 @@ cor(x, y = NULL, use = "everything",
 </section>
 </section>
 <section>
-<section id="slide-org0db8378">
-<h2 id="org0db8378">&ldquo;順序&rdquo;に基づく統計量</h2>
-<div class="outline-text-2" id="text-org0db8378">
+<section id="slide-org22e3252">
+<h2 id="org22e3252">&ldquo;順序&rdquo;に基づく統計量</h2>
+<div class="outline-text-2" id="text-org22e3252">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7c0c961">
-<h3 id="org7c0c961">中央値</h3>
+<section id="slide-orgc742bc4">
+<h3 id="orgc742bc4">中央値</h3>
 <ul>
-<li>データの順序にもとづく記述統計量</li>
 <li><p>
-<b>中央値</b> もしくは <b>メディアン</b> (median):
+データの順序にもとづく記述統計量
 </p>
 <blockquote>
 <div>
@@ -828,10 +865,15 @@ cor(x, y = NULL, use = "everything",
 \end{equation}
 
 </div>
-</blockquote>
+</blockquote></li>
+<li><p>
+<b>中央値</b> もしくは <b>メディアン</b> (median):
+</p>
+<blockquote>
 <p>
 データを昇順に並べ替えたとき中央にくる値
 </p>
+</blockquote>
 <ul>
 <li>\(n\) が奇数の場合: \(X_{((n+1)/2)}\)</li>
 <li>\(n\) が偶数の場合: \((X_{(n/2)}+X_{(n/2+1)})/2\)</li>
@@ -844,11 +886,17 @@ cor(x, y = NULL, use = "everything",
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org516dab4">
-<h3 id="org516dab4">分位点</h3>
+<section id="slide-org6b5a882">
+<h3 id="org6b5a882">分位点</h3>
 <ul>
-<li>\(100\alpha\) % <b>分位点</b> (percentile/quantile): <br />
-メディアンの一般化</li>
+<li><p>
+\(100\alpha\) % <b>分位点</b> (percentile/quantile):
+</p>
+<blockquote>
+<p>
+メディアンの一般化
+</p>
+</blockquote></li>
 <li>\(\alpha\in[0,1]\) に対して,
 その点以下のデータの個数が全体の約 \(100\alpha\) % になるような点
 <ul>
@@ -862,17 +910,17 @@ cor(x, y = NULL, use = "everything",
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org056122a">
-<h3 id="org056122a">中央値・分位点の計算</h3>
+<section id="slide-org0d2bb85">
+<h3 id="org0d2bb85">中央値・分位点の計算</h3>
 <ul>
 <li><p>
 基本書式
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >median(x, na.rm = FALSE, ...) # 中央値
+<pre><code class=" R" >median(x, na.rm = FALSE) # 中央値
 quantile(x, probs = seq(0, 1, 0.25), na.rm = FALSE,
-	 names = TRUE, type = 7, ...) # 分位点
+	 names = TRUE, type = 7) # 分位点
 summary(x) # 最大，最小，四分位点，平均を計算する
 ## x: ベクトル
 ## na.rm: 欠損値を取り除くか否か
@@ -886,18 +934,17 @@ summary(x) # 最大，最小，四分位点，平均を計算する
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org0211511">
-<h3 id="org0211511">連続分布の分位点</h3>
+<section id="slide-orgd3ba91a">
+<h3 id="orgd3ba91a">連続分布の分位点</h3>
 <ul>
 <li>分位点は推定や検定において重要な役割を果たす</li>
 <li><p>
-連続分布の \(100\alpha\) <b>%分位点</b> :
+連続分布の \(100\alpha\) % <b>分位点</b> :
 </p>
 <blockquote>
 <p>
 \(0<\alpha<1\) に対して，その分布に従う確率変数を \(X\) としたとき，
 不等式
-#+begin<sub>quote</sub>
 </p>
 <div>
 \begin{equation}
@@ -905,12 +952,13 @@ summary(x) # 最大，最小，四分位点，平均を計算する
 \end{equation}
 
 </div>
-</blockquote>
-<p>
-を満たす実数 \(x\) のうち最小のもの．
-</p>
 
 <p>
+を満たす実数 \(x\) のうち最小のもの
+</p>
+</blockquote>
+<ul>
+<li><p>
 そのような実数は常に存在し, それを \(q_\alpha\) とすると
 </p>
 <blockquote>
@@ -923,8 +971,9 @@ summary(x) # 最大，最小，四分位点，平均を計算する
 </blockquote>
 <p>
 が成り立つ．
-#+end<sub>quote</sub>
 </p></li>
+
+</ul></li>
 
 </ul>
 <div class="slide-footer"><br></div>
@@ -947,8 +996,8 @@ summary(x) # 最大，最小，四分位点，平均を計算する
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb47fb25">
-<h3 id="orgb47fb25">分布の分位点の計算</h3>
+<section id="slide-org7691b0d">
+<h3 id="org7691b0d">分布の分位点の計算</h3>
 <ul>
 <li><p>
 基本書式
@@ -972,17 +1021,35 @@ qxxx(p, "分布の特性を決める option の指定")
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbd372ce">
-<h3 id="orgbd372ce">ばらつきの指標</h3>
+<section id="slide-org0a32f17">
+<h3 id="org0a32f17">ばらつきの指標</h3>
 <ul>
 <li>分位点を利用したデータのばらつきの指標</li>
-<li><b>範囲</b> (range): <br />
-最大値と最小値の差 (外れ値の影響を大きく受ける)</li>
-<li><b>四分位範囲</b> (interquantile range): <br />
-第3四分位点と第1四分位点の差</li>
-<li><b>中央絶対偏差</b> (median absolute deviation): <br />
+<li><p>
+<b>範囲</b> (range):
+</p>
+<blockquote>
+<p>
+最大値と最小値の差 (外れ値の影響を大きく受ける)
+</p>
+</blockquote></li>
+<li><p>
+<b>四分位範囲</b> (interquantile range):
+</p>
+<blockquote>
+<p>
+第3四分位点と第1四分位点の差
+</p>
+</blockquote></li>
+<li><p>
+<b>中央絶対偏差</b> (median absolute deviation):
+</p>
+<blockquote>
+<p>
 \(X_1,X_2,\dots,X_n\) の中央値を \(m\) としたとき,
-\(|X_1-m|,|X_2-m|,\dots,|X_n-m|\) の中央値</li>
+\(|X_1-m|,|X_2-m|,\dots,|X_n-m|\) の中央値
+</p>
+</blockquote></li>
 
 </ul>
 
@@ -991,16 +1058,23 @@ qxxx(p, "分布の特性を決める option の指定")
 </section>
 </section>
 <section>
-<section id="slide-org4503483">
-<h2 id="org4503483">&ldquo;頻度&rdquo;に基づく統計量</h2>
-<div class="outline-text-2" id="text-org4503483">
+<section id="slide-org3cae103">
+<h2 id="org3cae103">&ldquo;頻度&rdquo;に基づく統計量</h2>
+<div class="outline-text-2" id="text-org3cae103">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbe06841">
-<h3 id="orgbe06841">頻度に基づく統計量</h3>
+<section id="slide-orgaf753c8">
+<h3 id="orgaf753c8">頻度に基づく統計量</h3>
 <ul>
-<li><b>最頻値</b> もしくは <b>モード</b> (mode): データの中で最も頻度が高く現れる値</li>
+<li><p>
+<b>最頻値</b> もしくは <b>モード</b> (mode):
+</p>
+<blockquote>
+<p>
+データの中で最も頻度が高く現れる値
+</p>
+</blockquote></li>
 <li>データが有限個の値を取る場合に特に有効</li>
 <li>データが連続で無限に多くの値を取ることができる場合には
 注意が必要
@@ -1018,21 +1092,30 @@ qxxx(p, "分布の特性を決める option の指定")
 </section>
 </section>
 <section>
-<section id="slide-orgef4c273" data-background="#fef4f4">
-<h2 id="orgef4c273">演習</h2>
+<section id="slide-org1402a2c" data-background="#fef4f4">
+<h2 id="org1402a2c">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org80323d8" data-background="#fef4f4">
-<h3 id="org80323d8">練習問題</h3>
+<section id="slide-orgd212652" data-background="#fef4f4">
+<h3 id="orgd212652">練習問題</h3>
 <ul>
-<li>東京都の気候データ (<code>tokyo_weather.csv</code>) の中の
-気温(temp; 数値データ)と最多風向(wdir; ラベルデータ)を用いて
+<li><p>
+東京都の気候データ (<code>tokyo_weather.csv</code>) の中の
+</p>
+<blockquote>
+<p>
+気温 (<code>temp</code>; 数値データ)と最多風向 (<code>wdir</code>; ラベルデータ)
+</p>
+</blockquote>
+<p>
+を用いて
 以下の問に答えよ．
+</p>
 <ul>
-<li>全てのデータを用いて気温の四分位点を求めよ．(データ数365)</li>
+<li>全てのデータを用いて気温の四分位点を求めよ．(データ数366)</li>
 <li>5の付く日(各月の5,15,25)の気温の四分位点を求めよ．(データ数36)</li>
 <li>ランダムに選んだ36日分のデータで気温の四分位点がどのくらいばらつくか確認せよ．</li>
-<li>風向の最頻値を求めなさい．</li>
+<li>風向の最頻値を求めよ．</li>
 
 </ul></li>
 
