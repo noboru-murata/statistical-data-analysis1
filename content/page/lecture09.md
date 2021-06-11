@@ -6,7 +6,7 @@ draft = false
 weight = 1010
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-11 Fri&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-11 Fri&gt; </span></span> 更新 (講義中に修正した部分を直しました)
 
 
 ## スライド {#スライド}

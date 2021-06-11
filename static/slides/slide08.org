@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-06-04 14:50:27 mura>
+# Time-stamp: <2021-06-11 16:30:10 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -324,7 +324,7 @@
        試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う．
        これをグラフに描画して確認しなさい．
 
-   #+begin_src R :exports none :tangle yes
+   #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 二項分布
      mc <- 10000 # 実験回数を指定
      m <- 16 
@@ -430,7 +430,7 @@
        強度 \(\lambda_{1}+\lambda_{2}\) の Poisson 分布に従う．
        これをグラフに描画して確認しなさい．
        
-   #+begin_src R :exports none :tangle yes
+   #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 Poisson 分布
      mc <- 10000 
      lambda1 <- 5
@@ -759,7 +759,7 @@
        これをグラフに描画して確認せよ. \\
        (この変換をBox-Muller変換と呼ぶ)
        
-   #+begin_src R :exports none :tangle yes
+   #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 正規分布
      mc <- 10000 # 実験回数を指定
      myRandom <- function(){ # 一方の分布を確認する
@@ -913,7 +913,7 @@
        二乗和は自由度 \(k\) の \(\chi^2\) 分布に従うことを
        確認しなさい．
 
-   #+begin_src R :exports none :tangle yes
+   #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 カイ二乗分布
      mc <- 10000 # 実験回数を指定
      k <- 8 # 自由度を設定
@@ -1017,7 +1017,7 @@
        #+end_quote
        は自由度 \(k\) の \(t\) 分布に従うことを確認しなさい．
 
-   #+begin_src R :exports none :tangle yes
+   #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 t分布
      mc <- 10000 # 実験回数を指定
      k <- 7
@@ -1122,7 +1122,7 @@
        #+end_src
        は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従うことを確認しなさい．
        
-   #+begin_src R :exports none :tangle yes
+   #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 F分布
      mc <- 10000 # 実験回数を指定
      k1 <- 20

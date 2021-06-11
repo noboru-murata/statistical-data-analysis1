@@ -74,14 +74,14 @@ myItems <- c("temp","solar","wind")
 par(family="HiraginoSans-W4") 
 ## 全ての組み合わせは for 文で実行可能
 for(inum in 1:3){
-    x <- TW.data[,myItems[inum]] # ベクトルにする必要がある
-    ## x <- subset(TW.data, select=myItems[inum], drop=TRUE) # でもよい
+    foo <- TW.data[,myItems[inum]] # ベクトルにする必要がある
+    ## foo <- subset(TW.data, select=myItems[inum], drop=TRUE) # でもよい
     par(family="HiraginoSans-W4") 
-    hist(x, breaks=30, freq=FALSE,
+    hist(foo, breaks=30, freq=FALSE,
          col="lightgreen", border="green",
          xlab=myItems[inum], main=myItems[inum])
-    curve(dnorm(x,mean=mean(x),sd=sd(x)), add=TRUE,
-          col="orange", lwd=2)
+    curve(dnorm(x,mean=mean(foo),sd=sd(foo)), # x は curve の変数
+          add=TRUE, col="orange", lwd=2)
 }
 
 ### 練習問題 共分散と相関の計算

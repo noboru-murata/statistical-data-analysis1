@@ -149,13 +149,13 @@
   :EXPORT_FILE_NAME: lecture09
   :EXPORT_DATE: <2020-09-19 Sat>
   :END:
-  <2021-06-11 Fri> 更新
+  <2021-06-11 Fri> 更新 (講義中に修正した部分を直しました)
 ** スライド
    {{< myslide base="statistical-data-analysis1" name="slide09" >}}
 ** ハンドアウト
    - [[github:pdfs/slide09.pdf][PDF file]]
 ** 解答例
-   - [[github:code/slide09.R][RScript]]
+   - [[github:code/slide09.R][RScript]] 
 
 * 講義10
   :PROPERTIES:
