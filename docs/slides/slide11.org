@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-06-11 18:51:32 mura>
+# Time-stamp: <2021-06-18 15:45:01 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -218,13 +218,11 @@
      #+end_src
      #+end_quote
    - 帰無分布 (帰無仮説 \(H_0\) のもとでの検定統計量 \(t\) の分布)
-     は自由度 \(n{-}1\) の \(t\) 分布
+     は自由度 \(n{-}1\) の \(t\)-分布
    - *Studentの \(t\) 検定*
   
 ** 棄却域を用いる場合
    - 有意水準を選択: \(\alpha\in(0,1)\)
-   - 自由度 \(n{-}1\) の \(t\) 分布の
-     \(1{-}\alpha/2\) 分位点: \(t_{1{-}\alpha/2}(n{-}1)\) 
    - \(H_0\) の下で以下が成立:
      #+begin_quote
      #+begin_src latex
@@ -233,6 +231,8 @@
        \end{equation}
      #+end_src
      #+end_quote
+     - \(t_{1{-}\alpha/2}(n{-}1)\):
+       自由度 \(n{-}1\) の \(t\)-分布の \(1{-}\alpha/2\) 分位点
    - 第一種過誤の上限が \(\alpha\) の棄却域:
      #+begin_quote
      #+begin_src latex
@@ -256,7 +256,7 @@
      #+end_quote
 
 ** \(p\)-値を用いる場合
-   - \(p\) 値を計算: ( \(f(x)\):自由度 \(n{-}1\) の \(t\) 分布の密度)
+   - \(p\)-値を計算: ( \(f(x)\):自由度 \(n{-}1\) の \(t\)-分布の密度)
      #+begin_quote
      #+begin_src latex
        \begin{equation}
@@ -265,7 +265,7 @@
        \end{equation}
      #+end_src
      #+end_quote
-   - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却:
+   - \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却:
      #+begin_quote
      #+begin_src latex
        \begin{align}
@@ -311,8 +311,6 @@
 
 ** 棄却域を用いる場合
    - 有意水準を選択: \(\alpha\in(0,1)\)
-   - 自由度 \(n{-}1\) の \(t\) 分布の \(1{-}\alpha\) 分位点:
-     \(t_{1{-}\alpha}(n{-}1)\)
    - \(H_0\) の下で以下が成立:
      #+begin_quote
      #+begin_src latex
@@ -321,6 +319,8 @@
        \end{equation}
      #+end_src
      #+end_quote
+     - \(t_{1{-}\alpha}(n{-}1)\):
+       自由度 \(n{-}1\) の \(t\)-分布の \(1{-}\alpha\) 分位点
    - 第一種過誤の上限が \(\alpha\) の棄却域:
      #+begin_quote
      #+begin_src latex
@@ -342,11 +342,11 @@
      #+end_quote
 
 ** \(p\)-値を用いる場合
-   - \(p\)-値を計算: ( \(f(x)\):自由度 \(n{-}1\) の \(t\) 分布の密度)
+   - \(p\)-値を計算: ( \(f(x)\):自由度 \(n{-}1\) の \(t\)-分布の密度)
      #+begin_quote
      #+begin_src latex
        \begin{equation}
-         \text{(\(p\) 値)}=
+         \text{(\(p\)-値)}=
          \int_{t}^\infty f(x)dx
        \end{equation}
      #+end_src
@@ -372,8 +372,8 @@
        \end{equation}
      #+end_src
      #+end_quote
-   - 自由度 \(n{-}1\) の \(t\) 分布の \(\alpha\) 分位点:
-     \(t_{\alpha}(n{-}1)\)
+     - \(t_{\alpha}(n{-}1)\):
+       自由度 \(n{-}1\) の \(t\)-分布の \(\alpha\) 分位点
    - 検定の手続き
      - 以下の場合，帰無仮説を棄却:
        #+begin_quote
@@ -393,7 +393,7 @@
        #+end_src
        #+end_quote
 
-** \(t\)-検定の関数
+** \(t\)検定の関数
    - 基本書式 
      #+begin_src R :eval no
        t.test(x, # 1標本の場合
@@ -416,12 +416,12 @@
    :reveal_background: #fef4f4
    :END:
    - 適当な正規乱数を用いてMonte-Carlo実験を行い，
-     t検定の過誤について調べなさい．
+     \(t\)-検定の過誤について調べなさい．
      #+begin_src R :eval no
        ## 例えば適当な数値を指定して以下のような実験を行えばよい
        myTrial <- function(n){ 
            result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
-           return(result\(p.value)}
+           return(result$p.value)}
        myData <- replicate(mc, myTrial(n))
        hist(myData) # p.valueの分布を見る
        table(myData<alpha)/mc # alpha以下のデータの数を調べる
@@ -436,14 +436,16 @@
      alpha <- 0.05
      myTrial <- function(n){ 
          result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
-         return(result\(p.value)}
+         return(result$p.value)}
      myData <- replicate(mc, myTrial(n))
      hist(myData,xlab="p value") # p.valueの分布を見る
      table(myData<alpha)/mc # alpha以下の結果の数を調べる=サイズ
    #+end_src
+
    #+reveal: split
    - ある番組の視聴率が2桁に達したかどうか知りたいとする．
      \(n\) 人を対象にその番組を観たかどうか確認したところ
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          X_{i}=
@@ -454,6 +456,7 @@
          i=1,2,\dotsc,n
        \end{equation}
      #+end_src
+     #+end_quote
      という結果が得られたとする．
      これを検定するにはどうしたらよいか考えてみよ．
      #+begin_src R :eval no
@@ -477,7 +480,7 @@
      myTrial <- function(n){ 
          x <- sample(0:1,n,replace=TRUE,prob=c(1-mu1,mu1))
          result <- t.test(x,mu=mu0,alternative="greater")
-         return(result\(p.value)}
+         return(result$p.value)}
      myData <- replicate(mc, myTrial(n))
      hist(myData,xlab="p value") # p.valueの分布を見る
      table(myData<alpha)/mc # alpha以下のデータの数を調べる=検出力
@@ -532,10 +535,6 @@
 
 ** 棄却域を用いる場合
    - 有意水準を選択: \(\alpha\in(0,1)\)
-   - 自由度 \(n{-}1\) の \(\chi^2\) 分布の
-     \(\alpha/2\), \(1{-}\alpha/2\) 分位点:
-     \(\chi^2_{\alpha/2}(n{-}1)\),
-     \(\chi^2_{1{-}\alpha/2}(n{-}1)\)
    - \(H_0\) の下で以下が成立:
      #+begin_quote
      #+begin_src latex
@@ -546,6 +545,10 @@
        \end{equation}
      #+end_src
      #+end_quote
+     - \(\chi^2_{\alpha/2}(n{-}1)\):
+       自由度 \(n{-}1\) の \(\chi^2\) 分布の \(\alpha/2\) 分位点
+     - \(\chi^2_{1{-}\alpha/2}(n{-}1)\):
+       自由度 \(n{-}1\) の \(\chi^2\) 分布の \(1{-}\alpha/2\) 分位点
    - 第一種過誤の上限が \(\alpha\) となる棄却域:
      #+begin_quote
      #+begin_src latex
@@ -592,7 +595,7 @@
          \end{equation}
        #+end_src
        #+end_quote
-   - (左側対立仮説 \(H_1:\sigma^2 < \sigma_0^2\) も以下の議論は同様)
+     - /[[color:gray][左側対立仮説 \(H_1:\sigma^2 < \sigma_0^2\) も以下の議論は同様]]/
 
 ** 棄却域を用いる場合
    - 自由度 \(n{-}1\) の \(\chi^2\) 分布の \(1{-}\alpha\) 分位点:
@@ -642,34 +645,32 @@
      6月の気温の分散が，
      月毎に計算した気温の分散の平均値より大きいかどうか検定せよ．
      #+begin_src R :eval no
-       myData <- read.csv("data/tokyo_weather.csv",
-                          fileEncoding="utf8")
+       TW.data <- read.csv("data/tokyo_weather.csv")
        ## 月毎の気温の分散は以下で計算できる
-       aggregate(気温~月,data=myData,FUN=var)
+       aggregate(temp ~ month, data=TW.data, FUN=var)
        ## この平均値は以下のように計算される
-       mean(aggregate(気温~月,data=myData,FUN=var)\(気温)
+       mean(aggregate(temp ~ month, data=TW.data, FUN=var)$temp)
      #+end_src
-     #+begin_src R :eval no :exports none :tangle yes
-       ### 練習2.1
-       ### 6月の気温の分散の検定
-       myData <- read.csv("data/tokyo_weather.csv",
-                          fileEncoding="utf8")
-       par(family="HiraginoSans-W4") 
-       boxplot(気温~月,data=myData, col="lightblue")
-       mySummary <- aggregate(気温~月,data=myData,FUN=var)
-       plot(mySummary,type="h",col="blue",lwd=3,
-            ylim=c(0,max(mySummary\(気温)+1),ylab="気温の分散")
-       v0 <- mean(mySummary\(気温) # sigma0^2
-       x <- subset(myData, subset=月==6, select=気温, drop=TRUE)
-       (n <- length(x)) # データ数
-       (chi2 <- (n-1)*var(x)/v0) # 検定統計量
-       (p <- 1-pchisq(chi2, df=n-1))
-       ## 分散が最も大きな3月を検定してみる
-       x <- subset(myData, subset=月==3, select=気温, drop=TRUE)
-       (n <- length(x)) # データ数
-       (chi2 <- (n-1)*var(x)/v0) # 検定統計量
-       (p <- 1-pchisq(chi2, df=n-1))
-     #+end_src
+
+   #+begin_src R :eval no :exports none :tangle yes
+     ### 練習問題 6月の気温の分散の検定
+     TW.data <- read.csv("data/tokyo_weather.csv")
+     par(family="HiraginoSans-W4") 
+     boxplot(temp ~ month, data=TW.data, col="lightblue")
+     mySummary <- aggregate(temp ~ month, data=TW.data, FUN=var)
+     plot(mySummary,type="h",col="blue",lwd=3,
+          ylim=c(0,max(mySummary$temp)+1),ylab="気温の分散")
+     v0 <- mean(mySummary$temp) # sigma0^2
+     x <- subset(TW.data, subset=month==6, select=temp, drop=TRUE)
+     (n <- length(x)) # データ数
+     (chi2 <- (n-1)*var(x)/v0) # 検定統計量
+     (p <- 1-pchisq(chi2, df=n-1))
+     ## 分散が最も大きな9月を検定してみる
+     x <- subset(TW.data, subset=month==9, select=temp, drop=TRUE)
+     (n <- length(x)) # データ数
+     (chi2 <- (n-1)*var(x)/v0) # 検定統計量
+     (p <- 1-pchisq(chi2, df=n-1))
+   #+end_src
      
 
 * 2標本正規母集団に対する検定
@@ -707,10 +708,14 @@
 ** 考え方
    - \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_m\) の不偏分散:
      \(s_1^2\),\(s_2^2\)
-     \begin{equation}
-       s_1^2=\frac{1}{m{-}1}\sum_{i=1}^m(X_i-\bar{X})^2,\quad
-       s_2^2=\frac{1}{n{-}1}\sum_{i=1}^n(Y_i-\bar{Y})^2.
-     \end{equation}
+     #+begin_quote
+     #+begin_src latex
+       \begin{equation}
+         s_1^2=\frac{1}{m{-}1}\sum_{i=1}^m(X_i-\bar{X})^2,\quad
+         s_2^2=\frac{1}{n{-}1}\sum_{i=1}^n(Y_i-\bar{Y})^2.
+       \end{equation}
+     #+end_src
+     #+end_quote
    - 標本平均と不偏分散の性質:
      - \(\bar{X}-\bar{Y},s_1^2,s_2^2\) は独立となる
      - \((m{-}1)s_1^2/\sigma_1^2\)
@@ -757,7 +762,7 @@
        \end{equation}
      #+end_src
      #+end_quote
-   - \(H_0\) の下で以下は自由度 \(\nu\) の \(t\) 分布に従う
+   - \(H_0\) の下で以下は自由度 \(\nu\) の \(t\)-分布に従う
      #+begin_quote
      #+begin_src latex
        \begin{equation}
@@ -770,7 +775,7 @@
      #+end_quote
      # (\(\frac{c}{\sigma_1^2/m+\sigma_2^2/n}=\nu^{-1}\)に注意)
    #+reveal: split
-   - 検定統計量 \(t\) の帰無分布は自由度 \(\nu\) の \(t\) 分布で近似できる
+   - 検定統計量 \(t\) の帰無分布は自由度 \(\nu\) の \(t\)-分布で近似できる
    - \(\nu\) は未知の分散 \(\sigma_1^2,\sigma_2^2\) を含むので
      不偏推定量 \(s_1^2,s_2^2\) で代用して, 
      次式で与えられる自由度 \(\hat{\nu}\) を用いる:
@@ -783,12 +788,10 @@
        \end{equation}
      #+end_src
      #+end_quote
-   - *Welchの \(t\) 検定* 
+   - *Welchの \(t\)検定* 
 
 ** 棄却域を用いる場合
    - 有意水準を選択: \(\alpha\in(0,1)\)
-   - 自由度 \(\hat{\nu}\) の \(t\) 分布の \(1{-}\alpha/2\) 分位点:
-     \(t_{1{-}\alpha/2}(\hat{\nu})\)
    - 棄却域:
      #+begin_quote
      #+begin_src latex
@@ -798,6 +801,8 @@
        \end{equation}
      #+end_src
      #+end_quote
+     - \(t_{1{-}\alpha/2}(\hat{\nu})\):
+       自由度 \(\hat{\nu}\) の \(t\)-分布の \(1{-}\alpha/2\) 分位点
    - 検定統計量 \(t\) の値を計算し，以下の場合は帰無仮説を棄却:
      #+begin_quote
      #+begin_src latex
@@ -806,13 +811,13 @@
        \end{equation}
      #+end_src
      #+end_quote
-   - (\(p\) 値の計算や片側対立仮説への対応は前と同様)
+   - /[[color:gray][\(p\)-値の計算や片側対立仮説への対応は前と同様]]/
 
 ** 対応がある場合の平均の差の検定
    - 対応がある観測データの平均の差の検定では
      2種類のデータ間の自然な対応を考慮することがある
      #+begin_quote
-     薬の投薬の例:
+     [[color:darkgreen][薬の投薬の例]]:
      - 2種類の薬の効能を比較するために被験者に両方の薬を投与
      - 被験者 \(i\) にそれぞれの薬を投与した場合の治験結果: \(X_i,Y_i\)
      - \(X_i\) と \(Y_i\) には"同一の被験者に対する治験結果"という意味で対応がある
@@ -822,7 +827,7 @@
    - \(Z_i=X_i-Y_i\) \((i=1,\dotsc,n)\) として，
      \(Z_1,\dotsc,Z_n\) の平均が0か否かを検定すれば良い
 
-** \(t\) 検定の関数
+** \(t\)-検定の関数
    - 基本書式 
      #+begin_src R :eval no
        t.test(x, y = NULL, # 2標本の場合
@@ -868,10 +873,6 @@
   
 ** 棄却域を用いる場合
    - 有意水準を選択: \(\alpha\in(0,1)\)
-   - 自由度 \(m{-}1,n{-}1\) の \(F\) 分布の
-     \(\alpha/2,\,1{-}\alpha/2\) 分位点:
-     \(F_{\alpha/2}(m{-}1,n{-}1)\),
-     \(F_{1{-}\alpha/2}(m{-}1,n{-}1)\)
    - \(H_0\) の下では以下が成立:
      #+begin_quote
      #+begin_src latex
@@ -881,6 +882,10 @@
        \end{equation}
      #+end_src
      #+end_quote
+     - \(F_{\alpha/2}(m{-}1,n{-}1)\):
+       自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(\alpha/2\) 分位点
+     - \(F_{1{-}\alpha/2}(m{-}1,n{-}1)\):
+       自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(1{-}\alpha/2\) 分位点
    - 第一種過誤の上限が \(\alpha\) の棄却域:
      #+begin_quote
      #+begin_src latex
@@ -902,7 +907,7 @@
        \end{equation}
      #+end_src
      #+end_quote
-   - (\(p\) 値の計算や片側対立仮説への対応は前と同様)
+   - /[[color:gray][\(p\)-値の計算や片側対立仮説への対応は前と同様]]/
 ** F検定の関数
    - 基本書式 
      #+begin_src R :eval no
@@ -926,48 +931,45 @@
    :END:
    - 東京の気象データの気温の項目を用いて，
      7月と8月の気温の平均が同じかどうか検定しなさい．
-     #+begin_src R :eval no :exports none :tangle yes
-       ### 練習3.1
-       ### 7月と8月の気温の平均の差の検定
-       ## install.packages("beeswarm") # consoleからinstallする場合
-       library(beeswarm) # boxplot上に散布図を表示するため
-       myData <- read.csv("data/tokyo_weather.csv",
-                          fileEncoding="utf8")
-       boxplot(気温~月, col="pink",
-               data=myData, subset=月%in%7:8) # 月を限定
-       beeswarm(気温~月, add=TRUE, col="red",
-                data=myData, subset=月%in%7:8) # 同じ書き方で良い
-       x <- subset(myData,subset=月==7,select=気温,drop=TRUE) 
-       y <- subset(myData,subset=月==8,select=気温,drop=TRUE)
-       t.test(x,y)
-       ## 2月と3月でも試してみる
-       boxplot(気温~月, col="lightblue",
-               data=myData, subset=月%in%2:3) # 月を限定
-       beeswarm(気温~月, add=TRUE, col="blue",
-                data=myData, subset=月%in%2:3) # 同じ書き方で良い
-       x <- subset(myData,subset=月==2,select=気温,drop=TRUE) 
-       y <- subset(myData,subset=月==3,select=気温,drop=TRUE)
-       t.test(x,y)
-     #+end_src
    - 同様に3月と6月の気温の分散が同じかどうか検定しなさい．
-     #+begin_src R :eval no :exports none :tangle yes
-       ### 練習3.2
-       ### 3月と6月の気温の分散の比の検定
-       boxplot(気温~月, col="lightgreen",
-               data=myData, subset=月%in%c(3,6)) # 月を限定
-       beeswarm(気温~月, add=TRUE, col="seagreen",
-                data=myData, subset=月%in%c(3,6)) # 同じ書き方で良い
-       x <- subset(myData,subset=月==3,select=気温,drop=TRUE) 
-       y <- subset(myData,subset=月==6,select=気温,drop=TRUE)
-       var.test(x,y)
-       ## 2月と6月でも試してみる
-       boxplot(気温~月, col="lightgreen",
-               data=myData, subset=月%in%c(2,6)) # 月を限定
-       beeswarm(気温~月, add=TRUE, col="seagreen",
-                data=myData, subset=月%in%c(2,6)) # 同じ書き方で良い
-       x <- subset(myData,subset=月==2,select=気温,drop=TRUE) 
-       var.test(x,y)
-     #+end_src
+
+   #+begin_src R :eval no :exports none :tangle yes
+     ### 練習問題 7月と8月の気温の平均の差の検定
+     ## install.packages("beeswarm") # consoleからinstallする場合
+     library(beeswarm) # boxplot上に散布図を表示するため
+     TW.data <- read.csv("data/tokyo_weather.csv")
+     boxplot(temp~month, col="pink",
+             data=TW.data, subset=month%in%7:8) # 月を限定
+     beeswarm(temp~month, add=TRUE, col="red",
+              data=TW.data, subset=month%in%7:8) # 同じ書き方で良い
+     x <- subset(TW.data,subset=month==7,select=temp,drop=TRUE) 
+     y <- subset(TW.data,subset=month==8,select=temp,drop=TRUE)
+     t.test(x,y)
+     ## 2月と3月でも試してみる
+     boxplot(temp~month, col="lightblue",
+             data=TW.data, subset=month%in%2:3) # 月を限定
+     beeswarm(temp~month, add=TRUE, col="blue",
+              data=TW.data, subset=month%in%2:3) # 同じ書き方で良い
+     x <- subset(TW.data,subset=month==2,select=temp,drop=TRUE) 
+     y <- subset(TW.data,subset=month==3,select=temp,drop=TRUE)
+     t.test(x,y)
+
+     ### 練習問題 3月と6月の気温の分散の比の検定
+     boxplot(temp~month, col="lightgreen",
+             data=TW.data, subset=month%in%c(3,6)) # 月を限定
+     beeswarm(temp~month, add=TRUE, col="seagreen",
+              data=TW.data, subset=month%in%c(3,6)) # 同じ書き方で良い
+     x <- subset(TW.data,subset=month==3,select=temp,drop=TRUE) 
+     y <- subset(TW.data,subset=month==6,select=temp,drop=TRUE)
+     var.test(x,y)
+     ## 2月と6月でも試してみる
+     boxplot(temp~month, col="lightgreen",
+             data=TW.data, subset=month%in%c(2,6)) # 月を限定
+     beeswarm(temp~month, add=TRUE, col="seagreen",
+              data=TW.data, subset=month%in%c(2,6)) # 同じ書き方で良い
+     x <- subset(TW.data,subset=month==2,select=temp,drop=TRUE) 
+     var.test(x,y)
+   #+end_src
 
 
 * COMMENT ローカル変数
