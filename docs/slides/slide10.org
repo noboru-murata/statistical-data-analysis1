@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-06-18 14:54:10 mura>
+# Time-stamp: <2021-06-18 18:59:18 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -84,7 +84,7 @@
        #+begin_quote
        #+begin_src latex
          \begin{equation}
-           E[\hat{\theta}]=\theta
+           \mathbb{E}[\hat{\theta}]=\theta
          \end{equation}
        #+end_src
        #+end_quote
@@ -105,7 +105,7 @@
 ** 良い不偏推定量
    - 一般に不偏推定量も複数存在
      #+begin_quote
-     [[color:darkgreen][例]]: \(\mathcal{L}\) の平均 \(\mu\) の不偏推定量:
+     [[color:darkgreen][例: \(\mathcal{L}\) の平均 \(\mu\) の不偏推定量]]:
      - 標本平均 \(\bar{X}\) 
      - \(X_1\) 
      - \(X_1,\dots,X_n\) のメディアン
