@@ -12,18 +12,18 @@ rbinom(20, size=5, prob=0.6) # 二項分布(20個)
 
 ### 練習問題 二項分布
 mc <- 10000 # 実験回数を指定
-m <- 16 
+n <- 16 
 p <- 0.6
 myRandom <- function(){ # Bernolli分布をm個生成して合計
-    sum(rbinom(m, size=1, prob=p))}
+    sum(rbinom(n, size=1, prob=p))}
 myData <- replicate(mc, myRandom())
 myTable <- table(myData)/mc # 出現確率ごとの表(度数分布表)を作成
 par(family="HiraginoSans-W4") # 日本語フォントの指定
 plot(myTable, type="h", lwd=5, col="royalblue",
      xlab="値", ylab="確率",
-     main=paste0("二項分布(試行回数", m, ", 成功確率", p, ")"))
+     main=paste0("二項分布(試行回数", n, ", 成功確率", p, ")"))
 myRange <- min(myData):max(myData) # 範囲を取得
-lines(myRange + 0.3, dbinom(myRange, size=m, prob=p),
+lines(myRange + 0.3, dbinom(myRange, size=n, prob=p),
       type="h", col="red", lwd=5) # 理論上の出現確率
 legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
        col=c("royalblue", "red"), lwd=5) # 凡例を作成
