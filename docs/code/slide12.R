@@ -1,35 +1,36 @@
+### 第12回 練習問題解答例
+
 ### 練習1
 ### 一元配置分散分析
 ## 気候データによる例
 ## 曜日ごとの気温に差があるか否かを分散分析
-myData <- read.csv("data/tokyo_weather.csv",
-                   fileEncoding="utf8")
+TW.data <- read.csv("data/tokyo_weather.csv")
 ## 曜日の情報を付加
-days <- with(myData,
-             as.Date(paste(年,月,日, sep="-"))) # 日付を作成
+days <- with(TW.data,
+             as.Date(paste(year,month,day,sep="-"))) # 日付を作成
 wdays <- weekdays(days) # 各日付の曜日を計算
-myData <- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
+TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
 ## 箱ひげ図で可視化
 par(family="HiraginoSans-W4") # 日本語フォントの指定
-boxplot(気温 ~ 曜日, data=myData, 
+boxplot(temp ~ weekday, data=TW.data, 
         col="lavender", main="曜日ごとの気温") 
-aggregate(気温 ~ 曜日, data=myData, FUN=mean)
-aggregate(気温 ~ 曜日, data=myData, FUN=var)
-aggregate(気温 ~ 曜日, data=myData, FUN=sd)
+aggregate(temp ~ weekday, data=TW.data, FUN=mean)
+aggregate(temp ~ weekday, data=TW.data, FUN=var)
+aggregate(temp ~ weekday, data=TW.data, FUN=sd)
 ## 曜日ごとの気温差に関する分散分析
-(myAov <- aov(気温 ~ 曜日, data=myData)) # aovによる分析
+(myAov <- aov(temp ~ weekday, data=TW.data)) # aovによる分析
 summary(myAov) # 分散分析表の表示(棄却されない)
 model.tables(myAov, type="means")   # 水準(曜日)ごとの平均値
 model.tables(myAov, type="effects") # 水準(曜日)ごとの効果
 ## 検定のみ実行する場合
-oneway.test(気温 ~ 曜日, data=myData, var.equal=TRUE) # 等分散での検定
-oneway.test(気温 ~ 曜日, data=myData) # Welchの近似法による検定
+oneway.test(temp ~ weekday, data=TW.data, var.equal=TRUE) # 等分散での検定
+oneway.test(temp ~ weekday, data=TW.data) # Welchの近似法による検定
 
 ## 参考: 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
-myData$月 <- as.factor(myData$月) # 月を因子化
-boxplot(気温 ~ 月, data=myData, 
+TW.data$month <- as.factor(TW.data$month) # 月を因子化
+boxplot(temp ~ month, data=TW.data, 
         col="lavender", main="月ごとの気温") 
-(myAov <- aov(気温 ~ 月, data=myData)) # aovによる分析
+(myAov <- aov(temp ~ month, data=TW.data)) # aovによる分析
 summary(myAov) # 分散分析表の表示(棄却される)
 
 ### 練習2

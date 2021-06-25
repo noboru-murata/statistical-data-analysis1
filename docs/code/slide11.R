@@ -49,12 +49,14 @@ v0 <- mean(mySummary$temp) # sigma0^2
 x <- subset(TW.data, subset=month==6, select=temp, drop=TRUE)
 (n <- length(x)) # データ数
 (chi2 <- (n-1)*var(x)/v0) # 検定統計量
-(p <- 1-pchisq(chi2, df=n-1))
+p0 <- pchisq(chi2, df=n-1)
+(p <- 2*min(p0,1-p0))
 ## 分散が最も大きな9月を検定してみる
 x <- subset(TW.data, subset=month==9, select=temp, drop=TRUE)
 (n <- length(x)) # データ数
 (chi2 <- (n-1)*var(x)/v0) # 検定統計量
-(p <- 1-pchisq(chi2, df=n-1))
+p0 <- pchisq(chi2, df=n-1)
+(p <- 2*min(p0,1-p0))
 
 ### 練習問題 7月と8月の気温の平均の差の検定
 ## install.packages("beeswarm") # consoleからinstallする場合

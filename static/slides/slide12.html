@@ -41,20 +41,31 @@
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
-  2020.07.03</p>
+  </p>
 </div>
 
 </section>
 
 <section>
-<section id="slide-org874dc58">
-<h2 id="org874dc58">分散分析とは</h2>
-<div class="outline-text-2" id="text-org874dc58">
+<section id="slide-orgbfe5110">
+<h2 id="orgbfe5110">講義の内容</h2>
+<ul>
+<li></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orge3e878c">
+<h2 id="orge3e878c">分散分析とは</h2>
+<div class="outline-text-2" id="text-orge3e878c">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8cad99a">
-<h3 id="org8cad99a">分散分析</h3>
+<section id="slide-org236e225">
+<h3 id="org236e225">分散分析</h3>
 <ul>
 <li>平均の差の検定: <br />
 <b>2つのグループ間</b> で平均の差があるか否か</li>
@@ -75,8 +86,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org07f9a28">
-<h3 id="org07f9a28">基本的な考え方</h3>
+<section id="slide-org1cb1c61">
+<h3 id="org1cb1c61">基本的な考え方</h3>
 <ul>
 <li>データの変動を分解:
 <ul>
@@ -95,95 +106,108 @@
 
 </ul>
 
+
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org6e6c45a">
-<h2 id="org6e6c45a">分散の比の検定 (再掲)</h2>
-<div class="outline-text-2" id="text-org6e6c45a">
+<section id="slide-orge63a09f">
+<h2 id="orge63a09f">分散の比の検定 (再掲)</h2>
+<div class="outline-text-2" id="text-orge63a09f">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2a1fcd9">
-<h3 id="org2a1fcd9">分散の比の検定</h3>
+<section id="slide-orgfd50eb0">
+<h3 id="orgfd50eb0">分散の比の検定</h3>
 <ul>
 <li><p>
 2種類のデータの分散が等しいか否かを検定する
 </p>
+<blockquote>
 <div>
 \begin{equation}
   H_0:\sigma_1^2=\sigma_2^2\quad\text{vs}\quad H_1:\sigma_1^2\neq\sigma_2^2
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org56a1f9d">
-<h3 id="org56a1f9d">考え方</h3>
+<section id="slide-org5a4e87b">
+<h3 id="org5a4e87b">考え方</h3>
 <ul>
-<li>\(X_1,\dotsc,X_m\) の不偏分散: \(s_1^2\)</li>
-<li>\(Y_1,\dotsc,Y_n\) の不偏分散: \(s_2^2\)</li>
+<li>\(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
+の不偏分散: \(s_1^2\), \(s_2^2\)</li>
+
+</ul>
+
+<ul>
 <li>このとき \(s_1^2,s_2^2\) は独立でそれぞれ
 <ul>
 <li>\((m{-}1)s_1^2/\sigma_1^2\)
-自由度 \(m{-}1\) の \(\chi^2\) 分布に従う</li>
+自由度 \(m{-}1\) の \(\chi^2\)-分布に従う</li>
 <li>\((n{-}1)s_2^2/\sigma_2^2\)
-は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う</li>
+は自由度 \(n{-}1\) の \(\chi^2\)-分布に従う</li>
 
 </ul></li>
 <li><p>
 検定統計量:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   F=\frac{s_1^2}{s_2^2}
 \end{equation}
 
-</div></li>
-
-<li>帰無分布は自由度 \(m{-}1,n{-}1\) の \(F\) 分布</li>
+</div>
+</blockquote></li>
+<li>帰無分布は自由度 \(m{-}1,n{-}1\) の \(F\)-分布
+(<b>\(F\)-検定</b>)</li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org707b3a5">
-<h3 id="org707b3a5">両側検定の棄却域</h3>
+<section id="slide-org4114c91">
+<h3 id="org4114c91">両側検定の棄却域</h3>
 <ul>
 <li>有意水準を選択: \(\alpha\in(0,1)\)</li>
-<li>自由度 \(m{-}1,n{-}1\) の \(F\) 分布の
-\(\alpha/2,\,1{-}\alpha/2\) 分位点:
-\(F_{\alpha/2}(m{-}1,n{-}1)\),
-\(F_{1{-}\alpha/2}(m{-}1,n{-}1)\)</li>
 <li><p>
 \(H_0\) の下では以下が成立:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   P(F < F_{\alpha/2}(m{-}1,n{-}1)
   \text{ または }F > F_{1{-}\alpha/2}(m{-}1,n{-}1))=\alpha
 \end{equation}
 
-</div></li>
+</div>
+</blockquote>
+<ul>
+<li>\(F_{\alpha/2}(m{-}1,n{-}1)\):
+自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(\alpha/2\) 分位点</li>
+<li>\(F_{1{-}\alpha/2}(m{-}1,n{-}1)\):
+自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(1{-}\alpha/2\) 分位点</li>
 
+</ul></li>
 <li><p>
 第一種過誤の上限が \(\alpha\) の棄却域:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   R_{\alpha}=
-  \left(0,F_{\alpha/2}(m{-}1,n{-}1)\right)
+  \left(-\infty,F_{\alpha/2}(m{-}1,n{-}1)\right)
   \cup\left(F_{1{-}\alpha/2}(m{-}1,n{-}1),\infty\right)
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
 </section>
 <section>
@@ -192,28 +216,31 @@
 <li><p>
 以下の場合，帰無仮説を棄却
 </p>
+<blockquote>
 <div>
 \begin{equation}
   F < F_{\alpha/2}(m{-}1,n{-}1)
   \text{ または }F>F_{1{-}\alpha/2}(m{-}1,n{-}1)
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
+
 
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgdc618f5">
-<h2 id="orgdc618f5">一元配置</h2>
-<div class="outline-text-2" id="text-orgdc618f5">
+<section id="slide-org91916d0">
+<h2 id="org91916d0">一元配置</h2>
+<div class="outline-text-2" id="text-org91916d0">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org278e97f">
-<h3 id="org278e97f">一元配置の問題設定</h3>
+<section id="slide-org0846294">
+<h3 id="org0846294">一元配置の問題設定</h3>
 <ul>
 <li>グループ分けが1種類:
 \(p\) グループ \(A_1,A_2,\dotsc,A_p\)</li>
@@ -242,8 +269,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org43c6156">
-<h3 id="org43c6156">一元配置のモデル</h3>
+<section id="slide-org2933be4">
+<h3 id="org2933be4">一元配置のモデル</h3>
 <ul>
 <li>分散分析の用語:
 <ul>
@@ -272,8 +299,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga4529a2">
-<h3 id="orga4529a2">一元配置の検定</h3>
+<section id="slide-orgdc46e91">
+<h3 id="orgdc46e91">一元配置の検定</h3>
 <ul>
 <li><p>
 検定問題
@@ -291,7 +318,7 @@
 <div>
 \begin{equation}
   H_0:\mu_1=\cdots=\mu_p\quad\text{vs}\quad
-  H_1:\text{ある$i,j$に対して}\mu_i\neq\mu_j.
+  H_1:\text{ある\(i,j\)に対して}\mu_i\neq\mu_j.
 \end{equation}
 
 </div></li>
@@ -302,8 +329,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge71851b">
-<h3 id="orge71851b">分析の考え方</h3>
+<section id="slide-org387f4b2">
+<h3 id="org387f4b2">分析の考え方</h3>
 <ul>
 <li>データの変動から因子間での変動と観測誤差の変動を抽出して比較</li>
 <li><p>
@@ -314,7 +341,7 @@
 \begin{align}
   &\text{(全データの標本平均)}
   &\bar{Y}_{\cdot\cdot}&=\frac{1}{n}\sum_{i=1}^p\sum_{j=1}^{n_i}Y_{ij},\\
-  &\text{(水準$A_i$の標本平均)}
+  &\text{(水準\(A_i\)の標本平均)}
   &\bar{Y}_{i\cdot}&=\frac{1}{n_i}\sum_{j=1}^{n_i}Y_{ij}\quad
 		     (i=1,\dotsc,p).
 \end{align}
@@ -386,8 +413,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5954035">
-<h3 id="org5954035">一元配置の検定</h3>
+<section id="slide-org108c2a8">
+<h3 id="org108c2a8">一元配置の検定</h3>
 <ul>
 <li><p>
 検定統計量:
@@ -413,8 +440,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga9a6ace">
-<h3 id="orga9a6ace">棄却域を用いる場合</h3>
+<section id="slide-orgcd70704">
+<h3 id="orgcd70704">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択: \(\alpha\in(0,1)\)</li>
 <li>自由度 \(p{-}1,n{-}p\) の \(F\) 分布の \(1{-}\alpha\) 分位点:
@@ -461,15 +488,15 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org93e2666">
-<h3 id="org93e2666">\(p\) 値を用いる場合</h3>
+<section id="slide-org1d040d3">
+<h3 id="org1d040d3">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 \(p\) 値を用いる方法: \(p\) 値を計算
 </p>
 <div>
 \begin{equation}
-  \text{($p$値)}=\int_{F}^\infty f(x)dx
+  \text{(\(p\)値)}=\int_{F}^\infty f(x)dx
 \end{equation}
 
 </div>
@@ -483,8 +510,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgef519ec">
-<h3 id="orgef519ec">分散分析表 (一元配置の場合)</h3>
+<section id="slide-org6c98d1b">
+<h3 id="org6c98d1b">分散分析表 (一元配置の場合)</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -550,8 +577,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1e913c8">
-<h3 id="org1e913c8">モデルの別表現</h3>
+<section id="slide-orga03fd5c">
+<h3 id="orga03fd5c">モデルの別表現</h3>
 <ul>
 <li>各水準の平均値の相対効果による定式化:
 <ul>
@@ -585,8 +612,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbb7b11a">
-<h3 id="orgbb7b11a">分散分析の関数</h3>
+<section id="slide-org1f7cfce">
+<h3 id="org1f7cfce">分散分析の関数</h3>
 <ul>
 <li><p>
 基本書式 
@@ -616,8 +643,8 @@ model.tables(aovの結果, type="effects") # 効果
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc5e0e3f">
-<h3 id="orgc5e0e3f">分散分析の関数(検定のみ)</h3>
+<section id="slide-org08e4105">
+<h3 id="org08e4105">分散分析の関数(検定のみ)</h3>
 <ul>
 <li><p>
 基本書式 
@@ -639,16 +666,17 @@ model.tables(aovの結果, type="effects") # 効果
 
 </ul>
 
+
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org4fdec66" data-background="#fef4f4">
-<h2 id="org4fdec66">演習</h2>
+<section id="slide-org6995085" data-background="#fef4f4">
+<h2 id="org6995085">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3e68645" data-background="#fef4f4">
-<h3 id="org3e68645">練習問題</h3>
+<section id="slide-org703e3b5" data-background="#fef4f4">
+<h3 id="org703e3b5">練習問題</h3>
 <ul>
 <li>東京都の気候データ (<code>tokyo_weather.csv</code>) の
 気温の項目について以下の問に答えよ．
@@ -675,14 +703,14 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 </section>
 </section>
 <section>
-<section id="slide-orgb47cf3f">
-<h2 id="orgb47cf3f">二元配置</h2>
-<div class="outline-text-2" id="text-orgb47cf3f">
+<section id="slide-org9b23f84">
+<h2 id="org9b23f84">二元配置</h2>
+<div class="outline-text-2" id="text-org9b23f84">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9ea70d0">
-<h3 id="org9ea70d0">二元配置の問題</h3>
+<section id="slide-orgcb94316">
+<h3 id="orgcb94316">二元配置の問題</h3>
 <ul>
 <li>因子が2種類ある場合
 <ul>
@@ -703,8 +731,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org48025b3">
-<h3 id="org48025b3">二元配置のモデル</h3>
+<section id="slide-org4efd244">
+<h3 id="org4efd244">二元配置のモデル</h3>
 <ul>
 <li>2種類の因子 \(A, B\)
 <ul>
@@ -736,8 +764,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org00af28d">
-<h3 id="org00af28d">二元配置の例</h3>
+<section id="slide-orgd0c2544">
+<h3 id="orgd0c2544">二元配置の例</h3>
 <ul>
 <li>例: 複数の薬の治験の問題
 <ul>
@@ -761,8 +789,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8b2705f">
-<h3 id="org8b2705f">二元配置の検定</h3>
+<section id="slide-org6db4e87">
+<h3 id="org6db4e87">二元配置の検定</h3>
 <ul>
 <li><p>
 検定問題
@@ -780,7 +808,7 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 <div>
 \begin{equation}
   H_0:\alpha_1=\cdots=\alpha_a\quad\text{vs}\quad
-  H_1:\text{ある$i_1,i_2$に対して}\alpha_{i_1}\neq\alpha_{i_2}.
+  H_1:\text{ある\(i_1,i_2\)に対して}\alpha_{i_1}\neq\alpha_{i_2}.
 \end{equation}
 
 </div></li>
@@ -791,8 +819,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgec732fb">
-<h3 id="orgec732fb">分析の考え方</h3>
+<section id="slide-org47a4e39">
+<h3 id="org47a4e39">分析の考え方</h3>
 <ul>
 <li>データの変動から因子間での変動と観測誤差の変動を抽出して比較</li>
 <li><p>
@@ -803,10 +831,10 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 \begin{align}
   &\text{(全データの標本平均)}
   &\bar{Y}_{\cdot\cdot}&=\frac{1}{n}\sum_{i=1}^a\sum_{j=1}^{b}Y_{ij},\\
-  &\text{(水準$A_i$の標本平均)}
+  &\text{(水準\(A_i\)の標本平均)}
   &\bar{Y}_{i\cdot}&=\frac{1}{b}\sum_{j=1}^bY_{ij}\quad
 		     (i=1,\dotsc,a),\\
-  &\text{(水準$B_j$の標本平均)}
+  &\text{(水準\(B_j\)の標本平均)}
   &\bar{Y}_{\cdot j}&=\frac{1}{a}\sum_{i=1}^aY_{ij}\quad
 		      (j=1,\dotsc,b).
 \end{align}
@@ -929,8 +957,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org0ec5b07">
-<h3 id="org0ec5b07">二元配置の検定</h3>
+<section id="slide-org1eeed25">
+<h3 id="org1eeed25">二元配置の検定</h3>
 <ul>
 <li><p>
 検定統計量:
@@ -956,8 +984,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge4304bd">
-<h3 id="orge4304bd">棄却域を用いる場合</h3>
+<section id="slide-org6c95471">
+<h3 id="org6c95471">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準: \(\alpha\in(0,1)\)</li>
 <li>自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の \(1{-}\alpha\) 分位点:
@@ -1003,15 +1031,15 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1654e7e">
-<h3 id="org1654e7e">\(p\) 値を用いる場合</h3>
+<section id="slide-orgae18e95">
+<h3 id="orgae18e95">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 値を計算
 </p>
 <div>
 \begin{equation}
-  \text{($p$値)}=\int_{F_A}^\infty f(x)dx
+  \text{(\(p\)値)}=\int_{F_A}^\infty f(x)dx
 \end{equation}
 
 </div>
@@ -1024,8 +1052,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org84543cc">
-<h3 id="org84543cc">分散分析表 (二元配置の場合)</h3>
+<section id="slide-org56d5375">
+<h3 id="org56d5375">分散分析表 (二元配置の場合)</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1085,8 +1113,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5bce939">
-<h3 id="org5bce939">モデルの別表現</h3>
+<section id="slide-org8ab240d">
+<h3 id="org8ab240d">モデルの別表現</h3>
 <p>
 相対効果による定式化:
 </p>
@@ -1139,8 +1167,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgeb0d881">
-<h3 id="orgeb0d881">分散分析の関数</h3>
+<section id="slide-orgc2b92a1">
+<h3 id="orgc2b92a1">分散分析の関数</h3>
 <ul>
 <li><p>
 基本書式 
@@ -1160,16 +1188,17 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 </ul>
 
+
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgdcd41c1" data-background="#fef4f4">
-<h2 id="orgdcd41c1">演習</h2>
+<section id="slide-org8b47db7" data-background="#fef4f4">
+<h2 id="org8b47db7">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga06bd5c" data-background="#fef4f4">
-<h3 id="orga06bd5c">練習問題</h3>
+<section id="slide-org2a2e11d" data-background="#fef4f4">
+<h3 id="org2a2e11d">練習問題</h3>
 <ul>
 <li><p>
 パッケージ <code>datarium</code> をインストールして，
@@ -1215,7 +1244,7 @@ center: true,
 slideNumber: 'c',
 rollingLinks: false,
 keyboard: true,
-mouseWheel: true,
+mouseWheel: false,
 fragmentInURL: true,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
@@ -1224,7 +1253,7 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }},
+spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
 
 // Plugins with reveal.js 4.x
 plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
@@ -1232,7 +1261,8 @@ plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
 // Optional libraries used to extend reveal.js
 dependencies: [
 { src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'}]
+{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
+{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
 
 });
 </script>

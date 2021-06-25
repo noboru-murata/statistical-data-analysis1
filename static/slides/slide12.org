@@ -2,7 +2,8 @@
 #+SUBTITLE: 複数のグループ間の違いを検証する
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 2020.07.03
+#+DATE: 
+# Time-stamp: <2021-06-25 16:43:06 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -11,15 +12,25 @@
 # C-c '
 :end:
 
-* COMMENT tangle用
- 
-#+begin_src R :exports none
-  setwd("~/Desktop/lectures/u-tokyo/spring/slide")
-#+end_src
-#+begin_src R :exports none :tangle yes
-  ### 第11回 演習問題解答例
-#+end_src
+* 講義の内容
+  - 分散分析とは
+  - 一元配置
+    - 一元配置のモデル
+    - 検定の構成
+  - 二元配置
+    - 二元配置のモデル
+    - 検定の構成
+    
+  #+begin_src R :eval no :exports none :tangle yes
+    ### 第12回 練習問題解答例
+  #+end_src
+  #+begin_src R :exports none
+    setwd("~/Desktop/lectures/u-tokyo/spring/slide")
+  #+end_src
 
+
+* COMMENT メモ
+ 
 * 分散分析とは
 ** 分散分析
    - 平均の差の検定: \\
@@ -42,65 +53,81 @@
    - 分散分析は *"データの変動の分析"* \\
      (変動=不確定性)
 
+
 * 分散の比の検定 (再掲)
 ** 分散の比の検定
    - 2種類のデータの分散が等しいか否かを検定する
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          H_0:\sigma_1^2=\sigma_2^2\quad\text{vs}\quad H_1:\sigma_1^2\neq\sigma_2^2
        \end{equation}
      #+end_src
+     #+end_quote
+
 ** 考え方
-   - $X_1,\dotsc,X_m$ の不偏分散: $s_1^2$
-   - $Y_1,\dotsc,Y_n$ の不偏分散: $s_2^2$
-   - このとき $s_1^2,s_2^2$ は独立でそれぞれ
-     - $(m{-}1)s_1^2/\sigma_1^2$
-       自由度 $m{-}1$ の $\chi^2$ 分布に従う
-     - $(n{-}1)s_2^2/\sigma_2^2$
-       は自由度 $n{-}1$ の $\chi^2$ 分布に従う
+   - \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
+     の不偏分散: \(s_1^2\), \(s_2^2\)
+   # - \(X_1,\dotsc,X_m\) の不偏分散: \(s_1^2\)
+   # - \(Y_1,\dotsc,Y_n\) の不偏分散: \(s_2^2\)
+   - このとき \(s_1^2,s_2^2\) は独立でそれぞれ
+     - \((m{-}1)s_1^2/\sigma_1^2\)
+       自由度 \(m{-}1\) の \(\chi^2\)-分布に従う
+     - \((n{-}1)s_2^2/\sigma_2^2\)
+       は自由度 \(n{-}1\) の \(\chi^2\)-分布に従う
    - 検定統計量:
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          F=\frac{s_1^2}{s_2^2}
        \end{equation}
      #+end_src
-   - 帰無分布は自由度 $m{-}1,n{-}1$ の $F$ 分布
-  
+     #+end_quote
+   - 帰無分布は自由度 \(m{-}1,n{-}1\) の \(F\)-分布
+     (*\(F\)-検定*)
 ** 両側検定の棄却域
-   - 有意水準を選択: $\alpha\in(0,1)$
-   - 自由度 $m{-}1,n{-}1$ の $F$ 分布の
-     $\alpha/2,\,1{-}\alpha/2$ 分位点:
-     $F_{\alpha/2}(m{-}1,n{-}1)$,
-     $F_{1{-}\alpha/2}(m{-}1,n{-}1)$
-   - $H_0$ の下では以下が成立:
+   - 有意水準を選択: \(\alpha\in(0,1)\)
+   - \(H_0\) の下では以下が成立:
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          P(F < F_{\alpha/2}(m{-}1,n{-}1)
          \text{ または }F > F_{1{-}\alpha/2}(m{-}1,n{-}1))=\alpha
        \end{equation}
      #+end_src
-   - 第一種過誤の上限が $\alpha$ の棄却域:
+     #+end_quote
+     - \(F_{\alpha/2}(m{-}1,n{-}1)\):
+       自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(\alpha/2\) 分位点
+     - \(F_{1{-}\alpha/2}(m{-}1,n{-}1)\):
+       自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(1{-}\alpha/2\) 分位点
+   - 第一種過誤の上限が \(\alpha\) の棄却域:
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          R_{\alpha}=
-         \left(0,F_{\alpha/2}(m{-}1,n{-}1)\right)
+         \left(-\infty,F_{\alpha/2}(m{-}1,n{-}1)\right)
          \cup\left(F_{1{-}\alpha/2}(m{-}1,n{-}1),\infty\right)
        \end{equation}
      #+end_src
+     #+end_quote
    #+reveal: split
-   - データから検定統計量 $F$ の値を計算
+   - データから検定統計量 \(F\) の値を計算
    - 以下の場合，帰無仮説を棄却
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          F < F_{\alpha/2}(m{-}1,n{-}1)
          \text{ または }F>F_{1{-}\alpha/2}(m{-}1,n{-}1)
        \end{equation}
      #+end_src
+     #+end_quote
+
+
 * 一元配置
 ** 一元配置の問題設定
    - グループ分けが1種類:
-     $p$ グループ $A_1,A_2,\dotsc,A_p$
-   - 各グループ $i$ ごとに $n_i$ 個のデータを観測
+     \(p\) グループ \(A_1,A_2,\dotsc,A_p\)
+   - 各グループ \(i\) ごとに \(n_i\) 個のデータを観測
      #+begin_src latex
        \begin{equation}
          Y_{i1},Y_{i2},\dotsc,Y_{in_i},\quad (i=1,2,\dotsc,p)
@@ -108,8 +135,8 @@
      #+end_src
      #+begin_quote
      例: 小売店の売上高の問題
-     - $A_1,A_2,\dotsc,A_p$: 月
-     - $Y_{i1},Y_{i2},\dotsc,Y_{in_i}$: $i$ 月の各日における売上高
+     - \(A_1,A_2,\dotsc,A_p\): 月
+     - \(Y_{i1},Y_{i2},\dotsc,Y_{in_i}\): \(i\) 月の各日における売上高
      #+end_quote
 
 ** 一元配置のモデル
@@ -123,32 +150,32 @@
        \end{equation}
      #+end_src
    - モデルの仮定:
-     - 水準 $A_i$ における観測データの平均値 $\mu_i$ は定数
-     - $\varepsilon_{ij}$ は独立同分布(平均0, 分散 $\sigma^2$ の正規分布)
+     - 水準 \(A_i\) における観測データの平均値 \(\mu_i\) は定数
+     - \(\varepsilon_{ij}\) は独立同分布(平均0, 分散 \(\sigma^2\) の正規分布)
 
 ** 一元配置の検定
    - 検定問題
      #+begin_quote
-     各水準 $A_1,A_2,\dotsc,A_p$ の平均に差があるか否かを検定する
+     各水準 \(A_1,A_2,\dotsc,A_p\) の平均に差があるか否かを検定する
      #+end_quote
      - 帰無仮説: 全ての水準で平均に差はない
      - 対立仮説: 平均の異なる水準がある
        #+begin_src latex
          \begin{equation}
            H_0:\mu_1=\cdots=\mu_p\quad\text{vs}\quad
-           H_1:\text{ある$i,j$に対して}\mu_i\neq\mu_j.
+           H_1:\text{ある\(i,j\)に対して}\mu_i\neq\mu_j.
          \end{equation}
        #+end_src
 
 ** 分析の考え方
   - データの変動から因子間での変動と観測誤差の変動を抽出して比較
-  - 各種平均: ($n=\sum_{i=1}^pn_i$ は全サンプル数)
+  - 各種平均: (\(n=\sum_{i=1}^pn_i\) は全サンプル数)
     #+begin_quote
     #+begin_src latex
       \begin{align}
         &\text{(全データの標本平均)}
         &\bar{Y}_{\cdot\cdot}&=\frac{1}{n}\sum_{i=1}^p\sum_{j=1}^{n_i}Y_{ij},\\
-        &\text{(水準$A_i$の標本平均)}
+        &\text{(水準\(A_i\)の標本平均)}
         &\bar{Y}_{i\cdot}&=\frac{1}{n_i}\sum_{j=1}^{n_i}Y_{ij}\quad
                            (i=1,\dotsc,p).
       \end{align}
@@ -182,13 +209,13 @@
        \end{equation}
      #+end_src
      #+end_quote
-   - 帰無仮説 $H_0$ が正しい:
+   - 帰無仮説 \(H_0\) が正しい:
      - 水準内・水準間でのデータの変動はともに観測誤差が原因
      - 自由度を除けば本質的な違いはない
-     - $SS_W/(n{-}p)$, $SS_B/(p{-}1)$ はともに $\sigma^2$ の不偏推定量
-   - 対立仮説 $H_1$ が正しい:
+     - \(SS_W/(n{-}p)\), \(SS_B/(p{-}1)\) はともに \(\sigma^2\) の不偏推定量
+   - 対立仮説 \(H_1\) が正しい:
      - 水準間での変動は観測誤差と平均値の差に影響される
-     - $SS_B$ は $SS_W$ より本質的に大きくなる
+     - \(SS_B\) は \(SS_W\) より本質的に大きくなる
 
 ** 一元配置の検定
    - 検定統計量:
@@ -198,23 +225,23 @@
        \end{equation}
      #+end_src
    - 帰無仮説の下で次の事実が成り立つ:
-     - $SS_B,SS_W$ は独立
-     - $SS_B$ は自由度 $p{-}1$ の $\chi^2$ 分布に従う
-     - $SS_W$ は自由度 $n{-}p$ の $\chi^2$ 分布に従う
-   - 帰無分布は自由度 $p{-}1,n{-}p$ の $F$ 分布
-   - 対立仮説の下 $F$ は大きな値をとるので右片側検定
+     - \(SS_B,SS_W\) は独立
+     - \(SS_B\) は自由度 \(p{-}1\) の \(\chi^2\) 分布に従う
+     - \(SS_W\) は自由度 \(n{-}p\) の \(\chi^2\) 分布に従う
+   - 帰無分布は自由度 \(p{-}1,n{-}p\) の \(F\) 分布
+   - 対立仮説の下 \(F\) は大きな値をとるので右片側検定
 
 ** 棄却域を用いる場合
-   - 有意水準を選択: $\alpha\in(0,1)$
-   - 自由度 $p{-}1,n{-}p$ の $F$ 分布の $1{-}\alpha$ 分位点:
-     $F_{1{-}\alpha}(p{-}1,n{-}p)$
-   - $H_0$ の下で以下が成立:
+   - 有意水準を選択: \(\alpha\in(0,1)\)
+   - 自由度 \(p{-}1,n{-}p\) の \(F\) 分布の \(1{-}\alpha\) 分位点:
+     \(F_{1{-}\alpha}(p{-}1,n{-}p)\)
+   - \(H_0\) の下で以下が成立:
      #+begin_src latex
        \begin{equation}
          P(F>F_{1{-}\alpha}(p{-}1,n{-}p))=\alpha
        \end{equation}
      #+end_src
-   - 第一種過誤の上限が $\alpha$ となる棄却域:
+   - 第一種過誤の上限が \(\alpha\) となる棄却域:
      #+begin_src latex
        \begin{equation}
          R_{\alpha}=
@@ -222,37 +249,37 @@
        \end{equation}
      #+end_src
    #+reveal: split
-   - データから検定統計量 $F$ の値を計算
+   - データから検定統計量 \(F\) の値を計算
    - 以下の場合，帰無仮説を棄却
      #+begin_src latex
        \begin{equation}
          F>F_{1{-}\alpha}(p{-}1,n{-}p)
        \end{equation}
      #+end_src
-** $p$ 値を用いる場合
-   - $p$ 値を用いる方法: $p$ 値を計算
+** \(p\) 値を用いる場合
+   - \(p\) 値を用いる方法: \(p\) 値を計算
      #+begin_src latex
        \begin{equation}
-         \text{($p$値)}=\int_{F}^\infty f(x)dx
+         \text{(\(p\)値)}=\int_{F}^\infty f(x)dx
        \end{equation}
      #+end_src
-     ($f(x)$ は自由度 $p{-}1,n{-}p$ の $F$ 分布の密度)
-   - $p$ 値が $\alpha$ 未満なら帰無仮説を棄却
+     (\(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の密度)
+   - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 
 ** 分散分析表 (一元配置の場合)
    |--------+---------+--------+----------------+--------+------------------------------------+---|
-   |        | 自由度  | 平方和 | 平均平方和     | $F$ 値 | $p$ 値                             |   |
+   |        | 自由度  | 平方和 | 平均平方和     | \(F\) 値 | \(p\) 値                             |   |
    |--------+---------+--------+----------------+--------+------------------------------------+---|
-   | 級間   | $p{-}1$ | $SS_B$ | $SS_B/(p{-}1)$ | $F$    | $\mathstrut\int_{F}^\infty f(x)dx$ |   |
-   | 級内   | $n{-}p$ | $SS_W$ | $SS_W/(n{-}p)$ |        |                                    |   |
+   | 級間   | \(p{-}1\) | \(SS_B\) | \(SS_B/(p{-}1)\) | \(F\)    | \(\mathstrut\int_{F}^\infty f(x)dx\) |   |
+   | 級内   | \(n{-}p\) | \(SS_W\) | \(SS_W/(n{-}p)\) |        |                                    |   |
    |--------+---------+--------+----------------+--------+------------------------------------+---|
-   | 全変動 | $n{-}1$ | $SS_T$ |                |        |                                    |   |
+   | 全変動 | \(n{-}1\) | \(SS_T\) |                |        |                                    |   |
    |--------+---------+--------+----------------+--------+------------------------------------+---|
 
 ** モデルの別表現
    - 各水準の平均値の相対効果による定式化:
-     - 因子 $A$ 全体の平均効果: $\mu$
-     - 平均 $\mu$ を基準とした各水準 $A_i$ の相対的な効果: $\alpha_i$
+     - 因子 \(A\) 全体の平均効果: \(\mu\)
+     - 平均 \(\mu\) を基準とした各水準 \(A_i\) の相対的な効果: \(\alpha_i\)
      - 平均値の別表現:
        #+begin_src latex
          \begin{equation}
@@ -261,7 +288,7 @@
            \sum_{i=1}^pn_i\alpha_i=0
        \end{equation}
        #+end_src
-   - 帰無仮説 $H_0$ は以下と同等:
+   - 帰無仮説 \(H_0\) は以下と同等:
      #+begin_src latex
        \begin{equation}
          \alpha_1=\cdots=\alpha_p=0
@@ -294,6 +321,7 @@
      - ~na.action~: 欠損値の扱い
      - ~var.equal~: 等分散を仮定する場合は ~TRUE~
    
+
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
@@ -307,11 +335,11 @@
      - 曜日ごとの気温の平均と分散を求めよ．
        #+begin_src R :eval no
          ## 週日を因子(factor)とするには例えば以下のような項目を加えればよい
-         myData <- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-         days <- with(myData, # 日付を取り出して整形する
+         TW.data <- read.csv("data/tokyo_weather.csv")
+         days <- with(TW.data, # 日付を取り出して整形する
                       as.Date(paste(年,月,日, sep="-"))) 
          wdays <- weekdays(days) # 各日付の曜日を計算
-         myData <- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
+         TW.data <- cbind(TW.data, 曜日=as.factor(wdays)) # 曜日因子を追加
        #+end_src
      - 曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．
      #+begin_src R :eval no :exports none :tangle yes
@@ -319,36 +347,36 @@
        ### 一元配置分散分析
        ## 気候データによる例
        ## 曜日ごとの気温に差があるか否かを分散分析
-       myData <- read.csv("data/tokyo_weather.csv",
-                          fileEncoding="utf8")
+       TW.data <- read.csv("data/tokyo_weather.csv")
        ## 曜日の情報を付加
-       days <- with(myData,
-                    as.Date(paste(年,月,日, sep="-"))) # 日付を作成
+       days <- with(TW.data,
+                    as.Date(paste(year,month,day,sep="-"))) # 日付を作成
        wdays <- weekdays(days) # 各日付の曜日を計算
-       myData <- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
+       TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
        ## 箱ひげ図で可視化
        par(family="HiraginoSans-W4") # 日本語フォントの指定
-       boxplot(気温 ~ 曜日, data=myData, 
+       boxplot(temp ~ weekday, data=TW.data, 
                col="lavender", main="曜日ごとの気温") 
-       aggregate(気温 ~ 曜日, data=myData, FUN=mean)
-       aggregate(気温 ~ 曜日, data=myData, FUN=var)
-       aggregate(気温 ~ 曜日, data=myData, FUN=sd)
+       aggregate(temp ~ weekday, data=TW.data, FUN=mean)
+       aggregate(temp ~ weekday, data=TW.data, FUN=var)
+       aggregate(temp ~ weekday, data=TW.data, FUN=sd)
        ## 曜日ごとの気温差に関する分散分析
-       (myAov <- aov(気温 ~ 曜日, data=myData)) # aovによる分析
+       (myAov <- aov(temp ~ weekday, data=TW.data)) # aovによる分析
        summary(myAov) # 分散分析表の表示(棄却されない)
        model.tables(myAov, type="means")   # 水準(曜日)ごとの平均値
        model.tables(myAov, type="effects") # 水準(曜日)ごとの効果
        ## 検定のみ実行する場合
-       oneway.test(気温 ~ 曜日, data=myData, var.equal=TRUE) # 等分散での検定
-       oneway.test(気温 ~ 曜日, data=myData) # Welchの近似法による検定
+       oneway.test(temp ~ weekday, data=TW.data, var.equal=TRUE) # 等分散での検定
+       oneway.test(temp ~ weekday, data=TW.data) # Welchの近似法による検定
 
        ## 参考: 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
-       myData$月 <- as.factor(myData$月) # 月を因子化
-       boxplot(気温 ~ 月, data=myData, 
+       TW.data$month <- as.factor(TW.data$month) # 月を因子化
+       boxplot(temp ~ month, data=TW.data, 
                col="lavender", main="月ごとの気温") 
-       (myAov <- aov(気温 ~ 月, data=myData)) # aovによる分析
+       (myAov <- aov(temp ~ month, data=TW.data)) # aovによる分析
        summary(myAov) # 分散分析表の表示(棄却される)
      #+end_src
+
 
 * 二元配置
 ** 二元配置の問題
@@ -362,10 +390,10 @@
       (薬の効き目には個人差があると考えられるため)
 
 ** 二元配置のモデル
-  - 2種類の因子 $A, B$
-    - 因子 $A$ には $a$ 個の水準: $A_1,\dotsc,A_a$
-    - 因子 $B$ には $b$ 個の水準: $B_1,\dotsc,B_b$
-    - 因子 $A,B$ の水準がそれぞれ $A_i,B_j$ である観測値: $Y_{ij}$
+  - 2種類の因子 \(A, B\)
+    - 因子 \(A\) には \(a\) 個の水準: \(A_1,\dotsc,A_a\)
+    - 因子 \(B\) には \(b\) 個の水準: \(B_1,\dotsc,B_b\)
+    - 因子 \(A,B\) の水準がそれぞれ \(A_i,B_j\) である観測値: \(Y_{ij}\)
     - (各水準ごとに1つの観測値が得られる一番簡単な場合を想定)
   - 観測データのモデル:
     #+begin_src latex
@@ -375,45 +403,45 @@
       \end{equation}
     #+end_src
   - モデルの仮定:
-    - $\alpha_i,\beta_j$ は定数，それぞれ因子 $A,B$ の水準 $A_i,B_j$ における効果
-    - $\varepsilon_{ij}$ は独立同分布 (平均0, 分散 $\sigma^2$ の正規分布)
+    - \(\alpha_i,\beta_j\) は定数，それぞれ因子 \(A,B\) の水準 \(A_i,B_j\) における効果
+    - \(\varepsilon_{ij}\) は独立同分布 (平均0, 分散 \(\sigma^2\) の正規分布)
 
 ** 二元配置の例
   - 例: 複数の薬の治験の問題
     - 因子
-      - 因子 $A$: "薬の種類"
-      - 因子 $B$: "被験者番号"
+      - 因子 \(A\): "薬の種類"
+      - 因子 \(B\): "被験者番号"
     - 効果
-      - $\alpha_i$: 薬 $A_i$ の効能
-      - $\beta_j$: 被験者 $B_j$ 固有の薬の効きやすさ
+      - \(\alpha_i\): 薬 \(A_i\) の効能
+      - \(\beta_j\): 被験者 \(B_j\) 固有の薬の効きやすさ
     - 薬の効能に差があるか否かという検定
 
 ** 二元配置の検定
    - 検定問題
      #+begin_quote
-     因子 $A$ の各水準の効果に差があるか否かを検定する
+     因子 \(A\) の各水準の効果に差があるか否かを検定する
      #+end_quote
-     - 帰無仮説: 因子 $A$ の効果 $\alpha_{i}$ に差はない
-     - 対立仮説: 因子 $A$ の効果に差のあるものがある
+     - 帰無仮説: 因子 \(A\) の効果 \(\alpha_{i}\) に差はない
+     - 対立仮説: 因子 \(A\) の効果に差のあるものがある
        #+begin_src latex
          \begin{equation}
            H_0:\alpha_1=\cdots=\alpha_a\quad\text{vs}\quad
-           H_1:\text{ある$i_1,i_2$に対して}\alpha_{i_1}\neq\alpha_{i_2}.
+           H_1:\text{ある\(i_1,i_2\)に対して}\alpha_{i_1}\neq\alpha_{i_2}.
          \end{equation}
        #+end_src
 
 ** 分析の考え方
   - データの変動から因子間での変動と観測誤差の変動を抽出して比較
-  - 各種平均: ($n=ab$)
+  - 各種平均: (\(n=ab\))
     #+begin_quote
     #+begin_src latex
       \begin{align}
         &\text{(全データの標本平均)}
         &\bar{Y}_{\cdot\cdot}&=\frac{1}{n}\sum_{i=1}^a\sum_{j=1}^{b}Y_{ij},\\
-        &\text{(水準$A_i$の標本平均)}
+        &\text{(水準\(A_i\)の標本平均)}
         &\bar{Y}_{i\cdot}&=\frac{1}{b}\sum_{j=1}^bY_{ij}\quad
                            (i=1,\dotsc,a),\\
-        &\text{(水準$B_j$の標本平均)}
+        &\text{(水準\(B_j\)の標本平均)}
         &\bar{Y}_{\cdot j}&=\frac{1}{a}\sum_{i=1}^aY_{ij}\quad
                             (j=1,\dotsc,b).
       \end{align}
@@ -453,8 +481,8 @@
       \end{align}
     #+end_src
     #+end_quote
-    - *行間変動*: 水準 $A$ 内でのデータの変動
-    - *列間変動*: 水準 $B$ 内でのデータの変動
+    - *行間変動*: 水準 \(A\) 内でのデータの変動
+    - *列間変動*: 水準 \(B\) 内でのデータの変動
   #+reveal: split
   - 変動の分解:
     #+begin_quote
@@ -467,10 +495,10 @@
       \end{multline}
     #+end_src
     #+end_quote
-  - 帰無仮説 $H_0$ が正しい:
-    - 変動 $SS_A,SS_E$ はともに観測誤差のみが原因で生じる
+  - 帰無仮説 \(H_0\) が正しい:
+    - 変動 \(SS_A,SS_E\) はともに観測誤差のみが原因で生じる
     - 自由度を除けば本質的な違いはない
-    - $SS_A/(a{-}1)$, $SS_E/\{(a{-}1)(b{-}1)\}$ は $\sigma^2$ の不偏推定量
+    - \(SS_A/(a{-}1)\), \(SS_E/\{(a{-}1)(b{-}1)\}\) は \(\sigma^2\) の不偏推定量
   #+reveal: split
   - 変動の分解:
     #+begin_quote
@@ -483,9 +511,9 @@
       \end{multline}
     #+end_src
     #+end_quote
-  - 対立仮説 $H_1$ が正しい:
-    - 因子 $A$ 内の水準間での効果 $\alpha_1,\dotsc,\alpha_a$ の差に影響される
-    - $SS_A$ は $SS_E$ より本質的に大きくなる
+  - 対立仮説 \(H_1\) が正しい:
+    - 因子 \(A\) 内の水準間での効果 \(\alpha_1,\dotsc,\alpha_a\) の差に影響される
+    - \(SS_A\) は \(SS_E\) より本質的に大きくなる
 
 ** 二元配置の検定
   - 検定統計量:
@@ -495,23 +523,23 @@
       \end{equation}
     #+end_src
   - 帰無仮説の下で次の事実が成り立つ:
-    - $SS_A,SS_E$ は独立
-    - $SS_A$ は自由度 $a{-}1$ の $\chi^2$ 分布に従う
-    - $SS_E$ は自由度 $(a{-}1)(b{-}1)$ の $\chi^2$ 分布に従う
-  - 帰無仮説の下 $F_A$ は自由度 $a{-}1,(a{-}1)(b{-}1)$ の $F$ 分布に従う
-  - 対立仮説の下 $F_A$ は大きな値をとるので右片側検定
+    - \(SS_A,SS_E\) は独立
+    - \(SS_A\) は自由度 \(a{-}1\) の \(\chi^2\) 分布に従う
+    - \(SS_E\) は自由度 \((a{-}1)(b{-}1)\) の \(\chi^2\) 分布に従う
+  - 帰無仮説の下 \(F_A\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布に従う
+  - 対立仮説の下 \(F_A\) は大きな値をとるので右片側検定
 
 ** 棄却域を用いる場合
-  - 有意水準: $\alpha\in(0,1)$
-  - 自由度 $a{-}1,(a{-}1)(b{-}1)$ の $F$ 分布の $1{-}\alpha$ 分位点:
-    $F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))$
-  - $H_0$ の下で以下が成立:
+  - 有意水準: \(\alpha\in(0,1)\)
+  - 自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の \(1{-}\alpha\) 分位点:
+    \(F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))\)
+  - \(H_0\) の下で以下が成立:
     #+begin_src latex
       \begin{equation}
         P(F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)))=\alpha
       \end{equation}
     #+end_src
-  - 第一種過誤の上限が $\alpha$ となる棄却域:
+  - 第一種過誤の上限が \(\alpha\) となる棄却域:
     #+begin_src latex
       \begin{equation}
         R_{\alpha}=
@@ -519,31 +547,31 @@
       \end{equation}
     #+end_src
   #+reveal: split
-  - データから検定統計量 $F_A$ の値を計算
+  - データから検定統計量 \(F_A\) の値を計算
   - 以下の場合，帰無仮説を棄却
     \begin{equation}
       F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))
     \end{equation}
-** $p$ 値を用いる場合
+** \(p\) 値を用いる場合
   - 値を計算
     \begin{equation}
-      \text{($p$値)}=\int_{F_A}^\infty f(x)dx
+      \text{(\(p\)値)}=\int_{F_A}^\infty f(x)dx
     \end{equation}
-    ($f$ は自由度 $a{-}1,(a{-}1)(b{-}1)$ の $F$ 分布の確率密度関数)
-  - $p$ 値が $\alpha$ 未満なら帰無仮説を棄却
+    (\(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度関数)
+  - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 
 ** 分散分析表 (二元配置の場合)
    |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
-   |                | 自由度           | 平方和 | 平均平方和                                 | $F\text{値}$ | $p\text{値}$                                                   |
+   |                | 自由度           | 平方和 | 平均平方和                                 | \(F\text{値}\) | \(p\text{値}\)                                                   |
    |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
-   | $\text{因子}A$ | $a{-}1$          | $SS_A$ | $\displaystyle\frac{SS_A}{a{-}1}$          | $F_A$        | $\displaystyle\int_{F_A}^\infty f_{a{-}1,(a{-}1)(b{-}1)}(x)dx$ |
-   | $\text{因子}B$ | $b{-}1$          | $SS_B$ | $\displaystyle\frac{SS_B}{b{-}1}$          | $F_B$        | $\displaystyle\int_{F_B}^\infty f_{b{-}1,(a{-}1)(b{-}1)}(x)dx$ |
+   | \(\text{因子}A\) | \(a{-}1\)          | \(SS_A\) | \(\displaystyle\frac{SS_A}{a{-}1}\)          | \(F_A\)        | \(\displaystyle\int_{F_A}^\infty f_{a{-}1,(a{-}1)(b{-}1)}(x)dx\) |
+   | \(\text{因子}B\) | \(b{-}1\)          | \(SS_B\) | \(\displaystyle\frac{SS_B}{b{-}1}\)          | \(F_B\)        | \(\displaystyle\int_{F_B}^\infty f_{b{-}1,(a{-}1)(b{-}1)}(x)dx\) |
    |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
-   | $\text{誤差}$  | $(a{-}1)(b{-}1)$ | $SS_E$ | $\displaystyle\frac{SS_E}{(a{-}1)(b{-}1)}$ |              |                                                                |
+   | \(\text{誤差}\)  | \((a{-}1)(b{-}1)\) | \(SS_E\) | \(\displaystyle\frac{SS_E}{(a{-}1)(b{-}1)}\) |              |                                                                |
    |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
    
-  # 因子 $A$ ではなく因子 $B$ の水準間の平均の差に関心がある場合は，
-  # $A$ と $B$ の役割を入れ替えて同様の議論を行えばよい  
+  # 因子 \(A\) ではなく因子 \(B\) の水準間の平均の差に関心がある場合は，
+  # \(A\) と \(B\) の役割を入れ替えて同様の議論を行えばよい  
 
 ** モデルの別表現
   相対効果による定式化:
@@ -567,7 +595,7 @@
     #+end_src
     #+end_quote
   #+reveal: split
-  - 帰無仮説 $H_0$ は以下と同等:
+  - 帰無仮説 \(H_0\) は以下と同等:
     #+begin_src latex
       \begin{equation}
         \alpha^*_1=\cdots=\alpha^*_a=0
@@ -584,6 +612,7 @@
      - ~data~: データフレーム
    - 分散分析表などは同様
      
+
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
