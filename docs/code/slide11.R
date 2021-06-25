@@ -67,13 +67,13 @@ beeswarm(temp~month, add=TRUE, col="red",
 x <- subset(TW.data,subset=month==7,select=temp,drop=TRUE) 
 y <- subset(TW.data,subset=month==8,select=temp,drop=TRUE)
 t.test(x,y)
-## 2月と3月でも試してみる
+## 2月と12月でも試してみる
 boxplot(temp~month, col="lightblue",
-        data=TW.data, subset=month%in%2:3) # 月を限定
+        data=TW.data, subset=month%in%c(2,12)) # 月を限定
 beeswarm(temp~month, add=TRUE, col="blue",
-         data=TW.data, subset=month%in%2:3) # 同じ書き方で良い
-x <- subset(TW.data,subset=month==2,select=temp,drop=TRUE) 
-y <- subset(TW.data,subset=month==3,select=temp,drop=TRUE)
+         data=TW.data, subset=month%in%c(2,12)) # 同じ書き方で良い
+x <- subset(TW.data,subset=month==2, select=temp,drop=TRUE) 
+y <- subset(TW.data,subset=month==12,select=temp,drop=TRUE)
 t.test(x,y)
 
 ### 練習問題 3月と6月の気温の分散の比の検定
