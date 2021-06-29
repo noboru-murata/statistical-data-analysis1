@@ -1,7 +1,6 @@
 ### 第12回 練習問題解答例
 
-### 練習1
-### 一元配置分散分析
+### 練習問題 一元配置分散分析
 ## 気候データによる例
 ## 曜日ごとの気温に差があるか否かを分散分析
 TW.data <- read.csv("data/tokyo_weather.csv")
@@ -33,8 +32,7 @@ boxplot(temp ~ month, data=TW.data,
 (myAov <- aov(temp ~ month, data=TW.data)) # aovによる分析
 summary(myAov) # 分散分析表の表示(棄却される)
 
-### 練習2
-### 二元配置分散分析
+### 練習問題 二元配置分散分析
 ## datarium::jobsatisfaction による例
 ## 性別(gender)と学歴(education_level)による仕事の満足度
 ## 満足度にそれぞれの因子の効果があるかを検証

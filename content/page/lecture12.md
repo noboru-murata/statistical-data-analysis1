@@ -6,7 +6,7 @@ draft = false
 weight = 1013
 +++
 
-昨年度資料
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-29 Tue&gt; </span></span> 更新
 
 
 ## スライド {#スライド}

@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-06-25 18:52:03 mura>
+# Time-stamp: <2021-06-25 18:56:55 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -32,6 +32,7 @@
 
 * COMMENT メモ
   - 検定に関するMCを充実させたい
+  - 正規母集団でなくても使えるが正規分布を仮定することを言う
   - 演習問題を整理するべきか
 
 * 検定とは

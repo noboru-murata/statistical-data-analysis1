@@ -47,10 +47,22 @@
 </section>
 
 <section>
-<section id="slide-orgbfe5110">
-<h2 id="orgbfe5110">講義の内容</h2>
+<section id="slide-org09d7e8d">
+<h2 id="org09d7e8d">講義の内容</h2>
 <ul>
-<li></li>
+<li>分散分析とは</li>
+<li>一元配置
+<ul>
+<li>一元配置のモデル</li>
+<li>検定の構成</li>
+
+</ul></li>
+<li>二元配置
+<ul>
+<li>二元配置のモデル</li>
+<li>検定の構成</li>
+
+</ul></li>
 
 </ul>
 
@@ -58,21 +70,21 @@
 </section>
 </section>
 <section>
-<section id="slide-orge3e878c">
-<h2 id="orge3e878c">分散分析とは</h2>
-<div class="outline-text-2" id="text-orge3e878c">
+<section id="slide-orgbc6582c">
+<h2 id="orgbc6582c">分散分析とは</h2>
+<div class="outline-text-2" id="text-orgbc6582c">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org236e225">
-<h3 id="org236e225">分散分析</h3>
+<section id="slide-org06df039">
+<h3 id="org06df039">分散分析</h3>
 <ul>
 <li>平均の差の検定: <br />
 <b>2つのグループ間</b> で平均の差があるか否か</li>
 <li>分散分析: <br />
 <b>2つ以上のグループ間</b> で平均の差があるか否か</li>
 <li><p>
-分散分析における仮説の例:
+<span style="color:darkgreen;">分散分析における仮説の例</span>:
 </p>
 <blockquote>
 <ul>
@@ -86,10 +98,10 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1cb1c61">
-<h3 id="org1cb1c61">基本的な考え方</h3>
+<section id="slide-org11b19c4">
+<h3 id="org11b19c4">基本的な考え方</h3>
 <ul>
-<li>データの変動を分解:
+<li>データの変動 (<b>分散</b>) を分解: (変動=不確定性)
 <ul>
 <li>グループ間での変動</li>
 <li>観測誤差のみに起因する変動</li>
@@ -101,8 +113,7 @@
 <li>平均に差がある: グループ間の変動が増してより大きくなる</li>
 
 </ul></li>
-<li>分散分析は <b>&ldquo;データの変動の分析&rdquo;</b> <br />
-(変動=不確定性)</li>
+<li>分散分析は <b>&ldquo;データの変動の分析&rdquo;</b></li>
 
 </ul>
 
@@ -111,14 +122,14 @@
 </section>
 </section>
 <section>
-<section id="slide-orge63a09f">
-<h2 id="orge63a09f">分散の比の検定 (再掲)</h2>
-<div class="outline-text-2" id="text-orge63a09f">
+<section id="slide-org458a237">
+<h2 id="org458a237">分散の比の検定 (再掲)</h2>
+<div class="outline-text-2" id="text-org458a237">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfd50eb0">
-<h3 id="orgfd50eb0">分散の比の検定</h3>
+<section id="slide-orgb00503c">
+<h3 id="orgb00503c">分散の比の検定</h3>
 <ul>
 <li><p>
 2種類のデータの分散が等しいか否かを検定する
@@ -136,8 +147,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5a4e87b">
-<h3 id="org5a4e87b">考え方</h3>
+<section id="slide-org36c2888">
+<h3 id="org36c2888">考え方</h3>
 <ul>
 <li>\(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
 の不偏分散: \(s_1^2\), \(s_2^2\)</li>
@@ -170,8 +181,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4114c91">
-<h3 id="org4114c91">両側検定の棄却域</h3>
+<section id="slide-org2e94b20">
+<h3 id="org2e94b20">両側検定の棄却域</h3>
 <ul>
 <li>有意水準を選択: \(\alpha\in(0,1)\)</li>
 <li><p>
@@ -187,10 +198,12 @@
 </div>
 </blockquote>
 <ul>
-<li>\(F_{\alpha/2}(m{-}1,n{-}1)\):
-自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(\alpha/2\) 分位点</li>
-<li>\(F_{1{-}\alpha/2}(m{-}1,n{-}1)\):
-自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(1{-}\alpha/2\) 分位点</li>
+<li>自由度 \(m{-}1,n{-}1\) の \(F\) 分布
+<ul>
+<li>\(F_{\alpha/2}(m{-}1,n{-}1)\) : \(\alpha/2\) 分位点</li>
+<li>\(F_{1{-}\alpha/2}(m{-}1,n{-}1)\) : \(1{-}\alpha/2\) 分位点</li>
+
+</ul></li>
 
 </ul></li>
 <li><p>
@@ -233,14 +246,14 @@
 </section>
 </section>
 <section>
-<section id="slide-org91916d0">
-<h2 id="org91916d0">一元配置</h2>
-<div class="outline-text-2" id="text-org91916d0">
+<section id="slide-org1a50fed">
+<h2 id="org1a50fed">一元配置</h2>
+<div class="outline-text-2" id="text-org1a50fed">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org0846294">
-<h3 id="org0846294">一元配置の問題設定</h3>
+<section id="slide-orge763b99">
+<h3 id="orge763b99">一元配置の問題設定</h3>
 <ul>
 <li>グループ分けが1種類:
 \(p\) グループ \(A_1,A_2,\dotsc,A_p\)</li>
@@ -256,7 +269,7 @@
 
 <blockquote>
 <p>
-例: 小売店の売上高の問題
+<span style="color:darkgreen;">小売店の売上高の問題</span>
 </p>
 <ul>
 <li>\(A_1,A_2,\dotsc,A_p\): 月</li>
@@ -269,8 +282,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2933be4">
-<h3 id="org2933be4">一元配置のモデル</h3>
+<section id="slide-orgf288cf7">
+<h3 id="orgf288cf7">一元配置のモデル</h3>
 <ul>
 <li>分散分析の用語:
 <ul>
@@ -281,13 +294,14 @@
 <li><p>
 観測データのモデル:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   Y_{ij}=\mu_i+\varepsilon_{ij}\quad(i=1,\dotsc,p;\;j=1,\dotsc,n_i).
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li>モデルの仮定:
 <ul>
 <li>水準 \(A_i\) における観測データの平均値 \(\mu_i\) は定数</li>
@@ -299,38 +313,40 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgdc46e91">
-<h3 id="orgdc46e91">一元配置の検定</h3>
+<section id="slide-org93cbef1">
+<h3 id="org93cbef1">一元配置の検定</h3>
 <ul>
 <li><p>
 検定問題
 </p>
 <blockquote>
 <p>
-各水準 \(A_1,A_2,\dotsc,A_p\) の平均に差があるか否かを検定する
+各水準 \(A_1,A_2,\dotsc,A_p\)
+の平均 \(\mu_1,\mu_2,\dotsc,\mu_{p}\)
+に差があるか否かを検定する
 </p>
 </blockquote>
 <ul>
 <li>帰無仮説: 全ての水準で平均に差はない</li>
-<li><p>
-対立仮説: 平均の異なる水準がある
-</p>
+<li>対立仮説: 平均の異なる水準がある</li>
+
+</ul>
+<blockquote>
 <div>
 \begin{equation}
   H_0:\mu_1=\cdots=\mu_p\quad\text{vs}\quad
   H_1:\text{ある\(i,j\)に対して}\mu_i\neq\mu_j.
 \end{equation}
 
-</div></li>
-
-</ul></li>
+</div>
+</blockquote></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org387f4b2">
-<h3 id="org387f4b2">分析の考え方</h3>
+<section id="slide-org9c97d8a">
+<h3 id="org9c97d8a">分析の考え方</h3>
 <ul>
 <li>データの変動から因子間での変動と観測誤差の変動を抽出して比較</li>
 <li><p>
@@ -400,6 +416,25 @@
 <li>\(SS_W/(n{-}p)\), \(SS_B/(p{-}1)\) はともに \(\sigma^2\) の不偏推定量</li>
 
 </ul></li>
+
+</ul>
+<div class="slide-footer"><br></div>
+</section>
+<section>
+<ul>
+<li><p>
+変動の分解:
+</p>
+<blockquote>
+<div>
+\begin{equation}
+  \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }n{-}1}
+  =\underbrace{\text{(級内変動) }SS_W}_{\text{自由度 }n{-}p}
+  +\underbrace{\text{(級間変動) }SS_B}_{\text{自由度 }p{-}1}
+\end{equation}
+
+</div>
+</blockquote></li>
 <li>対立仮説 \(H_1\) が正しい:
 <ul>
 <li>水準間での変動は観測誤差と平均値の差に影響される</li>
@@ -413,19 +448,20 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org108c2a8">
-<h3 id="org108c2a8">一元配置の検定</h3>
+<section id="slide-orgecc2681">
+<h3 id="orgecc2681">一元配置の検定</h3>
 <ul>
 <li><p>
 検定統計量:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   F=\frac{SS_B/(p{-}1)}{SS_W/(n{-}p)}
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li>帰無仮説の下で次の事実が成り立つ:
 <ul>
 <li>\(SS_B,SS_W\) は独立</li>
@@ -433,42 +469,47 @@
 <li>\(SS_W\) は自由度 \(n{-}p\) の \(\chi^2\) 分布に従う</li>
 
 </ul></li>
-<li>帰無分布は自由度 \(p{-}1,n{-}p\) の \(F\) 分布</li>
+<li>帰無分布は自由度 \(p{-}1,n{-}p\) の \(F\) 分布に従う</li>
 <li>対立仮説の下 \(F\) は大きな値をとるので右片側検定</li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcd70704">
-<h3 id="orgcd70704">棄却域を用いる場合</h3>
+<section id="slide-org1416faa">
+<h3 id="org1416faa">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択: \(\alpha\in(0,1)\)</li>
-<li>自由度 \(p{-}1,n{-}p\) の \(F\) 分布の \(1{-}\alpha\) 分位点:
-\(F_{1{-}\alpha}(p{-}1,n{-}p)\)</li>
+<li>自由度 \(p{-}1,n{-}p\) の \(F\) 分布
+<ul>
+<li>\(F_{1{-}\alpha}(p{-}1,n{-}p)\) : \(1{-}\alpha\) 分位点</li>
+
+</ul></li>
 <li><p>
 \(H_0\) の下で以下が成立:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   P(F>F_{1{-}\alpha}(p{-}1,n{-}p))=\alpha
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 第一種過誤の上限が \(\alpha\) となる棄却域:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   R_{\alpha}=
   \left(F_{1{-}\alpha}(p{-}1,n{-}p),\infty\right)
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
 </section>
 <section>
@@ -477,41 +518,44 @@
 <li><p>
 以下の場合，帰無仮説を棄却
 </p>
+<blockquote>
 <div>
 \begin{equation}
   F>F_{1{-}\alpha}(p{-}1,n{-}p)
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1d040d3">
-<h3 id="org1d040d3">\(p\) 値を用いる場合</h3>
+<section id="slide-org608fa64">
+<h3 id="org608fa64">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 \(p\) 値を用いる方法: \(p\) 値を計算
 </p>
+<blockquote>
 <div>
 \begin{equation}
   \text{(\(p\)値)}=\int_{F}^\infty f(x)dx
 \end{equation}
 
 </div>
+</blockquote>
+<ul>
+<li>\(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の密度</li>
 
-<p>
-(\(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の密度)
-</p></li>
+</ul></li>
 <li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6c98d1b">
-<h3 id="org6c98d1b">分散分析表 (一元配置の場合)</h3>
+<section id="slide-org9fc228a">
+<h3 id="org9fc228a">分散分析表 (一元配置の場合)</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -577,8 +621,8 @@
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga03fd5c">
-<h3 id="orga03fd5c">モデルの別表現</h3>
+<section id="slide-org1906e70">
+<h3 id="org1906e70">モデルの別表現</h3>
 <ul>
 <li>各水準の平均値の相対効果による定式化:
 <ul>
@@ -587,6 +631,7 @@
 <li><p>
 平均値の別表現:
 </p>
+<blockquote>
 <div>
 \begin{equation}
     \mu_i=\mu+\alpha_i,\quad
@@ -594,26 +639,28 @@
     \sum_{i=1}^pn_i\alpha_i=0
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul></li>
-
 <li><p>
 帰無仮説 \(H_0\) は以下と同等:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   \alpha_1=\cdots=\alpha_p=0
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1f7cfce">
-<h3 id="org1f7cfce">分散分析の関数</h3>
+<section id="slide-orge02ccea">
+<h3 id="orge02ccea">分散分析の関数</h3>
 <ul>
 <li><p>
 基本書式 
@@ -621,14 +668,10 @@
 <div class="org-src-container">
 
 <pre><code class=" R" >aov(formula, data)
+## formula: 式，一元配置の場合は (観測値 ~ 因子)
+## data: データフレーム
 </code></pre>
 </div></li>
-<li>関数の引数
-<ul>
-<li><code>formula</code>: 式，一元配置の場合は (観測値 ~ 因子)</li>
-<li><code>data</code>: データフレーム</li>
-
-</ul></li>
 <li><p>
 分散分析表の表示
 </p>
@@ -643,8 +686,8 @@ model.tables(aovの結果, type="effects") # 効果
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org08e4105">
-<h3 id="org08e4105">分散分析の関数(検定のみ)</h3>
+<section id="slide-orge946673">
+<h3 id="orge946673">分散分析の関数(検定のみ)</h3>
 <ul>
 <li><p>
 基本書式 
@@ -652,17 +695,14 @@ model.tables(aovの結果, type="effects") # 効果
 <div class="org-src-container">
 
 <pre><code class=" R" >oneway.test(formula, data, subset, na.action, var.equal = FALSE)
+## formula: 式
+## data: データフレーム
+## subset: subsetの指定
+## na.action: 欠損値の扱い
+## var.equal: 等分散を仮定する場合は TRUE
 </code></pre>
 </div></li>
-<li>関数の引数
-<ul>
-<li><code>formula</code>: 式</li>
-<li><code>data</code>: データフレーム</li>
-<li><code>subset</code>: subsetの指定</li>
-<li><code>na.action</code>: 欠損値の扱い</li>
-<li><code>var.equal</code>: 等分散を仮定する場合は <code>TRUE</code></li>
-
-</ul></li>
+<li>関数の引数</li>
 
 </ul>
 
@@ -671,12 +711,12 @@ model.tables(aovの結果, type="effects") # 効果
 </section>
 </section>
 <section>
-<section id="slide-org6995085" data-background="#fef4f4">
-<h2 id="org6995085">演習</h2>
+<section id="slide-orgaee699e" data-background="#fef4f4">
+<h2 id="orgaee699e">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org703e3b5" data-background="#fef4f4">
-<h3 id="org703e3b5">練習問題</h3>
+<section id="slide-org79e3d6e" data-background="#fef4f4">
+<h3 id="org79e3d6e">練習問題</h3>
 <ul>
 <li>東京都の気候データ (<code>tokyo_weather.csv</code>) の
 気温の項目について以下の問に答えよ．
@@ -687,11 +727,11 @@ model.tables(aovの結果, type="effects") # 効果
 <div class="org-src-container">
 
 <pre><code class=" R" >## 週日を因子(factor)とするには例えば以下のような項目を加えればよい
-myData &lt;- read.csv("data/tokyo_weather.csv", fileEncoding="utf8")
-days &lt;- with(myData, # 日付を取り出して整形する
+TW.data &lt;- read.csv("data/tokyo_weather.csv")
+days &lt;- with(TW.data, # 日付を取り出して整形する
 	     as.Date(paste(年,月,日, sep="-"))) 
 wdays &lt;- weekdays(days) # 各日付の曜日を計算
-myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
+TW.data &lt;- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
 </code></pre>
 </div></li>
 <li>曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．</li>
@@ -699,18 +739,20 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 </ul></li>
 
 </ul>
+
+
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org9b23f84">
-<h2 id="org9b23f84">二元配置</h2>
-<div class="outline-text-2" id="text-org9b23f84">
+<section id="slide-orgea21587">
+<h2 id="orgea21587">二元配置</h2>
+<div class="outline-text-2" id="text-orgea21587">
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcb94316">
-<h3 id="orgcb94316">二元配置の問題</h3>
+<section id="slide-orgbc5feb6">
+<h3 id="orgbc5feb6">二元配置の問題</h3>
 <ul>
 <li>因子が2種類ある場合
 <ul>
@@ -718,7 +760,7 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 <li>もう一方の因子の水準で平均値に差があるかは不問</li>
 
 </ul></li>
-<li>例: 複数の薬の効能を複数の被験者に投与する治験
+<li><span style="color:darkgreen;">複数の薬の効能を複数の被験者に投与する治験</span>
 <ul>
 <li>&ldquo;薬の種類&rdquo;と&ldquo;被験者番号&rdquo;の2種類の因子</li>
 <li>&ldquo;薬の種類&rdquo;という因子での薬の効能の差を検証したい</li>
@@ -731,31 +773,33 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4efd244">
-<h3 id="org4efd244">二元配置のモデル</h3>
+<section id="slide-orgda328fa">
+<h3 id="orgda328fa">二元配置のモデル</h3>
 <ul>
 <li>2種類の因子 \(A, B\)
 <ul>
 <li>因子 \(A\) には \(a\) 個の水準: \(A_1,\dotsc,A_a\)</li>
 <li>因子 \(B\) には \(b\) 個の水準: \(B_1,\dotsc,B_b\)</li>
 <li>因子 \(A,B\) の水準がそれぞれ \(A_i,B_j\) である観測値: \(Y_{ij}\)</li>
-<li>(各水準ごとに1つの観測値が得られる一番簡単な場合を想定)</li>
+<li><span style="color:gray;">各水準ごとに1つの観測値が得られる一番簡単な場合を想定</span></li>
 
 </ul></li>
 <li><p>
 観測データのモデル:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   Y_{ij}=\alpha_i+\beta_j+\varepsilon_{ij}\quad
   (i=1,\dotsc,a;\;j=1,\dotsc,b).
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li>モデルの仮定:
 <ul>
-<li>\(\alpha_i,\beta_j\) は定数，それぞれ因子 \(A,B\) の水準 \(A_i,B_j\) における効果</li>
+<li>因子 \(A,B\) の水準 \(A_i,B_j\) における効果
+\(\alpha_i,\beta_j\) は定数</li>
 <li>\(\varepsilon_{ij}\) は独立同分布 (平均0, 分散 \(\sigma^2\) の正規分布)</li>
 
 </ul></li>
@@ -764,10 +808,10 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd0c2544">
-<h3 id="orgd0c2544">二元配置の例</h3>
+<section id="slide-orgb56be86">
+<h3 id="orgb56be86">二元配置の例</h3>
 <ul>
-<li>例: 複数の薬の治験の問題
+<li><span style="color:darkgreen;">複数の薬の治験の問題</span>
 <ul>
 <li>因子
 <ul>
@@ -789,8 +833,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6db4e87">
-<h3 id="org6db4e87">二元配置の検定</h3>
+<section id="slide-orgfdcd0ba">
+<h3 id="orgfdcd0ba">二元配置の検定</h3>
 <ul>
 <li><p>
 検定問題
@@ -805,13 +849,15 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 <li><p>
 対立仮説: 因子 \(A\) の効果に差のあるものがある
 </p>
+<blockquote>
 <div>
 \begin{equation}
   H_0:\alpha_1=\cdots=\alpha_a\quad\text{vs}\quad
   H_1:\text{ある\(i_1,i_2\)に対して}\alpha_{i_1}\neq\alpha_{i_2}.
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul></li>
 
@@ -819,8 +865,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org47a4e39">
-<h3 id="org47a4e39">分析の考え方</h3>
+<section id="slide-orgd160c9d">
+<h3 id="orgd160c9d">分析の考え方</h3>
 <ul>
 <li>データの変動から因子間での変動と観測誤差の変動を抽出して比較</li>
 <li><p>
@@ -957,19 +1003,20 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1eeed25">
-<h3 id="org1eeed25">二元配置の検定</h3>
+<section id="slide-orge58a653">
+<h3 id="orge58a653">二元配置の検定</h3>
 <ul>
 <li><p>
 検定統計量:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   F_A=\frac{SS_A/(a{-}1)}{SS_E/\{(a{-}1)(b{-}1)\}}
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li>帰無仮説の下で次の事実が成り立つ:
 <ul>
 <li>\(SS_A,SS_E\) は独立</li>
@@ -984,35 +1031,40 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6c95471">
-<h3 id="org6c95471">棄却域を用いる場合</h3>
+<section id="slide-orgdff6289">
+<h3 id="orgdff6289">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準: \(\alpha\in(0,1)\)</li>
-<li>自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の \(1{-}\alpha\) 分位点:
-\(F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))\)</li>
+<li>自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布
+<ul>
+<li>\(F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))\) : \(1{-}\alpha\) 分位点</li>
+
+</ul></li>
 <li><p>
 \(H_0\) の下で以下が成立:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   P(F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)))=\alpha
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 第一種過誤の上限が \(\alpha\) となる棄却域:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   R_{\alpha}=
   (F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)),\infty)
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
 </section>
 <section>
@@ -1021,39 +1073,45 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 <li><p>
 以下の場合，帰無仮説を棄却
 </p>
+<blockquote>
 <div>
 \begin{equation}
   F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
+
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgae18e95">
-<h3 id="orgae18e95">\(p\) 値を用いる場合</h3>
+<section id="slide-orgac54b25">
+<h3 id="orgac54b25">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 値を計算
 </p>
+<blockquote>
 <div>
 \begin{equation}
   \text{(\(p\)値)}=\int_{F_A}^\infty f(x)dx
 \end{equation}
 
 </div>
-<p>
-(\(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度関数)
-</p></li>
+</blockquote>
+<ul>
+<li>\(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度関数</li>
+
+</ul></li>
 <li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org56d5375">
-<h3 id="org56d5375">分散分析表 (二元配置の場合)</h3>
+<section id="slide-orgbf450b8">
+<h3 id="orgbf450b8">分散分析表 (二元配置の場合)</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1113,8 +1171,8 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8ab240d">
-<h3 id="org8ab240d">モデルの別表現</h3>
+<section id="slide-orgac8e846">
+<h3 id="orgac8e846">モデルの別表現</h3>
 <p>
 相対効果による定式化:
 </p>
@@ -1156,19 +1214,21 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 <li><p>
 帰無仮説 \(H_0\) は以下と同等:
 </p>
+<blockquote>
 <div>
 \begin{equation}
   \alpha^*_1=\cdots=\alpha^*_a=0
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
 
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc2b92a1">
-<h3 id="orgc2b92a1">分散分析の関数</h3>
+<section id="slide-orgfcfde17">
+<h3 id="orgfcfde17">分散分析の関数</h3>
 <ul>
 <li><p>
 基本書式 
@@ -1176,15 +1236,11 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 <div class="org-src-container">
 
 <pre><code class=" R" >aov(formula, data)
+## formula: 式，二元配置の場合は (観測値 ~ 因子 + 因子)
+## data: データフレーム
 </code></pre>
 </div></li>
-<li>関数の引数
-<ul>
-<li><code>formula</code>: 式，二元配置の場合は (観測値 ~ 因子 + 因子)</li>
-<li><code>data</code>: データフレーム</li>
-
-</ul></li>
-<li>分散分析表などは同様</li>
+<li>分散分析表なども同様</li>
 
 </ul>
 
@@ -1193,12 +1249,12 @@ myData &lt;- cbind(myData, 曜日=as.factor(wdays)) # 曜日因子を追加
 </section>
 </section>
 <section>
-<section id="slide-org8b47db7" data-background="#fef4f4">
-<h2 id="org8b47db7">演習</h2>
+<section id="slide-org652a7c0" data-background="#fef4f4">
+<h2 id="org652a7c0">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2a2e11d" data-background="#fef4f4">
-<h3 id="org2a2e11d">練習問題</h3>
+<section id="slide-orgc861889" data-background="#fef4f4">
+<h3 id="orgc861889">練習問題</h3>
 <ul>
 <li><p>
 パッケージ <code>datarium</code> をインストールして，

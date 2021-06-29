@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-06-25 16:43:06 mura>
+# Time-stamp: <2021-06-29 17:51:23 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -28,30 +28,30 @@
     setwd("~/Desktop/lectures/u-tokyo/spring/slide")
   #+end_src
 
-
+  
 * COMMENT メモ
  
+
 * 分散分析とは
 ** 分散分析
    - 平均の差の検定: \\
      *2つのグループ間* で平均の差があるか否か
    - 分散分析: \\
      *2つ以上のグループ間* で平均の差があるか否か
-   - 分散分析における仮説の例:
+   - [[color:darkgreen][分散分析における仮説の例]]:
      #+begin_quote
      - ある小売店について"売上高は月によって差があるか"
      - ある銘柄の株価について"収益率は曜日によって差があるか"
      #+end_quote
 
 ** 基本的な考え方
-   - データの変動を分解:
+   - データの変動 (*分散*) を分解: (変動=不確定性)
      - グループ間での変動
      - 観測誤差のみに起因する変動
    - 変動の大きさを比較:
      - 平均に差がない: 自由度を除いて両者に本質的な差がない
      - 平均に差がある: グループ間の変動が増してより大きくなる
-   - 分散分析は *"データの変動の分析"* \\
-     (変動=不確定性)
+   - 分散分析は *"データの変動の分析"*
 
 
 * 分散の比の検定 (再掲)
@@ -96,10 +96,9 @@
        \end{equation}
      #+end_src
      #+end_quote
-     - \(F_{\alpha/2}(m{-}1,n{-}1)\):
-       自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(\alpha/2\) 分位点
-     - \(F_{1{-}\alpha/2}(m{-}1,n{-}1)\):
-       自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(1{-}\alpha/2\) 分位点
+     - 自由度 \(m{-}1,n{-}1\) の \(F\) 分布
+       - \(F_{\alpha/2}(m{-}1,n{-}1)\) : \(\alpha/2\) 分位点
+       - \(F_{1{-}\alpha/2}(m{-}1,n{-}1)\) : \(1{-}\alpha/2\) 分位点
    - 第一種過誤の上限が \(\alpha\) の棄却域:
      #+begin_quote
      #+begin_src latex
@@ -134,7 +133,7 @@
        \end{equation}
      #+end_src
      #+begin_quote
-     例: 小売店の売上高の問題
+     [[color:darkgreen][小売店の売上高の問題]]
      - \(A_1,A_2,\dotsc,A_p\): 月
      - \(Y_{i1},Y_{i2},\dotsc,Y_{in_i}\): \(i\) 月の各日における売上高
      #+end_quote
@@ -144,11 +143,13 @@
      - *因子*: グループ分けのこと (月ごと)
      - *水準*: 因子内の各グループのこと (1月，2月，3月，…)
    - 観測データのモデル:
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          Y_{ij}=\mu_i+\varepsilon_{ij}\quad(i=1,\dotsc,p;\;j=1,\dotsc,n_i).
        \end{equation}
      #+end_src
+     #+end_quote
    - モデルの仮定:
      - 水準 \(A_i\) における観測データの平均値 \(\mu_i\) は定数
      - \(\varepsilon_{ij}\) は独立同分布(平均0, 分散 \(\sigma^2\) の正規分布)
@@ -156,16 +157,20 @@
 ** 一元配置の検定
    - 検定問題
      #+begin_quote
-     各水準 \(A_1,A_2,\dotsc,A_p\) の平均に差があるか否かを検定する
+     各水準 \(A_1,A_2,\dotsc,A_p\)
+     の平均 \(\mu_1,\mu_2,\dotsc,\mu_{p}\)
+     に差があるか否かを検定する
      #+end_quote
      - 帰無仮説: 全ての水準で平均に差はない
      - 対立仮説: 平均の異なる水準がある
-       #+begin_src latex
-         \begin{equation}
-           H_0:\mu_1=\cdots=\mu_p\quad\text{vs}\quad
-           H_1:\text{ある\(i,j\)に対して}\mu_i\neq\mu_j.
-         \end{equation}
-       #+end_src
+     #+begin_quote
+     #+begin_src latex
+       \begin{equation}
+         H_0:\mu_1=\cdots=\mu_p\quad\text{vs}\quad
+         H_1:\text{ある\(i,j\)に対して}\mu_i\neq\mu_j.
+       \end{equation}
+     #+end_src
+     #+end_quote
 
 ** 分析の考え方
   - データの変動から因子間での変動と観測誤差の変動を抽出して比較
@@ -213,57 +218,78 @@
      - 水準内・水準間でのデータの変動はともに観測誤差が原因
      - 自由度を除けば本質的な違いはない
      - \(SS_W/(n{-}p)\), \(SS_B/(p{-}1)\) はともに \(\sigma^2\) の不偏推定量
+   #+reveal: split
+   - 変動の分解:
+     #+begin_quote
+     #+begin_src latex
+       \begin{equation}
+         \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }n{-}1}
+         =\underbrace{\text{(級内変動) }SS_W}_{\text{自由度 }n{-}p}
+         +\underbrace{\text{(級間変動) }SS_B}_{\text{自由度 }p{-}1}
+       \end{equation}
+     #+end_src
+     #+end_quote
    - 対立仮説 \(H_1\) が正しい:
      - 水準間での変動は観測誤差と平均値の差に影響される
      - \(SS_B\) は \(SS_W\) より本質的に大きくなる
 
 ** 一元配置の検定
    - 検定統計量:
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          F=\frac{SS_B/(p{-}1)}{SS_W/(n{-}p)}
        \end{equation}
      #+end_src
+     #+end_quote
    - 帰無仮説の下で次の事実が成り立つ:
      - \(SS_B,SS_W\) は独立
      - \(SS_B\) は自由度 \(p{-}1\) の \(\chi^2\) 分布に従う
      - \(SS_W\) は自由度 \(n{-}p\) の \(\chi^2\) 分布に従う
-   - 帰無分布は自由度 \(p{-}1,n{-}p\) の \(F\) 分布
+   - 帰無分布は自由度 \(p{-}1,n{-}p\) の \(F\) 分布に従う
    - 対立仮説の下 \(F\) は大きな値をとるので右片側検定
 
 ** 棄却域を用いる場合
    - 有意水準を選択: \(\alpha\in(0,1)\)
-   - 自由度 \(p{-}1,n{-}p\) の \(F\) 分布の \(1{-}\alpha\) 分位点:
-     \(F_{1{-}\alpha}(p{-}1,n{-}p)\)
+   - 自由度 \(p{-}1,n{-}p\) の \(F\) 分布
+     - \(F_{1{-}\alpha}(p{-}1,n{-}p)\) : \(1{-}\alpha\) 分位点
    - \(H_0\) の下で以下が成立:
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          P(F>F_{1{-}\alpha}(p{-}1,n{-}p))=\alpha
        \end{equation}
      #+end_src
+     #+end_quote
    - 第一種過誤の上限が \(\alpha\) となる棄却域:
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          R_{\alpha}=
          \left(F_{1{-}\alpha}(p{-}1,n{-}p),\infty\right)
        \end{equation}
      #+end_src
+     #+end_quote
    #+reveal: split
    - データから検定統計量 \(F\) の値を計算
    - 以下の場合，帰無仮説を棄却
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          F>F_{1{-}\alpha}(p{-}1,n{-}p)
        \end{equation}
      #+end_src
+     #+end_quote
 ** \(p\) 値を用いる場合
    - \(p\) 値を用いる方法: \(p\) 値を計算
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          \text{(\(p\)値)}=\int_{F}^\infty f(x)dx
        \end{equation}
      #+end_src
-     (\(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の密度)
+     #+end_quote
+     - \(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の密度
    - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 
 ** 分散分析表 (一元配置の場合)
@@ -281,6 +307,7 @@
      - 因子 \(A\) 全体の平均効果: \(\mu\)
      - 平均 \(\mu\) を基準とした各水準 \(A_i\) の相対的な効果: \(\alpha_i\)
      - 平均値の別表現:
+       #+begin_quote
        #+begin_src latex
          \begin{equation}
            \mu_i=\mu+\alpha_i,\quad
@@ -288,21 +315,23 @@
            \sum_{i=1}^pn_i\alpha_i=0
        \end{equation}
        #+end_src
+       #+end_quote
    - 帰無仮説 \(H_0\) は以下と同等:
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          \alpha_1=\cdots=\alpha_p=0
        \end{equation}
      #+end_src
+     #+end_quote
 
 ** 分散分析の関数
    - 基本書式 
      #+begin_src R :eval no
        aov(formula, data)
+       ## formula: 式，一元配置の場合は (観測値 ~ 因子)
+       ## data: データフレーム
      #+end_src
-   - 関数の引数
-     - ~formula~: 式，一元配置の場合は (観測値 ~ 因子)
-     - ~data~: データフレーム
    - 分散分析表の表示
      #+begin_src R :eval no
        summary(aovの結果)
@@ -313,13 +342,13 @@
    - 基本書式 
      #+begin_src R :eval no
        oneway.test(formula, data, subset, na.action, var.equal = FALSE)
+       ## formula: 式
+       ## data: データフレーム
+       ## subset: subsetの指定
+       ## na.action: 欠損値の扱い
+       ## var.equal: 等分散を仮定する場合は TRUE
      #+end_src
    - 関数の引数
-     - ~formula~: 式
-     - ~data~: データフレーム
-     - ~subset~: subsetの指定
-     - ~na.action~: 欠損値の扱い
-     - ~var.equal~: 等分散を仮定する場合は ~TRUE~
    
 
 * 演習
@@ -339,43 +368,44 @@
          days <- with(TW.data, # 日付を取り出して整形する
                       as.Date(paste(年,月,日, sep="-"))) 
          wdays <- weekdays(days) # 各日付の曜日を計算
-         TW.data <- cbind(TW.data, 曜日=as.factor(wdays)) # 曜日因子を追加
+         TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
        #+end_src
      - 曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．
-     #+begin_src R :eval no :exports none :tangle yes
-       ### 練習1
-       ### 一元配置分散分析
-       ## 気候データによる例
-       ## 曜日ごとの気温に差があるか否かを分散分析
-       TW.data <- read.csv("data/tokyo_weather.csv")
-       ## 曜日の情報を付加
-       days <- with(TW.data,
-                    as.Date(paste(year,month,day,sep="-"))) # 日付を作成
-       wdays <- weekdays(days) # 各日付の曜日を計算
-       TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
-       ## 箱ひげ図で可視化
-       par(family="HiraginoSans-W4") # 日本語フォントの指定
-       boxplot(temp ~ weekday, data=TW.data, 
-               col="lavender", main="曜日ごとの気温") 
-       aggregate(temp ~ weekday, data=TW.data, FUN=mean)
-       aggregate(temp ~ weekday, data=TW.data, FUN=var)
-       aggregate(temp ~ weekday, data=TW.data, FUN=sd)
-       ## 曜日ごとの気温差に関する分散分析
-       (myAov <- aov(temp ~ weekday, data=TW.data)) # aovによる分析
-       summary(myAov) # 分散分析表の表示(棄却されない)
-       model.tables(myAov, type="means")   # 水準(曜日)ごとの平均値
-       model.tables(myAov, type="effects") # 水準(曜日)ごとの効果
-       ## 検定のみ実行する場合
-       oneway.test(temp ~ weekday, data=TW.data, var.equal=TRUE) # 等分散での検定
-       oneway.test(temp ~ weekday, data=TW.data) # Welchの近似法による検定
 
-       ## 参考: 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
-       TW.data$month <- as.factor(TW.data$month) # 月を因子化
-       boxplot(temp ~ month, data=TW.data, 
-               col="lavender", main="月ごとの気温") 
-       (myAov <- aov(temp ~ month, data=TW.data)) # aovによる分析
-       summary(myAov) # 分散分析表の表示(棄却される)
-     #+end_src
+
+   #+begin_src R :eval no :exports none :tangle yes
+     ### 練習問題 一元配置分散分析
+     ## 気候データによる例
+     ## 曜日ごとの気温に差があるか否かを分散分析
+     TW.data <- read.csv("data/tokyo_weather.csv")
+     ## 曜日の情報を付加
+     days <- with(TW.data,
+                  as.Date(paste(year,month,day,sep="-"))) # 日付を作成
+     wdays <- weekdays(days) # 各日付の曜日を計算
+     TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
+     ## 箱ひげ図で可視化
+     par(family="HiraginoSans-W4") # 日本語フォントの指定
+     boxplot(temp ~ weekday, data=TW.data, 
+             col="lavender", main="曜日ごとの気温") 
+     aggregate(temp ~ weekday, data=TW.data, FUN=mean)
+     aggregate(temp ~ weekday, data=TW.data, FUN=var)
+     aggregate(temp ~ weekday, data=TW.data, FUN=sd)
+     ## 曜日ごとの気温差に関する分散分析
+     (myAov <- aov(temp ~ weekday, data=TW.data)) # aovによる分析
+     summary(myAov) # 分散分析表の表示(棄却されない)
+     model.tables(myAov, type="means")   # 水準(曜日)ごとの平均値
+     model.tables(myAov, type="effects") # 水準(曜日)ごとの効果
+     ## 検定のみ実行する場合
+     oneway.test(temp ~ weekday, data=TW.data, var.equal=TRUE) # 等分散での検定
+     oneway.test(temp ~ weekday, data=TW.data) # Welchの近似法による検定
+
+     ## 参考: 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
+     TW.data$month <- as.factor(TW.data$month) # 月を因子化
+     boxplot(temp ~ month, data=TW.data, 
+             col="lavender", main="月ごとの気温") 
+     (myAov <- aov(temp ~ month, data=TW.data)) # aovによる分析
+     summary(myAov) # 分散分析表の表示(棄却される)
+   #+end_src
 
 
 * 二元配置
@@ -383,7 +413,7 @@
   - 因子が2種類ある場合
     - 一方の因子の水準の平均値に差があるか否かを検定
     - もう一方の因子の水準で平均値に差があるかは不問
-  - 例: 複数の薬の効能を複数の被験者に投与する治験
+  - [[color:darkgreen][複数の薬の効能を複数の被験者に投与する治験]]
     - "薬の種類"と"被験者番号"の2種類の因子
     - "薬の種類"という因子での薬の効能の差を検証したい
     - "被験者番号"という因子で効能に差があることは許容したい
@@ -394,20 +424,23 @@
     - 因子 \(A\) には \(a\) 個の水準: \(A_1,\dotsc,A_a\)
     - 因子 \(B\) には \(b\) 個の水準: \(B_1,\dotsc,B_b\)
     - 因子 \(A,B\) の水準がそれぞれ \(A_i,B_j\) である観測値: \(Y_{ij}\)
-    - (各水準ごとに1つの観測値が得られる一番簡単な場合を想定)
+    - [[color:gray][各水準ごとに1つの観測値が得られる一番簡単な場合を想定]]
   - 観測データのモデル:
+    #+begin_quote
     #+begin_src latex
       \begin{equation}
         Y_{ij}=\alpha_i+\beta_j+\varepsilon_{ij}\quad
         (i=1,\dotsc,a;\;j=1,\dotsc,b).
       \end{equation}
     #+end_src
+    #+end_quote
   - モデルの仮定:
-    - \(\alpha_i,\beta_j\) は定数，それぞれ因子 \(A,B\) の水準 \(A_i,B_j\) における効果
+    - 因子 \(A,B\) の水準 \(A_i,B_j\) における効果
+      \(\alpha_i,\beta_j\) は定数
     - \(\varepsilon_{ij}\) は独立同分布 (平均0, 分散 \(\sigma^2\) の正規分布)
 
 ** 二元配置の例
-  - 例: 複数の薬の治験の問題
+  - [[color:darkgreen][複数の薬の治験の問題]]
     - 因子
       - 因子 \(A\): "薬の種類"
       - 因子 \(B\): "被験者番号"
@@ -423,12 +456,14 @@
      #+end_quote
      - 帰無仮説: 因子 \(A\) の効果 \(\alpha_{i}\) に差はない
      - 対立仮説: 因子 \(A\) の効果に差のあるものがある
+       #+begin_quote
        #+begin_src latex
          \begin{equation}
            H_0:\alpha_1=\cdots=\alpha_a\quad\text{vs}\quad
            H_1:\text{ある\(i_1,i_2\)に対して}\alpha_{i_1}\neq\alpha_{i_2}.
          \end{equation}
        #+end_src
+       #+end_quote
 
 ** 分析の考え方
   - データの変動から因子間での変動と観測誤差の変動を抽出して比較
@@ -517,11 +552,13 @@
 
 ** 二元配置の検定
   - 検定統計量:
+    #+begin_quote
     #+begin_src latex
       \begin{equation}
         F_A=\frac{SS_A/(a{-}1)}{SS_E/\{(a{-}1)(b{-}1)\}}
       \end{equation}
     #+end_src
+    #+end_quote
   - 帰無仮説の下で次の事実が成り立つ:
     - \(SS_A,SS_E\) は独立
     - \(SS_A\) は自由度 \(a{-}1\) の \(\chi^2\) 分布に従う
@@ -531,33 +568,46 @@
 
 ** 棄却域を用いる場合
   - 有意水準: \(\alpha\in(0,1)\)
-  - 自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の \(1{-}\alpha\) 分位点:
-    \(F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))\)
+  - 自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布
+    - \(F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))\) : \(1{-}\alpha\) 分位点
   - \(H_0\) の下で以下が成立:
+    #+begin_quote
     #+begin_src latex
       \begin{equation}
         P(F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)))=\alpha
       \end{equation}
     #+end_src
+    #+end_quote
   - 第一種過誤の上限が \(\alpha\) となる棄却域:
+    #+begin_quote
     #+begin_src latex
       \begin{equation}
         R_{\alpha}=
         (F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)),\infty)
       \end{equation}
     #+end_src
+    #+end_quote
   #+reveal: split
   - データから検定統計量 \(F_A\) の値を計算
   - 以下の場合，帰無仮説を棄却
-    \begin{equation}
-      F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))
-    \end{equation}
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}
+        F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))
+      \end{equation}
+    #+end_src
+    #+end_quote
+
 ** \(p\) 値を用いる場合
   - 値を計算
-    \begin{equation}
-      \text{(\(p\)値)}=\int_{F_A}^\infty f(x)dx
-    \end{equation}
-    (\(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度関数)
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}
+        \text{(\(p\)値)}=\int_{F_A}^\infty f(x)dx
+      \end{equation}
+    #+end_src
+    #+end_quote
+    - \(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度関数
   - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 
 ** 分散分析表 (二元配置の場合)
@@ -596,21 +646,22 @@
     #+end_quote
   #+reveal: split
   - 帰無仮説 \(H_0\) は以下と同等:
+    #+begin_quote
     #+begin_src latex
       \begin{equation}
         \alpha^*_1=\cdots=\alpha^*_a=0
       \end{equation}
     #+end_src
+    #+end_quote
 
 ** 分散分析の関数
    - 基本書式 
      #+begin_src R :eval no
        aov(formula, data)
+       ## formula: 式，二元配置の場合は (観測値 ~ 因子 + 因子)
+       ## data: データフレーム
      #+end_src
-   - 関数の引数
-     - ~formula~: 式，二元配置の場合は (観測値 ~ 因子 + 因子)
-     - ~data~: データフレーム
-   - 分散分析表などは同様
+   - 分散分析表なども同様
      
 
 * 演習
@@ -634,35 +685,35 @@
      - データを適当な方法で可視化しなさい．
      - それぞれの因子で満足度の平均に違いがあるか
        二元配置の分散分析を用いて検討しなさい．
-     #+begin_src R :eval no :exports none :tangle yes
-       ### 練習2
-       ### 二元配置分散分析
-       ## datarium::jobsatisfaction による例
-       ## 性別(gender)と学歴(education_level)による仕事の満足度
-       ## 満足度にそれぞれの因子の効果があるかを検証
-       ## install.packages("datarium") # 検定用のデータが集められている
-       library(datarium) # packageの読み込み
-       head(jobsatisfaction) # データの一部を見る
-       ## boxplotによる視覚化
-       boxplot(score ~ education_level + gender,
-               data=jobsatisfaction,
-               col=rep(c("lightblue","pink"),each=3))
-       ## 比較するために表示を工夫してみる
-       boxplot(score ~ education_level + gender,
-               data=jobsatisfaction,
-               col=rep(c("yellow","palegreen","royalblue"),2),
-               names=c("","male","","","female",""))
-       legend("topleft",inset=0.05,
-              col=c("yellow","palegreen","royalblue"),
-              lwd=3, cex=0.5,
-              legend=c("school","college","university"))
-       ## 二元配置分散分析
-       (myAov <- aov(score ~ gender + education_level,
-                     data=jobsatisfaction))
-       summary(myAov)
-       model.tables(myAov, type="means")  
-       model.tables(myAov, type="effects")
-     #+end_src
+
+   #+begin_src R :eval no :exports none :tangle yes
+     ### 練習問題 二元配置分散分析
+     ## datarium::jobsatisfaction による例
+     ## 性別(gender)と学歴(education_level)による仕事の満足度
+     ## 満足度にそれぞれの因子の効果があるかを検証
+     ## install.packages("datarium") # 検定用のデータが集められている
+     library(datarium) # packageの読み込み
+     head(jobsatisfaction) # データの一部を見る
+     ## boxplotによる視覚化
+     boxplot(score ~ education_level + gender,
+             data=jobsatisfaction,
+             col=rep(c("lightblue","pink"),each=3))
+     ## 比較するために表示を工夫してみる
+     boxplot(score ~ education_level + gender,
+             data=jobsatisfaction,
+             col=rep(c("yellow","palegreen","royalblue"),2),
+             names=c("","male","","","female",""))
+     legend("topleft",inset=0.05,
+            col=c("yellow","palegreen","royalblue"),
+            lwd=3, cex=0.5,
+            legend=c("school","college","university"))
+     ## 二元配置分散分析
+     (myAov <- aov(score ~ gender + education_level,
+                   data=jobsatisfaction))
+     summary(myAov)
+     model.tables(myAov, type="means")  
+     model.tables(myAov, type="effects")
+   #+end_src
 
 
 * COMMENT ローカル変数
