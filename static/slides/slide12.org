@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-06-29 17:51:23 mura>
+# Time-stamp: <2021-07-02 16:02:40 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -45,7 +45,7 @@
      #+end_quote
 
 ** 基本的な考え方
-   - データの変動 (*分散*) を分解: (変動=不確定性)
+   - データの変動 (*分散*) =不確定性を分解:
      - グループ間での変動
      - 観測誤差のみに起因する変動
    - 変動の大きさを比較:
@@ -72,7 +72,7 @@
    # - \(Y_1,\dotsc,Y_n\) の不偏分散: \(s_2^2\)
    - このとき \(s_1^2,s_2^2\) は独立でそれぞれ
      - \((m{-}1)s_1^2/\sigma_1^2\)
-       自由度 \(m{-}1\) の \(\chi^2\)-分布に従う
+       は自由度 \(m{-}1\) の \(\chi^2\)-分布に従う
      - \((n{-}1)s_2^2/\sigma_2^2\)
        は自由度 \(n{-}1\) の \(\chi^2\)-分布に従う
    - 検定統計量:
@@ -80,6 +80,12 @@
      #+begin_src latex
        \begin{equation}
          F=\frac{s_1^2}{s_2^2}
+         \left(
+           =
+           \frac
+           {((m{-}1)s_1^2/\sigma_1^2)/(m{-}1)}
+           {((n{-}1)s_2^2/\sigma_2^2)/(n{-}1)}
+         \right)
        \end{equation}
      #+end_src
      #+end_quote
@@ -124,24 +130,33 @@
 
 * 一元配置
 ** 一元配置の問題設定
-   - グループ分けが1種類:
-     \(p\) グループ \(A_1,A_2,\dotsc,A_p\)
+   - グループ分けが1種類: \(p\) グループ
+     \(A_1,A_2,\dotsc,A_p\)
+     # #+begin_quote
+     # #+begin_src latex
+     #   \begin{equation}
+     #     A_1,A_2,\dotsc,A_p
+     #   \end{equation}
+     # #+end_src
+     # #+end_quote
    - 各グループ \(i\) ごとに \(n_i\) 個のデータを観測
+     #+begin_quote
      #+begin_src latex
        \begin{equation}
          Y_{i1},Y_{i2},\dotsc,Y_{in_i},\quad (i=1,2,\dotsc,p)
        \end{equation}
      #+end_src
+     #+end_quote
+   - [[color:darkgreen][小売店の売上高の問題]]
      #+begin_quote
-     [[color:darkgreen][小売店の売上高の問題]]
      - \(A_1,A_2,\dotsc,A_p\): 月
      - \(Y_{i1},Y_{i2},\dotsc,Y_{in_i}\): \(i\) 月の各日における売上高
      #+end_quote
 
 ** 一元配置のモデル
    - 分散分析の用語:
-     - *因子*: グループ分けのこと (月ごと)
-     - *水準*: 因子内の各グループのこと (1月，2月，3月，…)
+     - *因子*: グループ分けのこと ([[color:darkgreen][月ごと]])
+     - *水準*: 因子内の各グループのこと ([[color:darkgreen][1月，2月，3月，…]])
    - 観測データのモデル:
      #+begin_quote
      #+begin_src latex
@@ -202,7 +217,7 @@
     #+end_src
     #+end_quote
     - *級内変動*: 各水準内でのデータの変動 (観測誤差に起因)
-    - *級間変動*: 水準間でのデータの変動
+    - *級間変動*: 水準間でのデータの変動 (水準ごとのデータ数で重みづけ)
    #+reveal: split
    - 変動の分解:
      #+begin_quote
@@ -217,7 +232,8 @@
    - 帰無仮説 \(H_0\) が正しい:
      - 水準内・水準間でのデータの変動はともに観測誤差が原因
      - 自由度を除けば本質的な違いはない
-     - \(SS_W/(n{-}p)\), \(SS_B/(p{-}1)\) はともに \(\sigma^2\) の不偏推定量
+     - \(SS_T/(n{-}1)\) は \(\sigma^2\) の不偏推定量
+     - \(SS_W/(n{-}p)\), \(SS_B/(p{-}1)\) もともに \(\sigma^2\) の不偏推定量
    #+reveal: split
    - 変動の分解:
      #+begin_quote
@@ -230,7 +246,7 @@
      #+end_src
      #+end_quote
    - 対立仮説 \(H_1\) が正しい:
-     - 水準間での変動は観測誤差と平均値の差に影響される
+     - 水準間での変動 \(SS_B\) は観測誤差と平均値の差に影響される
      - \(SS_B\) は \(SS_W\) より本質的に大きくなる
 
 ** 一元配置の検定
@@ -280,12 +296,12 @@
        \end{equation}
      #+end_src
      #+end_quote
-** \(p\) 値を用いる場合
+** \(p\)-値を用いる場合
    - \(p\) 値を用いる方法: \(p\) 値を計算
      #+begin_quote
      #+begin_src latex
        \begin{equation}
-         \text{(\(p\)値)}=\int_{F}^\infty f(x)dx
+         \text{(\(p\)-値)}=\int_{F}^\infty f(x)dx
        \end{equation}
      #+end_src
      #+end_quote
@@ -301,6 +317,7 @@
    |--------+---------+--------+----------------+--------+------------------------------------+---|
    | 全変動 | \(n{-}1\) | \(SS_T\) |                |        |                                    |   |
    |--------+---------+--------+----------------+--------+------------------------------------+---|
+   - \(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の密度
 
 ** モデルの別表現
    - 各水準の平均値の相対効果による定式化:
@@ -328,15 +345,17 @@
 ** 分散分析の関数
    - 基本書式 
      #+begin_src R :eval no
-       aov(formula, data)
+       res <- aov(formula, data)
        ## formula: 式，一元配置の場合は (観測値 ~ 因子)
        ## data: データフレーム
+       ## 分析の結果を参照する関数がいくつかあるので，多くの場合適当なオブジェクトに代入
      #+end_src
    - 分散分析表の表示
      #+begin_src R :eval no
-       summary(aovの結果)
-       model.tables(aovの結果, type="means")   # 平均値
-       model.tables(aovの結果, type="effects") # 効果
+       summary(res) # res は上記の分析を保存したオブジェクト
+       anova(res) # summaryと同様な情報を表示，こちらは data.frame になっている
+       model.tables(res, type="means")   # 平均値
+       model.tables(res, type="effects") # 効果
      #+end_src
 ** 分散分析の関数(検定のみ)
    - 基本書式 
@@ -346,9 +365,8 @@
        ## data: データフレーム
        ## subset: subsetの指定
        ## na.action: 欠損値の扱い
-       ## var.equal: 等分散を仮定する場合は TRUE
+       ## var.equal: 等分散を仮定する場合は TRUE，標準では Welch の近似が用いられる
      #+end_src
-   - 関数の引数
    
 
 * 演習
@@ -366,12 +384,48 @@
          ## 週日を因子(factor)とするには例えば以下のような項目を加えればよい
          TW.data <- read.csv("data/tokyo_weather.csv")
          days <- with(TW.data, # 日付を取り出して整形する
-                      as.Date(paste(年,月,日, sep="-"))) 
+                      as.Date(paste(year,month,day,sep="-"))) 
          wdays <- weekdays(days) # 各日付の曜日を計算
          TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
        #+end_src
      - 曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．
 
+   #+begin_src R :eval no :exports none :tangle yes
+     ### 分散分析(一元配置)の Monte-Carlo 実験
+     fact <- as.factor(rep(LETTERS[1:3],c(10,8,12))) # 因子
+     alt <- rep(c(1,-1,1),c(10,8,12)) # 対立仮説の例
+     foo <- data.frame( # 帰無仮説が正しい場合
+         obs=rnorm(length(fact),mean=3,sd=2), # 観測値
+         fact=fact) # 因子
+     bar <- data.frame( # 対立仮説が正しい場合
+         obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
+         fact=fact) # 因子
+     anova(aov(obs ~ fact, data=foo))
+     anova(aov(obs ~ fact, data=bar))
+
+     ## 実験
+     myTrial <- function(h0=TRUE){
+         if(h0) {
+             foo <- data.frame( # 帰無仮説が正しい場合
+                 obs=rnorm(length(fact),mean=3,sd=2), # 観測値
+                 fact=fact # 因子
+             )
+         } else {
+             foo <- data.frame( # 対立仮説が正しい場合
+                 obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
+                 fact=fact # 因子
+             )
+         }
+         return(anova(aov(obs ~ fact, data=foo))["fact","Pr(>F)"])
+         ## p-値を返す
+     }
+     ## 帰無仮説が正しい場合のp-値の分布 (一様分布になる)
+     hist(replicate(2000,myTrial()),
+          xlab="p-value", main="H0 = TRUE")
+     ## 対立仮説が正しい場合のp-値の分布 (小さな値に偏る)
+     hist(replicate(2000,myTrial(h0=FALSE)),
+          xlab="p-value", main="H0 = FALSE")
+   #+end_src
 
    #+begin_src R :eval no :exports none :tangle yes
      ### 練習問題 一元配置分散分析
@@ -393,6 +447,7 @@
      ## 曜日ごとの気温差に関する分散分析
      (myAov <- aov(temp ~ weekday, data=TW.data)) # aovによる分析
      summary(myAov) # 分散分析表の表示(棄却されない)
+     anova(myAov)["weekday","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
      model.tables(myAov, type="means")   # 水準(曜日)ごとの平均値
      model.tables(myAov, type="effects") # 水準(曜日)ごとの効果
      ## 検定のみ実行する場合
@@ -405,6 +460,7 @@
              col="lavender", main="月ごとの気温") 
      (myAov <- aov(temp ~ month, data=TW.data)) # aovによる分析
      summary(myAov) # 分散分析表の表示(棄却される)
+     anova(myAov)["month","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
    #+end_src
 
 
@@ -413,11 +469,14 @@
   - 因子が2種類ある場合
     - 一方の因子の水準の平均値に差があるか否かを検定
     - もう一方の因子の水準で平均値に差があるかは不問
-  - [[color:darkgreen][複数の薬の効能を複数の被験者に投与する治験]]
+  - [[color:darkgreen][複数の薬の治験の問題]]
+    #+begin_quote
+    複数の薬の効能を複数の被験者に投与する実験
     - "薬の種類"と"被験者番号"の2種類の因子
     - "薬の種類"という因子での薬の効能の差を検証したい
     - "被験者番号"という因子で効能に差があることは許容したい
       (薬の効き目には個人差があると考えられるため)
+    #+end_quote
 
 ** 二元配置のモデル
   - 2種類の因子 \(A, B\)
@@ -598,12 +657,12 @@
     #+end_src
     #+end_quote
 
-** \(p\) 値を用いる場合
+** \(p\)-値を用いる場合
   - 値を計算
     #+begin_quote
     #+begin_src latex
       \begin{equation}
-        \text{(\(p\)値)}=\int_{F_A}^\infty f(x)dx
+        \text{(\(p\)-値)}=\int_{F_A}^\infty f(x)dx
       \end{equation}
     #+end_src
     #+end_quote
@@ -611,15 +670,15 @@
   - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 
 ** 分散分析表 (二元配置の場合)
-   |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
-   |                | 自由度           | 平方和 | 平均平方和                                 | \(F\text{値}\) | \(p\text{値}\)                                                   |
-   |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
-   | \(\text{因子}A\) | \(a{-}1\)          | \(SS_A\) | \(\displaystyle\frac{SS_A}{a{-}1}\)          | \(F_A\)        | \(\displaystyle\int_{F_A}^\infty f_{a{-}1,(a{-}1)(b{-}1)}(x)dx\) |
-   | \(\text{因子}B\) | \(b{-}1\)          | \(SS_B\) | \(\displaystyle\frac{SS_B}{b{-}1}\)          | \(F_B\)        | \(\displaystyle\int_{F_B}^\infty f_{b{-}1,(a{-}1)(b{-}1)}(x)dx\) |
-   |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
-   | \(\text{誤差}\)  | \((a{-}1)(b{-}1)\) | \(SS_E\) | \(\displaystyle\frac{SS_E}{(a{-}1)(b{-}1)}\) |              |                                                                |
-   |----------------+------------------+--------+--------------------------------------------+--------------+----------------------------------------------------------------|
-   
+   |------------------+--------------------+----------+----------------------------------------------+----------------+-------------------------------------------|
+   |                  | 自由度             | 平方和   | 平均平方和                                   | \(F\text{値}\) | \(p\text{値}\)                            |
+   |------------------+--------------------+----------+----------------------------------------------+----------------+-------------------------------------------|
+   | \(\text{因子}A\) | \(a{-}1\)          | \(SS_A\) | \(\displaystyle\frac{SS_A}{a{-}1}\)          | \(F_A\)        | \(\displaystyle\int_{F_A}^\infty f(x)dx\) |
+   | \(\text{因子}B\) | \(b{-}1\)          | \(SS_B\) | \(\displaystyle\frac{SS_B}{b{-}1}\)          | \(F_B\)        | \(\displaystyle\int_{F_B}^\infty f(x)dx\) |
+   |------------------+--------------------+----------+----------------------------------------------+----------------+-------------------------------------------|
+   | \(\text{誤差}\)  | \((a{-}1)(b{-}1)\) | \(SS_E\) | \(\displaystyle\frac{SS_E}{(a{-}1)(b{-}1)}\) |                |                                           |
+   |------------------+--------------------+----------+----------------------------------------------+----------------+-------------------------------------------|
+   - \(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度関数
   # 因子 \(A\) ではなく因子 \(B\) の水準間の平均の差に関心がある場合は，
   # \(A\) と \(B\) の役割を入れ替えて同様の議論を行えばよい  
 
@@ -694,6 +753,7 @@
      ## install.packages("datarium") # 検定用のデータが集められている
      library(datarium) # packageの読み込み
      head(jobsatisfaction) # データの一部を見る
+     View(jobsatisfaction) # 左上ペインに表を表示する
      ## boxplotによる視覚化
      boxplot(score ~ education_level + gender,
              data=jobsatisfaction,

@@ -1,5 +1,40 @@
 ### 第12回 練習問題解答例
 
+### 分散分析(一元配置)の Monte-Carlo 実験
+fact <- as.factor(rep(LETTERS[1:3],c(10,8,12))) # 因子
+alt <- rep(c(1,-1,1),c(10,8,12)) # 対立仮説の例
+foo <- data.frame( # 帰無仮説が正しい場合
+    obs=rnorm(length(fact),mean=3,sd=2), # 観測値
+    fact=fact) # 因子
+bar <- data.frame( # 対立仮説が正しい場合
+    obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
+    fact=fact) # 因子
+anova(aov(obs ~ fact, data=foo))
+anova(aov(obs ~ fact, data=bar))
+
+## 実験
+myTrial <- function(h0=TRUE){
+    if(h0) {
+        foo <- data.frame( # 帰無仮説が正しい場合
+            obs=rnorm(length(fact),mean=3,sd=2), # 観測値
+            fact=fact # 因子
+        )
+    } else {
+        foo <- data.frame( # 対立仮説が正しい場合
+            obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
+            fact=fact # 因子
+        )
+    }
+    return(anova(aov(obs ~ fact, data=foo))["fact","Pr(>F)"])
+    ## p-値を返す
+}
+## 帰無仮説が正しい場合のp-値の分布 (一様分布になる)
+hist(replicate(2000,myTrial()),
+     xlab="p-value", main="H0 = TRUE")
+## 対立仮説が正しい場合のp-値の分布 (小さな値に偏る)
+hist(replicate(2000,myTrial(h0=FALSE)),
+     xlab="p-value", main="H0 = FALSE")
+
 ### 練習問題 一元配置分散分析
 ## 気候データによる例
 ## 曜日ごとの気温に差があるか否かを分散分析
@@ -19,6 +54,7 @@ aggregate(temp ~ weekday, data=TW.data, FUN=sd)
 ## 曜日ごとの気温差に関する分散分析
 (myAov <- aov(temp ~ weekday, data=TW.data)) # aovによる分析
 summary(myAov) # 分散分析表の表示(棄却されない)
+anova(myAov)["weekday","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
 model.tables(myAov, type="means")   # 水準(曜日)ごとの平均値
 model.tables(myAov, type="effects") # 水準(曜日)ごとの効果
 ## 検定のみ実行する場合
@@ -31,6 +67,7 @@ boxplot(temp ~ month, data=TW.data,
         col="lavender", main="月ごとの気温") 
 (myAov <- aov(temp ~ month, data=TW.data)) # aovによる分析
 summary(myAov) # 分散分析表の表示(棄却される)
+anova(myAov)["month","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
 
 ### 練習問題 二元配置分散分析
 ## datarium::jobsatisfaction による例
@@ -39,6 +76,7 @@ summary(myAov) # 分散分析表の表示(棄却される)
 ## install.packages("datarium") # 検定用のデータが集められている
 library(datarium) # packageの読み込み
 head(jobsatisfaction) # データの一部を見る
+View(jobsatisfaction) # 左上ペインに表を表示する
 ## boxplotによる視覚化
 boxplot(score ~ education_level + gender,
         data=jobsatisfaction,
