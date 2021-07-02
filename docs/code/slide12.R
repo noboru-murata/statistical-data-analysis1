@@ -9,31 +9,48 @@ foo <- data.frame( # 帰無仮説が正しい場合
 bar <- data.frame( # 対立仮説が正しい場合
     obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
     fact=fact) # 因子
+library(beeswarm) # boxplot上に散布図を表示するため
+boxplot(obs ~ fact, data=foo, 
+        col="pink", main="H0 = TRUE")
+beeswarm(obs ~ fact, data=foo,
+         add=TRUE, col="red")
 anova(aov(obs ~ fact, data=foo))
+boxplot(obs ~ fact, data=bar, 
+        col="lightblue", main="H0 = FALSE")
+beeswarm(obs ~ fact, data=bar,
+         add=TRUE, col="blue")
 anova(aov(obs ~ fact, data=bar))
 
 ## 実験
 myTrial <- function(h0=TRUE){
     if(h0) {
-        foo <- data.frame( # 帰無仮説が正しい場合
+        tmp <- data.frame( # 帰無仮説が正しい場合
             obs=rnorm(length(fact),mean=3,sd=2), # 観測値
             fact=fact # 因子
         )
     } else {
-        foo <- data.frame( # 対立仮説が正しい場合
+        tmp <- data.frame( # 対立仮説が正しい場合
             obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
             fact=fact # 因子
         )
     }
-    return(anova(aov(obs ~ fact, data=foo))["fact","Pr(>F)"])
+    return(anova(aov(obs ~ fact, data=tmp))["fact",c("F value","Pr(>F)"),drop=TRUE])
     ## p-値を返す
 }
-## 帰無仮説が正しい場合のp-値の分布 (一様分布になる)
-hist(replicate(2000,myTrial()),
+## 帰無仮説が正しい場合のF-値/p-値の分布 (一様分布になる)
+foo <- replicate(2000,myTrial())
+hist(unlist(foo["F value",]),
+     xlab="F-value", main="H0 = TRUE")
+hist(unlist(foo["Pr(>F)",]),
      xlab="p-value", main="H0 = TRUE")
 ## 対立仮説が正しい場合のp-値の分布 (小さな値に偏る)
-hist(replicate(2000,myTrial(h0=FALSE)),
+bar <- replicate(2000,myTrial(h0=FALSE))
+hist(unlist(bar["F value",]),
+     xlab="F-value", main="H0 = FALSE")
+hist(unlist(bar["Pr(>F)",]),
      xlab="p-value", main="H0 = FALSE")
+## foo <- data.frame(t(replicate....)) としてもよいが
+## data.frame の名前に空白や>が許されず，適宜書き変わるので注意
 
 ### 練習問題 一元配置分散分析
 ## 気候データによる例
