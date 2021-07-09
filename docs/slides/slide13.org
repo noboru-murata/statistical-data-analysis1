@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-07-09 14:29:45 mura>
+# Time-stamp: <2021-07-09 16:19:58 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content
@@ -562,7 +562,7 @@
          \end{equation}
        #+end_src
        #+end_quote
-     - 不偏推定量で置き換え: *自由度調整済み決定係数* (または寄与率)
+     - 不偏推定量で代替: *自由度調整済み決定係数* (または寄与率)
        #+begin_quote
        #+begin_src latex
          \begin{equation}
