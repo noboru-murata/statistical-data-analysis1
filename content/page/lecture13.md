@@ -1,5 +1,5 @@
 +++
-title = "講義13"
+title = "第13講"
 author = ["Noboru Murata"]
 date = 2021-04-03T00:00:00+09:00
 draft = false

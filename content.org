@@ -34,7 +34,7 @@
    [[https://noboru-murata.github.io/statistical-data-analysis2/][こちら]]
    にあります．
    
-* 講義1
+* 第1講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture01
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -47,7 +47,7 @@
 ** 解答例
    - [[github:code/slide01.R][RScript]]
 
-* 講義2
+* 第2講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture02
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -60,7 +60,7 @@
 ** 解答例
    - [[github:code/slide02.R][RScript]]
 
-* 講義3
+* 第3講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture03
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -73,7 +73,7 @@
 ** 解答例
    - [[github:code/slide03.R][RScript]]
 
-* 講義4
+* 第4講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture04
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -88,7 +88,7 @@
 ** 練習用データ
    - [[github:zips/jpdata.zip][jpdata]]
 
-* 講義5
+* 第5講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture05
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -103,7 +103,7 @@
 ** 練習用データ
    - [[github:zips/tokyo.zip][tokyo]] (修正版を掲載しました <2021-05-08 Sat>)
 
-* 講義6
+* 第6講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture06
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -118,7 +118,7 @@
    - [[github:zips/mc.zip][確率シミュレーションの例]]
    - [[github:zips/epidemic.zip][確率シミュレーションの例 (追加)]]
 
-* 講義7
+* 第7講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture07
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -131,7 +131,7 @@
 ** 解答例
    - [[github:code/slide07.R][RScript]]
 
-* 講義8
+* 第8講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture08
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -144,7 +144,7 @@
 ** 解答例
    - [[github:code/slide08.R][RScript]]
 
-* 講義9
+* 第9講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture09
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -157,7 +157,7 @@
 ** 解答例
    - [[github:code/slide09.R][RScript]] 
 
-* 講義10
+* 第10講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture10
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -170,7 +170,7 @@
 ** 解答例
    - [[github:code/slide10.R][RScript]]
 
-* 講義11
+* 第11講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture11
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -183,7 +183,7 @@
 ** 解答例
    - [[github:code/slide11.R][RScript]]
 
-* 講義12
+* 第12講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture12
   :EXPORT_DATE: <2020-09-19 Sat>
@@ -222,7 +222,7 @@
 # ** COMMENT 解答例
 #    - [[github:code/slide14.R][RScript]]
 
-* 講義13
+* 第13講
   :PROPERTIES:
   :EXPORT_FILE_NAME: lecture13
   :EXPORT_DATE: <2021-04-03 Sat>
