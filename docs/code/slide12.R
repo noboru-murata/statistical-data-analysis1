@@ -4,11 +4,11 @@
 fact <- as.factor(rep(LETTERS[1:3],c(10,8,12))) # 因子
 alt <- rep(c(1,-1,1),c(10,8,12)) # 対立仮説の例
 foo <- data.frame( # 帰無仮説が正しい場合
-    obs=rnorm(length(fact),mean=3,sd=2), # 観測値
-    fact=fact) # 因子
+  obs=rnorm(length(fact),mean=3,sd=2), # 観測値
+  fact=fact) # 因子
 bar <- data.frame( # 対立仮説が正しい場合
-    obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
-    fact=fact) # 因子
+  obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
+  fact=fact) # 因子
 library(beeswarm) # boxplot上に散布図を表示するため
 boxplot(obs ~ fact, data=foo, 
         col="pink", main="H0 = TRUE")
@@ -23,19 +23,19 @@ anova(aov(obs ~ fact, data=bar))
 
 ## 実験
 myTrial <- function(h0=TRUE){
-    if(h0) {
-        tmp <- data.frame( # 帰無仮説が正しい場合
-            obs=rnorm(length(fact),mean=3,sd=2), # 観測値
-            fact=fact # 因子
-        )
-    } else {
-        tmp <- data.frame( # 対立仮説が正しい場合
-            obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
-            fact=fact # 因子
-        )
-    }
-    return(anova(aov(obs ~ fact, data=tmp))["fact",c("F value","Pr(>F)"),drop=TRUE])
-    ## p-値を返す
+  if(h0) {
+    tmp <- data.frame( # 帰無仮説が正しい場合
+      obs=rnorm(length(fact),mean=3,sd=2), # 観測値
+      fact=fact # 因子
+    )
+  } else {
+    tmp <- data.frame( # 対立仮説が正しい場合
+      obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
+      fact=fact # 因子
+    )
+  }
+  return(anova(aov(obs ~ fact, data=tmp))["fact",c("F value","Pr(>F)"),drop=TRUE])
+  ## p-値を返す
 }
 ## 帰無仮説が正しい場合のF-値/p-値の分布 (一様分布になる)
 foo <- replicate(2000,myTrial())

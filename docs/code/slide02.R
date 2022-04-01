@@ -75,9 +75,9 @@ L1$first
 
 ## 前回の練習問題の例
 df <- data.frame(
-    literature=c(90,80,70,60),
-    math=c(25,50,75,100),
-    english=c(65,100,70,40))
+  literature=c(90,80,70,60),
+  math=c(25,50,75,100),
+  english=c(65,100,70,40))
 row.names(df) <- x # 各行の名前を書き換える
 df
 
@@ -142,11 +142,11 @@ BAR %*% t(BAR) # 行列による別の方法
 ## 30度の回転行列の2乗は60度の回転行列
 theta <- pi/6 # 30度のラジアン値
 (R30 <- # 30度の回転行列
-     matrix(c(cos(theta),sin(theta),
-              -sin(theta),cos(theta)),2,2))
+   matrix(c(cos(theta),sin(theta),
+            -sin(theta),cos(theta)),2,2))
 (R60 <- # 60度の回転行列
-     matrix(c(cos(2*theta),sin(2*theta),
-		-sin(2*theta),cos(2*theta)),2,2))
+   matrix(c(cos(2*theta),sin(2*theta),
+            -sin(2*theta),cos(2*theta)),2,2))
 R30 %*% R30 # 30度の回転行列の2乗を表示
 
 ### ベクトルと行列の計算で用いた例

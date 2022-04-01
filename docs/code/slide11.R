@@ -7,8 +7,8 @@ sd0 <- 3
 mc <- 10000
 alpha <- 0.05
 myTrial <- function(n){ 
-    result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
-    return(result$p.value)}
+  result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
+  return(result$p.value)}
 myData <- replicate(mc, myTrial(n))
 hist(myData,xlab="p value") # p.valueの分布を見る
 table(myData<alpha)/mc # alpha以下の結果の数を調べる=サイズ
@@ -26,9 +26,9 @@ t.test(x,mu=mu0,alternative="greater")
 mc <- 10000
 alpha <- 0.03 # 
 myTrial <- function(n){ 
-    x <- sample(0:1,n,replace=TRUE,prob=c(1-mu1,mu1))
-    result <- t.test(x,mu=mu0,alternative="greater")
-    return(result$p.value)}
+  x <- sample(0:1,n,replace=TRUE,prob=c(1-mu1,mu1))
+  result <- t.test(x,mu=mu0,alternative="greater")
+  return(result$p.value)}
 myData <- replicate(mc, myTrial(n))
 hist(myData,xlab="p value") # p.valueの分布を見る
 table(myData<alpha)/mc # alpha以下のデータの数を調べる=検出力

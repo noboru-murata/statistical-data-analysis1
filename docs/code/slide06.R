@@ -42,15 +42,15 @@ print(myData) # 実験結果は行列として保存されている
 ### 練習問題 コイン投げの賭け
 ## 試行を行う関数
 myTrial <- function(){ 
-    while(TRUE){ # 永久に回るループ
-        if(sample(c("h","t"),1)=="h"){ # h:head，t:tail
-            return("Alice") # Aliceが表を出して終了
-        }
-        if(sample(c("h","t"),1)=="h"){
-            return("Bob") # Bobが表を出して終了
-        }
-        ## どちらも裏ならもう一度ループ
+  while(TRUE){ # 永久に回るループ
+    if(sample(c("h","t"),1)=="h"){ # h:head，t:tail
+      return("Alice") # Aliceが表を出して終了
     }
+    if(sample(c("h","t"),1)=="h"){
+      return("Bob") # Bobが表を出して終了
+    }
+    ## どちらも裏ならもう一度ループ
+  }
 }
 ## この関数は rbinom を用いても実装できるので試みてみよう
 
@@ -61,8 +61,9 @@ myTrial()
 ## Monte-Carlo simulation
 ## set.seed(8888) # 実験を再現する場合はシードを指定
 mc <- 10000 # 回数を設定 
-myData <- replicate(mc,myTrial()) 
+myData <- replicate(mc,myTrial())
+str(myData) # 結果が mc 次元のベクトルになっていることが確認できる
 
 ## 簡単な集計 (この賭けは先手が有利なはず)
 table(myData) # 頻度を表示する
-table(myData)/mc # 勝率の計算
+table(myData)/mc # 勝率の計算 (全実験回数で除算)

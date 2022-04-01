@@ -46,27 +46,26 @@
 </section>
 
 <section>
-<section id="slide-orgcf761eb">
-<h2 id="orgcf761eb">講義の内容</h2>
+<section id="slide-org319ccdc">
+<h2 id="org319ccdc">講義の内容</h2>
 <ul>
 <li>データフレームの操作</li>
 <li>ファイルの取り扱い</li>
 <li>データの集計</li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
 </section>
 <section>
-<section id="slide-org85115a7">
-<h2 id="org85115a7">データフレームの操作</h2>
-<div class="outline-text-2" id="text-org85115a7">
+<section id="slide-orgf11692c">
+<h2 id="orgf11692c">データフレームの操作</h2>
+<div class="outline-text-2" id="text-orgf11692c">
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd425ef0">
-<h3 id="orgd425ef0">Rに用意されているデータ構造</h3>
+<section id="slide-org977084b">
+<h3 id="org977084b">Rに用意されているデータ構造</h3>
 <ul>
 <li>下記は基本的なもので標準環境で利用できる
 <ul>
@@ -79,11 +78,11 @@
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org49711e2">
-<h3 id="org49711e2">データフレームからの項目の抽出</h3>
+<section id="slide-org29a8c92">
+<h3 id="org29a8c92">データフレームからの項目の抽出</h3>
 <ul>
 <li>添字の番号を指定</li>
 <li>要素の名前で指定</li>
@@ -101,11 +100,11 @@
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org092952b">
-<h3 id="org092952b">データ例</h3>
+<section id="slide-orgab6cf4e">
+<h3 id="orgab6cf4e">データ例</h3>
 <ul>
 <li><p>
 <b><code>datasets::airquality</code></b> 
@@ -139,23 +138,23 @@ A data frame with 153 observations on 6 variables.
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org2054517">
-<h3 id="org2054517">行の抽出</h3>
+<section id="slide-org1c0527b">
+<h3 id="org1c0527b">行の抽出</h3>
 <ul>
 <li><p>
 行番号による指定
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 行番号のベクトルで指定して抽出
+<pre><code class="R" >## 行番号のベクトルで指定して抽出
 airquality[1:10,] # 1-10行を抽出
 </code></pre>
 </div>
 
-<pre class="example">
+<pre class="example" id="org8afdeb1">
    Ozone Solar.R Wind Temp Month Day
 1     41     190  7.4   67     5   1
 2     36     118  8.0   72     5   2
@@ -180,7 +179,7 @@ airquality[1:10,] # 1-10行を抽出
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 条件の指定の仕方
+<pre><code class="R" >## 条件の指定の仕方
 airquality[1:15,]$Ozone&gt;100 # 条件に合致する行はTRUE (NAは欠損値)
 airquality[1:15,]$Ozone&gt;100 &amp; airquality[1:15,]$Wind&lt;=5 # 条件のAND
 with(airquality[1:15,], Ozone&gt;100 &amp; Wind&lt;=5) # 上と同じ(短い書き方)
@@ -188,21 +187,18 @@ with(airquality[1:60,], Ozone&gt;100 | Wind&lt;=5) # 条件のOR
 </code></pre>
 </div>
 
-<pre class="example">
- [1] FALSE FALSE FALSE FALSE    NA FALSE FALSE FALSE
- [9] FALSE    NA FALSE FALSE FALSE FALSE FALSE
- [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
- [9] FALSE FALSE FALSE FALSE FALSE FALSE FALSE
- [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
- [9] FALSE FALSE FALSE FALSE FALSE FALSE FALSE
- [1] FALSE FALSE FALSE FALSE    NA FALSE FALSE FALSE
- [9] FALSE    NA FALSE FALSE FALSE FALSE FALSE FALSE
-[17] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[25]    NA    NA    NA FALSE FALSE  TRUE FALSE    NA
-[33]    NA    NA    NA    NA    NA FALSE    NA FALSE
-[41] FALSE    NA    NA FALSE    NA    NA FALSE FALSE
-[49] FALSE FALSE FALSE    NA  TRUE  TRUE    NA    NA
-[57]    NA    NA    NA    NA
+<pre class="example" id="orgc821d03">
+ [1] FALSE FALSE FALSE FALSE    NA FALSE FALSE FALSE FALSE    NA FALSE FALSE
+[13] FALSE FALSE FALSE
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE
+ [1] FALSE FALSE FALSE FALSE    NA FALSE FALSE FALSE FALSE    NA FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[25]    NA    NA    NA FALSE FALSE  TRUE FALSE    NA    NA    NA    NA    NA
+[37]    NA FALSE    NA FALSE FALSE    NA    NA FALSE    NA    NA FALSE FALSE
+[49] FALSE FALSE FALSE    NA  TRUE  TRUE    NA    NA    NA    NA    NA    NA
 </pre></li>
 
 </ul>
@@ -216,7 +212,7 @@ with(airquality[1:60,], Ozone&gt;100 | Wind&lt;=5) # 条件のOR
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 関数 which() でTRUEの番号を抽出
+<pre><code class="R" >## 関数 which() でTRUEの番号を抽出
 which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)) # 全データからTRUEを抽出
 </code></pre>
 </div>
@@ -230,7 +226,7 @@ which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)) # 全データからTRUE�
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 条件を指定して行を抽出
+<pre><code class="R" >## 条件を指定して行を抽出
 airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), ] 
 </code></pre>
 </div>
@@ -244,18 +240,18 @@ airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), ]
 </pre></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-orga914a8a">
-<h3 id="orga914a8a">列の抽出</h3>
+<section id="slide-orge055a5c">
+<h3 id="orge055a5c">列の抽出</h3>
 <ul>
 <li><p>
 列番号による指定
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 列番号のベクトルで指定して抽出
+<pre><code class="R" >## 列番号のベクトルで指定して抽出
 airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), c(1,5,6)] 
 </code></pre>
 </div>
@@ -279,7 +275,7 @@ airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), c(1,5,6)]
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 複数の列の場合
+<pre><code class="R" >## 複数の列の場合
 airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)), 
 	   c("Month","Day")] 
 </code></pre>
@@ -304,7 +300,7 @@ airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)),
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 1つの列の場合は以下でも良い (ただしデータフレームではなくベクトルになる)
+<pre><code class="R" >## 1つの列の場合は以下でも良い (ただしデータフレームではなくベクトルになる)
 airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)),]$Month
 airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)),"Month"] # 上と同じ
 ## データフレームとして抽出したい場合は drop=FALSE を指定する
@@ -323,11 +319,11 @@ airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)),"Month",drop=F
 </pre></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org6cb77be">
-<h3 id="org6cb77be">関数 <code>subset()</code></h3>
+<section id="slide-org4c413b8">
+<h3 id="org4c413b8">関数 <code>subset()</code></h3>
 <ul>
 <li>複合的な条件を指定してデータを整理する関数</li>
 <li><p>
@@ -335,7 +331,7 @@ airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)),"Month",drop=F
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >subset(x, subset, select, drop=FALSE)
+<pre><code class="R" >subset(x, subset, select, drop=FALSE)
 ## x:  データフレーム 
 ## subset: 抽出する行の条件
 ## select: 列の選択(未指定の場合は全ての列)
@@ -344,18 +340,18 @@ airquality[which(with(airquality, Ozone&gt;100 &amp; Wind&lt;=5)),"Month",drop=F
 </div></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org919ef4f">
-<h3 id="org919ef4f">関数 <code>subset()</code> の例</h3>
+<section id="slide-org1d647cd">
+<h3 id="org1d647cd">関数 <code>subset()</code> の例</h3>
 <ul>
 <li><p>
 前出の例の書き換え
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >### 関数 subset() の使い方
+<pre><code class="R" >### 関数 subset() の使い方
 subset(airquality,
        subset = Ozone&gt;100 &amp; Wind&lt;=5,
        select = c(1,5,6))
@@ -365,7 +361,7 @@ subset(airquality,
 </code></pre>
 </div>
 
-<pre class="example">
+<pre class="example" id="orgc37e2eb">
     Ozone Month Day
 62    135     7   1
 99    122     8   7
@@ -389,7 +385,7 @@ subset(airquality,
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## Ozoneに欠測(NA)がなく, かつDayが5か10のデータのWindからDayまでの列を抽出
+<pre><code class="R" >## Ozoneに欠測(NA)がなく, かつDayが5か10のデータのWindからDayまでの列を抽出
 subset(airquality, 
        subset = !is.na(Ozone) &amp; Day %in% c(5,10),
        select = Wind:Day)
@@ -417,7 +413,7 @@ subset(airquality,
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
+<pre><code class="R" >## Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
 subset(airquality,
        subset = Ozone&gt;120 | Wind&lt;=3,
        select = -Temp)
@@ -435,18 +431,18 @@ subset(airquality,
 </pre></li>
 
 </ul>
-
-
 <div class="slide-footer"><br></div>
+
+
 </section>
 </section>
 <section>
-<section id="slide-org4112567" data-background="#fef4f4">
-<h2 id="org4112567">演習</h2>
+<section id="slide-org2b83a38" data-background="#fef4f4">
+<h2 id="org2b83a38">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org346ca17" data-background="#fef4f4">
-<h3 id="org346ca17">練習問題</h3>
+<section id="slide-org48641e2" data-background="#fef4f4">
+<h3 id="org48641e2">練習問題</h3>
 <ul>
 <li><code>datasets::airquality</code> に対して
 以下の条件を満たすデータを取り出しなさい．
@@ -460,19 +456,18 @@ subset(airquality,
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
 </section>
 <section>
-<section id="slide-org7b295b0">
-<h2 id="org7b295b0">ファイルの取り扱い</h2>
-<div class="outline-text-2" id="text-org7b295b0">
+<section id="slide-org70480ba">
+<h2 id="org70480ba">ファイルの取り扱い</h2>
+<div class="outline-text-2" id="text-org70480ba">
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc1ed21d">
-<h3 id="orgc1ed21d">データファイルの読み書き</h3>
+<section id="slide-org5ffbeef">
+<h3 id="org5ffbeef">データファイルの読み書き</h3>
 <ul>
 <li>実際の解析においては以下の操作が必要
 <ul>
@@ -490,11 +485,11 @@ subset(airquality,
 <li>データフレームを対象とした扱いを整理する</li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-orgff97a2a">
-<h3 id="orgff97a2a">作業ディレクトリ</h3>
+<section id="slide-org5912bc6">
+<h3 id="org5912bc6">作業ディレクトリ</h3>
 <ul>
 <li>Rは <b>作業ディレクトリ</b> で実行される
 <ul>
@@ -522,18 +517,18 @@ subset(airquality,
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org82c4c2d">
-<h3 id="org82c4c2d">関数 <code>getwd()/setwd()</code> の例</h3>
+<section id="slide-org5380be5">
+<h3 id="org5380be5">関数 <code>getwd()/setwd()</code> の例</h3>
 <ul>
 <li><p>
 コンソール / R Scriptからの作業ディレクトリの操作
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 作業ディレクトリの確認 (環境によって実行結果が異なる)
+<pre><code class="R" >## 作業ディレクトリの確認 (環境によって実行結果が異なる)
 getwd()
 ## 作業ディレクトリの移動 (環境によって指定の仕方も異なる)
 setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダに移動
@@ -545,11 +540,11 @@ setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダ
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org49cf84e">
-<h3 id="org49cf84e">関数 <code>write.csv()</code></h3>
+<section id="slide-org9323a3b">
+<h3 id="org9323a3b">関数 <code>write.csv()</code></h3>
 <ul>
 <li>データフレームをCSVファイルへ書き出す関数</li>
 <li><p>
@@ -557,7 +552,7 @@ setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダ
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >write.csv(x, file="ファイル名")
+<pre><code class="R" >write.csv(x, file="ファイル名")
 ## x: 書き出すデータフレーム
 ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
 </code></pre>
@@ -568,18 +563,18 @@ setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダ
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org17dfccb">
-<h3 id="org17dfccb">関数 <code>write.csv()</code> の例</h3>
+<section id="slide-org7c2e8de">
+<h3 id="org7c2e8de">関数 <code>write.csv()</code> の例</h3>
 <ul>
 <li><p>
 CSVファイルの書き出し
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 関数 write.csv() の使い方 (CSVファイルの操作)
+<pre><code class="R" >## 関数 write.csv() の使い方 (CSVファイルの操作)
 (myData &lt;- subset(airquality, 
 		  subset = Ozone&gt;120,
 		  select = -Temp)) # データフレームの作成
@@ -598,11 +593,11 @@ write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
 </pre></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org99a1590">
-<h3 id="org99a1590">関数 <code>read.csv()</code></h3>
+<section id="slide-org7d091ea">
+<h3 id="org7d091ea">関数 <code>read.csv()</code></h3>
 <ul>
 <li>CSVファイルからデータフレームを読み込む関数</li>
 <li><p>
@@ -610,7 +605,7 @@ write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >read.csv(file="ファイル名", header=TRUE,
+<pre><code class="R" >read.csv(file="ファイル名", header=TRUE,
 	 row.names, fileEncoding)      
 ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
 ## header: 1行目を列名として使うか否か
@@ -625,18 +620,18 @@ write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org8a31cda">
-<h3 id="org8a31cda">関数 <code>read.csv()</code> の例</h3>
+<section id="slide-org68ef4d2">
+<h3 id="org68ef4d2">関数 <code>read.csv()</code> の例</h3>
 <ul>
 <li><p>
 CSVファイルの読み込み 
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 関数 read.csv() の使い方 (CSVファイルの操作)
+<pre><code class="R" >## 関数 read.csv() の使い方 (CSVファイルの操作)
 (newData &lt;- read.csv(file="data/mydata.csv", # 前の例のファイル
 		     row.names=1)) # 1列目を行名に指定
 dim(newData) # 正しく読み込めたか大きさを確認
@@ -652,11 +647,11 @@ dim(newData) # 正しく読み込めたか大きさを確認
 </pre></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-orga8bff1f">
-<h3 id="orga8bff1f">関数 <code>save()</code></h3>
+<section id="slide-org3c0f798">
+<h3 id="org3c0f798">関数 <code>save()</code></h3>
 <ul>
 <li>RData ファイルへ書き出す関数</li>
 <li><p>
@@ -664,7 +659,7 @@ dim(newData) # 正しく読み込めたか大きさを確認
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >save(..., file="ファイル名")
+<pre><code class="R" >save(..., file="ファイル名")
 ## ...: 保存するオブジェクト名 (複数可，データフレーム以外も可)
 ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
 </code></pre>
@@ -676,18 +671,18 @@ dim(newData) # 正しく読み込めたか大きさを確認
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org7fdeeae">
-<h3 id="org7fdeeae">関数 <code>save()</code> の例</h3>
+<section id="slide-orgb12547c">
+<h3 id="orgb12547c">関数 <code>save()</code> の例</h3>
 <ul>
 <li><p>
 RDataファイルの書き出し
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >### 関数 save() の使い方 (RDataファイルの操作)
+<pre><code class="R" >### 関数 save() の使い方 (RDataファイルの操作)
 (myDat1 &lt;- subset(airquality, Temp&gt;95, select=-Ozone)) 
 (myDat2 &lt;- subset(airquality, Temp&lt;57, select=-Ozone)) 
 dim(myDat1); dim(myDat2) # 大きさを確認
@@ -706,11 +701,11 @@ save(myDat1,myDat2,file="data/mydata.rdata") # RData形式で書き出し
 </pre></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org7cdc2f4">
-<h3 id="org7cdc2f4">関数 <code>load()</code></h3>
+<section id="slide-org845fa11">
+<h3 id="org845fa11">関数 <code>load()</code></h3>
 <ul>
 <li>RDataファイルから読み込む関数</li>
 <li><p>
@@ -718,7 +713,7 @@ save(myDat1,myDat2,file="data/mydata.rdata") # RData形式で書き出し
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >load(file="ファイル名")
+<pre><code class="R" >load(file="ファイル名")
 ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
 </code></pre>
 </div>
@@ -728,18 +723,18 @@ save(myDat1,myDat2,file="data/mydata.rdata") # RData形式で書き出し
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org02e378c">
-<h3 id="org02e378c">関数 <code>load()</code> の例</h3>
+<section id="slide-org8828336">
+<h3 id="org8828336">関数 <code>load()</code> の例</h3>
 <ul>
 <li><p>
 RDataファイルの読み込み
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 関数 load() の使い方 (RDataファイルの操作)
+<pre><code class="R" >## 関数 load() の使い方 (RDataファイルの操作)
 (myDat1 &lt;- subset(airquality, Ozone &gt; 160)) # 新たに作成
 load(file="data/mydata.rdata") # RData形式の読み込み
 myDat1 # saveしたときの名前で読み込まれ上書きされる
@@ -758,18 +753,18 @@ myDat2
 </pre></li>
 
 </ul>
-
-
 <div class="slide-footer"><br></div>
+
+
 </section>
 </section>
 <section>
-<section id="slide-orgb66a657" data-background="#fef4f4">
-<h2 id="orgb66a657">演習</h2>
+<section id="slide-org81f1540" data-background="#fef4f4">
+<h2 id="org81f1540">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org86b34a3" data-background="#fef4f4">
-<h3 id="org86b34a3">練習問題</h3>
+<section id="slide-orgb4c14d8" data-background="#fef4f4">
+<h3 id="orgb4c14d8">練習問題</h3>
 <ul>
 <li>以下のデータを読み込み，操作を行ってみよう．
 <ul>
@@ -787,7 +782,7 @@ myDat2
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >myData &lt;- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
+<pre><code class="R" >myData &lt;- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
 myItem &lt;- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
 myArea &lt;- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
 </code></pre>
@@ -797,7 +792,7 @@ myArea &lt;- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >myDataEn &lt;- read.csv(file="data/jpdata1-en.csv", row.names=1)
+<pre><code class="R" >myDataEn &lt;- read.csv(file="data/jpdata1-en.csv", row.names=1)
 myAreaEn &lt;- read.csv(file="data/jpdata3-en.csv")
 </code></pre>
 </div></li>
@@ -805,19 +800,18 @@ myAreaEn &lt;- read.csv(file="data/jpdata3-en.csv")
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
 </section>
 <section>
-<section id="slide-org22265ae">
-<h2 id="org22265ae">データの集計</h2>
-<div class="outline-text-2" id="text-org22265ae">
+<section id="slide-org962f626">
+<h2 id="org962f626">データの集計</h2>
+<div class="outline-text-2" id="text-org962f626">
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org33bf08d">
-<h3 id="org33bf08d">集約のための関数</h3>
+<section id="slide-orgcde04a5">
+<h3 id="orgcde04a5">集約のための関数</h3>
 <ul>
 <li>データを集約するための基本的な関数は用意されている
 <ul>
@@ -831,18 +825,18 @@ myAreaEn &lt;- read.csv(file="data/jpdata3-en.csv")
 <li><i><span style="color:gray;">これ以外にも集約を行なう関数は沢山ある</span></i></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org1582a37">
-<h3 id="org1582a37">関数の例</h3>
+<section id="slide-orgdc0ccab">
+<h3 id="orgdc0ccab">関数の例</h3>
 <ul>
 <li><p>
 練習問題のデータの集計を行う
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >myData &lt;- read.csv(file="data/jpdata1.csv",
+<pre><code class="R" >myData &lt;- read.csv(file="data/jpdata1.csv",
 		   row.names=1, fileEncoding="utf8")
 ## 一度読み込んでいれば上の行は不要
 sum(myData$人口) # 全国の総人口 (列名で選択)
@@ -862,11 +856,11 @@ with(myData,max(老人))  # 老年人口の最大値 (関数 with() を利用)
 </pre></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org357fc2f">
-<h3 id="org357fc2f">関数 <code>apply()</code></h3>
+<section id="slide-org8ed1439">
+<h3 id="org8ed1439">関数 <code>apply()</code></h3>
 <ul>
 <li>列あるいは行ごとの計算を行う関数</li>
 <li><p>
@@ -874,7 +868,7 @@ with(myData,max(老人))  # 老年人口の最大値 (関数 with() を利用)
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >apply(X, MARGIN, FUN)
+<pre><code class="R" >apply(X, MARGIN, FUN)
 ## X: データフレーム
 ## MARGIN: 行(1)か列(2)かを指定
 ## FUN: 計算すべき統計量の関数
@@ -891,18 +885,18 @@ with(myData,max(老人))  # 老年人口の最大値 (関数 with() を利用)
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-orgc4cfed0">
-<h3 id="orgc4cfed0">関数 <code>apply()</code> の例</h3>
+<section id="slide-org87df5a5">
+<h3 id="org87df5a5">関数 <code>apply()</code> の例</h3>
 <ul>
 <li><p>
 抽出したデータの集計を行う
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >### 関数applyの使い方
+<pre><code class="R" >### 関数applyの使い方
 x &lt;- subset(myData, select=婚姻:失業) # 抽出
 colMeans(x) # 各列の平均
 apply(x, 2, max) # 列ごとの最大値
@@ -924,11 +918,11 @@ apply(x, 2, function(z){sum(z&gt;mean(z))}) # 平均より大きいデータ数
 </pre></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org003417d">
-<h3 id="org003417d">関数 <code>aggregate()</code></h3>
+<section id="slide-org95a996d">
+<h3 id="org95a996d">関数 <code>aggregate()</code></h3>
 <ul>
 <li>各行をグループにまとめて統計量を計算する関数</li>
 <li><p>
@@ -936,7 +930,7 @@ apply(x, 2, function(z){sum(z&gt;mean(z))}) # 平均より大きいデータ数
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >aggregate(x, by, FUN)
+<pre><code class="R" >aggregate(x, by, FUN)
 ## x: データフレーム
 ## by: 各行が属するグループを指定するベクトルをリストで与える(複数可)
 ## FUN: 求めたい統計量を計算するための関数
@@ -948,18 +942,18 @@ apply(x, 2, function(z){sum(z&gt;mean(z))}) # 平均より大きいデータ数
 </ul></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org20b1c0b">
-<h3 id="org20b1c0b">関数 <code>aggregate()</code> の例</h3>
+<section id="slide-orgd6f16fe">
+<h3 id="orgd6f16fe">関数 <code>aggregate()</code> の例</h3>
 <ul>
 <li><p>
 同じ値を持つグループごとの平均値を求める
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >### 関数aggregateの使い方
+<pre><code class="R" >### 関数aggregateの使い方
 ## 人口から面積まで地方ごとの平均値を計算
 x &lt;- subset(myData,select=人口:面積)
 aggregate(x, by=list(地方=myArea$地方), FUN=mean) 
@@ -989,7 +983,7 @@ aggregate(x, by=list(地方=myArea$地方), FUN=mean)
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >aggregate(subset(myData,select=人口:面積),
+<pre><code class="R" >aggregate(subset(myData,select=人口:面積),
 	  by=list(地方=myArea$地方),
 	  FUN=mean) 
 </code></pre>
@@ -1018,7 +1012,7 @@ aggregate(x, by=list(地方=myArea$地方), FUN=mean)
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >y &lt;- transform(x,地方=myArea$地方) # データフレームを変更
+<pre><code class="R" >y &lt;- transform(x,地方=myArea$地方) # データフレームを変更
 aggregate( . ~ 地方, data=y, FUN=mean)
 </code></pre>
 </div>
@@ -1046,7 +1040,7 @@ aggregate( . ~ 地方, data=y, FUN=mean)
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
+<pre><code class="R" >aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
 	  data=transform(subset(myData,select=人口:面積),
 			 地方=myArea$地方), 
 	  FUN=mean)
@@ -1076,14 +1070,14 @@ aggregate( . ~ 地方, data=y, FUN=mean)
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
+<pre><code class="R" >## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
 aggregate(x, by=list(地方=myArea$地方,
 		     過疎=with(myData, 人口&lt;=median(人口))),
 	  FUN=mean)
 </code></pre>
 </div>
 
-<pre class="example">
+<pre class="example" id="org147ae30">
      地方  過疎      人口     若年      老人      面積
 1    関東 FALSE 6178285.7 737000.0 1564000.0  463329.3
 2    近畿 FALSE 4681250.0 573750.0 1305500.0  517317.2
@@ -1111,14 +1105,14 @@ aggregate(x, by=list(地方=myArea$地方,
 </p>
 <div class="org-src-container">
 
-<pre><code class=" R" >aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
+<pre><code class="R" >aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
 	  data=transform(subset(myData,select=人口:面積),
 			 地方=myArea$地方,
 			 過疎=人口&lt;=median(人口)))
 </code></pre>
 </div>
 
-<pre class="example">
+<pre class="example" id="org0634e42">
      地方  過疎      人口     若年      老人      面積
 1    関東 FALSE 6178285.7 737000.0 1564000.0  463329.3
 2    近畿 FALSE 4681250.0 573750.0 1305500.0  517317.2
@@ -1136,17 +1130,17 @@ aggregate(x, by=list(地方=myArea$地方,
 </pre></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
+
 </section>
 </section>
 <section>
-<section id="slide-orgabef6cb" data-background="#fef4f4">
-<h2 id="orgabef6cb">演習</h2>
+<section id="slide-org2e7b2ae" data-background="#fef4f4">
+<h2 id="org2e7b2ae">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfbaefdb" data-background="#fef4f4">
-<h3 id="orgfbaefdb">練習問題</h3>
+<section id="slide-orgd38cf55" data-background="#fef4f4">
+<h3 id="orgd38cf55">練習問題</h3>
 <ul>
 <li>サンプルデータ(<code>jpdata</code>)の整理をしてみよう．
 <ul>
@@ -1188,7 +1182,6 @@ mouseWheel: false,
 fragmentInURL: true,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
-
 overview: true,
 
 transition: 'fade',

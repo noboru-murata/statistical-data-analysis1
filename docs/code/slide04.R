@@ -208,7 +208,7 @@ aggregate( . ~ region, data=y, FUN=mean)
 
 aggregate( . ~ region, # 右辺で条件付けて左辺(右辺以外)を計算
           data=transform(subset(myDataEn,select=population:area),
-                          region=myAreaEn$region), 
+                         region=myAreaEn$region), 
           FUN=mean)
 
 ## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
@@ -234,7 +234,7 @@ with(myData,人口/面積) # 値のみ返す
 ### 地方別の人口密度 (地方の総人口/地方の総面積)
 ## 地方ごとに人口と面積の合計を計算
 (myDat2 <- aggregate(subset(myData,select=c(人口,面積)),
-		     by=list(地方=myArea$地方), FUN=sum))
+                     by=list(地方=myArea$地方), FUN=sum))
 ## 人口密度を計算して追加
 (myDat2 <- transform(myDat2, 
                      人口密度=人口/面積))
@@ -250,7 +250,7 @@ with(myData,人口/面積) # 値のみ返す
                   地方=myArea$地方))
 ## 地方別の婚姻・離婚数を集計
 (myDat3 <- aggregate(. ~ 地方, FUN=sum,
-		     data=subset(foo,select=-c(婚姻,離婚))))
+                     data=subset(foo,select=-c(婚姻,離婚))))
 ## 婚姻率・離婚率を計算して追加
 (myDat3 <- transform(myDat3,
                      婚姻率=婚姻数/婚姻可能*1000,
@@ -267,7 +267,7 @@ with(myDataEn,population/area) # 値のみ返す
 ### 地方別の人口密度 (地方の総人口/地方の総面積)
 ## 地方ごとに人口と面積の合計を計算
 (myDat2En <- aggregate(subset(myDataEn,select=c(population,area)),
-		       by=list(region=myAreaEn$region), FUN=sum))
+                       by=list(region=myAreaEn$region), FUN=sum))
 ## 人口密度を計算して追加
 (myDat2En <- transform(myDat2En, 
                        density=population/area))
@@ -283,7 +283,7 @@ with(myDataEn,population/area) # 値のみ返す
                   region=myAreaEn$region))
 ## 地方別の婚姻・離婚数を集計
 (myDat3En <- aggregate(. ~ region, FUN=sum,
-		       data=subset(foo,select=-c(marriage,divorce))))
+                       data=subset(foo,select=-c(marriage,divorce))))
 ## 婚姻率・離婚率を計算して追加
 (myDat3En <- transform(myDat3En,
                        ratio_marriage=nmarriage/marriageable*1000,

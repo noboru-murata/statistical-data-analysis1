@@ -15,7 +15,7 @@ mc <- 10000 # 実験回数を指定
 n <- 16 
 p <- 0.6
 myRandom <- function(){ # Bernolli分布をm個生成して合計
-    sum(rbinom(n, size=1, prob=p))}
+  sum(rbinom(n, size=1, prob=p))}
 myData <- replicate(mc, myRandom())
 myTable <- table(myData)/mc # 出現確率ごとの表(度数分布表)を作成
 par(family="HiraginoSans-W4") # 日本語フォントの指定
@@ -38,7 +38,7 @@ mc <- 10000
 lambda1 <- 5
 lambda2 <- 12
 myRandom <- function(){ # 2つの Poisson 分布の和
-    rpois(1, lambda=lambda1)+rpois(1, lambda=lambda2)}
+  rpois(1, lambda=lambda1)+rpois(1, lambda=lambda2)}
 myData <- replicate(mc, myRandom())
 myTable <- table(myData)/mc 
 par(family="HiraginoSans-W4") # 日本語フォントの指定
@@ -69,9 +69,9 @@ rnorm(8,mean=1,sd=2) # 平均1分散4=2^2の正規乱数
 ### 練習問題 正規分布
 mc <- 10000 # 実験回数を指定
 myRandom <- function(){ # 一方の分布を確認する
-    u1 <- runif(1)
-    u2 <- runif(1)
-    return(sqrt(-2*log(u1))*cos(2*pi*u2))}
+  u1 <- runif(1)
+  u2 <- runif(1)
+  return(sqrt(-2*log(u1))*cos(2*pi*u2))}
 myData <- replicate(mc, myRandom()) # Monte-Carlo実験
 par(family="HiraginoSans-W4") # 日本語フォントの指定
 hist(myData, freq=FALSE, breaks=40,
@@ -83,11 +83,11 @@ legend("topright", inset=0.05, legend=c("観測値", "理論値"),
        col=c("lightblue", "red"), lwd=3) # 凡例を作成
 ## Box-Muller法で作られる2つの確率変数の関係を調べる
 boxmuller <- function(){
-    u1 <- runif(1)
-    u2 <- runif(1)
-    x1 <- sqrt(-2*log(u1))*cos(2*pi*u2)
-    x2 <- sqrt(-2*log(u1))*sin(2*pi*u2)
-    return(c(x1,x2))
+  u1 <- runif(1)
+  u2 <- runif(1)
+  x1 <- sqrt(-2*log(u1))*cos(2*pi*u2)
+  x2 <- sqrt(-2*log(u1))*sin(2*pi*u2)
+  return(c(x1,x2))
 }
 x <- replicate(mc, boxmuller()) # 2行xmc列の行列が得られる
 par(family="HiraginoSans-W4") # 日本語フォントの指定
@@ -118,7 +118,7 @@ rchisq(8, df=4) # 自由度4のカイ二乗分布(8個)
 mc <- 10000 # 実験回数を指定
 k <- 8 # 自由度を設定
 myRandom <- function(){ 
-    sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
+  sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
 myData <- replicate(mc, myRandom()) # Monte-Carlo実験
 par(family="HiraginoSans-W4") # 日本語フォントの指定
 hist(myData, freq=FALSE, breaks=25,
@@ -138,10 +138,10 @@ rt(8, df=4) # 自由度4のt分布(8個)
 mc <- 10000 # 実験回数を指定
 k <- 7
 myRandom <- function(){ 
-    y <- rchisq(1, df=k) # 自由度kのカイ2乗分布
-    ## y <- sum(rnorm(k)^2) # 正規乱数を用いてもよい
-    z <- rnorm(1) # 標準正規乱数
-    return(z/sqrt(y/k))}
+  y <- rchisq(1, df=k) # 自由度kのカイ2乗分布
+  ## y <- sum(rnorm(k)^2) # 正規乱数を用いてもよい
+  z <- rnorm(1) # 標準正規乱数
+  return(z/sqrt(y/k))}
 myData <- replicate(mc, myRandom()) # Monte-Carlo実験
 par(family="HiraginoSans-W4") # 日本語フォントの指定
 hist(myData, freq=FALSE, breaks=40,
@@ -162,11 +162,11 @@ mc <- 10000 # 実験回数を指定
 k1 <- 20
 k2 <- 10
 myRandom <- function(){ 
-    y1 <- rchisq(1, df=k1) # 自由度20のカイ二乗分布
-    y2 <- rchisq(1, df=k2) # 自由度10のカイ二乗分布
-    ## y1 <- sum(rnorm(k1)^2) # 正規乱数を用いてもよい
-    ## y2 <- sum(rnorm(k2)^2) 
-    return((y1/k1)/(y2/k2))}
+  y1 <- rchisq(1, df=k1) # 自由度20のカイ二乗分布
+  y2 <- rchisq(1, df=k2) # 自由度10のカイ二乗分布
+  ## y1 <- sum(rnorm(k1)^2) # 正規乱数を用いてもよい
+  ## y2 <- sum(rnorm(k2)^2) 
+  return((y1/k1)/(y2/k2))}
 myData <- replicate(mc, myRandom()) # Monte-Carlo実験
 par(family="HiraginoSans-W4") # 日本語フォントの指定
 hist(myData, freq=FALSE, breaks=40,

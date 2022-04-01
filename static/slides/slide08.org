@@ -3,158 +3,158 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-06-18 15:55:45 mura>
+# Time-stamp: <2021-08-14 21:08:51 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
-#+STARTUP: hidestars content
+#+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :end:
 
 * 講義の内容
-  - 一般の確率変数
-  - 離散分布
-    - 離散一様分布・二項分布
-    - Poisson 分布・幾何分布
-  - 連続分布
-    - 一様分布・正規分布
-    - ガンマ分布・\(t\)-分布・\(F\)-分布
+- 一般の確率変数
+- 離散分布
+  - 離散一様分布・二項分布
+  - Poisson 分布・幾何分布
+- 連続分布
+  - 一様分布・正規分布
+  - ガンマ分布・\(t\)-分布・\(F\)-分布
 
-  #+begin_src R :eval no :exports none :tangle yes
-    ### 第08回 練習問題解答例
-  #+end_src
-  #+begin_src R :exports none
-    setwd("~/Desktop/lectures/u-tokyo/spring/slide")
-  #+end_src
-
+#+begin_src R :eval no :exports none :tangle yes
+  ### 第08回 練習問題解答例
+#+end_src
+#+begin_src R :exports none
+  setwd("~/Desktop/lectures/u-tokyo/spring/slide")
+#+end_src
 
 * COMMENT メモ
 
 
 * 一般の確率変数
 ** 確率分布
-   - 確率変数 \(X\) : 
-     - 値がランダムに決定される変数
-     - 任意の区間 \([a,b]\) に含まれる確率が定められている
-   - 確率分布 \(P\) (または単に分布):
-     - 区間 \([a,b]\) \((a\leq b)\) に \(X\) が含まれる確率
-       #+begin_quote
-       #+begin_src latex
-	 \begin{equation}
-           P(a\leq X\leq b)
-         \end{equation}
-       #+end_src
-       #+end_quote
-     - 「確率変数 \(X\) は確率分布 \(P\) に従う」という
-     - 現象の理解のためには実現値より確率分布にこそ興味がある
+- 確率変数 \(X\) : 
+  - 値がランダムに決定される変数
+  - 任意の区間 \([a,b]\) に含まれる確率が定められている
+- 確率分布 \(P\) (または単に分布):
+  - 区間 \([a,b]\) \((a\leq b)\) に \(X\) が含まれる確率
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}
+        P(a\leq X\leq b)
+      \end{equation}
+    #+end_src
+    #+end_quote
+  - 「確率変数 \(X\) は確率分布 \(P\) に従う」という
+  - 現象の理解のためには実現値より確率分布にこそ興味がある
 
 ** 極限定理
-   - 大数の法則，
-     中心極限定理，
-     少数の法則など
-   - 緩やかな条件のもとで一般の確率変数の列についても成立する
-     - 大数の強法則は平均が存在すれば成立する \\
-       (平均と分散は後に定義する)
-     - 2次のモーメントをもたない(計算できない)場合には
-       中心極限定理は成立しない \\
-       (そもそも分散が定義できない)
-   #    - 前回は有限個の値をとる確率変数列を扱った
-   #   %- 一般の場合の確率変数列の独立性と同分布性は以下のように定義する
+- 大数の法則，
+  中心極限定理，
+  少数の法則など
+- 緩やかな条件のもとで一般の確率変数の列についても成立する
+  - 大数の強法則は平均が存在すれば成立する \\
+    (平均と分散は後に定義する)
+  - 2次のモーメントをもたない(計算できない)場合には
+    中心極限定理は成立しない \\
+    (そもそも分散が定義できない)
+    #    - 前回は有限個の値をとる確率変数列を扱った
+    #   %- 一般の場合の確率変数列の独立性と同分布性は以下のように定義する
 
 ** 確率変数列の独立性
-   - 定義
-     #+begin_quote
-     \(n\) 個の確率変数 \(X_{1},X_{2},\dotsc,X_n\) が *独立* であるとは，
-     \(a_i\leq b_i\) \((i=1,\dots,n)\) なる
-     任意の実数 \(a_{1},b_{1},\dots,a_n,b_n\) に対して
-     #+begin_src latex
-       \begin{multline}
-         P(a_{1}\leq X_{1}\leq b_{1},a_{2}\leq X_{2}\leq b_{2},\dots,a_n\leq X_n\leq b_n)\\
-         =P(a_{1}\leq X_{1}\leq b_{1})P(a_{2}\leq X_{2}\leq b_{2})\cdots P(a_n\leq X_n\leq b_n)
-       \end{multline}
-     #+end_src
-     が成り立つことをいう．
-     #+end_quote
+- 定義
+  #+begin_quote
+  \(n\) 個の確率変数 \(X_{1},X_{2},\dotsc,X_n\) が *独立* であるとは，
+  \(a_i\leq b_i\) \((i=1,\dots,n)\) なる
+  任意の実数 \(a_{1},b_{1},\dots,a_n,b_n\) に対して
+  #+begin_src latex
+    \begin{multline}
+      P(a_{1}\leq X_{1}\leq b_{1},a_{2}\leq X_{2}\leq b_{2},\dots,a_n\leq X_n\leq b_n)\\
+      =P(a_{1}\leq X_{1}\leq b_{1})P(a_{2}\leq X_{2}\leq b_{2})\cdots P(a_n\leq X_n\leq b_n)
+    \end{multline}
+  #+end_src
+  が成り立つことをいう．
+  #+end_quote
 
 ** 確率変数列の同分布性
-   - 定義
-     #+begin_quote
-     \(n\) 個の確率変数 \(X_{1},X_{2},\dotsc,X_n\) が *同分布* であるとは，
-     \(a\leq b\) なる任意の実数 \(a,b\) に対して
-     #+begin_src latex
-       \begin{equation}
-         P(a\leq X_{1}\leq b)=P(a\leq X_{2}\leq b)=\cdots=P(a\leq X_n\leq b)
-       \end{equation}
-     #+end_src
-     が成り立つことをいう．
-     #+end_quote
+- 定義
+  #+begin_quote
+  \(n\) 個の確率変数 \(X_{1},X_{2},\dotsc,X_n\) が *同分布* であるとは，
+  \(a\leq b\) なる任意の実数 \(a,b\) に対して
+  #+begin_src latex
+    \begin{equation}
+      P(a\leq X_{1}\leq b)=P(a\leq X_{2}\leq b)=\cdots=P(a\leq X_n\leq b)
+    \end{equation}
+  #+end_src
+  が成り立つことをいう．
+  #+end_quote
 
 
 * 離散分布
 ** 離散分布
-   - 離散型確率変数:
-     - 取りうる値が有限個 \\
-       もしくは可算無限個 (例えば整数値のみとる場合)
-   - 離散分布:
-     - 離散型確率変数の確率分布
-     - \(X=x\) となる確率 \(P(X=x)\) で完全に決定される
-     - 関数 \(f(x)=P(X=x)\) を 
-       *確率関数* (*確率質量関数*) 
-       と呼ぶ
+- 離散型確率変数:
+  - 取りうる値が有限個 \\
+    もしくは可算無限個 (例えば整数値のみとる場合)
+- 離散分布:
+  - 離散型確率変数の確率分布
+  - \(X=x\) となる確率 \(P(X=x)\) で完全に決定される
+  - 関数 \(f(x)=P(X=x)\) を 
+    *確率関数* (*確率質量関数*) 
+    と呼ぶ
 
 ** 離散分布の平均
-   - 定義
-     #+begin_quote
-     以下の右辺が定義できる(絶対収束する)とき
-     離散型の確率変数 
-     \(X\) の *平均* (または *期待値* )を
-     #+begin_src latex
-       \begin{equation}
-         \mathbb{E}[X]:=\sum_{x\in\mathcal{X}}xP(X=x)
-       \end{equation}
-     #+end_src
-     で定義する．
+- 定義
+  #+begin_quote
+  以下の右辺が定義できる(絶対収束する)とき
+  離散型の確率変数 
+  \(X\) の *平均* (または *期待値* )を
+  #+begin_src latex
+    \begin{equation}
+      \mathbb{E}[X]:=\sum_{x\in\mathcal{X}}xP(X=x)
+    \end{equation}
+  #+end_src
+  で定義する．
 
-     ただし 
-     \(\mathcal{X}\) は \(X\) の取りうる値(無限個も可)の集合
-     #+end_quote
-     - 級数 \(\sum_{x\in\mathcal{X}}xP(X=x)\) が
-       定義できない場合は
-       \(X\) は *平均をもたない* とする
-   #+reveal: split
-   - 確率変数の変換 \(\varphi(X)\) の期待値
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathbb{E}[\varphi(X)]:=\sum_{x\in\mathcal{X}}\varphi(x)P(X=x)
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - \(p\) 次の *モーメント* (あるいは *積率* )
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathbb{E}[X^p]=\sum_{x\in\mathcal{X}}x^pP(X=x)
-       \end{equation}
-     #+end_src
-     #+end_quote
-     - \(X\) が正整数 \(p\) 次のモーメントをもてば，
-       \(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ
+  ただし 
+  \(\mathcal{X}\) は \(X\) の取りうる値(無限個も可)の集合
+  #+end_quote
+  - 級数 \(\sum_{x\in\mathcal{X}}xP(X=x)\) が
+    定義できない場合は
+    \(X\) は *平均をもたない* とする
+
+#+reveal: split
+- 確率変数の変換 \(\varphi(X)\) の期待値
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathbb{E}[\varphi(X)]:=\sum_{x\in\mathcal{X}}\varphi(x)P(X=x)
+    \end{equation}
+  #+end_src
+  #+end_quote
+- \(p\) 次の *モーメント* (あるいは *積率* )
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathbb{E}[X^p]=\sum_{x\in\mathcal{X}}x^pP(X=x)
+    \end{equation}
+  #+end_src
+  #+end_quote
+  - \(X\) が正整数 \(p\) 次のモーメントをもてば，
+    \(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ
 
 ** 離散分布の分散
-   - 定義
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathrm{Var}(X)
-         :=&\mathbb{E}[(X-\mathbb{E}[X])^2]\\
-         =&\sum_{x\in\mathcal{X}}(x-\mathbb{E}[X])^2P(X=x)
-       \end{align}
-     #+end_src
-     #+end_quote
-     - \(X\) が *2次のモーメントをもつ* ときのみ定義できる
-     - 分散の平方根\(\sqrt{\mathrm{Var}(X)}\) を *標準偏差* と呼ぶ
+- 定義
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathrm{Var}(X)
+      :=&\mathbb{E}[(X-\mathbb{E}[X])^2]\\
+      =&\sum_{x\in\mathcal{X}}(x-\mathbb{E}[X])^2P(X=x)
+    \end{align}
+  #+end_src
+  #+end_quote
+  - \(X\) が *2次のモーメントをもつ* ときのみ定義できる
+  - 分散の平方根\(\sqrt{\mathrm{Var}(X)}\) を *標準偏差* と呼ぶ
 
 
 * 離散一様分布
@@ -163,53 +163,53 @@
   #+end_src
 
 ** 離散一様分布の確率関数
-   - 集合 \(\{x_{1},\dotsc,x_n\}\) 上の離散一様分布: \\
-     相異なる実数
-     \(x_{1},\dotsc,x_n\) 
-     を箱(壺)から無作為に取り出す試行
-   - 確率関数:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         f(x)=\frac{1}{n},\quad
-         x\in\{x_{1},\dots,x_n\}
-       \end{equation}
-     #+end_src
-     #+end_quote
+- 集合 \(\{x_{1},\dotsc,x_n\}\) 上の離散一様分布: \\
+  相異なる実数
+  \(x_{1},\dotsc,x_n\) 
+  を箱(壺)から無作為に取り出す試行
+- 確率関数:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=\frac{1}{n},\quad
+      x\in\{x_{1},\dots,x_n\}
+    \end{equation}
+  #+end_src
+  #+end_quote
 
 ** 離散一様分布の平均と分散
-   - 平均:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathbb{E}[X]
-         =\sum_{i=1}^nx_if(x_i)
-         =\frac{1}{n}\sum_{i=1}^nx_i=\bar{x}
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - 分散:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathrm{Var}(X)
-         =\sum_{i=1}^n(x_i-\mathbb{E}[X])^2f(x_i)
-         =\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2
-       \end{equation}
-     #+end_src
-     #+end_quote
-   # - \(X\) を集合 \(\{x_{1},\dots,x_n\}\) 上の
-   #   離散一様分布に従う確率変数とする
+- 平均:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathbb{E}[X]
+      =\sum_{i=1}^nx_if(x_i)
+      =\frac{1}{n}\sum_{i=1}^nx_i=\bar{x}
+    \end{equation}
+  #+end_src
+  #+end_quote
+- 分散:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathrm{Var}(X)
+      =\sum_{i=1}^n(x_i-\mathbb{E}[X])^2f(x_i)
+      =\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2
+    \end{equation}
+  #+end_src
+  #+end_quote
+  # - \(X\) を集合 \(\{x_{1},\dots,x_n\}\) 上の
+  #   離散一様分布に従う確率変数とする
    
 ** 離散一様分布に従う乱数
-   - 歪みのないサイコロを1回投げたときに出る目の分布は, 
-     集合 \(\{1,\dots,6\}\) 上の離散一様分布に従う
-   - 乱数の発生は
-     ~sample()~ が利用できる( ~replace=TRUE~; 復元抽出)
-     #+begin_src R :tangle yes
-       a <- 1:6 # サンプリング対象の集合をベクトルとして定義
-       sample(a, size=20, replace=TRUE) # 離散一様分布(20個)
-     #+end_src
+- 歪みのないサイコロを1回投げたときに出る目の分布は, 
+  集合 \(\{1,\dots,6\}\) 上の離散一様分布に従う
+- 乱数の発生は
+  ~sample()~ が利用できる( ~replace=TRUE~; 復元抽出)
+  #+begin_src R :tangle yes
+    a <- 1:6 # サンプリング対象の集合をベクトルとして定義
+    sample(a, size=20, replace=TRUE) # 離散一様分布(20個)
+  #+end_src
 
 
 * 二項分布
@@ -218,75 +218,75 @@
   #+end_src
 
 ** 二項分布の確率関数
-   - 試行回数 \(n\) , 成功確率 \(p\) の二項分布: \\
-     確率 \(p\) で成功する試行を \(n\) 回行った総成功回数
-   - 確率関数:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-	 f(x)=\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x},\quad x=0,1,\dots,n
-       \end{equation}
-     #+end_src
-     #+end_quote
-   #   - 平均は \(np\) , 分散は \(np(1-p)\) で与えられる
+- 試行回数 \(n\) , 成功確率 \(p\) の二項分布: \\
+  確率 \(p\) で成功する試行を \(n\) 回行った総成功回数
+- 確率関数:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x},\quad x=0,1,\dots,n
+    \end{equation}
+  #+end_src
+  #+end_quote
+  #   - 平均は \(np\) , 分散は \(np(1-p)\) で与えられる
 
 ** 二項分布の平均と分散
-   - 平均:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathbb{E}[X]
-         &=\sum_{x=0}^nxf(x)=\sum_{x=0}^nx\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x}\\
-         &=\sum_{x=1}^n\frac{n!}{(x-1)!(n-x)!}p^x(1-p)^{n-x}\\
-         % &=\sum_{x=0}^{n-1}\frac{n!}{x!(n-x-1)!}p^{x+1}(1-p)^{n-x-1}\\
-         &=np\sum_{x=0}^{n-1}\Bigl({n-1\atop x}\Bigr)p^{x}(1-p)^{n-1-x}\\
-         &=np
-       \end{align}
-     #+end_src
-     #+end_quote
+- 平均:
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathbb{E}[X]
+      &=\sum_{x=0}^nxf(x)=\sum_{x=0}^nx\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x}\\
+      &=\sum_{x=1}^n\frac{n!}{(x-1)!(n-x)!}p^x(1-p)^{n-x}\\
+      % &=\sum_{x=0}^{n-1}\frac{n!}{x!(n-x-1)!}p^{x+1}(1-p)^{n-x-1}\\
+      &=np\sum_{x=0}^{n-1}\Bigl({n-1\atop x}\Bigr)p^{x}(1-p)^{n-1-x}\\
+      &=np
+    \end{align}
+  #+end_src
+  #+end_quote
 
 ** 二項分布の平均と分散
-   - 2次モーメント:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathbb{E}[X^2]
-         &=\sum_{x=0}^nx^2f(x)
-           =\sum_{x=0}^nx(x-1)\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x}+\mathbb{E}[X]\\
-           % &=\sum_{x=2}^n\frac{n!}{(x-2)!(n-x)!}p^x(1-p)^{n-x}+np\\
-           % &=\sum_{x=0}^{n-2}\frac{n!}{x!(n-x-2)!}p^{x+2}(1-p)^{n-x-2}+np\\
-         &=n(n-1)p^2\sum_{x=0}^{n-2}\Bigl({n-2\atop x}\Bigr)p^{x}(1-p)^{n-2-x}+np\\
-         &=n(n-1)p^2+np
-           =(np)^2+np(1-p)
-       \end{align}
-     #+end_src
-     #+end_quote
-   - 分散:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathrm{Var}(X)
-         =\mathbb{E}[X^2]-\mathbb{E}[X]^2
-         =np(1-p)
-       \end{equation}
-     #+end_src
-     #+end_quote
+- 2次モーメント:
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathbb{E}[X^2]
+      &=\sum_{x=0}^nx^2f(x)
+        =\sum_{x=0}^nx(x-1)\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x}+\mathbb{E}[X]\\
+        % &=\sum_{x=2}^n\frac{n!}{(x-2)!(n-x)!}p^x(1-p)^{n-x}+np\\
+        % &=\sum_{x=0}^{n-2}\frac{n!}{x!(n-x-2)!}p^{x+2}(1-p)^{n-x-2}+np\\
+      &=n(n-1)p^2\sum_{x=0}^{n-2}\Bigl({n-2\atop x}\Bigr)p^{x}(1-p)^{n-2-x}+np\\
+      &=n(n-1)p^2+np
+        =(np)^2+np(1-p)
+    \end{align}
+  #+end_src
+  #+end_quote
+- 分散:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathrm{Var}(X)
+      =\mathbb{E}[X^2]-\mathbb{E}[X]^2
+      =np(1-p)
+    \end{equation}
+  #+end_src
+  #+end_quote
 
 ** 二項分布に従う乱数
-   - 表が出る確率が \(p\) のコインを \(n\) 回投げたときに表が出る回数は，
-     試行回数 \(n\) ，成功確率 \(p\) の二項分布に従う
-   - 試行回数1の二項分布を *Bernoulli分布* と呼ぶ
-   - 乱数の発生は ~rbinom()~ を用いる
-     #+begin_src R :tangle yes
-       rbinom(10, size=1, prob=0.2) # Bernoulli分布(10個)
-       rbinom(20, size=5, prob=0.6) # 二項分布(20個)
-     #+end_src
-   - 確率関数は ~dbinom()~ で計算できる
-     # % - なお, 原則として, ある確率分布に従う乱数を発生するためのRの
-     # %   関数の命名規則は,「\texttt{r} + その乱数が従う分布の名前の省略
-     # %   形」となっている(離散一様分布など一部例外がある)
-     # % - また, 離散分布の場合, その確率関数を計算するための関数が,
-     # %   同じ省略形の文頭に\texttt{d}をつけることで得られる
+- 表が出る確率が \(p\) のコインを \(n\) 回投げたときに表が出る回数は，
+  試行回数 \(n\) ，成功確率 \(p\) の二項分布に従う
+- 試行回数1の二項分布を *Bernoulli分布* と呼ぶ
+- 乱数の発生は ~rbinom()~ を用いる
+  #+begin_src R :tangle yes
+    rbinom(10, size=1, prob=0.2) # Bernoulli分布(10個)
+    rbinom(20, size=5, prob=0.6) # 二項分布(20個)
+  #+end_src
+- 確率関数は ~dbinom()~ で計算できる
+  # % - なお, 原則として, ある確率分布に従う乱数を発生するためのRの
+  # %   関数の命名規則は,「\texttt{r} + その乱数が従う分布の名前の省略
+  # %   形」となっている(離散一様分布など一部例外がある)
+  # % - また, 離散分布の場合, その確率関数を計算するための関数が,
+  # %   同じ省略形の文頭に\texttt{d}をつけることで得られる
 
 
 * 演習
@@ -294,55 +294,55 @@
   :reveal_background: #fef4f4
   :END:
 ** 数値実験の雛形(離散分布)
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 人工的に生成した乱数と理論曲線(確率関数)との比較を行う
-   - 数値実験の雛形は以下のようになる
-     #+begin_src R :eval no
-       mc <- 10000 # 実験回数を指定
-       myRandom <- function(){...} # 乱数生成のプログラム
-       myDist <- function(){...} # 必要であれば理論曲線を定義
-                                        # ただし多くの場合 d"乱数名"で定義されているので不要
-       myData <- replicate(mc, myRandom()) # Monte-Carlo実験
-       myTable <- table(myData)/mc # 同じ値の頻度から確率を計算
-       plot(myTable, type="h", lwd=3, col="blue") # 乱数の分布の表示
-       myRange <- min(myData):max(myData) # 乱数の範囲を取得
-       lines(myRange + 0.3, myDist(myRange),
-             type="h", lwd=3, col="red") # ずらして表示
-     #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 人工的に生成した乱数と理論曲線(確率関数)との比較を行う
+- 数値実験の雛形は以下のようになる
+  #+begin_src R :eval no
+    mc <- 10000 # 実験回数を指定
+    myRandom <- function(){...} # 乱数生成のプログラム
+    myDist <- function(){...} # 必要であれば理論曲線を定義
+                                            # ただし多くの場合 d"乱数名"で定義されているので不要
+    myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+    myTable <- table(myData)/mc # 同じ値の頻度から確率を計算
+    plot(myTable, type="h", lwd=3, col="blue") # 乱数の分布の表示
+    myRange <- min(myData):max(myData) # 乱数の範囲を取得
+    lines(myRange + 0.3, myDist(myRange),
+          type="h", lwd=3, col="red") # ずらして表示
+  #+end_src
 
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 二項分布に関して以下を考察せよ．
-     - 平均と分散の計算を確認しなさい．
-     - \(X_{1},\dotsc,X_n\) を成功確率 \(p\) の
-       Bernoulli分布に従う独立同分布な確率変数列とする．
-       このとき \(\sum_{i=1}^nX_i\) の分布は，
-       試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う．
-       これをグラフに描画して確認しなさい．
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 二項分布に関して以下を考察せよ．
+  - 平均と分散の計算を確認しなさい．
+  - \(X_{1},\dotsc,X_n\) を成功確率 \(p\) の
+    Bernoulli分布に従う独立同分布な確率変数列とする．
+    このとき \(\sum_{i=1}^nX_i\) の分布は，
+    試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う．
+    これをグラフに描画して確認しなさい．
 
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 二項分布
-     mc <- 10000 # 実験回数を指定
-     n <- 16 
-     p <- 0.6
-     myRandom <- function(){ # Bernolli分布をm個生成して合計
-         sum(rbinom(n, size=1, prob=p))}
-     myData <- replicate(mc, myRandom())
-     myTable <- table(myData)/mc # 出現確率ごとの表(度数分布表)を作成
-     par(family="HiraginoSans-W4") # 日本語フォントの指定
-     plot(myTable, type="h", lwd=5, col="royalblue",
-          xlab="値", ylab="確率",
-          main=paste0("二項分布(試行回数", n, ", 成功確率", p, ")"))
-     myRange <- min(myData):max(myData) # 範囲を取得
-     lines(myRange + 0.3, dbinom(myRange, size=n, prob=p),
-           type="h", col="red", lwd=5) # 理論上の出現確率
-     legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-            col=c("royalblue", "red"), lwd=5) # 凡例を作成
-   #+end_src
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 二項分布
+  mc <- 10000 # 実験回数を指定
+  n <- 16 
+  p <- 0.6
+  myRandom <- function(){ # Bernolli分布をm個生成して合計
+    sum(rbinom(n, size=1, prob=p))}
+  myData <- replicate(mc, myRandom())
+  myTable <- table(myData)/mc # 出現確率ごとの表(度数分布表)を作成
+  par(family="HiraginoSans-W4") # 日本語フォントの指定
+  plot(myTable, type="h", lwd=5, col="royalblue",
+       xlab="値", ylab="確率",
+       main=paste0("二項分布(試行回数", n, ", 成功確率", p, ")"))
+  myRange <- min(myData):max(myData) # 範囲を取得
+  lines(myRange + 0.3, dbinom(myRange, size=n, prob=p),
+        type="h", col="red", lwd=5) # 理論上の出現確率
+  legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+         col=c("royalblue", "red"), lwd=5) # 凡例を作成
+#+end_src
 
 
 * Poisson 分布
@@ -351,67 +351,67 @@
   #+end_src
 
 ** Poisson 分布の確率関数
-   - 強度 \(\lambda\) の Poisson 分布: \(Po(\lambda)\) (\(\lambda > 0\))\\ 
-     少数の法則に現れた滅多に起こらない事象の起こる回数の分布
-   - 確率関数:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         f(x)=\frac{\lambda^x}{x!}e^{-\lambda},\quad x=0,1,\dotsc
-       \end{equation}
-     #+end_src
-     #+end_quote
-   #   - 平均は \(\lambda\) , 分散は \(\lambda\) で与えられる
+- 強度 \(\lambda\) の Poisson 分布: \(Po(\lambda)\) (\(\lambda > 0\))\\ 
+  少数の法則に現れた滅多に起こらない事象の起こる回数の分布
+- 確率関数:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=\frac{\lambda^x}{x!}e^{-\lambda},\quad x=0,1,\dotsc
+    \end{equation}
+  #+end_src
+  #+end_quote
+  #   - 平均は \(\lambda\) , 分散は \(\lambda\) で与えられる
 
 ** Poisson 分布の平均
-   - 平均:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathbb{E}[X]
-         &=\sum_{x=0}^\infty xf(x)=\sum_{x=0}^\infty x\frac{\lambda^x}{x!}e^{-\lambda}
-           =e^{-\lambda}\sum_{x=1}^\infty\frac{\lambda^x}{(x-1)!}\\
-         &=\lambda e^{-\lambda}\sum_{x=0}^\infty\frac{\lambda^x}{x!}
-           =\lambda
-       \end{align}
-     #+end_src
-     #+end_quote
+- 平均:
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathbb{E}[X]
+      &=\sum_{x=0}^\infty xf(x)=\sum_{x=0}^\infty x\frac{\lambda^x}{x!}e^{-\lambda}
+        =e^{-\lambda}\sum_{x=1}^\infty\frac{\lambda^x}{(x-1)!}\\
+      &=\lambda e^{-\lambda}\sum_{x=0}^\infty\frac{\lambda^x}{x!}
+        =\lambda
+    \end{align}
+  #+end_src
+  #+end_quote
 
 ** Poisson 分布の分散
-   - 2次モーメント:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathbb{E}[X^2]
-         &=\sum_{x=0}^\infty x^2f(x)
-           =\sum_{x=0}^\infty x(x-1)\frac{\lambda^x}{x!}e^{-\lambda}+\mathbb{E}[X]\\
-         &=e^{-\lambda}\sum_{x=2}^\infty\frac{\lambda^x}{(x-2)!}+\lambda
-           =\lambda^2 e^{-\lambda}\sum_{x=0}^\infty\frac{\lambda^x}{x!}+\lambda\\
-         &=\lambda^2+\lambda
-       \end{align}
-     #+end_src
-     #+end_quote
-   - 分散:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathrm{Var}(X)
-         =\mathbb{E}[X^2]-\mathbb{E}[X]^2=\lambda
-       \end{equation}
-     #+end_src
-     #+end_quote
+- 2次モーメント:
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathbb{E}[X^2]
+      &=\sum_{x=0}^\infty x^2f(x)
+        =\sum_{x=0}^\infty x(x-1)\frac{\lambda^x}{x!}e^{-\lambda}+\mathbb{E}[X]\\
+      &=e^{-\lambda}\sum_{x=2}^\infty\frac{\lambda^x}{(x-2)!}+\lambda
+        =\lambda^2 e^{-\lambda}\sum_{x=0}^\infty\frac{\lambda^x}{x!}+\lambda\\
+      &=\lambda^2+\lambda
+    \end{align}
+  #+end_src
+  #+end_quote
+- 分散:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathrm{Var}(X)
+      =\mathbb{E}[X^2]-\mathbb{E}[X]^2=\lambda
+    \end{equation}
+  #+end_src
+  #+end_quote
 
 ** Poisson 分布に従う乱数
-   - 一定時間に放射性物質から放射される粒子の数や，
-     一定時間に発生する交通事故の数などは Poisson 分布に従うことが知られている
-   - 発生確率が低い事象が十分長い期間で起こる回数の分布は
-     Poisson 分布で近似できる (少数の法則)
-   - 乱数の発生は ~rpois()~ を用いる
-     #+begin_src R :tangle yes
-       rpois(15, lambda=1) # 強度1の Poisson 分布(15個)
-       rpois(15, lambda=10) # 強度10の Poisson 分布(15個)
-     #+end_src
-   - 確率関数は ~dpois()~ で計算できる
+- 一定時間に放射性物質から放射される粒子の数や，
+  一定時間に発生する交通事故の数などは Poisson 分布に従うことが知られている
+- 発生確率が低い事象が十分長い期間で起こる回数の分布は
+  Poisson 分布で近似できる (少数の法則)
+- 乱数の発生は ~rpois()~ を用いる
+  #+begin_src R :tangle yes
+    rpois(15, lambda=1) # 強度1の Poisson 分布(15個)
+    rpois(15, lambda=10) # 強度10の Poisson 分布(15個)
+  #+end_src
+- 確率関数は ~dpois()~ で計算できる
 
 
 * 演習
@@ -419,37 +419,37 @@
   :reveal_background: #fef4f4
   :END:
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - Poisson 分布に関して以下を考察せよ．
-     - 平均と分散の計算を確認しなさい．
-     - \(X,Y\) を独立な2つの確率変数とし，
-       それぞれ強度 \(\lambda_{1},\lambda_{2}\) の Poisson 分布に従うとする．
-       このとき, 和 \(X+Y\) の分布は
-       強度 \(\lambda_{1}+\lambda_{2}\) の Poisson 分布に従う．
-       これをグラフに描画して確認しなさい．
-       
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 Poisson 分布
-     mc <- 10000 
-     lambda1 <- 5
-     lambda2 <- 12
-     myRandom <- function(){ # 2つの Poisson 分布の和
-         rpois(1, lambda=lambda1)+rpois(1, lambda=lambda2)}
-     myData <- replicate(mc, myRandom())
-     myTable <- table(myData)/mc 
-     par(family="HiraginoSans-W4") # 日本語フォントの指定
-     plot(myTable, type="h", lwd=5, col="royalblue",
-          xlab="値", ylab="確率",
-          main=paste0("Poisson 分布(強度", lambda1+lambda2, ")"))
-     myRange <- min(myData):max(myData) 
-     lines(myRange + 0.3,
-           dpois(myRange, lambda=lambda1+lambda2), 
-           type="h", col="red", lwd=5) # 理論上の出現確率
-     legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-            col=c("royalblue", "red"), lwd=5) 
-   #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- Poisson 分布に関して以下を考察せよ．
+  - 平均と分散の計算を確認しなさい．
+  - \(X,Y\) を独立な2つの確率変数とし，
+    それぞれ強度 \(\lambda_{1},\lambda_{2}\) の Poisson 分布に従うとする．
+    このとき, 和 \(X+Y\) の分布は
+    強度 \(\lambda_{1}+\lambda_{2}\) の Poisson 分布に従う．
+    これをグラフに描画して確認しなさい．
+
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 Poisson 分布
+  mc <- 10000 
+  lambda1 <- 5
+  lambda2 <- 12
+  myRandom <- function(){ # 2つの Poisson 分布の和
+    rpois(1, lambda=lambda1)+rpois(1, lambda=lambda2)}
+  myData <- replicate(mc, myRandom())
+  myTable <- table(myData)/mc 
+  par(family="HiraginoSans-W4") # 日本語フォントの指定
+  plot(myTable, type="h", lwd=5, col="royalblue",
+       xlab="値", ylab="確率",
+       main=paste0("Poisson 分布(強度", lambda1+lambda2, ")"))
+  myRange <- min(myData):max(myData) 
+  lines(myRange + 0.3,
+        dpois(myRange, lambda=lambda1+lambda2), 
+        type="h", col="red", lwd=5) # 理論上の出現確率
+  legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+         col=c("royalblue", "red"), lwd=5) 
+#+end_src
 
 
 * 幾何分布
@@ -458,136 +458,137 @@
   #+end_src
 
 ** 幾何分布の確率関数
-   - 成功確率 \(p\) の幾何分布: \((0 < p\leq 1)\) \\
-     成功するまでの回数の分布
-   - 確率関数:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         f(x)=p(1-p)^x,\quad x=0,1,\dots
-       \end{equation}
-     #+end_src
-     #+end_quote
-     
+- 成功確率 \(p\) の幾何分布: \((0 < p\leq 1)\) \\
+  成功するまでの回数の分布
+- 確率関数:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=p(1-p)^x,\quad x=0,1,\dots
+    \end{equation}
+  #+end_src
+  #+end_quote
+
 ** 幾何分布の平均
-   - 平均:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathbb{E}[X]
-         &=\sum_{x=0}^\infty xf(x)=\sum_{x=0}^\infty xp(1-p)^x
-           =p(1-p)\sum_{x=1}^\infty x(1-p)^{x-1}\\
-         &=-p(1-p)\frac{d}{dp}\sum_{x=1}^\infty(1-p)^x
-           =-p(1-p)\frac{d}{dp}\frac{1-p}{p}\\
-         &=-p(1-p)\cdot\Bigl(-\frac{1}{p^2}\Bigr)
-           =\frac{1-p}{p}
-       \end{align}
-     #+end_src
-     #+end_quote
+- 平均:
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathbb{E}[X]
+      &=\sum_{x=0}^\infty xf(x)=\sum_{x=0}^\infty xp(1-p)^x
+        =p(1-p)\sum_{x=1}^\infty x(1-p)^{x-1}\\
+      &=-p(1-p)\frac{d}{dp}\sum_{x=1}^\infty(1-p)^x
+        =-p(1-p)\frac{d}{dp}\frac{1-p}{p}\\
+      &=-p(1-p)\cdot\Bigl(-\frac{1}{p^2}\Bigr)
+        =\frac{1-p}{p}
+    \end{align}
+  #+end_src
+  #+end_quote
 
 ** 幾何分布の分散
-   - 2次モーメント:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathbb{E}[X^2]
-         &=\sum_{x=0}^\infty x^2f(x)=\sum_{x=0}^\infty x(x-1)p(1-p)^x+\mathbb{E}[X]\\
-         % &=p(1-p)^2\sum_{x=2}^\infty x(x-1)p(1-p)^{x-2}+\frac{1-p}{p}\\
-         % &=p(1-p)^2\frac{d^2}{dp^2}\sum_{x=2}^\infty (1-p)^{x}+\frac{1-p}{p}\\
-         % &=p(1-p)^2\frac{d^2}{dp^2}\frac{(1-p)^2}{p}+\frac{1-p}{p}\\
-         % &=p(1-p)^2\frac{2}{p^3}+\frac{1-p}{p}
-           &=2\Bigl(\frac{1-p}{p}\Bigr)^2+\frac{1-p}{p}
-       \end{align}
-     #+end_src
-     #+end_quote
-   - 分散:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathrm{Var}(X)
-         =\mathbb{E}[X^2]-\mathbb{E}[X]^2
-         =\frac{1-p}{p^2}
-       \end{equation}
-     #+end_src
-     #+end_quote
+- 2次モーメント:
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathbb{E}[X^2]
+      &=\sum_{x=0}^\infty x^2f(x)=\sum_{x=0}^\infty x(x-1)p(1-p)^x+\mathbb{E}[X]\\
+      % &=p(1-p)^2\sum_{x=2}^\infty x(x-1)p(1-p)^{x-2}+\frac{1-p}{p}\\
+      % &=p(1-p)^2\frac{d^2}{dp^2}\sum_{x=2}^\infty (1-p)^{x}+\frac{1-p}{p}\\
+      % &=p(1-p)^2\frac{d^2}{dp^2}\frac{(1-p)^2}{p}+\frac{1-p}{p}\\
+      % &=p(1-p)^2\frac{2}{p^3}+\frac{1-p}{p}
+        &=2\Bigl(\frac{1-p}{p}\Bigr)^2+\frac{1-p}{p}
+    \end{align}
+  #+end_src
+  #+end_quote
+- 分散:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathrm{Var}(X)
+      =\mathbb{E}[X^2]-\mathbb{E}[X]^2
+      =\frac{1-p}{p^2}
+    \end{equation}
+  #+end_src
+  #+end_quote
 
 ** 幾何分布に従う乱数
-   - 表が出る確率が \(p\) のコインを投げ続けて，
-     初めて表が出るまでに出た裏の回数は，
-     成功確率 \(p\) の幾何分布に従う
-   - 乱数の発生は ~rgeom()~ を用いる
-     #+begin_src R :tangle yes
-       rgeom(15, prob=0.1) # 成功確率0.1の幾何分布(15個)
-     #+end_src
-   - 確率関数は ~dgeom()~ で計算できる
+- 表が出る確率が \(p\) のコインを投げ続けて，
+  初めて表が出るまでに出た裏の回数は，
+  成功確率 \(p\) の幾何分布に従う
+- 乱数の発生は ~rgeom()~ を用いる
+  #+begin_src R :tangle yes
+    rgeom(15, prob=0.1) # 成功確率0.1の幾何分布(15個)
+  #+end_src
+- 確率関数は ~dgeom()~ で計算できる
 
 
 * 連続分布
 ** 連続分布
-   - 連続型確率変数:
-     - 取りうる値が任意の実数またはある範囲の実数\\
-       取りうる値のパターンが数多いため実数で近似
-   - 連続分布:
-     - 連続型の確率変数の確率分布
-     - 非負の値をとる実数上の関数 \(f\) の積分で表される
-       #+begin_quote
-       #+begin_src latex
-	 \begin{equation}
-           P(a\leq X\leq b)=\int_{a}^b f(x)dx \quad(a < b)
-         \end{equation}
-       #+end_src
-       #+end_quote
-     - 関数 \(f\) を *確率密度関数* (または *密度*)と呼ぶ
+- 連続型確率変数:
+  - 取りうる値が任意の実数またはある範囲の実数\\
+    取りうる値のパターンが数多いため実数で近似
+- 連続分布:
+  - 連続型の確率変数の確率分布
+  - 非負の値をとる実数上の関数 \(f\) の積分で表される
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}
+        P(a\leq X\leq b)=\int_{a}^b f(x)dx \quad(a < b)
+      \end{equation}
+    #+end_src
+    #+end_quote
+  - 関数 \(f\) を *確率密度関数* (または *密度*)と呼ぶ
 
 ** 連続分布の平均
-   - 連続型の確率変数 \(X\) の平均: \\
-     積分 \(\int_{-\infty}^\infty xf(x)dx\) が絶対収束するとき
-     \(X\) の *平均* (または *期待値*)を
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathbb{E}[X]:=\int_{-\infty}^\infty xf(x)dx
-       \end{equation}
-     #+end_src
-     #+end_quote
-     で定義する
-   - 積分 \(\int_{-\infty}^\infty xf(x)dx\) が
-     絶対収束しない場合は\\
-     \(X\) は *平均をもたない* とする
-   # - 離散分布の場合と同様に, 連続分布に対しても平均, 分散, 標準偏差の概念が定義される
-   # - \(X\) を連続型の確率変数, \(f\) を \(X\) の分布の確率密度関数とする
-   #+reveal: split
-   - 確率変数の変換 \(\varphi(X)\) の期待値:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathbb{E}[\varphi(X)]:=\int_{-\infty}^\infty\varphi(x)f(x)dx
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - \(p\) 次の *モーメント* (あるいは *積率* ):
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathbb{E}[X^p]=\int_{-\infty}^\infty x^pf(x)dx
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - \(X\) が正整数 \(p\) 次のモーメントをもてば，
-     \(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ
+- 連続型の確率変数 \(X\) の平均: \\
+  積分 \(\int_{-\infty}^\infty xf(x)dx\) が絶対収束するとき
+  \(X\) の *平均* (または *期待値*)を
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathbb{E}[X]:=\int_{-\infty}^\infty xf(x)dx
+    \end{equation}
+  #+end_src
+  #+end_quote
+  で定義する
+- 積分 \(\int_{-\infty}^\infty xf(x)dx\) が
+  絶対収束しない場合は\\
+  \(X\) は *平均をもたない* とする
+  # - 離散分布の場合と同様に, 連続分布に対しても平均, 分散, 標準偏差の概念が定義される
+  # - \(X\) を連続型の確率変数, \(f\) を \(X\) の分布の確率密度関数とする
+
+#+reveal: split
+- 確率変数の変換 \(\varphi(X)\) の期待値:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathbb{E}[\varphi(X)]:=\int_{-\infty}^\infty\varphi(x)f(x)dx
+    \end{equation}
+  #+end_src
+  #+end_quote
+- \(p\) 次の *モーメント* (あるいは *積率* ):
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathbb{E}[X^p]=\int_{-\infty}^\infty x^pf(x)dx
+    \end{equation}
+  #+end_src
+  #+end_quote
+- \(X\) が正整数 \(p\) 次のモーメントをもてば，
+  \(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ
 
 ** 連続分布の分散
-   - 分散:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathrm{Var}(X):=& \mathbb{E}[(X-\mathbb{E}[X])^2]=\mathbb{E}[X^2]-\mathbb{E}[X]^2\\
-         =&\int_{-\infty}^\infty(x-\mathbb{E}[X])^2f(x)dx
-       \end{align}
-     #+end_src
-     #+end_quote
-   - \(X\) が *2次のモーメントをもつ* ときのみ定義できる
-   - 分散の平方根 \(\sqrt{\mathrm{Var}(X)}\) を *標準偏差* と呼ぶ
+- 分散:
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathrm{Var}(X):=& \mathbb{E}[(X-\mathbb{E}[X])^2]=\mathbb{E}[X^2]-\mathbb{E}[X]^2\\
+      =&\int_{-\infty}^\infty(x-\mathbb{E}[X])^2f(x)dx
+    \end{align}
+  #+end_src
+  #+end_quote
+- \(X\) が *2次のモーメントをもつ* ときのみ定義できる
+- 分散の平方根 \(\sqrt{\mathrm{Var}(X)}\) を *標準偏差* と呼ぶ
 
 
 * 一様分布
@@ -596,68 +597,68 @@
   #+end_src
 
 ** 一様分布の密度関数
-   - 区間 \((a,b)\) 上の一様分布: \(U(a,b)\) \\
-     区間 \((a,b)\) のランダムな値の選択を表す分布
-   - 確率密度関数:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         f(x)=
-         \begin{cases}
-           \frac{1}{b-a} & (a < x < b)\\
-           0 & (\text{上記以外のとき})
-         \end{cases}
-       \end{equation}
-     #+end_src
-     #+end_quote
+- 区間 \((a,b)\) 上の一様分布: \(U(a,b)\) \\
+  区間 \((a,b)\) のランダムな値の選択を表す分布
+- 確率密度関数:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=
+      \begin{cases}
+        \frac{1}{b-a} & (a < x < b)\\
+        0 & (\text{上記以外のとき})
+      \end{cases}
+    \end{equation}
+  #+end_src
+  #+end_quote
 
 ** 一様分布の平均
-   - 平均:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathbb{E}[X]
-         &=\int_{-\infty}^\infty xf(x)dx
-           =\frac{1}{b-a}\int_a^bxdx\\
-         &=\frac{b^2-a^2}{2(b-a)}
-           =\frac{a+b}{2}
-       \end{align}
-     #+end_src
-     #+end_quote
+- 平均:
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathbb{E}[X]
+      &=\int_{-\infty}^\infty xf(x)dx
+        =\frac{1}{b-a}\int_a^bxdx\\
+      &=\frac{b^2-a^2}{2(b-a)}
+        =\frac{a+b}{2}
+    \end{align}
+  #+end_src
+  #+end_quote
 
 ** 一様分布の分散
-   - 2次モーメント:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathbb{E}[X^2]
-         &=\int_{-\infty}^\infty x^2f(x)dx
-           =\frac{1}{b-a}\int_a^bx^2dx\\
-         &=\frac{b^3-a^3}{3(b-a)}
-           =\frac{a^2+ab+b^2}{3}
-       \end{align}
-     #+end_src
-     #+end_quote
-   - 分散:
-     #+begin_quote
-     #+begin_src latex
-       \begin{align}
-         \mathrm{Var}(X)
-         &=\mathbb{E}[X^2]-\mathbb{E}[X]^2
-         % =\frac{a^2+ab+b^2}{3}-\frac{a^2+2ab+b^2}{4}\\
-         % &=\frac{a^2-2ab+b^2}{12}
-             =\frac{(b-a)^2}{12}
-       \end{align}
-     #+end_src
-     #+end_quote
+- 2次モーメント:
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathbb{E}[X^2]
+      &=\int_{-\infty}^\infty x^2f(x)dx
+        =\frac{1}{b-a}\int_a^bx^2dx\\
+      &=\frac{b^3-a^3}{3(b-a)}
+        =\frac{a^2+ab+b^2}{3}
+    \end{align}
+  #+end_src
+  #+end_quote
+- 分散:
+  #+begin_quote
+  #+begin_src latex
+    \begin{align}
+      \mathrm{Var}(X)
+      &=\mathbb{E}[X^2]-\mathbb{E}[X]^2
+      % =\frac{a^2+ab+b^2}{3}-\frac{a^2+2ab+b^2}{4}\\
+      % &=\frac{a^2-2ab+b^2}{12}
+          =\frac{(b-a)^2}{12}
+    \end{align}
+  #+end_src
+  #+end_quote
 
 ** 一様分布に従う乱数
-   - 乱数の発生は ~runif()~ を用いる
-     #+begin_src R :tangle yes
-       runif(8) # 区間(0,1)上の一様乱数(8個)
-       runif(8,min=-1,max=1) # 区間(-1,1)上の一様乱数(8個)
-     #+end_src
-   - 確率密度関数は ~dunif()~ で計算できる
+- 乱数の発生は ~runif()~ を用いる
+  #+begin_src R :tangle yes
+    runif(8) # 区間(0,1)上の一様乱数(8個)
+    runif(8,min=-1,max=1) # 区間(-1,1)上の一様乱数(8個)
+  #+end_src
+- 確率密度関数は ~dunif()~ で計算できる
 
 
 * 正規分布
@@ -666,61 +667,61 @@
   #+end_src
 
 ** 正規分布の密度関数
-   - 平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布: \(N(\mu,\sigma^2)\) \\
-     (\(\mu\) は実数, \(\sigma\) は正の実数)
-   - 確率密度関数:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\Bigl(-\frac{(x-\mu)^2}{2\sigma^2}\Bigr)
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - 平均0, 分散1の正規分布を *標準正規分布* と呼ぶ
-   - *Gauss分布* と呼ぶこともある
+- 平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布: \(N(\mu,\sigma^2)\) \\
+  (\(\mu\) は実数, \(\sigma\) は正の実数)
+- 確率密度関数:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\Bigl(-\frac{(x-\mu)^2}{2\sigma^2}\Bigr)
+    \end{equation}
+  #+end_src
+  #+end_quote
+- 平均0, 分散1の正規分布を *標準正規分布* と呼ぶ
+- *Gauss分布* と呼ぶこともある
 
 ** 正規分布の特徴付け
-   - 物理実験等の観測誤差の分布はしばしば正規分布でモデル化される
-   - 真の平均を標本平均で推定した際の推定誤差の確率分布は，
-     サンプル数が大きくなるに従って正規分布に近づいていく
-     (*中心極限定理*)
+- 物理実験等の観測誤差の分布はしばしば正規分布でモデル化される
+- 真の平均を標本平均で推定した際の推定誤差の確率分布は，
+  サンプル数が大きくなるに従って正規分布に近づいていく
+  (*中心極限定理*)
 
-   #+reveal: split
-   - 中心極限定理の特殊な形 (de Moivre-Laplaceの定理)
-     - \(X_{1},\dotsc,X_n\) を成功確率 \(p\) のBernoulli分布に従う
-       独立同分布な確率変数列とする
-     - \(Y=\sum_{i=1}^nX_i\) は試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う
-     - Bernoulli分布は平均 \(p\) , 分散 \(p(1-p)\) である
-     - 中心極限定理により
-       #+begin_quote
-       #+begin_src latex
-	 \begin{equation}
-	   \frac{\sum_{i=1}^nX_i-np}{\sqrt{np(1-p)}}
-	   =\frac{\sqrt{n}(\frac{1}{n}\sum_{i=1}^nX_i-p)}{\sqrt{p(1-p)}}
-	   =\frac{Y-np}{\sqrt{np(1-p)}}
-	 \end{equation}
-       #+end_src
-       #+end_quote
-       の分布は標準正規分布で近似できる
-     - \(p\) が非常に小さい場合，
-       特に \(np\) がそれほど大きくならない程度に \(p\) が小さい場合は，
-       \((Y-np)/\sqrt{np(1-p)}\) の分布の正規近似よりも，
-       \(Y\) の分布は強度 \(np\) の Poisson 分布による近似の方が精度がよい (少数の法則)
+#+reveal: split
+- 中心極限定理の特殊な形 (de Moivre-Laplaceの定理)
+  - \(X_{1},\dotsc,X_n\) を成功確率 \(p\) のBernoulli分布に従う
+    独立同分布な確率変数列とする
+  - \(Y=\sum_{i=1}^nX_i\) は試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う
+  - Bernoulli分布は平均 \(p\) , 分散 \(p(1-p)\) である
+  - 中心極限定理により
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}
+        \frac{\sum_{i=1}^nX_i-np}{\sqrt{np(1-p)}}
+        =\frac{\sqrt{n}(\frac{1}{n}\sum_{i=1}^nX_i-p)}{\sqrt{p(1-p)}}
+        =\frac{Y-np}{\sqrt{np(1-p)}}
+      \end{equation}
+    #+end_src
+    #+end_quote
+    の分布は標準正規分布で近似できる
+  - \(p\) が非常に小さい場合，
+    特に \(np\) がそれほど大きくならない程度に \(p\) が小さい場合は，
+    \((Y-np)/\sqrt{np(1-p)}\) の分布の正規近似よりも，
+    \(Y\) の分布は強度 \(np\) の Poisson 分布による近似の方が精度がよい (少数の法則)
 
-       # - \(Y\) を試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う確率変数とすると，
-       #   \(n\) が十分大きいとき \((Y-np)/\sqrt{np(1-p)}\) の分布は標準正規分布で
-       #   近似できる 
-       # ** 二項分布の近似
-       #    - 正規近似の例: ~dist-binom-norm.r~
-       #    - Poisson 近似の例: ~dist-binom-pois.r~
+    # - \(Y\) を試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う確率変数とすると，
+    #   \(n\) が十分大きいとき \((Y-np)/\sqrt{np(1-p)}\) の分布は標準正規分布で
+    #   近似できる 
+    # ** 二項分布の近似
+    #    - 正規近似の例: ~dist-binom-norm.r~
+    #    - Poisson 近似の例: ~dist-binom-pois.r~
 
 ** 正規分布に従う乱数
-   - 乱数の発生は ~rnorm()~ を用いる
-     #+begin_src R :tangle yes
-       rnorm(8) # 標準正規乱数(8個)
-       rnorm(8,mean=1,sd=2) # 平均1分散4=2^2の正規乱数
-     #+end_src
-   - 確率密度関数は ~dnorm()~ で計算できる
+- 乱数の発生は ~rnorm()~ を用いる
+  #+begin_src R :tangle yes
+    rnorm(8) # 標準正規乱数(8個)
+    rnorm(8,mean=1,sd=2) # 平均1分散4=2^2の正規乱数
+  #+end_src
+- 確率密度関数は ~dnorm()~ で計算できる
 
 
 * 演習
@@ -728,75 +729,75 @@
   :reveal_background: #fef4f4
   :END:
 ** 数値実験の雛形(連続)
-   - 人工的に生成した乱数と理論曲線(確率密度)との比較を行う
-   - 数値実験の雛形は以下のようになる
-     #+begin_src R :eval no
-       mc <- 10000 # 実験回数を指定
-       myRandom <- function(){...} # 乱数生成のプログラム
-       myDist <- function(){...} # 必要であれば理論曲線を定義
-                                        # ただし多くの場合 d"乱数名"で定義されているので不要
-       myData <- replicate(mc, myRandom()) # Monte-Carlo実験
-       hist(myData, freq=FALSE) # 乱数の分布(密度)の表示
-       curve(myDist(x), add=TRUE) # 理論曲線(確率密度) 変数xを明示した方が良い
-     #+end_src
+- 人工的に生成した乱数と理論曲線(確率密度)との比較を行う
+- 数値実験の雛形は以下のようになる
+  #+begin_src R :eval no
+    mc <- 10000 # 実験回数を指定
+    myRandom <- function(){...} # 乱数生成のプログラム
+    myDist <- function(){...} # 必要であれば理論曲線を定義
+                                            # ただし多くの場合 d"乱数名"で定義されているので不要
+    myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+    hist(myData, freq=FALSE) # 乱数の分布(密度)の表示
+    curve(myDist(x), add=TRUE) # 理論曲線(確率密度) 変数xを明示した方が良い
+  #+end_src
 
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 正規分布に関して以下を考察せよ．
-     - \(U_{1},U_{2}\) を \((0,1)\) 上の
-       一様分布に従う独立な確率変数とする．
-       このとき
-       #+begin_src latex
-	 \begin{align}
-	   X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
-	   X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
-	 \end{align}
-       #+end_src
-       とおくと，
-       \(X_{1},X_{2}\) は独立かつともに標準正規分布に従う．
-       これをグラフに描画して確認せよ. \\
-       (この変換をBox-Muller変換と呼ぶ)
-       
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 正規分布
-     mc <- 10000 # 実験回数を指定
-     myRandom <- function(){ # 一方の分布を確認する
-         u1 <- runif(1)
-         u2 <- runif(1)
-         return(sqrt(-2*log(u1))*cos(2*pi*u2))}
-     myData <- replicate(mc, myRandom()) # Monte-Carlo実験
-     par(family="HiraginoSans-W4") # 日本語フォントの指定
-     hist(myData, freq=FALSE, breaks=40,
-          col="lightblue", border="white", 
-          xlab="x", main=paste0("標準正規分布")) # ヒストグラム(密度表示)
-     curve(dnorm(x, mean=0, sd=1), add=TRUE, 
-           col="red", lwd=3) # 理論上の確率密度関数
-     legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-            col=c("lightblue", "red"), lwd=3) # 凡例を作成
-     ## Box-Muller法で作られる2つの確率変数の関係を調べる
-     boxmuller <- function(){
-         u1 <- runif(1)
-         u2 <- runif(1)
-         x1 <- sqrt(-2*log(u1))*cos(2*pi*u2)
-         x2 <- sqrt(-2*log(u1))*sin(2*pi*u2)
-         return(c(x1,x2))
-     }
-     x <- replicate(mc, boxmuller()) # 2行xmc列の行列が得られる
-     par(family="HiraginoSans-W4") # 日本語フォントの指定
-     plot(x[1,],x[2,],xlab="x1",ylab="x2") # 散布図を描く
-     ## 以下では同じ分布なのでx1,x2はまとめて計算
-     mu <- round(mean(x),2)
-     sigma <- round(sd(x),2)
-     hist(x, freq=FALSE, breaks=40, col="lightblue", border="white",
-          
-          main=paste0("正規分布(平均", mu, ", 分散", sigma^2, ")")) # ヒストグラム(密度表示)
-     curve(dnorm(x, mean=mu, sd=sigma), add=TRUE, 
-           col="red", lwd=3) # 理論上の確率密度関数
-     legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-            col=c("lightblue", "red"), lwd=3) # 凡例を作成
-   #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 正規分布に関して以下を考察せよ．
+  - \(U_{1},U_{2}\) を \((0,1)\) 上の
+    一様分布に従う独立な確率変数とする．
+    このとき
+    #+begin_src latex
+      \begin{align}
+        X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
+        X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
+      \end{align}
+    #+end_src
+    とおくと，
+    \(X_{1},X_{2}\) は独立かつともに標準正規分布に従う．
+    これをグラフに描画して確認せよ. \\
+    (この変換をBox-Muller変換と呼ぶ)
+
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 正規分布
+  mc <- 10000 # 実験回数を指定
+  myRandom <- function(){ # 一方の分布を確認する
+    u1 <- runif(1)
+    u2 <- runif(1)
+    return(sqrt(-2*log(u1))*cos(2*pi*u2))}
+  myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+  par(family="HiraginoSans-W4") # 日本語フォントの指定
+  hist(myData, freq=FALSE, breaks=40,
+       col="lightblue", border="white", 
+       xlab="x", main=paste0("標準正規分布")) # ヒストグラム(密度表示)
+  curve(dnorm(x, mean=0, sd=1), add=TRUE, 
+        col="red", lwd=3) # 理論上の確率密度関数
+  legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+         col=c("lightblue", "red"), lwd=3) # 凡例を作成
+  ## Box-Muller法で作られる2つの確率変数の関係を調べる
+  boxmuller <- function(){
+    u1 <- runif(1)
+    u2 <- runif(1)
+    x1 <- sqrt(-2*log(u1))*cos(2*pi*u2)
+    x2 <- sqrt(-2*log(u1))*sin(2*pi*u2)
+    return(c(x1,x2))
+  }
+  x <- replicate(mc, boxmuller()) # 2行xmc列の行列が得られる
+  par(family="HiraginoSans-W4") # 日本語フォントの指定
+  plot(x[1,],x[2,],xlab="x1",ylab="x2") # 散布図を描く
+  ## 以下では同じ分布なのでx1,x2はまとめて計算
+  mu <- round(mean(x),2)
+  sigma <- round(sd(x),2)
+  hist(x, freq=FALSE, breaks=40, col="lightblue", border="white",
+  
+       main=paste0("正規分布(平均", mu, ", 分散", sigma^2, ")")) # ヒストグラム(密度表示)
+  curve(dnorm(x, mean=mu, sd=sigma), add=TRUE, 
+        col="red", lwd=3) # 理論上の確率密度関数
+  legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+         col=c("lightblue", "red"), lwd=3) # 凡例を作成
+#+end_src
    
 
 * ガンマ分布
@@ -805,130 +806,130 @@
   #+end_src
 
 ** ガンマ分布の密度関数
-   - パラメータ \(\nu\) , \(\alpha\) のガンマ分布: \\
-     \(\Gamma(\nu,\alpha)\) または \(G(\alpha,\nu)\) 
-     (\(\nu > 0\) , \(\alpha > 0\))
-   - 確率密度関数:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         f(x)=
-         \begin{cases}
-           \frac{\alpha^\nu }{\Gamma(\nu)}
-           x^{\nu-1}e^{-\alpha x}&(x>0)\\
-           0&(x\leq0)
-         \end{cases}
-       \end{equation}
-     #+end_src
-     #+end_quote
-     ただしガンマ関数 \(\Gamma(\nu)\) は以下で定義される:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \Gamma(\nu)=\int_0^\infty x^{\nu-1}e^{-x}dx
-       \end{equation}
-     #+end_src
-     #+end_quote
+- パラメータ \(\nu\) , \(\alpha\) のガンマ分布: \\
+  \(\Gamma(\nu,\alpha)\) または \(G(\alpha,\nu)\) 
+  (\(\nu > 0\) , \(\alpha > 0\))
+- 確率密度関数:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=
+      \begin{cases}
+        \frac{\alpha^\nu }{\Gamma(\nu)}
+        x^{\nu-1}e^{-\alpha x}&(x>0)\\
+        0&(x\leq0)
+      \end{cases}
+    \end{equation}
+  #+end_src
+  #+end_quote
+  ただしガンマ関数 \(\Gamma(\nu)\) は以下で定義される:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \Gamma(\nu)=\int_0^\infty x^{\nu-1}e^{-x}dx
+    \end{equation}
+  #+end_src
+  #+end_quote
 
 ** ガンマ分布の性質
-   - \(\nu,\alpha\) はそれぞれ *形状パラメータ* ， *レート* と呼ばれることがある
-   - 平均は \(\nu/\alpha\) , 分散は \(\nu/\alpha^2\) で与えられる
-   - ガンマ分布は応用上重要な確率分布を含む
-     - 指数分布
-     - \(\chi^2\) 分布
+- \(\nu,\alpha\) はそれぞれ *形状パラメータ* ， *レート* と呼ばれることがある
+- 平均は \(\nu/\alpha\) , 分散は \(\nu/\alpha^2\) で与えられる
+- ガンマ分布は応用上重要な確率分布を含む
+  - 指数分布
+  - \(\chi^2\) 分布
 
 ** ガンマ分布に従う乱数
-   - 乱数の発生は ~rgamma()~ を用いる
-     #+begin_src R :tangle yes
-       rgamma(8, shape=3, rate=1) # ガンマ分布(8個)
-       rgamma(8, shape=1, rate=3) # 異なるパラメタのガンマ分布(8個)
-     #+end_src
+- 乱数の発生は ~rgamma()~ を用いる
+  #+begin_src R :tangle yes
+    rgamma(8, shape=3, rate=1) # ガンマ分布(8個)
+    rgamma(8, shape=1, rate=3) # 異なるパラメタのガンマ分布(8個)
+  #+end_src
   - 確率密度関数は ~dgamma()~ で計算できる
 
 ** 指数分布の密度関数
-   - パラメータ \(\lambda\) の指数分布: \(\mathrm{Exp}(\lambda)\) 
-     (\(\lambda > 0\))
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         f(x)=\Gamma(1,\lambda)=
-         \begin{cases}
-           \lambda e^{-\lambda x}&(x>0)\\
-           0&(x\leq0)
-         \end{cases}
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - \(\lambda\) は *レート* と呼ばれることがある
-   - 平均，分散はそれぞれ \(\lambda^{-1}\) , \(\lambda^{-2}\) で与えられる
+- パラメータ \(\lambda\) の指数分布: \(\mathrm{Exp}(\lambda)\) 
+  (\(\lambda > 0\))
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=\Gamma(1,\lambda)=
+      \begin{cases}
+        \lambda e^{-\lambda x}&(x>0)\\
+        0&(x\leq0)
+      \end{cases}
+    \end{equation}
+  #+end_src
+  #+end_quote
+- \(\lambda\) は *レート* と呼ばれることがある
+- 平均，分散はそれぞれ \(\lambda^{-1}\) , \(\lambda^{-2}\) で与えられる
 
 ** 指数分布に従う乱数
-   - 乱数の発生は ~rexp()~ を用いる
-     #+begin_src R :tangle yes
-       rexp(8) # レート1の指数分布(8個)
-       rexp(8, rate=0.5) # レート0.5の指数分布(8個)
-     #+end_src
+- 乱数の発生は ~rexp()~ を用いる
+  #+begin_src R :tangle yes
+    rexp(8) # レート1の指数分布(8個)
+    rexp(8, rate=0.5) # レート0.5の指数分布(8個)
+  #+end_src
 
 ** \(\chi^2\)-分布の密度関数
-   - 自由度 \(k\) の \(\chi^2\) 分布: \(\chi^2(k)\) 
-     (\(k > 0\))
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         f(x)=\Gamma(k/2,1/2)=
-         \begin{cases}
-           \frac{1}{2^{k/2}\Gamma(k/2)}
-           x^{k/2-1}e^{-x/2}&(x>0)\\
-           0&(x\leq0)
-         \end{cases}
-       \end{equation}
-     #+end_src
-     #+end_quote
+- 自由度 \(k\) の \(\chi^2\) 分布: \(\chi^2(k)\) 
+  (\(k > 0\))
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=\Gamma(k/2,1/2)=
+      \begin{cases}
+        \frac{1}{2^{k/2}\Gamma(k/2)}
+        x^{k/2-1}e^{-x/2}&(x>0)\\
+        0&(x\leq0)
+      \end{cases}
+    \end{equation}
+  #+end_src
+  #+end_quote
 
 ** \(\chi^2\)-分布の特徴付け
-   - \(\chi^2\) は *カイ二乗* と読む
-   - 平均, 分散はそれぞれ \(k\) , \(2k\) で与えられる
-   - 標準正規分布に従う \(k\) 個の独立な確率変数の
-     二乗和は自由度 \(k\) の \(\chi^2\) 分布に従う
+- \(\chi^2\) は *カイ二乗* と読む
+- 平均, 分散はそれぞれ \(k\) , \(2k\) で与えられる
+- 標準正規分布に従う \(k\) 個の独立な確率変数の
+  二乗和は自由度 \(k\) の \(\chi^2\) 分布に従う
 
 ** \(\chi^2\)-分布に従う乱数
-   - 乱数の発生は ~rchisq()~ を用いる
-     #+begin_src R :tangle yes
-       rchisq(8, df=1) # 自由度1のカイ二乗分布(8個)
-       rchisq(8, df=4) # 自由度4のカイ二乗分布(8個)
-     #+end_src
-   - 確率密度関数は ~dchisq()~ で計算できる
-     
+- 乱数の発生は ~rchisq()~ を用いる
+  #+begin_src R :tangle yes
+    rchisq(8, df=1) # 自由度1のカイ二乗分布(8個)
+    rchisq(8, df=4) # 自由度4のカイ二乗分布(8個)
+  #+end_src
+- 確率密度関数は ~dchisq()~ で計算できる
+
 
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
   :END:
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - \(\chi^2\) 分布に関して以下を考察せよ．
-     - 標準正規分布に従う \(k\) 個の独立な確率変数の
-       二乗和は自由度 \(k\) の \(\chi^2\) 分布に従うことを
-       確認しなさい．
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- \(\chi^2\) 分布に関して以下を考察せよ．
+  - 標準正規分布に従う \(k\) 個の独立な確率変数の
+    二乗和は自由度 \(k\) の \(\chi^2\) 分布に従うことを
+    確認しなさい．
 
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 カイ二乗分布
-     mc <- 10000 # 実験回数を指定
-     k <- 8 # 自由度を設定
-     myRandom <- function(){ 
-         sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
-     myData <- replicate(mc, myRandom()) # Monte-Carlo実験
-     par(family="HiraginoSans-W4") # 日本語フォントの指定
-     hist(myData, freq=FALSE, breaks=25,
-          col="lightblue", border="white", 
-          xlab="x", main=bquote(paste(chi^2,"分布(自由度",.(k),")"))) 
-     curve(dchisq(x, k), # 理論曲線(確率密度)
-           add=TRUE, col="red", lwd=3) 
-     legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-            col=c("lightblue", "red"), lwd=3) 
-   #+end_src
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 カイ二乗分布
+  mc <- 10000 # 実験回数を指定
+  k <- 8 # 自由度を設定
+  myRandom <- function(){ 
+    sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
+  myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+  par(family="HiraginoSans-W4") # 日本語フォントの指定
+  hist(myData, freq=FALSE, breaks=25,
+       col="lightblue", border="white", 
+       xlab="x", main=bquote(paste(chi^2,"分布(自由度",.(k),")"))) 
+  curve(dchisq(x, k), # 理論曲線(確率密度)
+        add=TRUE, col="red", lwd=3) 
+  legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+         col=c("lightblue", "red"), lwd=3) 
+#+end_src
 
 
 * \(t\)-分布
@@ -937,61 +938,61 @@
   #+end_src
 
 ** \(t\)-分布の密度関数
-   - 自由度 \(\nu\) の(Studentの) \(t\) 分布: \(t(\nu)\) 
-     (\(\nu > 0\))
-   - 確率密度関数:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         f(x)=
-         \frac{1}{\sqrt{\pi \nu}}
-         \frac{\Gamma((\nu+1)/2)}{\Gamma(\nu/2)}
-         \left(1+\frac{x^2}{\nu}\right)^{-(\nu+1)/2}
-       \end{equation}
-     #+end_src
-     #+end_quote
-     - *Student* は \(t\) 分布を導入した統計学者Gossetのペンネーム
+- 自由度 \(\nu\) の(Studentの) \(t\) 分布: \(t(\nu)\) 
+  (\(\nu > 0\))
+- 確率密度関数:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=
+      \frac{1}{\sqrt{\pi \nu}}
+      \frac{\Gamma((\nu+1)/2)}{\Gamma(\nu/2)}
+      \left(1+\frac{x^2}{\nu}\right)^{-(\nu+1)/2}
+    \end{equation}
+  #+end_src
+  #+end_quote
+  - *Student* は \(t\) 分布を導入した統計学者Gossetのペンネーム
 
 ** \(t\)-分布の平均と分散
-   - 平均:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathbb{E}[X]
-         =0 \quad\text{(ただし\(\nu>1\))}
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - 分散:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathrm{Var}(X)
-         =\frac{\nu}{\nu-2} \quad\text{(ただし \(\nu>2\))}
-       \end{equation}
-     #+end_src
-     #+end_quote
+- 平均:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathbb{E}[X]
+      =0 \quad\text{(ただし\(\nu>1\))}
+    \end{equation}
+  #+end_src
+  #+end_quote
+- 分散:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathrm{Var}(X)
+      =\frac{\nu}{\nu-2} \quad\text{(ただし \(\nu>2\))}
+    \end{equation}
+  #+end_src
+  #+end_quote
 
 ** \(t\)-分布の特徴付け 
-   - \(Z\) を標準正規分布に従う確率変数，
-     \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
-     \(Z,Y\) は独立であるとする．
-     このとき確率変数
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \frac{Z}{\sqrt{Y/k}}
-       \end{equation}
-     #+end_src
-     #+end_quote
-     は自由度 \(k\) の \(t\) 分布に従う
+- \(Z\) を標準正規分布に従う確率変数，
+  \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
+  \(Z,Y\) は独立であるとする．
+  このとき確率変数
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \frac{Z}{\sqrt{Y/k}}
+    \end{equation}
+  #+end_src
+  #+end_quote
+  は自由度 \(k\) の \(t\) 分布に従う
 
 ** \(t\)-分布に従う乱数
-   - 乱数の発生は ~rt()~ を用いる
-     #+begin_src R :tangle yes
-       rt(8, df=1) # 自由度1のt分布(8個)
-       rt(8, df=4) # 自由度4のt分布(8個)
-     #+end_src
+- 乱数の発生は ~rt()~ を用いる
+  #+begin_src R :tangle yes
+    rt(8, df=1) # 自由度1のt分布(8個)
+    rt(8, df=4) # 自由度4のt分布(8個)
+  #+end_src
   - 確率密度関数は ~dt()~ で計算できる
 
 
@@ -1000,42 +1001,42 @@
   :reveal_background: #fef4f4
   :END:
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - \(t\) 分布に関して以下を考察せよ．
-     - \(Z\) を標準正規分布に従う確率変数，
-       \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
-       \(Z,Y\) は独立であるとする．
-       このとき確率変数
-       #+begin_quote
-       #+begin_src latex
-	 \begin{equation}
-	   \frac{Z}{\sqrt{Y/k}}
-	 \end{equation}
-       #+end_src
-       #+end_quote
-       は自由度 \(k\) の \(t\) 分布に従うことを確認しなさい．
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- \(t\) 分布に関して以下を考察せよ．
+  - \(Z\) を標準正規分布に従う確率変数，
+    \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
+    \(Z,Y\) は独立であるとする．
+    このとき確率変数
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}
+        \frac{Z}{\sqrt{Y/k}}
+      \end{equation}
+    #+end_src
+    #+end_quote
+    は自由度 \(k\) の \(t\) 分布に従うことを確認しなさい．
 
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 t分布
-     mc <- 10000 # 実験回数を指定
-     k <- 7
-     myRandom <- function(){ 
-         y <- rchisq(1, df=k) # 自由度kのカイ2乗分布
-         ## y <- sum(rnorm(k)^2) # 正規乱数を用いてもよい
-         z <- rnorm(1) # 標準正規乱数
-         return(z/sqrt(y/k))}
-     myData <- replicate(mc, myRandom()) # Monte-Carlo実験
-     par(family="HiraginoSans-W4") # 日本語フォントの指定
-     hist(myData, freq=FALSE, breaks=40,
-          col="lightblue", border="white",  
-          xlab="x", main=bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")")))
-     curve(dt(x, df=k), # 確率密度関数(理論)
-           add=TRUE, col="red", lwd=3) 
-     legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-            col=c("lightblue", "red"), lwd=3) 
-   #+end_src
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 t分布
+  mc <- 10000 # 実験回数を指定
+  k <- 7
+  myRandom <- function(){ 
+    y <- rchisq(1, df=k) # 自由度kのカイ2乗分布
+    ## y <- sum(rnorm(k)^2) # 正規乱数を用いてもよい
+    z <- rnorm(1) # 標準正規乱数
+    return(z/sqrt(y/k))}
+  myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+  par(family="HiraginoSans-W4") # 日本語フォントの指定
+  hist(myData, freq=FALSE, breaks=40,
+       col="lightblue", border="white",  
+       xlab="x", main=bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")")))
+  curve(dt(x, df=k), # 確率密度関数(理論)
+        add=TRUE, col="red", lwd=3) 
+  legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+         col=c("lightblue", "red"), lwd=3) 
+#+end_src
 
 
 * \(F\)-分布
@@ -1044,61 +1045,61 @@
   #+end_src
 
 ** \(F\)-分布の密度関数
-   - 自由度 \(\nu_{1},\nu_{2}\) の \(F\) 分布: \(F(\nu_{1},\nu_{2})\) 
-     (\(\nu_{1} > 0, \nu_{2} > 0\))
-   - 確率密度関数:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         f(x)=
-         \begin{cases}
-           \frac{(\nu_{1}/\nu_{2})^{\nu_{1}/2}}{B(\nu_{1}/2,\nu_{2}/2)}
-           \frac{x^{\nu_{1}/2-1}}{(1+\nu_{1}x/\nu_{2})^{(\nu_{1}+\nu_{2})/2}}&(x>0)\\
-           0&(x\leq0)
-         \end{cases}
-       \end{equation}
-     #+end_src
-     #+end_quote
+- 自由度 \(\nu_{1},\nu_{2}\) の \(F\) 分布: \(F(\nu_{1},\nu_{2})\) 
+  (\(\nu_{1} > 0, \nu_{2} > 0\))
+- 確率密度関数:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      f(x)=
+      \begin{cases}
+        \frac{(\nu_{1}/\nu_{2})^{\nu_{1}/2}}{B(\nu_{1}/2,\nu_{2}/2)}
+        \frac{x^{\nu_{1}/2-1}}{(1+\nu_{1}x/\nu_{2})^{(\nu_{1}+\nu_{2})/2}}&(x>0)\\
+        0&(x\leq0)
+      \end{cases}
+    \end{equation}
+  #+end_src
+  #+end_quote
 
 ** \(F\)-分布の平均と分散
-   - 平均:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathbb{E}[X]
-         =\frac{\nu_{2}}{\nu_{2}-2} \quad \text{(ただし\(\nu_{2}>2\))}
-       \end{equation}
-     #+end_src
-     #+end_quote
-   - 分散:
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \mathrm{Var}(X)
-         =\frac{2\nu_{2}^2(\nu_{1}+\nu_{2}-2)}{\nu_{1}(\nu_{2}-2)^2(\nu_{2}-4)}
-         \quad\text{(ただし\(\nu_{2}>4\))}
-       \end{equation}
-     #+end_src
-     #+end_quote
-     
+- 平均:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathbb{E}[X]
+      =\frac{\nu_{2}}{\nu_{2}-2} \quad \text{(ただし\(\nu_{2}>2\))}
+    \end{equation}
+  #+end_src
+  #+end_quote
+- 分散:
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \mathrm{Var}(X)
+      =\frac{2\nu_{2}^2(\nu_{1}+\nu_{2}-2)}{\nu_{1}(\nu_{2}-2)^2(\nu_{2}-4)}
+      \quad\text{(ただし\(\nu_{2}>4\))}
+    \end{equation}
+  #+end_src
+  #+end_quote
+
 ** \(F\)-分布の特徴付け
-   - \(Y_{1},Y_{2}\) をそれぞれ自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う独立な
-     確率変数とする．このとき, 確率変数
-     #+begin_quote
-     #+begin_src latex
-       \begin{equation}
-         \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
-       \end{equation}
-     #+end_src
-     #+end_quote
-     は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従う
+- \(Y_{1},Y_{2}\) をそれぞれ自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う独立な
+  確率変数とする．このとき, 確率変数
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
+    \end{equation}
+  #+end_src
+  #+end_quote
+  は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従う
 
 ** \(F\)-分布に従う乱数
-   - 乱数の発生は ~rf()~ を用いる
-     #+begin_src R :tangle yes
-       rf(10, df1=4, df2=7) # 自由度4,7のF分布(10個)
-       rf(10, df1=7, df2=12) # 自由度7,12のF分布(10個)
-     #+end_src
+- 乱数の発生は ~rf()~ を用いる
+  #+begin_src R :tangle yes
+    rf(10, df1=4, df2=7) # 自由度4,7のF分布(10個)
+    rf(10, df1=7, df2=12) # 自由度7,12のF分布(10個)
+  #+end_src
   - 確率密度関数は ~df()~ で計算できる
 
 
@@ -1107,58 +1108,58 @@
   :reveal_background: #fef4f4
   :END:
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - \(F\) 分布に関して以下を考察せよ．
-     - \(Y_{1},Y_{2}\) をそれぞれ
-       自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う
-       独立な確率変数とする．
-       このとき, 確率変数
-       #+begin_src latex
-         \begin{equation}
-           \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
-         \end{equation}
-       #+end_src
-       は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従うことを確認しなさい．
-       
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 F分布
-     mc <- 10000 # 実験回数を指定
-     k1 <- 20
-     k2 <- 10
-     myRandom <- function(){ 
-         y1 <- rchisq(1, df=k1) # 自由度20のカイ二乗分布
-         y2 <- rchisq(1, df=k2) # 自由度10のカイ二乗分布
-         ## y1 <- sum(rnorm(k1)^2) # 正規乱数を用いてもよい
-         ## y2 <- sum(rnorm(k2)^2) 
-         return((y1/k1)/(y2/k2))}
-     myData <- replicate(mc, myRandom()) # Monte-Carlo実験
-     par(family="HiraginoSans-W4") # 日本語フォントの指定
-     hist(myData, freq=FALSE, breaks=40,
-          col="lightblue", border="white",
-          xlab="x",
-          main=bquote(paste(frac(Y[1]/k[1],Y[2]/k[2]),
-                            " (",k[1]==.(k1),
-                            ", ",k[2]==.(k2),")"))) 
-     curve(df(x, df1=k1, df2=k2), # 確率密度関数(理論)
-           add=TRUE, col="red", lwd=3) 
-     legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-            col=c("lightblue", "red"), lwd=3) 
-   #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- \(F\) 分布に関して以下を考察せよ．
+  - \(Y_{1},Y_{2}\) をそれぞれ
+    自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う
+    独立な確率変数とする．
+    このとき, 確率変数
+    #+begin_src latex
+      \begin{equation}
+        \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
+      \end{equation}
+    #+end_src
+    は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従うことを確認しなさい．
+
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 F分布
+  mc <- 10000 # 実験回数を指定
+  k1 <- 20
+  k2 <- 10
+  myRandom <- function(){ 
+    y1 <- rchisq(1, df=k1) # 自由度20のカイ二乗分布
+    y2 <- rchisq(1, df=k2) # 自由度10のカイ二乗分布
+    ## y1 <- sum(rnorm(k1)^2) # 正規乱数を用いてもよい
+    ## y2 <- sum(rnorm(k2)^2) 
+    return((y1/k1)/(y2/k2))}
+  myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+  par(family="HiraginoSans-W4") # 日本語フォントの指定
+  hist(myData, freq=FALSE, breaks=40,
+       col="lightblue", border="white",
+       xlab="x",
+       main=bquote(paste(frac(Y[1]/k[1],Y[2]/k[2]),
+                         " (",k[1]==.(k1),
+                         ", ",k[2]==.(k2),")"))) 
+  curve(df(x, df1=k1, df2=k2), # 確率密度関数(理論)
+        add=TRUE, col="red", lwd=3) 
+  legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+         col=c("lightblue", "red"), lwd=3) 
+#+end_src
 
 ** COMMENT 課題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 来週までに自身の興味のあるデータを収集しておく
-     - データ収集の方法を整理しておく
-     - 講義で利用する
-   - 参考となるサイト
-     - e-Stat (総務省) https://www.e-stat.go.jp
-     - 気象庁 http://www.jma.go.jp/jma/index.html
-     - World Bank https://data.worldbank.org
-     - Yahoo! finance https://finance.yahoo.com
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 来週までに自身の興味のあるデータを収集しておく
+  - データ収集の方法を整理しておく
+  - 講義で利用する
+- 参考となるサイト
+  - e-Stat (総務省) https://www.e-stat.go.jp
+  - 気象庁 http://www.jma.go.jp/jma/index.html
+  - World Bank https://data.worldbank.org
+  - Yahoo! finance https://finance.yahoo.com
 
 
 * COMMENT ローカル変数

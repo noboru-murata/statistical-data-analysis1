@@ -55,8 +55,8 @@ plot(離婚 ~ 婚姻, data=JP.data,
      col="red", 
      pch=コード)
 with(JP.data, text(婚姻,離婚,labels=県名,
-                  col="gray", # 文字の色を指定
-                  cex=0.5)) # 文字の大きさを指定(既定値は1)
+                   col="gray", # 文字の色を指定
+                   cex=0.5)) # 文字の大きさを指定(既定値は1)
 
 ### 分布の視覚化で用いた例
 

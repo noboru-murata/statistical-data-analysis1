@@ -2,745 +2,762 @@
 #+SUBTITLE: R言語の仕様とRStudioの使い方
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 
-# Time-stamp: <2021-04-09 21:30:38 mura>
+#+DATE: 第1講
+# Time-stamp: <2022-04-01 17:29:52 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
-#+STARTUP: hidestars content
+#+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :end:
 
 * 講義の内容
-  - R言語の概要
-  - RStudioのUI (ユーザインタフェース)
-  - R言語の使い方
-  - Rで用いるデータ構造 (ベクトル・データフレーム)
-    
-  #+begin_src R :eval no :exports none :tangle yes
-    ### 第01回 練習問題解答例
-  #+end_src
-  #+begin_src R :exports none
-    setwd("~/Desktop/lectures/u-tokyo/spring/slide")
-  #+end_src
-  
+- R言語の概要
+- RStudioのUI (ユーザインタフェース)
+- R言語の使い方
+- Rで用いるデータ構造 (ベクトル・データフレーム)
 
+#+begin_src R :eval no :exports none :tangle yes
+  ### 第1講 練習問題解答例
+#+end_src
+#+begin_src R :exports none
+  setwd("~/Desktop/lectures/u-tokyo/spring/slide")
+#+end_src
+  
 * COMMENT メモ
-  - install manual は別添
-  - データ構造はベクトルとデータフレームのみ
-  - 第1回は一緒に使いながら説明と同時に細々練習を行う
-    
+- install manual は別添
+- データ構造はベクトルとデータフレームのみ
+- 第1回は一緒に使いながら説明と同時に細々練習を行う
+
 
 * R言語の概要
 ** R言語とは
-   - 統計計算のための言語と環境の総称
-   - オープンソース・フリーソフトウェア
-   - 「パッケージ」を利用して容易に機能拡張が可能
-     - パッケージの開発は非常に活発 (現在10000を越える)
-     - 最新の技術や方法が簡単に導入できることも多い
-   - https://www.r-project.org/ (プロジェクトのサイト)
+- 統計計算のための言語と環境の総称
+- オープンソース・フリーソフトウェア
+- 「パッケージ」を利用して容易に機能拡張が可能
+  - パッケージの開発は非常に活発 (現在10000を越える)
+  - 最新の技術や方法が簡単に導入できることも多い
+- https://www.r-project.org/ (プロジェクトのサイト)
 
 ** RStudioとは
-   - RStudio社が開発している統合開発環境(IDE)
-     - R によるデータ解析や統計計算・パッケージ開発を支援
-     - OSに依存しない対話型操作環境を提供
-   - 本講義ではRStudioを用いて説明を行う
-   - https://www.rstudio.com/ (RStudio社のサイト)
+- RStudio社が開発している統合開発環境(IDE)
+  - R によるデータ解析や統計計算・パッケージ開発を支援
+  - OSに依存しない対話型操作環境を提供
+- 本講義ではRStudioを用いて説明を行う
+- https://www.rstudio.com/ (RStudio社のサイト)
 
 ** Rの得意分野
-   - データの分類・集計・整理
-   - 記述統計量 (基本・要約統計量) の計算
-   - グラフによる視覚化
-   - プログラムによる処理の自動化
-   - 擬似乱数による不確定性を含む現象の模擬 \\
-     *確率的シミュレーション・モンテカルロ法*
+- データの分類・集計・整理
+- 記述統計量 (基本・要約統計量) の計算
+- グラフによる視覚化
+- プログラムによる処理の自動化
+- 擬似乱数による不確定性を含む現象の模擬 \\
+  *確率的シミュレーション・モンテカルロ法*
 
 ** データ形式の分類
-   - 構造化データ
-     - 個々のデータが項目ごとに表形式で整理されている
-     - 集計・分類・抽出・追加など整理が比較的容易
-     - [[color:darkgreen][国別の経済指標，学生の成績表]]
+- 構造化データ
+  - 個々のデータが項目ごとに表形式で整理されている
+  - 集計・分類・抽出・追加など整理が比較的容易
+  - [[color:green][国別の経済指標，学生の成績表]]
 
-   - 非構造化データ (本講義では扱わない)
-     - データごとに形式や項目数など属性が異なる
-     - データの整理や比較がそのままでは困難
-     - [[color:darkgreen][文書，画像，動画，音声]]
+- 非構造化データ (本講義では扱わない)
+  - データごとに形式や項目数など属性が異なる
+  - データの整理や比較がそのままでは困難
+  - [[color:green][文書，画像，動画，音声]]
 
 
 * COMMENT (参考) R および RStudio の導入方法
 ** Rのインストール手順
-   1. _R: The R project for Statistical Computing_
-      にアクセス
-      - http://www.r-project.org/ を直接入力
-      - または [[color:darkgreen]["r install"]] などで検索
-   2. _download R_
-      というリンクをクリック
-   3. CRANのミラーサイトを選ぶ:
-      - どれでも利用可だが [[color:darkgreen]["Japan" のいずれか]] を選ぶと良い
-      - OSごとにインストール方法が異なるので注意
+1. _R: The R project for Statistical Computing_
+   にアクセス
+   - http://www.r-project.org/ を直接入力
+   - または [[color:darkgreen]["r install"]] などで検索
+2. _download R_
+   というリンクをクリック
+3. CRANのミラーサイトを選ぶ:
+   - どれでも利用可だが [[color:darkgreen]["Japan" のいずれか]] を選ぶと良い
+   - OSごとにインストール方法が異なるので注意
 
 ** Windowsの場合
-   1. _Download R for Windows_
-      をクリック
-   2. _base_
-      をクリック
-   3. _Download R (バージョン名) for Windows_
-      をクリック
-   4. ダウンロードされたインストーラを起動
-   5. 指示に従って R をインストールする 
+1. _Download R for Windows_
+   をクリック
+2. _base_
+   をクリック
+3. _Download R (バージョン名) for Windows_
+   をクリック
+4. ダウンロードされたインストーラを起動
+5. 指示に従って R をインストールする 
 
 ** Macの場合
-   1. _Download R for (Mac) OS X_
-      をクリック
-   2. _R-(バージョン名).pkg_
-      をクリック
-   3. ダウンロードされたインストーラを起動
-   4. 指示に従って R をインストールする 
+1. _Download R for (Mac) OS X_
+   をクリック
+2. _R-(バージョン名).pkg_
+   をクリック
+3. ダウンロードされたインストーラを起動
+4. 指示に従って R をインストールする 
 
 ** RStudioのインストール手順
-   1. _Download RStudio - RStudio_
-      にアクセス
-      - https://www.rstudio.com/products/rstudio/download/ 
-      - [[color:darkgreen]["rstudio install"]] などで検索
-   2. _Installers for Supported Platforms_
-      から自分の環境に合わせて OS を選択
-   3. ダウンロードしたインストーラを起動
-   4. 指示に従って RStudio をインストールする
+1. _Download RStudio - RStudio_
+   にアクセス
+   - https://www.rstudio.com/products/rstudio/download/ 
+   - [[color:darkgreen]["rstudio install"]] などで検索
+2. _Installers for Supported Platforms_
+   から自分の環境に合わせて OS を選択
+3. ダウンロードしたインストーラを起動
+4. 指示に従って RStudio をインストールする
 
 
 * RStudio の UI
 ** 起動画面
-   - *以下 RStudio を用いて説明する*
-   - 起動すると4グループのペイン(枠; pane)を持つウィンドウが立ち上がる
-     - 左上: エディタ (開いていない場合もある)
-     - 左下: コンソール
-     - 右上: 作業環境内の変数・コマンド履歴
-     - 右下: パッケージ・グラフィックス・ヘルプ
-   - /[[color:gray][ペインの配置や数は個別に設定することもできる]]/
-
-** エディタ (左上)
-   - コマンドを記述したファイルを扱うためのペイン
-   - コンソール上に入力したコマンドは直ちに実行される
-     (履歴は *History Pane* に残る)
-   - 複雑なコマンドを書いたり，後から修正するための機能
-     (*History Pane* からコピーできる)
-     - コマンドを実行順に記述したファイルを作成 
-       _(R Script)_
-     - ファイルを保存
-     - ファイルを実行
-   - /[[color:gray][講義の中で使いながら説明]]/
+- *以下 RStudio を用いて説明する*
+- 起動すると4グループのペイン(枠; pane)を持つウィンドウが立ち上がる
+  - 左上: エディタ (開いていない場合もある)
+  - 左下: コンソール
+  - 右上: 作業環境内の変数・コマンド履歴
+  - 右下: パッケージ・グラフィックス・ヘルプ
+- /[[color:orange][ペインの配置や数は個別に設定することもできる]]/
 
 ** コンソール (左下)
-  - コマンドを入力するためのペイン
-  - 例えば，コンソール上で終了を指示する以下のコマンドを入力すれば
-    R を終了させることができる
-    #+begin_src R :eval no
-      q() # "Save workspace image?" と聞かれることがある (後述)
-    #+end_src
-  - /[[color:gray][終了できない場合はOSの機能で強制終了]]/
+- コマンドを入力するためのペイン
+- 例えば，コンソール上で終了を指示する以下のコマンドを入力すれば
+  R を終了させることができる
+  #+begin_src R :eval no
+    q() # "Save workspace image?" と聞かれることがある (後述)
+  #+end_src
+- /[[color:orange][終了できない場合はOSの機能で強制終了]]/
 
 ** 作業ディレクトリ
-   - プログラムが実行されるディレクトリ(フォルダ)
-   - 作業ディレクトリにあるファイルの読み書きはパスを指定する必要がない
-   - *Session* メニューの *Set Working Directory* で指定
-     - 読み込んだファイルの場所を選択
-     - *Files Pane* の場所を選択
-     - ディレクトリを直接選択
-   - /[[color:gray][次回以降に使いながら説明]]/
+- プログラムが実行されるディレクトリ(フォルダ)
+- 作業ディレクトリにあるファイルの読み書きはパスを指定する必要がない
+- 現在の作業ディレクトリはコンソールタブで確認
+- *Session* メニューの *Set Working Directory* で指定
+  - 読み込んだファイルの場所を選択
+  - *Files* タブ (右下ペイン) の場所を選択 (*More* からも選択可)
+  - ディレクトリを直接選択
+
+** プロジェクト
+- 作業環境をまとめて設定
+  - 作成したプロジェクトは *Project* メニューから選択可能
+  - プロジェクト毎に履歴や変数を保存可能
+  - 複数のプロジェクトを定義可能    
+  - いつでもプロジェクトを中断可能
+  - 中断するときは *Close Project* を選択
+- 一般的なプロジェクトの作成手順
+  - 右上の *Project* メニューから *New Project* を選択
+  - *Create Project* ダイアログで *New Directory* を選択
+  - *Project Type* ダイアログで *New Project* を選択
+  - *Directry Name* とその親ディレクトリを指定
+  
+** エディタ (左上)
+- コマンドを記述したファイルを扱うためのペイン
+- コンソールで入力したコマンドは直ちに実行される
+- 履歴は *History Pane* に残る
+- 複雑なコマンドを書いたり修正するための機能
+  - コマンドを実行順に記述したファイル (*R Script*) を作成 
+  - ファイルを保存
+  - ファイルを実行
+  - *History Pane* からコピーできる
+- /[[color:orange][講義の中で使いながら説明]]/
 
 ** 終了時の注意
-   - 終了時に以下のメッセージが表示される場合がある
-     #+begin_src R :eval no
-       > q()
-       Save workspace image? [y/n/c]:     
-     #+end_src
-   - 作業で使った変数などをセーブするか尋ねている
-     - y を入力: セーブする (yesの略)
-     - n を入力: セーブしない (noの略)
-     - c を入力: Rの終了をキャンセルする (cancelの略)
-   - セーブした場合次回起動時に読み込まれる 
+- 終了時に以下のメッセージが表示される場合がある
+  #+begin_src R :eval no
+    > q()
+    Save workspace image? [y/n/c]:     
+  #+end_src
+- 作業で使った変数などをセーブするか尋ねている
+  - y を入力: セーブする (yesの略)
+  - n を入力: セーブしない (noの略)
+  - c を入力: Rの終了をキャンセルする (cancelの略)
+- セーブした場合次回起動時に読み込まれる 
 
 ** COMMENT 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - RStudioを起動し上記の方法で終了してみよう
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- RStudioを起動し上記の方法で終了してみよう
 
 
 * 基本的な使い方
 ** 式の入力
-   - 四則演算や数学関数は直感的な文法で計算可能
-     - + (加算)，- (減算)，* (乗算)，/ (除算)，＾または** (ベキ乗)
-     - sin, cos, tan (三角関数)，exp (指数関数)，log (対数関数)
-   - [[color:darkgreen][コンソール上での計算例]]
-     #+begin_src R
-       1 * 2 + 3^2 # 計算の優先順位に注意．羃乗 > 乗除算 > 加減算 
-     #+end_src
-     #+begin_src R
-       sin(pi/4) + log(10) # pi は円周率．対数は自然対数
-     #+end_src
-
+- 四則演算や数学関数は直感的な文法で計算可能
+  - + (加算)，- (減算)，* (乗算)，/ (除算)，＾または** (ベキ乗)
+  - sin, cos, tan (三角関数)，exp (指数関数)，log (対数関数)
+- [[color:green][コンソール上での計算例]]
+  #+begin_src R
+    1 * 2 + 3^2 # 計算の優先順位に注意．羃乗 > 乗除算 > 加減算 
+  #+end_src
+  #+begin_src R
+    sin(pi/4) + log(10) # pi は円周率．対数は自然対数
+  #+end_src
+  
 ** COMMENT 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 以下の式を R を用いて計算してみよう
-     - $123\times456-789$
-     - $(2^{2^5}+1)\div641$
-     - $\sin^2(\pi/3)+\cos^2(\pi/3)$
-     - 適当な数学関数を試す
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 以下の式を R を用いて計算してみよう
+  - $123\times456-789$
+  - $(2^{2^5}+1)\div641$
+  - $\sin^2(\pi/3)+\cos^2(\pi/3)$
+  - 適当な数学関数を試す
 
 ** エディタからの実行
-   - 新規ファイルの作成 (以下のいずれか)
-     - 左上の *+* から
-       *R Script* を選択
-     - *File* から
-       *New File* を選択，
-       更に *R Script* を選択
-   - エディタ上でコマンドを記述
-   - 実行範囲の選択
-     - 一行のみ: カーソルをその行に移動
-     - 複数行: クリックしてながら移動して選択する
-   - 選択範囲の実行 (以下のいずれか)
-     - 左上の *Run* をクリック
-     - *Code* から 
-       *Selected Line(s)* を選択
-       (Ctrl/Command+Enter)
-** COMMENT エディタの補足
-   - 新規ファイルの作成 (以下のいずれか)
-     -新規ファイル - "Ctrl+Shift+N" (ショートカットキー)
-   - エコーあり: (以下のいずれか)
-     - エディタ右上部の "Source" の右側の▼をクリックして "Source with Echo" を選択
-     - "Ctrl+Shift+Enter" または "Command+Shift+Enter"
-     実行したコードの内容が出力("エコー"という)される
-   - エコーなしの実行: (以下のいずれか)
-     - エディタ右上部にある "Source" をクリック
-     - "Ctrl+Shift+S" または "Command+Shift+S"
-     コードの実行のみが行われ，実行されたコードは出力されない
+- 新規ファイルの作成 (以下のいずれか)
+  - 左上の *+* から
+    *R Script* を選択
+  - *File* から
+    *New File* を選択，
+    更に *R Script* を選択
+- エディタ上でコマンドを記述
+- 実行範囲の選択
+  - 一行のみ: カーソルをその行に移動
+  - 複数行: クリックしてながら移動して選択する
+- 選択範囲の実行 (以下のいずれか)
+  - 左上の *Run* をクリック
+  - *Code* から 
+    *Selected Line(s)* を選択
+    (Ctrl/Command+Enter)
+
+** COMMENT エディタの補足 (整理が必要)
+- 新規ファイルの作成 (以下のいずれか)
+  - 新規ファイル
+  - "Ctrl+Shift+N" (ショートカットキー)
+- エコーあり: (以下のいずれか)
+  - エディタ右上部の "Source" の右側の▼をクリックして "Source with Echo" を選択
+  - "Ctrl+Shift+Enter" または "Command+Shift+Enter"
+  実行したコードの内容が出力("エコー"という)される
+- エコーなしの実行: (以下のいずれか)
+  - エディタ右上部にある "Source" をクリック
+  - "Ctrl+Shift+S" または "Command+Shift+S"
+  コードの実行のみが行われ，実行されたコードは出力されない
 
 ** COMMENT 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 先程の演習の内容をエディタから実行してみよう
-     - $123\times456-789$
-     - $(2^{2^5}+1)\div641$
-     - $\sin^2(\pi/3)+\cos^2(\pi/3)$
-     - 適当な数学関数を試す
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 先程の演習の内容をエディタから実行してみよう
+  - $123\times456-789$
+  - $(2^{2^5}+1)\div641$
+  - $\sin^2(\pi/3)+\cos^2(\pi/3)$
+  - 適当な数学関数を試す
 
 ** ファイルの保存
-   - ファイルの保存 (以下のいずれか)
-     - 左上のディスクのマークをクリック
-     - *File* から 
-       *Save* を選択 (Ctrl/Command+S)
-   - ファイル作成に関する注意
-     - 保存する時にファイル名の入力が求められる
-     - 拡張子は通常
-       *.R* または
-       *.r* を利用する
-     - *#* 以降の字列は実行されない (コメントを残す際に有用)
+- 保存 (以下のいずれか)
+  - 左上のディスクのマークをクリック
+  - *File* から 
+    *Save* を選択 (Ctrl/Command+S)
+- ファイル作成に関する注意
+  - 保存する時にファイル名の入力が求められる
+  - 拡張子は通常
+    *.R* または
+    *.r* を利用する
+  - *#* 以降の字列は実行されない (コメントを残す際に有用)
 
 ** COMMENT ファイルの実行
-   - [[color:darkgreen][コンソールからの実行]]
-     #+begin_src R :exports code
-     source("ファイル名")
-     source("ファイル名",echo=TRUE) # エコーあり
-     #+end_src
-     - "ファイルのある場所(ディレクトリ)"も含めて指定する
-     - ファイル名のみだと作業ディレクトリにあるとみなされる
-   - [[color:darkgreen][作業ディレクトリの確認]]
-     #+begin_src R :exports code
-     getwd()
-     #+end_src
-     コンソール上部にも記載されている
+- [[color:darkgreen][コンソールからの実行]]
+  #+begin_src R :exports code
+  source("ファイル名")
+  source("ファイル名",echo=TRUE) # エコーあり
+  #+end_src
+  - "ファイルのある場所(ディレクトリ)"も含めて指定する
+  - ファイル名のみだと作業ディレクトリにあるとみなされる
+- [[color:darkgreen][作業ディレクトリの確認]]
+  #+begin_src R :exports code
+    getwd()
+  #+end_src
+  コンソール上部にも記載されている
 
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   基本的な操作に慣れよう
-   - 以下の計算を行うRScriptを作成し保存しなさい
-     - $123\times456-789$
-     - $(2^{2^5}+1)\div641$
-     - $\sin^2(\pi/3)+\cos^2(\pi/3)$
-     - 適当な数学関数を試す
-       
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 基本的な使い方
-     123 * 456 - 789
-     (2^2^5 + 1) / 641 # 羃乗の優先順位に注意
-     sin(pi/3)^2 + cos(pi/3)^2
-     log(exp(2)+1) # 適当な数学関数の例
-   #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+基本的な操作に慣れよう
+- 以下の計算を行う R Script を作成し保存しなさい
+  - $123\times456-789$
+  - $(2^{2^5}+1)\div641$
+  - $\sin^2(\pi/3)+\cos^2(\pi/3)$
+  - 適当な数学関数を用いた計算
 
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 基本的な使い方
+  123 * 456 - 789
+  (2^2^5 + 1) / 641 # 羃乗の優先順位に注意
+  sin(pi/3)^2 + cos(pi/3)^2
+  log(exp(2)+1) # 適当な数学関数の例
+#+end_src
+    
 
 * より進んだ使い方
 ** 関数
-   - 関数の取り扱いは一般的な計算機言語とほぼ同様
-   - 関数は引数とその値を指定して実行
-   - ただし引数名は順序を守れば省略可能
-   - [[color:darkgreen][関数の呼び出し方]]
-     #+begin_src R :eval no
-       f(arg1=value1, arg2=value2) 
-       ## arg1, arg2 は引数の名前，value1, value2 は引数に渡す値を表す
-       f(value1, value2) # 上と同値．順序に注意
-     #+end_src
-
-   # - 引数が存在しない，
-   #  もしくはすべての引数に対し既定値が設定されている関数もある．
-   #  例えば ~f~ がそのような関数だった場合，
-   #  コンソール上で
-   #  #+begin_src R :exports code
-   #  f()    
-   #  #+end_src
-   #  を実行すると引数=既定値として関数の内容が実行される
-   # - 典型例はRを終了する関数 ~q()~
+- 関数の取り扱いは一般的な計算機言語とほぼ同様
+- 関数は引数とその値を指定して実行
+- ただし引数名は順序を守れば省略可能
+- [[color:green][関数の呼び出し方]]
+  #+begin_src R :eval no
+    f(arg1=value1, arg2=value2) # 擬似コード
+    ## arg1, arg2 は引数の名前，value1, value2 は引数に渡す値を表す
+    f(value1, value2) # 上と同値．順序に注意
+  #+end_src
+  - /[[color:orange][擬似コード = 実行しても動かない]]/
+  # - 引数が存在しない，
+  #  もしくはすべての引数に対し既定値が設定されている関数もある．
+  #  例えば ~f~ がそのような関数だった場合，
+  #  コンソール上で
+  #  #+begin_src R :exports code
+  #  f()    
+  #  #+end_src
+  #  を実行すると引数=既定値として関数の内容が実行される
+  # - 典型例はRを終了する関数 ~q()~
 
 ** 関数の実行例
-   - [[color:darkgreen][正弦関数の計算]]
-     #+begin_src R
-       sin(x = pi/2) 
-       sin(pi/2) # 上と同値
-     #+end_src
-   - [[color:darkgreen][対数関数の計算]] (xやbに適当な数値を代入せよ)
-     #+begin_src R :eval no
-       log(x, b) # 底をbとする対数
-       log(x=x, base=b) #上と同値
-       log(base=b, x=x) #上と同値
-       log(b,x) # = log(x=b,base=x) 
-       log(x) # 自然対数 =log(x,base=exp(1))
-     #+end_src
-
+- [[color:green][正弦関数の計算]]
+  #+begin_src R
+    sin(x = pi/2) 
+    sin(pi/2) # 上と同値
+  #+end_src
+- [[color:green][対数関数の計算]]
+  #+begin_src R :eval no
+    # x,bを適当な数値に置き換えて実行せよ
+    log(x, b) # 底をbとする対数
+    log(x=x, base=b) #上と同値
+    log(base=b, x=x) #上と同値
+    log(b,x) # = log(x=b,base=x) 
+    log(x) # 自然対数 =log(x,base=exp(1))
+  #+end_src
+  
 ** オブジェクト
-   - Rで扱うことのできる数値
-     - 実数および複素数 (指数表記にも対応)
-     - 無限大や不定な数など特殊なものにも対応
-   - 文字列を名前として数値等を保持することができる
-   - 変数，関数，計算結果などRで扱う対象を総称して *オブジェクト* と呼ぶ
-   - オブジェクトの情報は右上の
-     *Environment Pane* で確認できる
+- Rで扱うことのできる数値
+  - 実数および複素数 (指数表記にも対応)
+  - 無限大や不定な数など特殊なものにも対応
+- 文字列を名前として数値等を保持することができる
+- 変数，関数，計算結果などRで扱う対象を総称して *オブジェクト* と呼ぶ
+- オブジェクトの情報は右上の
+  *Environment Pane* で確認できる
 
 ** オブジェクトの代入
-   - オブジェクトの内容(情報)を別のオブジェクトに代入することができる
-   - 計算結果や良く使う文字列の保存に利用できる
-   - [[color:darkgreen][代入操作の例]]
-     #+begin_src R
-       (foo <- 3) # 数値を変数 foo に代入
-       ## 外側の () は代入した結果の表示．下記の print() と同義
-       bar <- sin(2/3*pi) + cos(foo * pi/4) # 計算結果を代入
-       print(bar) # 変数の内容を表示．コンソールでは単に bar だけでもよい
-     #+end_src
+- オブジェクトの内容(情報)を別のオブジェクトに代入することができる
+- 計算結果や良く使う文字列の保存に利用できる
+- [[color:green][代入操作の例]]
+  #+begin_src R
+    (foo <- 3) # 数値を変数 foo に代入
+    ## 外側の () は代入した結果の表示．下記の print() と同義
+    bar <- sin(2/3*pi) + cos(foo * pi/4) # 計算結果を代入
+    print(bar) # 変数の内容を表示．コンソールでは単に bar だけでもよい
+  #+end_src
 
-   # - 変数名は自由に決めて用いることが出来る
-   #   - 例: \texttt{x}, \texttt{y}, \texttt{abc}など
-   # - \texttt{sin}, \texttt{log}, \texttt{pi}など
-   #   Rの仕様として使われているものは，
-   #   用いることができないわけではないが混乱を招く元なので使わないほうがよい
-   # - 以下の文字はRの起動時からすでに特定の機能を与えられているので，
-   #   値を代入する際は注意が必要
-   #   #+begin_quote
-   #   c q t C D F I T 
-   #   #+end_quote
-   #   それぞれの機能はヘルプを参照
-   # - 右上のペインの使い方
-   #   - これまでの作業で生成した変数に関する情報は，
-   #   *{{{structure(Environment)}}}* タブで確認できる
-   #   - これまでの作業でコンソール上で打ち込んだコマンドは，
-   #   *{{{structure(History)}}}* タブで確認できる
-   # - コンソール上で上下キーを打つことで，
-   #   以前に実行したコマンドを再表示できる
+  # - 変数名は自由に決めて用いることが出来る
+  #   - 例: \texttt{x}, \texttt{y}, \texttt{abc}など
+  # - \texttt{sin}, \texttt{log}, \texttt{pi}など
+  #   Rの仕様として使われているものは，
+  #   用いることができないわけではないが混乱を招く元なので使わないほうがよい
+  # - 以下の文字はRの起動時からすでに特定の機能を与えられているので，
+  #   値を代入する際は注意が必要
+  #   #+begin_quote
+  #   c q t C D F I T 
+  #   #+end_quote
+  #   それぞれの機能はヘルプを参照
+  # - 右上のペインの使い方
+  #   - これまでの作業で生成した変数に関する情報は，
+  #   *{{{structure(Environment)}}}* タブで確認できる
+  #   - これまでの作業でコンソール上で打ち込んだコマンドは，
+  #   *{{{structure(History)}}}* タブで確認できる
+  # - コンソール上で上下キーを打つことで，
+  #   以前に実行したコマンドを再表示できる
 
 ** ヘルプ機能
-   - 各関数の詳細(機能，引数名，引数の既定値，実行例など)を記述した
-     ヘルプが用意されている
-   - ヘルプに関連する関数:
-     - ~help()~ (使い方や例の表示)
-     - ~example()~ (例を実際に実行してくれる)
-     - ~help.search()~ (キーワード検索)
-   - 右下 *Help Pane* の右上にある検索窓でも参照可能
+- 各関数の詳細(機能，引数名，引数の既定値，実行例など)を記述した
+  ヘルプが用意されている
+- ヘルプに関連する関数:
+  - ~help()~ (使い方や例の表示)
+  - ~example()~ (例を実際に実行してくれる)
+  - ~help.search()~ (キーワード検索)
+- 右下 *Help Pane* の右上にある検索窓で参照可能
 
-   # - 関数の正確な名前が分からない場合，
-   #   キーワードを渡すことで関連するトピックをもつ関数を検索できる
-   # - {{{example(例)}}} 
-   #   三角関数を計算する関数の名前がわからない場合, 
-   #   三角関数は英語でtrigonometric functionであることから
-   #   #+begin_src R :exports both :results none
-   #   help.search(trigonometric)
-   #   #+end_src
-   #   または
-   #   #+begin_src R :exports both :results none
-   #   ??trigonometric
-   #   #+end_src
-   #   を実行してみればよい
+  # - 関数の正確な名前が分からない場合，
+  #   キーワードを渡すことで関連するトピックをもつ関数を検索できる
+  # - {{{example(例)}}} 
+  #   三角関数を計算する関数の名前がわからない場合, 
+  #   三角関数は英語でtrigonometric functionであることから
+  #   #+begin_src R :exports both :results none
+  #   help.search(trigonometric)
+  #   #+end_src
+  #   または
+  #   #+begin_src R :exports both :results none
+  #   ??trigonometric
+  #   #+end_src
+  #   を実行してみればよい
+
 ** ヘルプの利用例
-   - [[color:darkgreen][ヘルプの使い方]] 
-     #+begin_src R :eval no
-       help(log) # 関数logのヘルプ
-       ?log # 上と同値
-       example(log) # ヘルプ内の例を実行
-       help.search("log") # "log"に関連する項目は？
-       ??"log" # 上と同値
-     #+end_src
-     /[[color:gray][ヘルプは右下のペインに表示される]]/
+- [[color:green][ヘルプの使い方]] 
+  #+begin_src R :eval no
+    help(log) # 関数logのヘルプ
+    ?log # 上と同値
+    example(log) # ヘルプ内の例を実行
+    help.search("log") # "log"に関連する項目は？
+    ??"log" # 上と同値
+  #+end_src
+  - /[[color:orange][ヘルプは右下のペインに表示される]]/
 
 ** COMMENT 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 以下の項目についてヘルプを利用してみよう
-     - 三角関数(trigonometric function)を計算するための関数について
-       ヘルプファイルを調べよ
-     - 双曲線関数(hyperbolic function)についても調べよ
-       
-** パッケージの操作
-   - 機能を拡張するために多数のパッケージが用意されている  
-   - パッケージのインストール方法
-     - RStudioの機能を利用する方法
-     - コンソールから行う方法
-   - RStudioの機能を利用したインストール手順
-     - 右下 *Package Pane* をクリック
-     - 左上の *Install* をクリック
-     - パッケージ名を入力し *Install* をクリック
-   - 利用可能なパッケージの情報は
-     右下 *Package Pane* で確認できる
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 以下の項目についてヘルプを利用してみよう
+  - 三角関数(trigonometric function)を計算するための関数について
+    ヘルプファイルを調べよ
+  - 双曲線関数(hyperbolic function)についても調べよ
 
-   # - パッケージ名の左側のボックスをチェックするとロードされ，パッケージに含まれる関数などが利用可能になる
-   # - 左上部の"Update"をクリックするとインストール済みパッケージを最新版に更新できる
-   # - コンソールからのインストール手順
-   #   1. コンソール上で\texttt{install.packages("パッケージ名")}を実行
-   #   2. パッケージをダウンロードするためのサイト(CRANのミラーサイト)の
-   # 	選択を要求された場合は，適切なものを選択 (Japanのミラーサイトがよい)
-   # - コンソール上でのパッケージのロード
-   #   #+begin_src R :exports code
-   #   library(パッケージ名)
-   #   require(パッケージ名) # 上のほぼ同値
-   #   #+end_src
-   #   ~require()~ を用いると1度読み込んだものは再読み込みしない？
+** パッケージの操作
+- 機能を拡張するために多数のパッケージが用意されている  
+- パッケージのインストール方法
+  - RStudioの機能を利用する方法
+  - コンソールから行う方法
+- RStudioの機能を利用したインストール手順
+  - 右下 *Package Pane* をクリック
+  - 左上の *Install* をクリック
+  - パッケージ名を入力し *Install* をクリック
+- 利用可能なパッケージの情報は
+  右下 *Package Pane* で確認できる
+
+  # - パッケージ名の左側のボックスをチェックするとロードされ，パッケージに含まれる関数などが利用可能になる
+  # - 左上部の"Update"をクリックするとインストール済みパッケージを最新版に更新できる
+  # - コンソールからのインストール手順
+  #   1. コンソール上で\texttt{install.packages("パッケージ名")}を実行
+  #   2. パッケージをダウンロードするためのサイト(CRANのミラーサイト)の
+  # 	選択を要求された場合は，適切なものを選択 (Japanのミラーサイトがよい)
+  # - コンソール上でのパッケージのロード
+  #   #+begin_src R :exports code
+  #   library(パッケージ名)
+  #   require(パッケージ名) # 上のほぼ同値
+  #   #+end_src
+  #   ~require()~ を用いると1度読み込んだものは再読み込みしない？
 
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   パッケージを導入してみよう
-   - 講義で用いるパッケージを導入して，
-     その中の関数について調べてみよう
-     - package e1071 を導入する
-     - 関数 kurtosis を調べる
-     - 関数 kurtosis を呼び出す
-   # *swir* パッケージを導入して
-   # 関数 ~swirl()~ を実行してみよう
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+パッケージを導入してみよう
+- 講義で用いるパッケージを導入して
+  含まれている関数について調べてみよう
+  - package e1071 を導入する
+  - 関数 kurtosis を調べる
+  - 関数 kurtosis を呼び出す
+# *swir* パッケージを導入して
+# 関数 ~swirl()~ を実行してみよう
 
 
 * データ構造
 ** Rに用意されているデータ構造
-   - 下記は代表的なもので，これ以外にもある
-     - *ベクトル (vector)*
-     - 行列 (matrix)
-     - リスト (list) 
-     - *データフレーム (data frame)*
-     - 配列 (array)
+- 下記は代表的なもので，これ以外にもある
+  - *ベクトル (vector)*
+  - 行列 (matrix)
+  - リスト (list) 
+  - *データフレーム (data frame)*
+  - 配列 (array)
 
 ** ベクトルとは
-   - スカラー値(単一の値)の集合 
-   - スカラー値として扱われる主なもの
-     - 数値 (実数や複素数)
-     - 文字列 (' や " で囲まれた文字．"foo"，"bar"など)
-     - 論理値 ( ~TRUE~ , ~FALSE~ )
-   - Rオブジェクトの多くはベクトルとして扱われる\\
-     /[[color:gray][スカラーは長さ1のベクトルとして扱われる]]/
+- スカラー値(単一の値)の集合 
+- スカラー値として扱われる主なもの
+  - 数値 (実数や複素数)
+  - 文字列 (' や " で囲まれた文字．"foo"，"bar"など)
+  - 論理値 ( ~TRUE~ , ~FALSE~ )
+- Rオブジェクトの多くはベクトルとして扱われる\\
+  /[[color:orange][スカラーは長さ1のベクトルとして扱われる]]/
 
 ** ベクトルの作成と操作
-   - 関数 ~c()~ を用いて作成する
-   - [[color:darkgreen][数値や文字列の要素からなるベクトルの生成]]
-     #+begin_src R
-       x <- c(1,-2,3,-4) # 数値のベクトル
-       y <- c("Alice","Bob","Cathy","David") # 文字列のベクトル
-       z <- c(TRUE,FALSE,TRUE,FALSE) # 論理値のベクトル
-     #+end_src
-   - [[color:darkgreen][ベクトルの要素の取得]]
-     #+begin_src R
-       x[2] # xの第2要素 (ベクトルの添え字は1から始まる)
-       y[c(1,3,4)] # 複数の要素 = c(y[1],y[3],y[4])
-     #+end_src
- 
+- 関数 ~c()~ を用いて作成する
+- [[color:green][数値や文字列の要素からなるベクトルの生成]]
+  #+begin_src R
+    x <- c(1,-2,3,-4) # 数値のベクトル
+    y <- c("Alice","Bob","Cathy","David") # 文字列のベクトル
+    z <- c(TRUE,FALSE,TRUE,FALSE) # 論理値のベクトル
+  #+end_src
+- [[color:green][ベクトルの要素の取得]]
+  #+begin_src R
+    x[2] # xの第2要素 (ベクトルの添え字は1から始まる)
+    y[c(1,3,4)] # 複数の要素 = c(y[1],y[3],y[4])
+  #+end_src
+  
 ** データフレームとは
-   - 長さの等しいベクトルを束ねたリスト
-   - ベクトルのデータ型はバラバラでも良い
-   - 複数の個体について，複数の属性を集計したデータ
-   - [[color:darkgreen][ある小学校の1年生の身長・体重・性別・血液型]]
-     - 各成分はある個体のある属性に関する観測データ
-     - 個体数は集計項目に関わらず変化しないが，
-       集計項目によっては定量的データ・定性的データの違いが出てくるので
-       データ型は変わりうる
-   - 実データの多くは表形式で与えられるため，
-     実データに則したデータ構造
+- 長さの等しいベクトルを束ねたリスト
+- ベクトルのデータ型はバラバラでも良い
+- 複数の個体について，複数の属性を集計したデータ
+- [[color:green][ある小学校の1年生の身長・体重・性別・血液型]]
+  - 各成分はある固体のある属性に関する観測データ
+  - 個体数は集計項目に関わらず変化しないが，
+    集計項目によっては定量的データ・定性的データの違いが出てくるので
+    データ型は変わりうる
+- 実データの多くは表形式で与えられるため，
+  実データに則したデータ構造
 
 ** データフレームの生成と操作
-   - 関数 ~data.frame()~ を用いて作成する
-   - [[color:darkgreen][データフレームの生成]]
-     #+begin_src R
-       (df <- data.frame(A=x,B=y,C=z)) # x,y,zは同じ長さ．列名はA,B,C
-       ## 外側の () は代入した結果の表示．print() と同義．
-     #+end_src
-   #+reveal: split
-   - [[color:darkgreen][データフレーム要素の取得]]
-     #+begin_src R
-       df[2,3] # 2行3列の要素の取得
-       df[2, ] # 2行目の要素からなるデータフレームの取得
-       df[ ,3] # 3列目の要素からなるベクトルの取得
-       df[ ,"C"] # 同上．列名で参照する方法
-       df[c(2,3),] # 2,3行目の要素からなるデータフレームの取得
-       df[,c("A","C")] # 1,3列目の要素からなるデータフレームの取得
-     #+end_src
-
+- 関数 ~data.frame()~ を用いて作成する
+- [[color:green][データフレームの生成]]
+  #+begin_src R
+    (df <- data.frame(A=x,B=y,C=z)) # x,y,zは同じ長さ．列名はA,B,C
+    ## 外側の () は代入した結果の表示．print() と同義．
+  #+end_src
+  #+reveal: split
+  - [[color:green][データフレームの要素の取得]]
+    #+begin_src R
+      df[2,3] # 2行3列の要素の取得
+      df[2, ] # 2行目の要素からなるデータフレームの取得
+      df[ ,3] # 3列目の要素からなるベクトルの取得
+      df[ ,"C"] # 同上．列名で参照する方法
+      df[c(2,3),] # 2,3行目の要素からなるデータフレームの取得
+      df[,c("A","C")] # 1,3列目の要素からなるデータフレームの取得
+    #+end_src
+    
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   データフレームの操作に慣れよう
-   - 次の表に対応するデータフレームを作成してみよう
-     |-------+------+------+------|
-     |       | 国語 | 数学 | 英語 |
-     |-------+------+------+------|
-     | Alice |   90 |   25 |   65 |
-     | Bob   |   80 |   50 |  100 |
-     | Cathy |   70 |   75 |   70 |
-     | David |   60 |  100 |   40 |
-     |-------+------+------+------|
-   - データフレームを操作してみよう
-     - 数学の列を取り出す
-     - Cathyの行を取り出す
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+データフレームの操作に慣れよう
+- 次の表に対応するデータフレームを作成してみよう
+  |-------+------+------+------|
+  |       | 国語 | 数学 | 英語 |
+  |-------+------+------+------|
+  | Alice |   90 |   25 |   65 |
+  | Bob   |   80 |   50 |  100 |
+  | Cathy |   70 |   75 |   70 |
+  | David |   60 |  100 |   40 |
+  |-------+------+------+------|
+- データフレームを操作してみよう
+  - 数学の列を取り出す
+  - Cathyの行を取り出す
 
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 データフレームの取り扱い
-     ## データフレームの作成
-     df <- data.frame(
-         name=c("Alice","Bob","Cathy","David"),
-         literature=c(90,80,70,60),
-         math=c(25,50,75,100),
-         english=c(65,100,70,40))
-     ## 日本語文字を使うことも可能だが，設定により文字化けが起こるので注意
-     df # または Environment タグから click する
-
-     ## データフレームの操作
-     df[,"math"]
-     df[3,]
-
-     ## name列の代わりに行に名前を付けることもできる
-     df2 <- data.frame(
-         literature=c(90,80,70,60),
-         math=c(25,50,75,100),
-         english=c(65,100,70,40))
-     row.names(df2) <- c("Alice","Bob","Cathy","David")
-     df2
-     df2[,"math"]
-     df2["Cathy",] # 行の名前で参照可能
-   #+end_src
-
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 データフレームの取り扱い
+  ## データフレームの作成
+  df <- data.frame(
+    name=c("Alice","Bob","Cathy","David"),
+    literature=c(90,80,70,60),
+    math=c(25,50,75,100),
+    english=c(65,100,70,40))
+  ## 日本語文字を使うことも可能だが，設定により文字化けが起こるので注意
+  df # または Environment タグから click する
+  
+  ## データフレームの操作
+  df[,"math"]
+  df[3,]
+  
+  ## name列の代わりに行に名前を付けることもできる
+  df2 <- data.frame(
+    literature=c(90,80,70,60),
+    math=c(25,50,75,100),
+    english=c(65,100,70,40))
+  row.names(df2) <- c("Alice","Bob","Cathy","David")
+  df2
+  df2[,"math"]
+  df2["Cathy",] # 行の名前で参照可能
+#+end_src
+    
 
 * COMMENT ベクトル
 ** ベクトルとは
-   - スカラー値(単一の値)の集合 
-   - スカラー値として扱われる主なもの
-     - 数値 (実数や複素数)
-     - 文字列 ('や"で囲まれた文字．"foo"，"bar"など)
-     - 論理値 ( ~TRUE~ , ~FALSE~ )
-   - Rオブジェクトの多くはベクトルとして扱われる\\
-     /[[color:gray][スカラー値は長さ1のベクトルとして扱われる]]/
+- スカラー値(単一の値)の集合 
+- スカラー値として扱われる主なもの
+  - 数値 (実数や複素数)
+  - 文字列 ('や"で囲まれた文字．"foo"，"bar"など)
+  - 論理値 ( ~TRUE~ , ~FALSE~ )
+- Rオブジェクトの多くはベクトルとして扱われる\\
+  /[[color:gray][スカラー値は長さ1のベクトルとして扱われる]]/
 
 ** ベクトルの生成と操作
-   - 数値や文字列の要素からなるベクトルの生成:
-     #+begin_src R :exports both :results output
-       c(1,-2,3,-4,5) # 数値のベクトル
-       c("Alice","Bob","Cathy","David") # 文字列のベクトル
-     #+end_src
-   - ベクトルの要素の取得:
-     #+begin_src R :exports code
-       x[i] # xの第i要素 (ベクトルの添え字は1から始まる)
-       x[c(1,3,4)] # 複数の要素 = c(x[1],x[3],x[4])
-     #+end_src
-   #+reveal: split
-   - ベクトル ~x~ の長さの取得:
-     #+begin_src R :exports code
-       length(x)    
-     #+end_src
-   - 実数 ~x~ から ~y~ まで
-     1ずつ変化するベクトル:
-     #+begin_src R :exports code
-       x:y # x < y の場合は1ずつ増加，逆の場合は1ずつ減少
-     #+end_src
-   # x<yの場合は1ずつ増加，x>yの場合は1ずつ減少
-   - 実数 ~x~ から ~y~ まで
-     ~a~ ずつ変化するベクトル:
-     #+begin_src R :exports code
-       seq(x,y,by=a) # from=x,to=y と明示してもよい    
-     #+end_src
-   #+reveal: split
-   - ベクトル ~x~ を ~n~ 回繰り返したベクトル:
-     #+begin_src R :exports code
-       rep(x,n) # 長さは length(x) * n となる
-     #+end_src
-   - ベクトル ~x~ とベクトル ~y~ の結合:
-     #+begin_src R :exports code
-       c(x,y)    
-     #+end_src
-   - ベクトル ~x~ の反転:
-     #+begin_src R :exports code
-       rev(x)    
-     #+end_src
-
+- 数値や文字列の要素からなるベクトルの生成:
+  #+begin_src R :exports both :results output
+    c(1,-2,3,-4,5) # 数値のベクトル
+    c("Alice","Bob","Cathy","David") # 文字列のベクトル
+  #+end_src
+- ベクトルの要素の取得:
+  #+begin_src R :exports code
+    x[i] # xの第i要素 (ベクトルの添え字は1から始まる)
+    x[c(1,3,4)] # 複数の要素 = c(x[1],x[3],x[4])
+  #+end_src
+  #+reveal: split
+  - ベクトル ~x~ の長さの取得:
+    #+begin_src R :exports code
+      length(x)    
+    #+end_src
+  - 実数 ~x~ から ~y~ まで
+    1ずつ変化するベクトル:
+    #+begin_src R :exports code
+      x:y # x < y の場合は1ずつ増加，逆の場合は1ずつ減少
+    #+end_src
+    # x<yの場合は1ずつ増加，x>yの場合は1ずつ減少
+    - 実数 ~x~ から ~y~ まで
+      ~a~ ずつ変化するベクトル:
+      #+begin_src R :exports code
+	seq(x,y,by=a) # from=x,to=y と明示してもよい    
+      #+end_src
+    #+reveal: split
+    - ベクトル ~x~ を ~n~ 回繰り返したベクトル:
+      #+begin_src R :exports code
+	rep(x,n) # 長さは length(x) * n となる
+      #+end_src
+    - ベクトル ~x~ とベクトル ~y~ の結合:
+      #+begin_src R :exports code
+	c(x,y)    
+      #+end_src
+    - ベクトル ~x~ の反転:
+      #+begin_src R :exports code
+	rev(x)    
+      #+end_src
+      
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   ベクトルの操作に慣れよう
-   - 以下に示すベクトルを作成してみよう
-     - 1から10までの自然数のベクトル
-     - 1以上30以下の奇数を昇順に並べたベクトル
-     - すべての要素が1からなる長さ10のベクトル
-   - 作成したベクトルを操作してみよう
-     - ベクトルの長さを求める
-     - 3番目の要素を取り出す
-     - 最後の要素を取り出す
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+ベクトルの操作に慣れよう
+- 以下に示すベクトルを作成してみよう
+  - 1から10までの自然数のベクトル
+  - 1以上30以下の奇数を昇順に並べたベクトル
+  - すべての要素が1からなる長さ10のベクトル
+- 作成したベクトルを操作してみよう
+  - ベクトルの長さを求める
+  - 3番目の要素を取り出す
+  - 最後の要素を取り出す
 
 * COMMENT 行列
 ** 行列の生成と操作
-   - すべての要素が ~a~ である $m\times n$ 行列:
-     #+begin_src R :exports code
-       matrix(a,m,n)     
-     #+end_src
-   - 長さ $mn$ のベクトル ~x~ を $m\times n$ 行列に変換:
-     # # #+begin_export latex
-     # \begin{equation}
-     #   x=(x_{11},\dots,x_{m1},x_{21},\dots,x_{2n},\dots,x_{m1},\dots,x_{mn})
-     # \end{equation}
-     # # #+end_export
-     #+begin_src R :exports code
-       x <- c(x11,...,xm1,x12,...,xm2,...,x1n,...,xmn)
-       matrix(x,m,n)    
-     #+end_src
-     # ただし
-     # % $x=(x_{11},\dotsc,x_{m1},x_{21},\dotsc,x_{m1},\dotsc,x_{mn})$
-     # % $(x_{ij})_{1\leq i\leq m,1\leq n}$
-   - 関数 ~as.vector()~ を用いたベクトル化:
-     #+begin_src R :exports code
-       x <- as.vector(matrix(x,m,n))
-     #+end_src 
-   #+reveal: split
-   - 行列のサイズの取得: 
-     #+begin_src R :exports code
-       dim(X) # 長さ2のベクトル
-       nrow(X) # 行数
-       ncol(X) # 列数
-     #+end_src
-   # - 関数 ~dim()~ によるベクトルから行列への変換:
-   #   #+begin_src R :exports code
-   #     dim(x) <- c(m,n) # = matrix(x,m,n)
-   #   #+end_src
-   - 行列の成分の取得:
-     #+begin_src R :exports code
-       X[i,j] # (i,j)成分
-       X[i, ] # 第i行
-       X[ ,j] # 第j列
-       X[c(1,3),2:4] # 1，3行と，2〜4列からなる部分行列
-     #+end_src
-     # ベクトルの場合と同様に，
-     # 添え字をベクトルで指定することで部分行列の取り出しも可能
-   - 長さが等しい複数のベクトルの結合:
-     #+begin_src R :exports code
-       rbind(x, y, ...) # 行ベクトルとして結合
-       cbind(x, y, ...) # 列ベクトルとして結合
-     #+end_src
-     # ~cbind()/rbind()~ は行列の結合にも使える
+- すべての要素が ~a~ である $m\times n$ 行列:
+  #+begin_src R :exports code
+    matrix(a,m,n)     
+  #+end_src
+- 長さ $mn$ のベクトル ~x~ を $m\times n$ 行列に変換:
+  # # #+begin_export latex
+  # \begin{equation}
+  #   x=(x_{11},\dots,x_{m1},x_{21},\dots,x_{2n},\dots,x_{m1},\dots,x_{mn})
+  # \end{equation}
+  # # #+end_export
+  #+begin_src R :exports code
+    x <- c(x11,...,xm1,x12,...,xm2,...,x1n,...,xmn)
+    matrix(x,m,n)    
+  #+end_src
+  # ただし
+  # % $x=(x_{11},\dotsc,x_{m1},x_{21},\dotsc,x_{m1},\dotsc,x_{mn})$
+  # % $(x_{ij})_{1\leq i\leq m,1\leq n}$
+- 関数 ~as.vector()~ を用いたベクトル化:
+  #+begin_src R :exports code
+    x <- as.vector(matrix(x,m,n))
+  #+end_src 
+  #+reveal: split
+  - 行列のサイズの取得: 
+    #+begin_src R :exports code
+      dim(X) # 長さ2のベクトル
+      nrow(X) # 行数
+      ncol(X) # 列数
+    #+end_src
+    # - 関数 ~dim()~ によるベクトルから行列への変換:
+    #   #+begin_src R :exports code
+    #     dim(x) <- c(m,n) # = matrix(x,m,n)
+    #   #+end_src
+    - 行列の成分の取得:
+      #+begin_src R :exports code
+	X[i,j] # (i,j)成分
+ X[i, ] # 第i行
+ X[ ,j] # 第j列
+ X[c(1,3),2:4] # 1，3行と，2〜4列からなる部分行列
+      #+end_src
+      # ベクトルの場合と同様に，
+      # 添え字をベクトルで指定することで部分行列の取り出しも可能
+    - 長さが等しい複数のベクトルの結合:
+      #+begin_src R :exports code
+	rbind(x, y, ...) # 行ベクトルとして結合
+ cbind(x, y, ...) # 列ベクトルとして結合
+      #+end_src
+      # ~cbind()/rbind()~ は行列の結合にも使える
 
 ** 行列の生成と操作 (補足)
-   - 関数 ~cbind()/rbind()~ は行数/列数が等しい行列を横/縦に結合できる
-   - 行列の高次元版として配列(array)が用意されている
-   - 関数 ~rownames()/colnames()~ を用いると行と列に名前を付けることができる
+- 関数 ~cbind()/rbind()~ は行数/列数が等しい行列を横/縦に結合できる
+- 行列の高次元版として配列(array)が用意されている
+- 関数 ~rownames()/colnames()~ を用いると行と列に名前を付けることができる
 
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   行列の操作に慣れよう
-   - 以下に示す行列を作成してみよう
-     # #+begin_export latex
-     \begin{equation*}
-       \begin{pmatrix}
-         1  & 2  & 3  \\
-         4  & 5  & 6 
-       \end{pmatrix}
-     \end{equation*}
-     # #+end_export
-   - 行列を操作してみよう
-     - 2行2列成分を取り出す
-     - 転置行列を作成する
-     - 行名をつける
-   
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+行列の操作に慣れよう
+- 以下に示す行列を作成してみよう
+  # #+begin_export latex
+  \begin{equation*}
+    \begin{pmatrix}
+      1  & 2  & 3  \\
+      4  & 5  & 6 
+    \end{pmatrix}
+  \end{equation*}
+  # #+end_export
+- 行列を操作してみよう
+  - 2行2列成分を取り出す
+  - 転置行列を作成する
+  - 行名をつける
+
 * COMMENT リスト
 ** リストとは
-   - 異なる構造のデータを1つにまとめたもの
-   - リストの各要素は異なる型であって構わない
-   - 本講義のデータ解析ではほとんど用いない
-   - Rの関数の操作ではときどき必要
+- 異なる構造のデータを1つにまとめたもの
+- リストの各要素は異なる型であって構わない
+- 本講義のデータ解析ではほとんど用いない
+- Rの関数の操作ではときどき必要
+
 ** リストの生成と操作
-   - リストの生成:
-     #+begin_src R :exports code
-       L <- list(x,y) # x,yを要素とするリスト
-       L[[i]] # リストの第i要素
-     #+end_src
-   - リストの各要素に名前を付与:
-     #+begin_src R :exports code
-       L1 <- list(first=x, second=y) # 方法1
-       L2 <- list(x,y)               # 方法2
-       names(L2) <- c("first","second")
-     #+end_src
-   - 名前によるリストの要素の取得:
-     #+begin_src R :exports code
-       L1$first      # 方法1
-       L2[["first"]] # 方法2
-     #+end_src
+- リストの生成:
+  #+begin_src R :exports code
+    L <- list(x,y) # x,yを要素とするリスト
+    L[[i]] # リストの第i要素
+  #+end_src
+- リストの各要素に名前を付与:
+  #+begin_src R :exports code
+    L1 <- list(first=x, second=y) # 方法1
+    L2 <- list(x,y)               # 方法2
+    names(L2) <- c("first","second")
+  #+end_src
+- 名前によるリストの要素の取得:
+  #+begin_src R :exports code
+    L1$first      # 方法1
+    L2[["first"]] # 方法2
+  #+end_src
+
 * COMMENT データフレーム
 ** データフレームとは
-   - 長さの等しいベクトルを束ねたリスト
-     # (データ型はバラバラでも良い)
-   - いくつかの個体について，いくつかの属性を集計したデータ
-   - [[color:darkgreen][ある小学校の1年生の身長・体重・性別・血液型]]
-     - 各成分はある個体のある属性に関する観測データ
-     - 個体数は集計項目に関わらず変化しないが，
-       集計項目によっては定量的データ・定性的データの違いが出てくるので
-       データ型は変わりうる
-   - 実データの多くは表形式で与えられるため，
-     実データに則したデータ構造
+- 長さの等しいベクトルを束ねたリスト
+  # (データ型はバラバラでも良い)
+- いくつかの個体について，いくつかの属性を集計したデータ
+- [[color:darkgreen][ある小学校の1年生の身長・体重・性別・血液型]]
+  - 各成分はある個体のある属性に関する観測データ
+  - 個体数は集計項目に関わらず変化しないが，
+    集計項目によっては定量的データ・定性的データの違いが出てくるので
+    データ型は変わりうる
+- 実データの多くは表形式で与えられるため，
+  実データに則したデータ構造
 
 ** データフレームの生成と操作
-   - データフレームの生成:
-     #+begin_src R :exports code
-       data.frame(A=x,B=y,C=z) # x,y,zは同じ長さ，各列はA,B,Cという名前
-     #+end_src
-   - データフレームは *リスト* でもある\\
-     リストと同様にして各変数にアクセスできる
-   - データフレームは *行列* でもある\\
-     行数がベクトルの長さ(個体数), 列数が変数の個数(観測項目の数)の行列と同様にアクセスできる
+  - データフレームの生成:
+    #+begin_src R :exports code
+      data.frame(A=x,B=y,C=z) # x,y,zは同じ長さ，各列はA,B,Cという名前
+    #+end_src
+  - データフレームは *リスト* でもある\\
+    リストと同様にして各変数にアクセスできる
+  - データフレームは *行列* でもある\\
+    行数がベクトルの長さ(個体数), 列数が変数の個数(観測項目の数)の行列と同様にアクセスできる
 
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   データフレームの操作に慣れよう
-   - 次の表に対応するデータフレームを作成してみよう
-     |-------+------+------+------|
-     |       | 国語 | 数学 | 英語 |
-     |-------+------+------+------|
-     | Alice |   90 |   25 |   65 |
-     | Bob   |   80 |   50 |  100 |
-     | Cathy |   70 |   75 |   70 |
-     | David |   60 |  100 |   40 |
-     |-------+------+------+------|
-   - データフレームを操作してみよう
-     - 数学の列を取り出す
-     - Cathyの行を取り出す
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+データフレームの操作に慣れよう
+- 次の表に対応するデータフレームを作成してみよう
+  |-------+------+------+------|
+  |       | 国語 | 数学 | 英語 |
+  |-------+------+------+------|
+  | Alice |   90 |   25 |   65 |
+  | Bob   |   80 |   50 |  100 |
+  | Cathy |   70 |   75 |   70 |
+  | David |   60 |  100 |   40 |
+  |-------+------+------+------|
+- データフレームを操作してみよう
+  - 数学の列を取り出す
+  - Cathyの行を取り出す
 
 
 * COMMENT ローカル変数

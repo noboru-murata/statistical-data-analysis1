@@ -3,988 +3,1014 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-21 15:19:06 mura>
+# Time-stamp: <2021-08-14 20:14:57 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
-#+STARTUP: hidestars content
+#+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :end:
 
 * 講義の内容
-  - R言語のデータ構造
-  - ベクトル・行列・リストの操作
-  - ベクトルと行列のさまざまな計算
+- R言語のデータ構造
+- ベクトル・行列・リストの操作
+- ベクトルと行列のさまざまな計算
 
-  #+begin_src R :eval no :exports none :tangle yes
-    ### 第02回 練習問題解答例
-  #+end_src
-  #+begin_src R :exports none
-    setwd("~/Desktop/lectures/u-tokyo/spring/slide")
-  #+end_src
-
+#+begin_src R :eval no :exports none :tangle yes
+  ### 第02回 練習問題解答例
+#+end_src
+#+begin_src R :exports none
+  setwd("~/Desktop/lectures/u-tokyo/spring/slide")
+#+end_src
 
 * COMMENT メモ
-  - 前回を踏まえデータ構造を復習
-  - ベクトルと行列の計算を総括
+- 前回を踏まえデータ構造を復習
+- ベクトルと行列の計算を総括
 
 
 * R言語のデータ構造
-  #+begin_src R :exports none :tangle yes
-    ### R言語のデータ構造で用いた例
-  #+end_src
+#+begin_src R :exports none :tangle yes
+  ### R言語のデータ構造で用いた例
+#+end_src
 
 ** 基本的なデータ構造
-   - 下記は基本的なもので標準環境で利用できる
-     - ベクトル (vector)
-     - 行列 (matrix)
-     - リスト (list) 
-     - データフレーム (data frame)
-     - 配列 (array) (今回は扱わない)
-   - /[[color:gray][パッケージなどで拡張することができる]]/
+- 下記は基本的なもので標準環境で利用できる
+  - ベクトル (vector)
+  - 行列 (matrix)
+  - リスト (list) 
+  - データフレーム (data frame)
+  - 配列 (array) (今回は扱わない)
+- /[[color:gray][パッケージなどで拡張することができる]]/
 
 ** ベクトルとは
-   - スカラー値(単一の値)の集合 
-   - スカラー値として扱われる主なもの
-     - 数値 (実数や複素数)
-     - 文字列 ('や"で囲まれた文字．"foo"，"bar"など)
-     - 論理値 ( ~TRUE~ , ~FALSE~ )
-   - Rオブジェクトの多くはベクトルとして扱われる \\
-     /[[color:gray][スカラーは長さ1のベクトルとして扱われる]]/
+- スカラー値(単一の値)の集合 
+- スカラー値として扱われる主なもの
+  - 数値 (実数や複素数)
+  - 文字列 ('や"で囲まれた文字．"foo"，"bar"など)
+  - 論理値 ( ~TRUE~ , ~FALSE~ )
+- Rオブジェクトの多くはベクトルとして扱われる \\
+  /[[color:gray][スカラーは長さ1のベクトルとして扱われる]]/
 
 ** ベクトルの生成と操作
-   - 基本的には関数 ~c()~ を用いて作成する
-   - 数値や文字列の要素からなるベクトルの生成:
-     #+begin_src R :tangle yes
-       (x <- c("Alice","Bob","Cathy","David")) # 文字列のベクトル
-       (y <- c(1,-2,3,-4,5)) # 数値のベクトル
-       (z <- c("apple","berry","cat","dog","elephant")) # 文字列のベクトル
-       ## 外側の () は代入した結果の表示．print() と同義
-     #+end_src
-   #+reveal: split
-   - ベクトルの長さの取得:
-     #+begin_src R :tangle yes
-       length(x)    
-     #+end_src
-   - ベクトルの要素の取得:
-     #+begin_src R :tangle yes
-       x[3] # xの第3要素 (ベクトルの添え字は1から始まる)
-       y[c(1,3,4)] # 複数の要素 = c(y[1],y[3],y[4])
-     #+end_src
-   #+reveal: split
-   - 実数 ~a~ から ~b~ まで
-     1ずつ変化するベクトル:
-     #+begin_src R :tangle yes
-       a <- 8; b <- 15 # 変数 a,b に値を代入
-       a:b # a < b の場合は1ずつ増加する系列が作成される
-       a <- 29.5; b <- 24
-       a:b # 逆の場合は1ずつ減少する系列が作成される
-       29.5:24 # 直接数値を書いてもよい
-     #+end_src
-   - 実数 ~a~ から ~b~ まで
-     ~c~ ずつ変化するベクトル:
-     #+begin_src R :tangle yes
-       a <- 1; b <- 16; c <- 2 # 変数 a,b,c に値を代入
-       seq(a,b,by=c) # from=a,to=b と明示してもよい    
-     #+end_src
-   #+reveal: split 
-   - ベクトルの反転:
-     #+begin_src R :tangle yes
-       rev(x)
-     #+end_src
-   - ベクトルの繰り返し:
-     #+begin_src R :tangle yes
-       rep(y,3) # 長さは length(y) * 3
-       rep(y,times=3) # 単純に繰り返す．上記と同様
-       rep(y,each=3)  # 各要素を繰り返す
-       rep(y,length.out=12)  # 繰り返した結果の長さを指定する
-     #+end_src
-   #+reveal: split
-   - ベクトルの結合:
-     #+begin_src R :tangle yes
-       c(x,z) # 同じ属性のもの単純に結合される
-       c(x,y) # 異なる属性のものは結合できないので属性が書き換えられる
-     #+end_src
+- 基本的には関数 ~c()~ を用いて作成する
+- 数値や文字列の要素からなるベクトルの生成:
+  #+begin_src R :tangle yes
+    (x <- c("Alice","Bob","Cathy","David")) # 文字列のベクトル
+    (y <- c(1,-2,3,-4,5)) # 数値のベクトル
+    (z <- c("apple","berry","cat","dog","elephant")) # 文字列のベクトル
+    ## 外側の () は代入した結果の表示．print() と同義
+  #+end_src
+  
+#+reveal: split
+- ベクトルの長さの取得:
+  #+begin_src R :tangle yes
+    length(x)    
+  #+end_src
+- ベクトルの要素の取得:
+  #+begin_src R :tangle yes
+    x[3] # xの第3要素 (ベクトルの添え字は1から始まる)
+    y[c(1,3,4)] # 複数の要素 = c(y[1],y[3],y[4])
+  #+end_src
+
+#+reveal: split
+- 実数 ~a~ から ~b~ まで
+  1ずつ変化するベクトル:
+  #+begin_src R :tangle yes
+    a <- 8; b <- 15 # 変数 a,b に値を代入
+    a:b # a < b の場合は1ずつ増加する系列が作成される
+    a <- 29.5; b <- 24
+    a:b # 逆の場合は1ずつ減少する系列が作成される
+    29.5:24 # 直接数値を書いてもよい
+  #+end_src
+- 実数 ~a~ から ~b~ まで
+  ~c~ ずつ変化するベクトル:
+  #+begin_src R :tangle yes
+    a <- 1; b <- 16; c <- 2 # 変数 a,b,c に値を代入
+    seq(a,b,by=c) # from=a,to=b と明示してもよい    
+  #+end_src
+
+#+reveal: split 
+- ベクトルの反転:
+  #+begin_src R :tangle yes
+    rev(x)
+  #+end_src
+- ベクトルの繰り返し:
+  #+begin_src R :tangle yes
+    rep(y,3) # 長さは length(y) * 3
+    rep(y,times=3) # 単純に繰り返す．上記と同様
+    rep(y,each=3)  # 各要素を繰り返す
+    rep(y,length.out=12)  # 繰り返した結果の長さを指定する
+  #+end_src
+
+#+reveal: split
+- ベクトルの結合:
+  #+begin_src R :tangle yes
+    c(x,z) # 同じ属性のもの単純に結合される
+    c(x,y) # 異なる属性のものは結合できないので属性が書き換えられる
+  #+end_src
 
 ** 行列とは
-   - スカラー値を2次元状(縦横)に並べたもの
-     - 縦(列)ベクトルを列方向に並べて束ねたもの
-     - 横(行)ベクトルを行方向に並べて束ねたもの
-   - データフレームは行列を拡張したもの
+- スカラー値を2次元状(縦横)に並べたもの
+  - 縦(列)ベクトルを列方向に並べて束ねたもの
+  - 横(行)ベクトルを行方向に並べて束ねたもの
+- データフレームは行列を拡張したもの
 
 ** 行列の生成と操作
-   - 基本的には関数 ~matrix()~ を用いて作成する
-   - すべての要素が ~a~ である \(m\times n\) 行列の生成:
-     #+begin_src R :tangle yes
-       a <- 2; m <- 3; n <- 4 # 変数 a,m,n に値を代入
-       matrix(a,m,n)
-     #+end_src
-   #+reveal: split
-   - 長さ \(mn\) のベクトル ~a~ を \(m\times n\) 行列に変換:
-     #+begin_src R :tangle yes
-       a <- 2:13 # 変数 a に値を代入
-       (A <- matrix(a,m,n)) # 並び順を変えるには matrix(a,m,n,byrow=TRUE)
-     #+end_src
-   # - 関数 ~dim()~ によるベクトルから行列への変換:
-   #   #+begin_src R :exports code
-   #     dim(x) <- c(m,n) # = matrix(x,m,n)
-   #   #+end_src
-   - 関数 ~as.vector()~ を用いたベクトル化: 
-     #+begin_src R :tangle yes
-       as.vector(A) # matrix の逆変換にあたる
-     #+end_src 
-   #+reveal: split
-   - 長さが等しい複数のベクトルの結合:
-     #+begin_src R :tangle yes
-       a <- 4:7; b <- 10:7; c <- c(2,4,8,16) # 変数 a,b,c に値を代入
-       rbind(a,b,c) # 行ベクトルとして結合 (row vector)
-       cbind(a,b,c) # 列ベクトルとして結合 (column vector)
-     #+end_src
-     # ~cbind()/rbind()~ は行列の結合にも使える
-   #+reveal: split
-   - 行列のサイズの取得: 
-     #+begin_src R :tangle yes
-       dim(A) # 長さ2のベクトル (行数,列数) となることに注意
-       nrow(A) # 行数
-       ncol(A) # 列数
-       dim(A)[1] # nrow(A) と同値
-       dim(A)[2] # ncol(A) と同値
-     #+end_src
-   #+reveal: split
-   - 行列の成分の取得:
-     #+begin_src R :tangle yes
-       A[3,4] # (3,4)成分
-       A[3, ] # 第3行のベクトル
-       A[ ,4] # 第4列のベクトル
-       A[c(1,3),] # 1,3行からなる部分行列
-       A[c(1,3),2:4] # 1,3行と，2〜4列からなる部分行列
-     #+end_src
-     # ベクトルの場合と同様に，
-     # 添え字をベクトルで指定することで部分行列の取り出しも可能
+- 基本的には関数 ~matrix()~ を用いて作成する
+- すべての要素が ~a~ である \(m\times n\) 行列の生成:
+  #+begin_src R :tangle yes
+    a <- 2; m <- 3; n <- 4 # 変数 a,m,n に値を代入
+    matrix(a,m,n)
+  #+end_src
+  
+#+reveal: split
+- 長さ \(mn\) のベクトル ~a~ を \(m\times n\) 行列に変換:
+  #+begin_src R :tangle yes
+    a <- 2:13 # 変数 a に値を代入
+    (A <- matrix(a,m,n)) # 並び順を変えるには matrix(a,m,n,byrow=TRUE)
+  #+end_src
+  # - 関数 ~dim()~ によるベクトルから行列への変換:
+  #   #+begin_src R :exports code
+  #     dim(x) <- c(m,n) # = matrix(x,m,n)
+  #   #+end_src
+  - 関数 ~as.vector()~ を用いたベクトル化: 
+    #+begin_src R :tangle yes
+      as.vector(A) # matrix の逆変換にあたる
+    #+end_src 
+
+#+reveal: split
+- 長さが等しい複数のベクトルの結合:
+  #+begin_src R :tangle yes
+    a <- 4:7; b <- 10:7; c <- c(2,4,8,16) # 変数 a,b,c に値を代入
+    rbind(a,b,c) # 行ベクトルとして結合 (row vector)
+    cbind(a,b,c) # 列ベクトルとして結合 (column vector)
+  #+end_src
+  # ~cbind()/rbind()~ は行列の結合にも使える
+
+#+reveal: split
+- 行列のサイズの取得: 
+  #+begin_src R :tangle yes
+    dim(A) # 長さ2のベクトル (行数,列数) となることに注意
+    nrow(A) # 行数
+    ncol(A) # 列数
+    dim(A)[1] # nrow(A) と同値
+    dim(A)[2] # ncol(A) と同値
+  #+end_src
+
+#+reveal: split
+- 行列の成分の取得:
+  #+begin_src R :tangle yes
+    A[3,4] # (3,4)成分
+    A[3, ] # 第3行のベクトル
+    A[ ,4] # 第4列のベクトル
+    A[c(1,3),] # 1,3行からなる部分行列
+    A[c(1,3),2:4] # 1,3行と，2〜4列からなる部分行列
+  #+end_src
+  # ベクトルの場合と同様に，
+  # 添え字をベクトルで指定することで部分行列の取り出しも可能
 
 ** 行列の操作に関する補足
-   - 関数 ~cbind()/rbind()~ は行数・列数が等しい行列も横・縦に結合できる
-   - 行列の高次元版として配列(array)が用意されている
-   - 関数 ~rownames()/colnames()~ を用いると行と列に名前を付けることができる
-   - /[[color:gray][これらの機能は講義の中で使いながら説明する]]/
+- 関数 ~cbind()/rbind()~ は行数・列数が等しい行列も横・縦に結合できる
+- 行列の高次元版として配列(array)が用意されている
+- 関数 ~rownames()/colnames()~ を用いると行と列に名前を付けることができる
+- /[[color:gray][これらの機能は講義の中で使いながら説明する]]/
 
 ** リストとは
-   - 異なる構造のデータを1つにまとめたもの
-   - リストの各要素は異なる型であって構わない
-   - 本講義のデータ解析ではほとんど用いない
-   - Rの関数の操作ではときどき必要
+- 異なる構造のデータを1つにまとめたもの
+- リストの各要素は異なる型であって構わない
+- 本講義のデータ解析ではほとんど用いない
+- Rの関数の操作ではときどき必要
 
 ** リストの生成と操作
-   - リストの生成:
-     #+begin_src R :tangle yes
-       (L <- list(x,y)) # x,yを要素とするリスト
-     #+end_src
-   - リストの要素の参照:
-     #+begin_src R :tangle yes
-       L[[1]] # リストの第1要素
-     #+end_src
-   #+reveal: split
-   - リストの各要素に名前を付与:
-     #+begin_src R :tangle yes
-       ## 方法1 (作成時に名前を付与)
-       (L1 <- list(first=x, second=y))
-     #+end_src
-     #+begin_src R :tangle yes
-       ## 方法2 (作成後に名前を変更)
-       L2 <- list(x,y) 
-       names(L2) <- c("first","second")
-       L2 # リストを表示
-     #+end_src
-   #+reveal: split
-   - 名前によるリストの要素の取得:
-     #+begin_src R :tangle yes
-       ## 方法1 (リストの名前で参照)
-       L2[["first"]] 
-     #+end_src
-     #+begin_src R :tangle yes
-       ## 方法2 (記号$を用いる場合は""は不要なことに注意)
-       L1$first      
-     #+end_src
+- リストの生成:
+  #+begin_src R :tangle yes
+    (L <- list(x,y)) # x,yを要素とするリスト
+  #+end_src
+- リストの要素の参照:
+  #+begin_src R :tangle yes
+    L[[1]] # リストの第1要素
+  #+end_src
+  
+#+reveal: split
+- リストの各要素に名前を付与:
+  #+begin_src R :tangle yes
+    ## 方法1 (作成時に名前を付与)
+    (L1 <- list(first=x, second=y))
+  #+end_src
+  #+begin_src R :tangle yes
+    ## 方法2 (作成後に名前を変更)
+    L2 <- list(x,y) 
+    names(L2) <- c("first","second")
+    L2 # リストを表示
+  #+end_src
+
+#+reveal: split
+- 名前によるリストの要素の取得:
+  #+begin_src R :tangle yes
+    ## 方法1 (リストの名前で参照)
+    L2[["first"]] 
+  #+end_src
+  #+begin_src R :tangle yes
+    ## 方法2 (記号$を用いる場合は""は不要なことに注意)
+    L1$first      
+  #+end_src
 
 ** データフレームとは
-   - 長さの等しいベクトルを束ねたリスト
-   - 複数の属性を持つ実データに則したデータ構造
-   - 各列は異なる属性でも良い
-   - データフレームは *リスト* でもある\\
-     リストと同様にして各変数を取得できる
-   - データフレームは *行列* のように扱える\\
-     行列と同様にして各変数を取得できる
+- 長さの等しいベクトルを束ねたリスト
+- 複数の属性を持つ実データに則したデータ構造
+- 各列は異なる属性でも良い
+- データフレームは *リスト* でもある\\
+  リストと同様にして各変数を取得できる
+- データフレームは *行列* のように扱える\\
+  行列と同様にして各変数を取得できる
+
 ** データフレームの生成
-   - データフレームの生成:
-     #+begin_src R :tangle yes
-       ## 前回の練習問題の例
-       df <- data.frame(
-           literature=c(90,80,70,60),
-           math=c(25,50,75,100),
-           english=c(65,100,70,40))
-       row.names(df) <- x # 各行の名前を書き換える
-       df
-     #+end_src
-   - /[[color:gray][操作については別の講義で詳細に説明する]]/
+- データフレームの生成:
+  #+begin_src R :tangle yes
+    ## 前回の練習問題の例
+    df <- data.frame(
+      literature=c(90,80,70,60),
+      math=c(25,50,75,100),
+      english=c(65,100,70,40))
+    row.names(df) <- x # 各行の名前を書き換える
+    df
+  #+end_src
+- /[[color:gray][操作については別の講義で詳細に説明する]]/
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   ベクトルの操作に慣れよう
-   - 以下に示すベクトルを作成してみよう
-     - 1から10までの自然数のベクトル
-     - 1以上30以下の奇数を昇順に並べたベクトル
-     - すべての要素が1からなる長さ10のベクトル
-   - 作成したベクトルを操作してみよう
-     - ベクトルの長さを求める
-     - 3番目の要素を取り出す
-     - 最後の要素を取り出す
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+ベクトルの操作に慣れよう
+- 以下に示すベクトルを作成してみよう
+  - 1から10までの自然数のベクトル
+  - 1以上30以下の奇数を昇順に並べたベクトル
+  - すべての要素が1からなる長さ10のベクトル
+- 作成したベクトルを操作してみよう
+  - ベクトルの長さを求める
+  - 3番目の要素を取り出す
+  - 最後の要素を取り出す
 
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 ベクトルの操作
-     ## 1から10までの自然数のベクトル
-     (foo <- 1:10)
-     ## 1以上30以下の奇数を昇順に並べたベクトル
-     (bar <- seq(from=1,to=30,by=2)) # 変数名を含めた丁寧な書き方
-     ## すべての要素が1からなる長さ10のベクトル
-     (baz <- rep(1,length.out=10)) # 関数rep_len() もある
-     rep(1,len=15) # 変数名は見分けられれば短くてもOK
-     
-     ## ベクトルの長さを求める
-     length(foo)
-     ## 3番目の要素を取り出す
-     bar[3]
-     ## 最後の要素を取り出す
-     bar[length(bar)] # tail(bar,n=1) という方法もある
-   #+end_src
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 ベクトルの操作
+  ## 1から10までの自然数のベクトル
+  (foo <- 1:10)
+  ## 1以上30以下の奇数を昇順に並べたベクトル
+  (bar <- seq(from=1,to=30,by=2)) # 変数名を含めた丁寧な書き方
+  ## すべての要素が1からなる長さ10のベクトル
+  (baz <- rep(1,length.out=10)) # 関数rep_len() もある
+  rep(1,len=15) # 変数名は見分けられれば短くてもOK
+  
+  ## ベクトルの長さを求める
+  length(foo)
+  ## 3番目の要素を取り出す
+  bar[3]
+  ## 最後の要素を取り出す
+  bar[length(bar)] # tail(bar,n=1) という方法もある
+#+end_src
 
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   行列の操作に慣れよう
-   - 以下に示す行列を作成してみよう
-     #+begin_src latex
-       \begin{equation}
-         \begin{pmatrix}
-           1  & 2  & 3  \\
-           4  & 5  & 6 
-         \end{pmatrix}
-       \end{equation}
-     #+end_src
-   - 行列を操作してみよう
-     - 2行2列成分を取り出す
-     - 転置行列を作成する
-     - 行名をつける
-    
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 行列の操作
-     ## 行列の作成
-     (FOO <- matrix(1:6,2,3,byrow=TRUE))
-     (BAR <- rbind(1:3,4:6)) # cbind を使って作ることもできる
-     
-     ## 2行2列成分を取り出す
-     FOO[2,2]
-     ## 転置行列を作成する
-     (BAZ <- matrix(1:6,3,2)) # 愚直に作成し直す
-     t(BAR) # 関数t()を調べてみよう
-     ## 行名をつける
-     rownames(FOO) <- c("first","second")
-     FOO
-     colnames(BAZ) <- c("alpha","beta")
-     BAZ
-   #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+行列の操作に慣れよう
+- 以下に示す行列を作成してみよう
+  #+begin_src latex
+    \begin{equation}
+      \begin{pmatrix}
+        1  & 2  & 3  \\
+        4  & 5  & 6 
+      \end{pmatrix}
+    \end{equation}
+  #+end_src
+- 行列を操作してみよう
+  - 2行2列成分を取り出す
+  - 転置行列を作成する
+  - 行名をつける
+
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 行列の操作
+  ## 行列の作成
+  (FOO <- matrix(1:6,2,3,byrow=TRUE))
+  (BAR <- rbind(1:3,4:6)) # cbind を使って作ることもできる
+  
+  ## 2行2列成分を取り出す
+  FOO[2,2]
+  ## 転置行列を作成する
+  (BAZ <- matrix(1:6,3,2)) # 愚直に作成し直す
+  t(BAR) # 関数t()を調べてみよう
+  ## 行名をつける
+  rownames(FOO) <- c("first","second")
+  FOO
+  colnames(BAZ) <- c("alpha","beta")
+  BAZ
+#+end_src
 
 
 * ベクトルの計算
 ** ベクトルの表記
-   - ベクトルは太字で，要素は下付き添字で表す
-     #+begin_src latex
-       \begin{equation}
-         \boldsymbol{a}
-         =(a_{1},a_{2},\dotsc,a_{k})
-       \end{equation}
-     #+end_src
-   - 別の書き方:
-     #+begin_src latex
-       \begin{equation}
-         (\boldsymbol{a})_{i}
-         =\text{(ベクトル \(\boldsymbol{a}\) の第 \(i\) 成分)}  
-       \end{equation}
-     #+end_src
-   - Rの書式
-     #+begin_src R :eval no
-       a <- c(a1,a2,...,ak) # k次元ベクトルの作成
-     #+end_src
-   
+- ベクトルは太字で，要素は下付き添字で表す
+  #+begin_src latex
+    \begin{equation}
+      \boldsymbol{a}
+      =(a_{1},a_{2},\dotsc,a_{k})
+    \end{equation}
+  #+end_src
+- 別の書き方:
+  #+begin_src latex
+    \begin{equation}
+      (\boldsymbol{a})_{i}
+      =\text{(ベクトル \(\boldsymbol{a}\) の第 \(i\) 成分)}  
+    \end{equation}
+  #+end_src
+- Rの書式
+  #+begin_src R :eval no
+    a <- c(a1,a2,...,ak) # k次元ベクトルの作成
+  #+end_src
+
 ** ベクトルの加法
-   - *同じ長さのベクトル* の和および差: \\
-     /[[color:gray][数値の和と差のように扱うことができる]]/
-     #+begin_src latex
-       \begin{equation}
-         \boldsymbol{a}\pm\boldsymbol{b}
-         =(a_{1}\pm b_{1},a_{2}\pm b_{2},\dotsc,a_{k}\pm b_{k})
-       \end{equation}
-       \begin{equation}
-         (\boldsymbol{a}\pm\boldsymbol{b})_{i}
-         =a_{i}\pm b_{i}
-       \end{equation}
-     #+end_src
-   - Rの書式
-     #+begin_src R :eval no
-       a + b # 同じ長さのベクトル a,b の和
-       a - b # ベクトルの差
-     #+end_src
+- *同じ長さのベクトル* の和および差: \\
+  /[[color:gray][数値の和と差のように扱うことができる]]/
+  #+begin_src latex
+    \begin{equation}
+      \boldsymbol{a}\pm\boldsymbol{b}
+      =(a_{1}\pm b_{1},a_{2}\pm b_{2},\dotsc,a_{k}\pm b_{k})
+    \end{equation}
+    \begin{equation}
+      (\boldsymbol{a}\pm\boldsymbol{b})_{i}
+      =a_{i}\pm b_{i}
+    \end{equation}
+  #+end_src
+- Rの書式
+  #+begin_src R :eval no
+    a + b # 同じ長さのベクトル a,b の和
+    a - b # ベクトルの差
+  #+end_src
 
 ** ベクトルの乗法
-   - *同じ長さの2つのベクトル* の乗法: 
-     - 成分ごとの積 (Hadamard積; 要素積)
-     - ベクトルの内積
-     /[[color:gray][2種類ある]]/
-   - データ解析ではどちらも良く用いられる
+- *同じ長さの2つのベクトル* の乗法: 
+  - 成分ごとの積 (Hadamard積; 要素積)
+  - ベクトルの内積
+  /[[color:gray][2種類ある]]/
+- データ解析ではどちらも良く用いられる
 
 ** Hadamard積 
-   - *同じ長さのベクトル* の成分ごとの積
-     #+begin_src latex
-       \begin{equation}
-         \boldsymbol{a}\circ\boldsymbol{b}
-         =(a_{1}b_{1},a_{2}b_{2},\dotsc,a_{k}b_{k})
-       \end{equation}
-       \begin{equation}
-         (\boldsymbol{a}\circ\boldsymbol{b})_{i}
-         =a_{i}b_{i}
-       \end{equation}
-     #+end_src
-   - Rの書式
-     #+begin_src R :eval no
-       a * b # ベクトルの成分ごとの積
-       a / b # 成分ごとの商も計算可
-     #+end_src
+- *同じ長さのベクトル* の成分ごとの積
+  #+begin_src latex
+    \begin{equation}
+      \boldsymbol{a}\circ\boldsymbol{b}
+      =(a_{1}b_{1},a_{2}b_{2},\dotsc,a_{k}b_{k})
+    \end{equation}
+    \begin{equation}
+      (\boldsymbol{a}\circ\boldsymbol{b})_{i}
+      =a_{i}b_{i}
+    \end{equation}
+  #+end_src
+- Rの書式
+  #+begin_src R :eval no
+    a * b # ベクトルの成分ごとの積
+    a / b # 成分ごとの商も計算可
+  #+end_src
+
 ** 内積
-   - *同じ長さのベクトル* の内積
-     #+begin_src latex
-       \begin{align}
-         \boldsymbol{a}\cdot\boldsymbol{b}
-         &=a_{1}b_{1}+a_{2}b_{2}+\dotsb+a_{k}b_{k}\\
-         &=\sum_{i=1}^{k}a_{i}b_{i}
-       \end{align}
-     #+end_src
-   - Rの書式
-     #+begin_src R :exports code
-       a %*% b # ベクトルの内積
-     #+end_src
+- *同じ長さのベクトル* の内積
+  #+begin_src latex
+    \begin{align}
+      \boldsymbol{a}\cdot\boldsymbol{b}
+      &=a_{1}b_{1}+a_{2}b_{2}+\dotsb+a_{k}b_{k}\\
+      &=\sum_{i=1}^{k}a_{i}b_{i}
+    \end{align}
+  #+end_src
+- Rの書式
+  #+begin_src R :exports code
+    a %*% b # ベクトルの内積
+  #+end_src
 
 
 * 行列の計算
 ** 行列の表記
-   - 行列は大文字で，要素は下付き添字で表す
-     #+begin_src latex
-       \begin{equation}
-         A
-         =
-         \begin{pmatrix}
-           a_{11}&\dots&a_{1n}\\
-           \vdots&\ddots&\vdots\\
-           a_{m1}&\dots&a_{mn}
-         \end{pmatrix}
-         % \begin{pmatrix}
-         %   a_{11}&a_{12}&\dots&a_{1n}\\
-         %   a_{21}&a_{22}&\dots&a_{2n}\\
-         %   \vdots&&\ddots&\vdots\\
-         %   a_{m1}&a_{m2}&\dots&a_{mn}
-         % \end{pmatrix}
-       \end{equation}
-     #+end_src
-   - 別の書き方:
-     #+begin_src latex
-       \begin{equation}
-         (A)_{ij}
-         =\text{(行列 \(A\) の \(ij\) 成分)}
-       \end{equation}
-     #+end_src
-   - Rの書式
-     #+begin_src R :eval no
-       A <- matrix(c(a11,a21,...,amn),m,n) # m x n 行列の作成
-     #+end_src
+- 行列は大文字で，要素は下付き添字で表す
+  #+begin_src latex
+    \begin{equation}
+      A
+      =
+      \begin{pmatrix}
+        a_{11}&\dots&a_{1n}\\
+        \vdots&\ddots&\vdots\\
+        a_{m1}&\dots&a_{mn}
+      \end{pmatrix}
+      % \begin{pmatrix}
+      %   a_{11}&a_{12}&\dots&a_{1n}\\
+      %   a_{21}&a_{22}&\dots&a_{2n}\\
+      %   \vdots&&\ddots&\vdots\\
+      %   a_{m1}&a_{m2}&\dots&a_{mn}
+      % \end{pmatrix}
+    \end{equation}
+  #+end_src
+- 別の書き方:
+  #+begin_src latex
+    \begin{equation}
+      (A)_{ij}
+      =\text{(行列 \(A\) の \(ij\) 成分)}
+    \end{equation}
+  #+end_src
+- Rの書式
+  #+begin_src R :eval no
+    A <- matrix(c(a11,a21,...,amn),m,n) # m x n 行列の作成
+  #+end_src
 
 ** 行列の加法
-   - *同じ大きさの行列* の和および差: \\
-     /[[color:gray][ベクトルと同じように記述することができる]]/
-     #+begin_src latex
-       \begin{equation}
-         (A\pm B)_{ij}=a_{ij}\pm b_{ij}
-       \end{equation}
-     #+end_src
-   - Rの書式
-     #+begin_src R :eval no
-       A + B # 同じサイズの行列の和
-       A - B # 行列の差
-     #+end_src
+- *同じ大きさの行列* の和および差: \\
+  /[[color:gray][ベクトルと同じように記述することができる]]/
+  #+begin_src latex
+    \begin{equation}
+      (A\pm B)_{ij}=a_{ij}\pm b_{ij}
+    \end{equation}
+  #+end_src
+- Rの書式
+  #+begin_src R :eval no
+    A + B # 同じサイズの行列の和
+    A - B # 行列の差
+  #+end_src
 
 ** 行列の乗法
-   - 2つの行列の乗法: 
-     - *同じ大きさの行列* の成分ごとの積 (Hadamard積; 要素積)
-     - *\(n\times m\) 型行列と \(m\times l\) 型行列* の積
-     /[[color:gray][2種類ある]]/
-   - データ解析ではどちらも良く用いられる
+- 2つの行列の乗法: 
+  - *同じ大きさの行列* の成分ごとの積 (Hadamard積; 要素積)
+  - *\(n\times m\) 型行列と \(m\times l\) 型行列* の積
+  /[[color:gray][2種類ある]]/
+- データ解析ではどちらも良く用いられる
 
 ** Hadamard積
-   - *同じ大きさの行列* の成分ごとの積
-     #+begin_src latex
-       \begin{equation}
-         (A\circ B)_{ij}=a_{ij}b_{ij}
-       \end{equation}
-     #+end_src
-   - Rの書式
-     #+begin_src R :eval no
-       A * B # 行列の成分ごとの積
-       A / B # 成分ごとの商も計算可
-     #+end_src
+- *同じ大きさの行列* の成分ごとの積
+  #+begin_src latex
+    \begin{equation}
+      (A\circ B)_{ij}=a_{ij}b_{ij}
+    \end{equation}
+  #+end_src
+- Rの書式
+  #+begin_src R :eval no
+    A * B # 行列の成分ごとの積
+    A / B # 成分ごとの商も計算可
+  #+end_src
+
 ** 行列の積
-   - *\(n\times m\) 型行列 \(A\) と \(m\times l\) 型行列 \(B\)* の積
-     #+begin_src latex
-       \begin{equation}
-         (AB)_{ij}=\sum_{k=1}^{m}a_{ik}b_{kj}
-         \quad\text{(\(AB\)は\(n\times l\)行列)}
-       \end{equation}
-     #+end_src
-   - Rの書式
-     #+begin_src R :eval no
-       A %*% B # 行列の積
-     #+end_src
+- *\(n\times m\) 型行列 \(A\) と \(m\times l\) 型行列 \(B\)* の積
+  #+begin_src latex
+    \begin{equation}
+      (AB)_{ij}=\sum_{k=1}^{m}a_{ik}b_{kj}
+      \quad\text{(\(AB\)は\(n\times l\)行列)}
+    \end{equation}
+  #+end_src
+- Rの書式
+  #+begin_src R :eval no
+    A %*% B # 行列の積
+  #+end_src
 
 ** 行列式
-   - *\(n\) 次正方行列* \(A\) の行列式
-     #+begin_src latex
-       \begin{equation}
-         \det(A)\quad (=|A|)
-       \end{equation}
-     #+end_src
-     - 正方行列でなければ定義されないことに注意
-   - Rの書式
-     #+begin_src R :eval no
-       det(A) # 行列式
-     #+end_src
+- *\(n\) 次正方行列* \(A\) の行列式
+  #+begin_src latex
+    \begin{equation}
+      \det(A)\quad (=|A|)
+    \end{equation}
+  #+end_src
+  - 正方行列でなければ定義されないことに注意
+- Rの書式
+  #+begin_src R :eval no
+    det(A) # 行列式
+  #+end_src
 
 ** トレース
-   - *\(n\) 次正方行列* \(A\) のトレース(対角成分の総和)
-     #+begin_src latex
-       \begin{equation}
-         \mathrm{trace}(A)=\sum_{i=1}^{n}a_{ii}
-       \end{equation}
-     #+end_src
-   - Rの書式 (関数は用意されていないので以下を利用):
-     #+begin_src R :eval no
-       sum(diag(A)) # 行列のトレース
-     #+end_src
-     - 関数 ~diag()~: 行列の対角成分を取り出す\\
-       (ベクトルを対角行列にすることもできる)
-     - 関数 ~sum()~: ベクトルの総和を計算する 
+- *\(n\) 次正方行列* \(A\) のトレース(対角成分の総和)
+  #+begin_src latex
+    \begin{equation}
+      \mathrm{trace}(A)=\sum_{i=1}^{n}a_{ii}
+    \end{equation}
+  #+end_src
+- Rの書式 (関数は用意されていないので以下を利用):
+  #+begin_src R :eval no
+    sum(diag(A)) # 行列のトレース
+  #+end_src
+  - 関数 ~diag()~: 行列の対角成分を取り出す\\
+    (ベクトルを対角行列にすることもできる)
+  - 関数 ~sum()~: ベクトルの総和を計算する 
 
-       
+
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 例題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 適当な2次正方行列 \(A\) で
-     Hamilton-Cayleyの定理
-     #+begin_src latex
-       \begin{equation}
-         A^2-\mathrm{trace}(A)A+\det(A)E_{2}=O_{2}
-       \end{equation}
-     #+end_src
-     の成立を確認せよ．\\
-     ただし \(E_{2}\) は2次単位行列，\(O_{2}\) は2次正方零行列
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 適当な2次正方行列 \(A\) で
+  Hamilton-Cayleyの定理
+  #+begin_src latex
+    \begin{equation}
+      A^2-\mathrm{trace}(A)A+\det(A)E_{2}=O_{2}
+    \end{equation}
+  #+end_src
+  の成立を確認せよ．\\
+  ただし \(E_{2}\) は2次単位行列，\(O_{2}\) は2次正方零行列
 
 ** 解答例
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 例題 Hamilton-Cayleyの定理の確認
-   #+end_src
-   #+begin_src R :exports both :results output :tangle yes
-     ## 行列を作成 (好きに設定してよい)
-     (A <- matrix(1:4,2,2) - diag(rep(3,2)))
-     ## 左辺を計算 (丸め誤差の範囲で0になる)
-     A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
-   #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+#+begin_src R :eval no :exports none :tangle yes
+  ### 例題 Hamilton-Cayleyの定理の確認
+#+end_src
+#+begin_src R :exports both :results output :tangle yes
+  ## 行列を作成 (好きに設定してよい)
+  (A <- matrix(1:4,2,2) - diag(rep(3,2)))
+  ## 左辺を計算 (丸め誤差の範囲で0になる)
+  A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
+#+end_src
 
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 1から10の2乗値からなるベクトルを作成せよ．
-   - 1から10までの和を計算せよ．
-   - 行列を用いて九九の表を作成せよ．
-   - 30度の回転行列を2回乗ずると60度の回転行列となることを確認せよ．
-     #+begin_src latex
-       \begin{equation}
-         \text{(回転行列)}
-         =
-         \begin{pmatrix}
-           \cos(\theta)&-\sin(\theta)\\
-           \sin(\theta)& \cos(\theta)
-         \end{pmatrix}
-       \end{equation}
-     #+end_src
-
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 ベクトルおよび行列の計算
-     ## 1から10までの2乗値からなるベクトル
-     1:10 # 1から10までのベクトル
-     1:10 * 1:10 # Hadamard積を利用する
-
-     ## 1から10までの和
-     1:10 %*% rep(1,10) # (1,2,...,10)と(1,1,...,1)の内積
-     sum(1:10) # 関数sum()はベクトルの成分の合計を計算することもできる
-
-     ## 九九の表
-     matrix(rep(1:9,9),9,9) # 行ごとに1から9を並べる
-     matrix(rep(1:9,9),9,9,byrow=TRUE) # 列ごとに1から9を並べる
-     matrix(rep(1:9,9),9,9) * matrix(rep(1:9,9),9,9,byrow=TRUE)
-     (FOO <- matrix(rep(1:9,9),9,9))
-     FOO * t(FOO) # 行列とその転置を利用してもよい
-     (BAR <- matrix(1:9,9,1)) 
-     BAR %*% t(BAR) # 行列による別の方法
-     (BAZ <- 1:9); BAZ %o% BAZ # 講義の範囲外の方法
-     
-     ## 30度の回転行列の2乗は60度の回転行列
-     theta <- pi/6 # 30度のラジアン値
-     (R30 <- # 30度の回転行列
-          matrix(c(cos(theta),sin(theta),
-                   -sin(theta),cos(theta)),2,2))
-     (R60 <- # 60度の回転行列
-          matrix(c(cos(2*theta),sin(2*theta),
-		     -sin(2*theta),cos(2*theta)),2,2))
-     R30 %*% R30 # 30度の回転行列の2乗を表示
-   #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 1から10の2乗値からなるベクトルを作成せよ．
+- 1から10までの和を計算せよ．
+- 行列を用いて九九の表を作成せよ．
+- 30度の回転行列を2回乗ずると60度の回転行列となることを確認せよ．
+  #+begin_src latex
+    \begin{equation}
+      \text{(回転行列)}
+      =
+      \begin{pmatrix}
+        \cos(\theta)&-\sin(\theta)\\
+        \sin(\theta)& \cos(\theta)
+      \end{pmatrix}
+    \end{equation}
+  #+end_src
+ 
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 ベクトルおよび行列の計算
+  ## 1から10までの2乗値からなるベクトル
+  1:10 # 1から10までのベクトル
+  1:10 * 1:10 # Hadamard積を利用する
+  
+  ## 1から10までの和
+  1:10 %*% rep(1,10) # (1,2,...,10)と(1,1,...,1)の内積
+  sum(1:10) # 関数sum()はベクトルの成分の合計を計算することもできる
+  
+  ## 九九の表
+  matrix(rep(1:9,9),9,9) # 行ごとに1から9を並べる
+  matrix(rep(1:9,9),9,9,byrow=TRUE) # 列ごとに1から9を並べる
+  matrix(rep(1:9,9),9,9) * matrix(rep(1:9,9),9,9,byrow=TRUE)
+  (FOO <- matrix(rep(1:9,9),9,9))
+  FOO * t(FOO) # 行列とその転置を利用してもよい
+  (BAR <- matrix(1:9,9,1)) 
+  BAR %*% t(BAR) # 行列による別の方法
+  (BAZ <- 1:9); BAZ %o% BAZ # 講義の範囲外の方法
+  
+  ## 30度の回転行列の2乗は60度の回転行列
+  theta <- pi/6 # 30度のラジアン値
+  (R30 <- # 30度の回転行列
+     matrix(c(cos(theta),sin(theta),
+              -sin(theta),cos(theta)),2,2))
+  (R60 <- # 60度の回転行列
+     matrix(c(cos(2*theta),sin(2*theta),
+              -sin(2*theta),cos(2*theta)),2,2))
+  R30 %*% R30 # 30度の回転行列の2乗を表示
+#+end_src
 
 
 * ベクトルと行列の計算
-  #+begin_src R :exports none :tangle yes
-    ### ベクトルと行列の計算で用いた例
-  #+end_src
+#+begin_src R :exports none :tangle yes
+  ### ベクトルと行列の計算で用いた例
+#+end_src
 
 ** ベクトルと行列の乗法
-   - 列(縦)ベクトル・行(横)ベクトルという *区別はない*
-   - 行列とベクトルの順序で適切に判断される
-   - 計算結果は *行列* で表現される
-     #+begin_src R :tangle yes
-       A <- matrix(1:4,2,2); b <- c(5,6) # 行列とベクトルを作成
-       A %*% b # 行列 x ベクトル = 列ベクトル
-     #+end_src
-     #+begin_src R :tangle yes
-       b %*% A # ベクトル x 行列 = 行ベクトル
-     #+end_src
+- 列(縦)ベクトル・行(横)ベクトルという *区別はない*
+- 行列とベクトルの順序で適切に判断される
+- 計算結果は *行列* で表現される
+  #+begin_src R :tangle yes
+    A <- matrix(1:4,2,2); b <- c(5,6) # 行列とベクトルを作成
+    A %*% b # 行列 x ベクトル = 列ベクトル
+  #+end_src
+  #+begin_src R :tangle yes
+    b %*% A # ベクトル x 行列 = 行ベクトル
+  #+end_src
 
 ** 連立1次方程式の解法
-   - 連立1次方程式
-     - \(A\) : \(n\) 次正則行列
-     - \(\boldsymbol{b},\boldsymbol{x}\) : \(n\) 次元列ベクトル
-     #+begin_src latex
-       \begin{align}
-         A\boldsymbol{x}&=\boldsymbol{b}
-         &&\text{(連立1次方程式)}\\
-         \boldsymbol{x}&=A^{-1}\boldsymbol{b}
-         &&\text{(解;\(A\)が正則な場合)}
-       \end{align}
-     #+end_src
-   - 解を求めるには関数 ~solve()~ を利用する
-     #+begin_src R :eval no :tangle yes
-       x <- solve(A, b) 
-     #+end_src
-   - ベクトル \(\boldsymbol{b}\) の代わりに行列も扱える
+- 連立1次方程式
+  - \(A\) : \(n\) 次正則行列
+  - \(\boldsymbol{b},\boldsymbol{x}\) : \(n\) 次元列ベクトル
+  #+begin_src latex
+    \begin{align}
+      A\boldsymbol{x}&=\boldsymbol{b}
+      &&\text{(連立1次方程式)}\\
+      \boldsymbol{x}&=A^{-1}\boldsymbol{b}
+      &&\text{(解;\(A\)が正則な場合)}
+    \end{align}
+  #+end_src
+- 解を求めるには関数 ~solve()~ を利用する
+  #+begin_src R :eval no :tangle yes
+    x <- solve(A, b) 
+  #+end_src
+- ベクトル \(\boldsymbol{b}\) の代わりに行列も扱える
 
 ** 逆行列
-   - 正則な \(n\) 次正方行列 \(A\) の逆行列 \(A^{-1}\)
-     #+begin_src latex
-       \begin{equation}
-         AA^{-1}=A^{-1}A=E_{n}
-         \quad\text{(\(E_{n}\)は\(n\)次単位行列)}
-       \end{equation}
-     #+end_src
-   - 関数 ~solve()~ を利用して求めることができる
-     #+begin_src latex
-       \begin{align}
-         AX&=E_{n}\\
-         X&=A^{-1}E_{n}=A^{-1}
-       \end{align}
-     #+end_src
-     #+begin_src R :eval no
-       solve(A,B) # AX=B の解Xを求める
-       solve(A) # 逆行列 (Bが単位行列の場合省略できる)
-     #+end_src
-   - /[[color:gray][他にもいくつか方法は用意されている]]/
+- 正則な \(n\) 次正方行列 \(A\) の逆行列 \(A^{-1}\)
+  #+begin_src latex
+    \begin{equation}
+      AA^{-1}=A^{-1}A=E_{n}
+      \quad\text{(\(E_{n}\)は\(n\)次単位行列)}
+    \end{equation}
+  #+end_src
+- 関数 ~solve()~ を利用して求めることができる
+  #+begin_src latex
+    \begin{align}
+      AX&=E_{n}\\
+      X&=A^{-1}E_{n}=A^{-1}
+    \end{align}
+  #+end_src
+  #+begin_src R :eval no
+    solve(A,B) # AX=B の解Xを求める
+    solve(A) # 逆行列 (Bが単位行列の場合省略できる)
+  #+end_src
+- /[[color:gray][他にもいくつか方法は用意されている]]/
 
 ** 関数の適用
-   - ベクトルや行列に関数( \(\sin,\exp,\dots\) など)を適用すると
-     成分ごとに計算した結果が返される
-   - [[color:darkgreen][ベクトル \(\boldsymbol{a}\) ，行列 \(A\) に関数 \(\sin\) を適用]]
-     #+begin_src latex
-       \begin{equation}
-         (\sin(\boldsymbol{a}))_{i}=\sin(a_{i})
-       \end{equation}
-     #+end_src
-     #+begin_src R :eval no
-       sin(a) # 成分ごとに計算される．sin(a)[i]=sin(a[i])
-     #+end_src
-     #+begin_src latex
-       \begin{equation}
-         (\sin(A))_{ij}=\sin(a_{ij})
-       \end{equation}
-     #+end_src
-     #+begin_src R :eval no
-       sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
-     #+end_src
+- ベクトルや行列に関数( \(\sin,\exp,\dots\) など)を適用すると
+  成分ごとに計算した結果が返される
+- [[color:darkgreen][ベクトル \(\boldsymbol{a}\) ，行列 \(A\) に関数 \(\sin\) を適用]]
+  #+begin_src latex
+    \begin{equation}
+      (\sin(\boldsymbol{a}))_{i}=\sin(a_{i})
+    \end{equation}
+  #+end_src
+  #+begin_src R :eval no
+    sin(a) # 成分ごとに計算される．sin(a)[i]=sin(a[i])
+  #+end_src
+  #+begin_src latex
+    \begin{equation}
+      (\sin(A))_{ij}=\sin(a_{ij})
+    \end{equation}
+  #+end_src
+  #+begin_src R :eval no
+    sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
+  #+end_src
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 例題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 適当な3次正方行列 \(A\) と3次元ベクトル \(\boldsymbol{b}\) を作成して
-     \(\boldsymbol{x}\) に関する以下の連立1次方程式を解きなさい
-     #+begin_src latex
-       \begin{equation}
-         A\boldsymbol{x}=\boldsymbol{b}
-       \end{equation}
-     #+end_src
-     
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 適当な3次正方行列 \(A\) と3次元ベクトル \(\boldsymbol{b}\) を作成して
+  \(\boldsymbol{x}\) に関する以下の連立1次方程式を解きなさい
+  #+begin_src latex
+    \begin{equation}
+      A\boldsymbol{x}=\boldsymbol{b}
+    \end{equation}
+  #+end_src
+
 ** 解答例
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   #+begin_src R :exports none :tangle yes
-     ### 例題 3元連立1次方程式の解法
-   #+end_src
-   #+begin_src R :exports both :results output :tangle yes
-     (A <- matrix(rnorm(9),3,3)+diag(rep(1,3))) # 行列とベクトルを作成
-     ## rnorm(9) は正規乱数を9つ作成する(後の講義で詳しく説明)
-     (b <- 1:3)
-   #+end_src
-   #+begin_src R :exports both :results output :tangle yes
-     (x <- solve(A,b)) # 解を計算
-     A %*% x # 結果の確認(b になるはず)
-   #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+#+begin_src R :exports none :tangle yes
+  ### 例題 3元連立1次方程式の解法
+#+end_src
+#+begin_src R :exports both :results output :tangle yes
+  (A <- matrix(rnorm(9),3,3)+diag(rep(1,3))) # 行列とベクトルを作成
+  ## rnorm(9) は正規乱数を9つ作成する(後の講義で詳しく説明)
+  (b <- 1:3)
+#+end_src
+#+begin_src R :exports both :results output :tangle yes
+  (x <- solve(A,b)) # 解を計算
+  A %*% x # 結果の確認(b になるはず)
+#+end_src
 
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 1から10の2乗値からなるベクトルを作成せよ．
-   - 2次元ベクトルを回転行列で変換しても長さが変わらないことを確かめよ．
-   - 例題の \(A\) と \(\boldsymbol{b}\) を用いて
-     #+begin_src R :eval no
-       A %*% b + b %*% A   
-     #+end_src
-     を計算するとエラーになるが，何故そうなるか理由を考えよ．
-
-   #+begin_src R :eval no :exports none :tangle yes
-     ### 練習問題 ベクトルと行列の計算
-     ## 1から10までの2乗値からなるベクトル
-     (1:10)^2 # ^2も関数として成分ごとに計算される
-
-     ## 回転してもベクトルの長さが変わらないことを確認
-     ## 回転行列とベクトルを作成 (好きに設定してよい)
-     theta <- 2*pi/3 # 120度のラジアン値
-     (R <- matrix(c(cos(theta),sin(theta),
-                    -sin(theta),cos(theta)),2,2))
-     (x <- 1:2)
-     (y <- R %*% x) # xを回転してyを作成 (結果は行列になる)
-     ## 長さの2乗はベクトルの内積で計算できる
-     x %*% x # xの長さの2乗
-     as.vector(y) %*% as.vector(y) # yの長さの2乗
-     t(y) %*% y # 行列の積として計算することもできる
-     
-     ## エラーになる理由を考察
-     A %*% b # 列ベクトル (3x1型行列)
-     b %*% A # 行ベクトル (1x3型行列)
-     A %*% b + b %*% A # 大きさが異なるので計算できない   
-     #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 1から10の2乗値からなるベクトルを作成せよ．
+- 2次元ベクトルを回転行列で変換しても長さが変わらないことを確かめよ．
+- 例題の \(A\) と \(\boldsymbol{b}\) を用いて
+  #+begin_src R :eval no
+    A %*% b + b %*% A   
+  #+end_src
+  を計算するとエラーになるが，何故そうなるか理由を考えよ．
+ 
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 ベクトルと行列の計算
+  ## 1から10までの2乗値からなるベクトル
+  (1:10)^2 # ^2も関数として成分ごとに計算される
+  
+  ## 回転してもベクトルの長さが変わらないことを確認
+  ## 回転行列とベクトルを作成 (好きに設定してよい)
+  theta <- 2*pi/3 # 120度のラジアン値
+  (R <- matrix(c(cos(theta),sin(theta),
+                 -sin(theta),cos(theta)),2,2))
+  (x <- 1:2)
+  (y <- R %*% x) # xを回転してyを作成 (結果は行列になる)
+  ## 長さの2乗はベクトルの内積で計算できる
+  x %*% x # xの長さの2乗
+  as.vector(y) %*% as.vector(y) # yの長さの2乗
+  t(y) %*% y # 行列の積として計算することもできる
+  
+  ## エラーになる理由を考察
+  A %*% b # 列ベクトル (3x1型行列)
+  b %*% A # 行ベクトル (1x3型行列)
+  A %*% b + b %*% A # 大きさが異なるので計算できない   
+#+end_src
 
 
 * COMMENT 関数の定義
 ** 自作関数
-   - 他の言語と同様にRでも関数を定義できる   
-   - 関数の定義には関数 ~function()~ を利用する 
-   - [[color:darkgreen][半径 r から球の体積と表面積を求める関数]]
-     #+begin_src R 
-       myfunc <- function(r){
-           V <- (4/3) * pi * r^3 # 球の体積
-           S <- 4 * pi * r^2     # 球の表面積
-           out <- c(V,S) # 返り値のベクトルを作る
-           names(out) <- c("volume", "area") # 返り値の要素に名前を付ける
-           return(out) # 値を返す
-       }
-       myfunc(1) # 実行
-     #+end_src
+- 他の言語と同様にRでも関数を定義できる   
+- 関数の定義には関数 ~function()~ を利用する 
+- [[color:darkgreen][半径 r から球の体積と表面積を求める関数]]
+  #+begin_src R 
+    myfunc <- function(r){
+      V <- (4/3) * pi * r^3 # 球の体積
+      S <- 4 * pi * r^2     # 球の表面積
+      out <- c(V,S) # 返り値のベクトルを作る
+      names(out) <- c("volume", "area") # 返り値の要素に名前を付ける
+      return(out) # 値を返す
+    }
+    myfunc(1) # 実行
+  #+end_src
 
 * COMMENT 制御構造
 ** 制御文
-   - 最適化や数値計算などを行うためには，
-     条件分岐や繰り返しを行うための仕組みが必要となる
-   - R言語を含む多くの計算機言語では
-     - ~if~  (条件分岐)
-     - ~for~  (繰り返し・回数指定)
-     - ~while~  (繰り返し・条件指定)
-   - これを *制御文* と言う 
+- 最適化や数値計算などを行うためには，
+  条件分岐や繰り返しを行うための仕組みが必要となる
+- R言語を含む多くの計算機言語では
+  - ~if~  (条件分岐)
+  - ~for~  (繰り返し・回数指定)
+  - ~while~  (繰り返し・条件指定)
+- これを *制御文* と言う 
 
 ** ~if~ 文
-   - 条件Aが *真* のときプログラムXを実行する
-     #+begin_src R :exports code
-       if(条件A) プログラムX
-     #+end_src
-   - 上記の ~if~ 文に条件Aが *偽* のときプログラムYを実行することを追加する
-     #+begin_src R :exports code
-       if(条件A) プログラムX else プログラムY    
-     #+end_src
+- 条件Aが *真* のときプログラムXを実行する
+  #+begin_src R :exports code
+    if(条件A) プログラムX
+  #+end_src
+- 上記の ~if~ 文に条件Aが *偽* のときプログラムYを実行することを追加する
+  #+begin_src R :exports code
+    if(条件A) プログラムX else プログラムY    
+  #+end_src
+
 ** ~if~ 文の例
-   - [[color:darkgreen][20200724が19で割り切れるか?]]
-     #+begin_src R :exports none :tangle yes
-       ### 例題3
-       ### if文の例
-     #+end_src
-     #+begin_src R :tangle yes
-       if(20200724 %% 19 == 0) {# %% は余りを計算
-           print("割り切れます")
-           print(20200724 %/% 19) # 商を表示
-       } else { # {}で囲まれたブロックが1つのプログラム
-           print("割り切れません")
-           print(20200724 %% 19) # 余りを表示
-       } 
-     #+end_src
+- [[color:darkgreen][20200724が19で割り切れるか?]]
+  #+begin_src R :exports none :tangle yes
+    ### 例題3
+    ### if文の例
+  #+end_src
+  #+begin_src R :tangle yes
+    if(20200724 %% 19 == 0) {# %% は余りを計算
+      print("割り切れます")
+      print(20200724 %/% 19) # 商を表示
+    } else { # {}で囲まれたブロックが1つのプログラム
+      print("割り切れません")
+      print(20200724 %% 19) # 余りを表示
+    } 
+  #+end_src
+
 ** ~for~ 文
-   - ベクトル ~V~ の要素を *順に* 変数 ~i~ に代入して
-     プログラムXを繰り返し実行する
-     #+begin_src R :exports code
-       for(i in V) プログラムX
-     #+end_src
-   - プログラムXは変数 ~i~ によって実行内容が変わる
+- ベクトル ~V~ の要素を *順に* 変数 ~i~ に代入して
+  プログラムXを繰り返し実行する
+  #+begin_src R :exports code
+    for(i in V) プログラムX
+  #+end_src
+- プログラムXは変数 ~i~ によって実行内容が変わる
+
 ** ~for~ 文の例
-   - [[color:darkgreen][アルファベットの20,15,11,25,15番目を表示]]
-     #+begin_src R :exports none :tangle yes
-       ### 例題4
-       ### for文の例
-     #+end_src
-     #+begin_src R :tangle yes
-       print(LETTERS) # LETTERS ベクトルの内容を表示
-       for(i in c(20,15,11,25,15)) {
-           print(LETTERS[i]) # 順番に表示
-       }
-     #+end_src
+- [[color:darkgreen][アルファベットの20,15,11,25,15番目を表示]]
+  #+begin_src R :exports none :tangle yes
+    ### 例題4
+    ### for文の例
+  #+end_src
+  #+begin_src R :tangle yes
+    print(LETTERS) # LETTERS ベクトルの内容を表示
+    for(i in c(20,15,11,25,15)) {
+      print(LETTERS[i]) # 順番に表示
+    }
+  #+end_src
+
 ** ~while~ 文
-   - 条件Aが *真* である限りプログラムXを繰り返す
-     #+begin_src R :exports code
-       while(条件A) プログラムX
-     #+end_src
-   - プログラムXは実行するたびに実行内容が変わり，
-     いつか条件Aが満たされなくなるように書く
-   - /(~repeat~ 文というものもある)/
+- 条件Aが *真* である限りプログラムXを繰り返す
+  #+begin_src R :exports code
+    while(条件A) プログラムX
+  #+end_src
+- プログラムXは実行するたびに実行内容が変わり，
+  いつか条件Aが満たされなくなるように書く
+- /(~repeat~ 文というものもある)/
+
 ** ~while~ 文の例
-   - [[color:darkgreen][20200809を素因数分解する]]
-     #+begin_src R :exports none :tangle yes
-       ### 例題5
-       ### while文の例
-     #+end_src
-     #+begin_src R :tangle yes
-       n <- 20200809 # 分解の対象
-       p <- 2 # 最初に調べる数
-       while(n != 1){ # 商が1になるまで計算する
-           for(i in p:n){ # pからnまで順に調べる
-               if(n%%i == 0) { # 余りが0か確認
-                   print(i) # 割り切った数を表示
-                   n <- n/i # 商を計算して分解の対象を更新
-                   p <- i # 最初に調べる数を更新
-                   break # for文を途中で終了
-               }  
-           }
-       }
-     #+end_src
-   # ** ~repeat~ 文
-   #    - プログラムXを繰り返し実行
-   #      #+begin_src R :exports code
-   #        repeat プログラムX
-   #      #+end_src
-   #    - プログラムXには
-   #      #+begin_src R :exports code
-   #        if(条件A) break
-   #      #+end_src
-   #      という記述が含まれている必要がある．
-   #      この記述は，「条件Aが成立したら繰り返しをやめる」という意味
+- [[color:darkgreen][20200809を素因数分解する]]
+  #+begin_src R :exports none :tangle yes
+    ### 例題5
+    ### while文の例
+  #+end_src
+  #+begin_src R :tangle yes
+    n <- 20200809 # 分解の対象
+    p <- 2 # 最初に調べる数
+    while(n != 1){ # 商が1になるまで計算する
+      for(i in p:n){ # pからnまで順に調べる
+        if(n%%i == 0) { # 余りが0か確認
+          print(i) # 割り切った数を表示
+          n <- n/i # 商を計算して分解の対象を更新
+          p <- i # 最初に調べる数を更新
+          break # for文を途中で終了
+        }  
+      }
+    }
+  #+end_src
+  # ** ~repeat~ 文
+  #    - プログラムXを繰り返し実行
+  #      #+begin_src R :exports code
+  #        repeat プログラムX
+  #      #+end_src
+  #    - プログラムXには
+  #      #+begin_src R :exports code
+  #        if(条件A) break
+  #      #+end_src
+  #      という記述が含まれている必要がある．
+  #      この記述は，「条件Aが成立したら繰り返しをやめる」という意味
 
 * COMMENT 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 例題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 三角形の3辺の長さ \(x,y,z\) を与えると
-     面積 \(S\) を計算する関数を作成せよ．
-   - 参考: *ヘロンの公式* より
-     # #+begin_export latex
-     \begin{equation}
-       S=\sqrt{s(s-x)(s-y)(s-z)},\qquad
-       s=\frac{x+y+z}{2}
-     \end{equation}
-     # #+end_export
-     が成り立つ．
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 三角形の3辺の長さ \(x,y,z\) を与えると
+  面積 \(S\) を計算する関数を作成せよ．
+- 参考: *ヘロンの公式* より
+  # #+begin_export latex
+  \begin{equation}
+    S=\sqrt{s(s-x)(s-y)(s-z)},\qquad
+    s=\frac{x+y+z}{2}
+  \end{equation}
+  # #+end_export
+  が成り立つ．
+
 ** 解答例
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   #+begin_src R :exports none :tangle yes
-     ### 例題6
-     ### 三角形の面積を計算する関数
-   #+end_src
-   #+begin_src R :exports both :results output :tangle yes
-     area <- function(x,y,z){
-         s <- (x+y+z)/2
-         S <- (s*(s-x)*(s-y)*(s-z))^(1/2)
-         ## S <- sqrt(s*(s-x)*(s-y)*(s-z)) # 平方根を求める関数を用いても良い
-       return(S)
-     }
-     area(3,4,5) # 直角三角形で検算
-     area(12,13,5)
-   #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+#+begin_src R :exports none :tangle yes
+  ### 例題6
+  ### 三角形の面積を計算する関数
+#+end_src
+#+begin_src R :exports both :results output :tangle yes
+  area <- function(x,y,z){
+    s <- (x+y+z)/2
+    S <- (s*(s-x)*(s-y)*(s-z))^(1/2)
+    ## S <- sqrt(s*(s-x)*(s-y)*(s-z)) # 平方根を求める関数を用いても良い
+    return(S)
+  }
+  area(3,4,5) # 直角三角形で検算
+  area(12,13,5)
+#+end_src
+
 ** 演習
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 非負の整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ．
-     #+begin_src R :exports none :tangle yes
-       ### 練習3.1
-       ### 階乗を計算する関数
-       ## for文を用いた関数
-       fact1 <- function(n){
-           val <- 1
-           for(i in 1:n){
-               val <- val*i
-           }
-           return(val)
-       }
-       fact1(0) # 間違い
-       fact1(1)
-       fact1(2)
-       fact1(3)
-       fact1(4)
-       ## if文を用いた修正版
-       fact2 <- function(n){
-           if(n==0){
-               return(1)
-           } else {
-               val <- 1
-               for(i in 1:n){
-                   val <- val*i
-               }
-               return(val)
-           }
-       }
-       fact2(0) # 正しい
-       fact2(1)
-       fact2(2)
-       fact2(3)
-       fact2(4)
-       ## while文を用いた関数
-       fact3 <- function(n){
-           val <- 1
-           while(n>0){
-               val <- val*n
-               n <- n-1
-           }
-           return(val)
-       }
-       fact3(0)
-       fact3(1)
-       fact3(2)
-       fact3(3)
-       fact3(4)
-     #+end_src
-   - 整数 \(n\) の Fibonacci数を求める関数を作成せよ．
-     # #+begin_export latex
-     \begin{align}
-       F_{0}&=0\\
-       F_{1}&=1\\
-       F_{n}&=F_{n-1}+F_{n-2}
-     \end{align}
-     # #+end_export
-     #+begin_src R :exports none :tangle yes
-       ### 練習3.2
-       ### Fibonacci数を返す関数
-       fibo <- function(n){
-           f0 <- 0 # 第0項の設定
-           f1 <- 1 # 第1項の設定
-           if(n<0) {
-               print("計算できません")
-               return(NA) # 欠損値を返す
-           }
-           if(n==0) { # n=0の場合
-               return(f0)
-           }
-           if(n==1) { # n=1の場合
-               return(f1)
-           }
-           for(i in 2:n) { # n>=2の場合
-               fn <- f1 + f0 # fn = fn-1 + fn-2 の計算
-               f0 <- f1 # fn-2 の値の更新
-               f1 <- fn # fn-1 の値の更新
-           }
-           return(fn) # 計算結果を返す
-       }
-     #+end_src
-   - 行列 \(X\) が与えられたとき，各列の平均を計算する関数を作成せよ．
-     #+begin_src R :exports none :tangle yes
-       ### 練習3.3
-       ### 行列の列の平均を計算する関数
-       colave <- function(X) {
-           ave <- rep(0,length=ncol(X)) # 平均を記録するベクトルを用意
-           for(i in 1:ncol(X)){ # 列ごとに計算
-               ave[i] <- sum(X[,i])/nrow(X) # 平均の定義に従って計算
-               ## ave[i] <- mean(X[,i]) # 平均を計算する関数を用いても良い
-           }
-           return(ave)
-       }
-       (A <- matrix(1:12,3,4,byrow=TRUE))
-       colave(A)
-     #+end_src
-   - 前問で \(X\) がベクトルの場合にはその平均を計算するように修正せよ．\\
-     /(関数 ~is.vector()~ が利用できる)/
-     #+begin_src R :exports none :tangle yes
-       ### 練習3.4
-       ### ベクトルと行列を扱えるように修正
-       colave <- function(X){ 
-           if(is.vector(X)){
-               ave <- mean(X)
-           } else {
-               ave <- rep(0,length=ncol(X))
-               for(i in 1:ncol(X)){
-                   ave[i] <- mean(X[,i])
-               }
-           }
-           return(ave)
-       }
-       (A <- matrix(1:12,3,4,byrow=TRUE))
-       colave(A)
-       (x <- 1:12)
-       colave(x)
-     #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 非負の整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ．
+
+#+begin_src R :exports none :tangle yes
+  ### 練習3.1
+  ### 階乗を計算する関数
+  ## for文を用いた関数
+  fact1 <- function(n){
+    val <- 1
+    for(i in 1:n){
+      val <- val*i
+    }
+    return(val)
+  }
+  fact1(0) # 間違い
+  fact1(1)
+  fact1(2)
+  fact1(3)
+  fact1(4)
+  ## if文を用いた修正版
+  fact2 <- function(n){
+    if(n==0){
+      return(1)
+    } else {
+      val <- 1
+      for(i in 1:n){
+        val <- val*i
+      }
+      return(val)
+    }
+  }
+  fact2(0) # 正しい
+  fact2(1)
+  fact2(2)
+  fact2(3)
+  fact2(4)
+  ## while文を用いた関数
+  fact3 <- function(n){
+    val <- 1
+    while(n>0){
+      val <- val*n
+      n <- n-1
+    }
+    return(val)
+  }
+  fact3(0)
+  fact3(1)
+  fact3(2)
+  fact3(3)
+  fact3(4)
+#+end_src
+
+- 整数 \(n\) の Fibonacci数を求める関数を作成せよ．
+  #+begin_export latex
+  \begin{align}
+    F_{0}&=0\\
+    F_{1}&=1\\
+    F_{n}&=F_{n-1}+F_{n-2}
+  \end{align}
+  #+end_export
+
+#+begin_src R :exports none :tangle yes
+  ### 練習3.2
+  ### Fibonacci数を返す関数
+  fibo <- function(n){
+    f0 <- 0 # 第0項の設定
+    f1 <- 1 # 第1項の設定
+    if(n<0) {
+      print("計算できません")
+      return(NA) # 欠損値を返す
+    }
+    if(n==0) { # n=0の場合
+      return(f0)
+    }
+    if(n==1) { # n=1の場合
+      return(f1)
+    }
+    for(i in 2:n) { # n>=2の場合
+      fn <- f1 + f0 # fn = fn-1 + fn-2 の計算
+      f0 <- f1 # fn-2 の値の更新
+      f1 <- fn # fn-1 の値の更新
+    }
+    return(fn) # 計算結果を返す
+  }
+#+end_src
+
+- 行列 \(X\) が与えられたとき，各列の平均を計算する関数を作成せよ．
+  
+#+begin_src R :exports none :tangle yes
+  ### 練習3.3
+  ### 行列の列の平均を計算する関数
+  colave <- function(X) {
+    ave <- rep(0,length=ncol(X)) # 平均を記録するベクトルを用意
+    for(i in 1:ncol(X)){ # 列ごとに計算
+      ave[i] <- sum(X[,i])/nrow(X) # 平均の定義に従って計算
+      ## ave[i] <- mean(X[,i]) # 平均を計算する関数を用いても良い
+    }
+    return(ave)
+  }
+  (A <- matrix(1:12,3,4,byrow=TRUE))
+  colave(A)
+#+end_src
+
+- 前問で \(X\) がベクトルの場合にはその平均を計算するように修正せよ．\\
+  /(関数 ~is.vector()~ が利用できる)/
+  
+#+begin_src R :exports none :tangle yes
+  ### 練習3.4
+  ### ベクトルと行列を扱えるように修正
+  colave <- function(X){ 
+    if(is.vector(X)){
+      ave <- mean(X)
+    } else {
+      ave <- rep(0,length=ncol(X))
+      for(i in 1:ncol(X)){
+        ave[i] <- mean(X[,i])
+      }
+    }
+    return(ave)
+  }
+  (A <- matrix(1:12,3,4,byrow=TRUE))
+  colave(A)
+  (x <- 1:12)
+  colave(x)
+#+end_src
 
 
 

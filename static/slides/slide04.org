@@ -3,550 +3,560 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-05-03 14:40:38 mura>
+# Time-stamp: <2021-08-14 20:32:53 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
-#+STARTUP: hidestars content
+#+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :end:
 
 * 講義の内容
-  - データフレームの操作
-  - ファイルの取り扱い
-  - データの集計
-    
-  #+begin_src R :eval no :exports none :tangle yes
-    ### 第04回 練習問題解答例
-  #+end_src
-  #+begin_src R :exports none
-    setwd("~/Desktop/lectures/u-tokyo/spring/slide")
-  #+end_src
-    
+- データフレームの操作
+- ファイルの取り扱い
+- データの集計
 
+#+begin_src R :eval no :exports none :tangle yes
+  ### 第04回 練習問題解答例
+#+end_src
+#+begin_src R :exports none
+  setwd("~/Desktop/lectures/u-tokyo/spring/slide")
+#+end_src
+    
 * COMMENT メモ
 
 
 * データフレームの操作
-  #+begin_src R :exports none :tangle yes
-    ### データフレームの操作で用いた例
-  #+end_src
+#+begin_src R :exports none :tangle yes
+  ### データフレームの操作で用いた例
+#+end_src
 
 ** Rに用意されているデータ構造
-   - 下記は基本的なもので標準環境で利用できる
-     - ベクトル (vector)
-     - 行列 (matrix)
-     - リスト (list) 
-     - *データフレーム (data frame)*
-     - 配列 (array)
+- 下記は基本的なもので標準環境で利用できる
+  - ベクトル (vector)
+  - 行列 (matrix)
+  - リスト (list) 
+  - *データフレーム (data frame)*
+  - 配列 (array)
 
 ** データフレームからの項目の抽出
-   - 添字の番号を指定
-   - 要素の名前で指定
-   - *除外*: マイナス記号(-)をつけて指定
-   - 論理値で指定
-     - ~TRUE~: 要素の選択
-     - ~FALSE~: 要素の *除外*
-   - *欠損値 ~NA~* の扱いは状況依存なので注意
-     - ~NA~: 値が得られていないことを表すスカラー値
+- 添字の番号を指定
+- 要素の名前で指定
+- *除外*: マイナス記号(-)をつけて指定
+- 論理値で指定
+  - ~TRUE~: 要素の選択
+  - ~FALSE~: 要素の *除外*
+- *欠損値 ~NA~* の扱いは状況依存なので注意
+  - ~NA~: 値が得られていないことを表すスカラー値
 
 ** データ例
-   - *~datasets::airquality~* 
-     #+begin_quote
-     *New York Air Quality Measurements*
-     - Description:
-       Daily air quality measurements in New York, May to September 1973.
-     - Format: 
-       A data frame with 153 observations on 6 variables.
-       - [,1]   Ozone   numeric Ozone (ppb)
-       - [,2]   Solar.R numeric Solar R (lang)
-       - [,3]   Wind    numeric Wind (mph)
-       - [,4]   Temp    numeric Temperature (degrees F)
-       - [,5]   Month   numeric Month (1--12)
-       - [,6]   Day     numeric Day of month (1--31)
-     #+end_quote
-     - ~help(airquality)~ で詳細を確認
-     - ~datasets~ はRの標準パッケージ
-     - *パッケージ名::オブジェクト* という書き方で同名のオブジェクトを区別できる
+- *~datasets::airquality~* 
+  #+begin_quote
+  *New York Air Quality Measurements*
+  - Description:
+    Daily air quality measurements in New York, May to September 1973.
+  - Format: 
+    A data frame with 153 observations on 6 variables.
+    - [,1]   Ozone   numeric Ozone (ppb)
+    - [,2]   Solar.R numeric Solar R (lang)
+    - [,3]   Wind    numeric Wind (mph)
+    - [,4]   Temp    numeric Temperature (degrees F)
+    - [,5]   Month   numeric Month (1--12)
+    - [,6]   Day     numeric Day of month (1--31)
+  #+end_quote
+  - ~help(airquality)~ で詳細を確認
+  - ~datasets~ はRの標準パッケージ
+  - *パッケージ名::オブジェクト* という書き方で同名のオブジェクトを区別できる
 
 ** 行の抽出
-   - 行番号による指定
-     #+begin_src R :tangle yes
-       ## 行番号のベクトルで指定して抽出
-       airquality[1:10,] # 1-10行を抽出
-     #+end_src
-   #+reveal: split
-   - 条件の指定
-     #+begin_src R :tangle yes
-       ## 条件の指定の仕方
-       airquality[1:15,]$Ozone>100 # 条件に合致する行はTRUE (NAは欠損値)
-       airquality[1:15,]$Ozone>100 & airquality[1:15,]$Wind<=5 # 条件のAND
-       with(airquality[1:15,], Ozone>100 & Wind<=5) # 上と同じ(短い書き方)
-       with(airquality[1:60,], Ozone>100 | Wind<=5) # 条件のOR
-     #+end_src
-   #+reveal: split
-   - 条件に合致する行番号の抽出
-     #+begin_src R :tangle yes
-       ## 関数 which() でTRUEの番号を抽出
-       which(with(airquality, Ozone>100 & Wind<=5)) # 全データからTRUEを抽出
-     #+end_src
-   - 条件に合致する行の抽出
-     #+begin_src R :tangle yes
-       ## 条件を指定して行を抽出
-       airquality[which(with(airquality, Ozone>100 & Wind<=5)), ] 
-     #+end_src
+- 行番号による指定
+  #+begin_src R :tangle yes
+    ## 行番号のベクトルで指定して抽出
+    airquality[1:10,] # 1-10行を抽出
+  #+end_src
+
+#+reveal: split
+- 条件の指定
+  #+begin_src R :tangle yes
+    ## 条件の指定の仕方
+    airquality[1:15,]$Ozone>100 # 条件に合致する行はTRUE (NAは欠損値)
+    airquality[1:15,]$Ozone>100 & airquality[1:15,]$Wind<=5 # 条件のAND
+    with(airquality[1:15,], Ozone>100 & Wind<=5) # 上と同じ(短い書き方)
+    with(airquality[1:60,], Ozone>100 | Wind<=5) # 条件のOR
+  #+end_src
+
+#+reveal: split
+- 条件に合致する行番号の抽出
+  #+begin_src R :tangle yes
+    ## 関数 which() でTRUEの番号を抽出
+    which(with(airquality, Ozone>100 & Wind<=5)) # 全データからTRUEを抽出
+  #+end_src
+- 条件に合致する行の抽出
+  #+begin_src R :tangle yes
+    ## 条件を指定して行を抽出
+    airquality[which(with(airquality, Ozone>100 & Wind<=5)), ] 
+  #+end_src
 
 ** 列の抽出
-   - 列番号による指定
-     #+begin_src R :tangle yes
-       ## 列番号のベクトルで指定して抽出
-       airquality[which(with(airquality, Ozone>100 & Wind<=5)), c(1,5,6)] 
-     #+end_src
-   #+reveal: split
-   - 列名による指定
-     #+begin_src R :tangle yes
-       ## 複数の列の場合
-       airquality[which(with(airquality, Ozone>100 & Wind<=5)), 
-                  c("Month","Day")] 
-     #+end_src
-   #+reveal: split
-   - 列名による指定 (1つの場合)
-     #+begin_src R :tangle yes
-       ## 1つの列の場合は以下でも良い (ただしデータフレームではなくベクトルになる)
-       airquality[which(with(airquality, Ozone>100 & Wind<=5)),]$Month
-       airquality[which(with(airquality, Ozone>100 & Wind<=5)),"Month"] # 上と同じ
-       ## データフレームとして抽出したい場合は drop=FALSE を指定する
-       airquality[which(with(airquality, Ozone>100 & Wind<=5)),"Month",drop=FALSE]
-     #+end_src
+- 列番号による指定
+  #+begin_src R :tangle yes
+    ## 列番号のベクトルで指定して抽出
+    airquality[which(with(airquality, Ozone>100 & Wind<=5)), c(1,5,6)] 
+  #+end_src
+
+#+reveal: split
+- 列名による指定
+  #+begin_src R :tangle yes
+    ## 複数の列の場合
+    airquality[which(with(airquality, Ozone>100 & Wind<=5)), 
+               c("Month","Day")] 
+  #+end_src
+
+#+reveal: split
+- 列名による指定 (1つの場合)
+  #+begin_src R :tangle yes
+    ## 1つの列の場合は以下でも良い (ただしデータフレームではなくベクトルになる)
+    airquality[which(with(airquality, Ozone>100 & Wind<=5)),]$Month
+    airquality[which(with(airquality, Ozone>100 & Wind<=5)),"Month"] # 上と同じ
+    ## データフレームとして抽出したい場合は drop=FALSE を指定する
+    airquality[which(with(airquality, Ozone>100 & Wind<=5)),"Month",drop=FALSE]
+  #+end_src
 
 ** 関数 ~subset()~
-   - 複合的な条件を指定してデータを整理する関数
-   - 基本書式
-     #+begin_src R :eval no
-       subset(x, subset, select, drop=FALSE)
-       ## x:  データフレーム 
-       ## subset: 抽出する行の条件
-       ## select: 列の選択(未指定の場合は全ての列)
-       ## drop: 結果が1行または1列の場合の扱い．ベクトル(TRUE)・データフレーム(FALSE)
-     #+end_src
-       
+- 複合的な条件を指定してデータを整理する関数
+- 基本書式
+  #+begin_src R :eval no
+    subset(x, subset, select, drop=FALSE)
+    ## x:  データフレーム 
+    ## subset: 抽出する行の条件
+    ## select: 列の選択(未指定の場合は全ての列)
+    ## drop: 結果が1行または1列の場合の扱い．ベクトル(TRUE)・データフレーム(FALSE)
+  #+end_src
+
 ** 関数 ~subset()~ の例
-   - 前出の例の書き換え
-     #+begin_src R :tangle yes
-       ### 関数 subset() の使い方
-       subset(airquality,
-              subset = Ozone>100 & Wind<=5,
-              select = c(1,5,6))
-       subset(airquality,
-              Ozone>100 & Wind<=5, # 順序通りなら引数の名前は省略可
-              c(Month,Day)) # 名前は$の後と同じ扱いで "" は不要
-     #+end_src
-   #+reveal: split
-   - いろいろな記述の仕方 (~!,is.na(),%in%~)
-     #+begin_src R :tangle yes
-       ## Ozoneに欠測(NA)がなく, かつDayが5か10のデータのWindからDayまでの列を抽出
-       subset(airquality, 
-              subset = !is.na(Ozone) & Day %in% c(5,10),
-              select = Wind:Day)
-     #+end_src
-   #+reveal: split
-   - いろいろな記述の仕方 (~|,-~)
-     #+begin_src R :tangle yes
-       ## Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
-       subset(airquality,
-              subset = Ozone>120 | Wind<=3,
-              select = -Temp)
-     #+end_src
-     
+- 前出の例の書き換え
+  #+begin_src R :tangle yes
+    ### 関数 subset() の使い方
+    subset(airquality,
+           subset = Ozone>100 & Wind<=5,
+           select = c(1,5,6))
+    subset(airquality,
+           Ozone>100 & Wind<=5, # 順序通りなら引数の名前は省略可
+           c(Month,Day)) # 名前は$の後と同じ扱いで "" は不要
+  #+end_src
+
+#+reveal: split
+- いろいろな記述の仕方 (~!,is.na(),%in%~)
+  #+begin_src R :tangle yes
+    ## Ozoneに欠測(NA)がなく, かつDayが5か10のデータのWindからDayまでの列を抽出
+    subset(airquality, 
+           subset = !is.na(Ozone) & Day %in% c(5,10),
+           select = Wind:Day)
+  #+end_src
+
+#+reveal: split
+- いろいろな記述の仕方 (~|,-~)
+  #+begin_src R :tangle yes
+    ## Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
+    subset(airquality,
+           subset = Ozone>120 | Wind<=3,
+           select = -Temp)
+  #+end_src
+
 
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
   :END:
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - ~datasets::airquality~ に対して
-     以下の条件を満たすデータを取り出しなさい．
-     - 7月のオゾン濃度 (~Ozone~)
-     - 風速 (~Wind~) が時速10マイル以上で，
-       かつ気温 (~Temp~) が華氏80度以上の日のデータ
-     - オゾン (~Ozone~) も日射量 (~Solar.R~) も
-       欠測 (~NA~) でないデータの月 (~Month~) と日 (~Day~)
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- ~datasets::airquality~ に対して
+  以下の条件を満たすデータを取り出しなさい．
+  - 7月のオゾン濃度 (~Ozone~)
+  - 風速 (~Wind~) が時速10マイル以上で，
+    かつ気温 (~Temp~) が華氏80度以上の日のデータ
+  - オゾン (~Ozone~) も日射量 (~Solar.R~) も
+    欠測 (~NA~) でないデータの月 (~Month~) と日 (~Day~)
 
-   #+begin_src R :exports none :tangle yes
-     ### 練習問題 関数 subset() によるデータフレームの操作
-     ## 7月のオゾン濃度
-     subset(airquality,
-            subset = Month==7,
-            select = Ozone)
-
-     ## 風速時速10マイル以上かつ気温が華氏80度以上
-     subset(airquality,
-            subset = Wind>=10 & Temp>=80)
-
-     ## 日射量が欠測でないデータの月と日
-     subset(airquality,
-            subset = !is.na(Ozone) & !is.na(Solar.R),
-            select = c(Month,Day)) # 書いた順に並ぶ
-     subset(airquality, # 書き方はいろいろある
-            subset = !(is.na(Ozone) | is.na(Solar.R)),
-            select = Month:Day) # もともと並んでいるので c(Month,Day) と同じ
-   #+end_src
+#+begin_src R :exports none :tangle yes
+  ### 練習問題 関数 subset() によるデータフレームの操作
+  ## 7月のオゾン濃度
+  subset(airquality,
+         subset = Month==7,
+         select = Ozone)
+  
+  ## 風速時速10マイル以上かつ気温が華氏80度以上
+  subset(airquality,
+         subset = Wind>=10 & Temp>=80)
+  
+  ## 日射量が欠測でないデータの月と日
+  subset(airquality,
+         subset = !is.na(Ozone) & !is.na(Solar.R),
+         select = c(Month,Day)) # 書いた順に並ぶ
+  subset(airquality, # 書き方はいろいろある
+         subset = !(is.na(Ozone) | is.na(Solar.R)),
+         select = Month:Day) # もともと並んでいるので c(Month,Day) と同じ
+#+end_src
    
 
 * ファイルの取り扱い
-  #+begin_src R :exports none :tangle yes
-    ### ファイルの取り扱いで用いた例
-  #+end_src
+#+begin_src R :exports none :tangle yes
+  ### ファイルの取り扱いで用いた例
+#+end_src
   
 ** データファイルの読み書き
-   - 実際の解析においては以下の操作が必要
-     - 収集されたデータを読み込む
-     - 整理したデータを保存する
-   - Rで利用可能なデータファイル
-     - CSV形式(comma separated values): テキストファイル
-     - RData形式: Rの内部表現を用いたバイナリーファイル
-     - [[color:gray][Excel形式: RStudio の読み込み機能が利用可能]]
-   - データフレームを対象とした扱いを整理する
+- 実際の解析においては以下の操作が必要
+  - 収集されたデータを読み込む
+  - 整理したデータを保存する
+- Rで利用可能なデータファイル
+  - CSV形式(comma separated values): テキストファイル
+  - RData形式: Rの内部表現を用いたバイナリーファイル
+  - [[color:gray][Excel形式: RStudio の読み込み機能が利用可能]]
+- データフレームを対象とした扱いを整理する
 
 ** 作業ディレクトリ
-   - Rは *作業ディレクトリ* で実行される
-     - ファイルは作業ディレクトリに存在するものとして扱われる
-     - それ以外のファイルを扱う場合はパスを含めて指定する
-   - 作業ディレクトリの確認の仕方
-     - コンソールの上部の表示
-     - 関数 ~getwd()~
-   - 作業ディレクトリの変更の仕方
-     - *Session* メニューの *Set Working Directory* で指定
-       - 読み込んだファイルの場所を選択
-       - Files Pane の場所を選択
-       - ディレクトリを直接選択
-     - 関数 ~setwd()~
+- Rは *作業ディレクトリ* で実行される
+  - ファイルは作業ディレクトリに存在するものとして扱われる
+  - それ以外のファイルを扱う場合はパスを含めて指定する
+- 作業ディレクトリの確認の仕方
+  - コンソールの上部の表示
+  - 関数 ~getwd()~
+- 作業ディレクトリの変更の仕方
+  - *Session* メニューの *Set Working Directory* で指定
+    - 読み込んだファイルの場所を選択
+    - Files Pane の場所を選択
+    - ディレクトリを直接選択
+  - 関数 ~setwd()~
 
 ** 関数 ~getwd()/setwd()~ の例
-   - コンソール / R Scriptからの作業ディレクトリの操作
-     #+begin_src R :eval no
-       ## 作業ディレクトリの確認 (環境によって実行結果が異なる)
-       getwd()
-       ## 作業ディレクトリの移動 (環境によって指定の仕方も異なる)
-       setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダに移動
-     #+end_src
-     - 作業ディレクトリはコンソールのタブにも表示されている
+- コンソール / R Scriptからの作業ディレクトリの操作
+  #+begin_src R :eval no
+    ## 作業ディレクトリの確認 (環境によって実行結果が異なる)
+    getwd()
+    ## 作業ディレクトリの移動 (環境によって指定の仕方も異なる)
+    setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダに移動
+  #+end_src
+  - 作業ディレクトリはコンソールのタブにも表示されている
 
 ** 関数 ~write.csv()~
-   - データフレームをCSVファイルへ書き出す関数
-   - 基本書式
-     #+begin_src R :eval no
-       write.csv(x, file="ファイル名")
-       ## x: 書き出すデータフレーム
-       ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
-     #+end_src
-     - 他にも細かい指定ができるので詳しくはヘルプを参照
+- データフレームをCSVファイルへ書き出す関数
+- 基本書式
+  #+begin_src R :eval no
+    write.csv(x, file="ファイル名")
+    ## x: 書き出すデータフレーム
+    ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
+  #+end_src
+  - 他にも細かい指定ができるので詳しくはヘルプを参照
 
 ** 関数 ~write.csv()~ の例
-   - CSVファイルの書き出し
-     #+begin_src R :tangle yes
-       ## 関数 write.csv() の使い方 (CSVファイルの操作)
-       (myData <- subset(airquality, 
-                         subset = Ozone>120,
-                         select = -Temp)) # データフレームの作成
-       dim(myData) # データフレームの大きさを確認
-       ## 作業ディレクトリの中に data というフォルダを用意しておく
-       write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
-     #+end_src
-     
+- CSVファイルの書き出し
+  #+begin_src R :tangle yes
+    ## 関数 write.csv() の使い方 (CSVファイルの操作)
+    (myData <- subset(airquality, 
+                      subset = Ozone>120,
+                      select = -Temp)) # データフレームの作成
+    dim(myData) # データフレームの大きさを確認
+    ## 作業ディレクトリの中に data というフォルダを用意しておく
+    write.csv(myData,file="data/mydata.csv") # csvファイルとして書き出し
+  #+end_src
+
 ** 関数 ~read.csv()~
-   - CSVファイルからデータフレームを読み込む関数
-   - 基本書式
-     #+begin_src R :eval no
-       read.csv(file="ファイル名", header=TRUE,
-		row.names, fileEncoding)      
-       ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
-       ## header: 1行目を列名として使うか否か
-       ## row.names: 行名の指定 (行名を含む列番号/列名，または行名の直接指定が可能)
-       ## fileEncoding: 文字コードの指定 (日本語の場合，主に使うのは *"utf8","sjis"*)
-     #+end_src
-     - 他にも細かい指定ができるので詳しくはヘルプを参照
-     - 関数 ~read.table()~ , ~scan()~ なども参照
+- CSVファイルからデータフレームを読み込む関数
+- 基本書式
+  #+begin_src R :eval no
+    read.csv(file="ファイル名", header=TRUE,
+             row.names, fileEncoding)      
+    ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
+    ## header: 1行目を列名として使うか否か
+    ## row.names: 行名の指定 (行名を含む列番号/列名，または行名の直接指定が可能)
+    ## fileEncoding: 文字コードの指定 (日本語の場合，主に使うのは *"utf8","sjis"*)
+  #+end_src
+  - 他にも細かい指定ができるので詳しくはヘルプを参照
+  - 関数 ~read.table()~ , ~scan()~ なども参照
 
 ** 関数 ~read.csv()~ の例
-   - CSVファイルの読み込み 
-     #+begin_src R :tangle yes
-       ## 関数 read.csv() の使い方 (CSVファイルの操作)
-       (newData <- read.csv(file="data/mydata.csv", # 前の例のファイル
-                            row.names=1)) # 1列目を行名に指定
-       dim(newData) # 正しく読み込めたか大きさを確認
-     #+end_src
-     
+- CSVファイルの読み込み 
+  #+begin_src R :tangle yes
+    ## 関数 read.csv() の使い方 (CSVファイルの操作)
+    (newData <- read.csv(file="data/mydata.csv", # 前の例のファイル
+                         row.names=1)) # 1列目を行名に指定
+    dim(newData) # 正しく読み込めたか大きさを確認
+  #+end_src
+
 ** 関数 ~save()~
-   - RData ファイルへ書き出す関数
-   - 基本書式
-     #+begin_src R :eval no
-       save(..., file="ファイル名")
-       ## ...: 保存するオブジェクト名 (複数可，データフレーム以外も可)
-       ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
-     #+end_src
-     - CSV形式と異なり，
-       *複数* のデータフレームを1つのファイルに保存することができる
+- RData ファイルへ書き出す関数
+- 基本書式
+  #+begin_src R :eval no
+    save(..., file="ファイル名")
+    ## ...: 保存するオブジェクト名 (複数可，データフレーム以外も可)
+    ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
+  #+end_src
+  - CSV形式と異なり，
+    *複数* のデータフレームを1つのファイルに保存することができる
 
 ** 関数 ~save()~ の例
-   - RDataファイルの書き出し
-     #+begin_src R :tangle yes
-       ### 関数 save() の使い方 (RDataファイルの操作)
-       (myDat1 <- subset(airquality, Temp>95, select=-Ozone)) 
-       (myDat2 <- subset(airquality, Temp<57, select=-Ozone)) 
-       dim(myDat1); dim(myDat2) # 大きさを確認
-       save(myDat1,myDat2,file="data/mydata.rdata") # RData形式で書き出し
-     #+end_src
-     
+- RDataファイルの書き出し
+  #+begin_src R :tangle yes
+    ### 関数 save() の使い方 (RDataファイルの操作)
+    (myDat1 <- subset(airquality, Temp>95, select=-Ozone)) 
+    (myDat2 <- subset(airquality, Temp<57, select=-Ozone)) 
+    dim(myDat1); dim(myDat2) # 大きさを確認
+    save(myDat1,myDat2,file="data/mydata.rdata") # RData形式で書き出し
+  #+end_src
+
 ** 関数 ~load()~ 
-   - RDataファイルから読み込む関数
-   - 基本書式
-     #+begin_src R :eval no
-       load(file="ファイル名")
-       ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
-     #+end_src
-     - 同じ名前のオブジェクトがあると上書きされるので注意
-       
+- RDataファイルから読み込む関数
+- 基本書式
+  #+begin_src R :eval no
+    load(file="ファイル名")
+    ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
+  #+end_src
+  - 同じ名前のオブジェクトがあると上書きされるので注意
+
 ** 関数 ~load()~ の例
-   - RDataファイルの読み込み
-     #+begin_src R :tangle yes
-       ## 関数 load() の使い方 (RDataファイルの操作)
-       (myDat1 <- subset(airquality, Ozone > 160)) # 新たに作成
-       load(file="data/mydata.rdata") # RData形式の読み込み
-       myDat1 # saveしたときの名前で読み込まれ上書きされる
-       myDat2 
-     #+end_src
-   
+- RDataファイルの読み込み
+  #+begin_src R :tangle yes
+    ## 関数 load() の使い方 (RDataファイルの操作)
+    (myDat1 <- subset(airquality, Ozone > 160)) # 新たに作成
+    load(file="data/mydata.rdata") # RData形式の読み込み
+    myDat1 # saveしたときの名前で読み込まれ上書きされる
+    myDat2 
+  #+end_src
+
 
 * 演習
   :PROPERTIES:
   :reveal_background: #fef4f4
   :END:
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - 以下のデータを読み込み，操作を行ってみよう．
-     - https://www.e-stat.go.jp より取得したデータ\\
-       (地域から探す / 全県を選択 / 項目を選択してダウンロード)
-     - データファイル (文字コード: utf8)
-       - jpdata1.csv: 県別の対象データ
-       - jpdata2.csv: 対象データの内容
-       - jpdata3.csv: 県別と地域の対応関係
-     - 作業ディレクトリのdata内に置いて読み込む
-       #+begin_src R :eval no
-         myData <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
-         myItem <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
-         myArea <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
-       #+end_src
-     - 日本語に問題がある場合は英語版を読み込む
-       #+begin_src R :eval no
-         myDataEn <- read.csv(file="data/jpdata1-en.csv", row.names=1)
-         myAreaEn <- read.csv(file="data/jpdata3-en.csv")
-       #+end_src
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 以下のデータを読み込み，操作を行ってみよう．
+  - https://www.e-stat.go.jp より取得したデータ\\
+    (地域から探す / 全県を選択 / 項目を選択してダウンロード)
+  - データファイル (文字コード: utf8)
+    - jpdata1.csv: 県別の対象データ
+    - jpdata2.csv: 対象データの内容
+    - jpdata3.csv: 県別と地域の対応関係
+  - 作業ディレクトリのdata内に置いて読み込む
+    #+begin_src R :eval no
+      myData <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
+      myItem <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
+      myArea <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
+    #+end_src
+  - 日本語に問題がある場合は英語版を読み込む
+    #+begin_src R :eval no
+      myDataEn <- read.csv(file="data/jpdata1-en.csv", row.names=1)
+      myAreaEn <- read.csv(file="data/jpdata3-en.csv")
+    #+end_src
 
-   #+begin_src R :exports none :tangle yes
-     ### 練習問題 サンプルデータの読み込み
-     myData <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
-     myItem <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
-     myArea <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
-
-     ### データ操作の例
-     ## 項目名の内容を確認
-     myItem 
-     ## 最初の6県を表示
-     head(myData) 
-     ## 最後の6県を表示
-     tail(myData)
-     ## 地方名を確認
-     myArea
-     ## 人口の最大値を見る
-     with(myData,max(人口))
-     ## どの都道府県の人口多いか調べる
-     with(myData,which.max(人口)) # 行番号が返る
-     myData[with(myData,which.max(人口)),] 
-     ## 人口の多い順に都道府県を並べる
-     with(myData,order(人口,decreasing=TRUE)) # 行番号を取得
-     rownames(myData)[with(myData,order(人口,decreasing=TRUE))] # 県名を表示
-
-     ## 上記と同じ内容を英語版で実行する場合
-     myDataEn <- read.csv(file="data/jpdata1-en.csv", row.names=1)
-     myAreaEn <- read.csv(file="data/jpdata3-en.csv")
-     ## データを確認する
-     head(myDataEn) 
-     tail(myDataEn)
-     myAreaEn
-     ## 人口の最大値を見る
-     with(myDataEn,max(population))
-     ## 人口の最大値を与える県の番号を見る (help(which.max)を参照)
-     with(myDataEn,which.max(population))
-     ## どの都道府県の人口多いか調べる
-     myDataEn[with(myDataEn,which.max(population)),] 
-     ## 人口の多い順に都道府県を並べる (help(order)を参照)
-     rownames(myDataEn)[with(myDataEn,order(population,decreasing=TRUE))]
-   #+end_src
+#+begin_src R :exports none :tangle yes
+  ### 練習問題 サンプルデータの読み込み
+  myData <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
+  myItem <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
+  myArea <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
+  
+  ### データ操作の例
+  ## 項目名の内容を確認
+  myItem 
+  ## 最初の6県を表示
+  head(myData) 
+  ## 最後の6県を表示
+  tail(myData)
+  ## 地方名を確認
+  myArea
+  ## 人口の最大値を見る
+  with(myData,max(人口))
+  ## どの都道府県の人口多いか調べる
+  with(myData,which.max(人口)) # 行番号が返る
+  myData[with(myData,which.max(人口)),] 
+  ## 人口の多い順に都道府県を並べる
+  with(myData,order(人口,decreasing=TRUE)) # 行番号を取得
+  rownames(myData)[with(myData,order(人口,decreasing=TRUE))] # 県名を表示
+  
+  ## 上記と同じ内容を英語版で実行する場合
+  myDataEn <- read.csv(file="data/jpdata1-en.csv", row.names=1)
+  myAreaEn <- read.csv(file="data/jpdata3-en.csv")
+  ## データを確認する
+  head(myDataEn) 
+  tail(myDataEn)
+  myAreaEn
+  ## 人口の最大値を見る
+  with(myDataEn,max(population))
+  ## 人口の最大値を与える県の番号を見る (help(which.max)を参照)
+  with(myDataEn,which.max(population))
+  ## どの都道府県の人口多いか調べる
+  myDataEn[with(myDataEn,which.max(population)),] 
+  ## 人口の多い順に都道府県を並べる (help(order)を参照)
+  rownames(myDataEn)[with(myDataEn,order(population,decreasing=TRUE))]
+#+end_src
 
 
 * データの集計
-  #+begin_src R :exports none :tangle yes
-    ### データの集計で用いた例
-  #+end_src
+#+begin_src R :exports none :tangle yes
+  ### データの集計で用いた例
+#+end_src
 
 ** 集約のための関数
-   - データを集約するための基本的な関数は用意されている
-     - 関数 ~sum()~: 総和
-     - 関数 ~mean()~: 平均
-     - 関数 ~max()~: 最大値
-     - 関数 ~min()~: 最小値
-     - 関数 ~summary()~: 基本統計量
-   - /[[color:gray][これ以外にも集約を行なう関数は沢山ある]]/
+- データを集約するための基本的な関数は用意されている
+  - 関数 ~sum()~: 総和
+  - 関数 ~mean()~: 平均
+  - 関数 ~max()~: 最大値
+  - 関数 ~min()~: 最小値
+  - 関数 ~summary()~: 基本統計量
+- /[[color:gray][これ以外にも集約を行なう関数は沢山ある]]/
 
 ** 関数の例
-   - 練習問題のデータの集計を行う
-     #+begin_src R :tangle yes
-       myData <- read.csv(file="data/jpdata1.csv",
-                          row.names=1, fileEncoding="utf8")
-       ## 一度読み込んでいれば上の行は不要
-       sum(myData$人口) # 全国の総人口 (列名で選択)
-       mean(myData[,4]) # 面積の平均値 (行列として列を選択)
-       median(myData[[4]]) # 面積の中央値 (リストとして列を選択)
-       min(myData["若年"])  # 若年人口の最小値 (列名で選択)
-       with(myData,max(老人))  # 老年人口の最大値 (関数 with() を利用)
-     #+end_src
-     #+begin_src R :eval no :exports none :tangle yes
-       ### 日本語に不具合がある場合
-       myDataEn <- read.csv(file="data/jpdata1-en.csv", row.names=1)
-       ## 一度読み込んでいれば上の行は不要
-       sum(myDataEn$population) # 全国の総人口 (列名で選択)
-       mean(myDataEn[,4]) # 面積の平均値 (行列として列を選択)
-       median(myDataEn[[4]]) # 面積の中央値 (リストとして列を選択)
-       min(myDataEn["young_population"])  # 若年人口の最小値 (列名で選択)
-       with(myDataEn,max(old_population))  # 老年人口の最大値 (関数 with() を利用)
-     #+end_src
+- 練習問題のデータの集計を行う
+  #+begin_src R :tangle yes
+    myData <- read.csv(file="data/jpdata1.csv",
+                       row.names=1, fileEncoding="utf8")
+    ## 一度読み込んでいれば上の行は不要
+    sum(myData$人口) # 全国の総人口 (列名で選択)
+    mean(myData[,4]) # 面積の平均値 (行列として列を選択)
+    median(myData[[4]]) # 面積の中央値 (リストとして列を選択)
+    min(myData["若年"])  # 若年人口の最小値 (列名で選択)
+    with(myData,max(老人))  # 老年人口の最大値 (関数 with() を利用)
+  #+end_src
+  #+begin_src R :eval no :exports none :tangle yes
+    ### 日本語に不具合がある場合
+    myDataEn <- read.csv(file="data/jpdata1-en.csv", row.names=1)
+    ## 一度読み込んでいれば上の行は不要
+    sum(myDataEn$population) # 全国の総人口 (列名で選択)
+    mean(myDataEn[,4]) # 面積の平均値 (行列として列を選択)
+    median(myDataEn[[4]]) # 面積の中央値 (リストとして列を選択)
+    min(myDataEn["young_population"])  # 若年人口の最小値 (列名で選択)
+    with(myDataEn,max(old_population))  # 老年人口の最大値 (関数 with() を利用)
+  #+end_src
 
 ** 関数 ~apply()~
-   - 列あるいは行ごとの計算を行う関数
-   - 基本書式
-     #+begin_src R :eval no
-       apply(X, MARGIN, FUN)
-       ## X: データフレーム
-       ## MARGIN: 行(1)か列(2)かを指定
-       ## FUN: 計算すべき統計量の関数
-     #+end_src
-     - 総和や平均は専用の関数も用意されている
-       - *~rowSums()/colSums()~*
-       - *~rowMeans()/colMeans()~*
+- 列あるいは行ごとの計算を行う関数
+- 基本書式
+  #+begin_src R :eval no
+    apply(X, MARGIN, FUN)
+    ## X: データフレーム
+    ## MARGIN: 行(1)か列(2)かを指定
+    ## FUN: 計算すべき統計量の関数
+  #+end_src
+  - 総和や平均は専用の関数も用意されている
+    - *~rowSums()/colSums()~*
+    - *~rowMeans()/colMeans()~*
 
 ** 関数 ~apply()~ の例
-   - 抽出したデータの集計を行う
-     #+begin_src R :tangle yes
-       ### 関数applyの使い方
-       x <- subset(myData, select=婚姻:失業) # 抽出
-       colMeans(x) # 各列の平均
-       apply(x, 2, max) # 列ごとの最大値
-       sapply(x, max)   # 上と同じ (help(sapply)を参照)
-       ## 自作関数の適用 (関数に名前を付けずに利用できる)
-       apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
-     #+end_src
-     
-     #+begin_src R :eval no :exports none :tangle yes
-       ### 日本語に不具合がある場合
-       x <- subset(myDataEn, select=marriage:unemployed) # 抽出
-       colMeans(x) # 各列の平均
-       apply(x, 2, max) # 列ごとの最大値
-       sapply(x, max)   # 上と同じ (help(sapply)を参照)
-       apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
-     #+end_src
+- 抽出したデータの集計を行う
+  #+begin_src R :tangle yes
+    ### 関数applyの使い方
+    x <- subset(myData, select=婚姻:失業) # 抽出
+    colMeans(x) # 各列の平均
+    apply(x, 2, max) # 列ごとの最大値
+    sapply(x, max)   # 上と同じ (help(sapply)を参照)
+    ## 自作関数の適用 (関数に名前を付けずに利用できる)
+    apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
+  #+end_src
+
+  #+begin_src R :eval no :exports none :tangle yes
+    ### 日本語に不具合がある場合
+    x <- subset(myDataEn, select=marriage:unemployed) # 抽出
+    colMeans(x) # 各列の平均
+    apply(x, 2, max) # 列ごとの最大値
+    sapply(x, max)   # 上と同じ (help(sapply)を参照)
+    apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
+  #+end_src
 
 ** 関数 ~aggregate()~
-   - 各行をグループにまとめて統計量を計算する関数
-   - 基本書式
-     #+begin_src R :eval no
-       aggregate(x, by, FUN)
-       ## x: データフレーム
-       ## by: 各行が属するグループを指定するベクトルをリストで与える(複数可)
-       ## FUN: 求めたい統計量を計算するための関数
-     #+end_src
-     - 同様な目的に関数 ~tapply()~ も利用可
+- 各行をグループにまとめて統計量を計算する関数
+- 基本書式
+  #+begin_src R :eval no
+    aggregate(x, by, FUN)
+    ## x: データフレーム
+    ## by: 各行が属するグループを指定するベクトルをリストで与える(複数可)
+    ## FUN: 求めたい統計量を計算するための関数
+  #+end_src
+  - 同様な目的に関数 ~tapply()~ も利用可
 
 ** 関数 ~aggregate()~ の例
-   - 同じ値を持つグループごとの平均値を求める
-     #+begin_src R :tangle yes
-       ### 関数aggregateの使い方
-       ## 人口から面積まで地方ごとの平均値を計算
-       x <- subset(myData,select=人口:面積)
-       aggregate(x, by=list(地方=myArea$地方), FUN=mean) 
-     #+end_src
-   #+reveal: split
-   - 代入せずにまとめて書くことも可能
-     #+begin_src R :tangle yes
-       aggregate(subset(myData,select=人口:面積),
-                 by=list(地方=myArea$地方),
-                 FUN=mean) 
-     #+end_src
-   #+reveal: split
-   - 以下も同じ結果を返す (~help(transform)~ を参照)
-     #+begin_src R :tangle yes
-       y <- transform(x,地方=myArea$地方) # データフレームを変更
-       aggregate( . ~ 地方, data=y, FUN=mean)
-     #+end_src
-   #+reveal: split
-   - まとめて書くことも可能
-     #+begin_src R :tangle yes
-       aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-                 data=transform(subset(myData,select=人口:面積),
-                                地方=myArea$地方), 
-                 FUN=mean)
-     #+end_src
-   #+reveal: split
-   - 複数の条件でグループ分け
-     #+begin_src R :tangle yes
-       ## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-       aggregate(x, by=list(地方=myArea$地方,
-                            過疎=with(myData, 人口<=median(人口))),
-                 FUN=mean)
-     #+end_src
-   #+reveal: split
-   - 別の書き方 (~help(transform)~ を参照)
-     #+begin_src R :tangle yes
-       aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
-                 data=transform(subset(myData,select=人口:面積),
-                                地方=myArea$地方,
-                                過疎=人口<=median(人口)))
-     #+end_src
-     
-     #+begin_src R :eval no :exports none :tangle yes
-       ### 日本語に不具合がある場合
-       ## 人口から面積まで地方ごとの平均値を計算
-       x <- subset(myDataEn,select=population:area)
-       aggregate(x, by=list(region=myAreaEn$region), FUN=mean) 
+- 同じ値を持つグループごとの平均値を求める
+  #+begin_src R :tangle yes
+    ### 関数aggregateの使い方
+    ## 人口から面積まで地方ごとの平均値を計算
+    x <- subset(myData,select=人口:面積)
+    aggregate(x, by=list(地方=myArea$地方), FUN=mean) 
+  #+end_src
 
-       aggregate(subset(myDataEn,select=population:area),
-                 by=list(region=myAreaEn$region),
-                 FUN=mean) 
+#+reveal: split
+- 代入せずにまとめて書くことも可能
+  #+begin_src R :tangle yes
+    aggregate(subset(myData,select=人口:面積),
+              by=list(地方=myArea$地方),
+              FUN=mean) 
+  #+end_src
 
-       y <- transform(x,region=myAreaEn$region) 
-       aggregate( . ~ region, data=y, FUN=mean)
+#+reveal: split
+- 以下も同じ結果を返す (~help(transform)~ を参照)
+  #+begin_src R :tangle yes
+    y <- transform(x,地方=myArea$地方) # データフレームを変更
+    aggregate( . ~ 地方, data=y, FUN=mean)
+  #+end_src
 
-       aggregate( . ~ region, # 右辺で条件付けて左辺(右辺以外)を計算
-                 data=transform(subset(myDataEn,select=population:area),
-                                 region=myAreaEn$region), 
-                 FUN=mean)
+#+reveal: split
+- まとめて書くことも可能
+  #+begin_src R :tangle yes
+    aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
+              data=transform(subset(myData,select=人口:面積),
+                             地方=myArea$地方), 
+              FUN=mean)
+  #+end_src
 
-       ## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-       aggregate(x, by=list(region=myAreaEn$region,
-                            depop=with(myDataEn, population<=median(population))),
-                 FUN=mean)
+#+reveal: split
+- 複数の条件でグループ分け
+  #+begin_src R :tangle yes
+    ## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
+    aggregate(x, by=list(地方=myArea$地方,
+                         過疎=with(myData, 人口<=median(人口))),
+              FUN=mean)
+  #+end_src
 
-       aggregate( . ~ region + depop, FUN=mean, 
-                 data=transform(subset(myDataEn,select=population:area),
-                                region=myAreaEn$region,
-                                depop=population<=median(population)))
-     #+end_src
+#+reveal: split
+- 別の書き方 (~help(transform)~ を参照)
+  #+begin_src R :tangle yes
+    aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
+              data=transform(subset(myData,select=人口:面積),
+                             地方=myArea$地方,
+                             過疎=人口<=median(人口)))
+  #+end_src
+
+#+begin_src R :eval no :exports none :tangle yes
+  ### 日本語に不具合がある場合
+  ## 人口から面積まで地方ごとの平均値を計算
+  x <- subset(myDataEn,select=population:area)
+  aggregate(x, by=list(region=myAreaEn$region), FUN=mean) 
+  
+  aggregate(subset(myDataEn,select=population:area),
+            by=list(region=myAreaEn$region),
+            FUN=mean) 
+  
+  y <- transform(x,region=myAreaEn$region) 
+  aggregate( . ~ region, data=y, FUN=mean)
+  
+  aggregate( . ~ region, # 右辺で条件付けて左辺(右辺以外)を計算
+            data=transform(subset(myDataEn,select=population:area),
+                           region=myAreaEn$region), 
+            FUN=mean)
+  
+  ## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
+  aggregate(x, by=list(region=myAreaEn$region,
+                       depop=with(myDataEn, population<=median(population))),
+            FUN=mean)
+  
+  aggregate( . ~ region + depop, FUN=mean, 
+            data=transform(subset(myDataEn,select=population:area),
+                           region=myAreaEn$region,
+                           depop=population<=median(population)))
+#+end_src
 
 
 * 演習
@@ -554,90 +564,90 @@
   :reveal_background: #fef4f4
   :END:
 ** 練習問題
-   :PROPERTIES:
-   :reveal_background: #fef4f4
-   :END:
-   - サンプルデータ(~jpdata~)の整理をしてみよう．
-     - 県別の人口密度を求めよ
-     - 地方別の人口密度を求めよ\\
-       (県ごとに人口が異なるので単純に人口密度を平均してはいけない)
-     - 地方別の婚姻率・離婚率(1000人当たり)を概算せよ\\
-       (「人口1000人当たり」とあるが，
-       若年層は婚姻不可として除いた
-       「婚姻可能な人口1000人当たり」
-       で置き換えて計算しなさい)
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- サンプルデータ(~jpdata~)の整理をしてみよう．
+  - 県別の人口密度を求めよ
+  - 地方別の人口密度を求めよ\\
+    (県ごとに人口が異なるので単純に人口密度を平均してはいけない)
+  - 地方別の婚姻率・離婚率(1000人当たり)を概算せよ\\
+    (「人口1000人当たり」とあるが，
+    若年層は婚姻不可として除いた
+    「婚姻可能な人口1000人当たり」
+    で置き換えて計算しなさい)
 
-   #+begin_src R :exports none :tangle yes
-     ### 練習問題 データの集計
-     ### 県別の人口密度 (人口/面積)
-     with(myData,人口/面積) # 値のみ返す
-     ## 人口密度に関係するデータをまとめてデータフレームを作成
-     (myDat1 <- transform(subset(myData,select=c(人口,面積)),
-                          人口密度=人口/面積))
-     ## 以下でも同じデータフレームを作成できる
-     ## (myDat1 <- data.frame(subset(myData,select=c(人口,面積)),
-     ##			   人口密度=with(myData,人口/面積)))
-
-     ### 地方別の人口密度 (地方の総人口/地方の総面積)
-     ## 地方ごとに人口と面積の合計を計算
-     (myDat2 <- aggregate(subset(myData,select=c(人口,面積)),
-			  by=list(地方=myArea$地方), FUN=sum))
-     ## 人口密度を計算して追加
-     (myDat2 <- transform(myDat2, 
-                          人口密度=人口/面積))
-
-     ### 地方別の婚姻率・離婚率
-     ## 婚姻可能な人口を推計
-     (foo <- transform(subset(myData, select=婚姻:離婚), # 人口，若年は含まない
-                       婚姻可能=with(myData,人口-若年))) 
-     ## 婚姻率と離婚率から人数を推計
-     (foo <- transform(foo,
-                       婚姻数=婚姻可能*婚姻/1000,
-                       離婚数=婚姻可能*離婚/1000,
-                       地方=myArea$地方))
-     ## 地方別の婚姻・離婚数を集計
-     (myDat3 <- aggregate(. ~ 地方, FUN=sum,
-			  data=subset(foo,select=-c(婚姻,離婚))))
-     ## 婚姻率・離婚率を計算して追加
-     (myDat3 <- transform(myDat3,
-                          婚姻率=婚姻数/婚姻可能*1000,
-                          離婚率=離婚数/婚姻可能*1000))
-   #+end_src
+#+begin_src R :exports none :tangle yes
+  ### 練習問題 データの集計
+  ### 県別の人口密度 (人口/面積)
+  with(myData,人口/面積) # 値のみ返す
+  ## 人口密度に関係するデータをまとめてデータフレームを作成
+  (myDat1 <- transform(subset(myData,select=c(人口,面積)),
+                       人口密度=人口/面積))
+  ## 以下でも同じデータフレームを作成できる
+  ## (myDat1 <- data.frame(subset(myData,select=c(人口,面積)),
+  ##			   人口密度=with(myData,人口/面積)))
+  
+  ### 地方別の人口密度 (地方の総人口/地方の総面積)
+  ## 地方ごとに人口と面積の合計を計算
+  (myDat2 <- aggregate(subset(myData,select=c(人口,面積)),
+                       by=list(地方=myArea$地方), FUN=sum))
+  ## 人口密度を計算して追加
+  (myDat2 <- transform(myDat2, 
+                       人口密度=人口/面積))
+  
+  ### 地方別の婚姻率・離婚率
+  ## 婚姻可能な人口を推計
+  (foo <- transform(subset(myData, select=婚姻:離婚), # 人口，若年は含まない
+                    婚姻可能=with(myData,人口-若年))) 
+  ## 婚姻率と離婚率から人数を推計
+  (foo <- transform(foo,
+                    婚姻数=婚姻可能*婚姻/1000,
+                    離婚数=婚姻可能*離婚/1000,
+                    地方=myArea$地方))
+  ## 地方別の婚姻・離婚数を集計
+  (myDat3 <- aggregate(. ~ 地方, FUN=sum,
+                       data=subset(foo,select=-c(婚姻,離婚))))
+  ## 婚姻率・離婚率を計算して追加
+  (myDat3 <- transform(myDat3,
+                       婚姻率=婚姻数/婚姻可能*1000,
+                       離婚率=離婚数/婚姻可能*1000))
+#+end_src
      
-   #+begin_src R :exports none :tangle yes
-     ### 日本語に不具合がある場合
-
-     ### 県別の人口密度 (人口/面積)
-     with(myDataEn,population/area) # 値のみ返す
-     ## 人口密度に関係するデータをまとめてデータフレームを作成
-     (myDat1En <- transform(subset(myDataEn,select=c(population,area)),
-                            density=population/area))
-
-     ### 地方別の人口密度 (地方の総人口/地方の総面積)
-     ## 地方ごとに人口と面積の合計を計算
-     (myDat2En <- aggregate(subset(myDataEn,select=c(population,area)),
-			    by=list(region=myAreaEn$region), FUN=sum))
-     ## 人口密度を計算して追加
-     (myDat2En <- transform(myDat2En, 
-                            density=population/area))
-
-     ### 地方別の婚姻率・離婚率
-     ## 婚姻可能な人口を推計
-     (foo <- transform(subset(myDataEn, select=marriage:divorce),
-                       marriageable=with(myDataEn,population-young_population)))
-     ## 婚姻率と離婚率から人数を推計
-     (foo <- transform(foo,
-                       nmarriage=marriageable*marriage/1000,
-                       ndivorce=marriageable*divorce/1000,
-                       region=myAreaEn$region))
-     ## 地方別の婚姻・離婚数を集計
-     (myDat3En <- aggregate(. ~ region, FUN=sum,
-			    data=subset(foo,select=-c(marriage,divorce))))
-     ## 婚姻率・離婚率を計算して追加
-     (myDat3En <- transform(myDat3En,
-                            ratio_marriage=nmarriage/marriageable*1000,
-                            ratio_divorce=ndivorce/marriageable*1000))
-   #+end_src
+#+begin_src R :exports none :tangle yes
+  ### 日本語に不具合がある場合
+  
+  ### 県別の人口密度 (人口/面積)
+  with(myDataEn,population/area) # 値のみ返す
+  ## 人口密度に関係するデータをまとめてデータフレームを作成
+  (myDat1En <- transform(subset(myDataEn,select=c(population,area)),
+                         density=population/area))
+  
+  ### 地方別の人口密度 (地方の総人口/地方の総面積)
+  ## 地方ごとに人口と面積の合計を計算
+  (myDat2En <- aggregate(subset(myDataEn,select=c(population,area)),
+                         by=list(region=myAreaEn$region), FUN=sum))
+  ## 人口密度を計算して追加
+  (myDat2En <- transform(myDat2En, 
+                         density=population/area))
+  
+  ### 地方別の婚姻率・離婚率
+  ## 婚姻可能な人口を推計
+  (foo <- transform(subset(myDataEn, select=marriage:divorce),
+                    marriageable=with(myDataEn,population-young_population)))
+  ## 婚姻率と離婚率から人数を推計
+  (foo <- transform(foo,
+                    nmarriage=marriageable*marriage/1000,
+                    ndivorce=marriageable*divorce/1000,
+                    region=myAreaEn$region))
+  ## 地方別の婚姻・離婚数を集計
+  (myDat3En <- aggregate(. ~ region, FUN=sum,
+                         data=subset(foo,select=-c(marriage,divorce))))
+  ## 婚姻率・離婚率を計算して追加
+  (myDat3En <- transform(myDat3En,
+                         ratio_marriage=nmarriage/marriageable*1000,
+                         ratio_divorce=ndivorce/marriageable*1000))
+#+end_src
      
 
 * COMMENT ローカル変数
