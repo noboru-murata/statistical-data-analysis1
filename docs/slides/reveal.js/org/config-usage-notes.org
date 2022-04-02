@@ -1,5 +1,5 @@
 # Local IspellDict: en
-# SPDX-FileCopyrightText: 2020 Jens Lechtenbörger
+# SPDX-FileCopyrightText: 2020,2021 Jens Lechtenbörger
 # SPDX-License-Identifier: CC0-1.0
 
 # This is meant to be used with the keyword REVEAL_TITLE_SLIDE_NOTES
@@ -7,7 +7,7 @@
 
 - To toggle these notes, press ~v~
   - If a slide contains audio, notes might show transcript
-- Press ~?~ for key bindings
+- Press ~?~ for key bindings (in particular, ~o~, ~n~, ~p~, ~Ctrl-Shift-f~)
 - Presentations support two different PDF formats, see [[https://oer.gitlab.io/hints.html][usage notes]]
   - Concise PDF format (replace ~.html~ and whatever follows in
     [[https://en.wikipedia.org/wiki/Address_bar][address bar]] with ~.pdf~)

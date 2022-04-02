@@ -1,5 +1,5 @@
 # Local IspellDict: de
-# SPDX-FileCopyrightText: 2020 Jens Lechtenbörger
+# SPDX-FileCopyrightText: 2020,2021 Jens Lechtenbörger
 # SPDX-License-Identifier: CC0-1.0
 
 # Diese Datei sollte mit dem Schlüsselwort REVEAL_TITLE_SLIDE_NOTES
@@ -7,7 +7,7 @@
 
 - Mit der Taste ~v~ können diese Notizen aus- und eingeblendet werden
   - Auf Folien mit Tonspur könnte der gesprochene Text gezeigt werden
-- Durch ~?~ werden Tastaturbelegungen gezeigt
+- Durch ~?~ werden Tastaturbelegungen gezeigt (insbesondere ~o~, ~n~, ~p~, ~Ctrl-Shift-f~)
 - Präsentationen unterstützen zwei PDF-Formate, siehe
   [[https://oer.gitlab.io/hinweise.html][Hinweise zur Nutzung]]
   - Schlankes PDF-Format (Ändern von ~.html~ und folgenden Zeichen in

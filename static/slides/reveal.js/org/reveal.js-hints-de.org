@@ -1,6 +1,6 @@
 # Local IspellDict: de
 
-# SPDX-FileCopyrightText: 2018-2020 Jens Lechtenbörger
+# SPDX-FileCopyrightText: 2018-2021 Jens Lechtenbörger
 # SPDX-License-Identifier: CC-BY-SA-4.0
 
 # Diese Datei ist nicht für den direkten HTML-Export gedacht,
@@ -23,7 +23,7 @@ erzeugt und nutzen das HTML-Framework
   - Browser-Historie (Vor und Zurück im Browser, Alt-CursorLinks,
     Alt-CursorRechts; möglicherweise sind /zwei/ Versuche nötig)
   - Zoom mit Strg-Maus oder Alt-Maus
-  - Suche mit Strg-Umschalt-F
+  - Suche mit Strg-Umschalt-F („Eingabetaste“ für weitere Suchtreffer)
 - PDF-Export
   - Ändern der Browser-URL durch Hinzufügen von ~?print-pdf~ nach ~.html~
     (z. B. ~https://oer.gitlab.io/OS/Operating-Systems-JiTT.html?print-pdf~),

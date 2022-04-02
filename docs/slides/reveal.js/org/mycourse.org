@@ -106,10 +106,10 @@
 # #+LATEX_HEADER: \newunicodechar{⋮}{\vdots}
 # #+LATEX_HEADER: \newunicodechar{ }{~}
 # #+LATEX_HEADER: \usepackage{xcolor}
-#+LATEX_HEADER: \definecolor{darkred}{named}{myDarkRed}
-#+LATEX_HEADER: \definecolor{darkgreen}{named}{myDarkGreen}
-#+LATEX_HEADER: \definecolor{darkblue}{named}{myDarkBlue}
-#+LATEX_HEADER: \definecolor{darkorange}{named}{myDarkOrange}
+#+LATEX_HEADER: \definecolor{red}{named}{myDarkRed}
+#+LATEX_HEADER: \definecolor{green}{named}{myDarkGreen}
+#+LATEX_HEADER: \definecolor{blue}{named}{myDarkBlue}
+#+LATEX_HEADER: \definecolor{orange}{named}{myDarkOrange}
 # #+LATEX_HEADER: \definecolor{darkred}{rgb}{0.3, 0.0, 0.0}
 # #+LATEX_HEADER: \definecolor{darkgreen}{rgb}{0.0, 0.3, 0.1}
 # #+LATEX_HEADER: \definecolor{darkblue}{rgb}{0.0, 0.1, 0.3}

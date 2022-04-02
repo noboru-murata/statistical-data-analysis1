@@ -1,8 +1,9 @@
-# SPDX-FileCopyrightText: 2018-2020 Jens Lechtenbörger
+# SPDX-FileCopyrightText: 2018-2021 Jens Lechtenbörger
 # SPDX-License-Identifier: CC0-1.0
 
 * Bibliography
   :PROPERTIES:
+  :reveal_extra_attr: data-timing="5"
   :reveal_data_state: no-toc-progress
   :HTML_HEADLINE_CLASS: no-toc-progress
   :CUSTOM_ID: bibliography

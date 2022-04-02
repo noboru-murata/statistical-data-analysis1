@@ -1,6 +1,6 @@
 # Local IspellDict: en
 
-# SPDX-FileCopyrightText: 2018-2020 Jens Lechtenbörger
+# SPDX-FileCopyrightText: 2018-2021 Jens Lechtenbörger
 # SPDX-License-Identifier: CC-BY-SA-4.0
 
 # This file is not meant to be exported to HTML directly but to be
@@ -22,7 +22,7 @@ and make use of the HTML presentation framework
   - Browser history (buttons, Alt-CursorLeft, Alt-CursorRight; may
     need /two/ attempts to work)
   - Zoom with Ctrl-Mouse or Alt-Mouse
-  - Search with Ctrl-Shift-F
+  - Search with Ctrl-Shift-F (press “enter” for subsequent search hits)
 - PDF export
   - Change the URL by adding ~?print-pdf~ after ~.html~
     (e.g., ~https://oer.gitlab.io/OS/Operating-Systems-JiTT.html?print-pdf~),
