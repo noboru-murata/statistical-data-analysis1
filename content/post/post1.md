@@ -3,12 +3,10 @@ title = "R/RStudioの導入方法"
 author = ["Noboru Murata"]
 date = 2021-04-02T00:00:00+09:00
 draft = false
-weight = 1016
+weight = 1017
 +++
 
 ## スライド {#スライド}
-
-{{&lt; myslide base="statistical-data-analysis1" name="install" &gt;}}
 
 
 ## ハンドアウト {#ハンドアウト}
