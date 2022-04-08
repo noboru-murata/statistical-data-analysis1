@@ -8,7 +8,7 @@ weight = 1016
 
 ## スライド {#スライド}
 
-{{< myslide base="statistical-data-analysis1" name="install" >}}
+{{&lt; myslide base="statistical-data-analysis1" name="install" &gt;}}
 
 
 ## ハンドアウト {#ハンドアウト}

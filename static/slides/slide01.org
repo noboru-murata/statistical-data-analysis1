@@ -1,18 +1,18 @@
 #+TITLE: Rの基本的な操作
-#+SUBTITLE: R言語の仕様とRStudioの使い方
+#+SUBTITLE: 第1講 - R言語の仕様とRStudioの使い方
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
-#+DATE: 第1講
-# Time-stamp: <2022-04-02 11:16:27 mura>
-:reveal:
+#+DATE: 
+# Time-stamp: <2022-04-08 15:24:38 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
 
-* 講義の内容
+* 講義概要
 - R言語の概要
 - RStudioのUI (ユーザインタフェース)
 - R言語の使い方
@@ -28,7 +28,9 @@
 * COMMENT メモ
 - install manual は別添
 - データ構造はベクトルとデータフレームのみ
+- それ以外は第2回に移したのでそろそろ消しても良い
 - 第1回は一緒に使いながら説明と同時に細々練習を行う
+- projectを導入したのでworking directoryなどは概念だけで良いかも
 
 
 * R言語の概要
@@ -462,8 +464,9 @@
   - 数値 (実数や複素数)
   - 文字列 (' や " で囲まれた文字．"foo"，"bar"など)
   - 論理値 ( ~TRUE~ , ~FALSE~ )
-- Rオブジェクトの多くはベクトルとして扱われる\\
-  /[[color:orange][スカラーは長さ1のベクトルとして扱われる]]/
+  /[[color:orange][これらは"データ型"が異なるという]]/  
+- Rオブジェクトの多くはベクトルとして扱われる
+- スカラーは長さ1のベクトルとして扱われる
 
 ** ベクトルの作成と操作
 - 関数 ~c()~ を用いて作成する
@@ -482,7 +485,7 @@
 ** データフレームとは
 - 長さの等しいベクトルを束ねたリスト
 - ベクトルのデータ型はバラバラでも良い
-- 複数の個体について，複数の属性を集計したデータ
+- 複数の個体について複数の属性を集計したデータ
 - [[color:green][ある小学校の1年生の身長・体重・性別・血液型]]
   - 各成分はある固体のある属性に関する観測データ
   - 個体数は集計項目に関わらず変化しないが，
@@ -760,6 +763,12 @@
   - Cathyの行を取り出す
 
 
+* 次回の予定
+- R言語のデータ構造
+- ベクトル・行列・リストの操作
+- ベクトルと行列のさまざまな計算
+
+  
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted

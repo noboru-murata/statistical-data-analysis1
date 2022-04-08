@@ -4,3 +4,23 @@
 
 * 課題
   - 講義資料の整理
+
+* error 対応
+2022/4/1に以下の build & deployment error が発生
+#+begin_example
+Run actions/deploy-pages@v1
+Actor: github-pages[bot]
+Action ID: 2076247789
+Artifact URL: https://pipelines.actions.githubusercontent.com/lEDxyDA2p1y2j5KHKhk8PwqvDDv4WquUGRWLu1y7nVfxuf3YKT/_apis/pipelines/workflows/2076247789/artifacts?api-version=6.0-preview
+{"count":0,"value":[]}
+Failed to create deployment for 691b26583f5462ea7862e0a85719f939b4e9d543.
+Error: Error: No uploaded artifact was found! Please check if there are any errors at build step.
+Error: Error: No uploaded artifact was found! Please check if there are any errors at build step.
+Sending telemetry for run id 2076247789
+#+end_example
+以下で対応
+#+begin_src shell
+  git rm --cached -- themes/docter
+#+end_src
+昨年末と原因はほぼ一緒だと思われる
+    

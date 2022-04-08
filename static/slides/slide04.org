@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-08-14 20:32:53 mura>
+# Time-stamp: <2022-04-08 16:07:10 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -12,7 +12,7 @@
 # C-c '
 :end:
 
-* 講義の内容
+* 講義概要
 - データフレームの操作
 - ファイルの取り扱い
 - データの集計

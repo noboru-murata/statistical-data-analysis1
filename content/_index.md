@@ -16,10 +16,9 @@ weight = 1001
 1.  Rの基礎編 [(PDF)](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/note1.pdf) [(Rscript/Dataset)](https://noboru-murata.github.io/statistical-data-analysis1/zips/script1.zip)
 2.  確率と統計編 [(PDF)](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/note2.pdf) [(Rscript/Dataset)](https://noboru-murata.github.io/statistical-data-analysis1/zips/script2.zip)
 3.  多変量解析編 [(PDF)](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/note3.pdf) [(Rscript/Dataset)](https://noboru-murata.github.io/statistical-data-analysis1/zips/script3.zip)
+    (随時更新します)
 
-(随時更新します)
-
-特に統計データ解析Iでは「Rの基礎」と「確率と統計」を用います．
+    特に統計データ解析Iでは「Rの基礎」と「確率と統計」を用います．
 
 
 ## 参考資料 {#参考資料}

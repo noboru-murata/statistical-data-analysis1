@@ -1,18 +1,18 @@
 #+TITLE: 関数と制御構造
-#+SUBTITLE: 関数の定義とプログラムの作成
+#+SUBTITLE: 第3講 - 関数の定義とプログラムの作成
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-08-14 20:21:56 mura>
-:reveal:
+# Time-stamp: <2022-04-08 16:06:37 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
 
-* 講義の内容
+* 講義概要
 - R言語における関数
 - 引数の扱い方 (引数名・順序・既定値)
 - 自作関数の定義
@@ -39,7 +39,7 @@
 - 関数は引数とその値を指定して実行 \\
   /[[color:gray][引数がない場合もある]]/
 - 引数名は順序を守れば省略可能
-- [[color:darkgreen][関数の呼び出し方]]
+- [[color:green][関数の呼び出し方]]
   #+begin_src R :eval no
     f(arg1=value1, arg2=value2) 
     ## arg1, arg2 は引数の名前，value1, value2 は引数に渡す値を表す
@@ -47,12 +47,12 @@
   #+end_src
 
 ** 関数の実行例
-- [[color:darkgreen][正弦関数の計算]]
+- [[color:green][正弦関数の計算]]
   #+begin_src R :tangle yes
     sin(x = pi/2) # "引数名 = 値" で指定 
     sin(pi/2) # 上と同値 (引数と値の関係が明かなら引数名は省略可能)
   #+end_src
-- [[color:darkgreen][対数関数の計算]] 
+- [[color:green][対数関数の計算]] 
   #+begin_src R :eval no :tangle yes
     help(log) # ヘルプを表示して使い方を確認する
     x <- 16; b <- 2 # xやbに適当な数値を代入する．複数コマンドは ; で区切る
@@ -68,7 +68,7 @@
   - 引数については "Arguments" の項を参照
   - 返値については "Values" の項を参照
 - 引数を省略すると既定値 (default) が用いられる
-- [[color:darkgreen][ヘルプによる関数仕様の表示]]
+- [[color:green][ヘルプによる関数仕様の表示]]
   #+begin_src R :eval no :tangle yes
     ## 正規乱数を生成する関数
     help(rnorm) # Help Pane から指定しても良い
@@ -77,7 +77,7 @@
   #+end_src
 
 ** 既定値を持つ関数の実行例 (1/2)
-- [[color:darkgreen][正規乱数の生成]] 
+- [[color:green][正規乱数の生成]] 
   #+begin_src R :tangle yes
     rnorm(7) # 平均0 分散1 の正規乱数を7個生成
     rnorm(7, mean=10) # 平均10 分散1 の正規乱数を7個生成
@@ -86,7 +86,7 @@
   #+end_src
 
 ** 既定値を持つ関数の実行例 (2/2)
-- [[color:darkgreen][ヒストグラムの表示]] 
+- [[color:green][ヒストグラムの表示]] 
   #+begin_src R :tangle yes
     foo <- rnorm(n=10000, mean=50, sd=10) # 平均50 標準偏差10 の正規乱数
     hist(foo) # データ以外全て既定値で表示
@@ -149,7 +149,7 @@
   #+end_src
 
 ** 自作関数の例 
-- [[color:darkgreen][半径 r から球の体積と表面積を求める関数]]
+- [[color:green][半径 r から球の体積と表面積を求める関数]]
   #+begin_src R :tangle yes
     foo <- function(r){
       V <- (4/3) * pi * r^3 # 球の体積
@@ -163,7 +163,7 @@
   #+end_src
 
 #+reveal: split
-- [[color:darkgreen][初項 a 公比 r の等比数列の最初のn項 (既定値は5)]]
+- [[color:green][初項 a 公比 r の等比数列の最初のn項 (既定値は5)]]
   #+begin_src R :tangle yes
     bar <- function(a, r, n=5){
       out <- a*r^(1:n-1)
@@ -270,7 +270,7 @@
   #+end_src
 
 ** ~if~ 文の例
-- [[color:darkgreen][20210423が19で割り切れるか?]]
+- [[color:green][20210423が19で割り切れるか?]]
   #+begin_src R :tangle yes
     if(20210423 %% 19 == 0) {# %% は余りを計算
       print("割り切れます") 
@@ -290,7 +290,7 @@
 - プログラムXは変数 ~i~ によって実行内容が変わってよい
 
 ** ~for~ 文の例
-- [[color:darkgreen][アルファベットの20,15,11,25,15番目を表示]]
+- [[color:green][アルファベットの20,15,11,25,15番目を表示]]
   #+begin_src R :tangle yes
     print(LETTERS) # LETTERS ベクトルの内容を表示
     for(i in c(20,15,11,25,15)) {
@@ -308,7 +308,7 @@
 - /[[color:gray][~repeat~ 文というものもあるので調べてみよ]]/
 
 ** ~while~ 文の例
-- [[color:darkgreen][素因数分解する]]
+- [[color:green][素因数分解する]]
   #+begin_src R :tangle yes
     n <- 20210423 # 分解の対象．2*2*3*19/myFact(5) なども試してみよ
     p <- 2 # 最初に調べる数
@@ -509,6 +509,11 @@
   ##
 #+end_src
 
+
+* 次回の予定
+- データフレームの操作
+- ファイルの取り扱い
+- データの集計
 
 * COMMENT ローカル変数
 # Local Variables:
