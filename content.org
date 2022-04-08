@@ -261,6 +261,46 @@
 # ** COMMENT 解答例
 #    - [[github:code/slide14.R][RScript]]
 
+* 記録
+:PROPERTIES:
+:EXPORT_FILE_NAME: record
+:EXPORT_DATE: <2022-04-08 Fri>
+:END:
+** 第1回
+トピック: 統計データ解析I (数理科学続論I/知能社会情報学講義II)
+日付: 2022年4月8日 04:30 PM 大阪、札幌、東京
+
+ミーティングの記録:
+https://u-tokyo-ac-jp.zoom.us/rec/share/ptSybmpsRFYwK8DpBmre4YOgCez4oClsi_xr8YfHwGDqxgPg7cufu9tXuJQKgmRv.uj86kUO3yatUw1-Z
+
+
+
+# * COMMENT 講義13
+#   :PROPERTIES:
+#   :EXPORT_FILE_NAME: lecture13
+#   :EXPORT_DATE: <2020-09-19 Sat>
+#   :END:
+#   準備中
+# ** COMMENT スライド
+#    #+html: {{< myslide base="statistical-data-analysis1" name="slide13" >}}
+# ** COMMENT ハンドアウト
+#    - [[github:pdfs/slide13.pdf][PDF file]]
+# ** COMMENT 解答例
+#    - [[github:code/slide13.R][RScript]]
+
+# * COMMENT 講義14
+#   :PROPERTIES:
+#   :EXPORT_FILE_NAME: lecture14
+#   :EXPORT_DATE: <2020-09-19 Sat>
+#   :END:
+#   準備中
+# ** COMMENT スライド
+#    #+html: {{< myslide base="statistical-data-analysis1" name="slide14" >}}
+# ** COMMENT ハンドアウト
+#    - [[github:pdfs/slide14.pdf][PDF file]]
+# ** COMMENT 解答例
+#    - [[github:code/slide14.R][RScript]]
+
 * COMMENT お知らせの雛形
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: ./post
