@@ -6,8 +6,6 @@ draft = false
 weight = 1015
 +++
 
-## 第1回 {#第1回}
-
-日付: 2022年4月8日
+## 第1回 (2022年4月8日) {#第1回--2022年4月8日}
 
 <https://u-tokyo-ac-jp.zoom.us/rec/share/ptSybmpsRFYwK8DpBmre4YOgCez4oClsi_xr8YfHwGDqxgPg7cufu9tXuJQKgmRv.uj86kUO3yatUw1-Z>
