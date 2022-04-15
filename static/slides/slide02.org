@@ -1,9 +1,9 @@
-#+TITLE: データ構造の操作
+#+TITLE: データ構造と操作
 #+SUBTITLE: 第2講 - R言語で扱うデータとその演算
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-08 15:59:31 mura>
+# Time-stamp: <2022-04-15 14:08:07 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -66,7 +66,7 @@
 #+reveal: split
 - ベクトルの長さの取得:
   #+begin_src R :tangle yes
-    length(x)    
+    length(x) # 最後の要素を参照する場合などに利用できる    
   #+end_src
 - ベクトルの要素の取得:
   #+begin_src R :tangle yes
@@ -78,7 +78,7 @@
 - 実数 ~a~ から ~b~ まで
   1ずつ変化するベクトル:
   #+begin_src R :tangle yes
-    a <- 8; b <- 15 # 変数 a,b に値を代入
+    a <- 8; b <- 15 # 変数 a,b に値を代入．複数コマンドは ; で区切る
     a:b # a < b の場合は1ずつ増加する系列が作成される
     a <- 29.5; b <- 24
     a:b # 逆の場合は1ずつ減少する系列が作成される
@@ -107,8 +107,8 @@
 #+reveal: split
 - ベクトルの結合:
   #+begin_src R :tangle yes
-    c(x,z) # 同じ属性のもの単純に結合される
-    c(x,y) # 異なる属性のものは結合できないので属性が書き換えられる
+    c(x,z) # 同じデータ型のもの単純に結合される
+    c(x,y) # 異なるデータ型のものは結合できないので自動的に書き換えられる
   #+end_src
   
 ** 行列とは
@@ -129,7 +129,7 @@
 #+reveal: split
 - 長さ \(mn\) のベクトル ~a~ を \(m\times n\) 行列に変換:
   #+begin_src R :tangle yes
-    a <- 2:13 # 変数 a に値を代入
+    a <- 2:13 # 変数 a に値を代入 (m*n = 12 文字用意)
     (A <- matrix(a,m,n)) # 並び順を変えるには matrix(a,m,n,byrow=TRUE)
   #+end_src
   # - 関数 ~dim()~ によるベクトルから行列への変換:
@@ -204,7 +204,7 @@
   #+begin_src R :tangle yes
     ## 方法2 (作成後に名前を変更)
     L2 <- list(x,y) 
-    names(L2) <- c("first","second")
+    names(L2) <- c("1st","2nd")
     L2 # リストを表示
   #+end_src
   
@@ -212,7 +212,7 @@
 - 名前によるリストの要素の取得:
   #+begin_src R :tangle yes
     ## 方法1 (リストの名前で参照)
-    L2[["first"]] 
+    L2[["1st"]] 
   #+end_src
   #+begin_src R :tangle yes
     ## 方法2 (記号$を用いる場合は""は不要なことに注意)
@@ -334,7 +334,7 @@
   #+end_src
 - Rの書式
   #+begin_src R :eval no
-    a <- c(a1,a2,...,ak) # k次元ベクトルの作成
+    a <- c(a1,a2,...,ak) # k次元ベクトルの作成 (擬似コード)
   #+end_src
 
 ** ベクトルの加法
@@ -352,7 +352,7 @@
   #+end_src
 - Rの書式
   #+begin_src R :eval no
-    a + b # 同じ長さのベクトル a,b の和
+    a + b # 同じ長さのベクトル a,b の和．同じ長さのベクトルが返る
     a - b # ベクトルの差
   #+end_src
 
@@ -377,7 +377,7 @@
   #+end_src
 - Rの書式
   #+begin_src R :eval no
-    a * b # ベクトルの成分ごとの積
+    a * b # ベクトルの成分ごとの積．同じ長さのベクトルが返る
     a / b # 成分ごとの商も計算可
   #+end_src
 
@@ -392,7 +392,7 @@
   #+end_src
 - Rの書式
   #+begin_src R :exports code
-    a %*% b # ベクトルの内積
+    a %*% b # ベクトルの内積．1x1型の行列が返る
   #+end_src
 
 
@@ -425,7 +425,7 @@
   #+end_src
 - Rの書式
   #+begin_src R :eval no
-    A <- matrix(c(a11,a21,...,amn),m,n) # m x n 行列の作成
+    A <- matrix(c(a11,a21,...,amn),m,n) # m x n 行列の作成 (擬似コード)
   #+end_src
 
 ** 行列の加法
@@ -438,7 +438,7 @@
   #+end_src
 - Rの書式
   #+begin_src R :eval no
-    A + B # 同じサイズの行列の和
+    A + B # 同じサイズの行列の和．同じサイズの行列が返る
     A - B # 行列の差
   #+end_src
 
@@ -458,7 +458,7 @@
   #+end_src
 - Rの書式
   #+begin_src R :eval no
-    A * B # 行列の成分ごとの積
+    A * B # 行列の成分ごとの積．同じサイズの行列が返る
     A / B # 成分ごとの商も計算可
   #+end_src
 
@@ -472,7 +472,7 @@
   #+end_src
 - Rの書式
   #+begin_src R :eval no
-    A %*% B # 行列の積
+    A %*% B # 行列の積．n x l 型行列が返る
   #+end_src
 
 ** 行列式

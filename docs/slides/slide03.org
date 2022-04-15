@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-08 16:06:37 mura>
+# Time-stamp: <2022-04-15 14:18:56 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -37,11 +37,11 @@
 ** 関数
 - 関数の取り扱いは一般的な計算機言語とほぼ同様
 - 関数は引数とその値を指定して実行 \\
-  /[[color:gray][引数がない場合もある]]/
+  /[[color:orange][引数がない場合もある]]/
 - 引数名は順序を守れば省略可能
 - [[color:green][関数の呼び出し方]]
   #+begin_src R :eval no
-    f(arg1=value1, arg2=value2) 
+    f(arg1=value1, arg2=value2) # 擬似コード
     ## arg1, arg2 は引数の名前，value1, value2 は引数に渡す値を表す
     f(value1, value2) # 上と同値．順序に注意
   #+end_src
@@ -141,7 +141,7 @@
 - 他の言語と同様にRでも関数を定義できる   
 - 関数の定義には関数 ~function()~ を利用する 
   #+begin_src R :eval no
-    ## 関数 function() 記法
+    ## 関数 function() 記法 (擬似コード)
     関数名 <- function(引数){ # 計算ブロックの開始
       ## このブロック内に必要な手続きを記述する．複数行に渡って構わない
       return(返値) # 計算結果を明示的に示す
@@ -184,8 +184,8 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-- 三角形の3辺の長さ $x,y,z$ を与えると
-  面積 $S$ を計算する関数を作成せよ．
+- 三角形の3辺の長さ \(x,y,z\) を与えると
+  面積 \(S\) を計算する関数を作成せよ．
   - 参考: *ヘロンの公式* より
     #+begin_src latex
       \begin{equation}
@@ -203,7 +203,8 @@
   ### 例題 三角形の面積を計算する関数
 #+end_src
 #+begin_src R :exports both :results output :tangle yes
-  myHeron <- function(x,y,z){ # 関数名は上書きされるので独特の名前にするのがお薦め
+  myHeron <- function(x,y,z){
+    ## 関数名は上書きされるので独特の名前にするのがお薦め
     s <- (x+y+z)/2 # 補助変数 s の計算
     S <- sqrt(s*(s-x)*(s-y)*(s-z)) # ヘロンの公式による面積の計算
     return(S) # 面積を返す
@@ -270,14 +271,14 @@
   #+end_src
 
 ** ~if~ 文の例
-- [[color:green][20210423が19で割り切れるか?]]
+- [[color:green][20220422が19で割り切れるか?]]
   #+begin_src R :tangle yes
-    if(20210423 %% 19 == 0) {# %% は余りを計算
+    if(20220422 %% 19 == 0) {# %% は余りを計算
       print("割り切れます") 
-      print(20210423 %/% 19) # 商を表示
+      print(20220422 %/% 19) # 商を表示
     } else { # {}で囲まれたブロックが1つのプログラム
       print("割り切れません")
-      print(20210423 %% 19) # 余りを表示
+      print(20220422 %% 19) # 余りを表示
     } 
   #+end_src
 
@@ -303,14 +304,14 @@
   #+begin_src R :eval no
     while(条件A) {プログラムX}
   #+end_src
-- プログラムXは実行するたびに実行内容が変わり，
-  いつか条件Aが満たされなくなるように書く
-- /[[color:gray][~repeat~ 文というものもあるので調べてみよ]]/
+- プログラムXは繰り返し必要な実行内容を記述し，
+  終了するときに条件Aが満たされなくなるように書く
+- /[[color:orange][~repeat~ 文というものもあるので調べてみよ]]/
 
 ** ~while~ 文の例
 - [[color:green][素因数分解する]]
   #+begin_src R :tangle yes
-    n <- 20210423 # 分解の対象．2*2*3*19/myFact(5) なども試してみよ
+    n <- 20220422 # 分解の対象．2*2*3*19/myFact(5) なども試してみよ
     p <- 2 # 最初に調べる数
     while(n != 1){ # 商(for文の中で計算している)が1になるまで計算する
       if(n%%p == 0) { # 余りが0か確認
@@ -448,7 +449,7 @@
     #+end_quote
 - 行列 $X$ が与えられたとき，各列の平均を計算する関数を作成せよ
 - 前問で $X$ がベクトルの場合にはその平均を計算するように修正せよ \\
-  /[[color:gray][関数 ~is.vector()~ が利用できる]]/
+  /[[color:orange][関数 ~is.vector()~ が利用できる]]/
 
 #+begin_src R :exports none :tangle yes
   ### 練習問題 制御構造

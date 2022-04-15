@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-08 15:24:38 mura>
+# Time-stamp: <2022-04-15 13:55:34 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -320,8 +320,8 @@
   #+end_src
 - [[color:green][対数関数の計算]]
   #+begin_src R :eval no
-    # x,bを適当な数値に置き換えて実行せよ
-    log(x, b) # 底をbとする対数
+    # 以下は擬似コード．x,bを適当な数値に置き換えて実行せよ
+    log(x, b) # 底をbとする対数 
     log(x=x, base=b) #上と同値
     log(base=b, x=x) #上と同値
     log(b,x) # = log(x=b,base=x) 
