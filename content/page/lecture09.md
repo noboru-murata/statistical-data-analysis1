@@ -3,7 +3,7 @@ title = "第9講"
 author = ["Noboru Murata"]
 date = 2020-09-19T00:00:00+09:00
 draft = false
-weight = 1010
+weight = 1014
 +++
 
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-11 Fri&gt; </span></span> 更新 (講義中に修正した部分を直しました)
