@@ -98,6 +98,15 @@
     </item>
     
     <item>
+      <title>記録</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/record/</link>
+      <pubDate>Fri, 08 Apr 2022 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/record/</guid>
+      <description> 第1講 (2022年4月8日) 第2講 (2022年4月15日) 第3稿 (2022年4月22日)  </description>
+    </item>
+    
+    <item>
       <title>第10講</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture10/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
@@ -135,15 +144,6 @@
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture13/</guid>
       <description>&amp;lt;2021-07-09 Fri&amp;gt;  更新
 スライド    full size  ハンドアウト  PDF file  解答例  RScript  </description>
-    </item>
-    
-    <item>
-      <title>記録</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/record/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0900</pubDate>
-      
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/record/</guid>
-      <description> 第1回 (2022年4月8日) 第2回 (2022年4月15日)  </description>
     </item>
     
   </channel>
