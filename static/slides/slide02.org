@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-15 14:08:07 mura>
+# Time-stamp: <2022-04-22 12:31:57 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -44,6 +44,9 @@
   - 配列 (array) (今回は扱わない)
 - /[[color:orange][パッケージなどで拡張することができる]]/
 
+
+
+* ベクトル
 ** ベクトルとは
 - スカラー値(単一の値)の集合 
 - スカラー値として扱われる主なデータ型
@@ -111,6 +114,45 @@
     c(x,y) # 異なるデータ型のものは結合できないので自動的に書き換えられる
   #+end_src
   
+
+* 演習
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+** 練習問題
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+ベクトルの操作に慣れよう
+- 以下に示すベクトルを作成してみよう
+  - 1から10までの自然数のベクトル
+  - 1以上30以下の奇数を昇順に並べたベクトル
+  - すべての要素が1からなる長さ10のベクトル
+- 作成したベクトルを操作してみよう
+  - ベクトルの長さを求める
+  - 3番目の要素を取り出す
+  - 最後の要素を取り出す
+
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 ベクトルの操作
+  ## 1から10までの自然数のベクトル
+  (foo <- 1:10)
+  ## 1以上30以下の奇数を昇順に並べたベクトル
+  (bar <- seq(from=1,to=30,by=2)) # 変数名を含めた丁寧な書き方
+  ## すべての要素が1からなる長さ10のベクトル
+  (baz <- rep(1,length.out=10)) # 関数rep_len() もある
+  rep(1,len=15) # 変数名は見分けられれば短くてもOK
+  
+  ## ベクトルの長さを求める
+  length(foo)
+  ## 3番目の要素を取り出す
+  bar[3]
+  ## 最後の要素を取り出す
+  bar[length(bar)] # tail(bar,n=1) という方法もある
+#+end_src
+
+
+* 行列
 ** 行列とは
 - スカラー値を2次元状(縦横)に並べたもの
   - 縦(列)ベクトルを列方向に並べて束ねたもの
@@ -178,6 +220,50 @@
 - 関数 ~rownames()/colnames()~ を用いると行と列に名前を付けることができる
 - /[[color:orange][これらの機能は講義の中で使いながら説明する]]/
 
+
+* 演習
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+** 練習問題
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+行列の操作に慣れよう
+    - 以下に示す行列を作成してみよう
+      #+begin_src latex
+        \begin{equation}
+          \begin{pmatrix}
+            1  & 2  & 3  \\
+            4  & 5  & 6 
+          \end{pmatrix}
+        \end{equation}
+      #+end_src
+    - 行列を操作してみよう
+      - 2行2列成分を取り出す
+      - 転置行列を作成する
+      - 行名をつける
+
+#+begin_src R :eval no :exports none :tangle yes
+  ### 練習問題 行列の操作
+  ## 行列の作成
+  (FOO <- matrix(1:6,2,3,byrow=TRUE))
+  (BAR <- rbind(1:3,4:6)) # cbind を使って作ることもできる
+  
+  ## 2行2列成分を取り出す
+  FOO[2,2]
+  ## 転置行列を作成する
+  (BAZ <- matrix(1:6,3,2)) # 愚直に作成し直す
+  t(BAR) # 関数t()を調べてみよう
+  ## 行名をつける
+  rownames(FOO) <- c("first","second")
+  FOO
+  colnames(BAZ) <- c("alpha","beta")
+  BAZ
+#+end_src
+
+
+* その他のデータ構造
 ** リストとは
 - 異なる構造のオブジェクトを1つにまとめたもの
   - リストの各要素は異なるデータ型・サイズであって構わない
@@ -240,80 +326,6 @@
     df
   #+end_src
 - /[[color:orange][操作については別の講義で詳細に説明する]]/
-
-
-* 演習
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-** 練習問題
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-ベクトルの操作に慣れよう
-- 以下に示すベクトルを作成してみよう
-  - 1から10までの自然数のベクトル
-  - 1以上30以下の奇数を昇順に並べたベクトル
-  - すべての要素が1からなる長さ10のベクトル
-- 作成したベクトルを操作してみよう
-  - ベクトルの長さを求める
-  - 3番目の要素を取り出す
-  - 最後の要素を取り出す
-
-#+begin_src R :eval no :exports none :tangle yes
-  ### 練習問題 ベクトルの操作
-  ## 1から10までの自然数のベクトル
-  (foo <- 1:10)
-  ## 1以上30以下の奇数を昇順に並べたベクトル
-  (bar <- seq(from=1,to=30,by=2)) # 変数名を含めた丁寧な書き方
-  ## すべての要素が1からなる長さ10のベクトル
-  (baz <- rep(1,length.out=10)) # 関数rep_len() もある
-  rep(1,len=15) # 変数名は見分けられれば短くてもOK
-  
-  ## ベクトルの長さを求める
-  length(foo)
-  ## 3番目の要素を取り出す
-  bar[3]
-  ## 最後の要素を取り出す
-  bar[length(bar)] # tail(bar,n=1) という方法もある
-#+end_src
-
-** 練習問題
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-行列の操作に慣れよう
-    - 以下に示す行列を作成してみよう
-      #+begin_src latex
-        \begin{equation}
-          \begin{pmatrix}
-            1  & 2  & 3  \\
-            4  & 5  & 6 
-          \end{pmatrix}
-        \end{equation}
-      #+end_src
-    - 行列を操作してみよう
-      - 2行2列成分を取り出す
-      - 転置行列を作成する
-      - 行名をつける
-
-#+begin_src R :eval no :exports none :tangle yes
-  ### 練習問題 行列の操作
-  ## 行列の作成
-  (FOO <- matrix(1:6,2,3,byrow=TRUE))
-  (BAR <- rbind(1:3,4:6)) # cbind を使って作ることもできる
-  
-  ## 2行2列成分を取り出す
-  FOO[2,2]
-  ## 転置行列を作成する
-  (BAZ <- matrix(1:6,3,2)) # 愚直に作成し直す
-  t(BAR) # 関数t()を調べてみよう
-  ## 行名をつける
-  rownames(FOO) <- c("first","second")
-  FOO
-  colnames(BAZ) <- c("alpha","beta")
-  BAZ
-#+end_src
 
 
 * ベクトルの計算
