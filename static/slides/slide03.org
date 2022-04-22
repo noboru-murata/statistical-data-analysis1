@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-15 14:18:56 mura>
+# Time-stamp: <2022-04-22 12:25:06 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -166,7 +166,7 @@
 - [[color:green][初項 a 公比 r の等比数列の最初のn項 (既定値は5)]]
   #+begin_src R :tangle yes
     bar <- function(a, r, n=5){
-      out <- a*r^(1:n-1)
+      out <- a*r^(1:n-1) # 1:n-1 と 1:(n-1) は異なるので注意
       return(out) # 値を返す
     }
     bar(1,2) # 初項1 公比2 の最初の5項

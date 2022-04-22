@@ -58,7 +58,7 @@ foo(r=2) # 実行
 foo(3)
 
 bar <- function(a, r, n=5){
-  out <- a*r^(1:n-1)
+  out <- a*r^(1:n-1) # 1:n-1 と 1:(n-1) は異なるので注意
   return(out) # 値を返す
 }
 bar(1,2) # 初項1 公比2 の最初の5項
