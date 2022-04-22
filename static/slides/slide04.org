@@ -1,16 +1,16 @@
 #+TITLE: データの整理と集計
-#+SUBTITLE: データフレームのより進んだ操作
+#+SUBTITLE: 第4講 - データフレームのより進んだ操作
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-08 16:07:10 mura>
-:reveal:
+# Time-stamp: <2022-04-22 12:55:05 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
 
 * 講義概要
 - データフレームの操作
@@ -51,9 +51,9 @@
   - ~NA~: 値が得られていないことを表すスカラー値
 
 ** データ例
-- *~datasets::airquality~* 
+- *~datasets::airquality~*
   #+begin_quote
-  *New York Air Quality Measurements*
+  [[color:green][New York Air Quality Measurements]]
   - Description:
     Daily air quality measurements in New York, May to September 1973.
   - Format: 
@@ -69,7 +69,7 @@
   - ~datasets~ はRの標準パッケージ
   - *パッケージ名::オブジェクト* という書き方で同名のオブジェクトを区別できる
 
-** 行の抽出
+** 行の抽出 (素朴な方法)
 - 行番号による指定
   #+begin_src R :tangle yes
     ## 行番号のベクトルで指定して抽出
@@ -98,7 +98,7 @@
     airquality[which(with(airquality, Ozone>100 & Wind<=5)), ] 
   #+end_src
 
-** 列の抽出
+** 列の抽出 (素朴な方法)
 - 列番号による指定
   #+begin_src R :tangle yes
     ## 列番号のベクトルで指定して抽出
@@ -134,7 +134,7 @@
     ## drop: 結果が1行または1列の場合の扱い．ベクトル(TRUE)・データフレーム(FALSE)
   #+end_src
 
-** 関数 ~subset()~ の例
+** 関数 ~subset()~ の使い方
 - 前出の例の書き換え
   #+begin_src R :tangle yes
     ### 関数 subset() の使い方
@@ -174,7 +174,7 @@
 :reveal_background: #fef4f4
 :END:
 - ~datasets::airquality~ に対して
-  以下の条件を満たすデータを取り出しなさい．
+  以下の条件を満たすデータを取り出しなさい
   - 7月のオゾン濃度 (~Ozone~)
   - 風速 (~Wind~) が時速10マイル以上で，
     かつ気温 (~Temp~) が華氏80度以上の日のデータ
@@ -231,7 +231,7 @@
     - ディレクトリを直接選択
   - 関数 ~setwd()~
 
-** 関数 ~getwd()/setwd()~ の例
+** 関数 ~getwd()/setwd()~ の使い方
 - コンソール / R Scriptからの作業ディレクトリの操作
   #+begin_src R :eval no
     ## 作業ディレクトリの確認 (環境によって実行結果が異なる)
@@ -251,7 +251,7 @@
   #+end_src
   - 他にも細かい指定ができるので詳しくはヘルプを参照
 
-** 関数 ~write.csv()~ の例
+** 関数 ~write.csv()~ の使い方
 - CSVファイルの書き出し
   #+begin_src R :tangle yes
     ## 関数 write.csv() の使い方 (CSVファイルの操作)
@@ -277,7 +277,7 @@
   - 他にも細かい指定ができるので詳しくはヘルプを参照
   - 関数 ~read.table()~ , ~scan()~ なども参照
 
-** 関数 ~read.csv()~ の例
+** 関数 ~read.csv()~ の使い方
 - CSVファイルの読み込み 
   #+begin_src R :tangle yes
     ## 関数 read.csv() の使い方 (CSVファイルの操作)
@@ -297,7 +297,7 @@
   - CSV形式と異なり，
     *複数* のデータフレームを1つのファイルに保存することができる
 
-** 関数 ~save()~ の例
+** 関数 ~save()~ の使い方
 - RDataファイルの書き出し
   #+begin_src R :tangle yes
     ### 関数 save() の使い方 (RDataファイルの操作)
@@ -316,7 +316,7 @@
   #+end_src
   - 同じ名前のオブジェクトがあると上書きされるので注意
 
-** 関数 ~load()~ の例
+** 関数 ~load()~ の使い方
 - RDataファイルの読み込み
   #+begin_src R :tangle yes
     ## 関数 load() の使い方 (RDataファイルの操作)
@@ -335,7 +335,7 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-- 以下のデータを読み込み，操作を行ってみよう．
+- 以下のデータを読み込み，操作を行ってみよう
   - https://www.e-stat.go.jp より取得したデータ\\
     (地域から探す / 全県を選択 / 項目を選択してダウンロード)
   - データファイル (文字コード: utf8)
@@ -408,9 +408,9 @@
   - 関数 ~max()~: 最大値
   - 関数 ~min()~: 最小値
   - 関数 ~summary()~: 基本統計量
-- /[[color:gray][これ以外にも集約を行なう関数は沢山ある]]/
+- /[[color:orange][これ以外にも集約を行なう関数は沢山ある]]/
 
-** 関数の例
+** 集約の関数の使い方
 - 練習問題のデータの集計を行う
   #+begin_src R :tangle yes
     myData <- read.csv(file="data/jpdata1.csv",
@@ -446,7 +446,7 @@
     - *~rowSums()/colSums()~*
     - *~rowMeans()/colMeans()~*
 
-** 関数 ~apply()~ の例
+** 関数 ~apply()~ の使い方
 - 抽出したデータの集計を行う
   #+begin_src R :tangle yes
     ### 関数applyの使い方
@@ -478,7 +478,7 @@
   #+end_src
   - 同様な目的に関数 ~tapply()~ も利用可
 
-** 関数 ~aggregate()~ の例
+** 関数 ~aggregate()~ の使い方
 - 同じ値を持つグループごとの平均値を求める
   #+begin_src R :tangle yes
     ### 関数aggregateの使い方
@@ -567,15 +567,15 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-- サンプルデータ(~jpdata~)の整理をしてみよう．
+- サンプルデータ(~jpdata~)の整理をしてみよう
   - 県別の人口密度を求めよ
-  - 地方別の人口密度を求めよ\\
-    (県ごとに人口が異なるので単純に人口密度を平均してはいけない)
-  - 地方別の婚姻率・離婚率(1000人当たり)を概算せよ\\
-    (「人口1000人当たり」とあるが，
-    若年層は婚姻不可として除いた
-    「婚姻可能な人口1000人当たり」
-    で置き換えて計算しなさい)
+  - 地方別の人口密度を求めよ
+    - 県ごとに人口が異なるので単純に人口密度を平均してはいけない
+  - 地方別の婚姻率・離婚率(1000人当たり)を概算せよ
+    - 「人口1000人当たり」とあるが，
+      若年層は婚姻不可として除いた
+      「婚姻可能な人口1000人当たり」
+      で置き換えて計算しなさい
 
 #+begin_src R :exports none :tangle yes
   ### 練習問題 データの集計
@@ -649,6 +649,13 @@
                          ratio_divorce=ndivorce/marriageable*1000))
 #+end_src
      
+
+* 次回の予定
+- 可視化の重要性
+- 基本的な描画
+- 分布の視覚化
+- 比率の視覚化
+- 多次元データの視覚化
 
 * COMMENT ローカル変数
 # Local Variables:

@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-15 13:55:34 mura>
+# Time-stamp: <2022-04-22 12:49:24 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -565,7 +565,7 @@
   - 文字列 ('や"で囲まれた文字．"foo"，"bar"など)
   - 論理値 ( ~TRUE~ , ~FALSE~ )
 - Rオブジェクトの多くはベクトルとして扱われる\\
-  /[[color:gray][スカラー値は長さ1のベクトルとして扱われる]]/
+  /[[color:orange][スカラー値は長さ1のベクトルとして扱われる]]/
 
 ** ベクトルの生成と操作
 - 数値や文字列の要素からなるベクトルの生成:
