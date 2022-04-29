@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-22 12:25:06 mura>
+# Time-stamp: <2022-04-29 16:01:53 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -448,8 +448,8 @@
     #+end_src
     #+end_quote
 - 行列 $X$ が与えられたとき，各列の平均を計算する関数を作成せよ
-- 前問で $X$ がベクトルの場合にはその平均を計算するように修正せよ \\
-  /[[color:orange][関数 ~is.vector()~ が利用できる]]/
+- 前問で $X$ がベクトルの場合にはその平均を計算するように修正せよ 
+  - 関数 ~is.vector()~ が利用できる
 
 #+begin_src R :exports none :tangle yes
   ### 練習問題 制御構造
@@ -516,6 +516,8 @@
 - ファイルの取り扱い
 - データの集計
 
+
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted

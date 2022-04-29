@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-22 12:49:24 mura>
+# Time-stamp: <2022-04-29 16:00:53 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -768,7 +768,8 @@
 - ベクトル・行列・リストの操作
 - ベクトルと行列のさまざまな計算
 
-  
+
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted

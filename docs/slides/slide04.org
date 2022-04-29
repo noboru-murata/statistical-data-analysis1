@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-22 12:55:05 mura>
+# Time-stamp: <2022-04-29 16:42:43 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -25,7 +25,7 @@
 #+end_src
     
 * COMMENT メモ
-
+- jpdata の整理を忘れずに
 
 * データフレームの操作
 #+begin_src R :exports none :tangle yes
@@ -135,7 +135,7 @@
   #+end_src
 
 ** 関数 ~subset()~ の使い方
-- 前出の例の書き換え
+- [[color:green][前出の例の書き換え]]
   #+begin_src R :tangle yes
     ### 関数 subset() の使い方
     subset(airquality,
@@ -147,7 +147,7 @@
   #+end_src
 
 #+reveal: split
-- いろいろな記述の仕方 (~!,is.na(),%in%~)
+- [[color:green][いろいろな記法の例]] (~!,is.na(),%in%~)
   #+begin_src R :tangle yes
     ## Ozoneに欠測(NA)がなく, かつDayが5か10のデータのWindからDayまでの列を抽出
     subset(airquality, 
@@ -156,7 +156,7 @@
   #+end_src
 
 #+reveal: split
-- いろいろな記述の仕方 (~|,-~)
+- [[color:green][いろいろな記法]] (~|,-~)
   #+begin_src R :tangle yes
     ## Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
     subset(airquality,
@@ -166,15 +166,15 @@
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
 - ~datasets::airquality~ に対して
-  以下の条件を満たすデータを取り出しなさい
+  以下の条件を満たすデータを取り出しなさい．
   - 7月のオゾン濃度 (~Ozone~)
   - 風速 (~Wind~) が時速10マイル以上で，
     かつ気温 (~Temp~) が華氏80度以上の日のデータ
@@ -200,7 +200,7 @@
          subset = !(is.na(Ozone) | is.na(Solar.R)),
          select = Month:Day) # もともと並んでいるので c(Month,Day) と同じ
 #+end_src
-   
+
 
 * ファイルの取り扱い
 #+begin_src R :exports none :tangle yes
@@ -212,9 +212,9 @@
   - 収集されたデータを読み込む
   - 整理したデータを保存する
 - Rで利用可能なデータファイル
-  - CSV形式(comma separated values): テキストファイル
-  - RData形式: Rの内部表現を用いたバイナリーファイル
-  - [[color:gray][Excel形式: RStudio の読み込み機能が利用可能]]
+  - CSV形式 (comma separated values) : テキストファイル
+  - RData形式 : Rの内部表現を用いたバイナリーファイル
+  - [[color:gray][Excel形式 : RStudio の読み込み機能が利用可能]]
 - データフレームを対象とした扱いを整理する
 
 ** 作業ディレクトリ
@@ -232,7 +232,7 @@
   - 関数 ~setwd()~
 
 ** 関数 ~getwd()/setwd()~ の使い方
-- コンソール / R Scriptからの作業ディレクトリの操作
+- [[color:green][コンソール・RScriptからの作業ディレクトリの操作]]
   #+begin_src R :eval no
     ## 作業ディレクトリの確認 (環境によって実行結果が異なる)
     getwd()
@@ -252,7 +252,7 @@
   - 他にも細かい指定ができるので詳しくはヘルプを参照
 
 ** 関数 ~write.csv()~ の使い方
-- CSVファイルの書き出し
+- [[color:green][CSVファイルの書き出しの例]]
   #+begin_src R :tangle yes
     ## 関数 write.csv() の使い方 (CSVファイルの操作)
     (myData <- subset(airquality, 
@@ -272,13 +272,13 @@
     ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
     ## header: 1行目を列名として使うか否か
     ## row.names: 行名の指定 (行名を含む列番号/列名，または行名の直接指定が可能)
-    ## fileEncoding: 文字コードの指定 (日本語の場合，主に使うのは *"utf8","sjis"*)
+    ## fileEncoding: 文字コードの指定 (日本語の場合，主に使うのは "utf8","sjis")
   #+end_src
   - 他にも細かい指定ができるので詳しくはヘルプを参照
-  - 関数 ~read.table()~ , ~scan()~ なども参照
+  - 必要に応じて関数 ~read.table()~ , ~scan()~ なども参考に
 
 ** 関数 ~read.csv()~ の使い方
-- CSVファイルの読み込み 
+- [[color:green][CSVファイルの読み込みの例]] 
   #+begin_src R :tangle yes
     ## 関数 read.csv() の使い方 (CSVファイルの操作)
     (newData <- read.csv(file="data/mydata.csv", # 前の例のファイル
@@ -294,11 +294,11 @@
     ## ...: 保存するオブジェクト名 (複数可，データフレーム以外も可)
     ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
   #+end_src
-  - CSV形式と異なり，
+  - CSV形式と異なり
     *複数* のデータフレームを1つのファイルに保存することができる
 
 ** 関数 ~save()~ の使い方
-- RDataファイルの書き出し
+- [[color:green][RDataファイルの書き出しの例]]
   #+begin_src R :tangle yes
     ### 関数 save() の使い方 (RDataファイルの操作)
     (myDat1 <- subset(airquality, Temp>95, select=-Ozone)) 
@@ -314,10 +314,10 @@
     load(file="ファイル名")
     ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
   #+end_src
-  - 同じ名前のオブジェクトがあると上書きされるので注意
+  - 同じ名前のオブジェクトがあると上書きするので注意
 
 ** 関数 ~load()~ の使い方
-- RDataファイルの読み込み
+- [[color:green][RDataファイルの読み込みの例]]
   #+begin_src R :tangle yes
     ## 関数 load() の使い方 (RDataファイルの操作)
     (myDat1 <- subset(airquality, Ozone > 160)) # 新たに作成
@@ -328,21 +328,21 @@
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-- 以下のデータを読み込み，操作を行ってみよう
+- 以下のデータを読み込み，操作を行ってみよう．
   - https://www.e-stat.go.jp より取得したデータ\\
     (地域から探す / 全県を選択 / 項目を選択してダウンロード)
-  - データファイル (文字コード: utf8)
-    - jpdata1.csv: 県別の対象データ
-    - jpdata2.csv: 対象データの内容
-    - jpdata3.csv: 県別と地域の対応関係
-  - 作業ディレクトリのdata内に置いて読み込む
+  - データファイル (文字コード : utf8)
+    - jpdata1.csv : 県別の対象データ
+    - jpdata2.csv : 対象データの内容
+    - jpdata3.csv : 県別と地域の対応関係
+  - 作業ディレクトリの data 内に置いて読み込む
     #+begin_src R :eval no
       myData <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
       myItem <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
@@ -353,7 +353,7 @@
       myDataEn <- read.csv(file="data/jpdata1-en.csv", row.names=1)
       myAreaEn <- read.csv(file="data/jpdata3-en.csv")
     #+end_src
-
+    
 #+begin_src R :exports none :tangle yes
   ### 練習問題 サンプルデータの読み込み
   myData <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
@@ -402,7 +402,7 @@
 #+end_src
 
 ** 集約のための関数
-- データを集約するための基本的な関数は用意されている
+- データを集約するために用意されている基本的な関数
   - 関数 ~sum()~: 総和
   - 関数 ~mean()~: 平均
   - 関数 ~max()~: 最大値
@@ -411,10 +411,11 @@
 - /[[color:orange][これ以外にも集約を行なう関数は沢山ある]]/
 
 ** 集約の関数の使い方
-- 練習問題のデータの集計を行う
+- [[color:green][練習問題のデータの集計を行う]]
   #+begin_src R :tangle yes
-    myData <- read.csv(file="data/jpdata1.csv",
-                       row.names=1, fileEncoding="utf8")
+    myData <- read.csv(file="data/jpdata1.csv", # ファイルの指定
+                       row.names=1, # 第1列を用いて各行の名前を設定
+                       fileEncoding="utf8") # 文字コードの指定
     ## 一度読み込んでいれば上の行は不要
     sum(myData$人口) # 全国の総人口 (列名で選択)
     mean(myData[,4]) # 面積の平均値 (行列として列を選択)
@@ -422,6 +423,7 @@
     min(myData["若年"])  # 若年人口の最小値 (列名で選択)
     with(myData,max(老人))  # 老年人口の最大値 (関数 with() を利用)
   #+end_src
+
   #+begin_src R :eval no :exports none :tangle yes
     ### 日本語に不具合がある場合
     myDataEn <- read.csv(file="data/jpdata1-en.csv", row.names=1)
@@ -443,18 +445,18 @@
     ## FUN: 計算すべき統計量の関数
   #+end_src
   - 総和や平均は専用の関数も用意されている
-    - *~rowSums()/colSums()~*
-    - *~rowMeans()/colMeans()~*
+    - 行和・列和 : *~rowSums()/colSums()~*
+    - 行の平均・列の平均 : *~rowMeans()/colMeans()~*
 
 ** 関数 ~apply()~ の使い方
-- 抽出したデータの集計を行う
+- [[color:green][抽出したデータの集計を行う]]
   #+begin_src R :tangle yes
     ### 関数applyの使い方
     x <- subset(myData, select=婚姻:失業) # 抽出
     colMeans(x) # 各列の平均
     apply(x, 2, max) # 列ごとの最大値
     sapply(x, max)   # 上と同じ (help(sapply)を参照)
-    ## 自作関数の適用 (関数に名前を付けずに利用できる)
+    ## 自作関数の適用 (関数に名前を付けないで利用することができる)
     apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
   #+end_src
 
@@ -479,80 +481,83 @@
   - 同様な目的に関数 ~tapply()~ も利用可
 
 ** 関数 ~aggregate()~ の使い方
-- 同じ値を持つグループごとの平均値を求める
+- [[color:green][同じ値を持つグループごとの合計値を求める]]
   #+begin_src R :tangle yes
     ### 関数aggregateの使い方
     ## 人口から面積まで地方ごとの平均値を計算
-    x <- subset(myData,select=人口:面積)
-    aggregate(x, by=list(地方=myArea$地方), FUN=mean) 
+    x <- subset(myData, select = 人口:面積)
+    aggregate(x, by = list(地方 = myArea$地方), FUN = sum) 
   #+end_src
 
 #+reveal: split
-- 代入せずにまとめて書くことも可能
+- [[color:green][代入せずにまとめて書くこともできる]]
   #+begin_src R :tangle yes
-    aggregate(subset(myData,select=人口:面積),
-              by=list(地方=myArea$地方),
-              FUN=mean) 
+    aggregate(subset(myData, select = 人口:面積),
+              by = list(地方 = myArea$地方),
+              FUN = sum) 
   #+end_src
 
 #+reveal: split
-- 以下も同じ結果を返す (~help(transform)~ を参照)
+- [[color:green][以下も同じ結果を返す]]
   #+begin_src R :tangle yes
-    y <- transform(x,地方=myArea$地方) # データフレームを変更
-    aggregate( . ~ 地方, data=y, FUN=mean)
+    y <- transform(x, 地方 = myArea$地方) # データフレームを変更
+    aggregate( . ~ 地方, data = y, FUN = sum)
   #+end_src
+  - ~help(transform)~ を参照
 
 #+reveal: split
-- まとめて書くことも可能
+- [[color:green][まとめて書くこともできる]]
   #+begin_src R :tangle yes
     aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-              data=transform(subset(myData,select=人口:面積),
-                             地方=myArea$地方), 
-              FUN=mean)
+              data = transform(subset(myData, select = 人口:面積),
+                               地方 = myArea$地方), 
+              FUN = sum)
   #+end_src
 
 #+reveal: split
-- 複数の条件でグループ分け
+- [[color:green][複数の条件でグループ分け]]
   #+begin_src R :tangle yes
     ## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-    aggregate(x, by=list(地方=myArea$地方,
-                         過疎=with(myData, 人口<=median(人口))),
-              FUN=mean)
+    aggregate(x,
+              by = list(地方 = myArea$地方,
+                        過疎 = with(myData, 人口<=median(人口))),
+              FUN = sum)
   #+end_src
 
 #+reveal: split
-- 別の書き方 (~help(transform)~ を参照)
+- [[color:green][別の書き方]] 
   #+begin_src R :tangle yes
-    aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
-              data=transform(subset(myData,select=人口:面積),
-                             地方=myArea$地方,
-                             過疎=人口<=median(人口)))
+    aggregate( . ~ 地方 + 過疎,
+              FUN = sum, # + で条件を追加
+              data = transform(subset(myData, select = 人口:面積),
+                               地方 = myArea$地方,
+                               過疎 = 人口<=median(人口)))
   #+end_src
 
 #+begin_src R :eval no :exports none :tangle yes
   ### 日本語に不具合がある場合
   ## 人口から面積まで地方ごとの平均値を計算
   x <- subset(myDataEn,select=population:area)
-  aggregate(x, by=list(region=myAreaEn$region), FUN=mean) 
+  aggregate(x, by=list(region=myAreaEn$region), FUN=sum) 
   
   aggregate(subset(myDataEn,select=population:area),
             by=list(region=myAreaEn$region),
-            FUN=mean) 
+            FUN=sum) 
   
   y <- transform(x,region=myAreaEn$region) 
-  aggregate( . ~ region, data=y, FUN=mean)
+  aggregate( . ~ region, data=y, FUN=sum)
   
   aggregate( . ~ region, # 右辺で条件付けて左辺(右辺以外)を計算
             data=transform(subset(myDataEn,select=population:area),
                            region=myAreaEn$region), 
-            FUN=mean)
+            FUN=sum)
   
   ## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
   aggregate(x, by=list(region=myAreaEn$region,
                        depop=with(myDataEn, population<=median(population))),
-            FUN=mean)
+            FUN=sum)
   
-  aggregate( . ~ region + depop, FUN=mean, 
+  aggregate( . ~ region + depop, FUN=sum, 
             data=transform(subset(myDataEn,select=population:area),
                            region=myAreaEn$region,
                            depop=population<=median(population)))
@@ -560,60 +565,60 @@
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-- サンプルデータ(~jpdata~)の整理をしてみよう
-  - 県別の人口密度を求めよ
-  - 地方別の人口密度を求めよ
+- サンプルデータ (~jpdata~) の整理をしてみよう．
+  - 県別の人口密度を求めよ．
+  - 地方別の人口密度を求めよ．
     - 県ごとに人口が異なるので単純に人口密度を平均してはいけない
-  - 地方別の婚姻率・離婚率(1000人当たり)を概算せよ
+  - 地方別の婚姻率・離婚率(1000人当たり)を概算せよ．
     - 「人口1000人当たり」とあるが，
       若年層は婚姻不可として除いた
       「婚姻可能な人口1000人当たり」
-      で置き換えて計算しなさい
+      で置き換えて計算しなさい．
 
 #+begin_src R :exports none :tangle yes
   ### 練習問題 データの集計
   ### 県別の人口密度 (人口/面積)
-  with(myData,人口/面積) # 値のみ返す
+  with(myData, 人口/面積) # 値のみ返す
   ## 人口密度に関係するデータをまとめてデータフレームを作成
-  (myDat1 <- transform(subset(myData,select=c(人口,面積)),
-                       人口密度=人口/面積))
+  (myDat1 <- transform(subset(myData, select = c(人口,面積)),
+                       人口密度 = 人口/面積))
   ## 以下でも同じデータフレームを作成できる
   ## (myDat1 <- data.frame(subset(myData,select=c(人口,面積)),
   ##			   人口密度=with(myData,人口/面積)))
   
   ### 地方別の人口密度 (地方の総人口/地方の総面積)
   ## 地方ごとに人口と面積の合計を計算
-  (myDat2 <- aggregate(subset(myData,select=c(人口,面積)),
-                       by=list(地方=myArea$地方), FUN=sum))
+  (myDat2 <- aggregate(subset(myData, select = c(人口,面積)),
+                       by = list(地方 = myArea$地方), FUN = sum))
   ## 人口密度を計算して追加
   (myDat2 <- transform(myDat2, 
-                       人口密度=人口/面積))
+                       人口密度 = 人口/面積))
   
   ### 地方別の婚姻率・離婚率
   ## 婚姻可能な人口を推計
-  (foo <- transform(subset(myData, select=婚姻:離婚), # 人口，若年は含まない
-                    婚姻可能=with(myData,人口-若年))) 
+  (foo <- transform(subset(myData, select = 婚姻:離婚), # 人口，若年は含まない
+                    婚姻可能 = with(myData, 人口-若年))) 
   ## 婚姻率と離婚率から人数を推計
   (foo <- transform(foo,
-                    婚姻数=婚姻可能*婚姻/1000,
-                    離婚数=婚姻可能*離婚/1000,
-                    地方=myArea$地方))
+                    婚姻数 = 婚姻可能*婚姻/1000,
+                    離婚数 = 婚姻可能*離婚/1000,
+                    地方 = myArea$地方))
   ## 地方別の婚姻・離婚数を集計
-  (myDat3 <- aggregate(. ~ 地方, FUN=sum,
-                       data=subset(foo,select=-c(婚姻,離婚))))
+  (myDat3 <- aggregate(. ~ 地方, FUN = sum,
+                       data = subset(foo, select = -c(婚姻,離婚))))
   ## 婚姻率・離婚率を計算して追加
   (myDat3 <- transform(myDat3,
-                       婚姻率=婚姻数/婚姻可能*1000,
-                       離婚率=離婚数/婚姻可能*1000))
+                       婚姻率 = 婚姻数/婚姻可能*1000,
+                       離婚率 = 離婚数/婚姻可能*1000))
 #+end_src
-     
+
 #+begin_src R :exports none :tangle yes
   ### 日本語に不具合がある場合
   
@@ -648,7 +653,7 @@
                          ratio_marriage=nmarriage/marriageable*1000,
                          ratio_divorce=ndivorce/marriageable*1000))
 #+end_src
-     
+
 
 * 次回の予定
 - 可視化の重要性
@@ -657,6 +662,8 @@
 - 比率の視覚化
 - 多次元データの視覚化
 
+
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted
