@@ -78,7 +78,7 @@
 :EXPORT_FILE_NAME: lecture04
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-04-29 Fri> 更新
+<2022-05-05 Thu> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide04" >}}
 ** ハンドアウト
@@ -93,7 +93,7 @@
 :EXPORT_FILE_NAME: lecture05
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2021-05-07 Fri> 更新
+<2022-05-05 Thu> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide05" >}}
 ** ハンドアウト
@@ -101,7 +101,7 @@
 ** 解答例
 - [[github:code/slide05.R][RScript]]
 ** 練習用データ
-- [[github:zips/tokyo.zip][tokyo]] (修正版を掲載しました <2021-05-08 Sat>)
+- [[github:zips/tokyo.zip][tokyo]] 
 
 * 第6講
 :PROPERTIES:

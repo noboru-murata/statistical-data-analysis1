@@ -134,8 +134,9 @@ rownames(myDataEn)[with(myDataEn,order(population,decreasing=TRUE))]
 
 ### データの集計で用いた例
 
-myData <- read.csv(file="data/jpdata1.csv",
-                   row.names=1, fileEncoding="utf8")
+myData <- read.csv(file="data/jpdata1.csv", # ファイルの指定
+                   row.names=1, # 第1列を用いて各行の名前を設定
+                   fileEncoding="utf8") # 文字コードの指定
 ## 一度読み込んでいれば上の行は不要
 sum(myData$人口) # 全国の総人口 (列名で選択)
 mean(myData[,4]) # 面積の平均値 (行列として列を選択)
@@ -157,7 +158,7 @@ x <- subset(myData, select=婚姻:失業) # 抽出
 colMeans(x) # 各列の平均
 apply(x, 2, max) # 列ごとの最大値
 sapply(x, max)   # 上と同じ (help(sapply)を参照)
-## 自作関数の適用 (関数に名前を付けずに利用できる)
+## 自作関数の適用 (関数に名前を付けないで利用することができる)
 apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
 
 ### 日本語に不具合がある場合
@@ -169,92 +170,94 @@ apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
 
 ### 関数aggregateの使い方
 ## 人口から面積まで地方ごとの平均値を計算
-x <- subset(myData,select=人口:面積)
-aggregate(x, by=list(地方=myArea$地方), FUN=mean)
+x <- subset(myData, select = 人口:面積)
+aggregate(x, by = list(地方 = myArea$地方), FUN = sum)
 
-aggregate(subset(myData,select=人口:面積),
-          by=list(地方=myArea$地方),
-          FUN=mean)
+aggregate(subset(myData, select = 人口:面積),
+          by = list(地方 = myArea$地方),
+          FUN = sum)
 
-y <- transform(x,地方=myArea$地方) # データフレームを変更
-aggregate( . ~ 地方, data=y, FUN=mean)
+y <- transform(x, 地方 = myArea$地方) # データフレームを変更
+aggregate( . ~ 地方, data = y, FUN = sum)
 
 aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-          data=transform(subset(myData,select=人口:面積),
-                         地方=myArea$地方), 
-          FUN=mean)
+          data = transform(subset(myData, select = 人口:面積),
+                           地方 = myArea$地方), 
+          FUN = sum)
 
 ## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-aggregate(x, by=list(地方=myArea$地方,
-                     過疎=with(myData, 人口<=median(人口))),
-          FUN=mean)
+aggregate(x,
+          by = list(地方 = myArea$地方,
+                    過疎 = with(myData, 人口<=median(人口))),
+          FUN = sum)
 
-aggregate( . ~ 地方 + 過疎, FUN=mean, # + で条件を追加
-          data=transform(subset(myData,select=人口:面積),
-                         地方=myArea$地方,
-                         過疎=人口<=median(人口)))
+aggregate( . ~ 地方 + 過疎,
+          FUN = sum, # + で条件を追加
+          data = transform(subset(myData, select = 人口:面積),
+                           地方 = myArea$地方,
+                           過疎 = 人口<=median(人口)))
 
 ### 日本語に不具合がある場合
 ## 人口から面積まで地方ごとの平均値を計算
 x <- subset(myDataEn,select=population:area)
-aggregate(x, by=list(region=myAreaEn$region), FUN=mean) 
+aggregate(x, by=list(region=myAreaEn$region), FUN=sum) 
 
 aggregate(subset(myDataEn,select=population:area),
           by=list(region=myAreaEn$region),
-          FUN=mean) 
+          FUN=sum) 
 
 y <- transform(x,region=myAreaEn$region) 
-aggregate( . ~ region, data=y, FUN=mean)
+aggregate( . ~ region, data=y, FUN=sum)
 
 aggregate( . ~ region, # 右辺で条件付けて左辺(右辺以外)を計算
           data=transform(subset(myDataEn,select=population:area),
                          region=myAreaEn$region), 
-          FUN=mean)
+          FUN=sum)
 
 ## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
 aggregate(x, by=list(region=myAreaEn$region,
                      depop=with(myDataEn, population<=median(population))),
-          FUN=mean)
+          FUN=sum)
 
-aggregate( . ~ region + depop, FUN=mean, 
+aggregate( . ~ region + depop, FUN=sum, 
           data=transform(subset(myDataEn,select=population:area),
                          region=myAreaEn$region,
                          depop=population<=median(population)))
 
 ### 練習問題 データの集計
 ### 県別の人口密度 (人口/面積)
-with(myData,人口/面積) # 値のみ返す
+with(myData, 人口/面積) # 値のみ返す
 ## 人口密度に関係するデータをまとめてデータフレームを作成
-(myDat1 <- transform(subset(myData,select=c(人口,面積)),
-                     人口密度=人口/面積))
+(myDat1 <- transform(subset(myData, select = c(人口,面積)),
+                     人口密度 = 人口/面積))
 ## 以下でも同じデータフレームを作成できる
 ## (myDat1 <- data.frame(subset(myData,select=c(人口,面積)),
 ##			   人口密度=with(myData,人口/面積)))
 
 ### 地方別の人口密度 (地方の総人口/地方の総面積)
 ## 地方ごとに人口と面積の合計を計算
-(myDat2 <- aggregate(subset(myData,select=c(人口,面積)),
-                     by=list(地方=myArea$地方), FUN=sum))
+(myDat2 <- aggregate(subset(myData, select = c(人口,面積)),
+                     by = list(地方 = myArea$地方), FUN = sum))
 ## 人口密度を計算して追加
 (myDat2 <- transform(myDat2, 
-                     人口密度=人口/面積))
+                     人口密度 = 人口/面積))
 
-### 地方別の婚姻率・離婚率
+### 地方別の婚姻・離婚数/1000人
 ## 婚姻可能な人口を推計
-(foo <- transform(subset(myData, select=婚姻:離婚), # 人口，若年は含まない
-                  婚姻可能=with(myData,人口-若年))) 
-## 婚姻率と離婚率から人数を推計
+(foo <- transform(subset(myData, select = 婚姻:離婚), # 人口，若年は含まない
+                  婚姻可能 = with(myData, 人口-若年))) 
+## 婚姻数/1000人と離婚数/1000人から人数を推計
 (foo <- transform(foo,
-                  婚姻数=婚姻可能*婚姻/1000,
-                  離婚数=婚姻可能*離婚/1000,
-                  地方=myArea$地方))
+                  婚姻数 = 婚姻可能*婚姻/1000,
+                  離婚数 = 婚姻可能*離婚/1000,
+                  地方 = myArea$地方))
 ## 地方別の婚姻・離婚数を集計
-(myDat3 <- aggregate(. ~ 地方, FUN=sum,
-                     data=subset(foo,select=-c(婚姻,離婚))))
-## 婚姻率・離婚率を計算して追加
+(myDat3 <- aggregate(. ~ 地方, FUN = sum,
+                     data = subset(foo, select = -c(婚姻,離婚))))
+## 地方別の婚姻率(婚姻数/1000人)・離婚率(離婚数/1000人)を計算して追加
 (myDat3 <- transform(myDat3,
-                     婚姻率=婚姻数/婚姻可能*1000,
-                     離婚率=離婚数/婚姻可能*1000))
+                     婚姻率 = 婚姻数/婚姻可能*1000,
+                     離婚率 = 離婚数/婚姻可能*1000))
 
 ### 日本語に不具合がある場合
 
@@ -272,11 +275,11 @@ with(myDataEn,population/area) # 値のみ返す
 (myDat2En <- transform(myDat2En, 
                        density=population/area))
 
-### 地方別の婚姻率・離婚率
+### 地方別の婚姻・離婚件数/1000人
 ## 婚姻可能な人口を推計
 (foo <- transform(subset(myDataEn, select=marriage:divorce),
                   marriageable=with(myDataEn,population-young_population)))
-## 婚姻率と離婚率から人数を推計
+## 婚姻件数/1000人と離婚件数/1000人から人数を推計
 (foo <- transform(foo,
                   nmarriage=marriageable*marriage/1000,
                   ndivorce=marriageable*divorce/1000,
@@ -284,7 +287,7 @@ with(myDataEn,population/area) # 値のみ返す
 ## 地方別の婚姻・離婚数を集計
 (myDat3En <- aggregate(. ~ region, FUN=sum,
                        data=subset(foo,select=-c(marriage,divorce))))
-## 婚姻率・離婚率を計算して追加
+## 地方別の婚姻率(婚姻数/1000人)・離婚率(離婚数/1000人)を計算して追加
 (myDat3En <- transform(myDat3En,
                        ratio_marriage=nmarriage/marriageable*1000,
                        ratio_divorce=ndivorce/marriageable*1000))

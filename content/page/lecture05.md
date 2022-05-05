@@ -6,7 +6,7 @@ draft = false
 weight = 1006
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-05-07 Fri&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2022-05-05 Thu&gt; </span></span> 更新
 
 
 ## スライド {#スライド}
@@ -26,4 +26,4 @@ weight = 1006
 
 ## 練習用データ {#練習用データ}
 
--   [tokyo](https://noboru-murata.github.io/statistical-data-analysis1/zips/tokyo.zip) (修正版を掲載しました <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-05-08 Sat&gt;</span></span>)
+-   [tokyo](https://noboru-murata.github.io/statistical-data-analysis1/zips/tokyo.zip)

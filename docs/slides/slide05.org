@@ -3,14 +3,14 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-08-14 20:47:23 mura>
-:reveal:
+# Time-stamp: <2022-05-04 18:38:55 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
 
 * 講義の内容
 - 可視化の重要性
@@ -39,19 +39,21 @@
     線の種類や太さ，
     あるいは図中の文字の大きさなどを指定することができる
   - 用意されている多彩なオプションは説明しきれないため，
-    必要に応じて関数 ~help()~ (ヘルプ)と
-    と関数 ~example()~ (例題)
+    必要に応じて
+    関数 ~help()~ (ヘルプ)と
+    関数 ~example()~ (例題)
     を参照のこと
 
 ** 図の保存
-- RStudioの機能を使う場合:
+- RStudioの機能を使う場合 :
   1. 右下ペインの"Plots"タブの"Export"をクリック
-  2. 形式やサイズを指定する \\
-     /[[color:gray][クリップボードにコピーもできる]]/
-- コンソール / R Scriptで実行する場合:
-  - ~help(pdf)~ : PDFファイルに保存
-  - ~help(png)~ : PNGファイルに保存
-  - ~help(dev.copy)~ : "graphic device" 間でコピー
+  2. 形式を指定する 
+     /[[color:orange][クリップボードにコピーもできる]]/
+  3. サイズを指定して保存
+- コンソール / R Scriptで実行する場合 :
+  - ~help("pdf")~ : PDFファイルに保存
+  - ~help("png")~ : PNGファイルに保存
+  - ~help("dev.copy")~ : "graphic device" 間でコピー
   などを参照
 
 ** サンプルデータの説明
@@ -60,16 +62,17 @@
     - 地域から探す / 全県を選択 / 項目を選択してダウンロード
     - 日本語が扱えることを想定して日本語
     - 英語のために -en を用意
-  - データファイル (文字コード: utf8)
-    - jpdata1.csv: 県別の対象データ
-    - jpdata2.csv: 対象データの内容
-    - jpdata3.csv: 県別と地域の対応関係
+  - データファイル (文字コード : utf8)
+    - jpdata1.csv : 県別の対象データ
+    - jpdata2.csv : 対象データの内容
+    - jpdata3.csv : 県別と地域の対応関係
   - 作業ディレクトリのdata内に置いて読み込む場合
     #+begin_src R :eval no
       JP.data <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
       JP.item <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
       JP.area <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
     #+end_src
+    - 変数名は自由に付けてよい
 
 #+reveal: split
 - ~tokyo_weather~
@@ -86,11 +89,11 @@
     #+end_src
 
 #+reveal: split
-- ~tokyo_covid19~
+- ~tokyo_covid19_2021~
   - [[https://stopcovid19.metro.tokyo.lg.jp]] (東京都)
   - データ項目
     #+begin_quote
-    新規陽性患者数,検査実施数,7119相談件数
+    陽性者数, 総検査実施件数, 発熱等相談件数
     #+end_quote
   - 作業ディレクトリのdata内に置いて読み込む場合
     #+begin_src R :eval no
@@ -106,34 +109,40 @@
 ** 関数 ~plot()~
 - ベクトルデータの描画を行う関数
   #+begin_src R :eval no
-    plot(x, y=NULL, type="p", xlim=NULL, ylim=NULL,
-         main=NULL, xlab=NULL, ylab=NULL, ...) # ...はその他のオプション
+    plot(x, y = NULL, type = "p", xlim = NULL, ylim = NULL,
+         main = NULL, xlab = NULL, ylab = NULL, ...) 
     ## x, y: ベクトル． y は省略可能．
-    ## type: 描画タイプ．既定値は "p" (点)．"l" (折れ線)など指定可
+    ## type: 描画タイプ．既定値は "p" (点)．"l" (折れ線)などが指定可
     ## xlim/ylim: x/y 軸の範囲．既定値は自動的に決定
     ## main: 図のタイトル．既定値は空白
     ## xlab: x 軸のラベル名．既定値は Index
     ## ylab: y 軸のラベル名．既定値は x のオブジェクト名
+    ## ...: その他のオプション
   #+end_src
-  # - ~...~: 他のオプション．詳細は ~help(par)~ を参照
+  # - ~...~: 他のオプション．詳細は ~help("par")~ を参照
 
 ** 関数 ~plot()~ のオプション
-- よく利用されるその他のオプション (~...~ の部分)
-  - ~col~: 色の指定．
-    ~"red"~ や ~"blue"~ など． \\
-    /(指定可能な色は関数 ~colors()~ で照会できる)/
-  - ~pch~: 点の形．
-    詳細は ~help(points)~ を参照
-  - ~lty~: 線のタイプ．
+- よく利用される ~...~ の部分
+  - ~col~ : 色の指定．
+    ~"red"~ や ~"blue"~ など．
+    指定可能な色は関数 ~colors()~ を参照
+  - ~pch~ : 点の形．
+    詳細は ~help("points")~ を参照
+  - ~lty~ : 線のタイプ．
     実線・破線など．タイプ名もしくは数字で指定．
-    詳細は ~help(par)~ を参照
-  - ~lwd~: 線の太さ．数字で指定
-  - ~cex~: 文字の大きさ．
+    詳細は ~help("par")~ を参照
+  - ~lwd~ : 線の太さ．数字で指定
+  - ~cex~ : 文字の大きさ．
     既定値の何倍にするかを指定
   # - ベクトル ~x~ に対して ~plot(x)~ を実行すれば, 
   #   横軸に成分番号, 縦軸に各成分を描画した点プロットが作成される
 
 ** ベクトルの描画の例
+- 1変数の場合 ~plot(x)~
+- 2変数の場合 ~plot(x,y)~
+- 基本的なオプションの指定例
+
+#+reveal: split
 - 1変数の場合 ~plot(x)~
   #+begin_src R :file figs/graph-plot1.png :results graphics :tangle yes
     x <- pi/6*(0:12) # 30度(pi/6)おきに1周期分 (0-2*pi)
@@ -173,15 +182,15 @@
 ** 重ね描き
 - 別のベクトルを点として重ね描きする場合
   #+begin_src R :eval no
-    points(x, y=NULL, ...) # ... は関数 plot() と同様なオプションが指定可能
+    points(x, y = NULL, ...) # ... は関数 plot() と同様なオプションが指定可能
   #+end_src
 - 別のベクトルを線として重ね描きする場合
   #+begin_src R :eval no
-    lines(x, y=NULL, ...) # ... は関数 plot() と同様なオプションが指定可能
+    lines(x, y = NULL, ...) # ... は関数 plot() と同様なオプションが指定可能
   #+end_src
 - 文字を重ね描きする場合
   #+begin_src R :eval no
-    text(x, y=NULL, labels, ...) # labelsに文字列を指定
+    text(x, y = NULL, labels, ...) # labelsに文字列を指定
   #+end_src
 
 ** 重ね描きの例
@@ -205,8 +214,8 @@
 ** 関数 ~curve()~ 
 - 1変数関数の描画を行う関数
   #+begin_src R :eval no
-    curve(expr, from=NULL, to=NULL, add=FALSE,
-          type="l", xname="x", xlab=xname, ylab=NULL, ...)
+    curve(expr, from = NULL, to = NULL, add = FALSE,
+          type = "l", xname = "x", xlab = xname, ylab = NULL, ...)
     ## expr: 1変数関数 (関数名)
     ## from: x 軸の左端
     ## to: x 軸の右端
@@ -215,7 +224,7 @@
   #+end_src
 - 関数 ~plot()~ にも同様の機能がある
   #+begin_src R :eval no
-    plot(x, y=0, to=1, ...) # ... は"ベクトルの描画"と同じオプションが利用可能
+    plot(x, y = 0, to = 1, ...) # ... は"ベクトルの描画"と同様に指定が可能
   #+end_src
 
   # - ~...~: "ベクトルの描画"と同じオプションが利用可能
@@ -230,7 +239,7 @@
     curve(sin, from=0, to=4*pi, 
           col="blue", lwd=2, # グラフの線の色と太さ
           xlab="time", ylab="sin/cos") # x/y軸のラベルの文字列を指定
-    curve(cos, 
+    curve(cos, # 上書きする場合は範囲の指定は不要
           add=TRUE, # グラフを上書き
           col="red", lwd=2)
   #+end_src
@@ -264,11 +273,12 @@
   および \(y_1,\dots,y_n\) が与えられたとき，
   同じ index を持つ点 \((x_1,y_1),\dotsc,(x_n,y_n)\) を
   平面上に描画した図
+- データの性質を捉えるための基本的な描画の方法
 
 ** 関数 ~plot()~
 - ベクトルデータの散布図を作成する (既出の機能)
   #+begin_src R :eval no
-    plot(x, y=NULL, ...) #... は"ベクトルの描画"と同じオプションが利用可能
+    plot(x, y = NULL, ...) #... は"ベクトルの描画"と同様に指定が可能
     ## x: 1種類目のデータ c(x1,x2,...)
     ## y: 2種類目のデータ c(y1,y2,...) (x と同じ長さ)
   #+end_src
@@ -277,22 +287,28 @@
 データフレーム ~x~ の変数A，Bの散布図を作成する
 - 基本書式
   #+begin_src R :eval no
-    plot(B ~ A, data=x, ...) # "Y軸 ~ X軸" と指定
+    plot(B ~ A, data = x, ...) # "Y軸 ~ X軸" と指定
     ## x: データフレーム
     ## A,B: 変数名 (データフレームの列名を利用可能) 
+    ##      "B ~ A" は formula と呼ばれる
   #+end_src
-- データフレーム ~x~ に対して
-  ~plot(x)~ を実行すると，
-  すべての変数のペアに対する散布図が
-  作成される(散布図行列; ~pairs()~ 後述)
+  - formula の書き方は ~help("formula")~ を参照
+  - データフレーム ~x~ に対して
+    ~plot(x)~ を実行すると，
+    すべての変数のペアに対する散布図が
+    作成される(散布図行列・対散布図; ~pairs()~ 後述)
 
 ** 散布図の例
 - データフレームを用いた散布図
   #+begin_src R :file figs/graph-plot7.png :results graphics :tangle yes
-    plot(Ozone ~ Wind, data=airquality,
-         pch="*", col="red", cex=2) # cexは点の大きさの倍率を指定
+    plot(Ozone ~ Wind, data=airquality, # xy軸名は列の名前が使われる
+         pch="*", # 点の形を文字で指定することもできる
+         col="red", 
+         cex=2) # cexは点の大きさの倍率を指定する
   #+end_src
 
+#+reveal: split
+#+CAPTION: データフレームを用いた散布図
 #+NAME: fig:graph-plot7
 #+ATTR_HTML: :height 100%
 #+ATTR_LATEX: :width 0.6\linewidth
@@ -322,7 +338,7 @@
   - 婚姻・離婚率の散布図を描け．
   - 地方別に異なる点の形状を用いた散布図を描け．
   - それ以外にも様々な散布図を描画してみよう．
-  - (参考) 読み込み方:
+  - (参考) 読み込み方
     #+begin_src R :eval no 
       ## CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
       JP.data <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
@@ -339,18 +355,20 @@
   JP.data <- cbind(JP.data,JP.area)
   
   ## 婚姻・離婚率の散布図
-  par(family="HiraginoSans-W4") # 日本語表示 (macOSの場合)
+  if(Sys.info()["sysname"]=="Darwin"){ # macOSの場合の日本語表示
+      par(family="HiraginoSans-W4")}  
   plot(離婚 ~ 婚姻, data=JP.data, # データフレームを用いた散布図の指定
        col="green", # 点の色を指定
-       pch=19) # 点の形を指定 (help(points)参照)
-  with(JP.data, text(婚姻,離婚,labels=県名)) # X軸, Y軸 の順に注意
+       pch=19) # 点の形を指定 (help("points")参照)
+  with(JP.data, text(婚姻, 離婚, labels=県名)) # X軸, Y軸 の順に注意
+  ## 明示するには text(x=婚姻, y=離婚) とする
   ## 関数 text() には引数 data はないが，関数 with() を利用するとよい
   
   ## 地方別に異なる記号の散布図
   plot(離婚 ~ 婚姻, data=JP.data,
        col="red", 
        pch=コード)
-  with(JP.data, text(婚姻,離婚,labels=県名,
+  with(JP.data, text(婚姻, 離婚, labels=県名,
                      col="gray", # 文字の色を指定
                      cex=0.5)) # 文字の大きさを指定(既定値は1)
 #+end_src
@@ -388,17 +406,18 @@
 - 各棒グラフの矩形
   - 横幅が区間に対応
   - 面積が区間に含まれるデータの個数に比例
-- データの分布の仕方を可視化するのに有効 \\
-  (どのあたりに値が集中しているか, どの程度値にばらつきがあるかなど)
+- データの分布の仕方を可視化するのに有効
+  - どのあたりに値が集中しているか
+  - どの程度値にばらつきがあるか
 
 ** 関数 ~hist()~ 
 - ヒストグラムを描画する関数
   #+begin_src R :eval no
-    hist(x, breaks="Sturges", freq, ...) # ... は関数 plot() と同様に指定可能
+    hist(x, breaks = "Sturges", freq, ...) # ... は関数 plot() と同様に指定可能
     ## x: ベクトル
     ## breaks: 区間の分割の仕方を指定．既定値はSturgesの公式．      
-    ##       数字を指定するとデータ範囲をその数字に近い個数に等分割する．
-    ##       詳細はヘルプを参照
+    ##         数字を指定するとデータ範囲をその数字に近い個数に等分割する．
+    ##         詳細はヘルプを参照
     ## freq: TRUE (既定値)を指定すると縦軸はデータ数
     ##       FALSE を指定すると縦軸はデータ数/全データ数
   #+end_src
@@ -412,8 +431,9 @@
 ** ヒストグラムの例
 - 関数 ~hist()~ によるヒストグラムの作図
   #+begin_src R :file figs/graph-hist1.png :results graphics :tangle yes
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
+    ## 東京都の気温のヒストグラムを作成する
     TW.data <- read.csv("data/tokyo_weather.csv") # 東京都の気象データの読み込み
-    par(family="HiraginoSans-W4") # 日本語表示
     hist(TW.data$temp, 
          xlab="気温(℃)", ylab="頻度",
          breaks=25, # ビンの数を約25に設定
@@ -432,9 +452,10 @@
 #+reveal: split
 - 密度での表示
   #+begin_src R :file figs/graph-hist2.png :results graphics :tangle yes
-    par(family="HiraginoSans-W4") # 日本語表示
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
     hist(TW.data$wind, freq=FALSE, # 全体に対する割合で表示
-         xlab="風速(m/s)", ylab="密度", breaks=25, 
+         xlab="風速(m/s)", ylab="密度",
+         breaks=25, 
          col="lightblue", border="blue", # 長方形の境界の色
          main="風速の密度") 
   #+end_src
@@ -467,17 +488,19 @@
 
   #     - ...: 関数 ~plot()~ で指定できるオプションが利用可能
   #     - ~...~: 関数 ~plot()~ と同様のオプションを指定可能
-  - データフレーム ~x~ の
-    変数 ~A~ (質的変数; 性別・植物の種類など)で変数 ~B~ を分類する場合
-    #+begin_src R :eval no
-      boxplot(B ~ A, data=x, ...) # A,B はデータフレームの列名
-    #+end_src
+- 質的変数ごとに分類して描画する場合 
+  #+begin_src R :eval no
+    boxplot(B ~ A, data = x, ...) 
+    ## x: データフレーム
+    ## A: x の変数 (質的変数; 性別・植物の種類など)
+    ## B: x の変数
+  #+end_src
 
 ** 箱ひげ図の例
 - 関数 ~boxplot()~ による箱ひげ図の作図
   #+begin_src R :file figs/graph-boxplot1.png :results graphics :tangle yes
-    ## 基本的な箱ひげ図
-    par(family="HiraginoSans-W4") # 日本語表示
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
+    ## 気温, 降雨, 日射, 降雪, 風速の箱ひげ図を作成する
     boxplot(subset(TW.data, select=c(temp:snow,wind)), # 数値データの一部を抽出
             names=c("気温","降雨","日射","降雪","風速")) # 各箱ひげ図の名前を指定
     ## names を指定しなければ列名が使われる 
@@ -493,18 +516,18 @@
 #+reveal: split
 - 条件ごとの箱ひげ図の作図
   #+begin_src R :file figs/graph-boxplot2.png :results graphics :tangle yes
-    ## 月ごとに気温を分類
-    par(family="HiraginoSans-W4") # 日本語表示
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
+    ## 月ごとの気温の分布を箱ひげ図によって可視化する
     boxplot(temp ~ month, data=TW.data,
             col="orange",
             xlab="月",ylab="気温",main="月ごとの気温")
     ## 図を回転する場合は horizontal を指定する
     ## boxplot(気温 ~ 月, data=myData,
-    ## 	col="purple", main="月ごとの気温", horizontal=TRUE)
+    ##         col="purple", main="月ごとの気温", horizontal=TRUE)
   #+end_src
 
 #+reveal: split
-# #+CAPTION: 箱ひげ図
+#+CAPTION: 条件ごとの箱ひげ図
 #+NAME:   fig:graph-boxplot2
 #+ATTR_HTML: :height 100%
 #+ATTR_LATEX: :width 0.6\linewidth
@@ -519,8 +542,8 @@
 ** 関数 ~barplot()~
 - 棒グラフを作成する関数
   #+begin_src R :exports no
-    barplot(x, width=1, space=NULL, beside=FALSE,
-            legend.text=NULL, args.legend=NULL, 
+    barplot(x, width = 1, space = NULL, beside = FALSE,
+            legend.text = NULL, args.legend = NULL, 
             ...) # ... は関数 plot() と同様に指定可能
     ## x: ベクトルまたは行列 (データフレームは不可)
     ## width: 棒の幅
@@ -535,11 +558,11 @@
 ** 棒グラフの例
 - 関数 ~barplot()~ による棒グラフの作図
   #+begin_src R :file figs/graph-barplot1.png :results graphics :tangle yes
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
     ## 月ごとに各変数の平均を計算
-    par(family="HiraginoSans-W4") # 日本語表示
     (foo <- aggregate(. ~ month, FUN=mean,
                       data=subset(TW.data, select=c(month,temp:snow,wind))))
-    ## 基本的な棒グラフ
+    ## 月ごとの気温の平均値の棒グラフを作成する
     barplot(foo$temp, # 棒の高さのベクトル
             col="slateblue", # 棒の色の指定
             names.arg=foo$month, # x軸のラベル
@@ -556,9 +579,10 @@
 #+reveal: split
 - 複数の棒グラフ
   #+begin_src R :file figs/graph-barplot2.png :results graphics :tangle yes
-    par(family="HiraginoSans-W4") # 日本語表示
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
+    ## 気温, 降雨, 日射, 降雪, 風速の月ごとの棒グラフを作成する
     barplot(as.matrix(foo[ ,-1]), # 第1引数のデータフレームは行列にする
-            col=rainbow(12)[c(8:1,12:9)], # 12色に色分け
+            col=rainbow(12)[c(8:1,12:9)], # 12色に色分け．季節に合うように色を並べ変えている
             beside=TRUE, # 各列ごとの棒グラフを横に並べる
             space=c(1.5, 3), # 棒グラフ間・変数間のスペースを指定
             names.arg=c("気温","降雨","日射","降雪","風速"), # 各列の名前を指定．指定しなければ列名が使われる
@@ -576,7 +600,7 @@
 ** 関数 ~pie()~ 
 - 円グラフを作成する関数
   #+begin_src R :eval no
-    pie(x, clockwise=FALSE, ...) # ... は関数 plot() と同様に指定可能
+    pie(x, clockwise = FALSE, ...) # ... は関数 plot() と同様に指定可能
     ## x: ベクトル
     ## clockwise: 時計回りに書くか否か
   #+end_src
@@ -585,13 +609,13 @@
 ** 円グラフの例
 - 関数 ~pie()~ による円グラフの作図
   #+begin_src R :file figs/graph-pie1.png :results graphics :tangle yes
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
     ## ヒストグラムの機能を用いてデータの集計を行う
-    foo <- hist(TW.data$solar, breaks=5, plot=FALSE) # 5つ程度に分類
+    foo <- hist(TW.data$solar, breaks=5, plot=FALSE) # 5つ程度に分類を指定．実際には6つに分類
     bar <- foo$count # 各ビン内のデータ数
     baz <- foo$breaks # ビンの境界
     names(bar) <- paste(baz[-length(baz)],baz[-1],sep="-") # ビンの範囲の文字列を作成
-    ## 向きと色を調整して描画
-    par(family="HiraginoSans-W4") # 日本語表示
+    ## 6つに分類した日射量ごとの日数の割合を示す円グラフを作成する
     pie(bar, clockwise=TRUE, main="日射量別の日数の割合",
         col=heat.colors(length(bar),rev=TRUE)) # 日射量が高いほど赤を濃く指定
   #+end_src
@@ -617,12 +641,11 @@
   - 陽性者数の推移の折線グラフを描け．
   - 総検査実施件数の推移の棒グラフを描け．
   - 曜日ごとの総検査実施件数の箱ひげ図を描け．
-  - (参考) 読み込み方:
+  - (参考) 読み込み方
     #+begin_src R :eval no 
       ## CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
       TC.data <- read.csv(file="data/tokyo_covid19_2021.csv",fileEncoding="utf8")
     #+end_src
-  - (参考) covid19データは東京都 (https://stopcovid19.metro.tokyo.lg.jp/) から取得して整理したもの
 
 #+begin_src R :exports none :tangle yes
   ### 練習問題 東京都の感染動向データによる例
@@ -633,7 +656,7 @@
   TC.data <- transform(TC.data,年月日=as.Date(年月日)) # 日付の属性を変えておく
   
   ## 折れ線グラフ
-  par(family="HiraginoSans-W4") # 日本語表示
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
   plot(TC.data$陽性者数, type="l", col="red", ylab="陽性者数") 
   ## 日付ラベルを用いた作図の例
   with(TC.data,
@@ -687,26 +710,26 @@
     pairs(x, ...) # 関数 plot() でも良い
     ## x: データフレーム 
   #+end_src
-  /(すべての列のペアに対する散布図を行列状に配置)/
+  - すべての列のペアに対する散布図を行列状に配置
 - 変数 ~A1~, \(\dots\), ~Ak~ (列名)のみ考える場合
   #+begin_src R :eval no
-    pairs(~ A1 + ... + Ak, data=x, ...) # plot() でも良い
+    pairs(~ A1 + ... + Ak, data = x, ...) # 関数 plot() でも良い
     ## x: データフレーム
     ## A1,...,Ak: データフレームの列名
   #+end_src
 
-** 対散布図の例
+** 散布図行列の例
 - 関数 ~pairs()~ による散布図の作図
   #+begin_src R :file figs/graph-pairs1.png :results graphics :tangle yes
-    ## 表示する項目を指定
-    par(family = "HiraginoSans-W4") 
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
+    ## 気温, 日射, 風速に関する散布図を作成する
     pairs(~ temp + solar + wind, data=TW.data,
           labels=c("気温","日射","風速"), # 指定しなければ列名が使われる
           col=rainbow(12)[TW.data$month]) # 月毎に異なる色で表示
   #+end_src
 
 #+reveal: split
-#+CAPTION: 対散布図
+#+CAPTION: 散布図行列
 #+NAME:   fig:graph-pairs1
 #+ATTR_HTML: :height 100%
 #+ATTR_LATEX: :width 0.6\linewidth
@@ -715,7 +738,7 @@
 ** 関数 ~persp()~ 
 - 3次元のグラフを2次元に射影した俯瞰図を描く関数
   #+begin_src R :exports no
-    persp(x, y, z, theta=0, phi=15, expand=1, ...) # ... は関数 plot() と同様に指定可能
+    persp(x, y, z, theta = 0, phi = 15, expand = 1, ...) # ... は関数 plot() と同様に指定可能
     ## x,y,z: x,y,z 座標
     ##        z は点(x[i],y[j])に対応する値を(i,j) 成分とする行列で与える必要がある
     ## theta,phi: 俯瞰の方向を指定する極座標
@@ -738,7 +761,7 @@
   #+end_src
 
 #+reveal: split
-# #+CAPTION: 俯瞰図
+#+CAPTION: 俯瞰図
 #+NAME:   fig:graph-plot3d1
 #+ATTR_HTML: :height 100%
 #+ATTR_LATEX: :width 0.6\linewidth
@@ -746,15 +769,15 @@
 
 ** 3次元グラフのためのパッケージ
 - 以下は ~scatterplot3d()~ の例
-- 基本書式
   #+begin_src R :eval no
     library(scatterplot3d) # パッケージの読み込み
-    scatterplot3d(x, color, angle=40, ...) # ... は関数 plot() とは若干異なる
+    scatterplot3d(x, color, angle = 40, ...) # ... は関数 plot() とは若干異なる
     ## x: x,y,z座標を指定するデータフレーム
     ##    関数 persp() のようにx,y,zを個別に指定することも可能
     ## color: 色を指定(colではないので注意). 既定値は黒
     ## angle: x軸とy軸の間の角度
   #+end_src
+  - 詳細は ~example("scatterplot3d")~ を参照
   #     - ~...~: 関数 ~plot()~ で指定できるオプションが利用可能
 
 ** 3次元散布図の例
@@ -762,7 +785,8 @@
   #+begin_src R :file figs/graph-plot3d2.png :results graphics :tangle yes
     ## install.packages("scatterplot3d") # 初めて使う時に必要
     library(scatterplot3d) # パッケージのロード
-    par(family = "HiraginoSans-W4") 
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
+    ## 風速, 日射, 気温の3次元散布図を作成する
     scatterplot3d(subset(TW.data, select=c(wind, solar, temp)),
                   xlab="風速",ylab="日射",zlab="気温", # 指定しなければ列名が使われる
                   pch=4, color="orchid")
@@ -784,12 +808,12 @@
 ** 関数 ~legend()~
 - グラフに凡例を追加する関数
   #+begin_src R :exports no
-    legend(x, y=NULL, legend, ...) # ...はその他のオプション
+    legend(x, y = NULL, legend, ...) # ...はその他のオプション
     ## x,y: 凡例の位置を指定 (座標やキーワードで指定が可能)
     ## legend: 凡例の文字列ベクトル
   #+end_src
-  - 複雑なオプションは ~help(legend)~ を参照
-  - 数式の表示の詳細は ~help(plotmath)~ を参照
+  - 複雑なオプションは ~help("legend")~ を参照
+  - 数式の表示の詳細は ~help("plotmath")~ を参照
 
 ** 凡例の例
 - 凡例の追加
@@ -817,8 +841,7 @@
 #+reveal: split
 - 東京の気象データを用いた例
   #+begin_src R :file figs/graph-font.png :results graphics :tangle yes
-    ## 日本語フォントの指定
-    par(family="HiraginoSans-W4") 
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
     ## 東京の気象データから月ごとの気温,降水量,日射量の平均を計算し描画する
     (foo <- aggregate(. ~ month, FUN=mean,
                       data=subset(TW.data, select=c(month,temp,rain,solar))))
@@ -845,11 +868,11 @@
 ** 関数 ~par()~ 
 - グラフィクス環境の設定(複数図の配置, 余白の設定)をする関数
   #+begin_src R :eval no
-    par(tag=value)
+    par(tag = value)
     ## tag: グラフィックスパラメータ
   #+end_src
   - 描画の際の線の種類や色, 点の形等の既定値を設定することができる
-  - 設定可能なグラフィックスパラメータは ~help(par)~ を参照
+  - 設定可能なグラフィックスパラメータは ~help("par")~ を参照
   # *** 注意
   #     プロット環境は非常に細かく設定でき，
   #     またそれぞれの描画関数独自のパラメータも存在するため，
@@ -882,14 +905,14 @@
 #+begin_src R :exports none :tangle yes
   ### 練習問題
   ## 3次元の散布図 (jpdat1/3.csvを用いた例)
-  par(family="HiraginoSans-W4") # 日本語表示
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
   scatterplot3d(subset(JP.data, select=c(婚姻,離婚,失業)), 
                 pch=19, color="blue")
   pairs(subset(JP.data, select=c(婚姻,離婚,失業)), col="blue") # 三面図で見てみる
   
   ### 凡例の追加 (tokyo_covid19_2021.csvを用いた例)
   ## データの読み込み
-  par(family="HiraginoSans-W4") # 日本語表示
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
   plot(総検査実施件数/10 ~ 年月日, data=TC.data,
        type="h", col="blue", xlab="日付", ylab="人数")
   abline(h=seq(0,2000,by=100), lty=2, col="darkgray") # 補助線の追加
@@ -912,7 +935,7 @@
   (bar <- table(foo)) # (年齢 x 月) の患者数の表(行列)
   (baz <- apply(bar, 2, function(z){z/sum(z)})) # 月ごとの年齢分布
   ## 描画
-  par(family="HiraginoSans-W4") # 日本語表示
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
   barplot(bar, # 人数のグラフ
           col=rainbow(13), # 13色に色分け
           beside=TRUE, # 棒グラフを横に並べる
@@ -927,6 +950,14 @@
           args.legend=list(ncol=2,cex=0.5)) 
 #+end_src
 
+
+
+* 次回の予定
+- 計算機による数値実験
+- 乱数とは
+- 乱数を用いた数値実験
+
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted

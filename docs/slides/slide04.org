@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-04-29 16:42:43 mura>
+# Time-stamp: <2022-05-05 17:12:33 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -26,6 +26,7 @@
     
 * COMMENT メモ
 - jpdata の整理を忘れずに
+
 
 * データフレームの操作
 #+begin_src R :exports none :tangle yes
@@ -576,11 +577,11 @@
   - 県別の人口密度を求めよ．
   - 地方別の人口密度を求めよ．
     - 県ごとに人口が異なるので単純に人口密度を平均してはいけない
-  - 地方別の婚姻率・離婚率(1000人当たり)を概算せよ．
-    - 「人口1000人当たり」とあるが，
-      若年層は婚姻不可として除いた
+  - 地方別の1000人当たりの婚姻・離婚数を概算せよ．
+    - データの記述では「人口1000人当たり」とあるが，
+      この「人口」とは若年層は婚姻不可として除いた
       「婚姻可能な人口1000人当たり」
-      で置き換えて計算しなさい．
+      と考えて計算しなさい．
 
 #+begin_src R :exports none :tangle yes
   ### 練習問題 データの集計
@@ -601,11 +602,11 @@
   (myDat2 <- transform(myDat2, 
                        人口密度 = 人口/面積))
   
-  ### 地方別の婚姻率・離婚率
+  ### 地方別の婚姻・離婚数/1000人
   ## 婚姻可能な人口を推計
   (foo <- transform(subset(myData, select = 婚姻:離婚), # 人口，若年は含まない
                     婚姻可能 = with(myData, 人口-若年))) 
-  ## 婚姻率と離婚率から人数を推計
+  ## 婚姻数/1000人と離婚数/1000人から人数を推計
   (foo <- transform(foo,
                     婚姻数 = 婚姻可能*婚姻/1000,
                     離婚数 = 婚姻可能*離婚/1000,
@@ -613,7 +614,7 @@
   ## 地方別の婚姻・離婚数を集計
   (myDat3 <- aggregate(. ~ 地方, FUN = sum,
                        data = subset(foo, select = -c(婚姻,離婚))))
-  ## 婚姻率・離婚率を計算して追加
+  ## 地方別の婚姻率(婚姻数/1000人)・離婚率(離婚数/1000人)を計算して追加
   (myDat3 <- transform(myDat3,
                        婚姻率 = 婚姻数/婚姻可能*1000,
                        離婚率 = 離婚数/婚姻可能*1000))
@@ -636,11 +637,11 @@
   (myDat2En <- transform(myDat2En, 
                          density=population/area))
   
-  ### 地方別の婚姻率・離婚率
+  ### 地方別の婚姻・離婚件数/1000人
   ## 婚姻可能な人口を推計
   (foo <- transform(subset(myDataEn, select=marriage:divorce),
                     marriageable=with(myDataEn,population-young_population)))
-  ## 婚姻率と離婚率から人数を推計
+  ## 婚姻件数/1000人と離婚件数/1000人から人数を推計
   (foo <- transform(foo,
                     nmarriage=marriageable*marriage/1000,
                     ndivorce=marriageable*divorce/1000,
@@ -648,7 +649,7 @@
   ## 地方別の婚姻・離婚数を集計
   (myDat3En <- aggregate(. ~ region, FUN=sum,
                          data=subset(foo,select=-c(marriage,divorce))))
-  ## 婚姻率・離婚率を計算して追加
+  ## 地方別の婚姻率(婚姻数/1000人)・離婚率(離婚数/1000人)を計算して追加
   (myDat3En <- transform(myDat3En,
                          ratio_marriage=nmarriage/marriageable*1000,
                          ratio_divorce=ndivorce/marriageable*1000))
