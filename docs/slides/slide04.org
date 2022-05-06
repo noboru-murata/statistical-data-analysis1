@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-05-06 13:49:11 mura>
+# Time-stamp: <2022-05-06 15:17:12 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -126,7 +126,6 @@
 
 ** 関数 ~subset()~
 - 複合的な条件を指定してデータを整理する関数
-- 基本書式
   #+begin_src R :eval no
     subset(x, subset, select, drop = FALSE)
     ## x:  データフレーム 
@@ -244,7 +243,6 @@
 
 ** 関数 ~write.csv()~
 - データフレームをCSVファイルへ書き出す関数
-- 基本書式
   #+begin_src R :eval no
     write.csv(x, file = "ファイル名")
     ## x: 書き出すデータフレーム
@@ -266,7 +264,6 @@
 
 ** 関数 ~read.csv()~
 - CSVファイルからデータフレームを読み込む関数
-- 基本書式
   #+begin_src R :eval no
     read.csv(file = "ファイル名", header = TRUE,
              row.names, fileEncoding)      
@@ -289,7 +286,6 @@
 
 ** 関数 ~save()~
 - RData ファイルへ書き出す関数
-- 基本書式
   #+begin_src R :eval no
     save(..., file = "ファイル名")
     ## ...: 保存するオブジェクト名 (複数可，データフレーム以外も可)
@@ -310,7 +306,6 @@
 
 ** 関数 ~load()~ 
 - RDataファイルから読み込む関数
-- 基本書式
   #+begin_src R :eval no
     load(file = "ファイル名")
     ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
@@ -341,8 +336,8 @@
     (地域から探す / 全県を選択 / 項目を選択してダウンロード)
   - データファイル (文字コード : utf8)
     - jpdata1.csv : 県別の対象データ
-    - jpdata2.csv : 対象データの内容
-    - jpdata3.csv : 県別と地域の対応関係
+    - jpdata2.csv : 対象データの内容説明
+    - jpdata3.csv : 県と地域の対応関係
   - 作業ディレクトリの data 内に置いて読み込む
     #+begin_src R :eval no
       myData <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
@@ -438,7 +433,6 @@
 
 ** 関数 ~apply()~
 - 列あるいは行ごとの計算を行う関数
-- 基本書式
   #+begin_src R :eval no
     apply(X, MARGIN, FUN)
     ## X: データフレーム
@@ -474,7 +468,6 @@
 
 ** 関数 ~aggregate()~
 - 各行をグループにまとめて統計量を計算する関数
-- 基本書式
   #+begin_src R :eval no
     aggregate(x, by, FUN)
     ## x: データフレーム

@@ -1,9 +1,9 @@
 #+TITLE: データの可視化
-#+SUBTITLE: 様々なグラフの描画
+#+SUBTITLE: 第5講 - 様々なグラフの描画
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-05-04 18:38:55 mura>
+# Time-stamp: <2022-05-06 15:22:42 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -47,7 +47,7 @@
 ** 図の保存
 - RStudioの機能を使う場合 :
   1. 右下ペインの"Plots"タブの"Export"をクリック
-  2. 形式を指定する 
+  2. 形式を指定する \\
      /[[color:orange][クリップボードにコピーもできる]]/
   3. サイズを指定して保存
 - コンソール / R Scriptで実行する場合 :
@@ -57,15 +57,15 @@
   などを参照
 
 ** サンプルデータの説明
-- ~jpdata~
+- ~jpdata[1-3].csv~ (再掲)
   - https://www.e-stat.go.jp (統計局)
     - 地域から探す / 全県を選択 / 項目を選択してダウンロード
     - 日本語が扱えることを想定して日本語
     - 英語のために -en を用意
   - データファイル (文字コード : utf8)
     - jpdata1.csv : 県別の対象データ
-    - jpdata2.csv : 対象データの内容
-    - jpdata3.csv : 県別と地域の対応関係
+    - jpdata2.csv : 対象データの内容説明
+    - jpdata3.csv : 県と地域の対応関係
   - 作業ディレクトリのdata内に置いて読み込む場合
     #+begin_src R :eval no
       JP.data <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
@@ -74,8 +74,8 @@
     #+end_src
     - 変数名は自由に付けてよい
 
-#+reveal: split
-- ~tokyo_weather~
+#+reveal: split 
+- ~tokyo_weather.csv~ (~tokyo.zip~ の中)
   - [[https://www.jma.go.jp]] (気象庁)
     - 各種データ・資料 / 過去の地点気象データ・ダウンロード
     - 地点 / 項目 / 期間を選択してダウンロード
@@ -89,7 +89,7 @@
     #+end_src
 
 #+reveal: split
-- ~tokyo_covid19_2021~
+- ~tokyo_covid19_2021.csv~ (~tokyo.zip~ の中)
   - [[https://stopcovid19.metro.tokyo.lg.jp]] (東京都)
   - データ項目
     #+begin_quote
@@ -179,7 +179,7 @@
 #+ATTR_LATEX: :width 0.6\linewidth
 [[file:figs/graph-plot3.png]]
 
-** 重ね描き
+** 重ね描きのための関数
 - 別のベクトルを点として重ね描きする場合
   #+begin_src R :eval no
     points(x, y = NULL, ...) # ... は関数 plot() と同様なオプションが指定可能
@@ -284,8 +284,7 @@
   #+end_src
 
 ** 関数 ~plot()~
-データフレーム ~x~ の変数A，Bの散布図を作成する
-- 基本書式
+- データフレーム ~x~ の変数A，Bの散布図を作成する
   #+begin_src R :eval no
     plot(B ~ A, data = x, ...) # "Y軸 ~ X軸" と指定
     ## x: データフレーム
@@ -514,6 +513,23 @@
 [[file:figs/graph-boxplot1.png]]
 
 #+reveal: split
+- 箱を横向きにする場合
+  #+begin_src R :file figs/graph-boxplot1h.png :results graphics :tangle yes
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
+    ## 気温, 降雨, 日射, 降雪, 風速の箱ひげ図を作成する
+    boxplot(subset(TW.data, select=c(temp:snow,wind)), # 数値データの一部を抽出
+            names=c("気温","降雨","日射","降雪","風速"), # 各箱ひげ図の名前を指定
+            horizontal=TRUE) # 図を横向きに回転する
+  #+end_src
+
+#+reveal: split
+#+CAPTION: 箱ひげ図 (横向き)
+#+NAME:   fig:graph-boxplot1h
+#+ATTR_HTML: :height 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/graph-boxplot1h.png]]
+
+#+reveal: split
 - 条件ごとの箱ひげ図の作図
   #+begin_src R :file figs/graph-boxplot2.png :results graphics :tangle yes
     if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
@@ -600,8 +616,10 @@
 ** 関数 ~pie()~ 
 - 円グラフを作成する関数
   #+begin_src R :eval no
-    pie(x, clockwise = FALSE, ...) # ... は関数 plot() と同様に指定可能
+    pie(x, labels = names(x), 
+        clockwise = FALSE, ...) # ... は関数 plot() と同様に指定可能
     ## x: ベクトル
+    ## labels: ベクトルの各成分のラベル (既定値ではベクトルから取得)
     ## clockwise: 時計回りに書くか否か
   #+end_src
   #     - ~...~: 関数 ~plot()~ で指定できるオプションが利用可能
@@ -636,7 +654,7 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-- ~tokyo_covid19_2021.csv~ (東京都の新型コロナウイルス感染動向データ)
+- ~tokyo_covid19_2021.csv~ (東京都の新型コロナの動向データ)
   を用いて以下の問に答えよ．
   - 陽性者数の推移の折線グラフを描け．
   - 総検査実施件数の推移の棒グラフを描け．
@@ -705,13 +723,13 @@
     ### 多次元データの視覚化で用いた例
   #+end_src
 ** 関数 ~pairs()~
-- 対散布図(散布図行列)を作成する関数
+- 散布図行列 (対散布図) を作成する関数
   #+begin_src R :eval no
     pairs(x, ...) # 関数 plot() でも良い
     ## x: データフレーム 
   #+end_src
   - すべての列のペアに対する散布図を行列状に配置
-- 変数 ~A1~, \(\dots\), ~Ak~ (列名)のみ考える場合
+- 変数 ~A1~, \(\dots\), ~Ak~ (列名) のみ考える場合
   #+begin_src R :eval no
     pairs(~ A1 + ... + Ak, data = x, ...) # 関数 plot() でも良い
     ## x: データフレーム
