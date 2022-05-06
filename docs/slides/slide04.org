@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-05-05 17:12:33 mura>
+# Time-stamp: <2022-05-06 13:49:11 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -26,7 +26,7 @@
     
 * COMMENT メモ
 - jpdata の整理を忘れずに
-
+- 天気のデータでもでできると良いが
 
 * データフレームの操作
 #+begin_src R :exports none :tangle yes
@@ -42,11 +42,11 @@
   - 配列 (array)
 
 ** データフレームからの項目の抽出
-- 添字の番号を指定
+- 添字の番号(行と列)を指定
 - 要素の名前で指定
 - *除外*: マイナス記号(-)をつけて指定
 - 論理値で指定
-  - ~TRUE~: 要素の選択
+  - ~TRUE~: 要素の *選択*
   - ~FALSE~: 要素の *除外*
 - *欠損値 ~NA~* の扱いは状況依存なので注意
   - ~NA~: 値が得られていないことを表すスカラー値
@@ -66,7 +66,7 @@
     - [,5]   Month   numeric Month (1--12)
     - [,6]   Day     numeric Day of month (1--31)
   #+end_quote
-  - ~help(airquality)~ で詳細を確認
+  - ~help("airquality")~ で詳細を確認
   - ~datasets~ はRの標準パッケージ
   - *パッケージ名::オブジェクト* という書き方で同名のオブジェクトを区別できる
 
@@ -128,7 +128,7 @@
 - 複合的な条件を指定してデータを整理する関数
 - 基本書式
   #+begin_src R :eval no
-    subset(x, subset, select, drop=FALSE)
+    subset(x, subset, select, drop = FALSE)
     ## x:  データフレーム 
     ## subset: 抽出する行の条件
     ## select: 列の選択(未指定の場合は全ての列)
@@ -246,7 +246,7 @@
 - データフレームをCSVファイルへ書き出す関数
 - 基本書式
   #+begin_src R :eval no
-    write.csv(x, file="ファイル名")
+    write.csv(x, file = "ファイル名")
     ## x: 書き出すデータフレーム
     ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
   #+end_src
@@ -268,7 +268,7 @@
 - CSVファイルからデータフレームを読み込む関数
 - 基本書式
   #+begin_src R :eval no
-    read.csv(file="ファイル名", header=TRUE,
+    read.csv(file = "ファイル名", header = TRUE,
              row.names, fileEncoding)      
     ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
     ## header: 1行目を列名として使うか否か
@@ -291,7 +291,7 @@
 - RData ファイルへ書き出す関数
 - 基本書式
   #+begin_src R :eval no
-    save(..., file="ファイル名")
+    save(..., file = "ファイル名")
     ## ...: 保存するオブジェクト名 (複数可，データフレーム以外も可)
     ## file: 書き出すファイルの名前 (作業ディレクトリ下，またはパスを指定)
   #+end_src
@@ -312,7 +312,7 @@
 - RDataファイルから読み込む関数
 - 基本書式
   #+begin_src R :eval no
-    load(file="ファイル名")
+    load(file = "ファイル名")
     ## file: 読み込むファイルの名前 (作業ディレクトリ下，またはパスを指定)
   #+end_src
   - 同じ名前のオブジェクトがあると上書きするので注意
@@ -388,11 +388,11 @@
   myAreaEn
   ## 人口の最大値を見る
   with(myDataEn,max(population))
-  ## 人口の最大値を与える県の番号を見る (help(which.max)を参照)
+  ## 人口の最大値を与える県の番号を見る (help("which.max")を参照)
   with(myDataEn,which.max(population))
   ## どの都道府県の人口多いか調べる
   myDataEn[with(myDataEn,which.max(population)),] 
-  ## 人口の多い順に都道府県を並べる (help(order)を参照)
+  ## 人口の多い順に都道府県を並べる (help("order")を参照)
   rownames(myDataEn)[with(myDataEn,order(population,decreasing=TRUE))]
 #+end_src
 
@@ -403,7 +403,7 @@
 #+end_src
 
 ** 集約のための関数
-- データを集約するために用意されている基本的な関数
+- データを集約するために用意されている関数群
   - 関数 ~sum()~: 総和
   - 関数 ~mean()~: 平均
   - 関数 ~max()~: 最大値
@@ -445,6 +445,7 @@
     ## MARGIN: 行(1)か列(2)かを指定
     ## FUN: 計算すべき統計量の関数
   #+end_src
+  - 変数名が全て大文字で定義されているので注意
   - 総和や平均は専用の関数も用意されている
     - 行和・列和 : *~rowSums()/colSums()~*
     - 行の平均・列の平均 : *~rowMeans()/colMeans()~*
@@ -452,13 +453,14 @@
 ** 関数 ~apply()~ の使い方
 - [[color:green][抽出したデータの集計を行う]]
   #+begin_src R :tangle yes
-    ### 関数applyの使い方
+    ### 関数 apply() の使い方
     x <- subset(myData, select=婚姻:失業) # 抽出
     colMeans(x) # 各列の平均
     apply(x, 2, max) # 列ごとの最大値
-    sapply(x, max)   # 上と同じ (help(sapply)を参照)
+    sapply(x, max)   # 上と同じ (help("sapply")を参照)
     ## 自作関数の適用 (関数に名前を付けないで利用することができる)
     apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
+    ## return を省略すると関数内で最後に評価された値が返り値になる
   #+end_src
 
   #+begin_src R :eval no :exports none :tangle yes
@@ -466,7 +468,7 @@
     x <- subset(myDataEn, select=marriage:unemployed) # 抽出
     colMeans(x) # 各列の平均
     apply(x, 2, max) # 列ごとの最大値
-    sapply(x, max)   # 上と同じ (help(sapply)を参照)
+    sapply(x, max)   # 上と同じ (help("sapply")を参照)
     apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
   #+end_src
 
@@ -478,13 +480,17 @@
     ## x: データフレーム
     ## by: 各行が属するグループを指定するベクトルをリストで与える(複数可)
     ## FUN: 求めたい統計量を計算するための関数
+    aggregate(x, data, FUN)
+    ## x: 条件式 (formula)
+    ## data: データフレーム
+    ## FUN: 求めたい統計量を計算するための関数
   #+end_src
   - 同様な目的に関数 ~tapply()~ も利用可
 
 ** 関数 ~aggregate()~ の使い方
 - [[color:green][同じ値を持つグループごとの合計値を求める]]
   #+begin_src R :tangle yes
-    ### 関数aggregateの使い方
+    ### 関数 aggregate() の使い方
     ## 人口から面積まで地方ごとの平均値を計算
     x <- subset(myData, select = 人口:面積)
     aggregate(x, by = list(地方 = myArea$地方), FUN = sum) 
@@ -502,9 +508,10 @@
 - [[color:green][以下も同じ結果を返す]]
   #+begin_src R :tangle yes
     y <- transform(x, 地方 = myArea$地方) # データフレームを変更
-    aggregate( . ~ 地方, data = y, FUN = sum)
+    aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
+              data = y, FUN = sum)
   #+end_src
-  - ~help(transform)~ を参照
+  - ~help("transform")~ を参照
 
 #+reveal: split
 - [[color:green][まとめて書くこともできる]]
