@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-05-06 15:22:42 mura>
+# Time-stamp: <2022-05-13 15:34:36 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -44,18 +44,6 @@
     関数 ~example()~ (例題)
     を参照のこと
 
-** 図の保存
-- RStudioの機能を使う場合 :
-  1. 右下ペインの"Plots"タブの"Export"をクリック
-  2. 形式を指定する \\
-     /[[color:orange][クリップボードにコピーもできる]]/
-  3. サイズを指定して保存
-- コンソール / R Scriptで実行する場合 :
-  - ~help("pdf")~ : PDFファイルに保存
-  - ~help("png")~ : PNGファイルに保存
-  - ~help("dev.copy")~ : "graphic device" 間でコピー
-  などを参照
-
 ** サンプルデータの説明
 - ~jpdata[1-3].csv~ (再掲)
   - https://www.e-stat.go.jp (統計局)
@@ -79,6 +67,7 @@
   - [[https://www.jma.go.jp]] (気象庁)
     - 各種データ・資料 / 過去の地点気象データ・ダウンロード
     - 地点 / 項目 / 期間を選択してダウンロード
+    - ダウンロードしたものを必要事項のみ残して整理
   - データ項目
     #+begin_quote
     平均気温(℃),降水量の合計(mm),合計全天日射量(MJ/㎡),降雪量合計(cm),最多風向(16方位),平均風速(m/s),平均現地気圧(hPa),平均湿度(％),平均雲量(10分比),天気概況(昼：06時〜18時),天気概況(夜：18時〜翌日06時)
@@ -271,7 +260,7 @@
 ** 散布図
 - 2種類のデータ \(x_1,\dots,x_n\)
   および \(y_1,\dots,y_n\) が与えられたとき，
-  同じ index を持つ点 \((x_1,y_1),\dotsc,(x_n,y_n)\) を
+  同じ添字を持つ点 \((x_1,y_1),\dotsc,(x_n,y_n)\) を
   平面上に描画した図
 - データの性質を捉えるための基本的な描画の方法
 
@@ -323,6 +312,17 @@
     #+end_src
   - 以下のサイトなども参考になる \\
     https://oku.edu.mie-u.ac.jp/~okumura/stat/font.html
+
+** 図の保存
+- RStudioの機能を使う場合 :
+  1. 右下ペインの"Plots"タブの"Export"をクリック
+  2. 形式を指定する \\
+     /[[color:orange][クリップボードにコピーもできる]]/
+  3. サイズを指定して保存
+- コンソール / R Scriptで実行する場合は以下を参照
+  - ~help("pdf")~ : PDFファイルに保存
+  - ~help("png")~ : PNGファイルに保存
+  - ~help("dev.copy")~ : "graphic device" 間でコピー
 
 
 * 演習
@@ -875,7 +875,7 @@
   #+end_src
 
 #+reveal: split
-# #+CAPTION: 日本語フォントの指定
+#+CAPTION: 日本語での凡例の表示
 #+NAME:   fig:graph-font
 #+ATTR_HTML: :height 100%
 #+ATTR_LATEX: :width 0.6\linewidth

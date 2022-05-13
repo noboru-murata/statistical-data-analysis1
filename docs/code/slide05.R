@@ -87,6 +87,12 @@ boxplot(subset(TW.data, select=c(temp:snow,wind)), # 数値データの一部を
 ## names を指定しなければ列名が使われる
 
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
+## 気温, 降雨, 日射, 降雪, 風速の箱ひげ図を作成する
+boxplot(subset(TW.data, select=c(temp:snow,wind)), # 数値データの一部を抽出
+        names=c("気温","降雨","日射","降雪","風速"), # 各箱ひげ図の名前を指定
+        horizontal=TRUE) # 図を横向きに回転する
+
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
 ## 月ごとの気温の分布を箱ひげ図によって可視化する
 boxplot(temp ~ month, data=TW.data,
         col="orange",

@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-05-06 15:17:12 mura>
+# Time-stamp: <2022-05-06 18:28:14 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -576,7 +576,7 @@
 - サンプルデータ (~jpdata~) の整理をしてみよう．
   - 県別の人口密度を求めよ．
   - 地方別の人口密度を求めよ．
-    - 県ごとに人口が異なるので単純に人口密度を平均してはいけない
+    - 県ごとに人口が異なるので単純に人口密度を平均してはいけない．
   - 地方別の1000人当たりの婚姻・離婚数を概算せよ．
     - データの記述では「人口1000人当たり」とあるが，
       この「人口」とは若年層は婚姻不可として除いた

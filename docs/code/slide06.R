@@ -33,7 +33,7 @@ myTrial <- function(){ # この問題では引数は不要
   return(dice)
 }
 ## 乱数のシード値を指定
-set.seed(202105)
+set.seed(20220520)
 ## Monte-Carlo法を実行
 myData <- replicate(10, # 10回実験
                     myTrial()) # 実行する関数を指定
