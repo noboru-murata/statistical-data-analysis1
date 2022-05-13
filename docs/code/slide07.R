@@ -163,7 +163,7 @@ x <- rbinom(N,n,p) # 不良品数
 ## x <- replicate(N, rbinom(1,n,p)) # これでも同じ
 (myData <- table(x)) # 不良品数の度数分布表を作成
 ## それぞれの不良品数が生じた日数の割合のグラフを作成
-par(family = "HiraginoSans-W4") # 日本語フォントの指定
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示
 plot(myData/N, type="h", col="royalblue", lwd=6, 
      xlab="不良品数", ylab="発生割合")
 lines(min(x):max(x)+0.4, dpois(min(x):max(x),n*p),
@@ -177,7 +177,7 @@ p <- 0.002
 for(n in c(500,1000,5000,10000)){
   x <- rbinom(N,n,p) # 不良品数
   myData <- table(x)/N # 集計
-  par(family = "HiraginoSans-W4") 
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示
   plot(myData, type="h", col="royalblue", lwd=6, 
        xlab="不良品数", ylab="発生割合",
        main=paste("n =",n,"p =",p))
@@ -190,7 +190,7 @@ n <- 5000
 for(p in c(0.001,0.002,0.005,0.01)){
   x <- rbinom(N,n,p) # 不良品数
   myData <- table(x)/N # 集計
-  par(family = "HiraginoSans-W4") 
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示
   plot(myData, type="h", col="royalblue", lwd=6, 
        xlab="不良品数", ylab="発生割合",
        main=paste("n =",n,"p =",p))

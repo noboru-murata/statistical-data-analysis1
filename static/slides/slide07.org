@@ -1,16 +1,16 @@
 #+TITLE: 極限定理
-#+SUBTITLE: 大数の法則・中心極限定理・少数の法則
+#+SUBTITLE: 第7講 - 大数の法則・中心極限定理・少数の法則
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-08-14 21:01:13 mura>
-:reveal:
+# Time-stamp: <2022-05-13 17:12:14 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
 
 * 講義の内容
 - 独立な確率変数の性質
@@ -36,7 +36,7 @@
 ** 確率変数
 - 乱数の数学モデル: 値がランダムに決定される変数
 - 任意の区間 \([a,b]\) に含まれる確率が定められている 
-  - [[color:gray][数学的には厳密性を欠くが，本講義ではこの定義]]
+  - /[[color:orange][数学的には厳密性を欠くが，本講義ではこの定義]]/
 - 確率変数 \(X\) が区間 \([a,b]\) \((a\leq b)\) に含まれる確率:
   #+begin_quote
   #+begin_src latex
@@ -47,7 +47,7 @@
   (特に \(a=b\) のとき \(P(X=a)\) と書く)
   #+end_quote
 - 今回は有限個の値のみをとる確率変数を考える
-  - [[color:gray][無限個の値，特に連続的な値については次回以降]]
+  - /[[color:orange][無限個の値，特に連続的な値については次回以降]]/
 
 ** 平均と分散
 - 確率変数 \(X\) の観測値: \(x_1,x_2,\dotsc,x_N\)
@@ -72,7 +72,7 @@
   #+end_quote
 
 ** 例題
-- 問題
+- [[color:green][偏ったサイコロの問題]]
   #+begin_quote
   確率変数 \(X\) は
   偶数の出る確率が奇数の2倍のサイコロの目を表すとする．
@@ -86,7 +86,7 @@
   #+end_quote
 
 #+reveal: split
-- 解答 (計算例)
+- [[color:green][解答 (計算例)]]
   #+begin_quote
   \(X\) の平均は
   #+begin_src latex
@@ -105,7 +105,7 @@
   #+end_quote
 
 #+reveal: split
-- 解答 (Rでの計算例)
+- [[color:green][解答 (Rでの計算例)]]
   #+begin_src R :tangle yes
     ### 平均と分散の計算
     p <- rep(c(1/9,2/9),3) # 確率の値 (1/9 と 2/9 を交互に3回繰り返す)
@@ -132,7 +132,7 @@
   \(X_n\) が \(x_n\) という値をとる"
   という事象が起きる確率を
   *同時分布*
-  という
+  という．
   #+begin_src latex
     \begin{equation}
       P(X_1=x_1,X_2=x_2,\dots,X_n=x_n)
@@ -152,7 +152,7 @@
       =P(X_1=x_1)\cdot P(X_2=x_2)\cdots P(X_n=x_n)
     \end{multline}
   #+end_src
-  が成り立つことをいう
+  が成り立つことをいう．
   #+end_quote
   # 直感的には
   # すべての\(i=1,\dots,n\)について,
@@ -169,7 +169,7 @@
       P(X_1=x)=P(X_2=x)=\cdots=P(X_n=x)
     \end{equation}
   #+end_src
-  が成り立つことをいう
+  が成り立つことをいう．
   #+end_quote
 
 ** 独立同分布性
@@ -182,9 +182,9 @@
   *独立同分布*
   もしくは
   *i.i.d.* 
-  であるという
+  であるという．
   #+end_quote
-  - i.i.d. はindependent and identically distributedの略
+  - i.i.d. は independent and identically distributed の略
 
 ** 無限列の独立性と同分布性
 - 無限列に対しては任意の部分列について考える
@@ -219,9 +219,9 @@
   # % 分析対象の一部を\alert{ランダムに}収集したデータのみを用いて(標本)平
   # % 均を計算しても, データのサンプル数が十分大きければ, その平均値は集団
   # % 全体の平均値に近い値であると考えられることは, 経験則としてよく知られ
-- 具体的な例: 
-  - [[color:darkgreen][歪みの無いコインの表が出た回数の割合]]
-  - [[color:darkgreen][視聴率の調査]]
+- 具体例
+  - [[color:green][歪みの無いコインの表が出た回数の割合]]
+  - [[color:green][視聴率の調査]]
 - この法則を数学的に定式化した定理が *大数の法則*
 
 ** 大数の強法則
@@ -252,7 +252,7 @@
   統計的な性質を見るには繰り返し実験 (Monte-Carlo法) を行う．
   #+end_quote
   - 適当な分布を設定する
-    - [[color:darkgreen][簡単な例は偏りのあるサイコロ]]
+    - [[color:green][簡単な例は偏りのあるサイコロ]]
   - \(n\) 個の確率変数(乱数)の標本平均を計算する
   - 真の平均と標本平均の差を計算する
   - \(n\) を大きくしたときの差の性質を観察する
@@ -417,7 +417,7 @@
   サンプル数 \(n\) が十分大きければ，
   標本平均と真の平均の差
   \(\bar{X}_n-\mu\) 
-  の分布は，
+  の分布は
   *標準正規分布*
   で近似できる
   #+begin_quote
@@ -531,8 +531,8 @@
 * 少数の法則
 ** 少数の法則の概要
 - 滅多に起きない事が起こる回数に関する法則
-- 典型的な例:
-  - [[color:darkgreen][不良品発生率の低い工場での日々の不良品の個数の分布]]
+- 具体例
+  - [[color:green][不良品発生率の低い工場での日々の不良品の個数の分布]]
     #+begin_quote
     ある製品の不良品率 \(p\) はとても小さいとする.
 
@@ -541,9 +541,9 @@
     日によって不良品の個数 \(S_n\) には多少のばらつきが生じる．
 
     個数 \(S_n\) は確率変数であり，
-    強度 \(\lambda\) の *Poisson分布* で近似できる．
+    強度 \(\lambda\) の *Poisson 分布* で近似できる．
     #+end_quote
-- これを正確に述べたのが *少数の法則*
+- この状況を正確に述べたのが *少数の法則*
 
 ** 少数の法則
 - 定理の前提
@@ -584,19 +584,20 @@
   - 定理の \(\sum_{i=1}^nX_i\) が不良品の例の \(S_n\) に対応
 
 ** Poisson 分布
-- 確率変数 \(X\) の取りうる値が0以上の整数全体で，
-  値が整数 \(k\geq0\) となる確率が
+- 定義
   #+begin_quote
+  確率変数 \(X\) の取りうる値が0以上の整数全体で，
+  値が整数 \(k\geq0\) となる確率が
+
   #+begin_src latex
     \begin{equation}
       P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!}
     \end{equation}
   #+end_src
-  #+end_quote
   で与えられるものを強度
   \(\lambda\) の *Poisson 型確率変数* 
-  その確率法則を強度 \(\lambda\) の *Poisson 分布* と呼ぶ
-  #     - Poisson 分布の確率の値は関数 ~dpois()~ で計算
+  その確率法則を強度 \(\lambda\) の *Poisson 分布* と呼ぶ．
+  #+end_quote
 
 ** 数値実験の設計
 - 方針
@@ -609,9 +610,9 @@
   - \(n\) 個(非常に多数)の確率変数の合計 \(S_n\) を計算する
   - \(S_n\) を多数観測し分布を求める
   - \(S_n\) の分布を
-    強度 \(\lambda=pn\) の Poisson分布と比較する
+    強度 \(\lambda=pn\) の Poisson 分布と比較する
     - 確率 \(p\) サイズ \(n\) の二項乱数 ~rbinom()~ が利用可能
-    - Poissson 分布の確率値は関数 ~dpois()~ で計算
+    - Poissson 分布の確率値は関数 ~dpois()~ で計算可能
 
 
 * 演習
@@ -627,7 +628,7 @@
     不良品の発生確率 (\(p\)) が 0.002 である工場を例として，
     2年間の操業(週5日x50週間)
     において観測される不良品数の分布を確認しなさい．
-  - 母数 \(n,p\) の変更によって結果がどのように変わるか観察せよ．
+  - 母数 \(n,p\) の違いによって結果がどのように変わるか観察しなさい．
 
 #+begin_src R :exports none :tangle yes
   ### 練習問題 少数の法則
@@ -641,7 +642,7 @@
   ## x <- replicate(N, rbinom(1,n,p)) # これでも同じ
   (myData <- table(x)) # 不良品数の度数分布表を作成
   ## それぞれの不良品数が生じた日数の割合のグラフを作成
-  par(family = "HiraginoSans-W4") # 日本語フォントの指定
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示
   plot(myData/N, type="h", col="royalblue", lwd=6, 
        xlab="不良品数", ylab="発生割合")
   lines(min(x):max(x)+0.4, dpois(min(x):max(x),n*p),
@@ -655,7 +656,7 @@
   for(n in c(500,1000,5000,10000)){
     x <- rbinom(N,n,p) # 不良品数
     myData <- table(x)/N # 集計
-    par(family = "HiraginoSans-W4") 
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示
     plot(myData, type="h", col="royalblue", lwd=6, 
          xlab="不良品数", ylab="発生割合",
          main=paste("n =",n,"p =",p))
@@ -668,7 +669,7 @@
   for(p in c(0.001,0.002,0.005,0.01)){
     x <- rbinom(N,n,p) # 不良品数
     myData <- table(x)/N # 集計
-    par(family = "HiraginoSans-W4") 
+    if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示
     plot(myData, type="h", col="royalblue", lwd=6, 
          xlab="不良品数", ylab="発生割合",
          main=paste("n =",n,"p =",p))
@@ -720,6 +721,16 @@
   #+end_quote
 
 
+* 次回の予定
+- 一般の確率変数
+- 離散分布
+  - 離散一様分布・二項分布
+  - Poisson 分布・幾何分布
+- 連続分布
+  - 一様分布・正規分布
+  - ガンマ分布・\(t\)-分布・\(F\)-分布
+
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted

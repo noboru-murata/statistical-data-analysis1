@@ -1,9 +1,9 @@
 #+TITLE: 確率シミュレーション
-#+SUBTITLE: 乱数を用いた数値実験
+#+SUBTITLE: 第6講 - 乱数を用いた数値実験
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-05-13 16:00:15 mura>
+# Time-stamp: <2022-05-13 16:44:07 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
