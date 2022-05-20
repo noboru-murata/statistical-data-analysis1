@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-05-13 15:34:36 mura>
+# Time-stamp: <2022-05-20 15:11:19 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -48,7 +48,7 @@
 - ~jpdata[1-3].csv~ (再掲)
   - https://www.e-stat.go.jp (統計局)
     - 地域から探す / 全県を選択 / 項目を選択してダウンロード
-    - 日本語が扱えることを想定して日本語
+    - 日本語が扱えることを想定して日本語を含んでいる
     - 英語のために -en を用意
   - データファイル (文字コード : utf8)
     - jpdata1.csv : 県別の対象データ
@@ -60,7 +60,7 @@
       JP.item <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
       JP.area <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
     #+end_src
-    - 変数名は自由に付けてよい
+    - /[[color:orange][変数名は自由に付けてよい]]/
 
 #+reveal: split 
 - ~tokyo_weather.csv~ (~tokyo.zip~ の中)
@@ -108,6 +108,8 @@
     ## ylab: y 軸のラベル名．既定値は x のオブジェクト名
     ## ...: その他のオプション
   #+end_src
+  - /[[color:orange][適宜 ~help("plot")~ を参照]]/
+
   # - ~...~: 他のオプション．詳細は ~help("par")~ を参照
 
 ** 関数 ~plot()~ のオプション
@@ -160,7 +162,7 @@
 - オプションの例
   #+begin_src R :file figs/graph-plot3.png :results graphics :tangle yes
     x <- pi/6*(0:12)
-    plot(x,sin(x),type="l",lwd=3,col="blue",ylab="y=sin(x)") 
+    plot(x, sin(x), type="l", lwd=3, col="blue", ylab="y=sin(x)") 
   #+end_src
 
 #+NAME:   fig:graph-plot3
@@ -188,7 +190,7 @@
     x <- seq(0, 4*pi, by=0.5)
     y <- sin(x)
     z <- cos(x)
-    plot(x, y, type="b", pch="x", ylim=c(-2,2), col="red") # "b"="p+l"
+    plot(x, y, type="b", pch=4, ylim=c(-2,2), col="red") # "b"="p+l"
     points(x, z, col="blue", pch="C") # 点を追加. pchは文字も指定できる
     lines(x, z, col="cyan", lwd=3) # 折れ線を追加
   #+end_src
