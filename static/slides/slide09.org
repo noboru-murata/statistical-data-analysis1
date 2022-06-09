@@ -3,14 +3,14 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-08-14 21:15:29 mura>
-:reveal:
+# Time-stamp: <2022-06-08 15:30:05 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
 
 * 講義の内容
 - 基本的な記述統計量
@@ -776,6 +776,18 @@
 #+end_src
 
 
+
+* 次回の予定
+- 点推定
+  - 不偏推定量
+  - Cramér-Raoの不等式
+- 最尤推定量
+- 区間推定
+  - 信頼区間
+  - 正規母集団の区間推定
+  - 漸近正規性にもとづく区間推定
+
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted

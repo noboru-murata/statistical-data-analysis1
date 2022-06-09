@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-05-06 18:28:14 mura>
+# Time-stamp: <2022-05-20 15:57:29 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -185,7 +185,7 @@
   ### 練習問題 関数 subset() によるデータフレームの操作
   ## 7月のオゾン濃度
   subset(airquality,
-         subset = Month==7,
+         subset = Month==7, # Month %in% 7 などとしても良い
          select = Ozone)
   
   ## 風速時速10マイル以上かつ気温が華氏80度以上

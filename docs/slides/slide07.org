@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-05-13 17:12:14 mura>
+# Time-stamp: <2022-06-03 14:27:05 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -55,7 +55,7 @@
   #+begin_quote
   #+begin_src latex
     \begin{equation}
-      \mathbb{E}[X]:=\sum_{i=1}^Nx_iP(X=x_i)
+      \mathbb{E}[X]=\sum_{i=1}^Nx_iP(X=x_i)
     \end{equation}
   #+end_src
   #+end_quote
@@ -64,7 +64,7 @@
   #+begin_src latex
     \begin{equation}
       \mathrm{Var}(X)
-      :=\mathbb{E}[(X-\mathbb{E}[X])^2]
+      =\mathbb{E}[(X-\mathbb{E}[X])^2]
       % =\sum_{i=1}^N(x_i-\mathbb{E}[X])^2P(X=x_i)\\
       =\mathbb{E}[X^2]-\mathbb{E}[X]^2
     \end{equation}
@@ -192,19 +192,19 @@
   #+begin_quote
   \(X_1,X_2,\dotsc\) が *独立* であるとは，
   任意の正整数 \(n\) に対して \(X_1,X_2,\dotsc,X_n\) が
-  独立であることをいう
+  独立であることをいう．
   #+end_quote
 - 同分布性
   #+begin_quote
   \(X_1,X_2,\dotsc\) が *同分布* であるとは，
   任意の正整数 \(n\) に対して \(X_1,X_2,\dotsc,X_n\) が
-  同分布であることをいう
+  同分布であることをいう．
   #+end_quote
 - 独立同分布性
   #+begin_quote
   \(X_1,X_2,\dotsc\) が *独立同分布*
   もしくは *i.i.d.* であるとは，
-  \(X_1,X_2,\dotsc\) が独立かつ同分布であることをいう
+  \(X_1,X_2,\dotsc\) が独立かつ同分布であることをいう．
   #+end_quote
 
 
@@ -232,7 +232,7 @@
   このとき,  \(X_1,\dotsc,X_n\) の標本平均
   #+begin_src latex
     \begin{equation}
-      \bar{X}_n := \frac{1}{n}\sum_{i=1}^nX_i
+      \bar{X}_n = \frac{1}{n}\sum_{i=1}^nX_i
     \end{equation}
   #+end_src
   が \(n\to\infty\) のとき \(\mu\) に収束する確率は1である．

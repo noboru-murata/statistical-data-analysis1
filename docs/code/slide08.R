@@ -18,7 +18,7 @@ myRandom <- function(){ # Bernolli分布をm個生成して合計
   sum(rbinom(n, size=1, prob=p))}
 myData <- replicate(mc, myRandom())
 myTable <- table(myData)/mc # 出現確率ごとの表(度数分布表)を作成
-par(family="HiraginoSans-W4") # 日本語フォントの指定
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 plot(myTable, type="h", lwd=5, col="royalblue",
      xlab="値", ylab="確率",
      main=paste0("二項分布(試行回数", n, ", 成功確率", p, ")"))
@@ -41,7 +41,7 @@ myRandom <- function(){ # 2つの Poisson 分布の和
   rpois(1, lambda=lambda1)+rpois(1, lambda=lambda2)}
 myData <- replicate(mc, myRandom())
 myTable <- table(myData)/mc 
-par(family="HiraginoSans-W4") # 日本語フォントの指定
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 plot(myTable, type="h", lwd=5, col="royalblue",
      xlab="値", ylab="確率",
      main=paste0("Poisson 分布(強度", lambda1+lambda2, ")"))
@@ -73,7 +73,7 @@ myRandom <- function(){ # 一方の分布を確認する
   u2 <- runif(1)
   return(sqrt(-2*log(u1))*cos(2*pi*u2))}
 myData <- replicate(mc, myRandom()) # Monte-Carlo実験
-par(family="HiraginoSans-W4") # 日本語フォントの指定
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 hist(myData, freq=FALSE, breaks=40,
      col="lightblue", border="white", 
      xlab="x", main=paste0("標準正規分布")) # ヒストグラム(密度表示)
@@ -120,7 +120,7 @@ k <- 8 # 自由度を設定
 myRandom <- function(){ 
   sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
 myData <- replicate(mc, myRandom()) # Monte-Carlo実験
-par(family="HiraginoSans-W4") # 日本語フォントの指定
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 hist(myData, freq=FALSE, breaks=25,
      col="lightblue", border="white", 
      xlab="x", main=bquote(paste(chi^2,"分布(自由度",.(k),")"))) 
@@ -143,7 +143,7 @@ myRandom <- function(){
   z <- rnorm(1) # 標準正規乱数
   return(z/sqrt(y/k))}
 myData <- replicate(mc, myRandom()) # Monte-Carlo実験
-par(family="HiraginoSans-W4") # 日本語フォントの指定
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 hist(myData, freq=FALSE, breaks=40,
      col="lightblue", border="white",  
      xlab="x", main=bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")")))
@@ -168,7 +168,7 @@ myRandom <- function(){
   ## y2 <- sum(rnorm(k2)^2) 
   return((y1/k1)/(y2/k2))}
 myData <- replicate(mc, myRandom()) # Monte-Carlo実験
-par(family="HiraginoSans-W4") # 日本語フォントの指定
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 hist(myData, freq=FALSE, breaks=40,
      col="lightblue", border="white",
      xlab="x",

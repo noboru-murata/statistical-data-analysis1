@@ -51,7 +51,7 @@ subset(airquality,
 ### 練習問題 関数 subset() によるデータフレームの操作
 ## 7月のオゾン濃度
 subset(airquality,
-       subset = Month==7,
+       subset = Month==7, # Month %in% 7 などとしても良い
        select = Ozone)
 
 ## 風速時速10マイル以上かつ気温が華氏80度以上
@@ -125,11 +125,11 @@ tail(myDataEn)
 myAreaEn
 ## 人口の最大値を見る
 with(myDataEn,max(population))
-## 人口の最大値を与える県の番号を見る (help(which.max)を参照)
+## 人口の最大値を与える県の番号を見る (help("which.max")を参照)
 with(myDataEn,which.max(population))
 ## どの都道府県の人口多いか調べる
 myDataEn[with(myDataEn,which.max(population)),] 
-## 人口の多い順に都道府県を並べる (help(order)を参照)
+## 人口の多い順に都道府県を並べる (help("order")を参照)
 rownames(myDataEn)[with(myDataEn,order(population,decreasing=TRUE))]
 
 ### データの集計で用いた例
@@ -153,22 +153,23 @@ median(myDataEn[[4]]) # 面積の中央値 (リストとして列を選択)
 min(myDataEn["young_population"])  # 若年人口の最小値 (列名で選択)
 with(myDataEn,max(old_population))  # 老年人口の最大値 (関数 with() を利用)
 
-### 関数applyの使い方
+### 関数 apply() の使い方
 x <- subset(myData, select=婚姻:失業) # 抽出
 colMeans(x) # 各列の平均
 apply(x, 2, max) # 列ごとの最大値
-sapply(x, max)   # 上と同じ (help(sapply)を参照)
+sapply(x, max)   # 上と同じ (help("sapply")を参照)
 ## 自作関数の適用 (関数に名前を付けないで利用することができる)
 apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
+## return を省略すると関数内で最後に評価された値が返り値になる
 
 ### 日本語に不具合がある場合
 x <- subset(myDataEn, select=marriage:unemployed) # 抽出
 colMeans(x) # 各列の平均
 apply(x, 2, max) # 列ごとの最大値
-sapply(x, max)   # 上と同じ (help(sapply)を参照)
+sapply(x, max)   # 上と同じ (help("sapply")を参照)
 apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数
 
-### 関数aggregateの使い方
+### 関数 aggregate() の使い方
 ## 人口から面積まで地方ごとの平均値を計算
 x <- subset(myData, select = 人口:面積)
 aggregate(x, by = list(地方 = myArea$地方), FUN = sum)
@@ -178,7 +179,8 @@ aggregate(subset(myData, select = 人口:面積),
           FUN = sum)
 
 y <- transform(x, 地方 = myArea$地方) # データフレームを変更
-aggregate( . ~ 地方, data = y, FUN = sum)
+aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
+          data = y, FUN = sum)
 
 aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
           data = transform(subset(myData, select = 人口:面積),
