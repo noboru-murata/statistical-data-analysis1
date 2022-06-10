@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-09 13:37:10 mura>
+# Time-stamp: <2022-06-10 15:06:50 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -404,10 +404,10 @@
   #+end_quote
 
 ** Poisson 分布に従う乱数
-- 一定時間に放射性物質から放射される粒子の数や，
-  一定時間に発生する交通事故の数などは Poisson 分布に従うことが知られている
 - 発生確率が低い事象が十分長い期間で起こる回数の分布は
   Poisson 分布で近似できる (*少数の法則*)
+  - [[color:green][一定時間に放射性物質から放射される粒子の数]]
+  - [[color:green][一定時間に発生する交通事故の件数]]
 - 乱数の発生は関数 ~rpois()~ を用いる
   #+begin_src R :tangle yes
     rpois(15, lambda=1) # 強度1の Poisson 分布(15個)
@@ -790,7 +790,7 @@
     return(c(x1,x2))
   }
   x <- replicate(mc, boxmuller()) # 2行xmc列の行列が得られる
-  par(family="HiraginoSans-W4") # 日本語フォントの指定
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
   plot(x[1,],x[2,],xlab="x1",ylab="x2") # 散布図を描く
   ## 以下では同じ分布なのでx1,x2はまとめて計算
   mu <- round(mean(x),2)

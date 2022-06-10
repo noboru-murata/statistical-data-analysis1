@@ -90,7 +90,7 @@ boxmuller <- function(){
   return(c(x1,x2))
 }
 x <- replicate(mc, boxmuller()) # 2行xmc列の行列が得られる
-par(family="HiraginoSans-W4") # 日本語フォントの指定
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 plot(x[1,],x[2,],xlab="x1",ylab="x2") # 散布図を描く
 ## 以下では同じ分布なのでx1,x2はまとめて計算
 mu <- round(mean(x),2)

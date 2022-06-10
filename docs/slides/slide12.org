@@ -3,14 +3,14 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-08-14 21:37:40 mura>
-:reveal:
+# Time-stamp: <2022-06-09 14:41:01 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
 
 * 講義の内容
 - 分散分析とは
@@ -37,7 +37,7 @@
   *2つのグループ間* で平均の差があるか否か
 - 分散分析: \\
   *2つ以上のグループ間* で平均の差があるか否か
-- [[color:darkgreen][分散分析における仮説の例]]:
+- [[color:green][分散分析における仮説の例]]
   #+begin_quote
   - ある小売店について"売上高は月によって差があるか"
   - ある銘柄の株価について"収益率は曜日によって差があるか"
@@ -148,7 +148,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- [[color:darkgreen][小売店の売上高の問題]]
+- [[color:green][小売店の売上高の問題]]
   #+begin_quote
   - \(A_1,A_2,\dotsc,A_p\): 月
   - \(Y_{i1},Y_{i2},\dotsc,Y_{in_i}\): \(i\) 月の各日における売上高
@@ -156,8 +156,8 @@
 
 ** 一元配置のモデル
 - 分散分析の用語:
-  - *因子*: グループ分けのこと ([[color:darkgreen][月ごと]])
-  - *水準*: 因子内の各グループのこと ([[color:darkgreen][1月，2月，3月，…]])
+  - *因子*: グループ分けのこと ([[color:green][月ごと]])
+  - *水準*: 因子内の各グループのこと ([[color:green][1月，2月，3月，…]])
 - 観測データのモデル:
   #+begin_quote
   #+begin_src latex
@@ -462,7 +462,7 @@
   wdays <- weekdays(days) # 各日付の曜日を計算
   TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
   ## 箱ひげ図で可視化
-  par(family="HiraginoSans-W4") # 日本語フォントの指定
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
   boxplot(temp ~ weekday, data=TW.data, 
           col="lavender", main="曜日ごとの気温") 
   aggregate(temp ~ weekday, data=TW.data, FUN=mean)
@@ -493,7 +493,7 @@
 - 因子が2種類ある場合
   - 一方の因子の水準の平均値に差があるか否かを検定
   - もう一方の因子の水準で平均値に差があるかは不問
-- [[color:darkgreen][複数の薬の治験の問題]]
+- [[color:green][複数の薬の治験の問題]]
   #+begin_quote
   複数の薬の効能を複数の被験者に投与する実験
   - "薬の種類"と"被験者番号"の2種類の因子
@@ -523,7 +523,7 @@
   - \(\varepsilon_{ij}\) は独立同分布 (平均0, 分散 \(\sigma^2\) の正規分布)
 
 ** 二元配置の例
-- [[color:darkgreen][複数の薬の治験の問題]]
+- [[color:green][複数の薬の治験の問題]]
   - 因子
     - 因子 \(A\): "薬の種類"
     - 因子 \(B\): "被験者番号"
@@ -806,6 +806,16 @@
 #+end_src
 
 
+* 次回の予定
+- 回帰分析
+- 回帰係数の推定
+  - 点推定
+  - 区間推定
+- 回帰係数の検定
+  - 係数の有意性
+- 決定係数
+
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted

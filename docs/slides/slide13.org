@@ -3,14 +3,14 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-08-14 21:42:14 mura>
-:reveal:
+# Time-stamp: <2022-06-09 14:35:43 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
 
 * 講義の内容
 - 回帰分析
@@ -176,7 +176,7 @@
   ## 気候データによる例
   TW.data <- read.csv("data/tokyo_weather.csv")
   ## データの散布図 (1年分)
-  par(family="HiraginoSans-W4") 
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
   plot(temp ~ solar, # Y軸 ~ X軸
        data=TW.data,
        pch=20, col="blue")
@@ -642,6 +642,7 @@
 #+end_src
 
 
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted

@@ -3,14 +3,14 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-08-14 21:22:15 mura>
-:reveal:
+# Time-stamp: <2022-06-09 14:28:10 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
 
 * 講義の内容
 - 点推定
@@ -72,7 +72,7 @@
   \(\hat{\theta}\) を \(\theta\) の *推定量* と呼ぶ．
   #+end_quote
 - 記述統計量は分布のパラメタの1つ
-- [[color:darkgreen][推定量の例]]: 
+- [[color:green][推定量の例]]
   #+begin_quote
   \(\mathcal{L}\) の平均 \(\mu\) を
   標本平均 \(\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\) によって
@@ -99,7 +99,7 @@
       \end{equation}
     #+end_src
     #+end_quote
-  - [[color:darkgreen][良い推定量の例]]:
+  - [[color:green][良い推定量の例]]
     #+begin_quote
     標本平均, 不偏分散はそれぞれ
     \(\mathcal{L}\) の平均, 分散の不偏かつ一致性をもつ推定量
@@ -108,7 +108,7 @@
 ** 良い不偏推定量
 - 一般に不偏推定量も複数存在
   #+begin_quote
-  [[color:darkgreen][例: \(\mathcal{L}\) の平均 \(\mu\) の不偏推定量]]:
+  [[color:green][例: \(\mathcal{L}\) の平均 \(\mu\) の不偏推定量]]
   - 標本平均 \(\bar{X}\) 
   - \(X_1\) 
   - \(X_1,\dots,X_n\) のメディアン
@@ -126,7 +126,7 @@
   #+end_src
   #+end_quote
 
-** Cramér-Raoの不等式
+** Cramér-Rao の不等式
 - 定理
   #+begin_quote
   \(\mathcal{L}\) は1次元パラメタ \(\theta\) を含む連続分布とし，
@@ -347,7 +347,7 @@
   #+end_src
   #+end_quote
 
-** 例: Poisson分布の最尤推定
+** 例: Poisson 分布の最尤推定
 - \(\mathcal{L}\) をパラメタ \(\lambda>0\) のPoisson分布でモデル化
   - 対数尤度関数 (未知パラメタ: \(\lambda\) )
     #+begin_quote
@@ -482,7 +482,7 @@
   ## 以下では関数 with を利用しているが，TW.data から風速を取り出しておいても良い
   
   ## ヒストグラムの描画
-  par(family="HiraginoSans-W4") # 日本語フォントの指定
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
   with(TW.data, hist(wind, breaks=30, freq=FALSE, # 密度
                      col="skyblue", border="blue",
                      main="風速のヒストグラム", xlab="風速 [m/s]", ylab="密度"))
@@ -970,6 +970,17 @@
 #+end_src
 
 
+* 次回の予定
+- 検定
+  - 帰無仮説と対立仮説
+  - 棄却域
+  - \(p\)-値
+- 平均の検定
+- 分散の検定
+- 平均の差の検定
+- 分散の比の検定
+
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted

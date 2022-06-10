@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-08-14 21:30:52 mura>
+# Time-stamp: <2022-06-09 14:39:28 mura>
 :reveal:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -40,7 +40,7 @@
 - ある現象・母集団に対して仮定された仮説の真偽を
   データに基づいて統計的に検証する方法
   #+begin_quote
-  [[color:darkgreen][薬の治験の例]]: 
+  [[color:green][薬の治験の例]]
   新しい薬の効能が古い薬よりも優れていること(仮説)を
   薬の治験結果(データ)から検証したい
   #+end_quote
@@ -70,10 +70,10 @@
   - "帰無仮説を捨てて無に帰する"ことを期待する場合が多い
 
 ** 帰無仮説と対立仮説
-- [[color:darkgreen][薬の治験の例]] (単純な場合)
+- [[color:green][薬の治験の例]] (単純な場合)
   - 帰無仮説 \(H_0\): 新しい薬も古い薬も効能は同じ
   - 対立仮説 \(H_1\): 新しい薬と古い薬の効能は異なる
-- [[color:darkgreen][薬の治験の例]] (新薬がより良いことを期待する場合)
+- [[color:green][薬の治験の例]] (新薬がより良いことを期待する場合)
   - 帰無仮説 \(H_0\): 新しい薬も古い薬も効能は同じ
   - 対立仮説 \(H_1\): 新しい薬の方が古い薬より効能が高い
 
@@ -292,7 +292,7 @@
   # (棄却域に入ることと \(p\)-値が有意水準未満となることは同義)
 
 ** 対立仮説の違い
-- [[color:darkgreen][薬の治験例]]: 
+- [[color:green][薬の治験例]]
   #+begin_quote
   観測データ \(X_1,X_2,\dotsc,X_n\) (\(n\) 人の被験者の治験結果)
   に対する仮説:
@@ -678,7 +678,7 @@
 #+begin_src R :eval no :exports none :tangle yes
   ### 練習問題 6月の気温の分散の検定
   TW.data <- read.csv("data/tokyo_weather.csv")
-  par(family="HiraginoSans-W4") 
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
   boxplot(temp ~ month, data=TW.data, col="lightblue")
   mySummary <- aggregate(temp ~ month, data=TW.data, FUN=var)
   plot(mySummary,type="h",col="blue",lwd=3,
@@ -852,7 +852,7 @@
 - 対応がある観測データの平均の差の検定では
   2種類のデータ間の自然な対応を考慮することがある
   #+begin_quote
-  [[color:darkgreen][薬の投薬の例]]:
+  [[color:green][薬の投薬の例]]
   - 2種類の薬の効能を比較するために被験者に両方の薬を投与
   - 被験者 \(i\) にそれぞれの薬を投与した場合の治験結果: \(X_i,Y_i\)
   - \(X_i\) と \(Y_i\) には"同一の被験者に対する治験結果"という意味で対応がある
@@ -1012,6 +1012,16 @@
 #+end_src
 
 
+* 次回の予定
+- 分散分析とは
+- 一元配置
+  - 一元配置のモデル
+  - 検定の構成
+- 二元配置
+  - 二元配置のモデル
+  - 検定の構成
+
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted
