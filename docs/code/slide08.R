@@ -96,7 +96,6 @@ plot(x[1,],x[2,],xlab="x1",ylab="x2") # 散布図を描く
 mu <- round(mean(x),2)
 sigma <- round(sd(x),2)
 hist(x, freq=FALSE, breaks=40, col="lightblue", border="white",
-
      main=paste0("正規分布(平均", mu, ", 分散", sigma^2, ")")) # ヒストグラム(密度表示)
 curve(dnorm(x, mean=mu, sd=sigma), add=TRUE, 
       col="red", lwd=3) # 理論上の確率密度関数
