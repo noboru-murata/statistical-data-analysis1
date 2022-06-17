@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-09 14:20:08 mura>
+# Time-stamp: <2022-06-17 15:55:13 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -11,6 +11,13 @@
 # <m C-i でlatex block (math env用)
 # C-c '
 :END:
+
+* COMMENT メモ
+- 前回の確率分布との関係を説明
+  - 重要な確率分布
+    - 統計推測において重要なモデル
+    - 少数の母数で分布の形状を定まる
+    - 特徴付け(生成機構)がわかりやすい
 
 * 講義の内容
 - 基本的な記述統計量
@@ -27,11 +34,9 @@
   setwd("~/Desktop/lectures/u-tokyo/spring/slide")
 #+end_src
 
-* COMMENT メモ
-
 
 * 基礎的な記述統計量
-** 記述統計量
+** 記述統計量とは
 - *記述統計量* : (または要約統計量・基本統計量)
   - データを簡潔に要約して表すための統計値
   - その集団全体の特徴を表す重要な指標
@@ -47,7 +52,7 @@
 - 手に入るのは(少数の)サンプル(観測データ) \\
   (観測データを \(X_1,X_2,\dots,X_n\) で表す)
 - *推定* = 観測データから知りたい量を計算する方法
-- 真の値と観測データによる推定値には *差 (誤差)* がある 
+- 真の値と観測データによる推定値には差がある *(誤差)* 
 
 ** 独立同分布性
 - 統計解析における重要な仮定とその帰結 :
@@ -67,24 +72,38 @@
 
 ** 推定量の一致性
 - サンプル数が大きい場合に "合理的な" 推定量となる根拠の1つ
-  - *(強)一致性* (consistency) : \\
-    推定量がサンプル数 \(n\to\infty\) のとき確率1で真の値に収束する性質
-  - *(強)一致推定量* : 一致性をもつ推定量
+- *(強)一致性* (consistency) :
+  #+begin_quote
+  推定量がサンプル数
+  \(n\to\infty\) のとき確率1で真の値に収束する性質
+  #+begin_src latex
+    \begin{equation}
+      P\left(|\hat\theta-\theta|<\varepsilon\right)
+      \to1\quad
+      (\forall\varepsilon,\;
+      n\to\infty)
+    \end{equation}
+  #+end_src
+  #+end_quote
+- *(強)一致推定量* : 一致性をもつ推定量
   # - 標本平均・標本分散・標本標準偏差は
   #   平均・分散・標準偏差の一致推定量
 
 ** 推定量の不偏性
 - サンプル数が小さい場合の推定量の良さに関する性質の1つ
-  - *不偏性* (unbiasedness) : \\
-    推定量 \(\hat{\theta}\)
-    が不偏であるとは, \(\hat{\theta}\)
-    の平均が真の値 \(\theta\) となる性質
-    #+begin_src latex
-      \begin{equation}
-        \mathbb{E}[\hat{\theta}]=\theta
-      \end{equation}
-    #+end_src
-  - *不偏推定量* : 不偏性をもつ推定量
+- *不偏性* (unbiasedness) : 
+  #+begin_quote
+  推定量 \(\hat{\theta}\)
+  が不偏であるとは,
+  \(\hat{\theta}\)
+  の平均が真の値 \(\theta\) となる性質
+  #+begin_src latex
+    \begin{equation}
+      \mathbb{E}[\hat{\theta}]=\theta
+    \end{equation}
+  #+end_src
+  #+end_quote
+- *不偏推定量* : 不偏性をもつ推定量
 
 
 * "モーメント"に基づく記述統計量
@@ -171,7 +190,7 @@
     #   バイアス補正をしていることを強調するために通常 *不偏分散* と呼ぶ
 
 ** 標本標準偏差
-- *標本標準偏差* (sample standard deviation) :
+- *標本標準偏差* (sample standard deviation) : \\
   通常は不偏分散の平方根 \(s\) を指す
 - 一般に \(s\) は標準偏差 \(\sigma\) の *不偏推定量ではない*
   # - 標本標準偏差の計算: ~sd()~
@@ -371,7 +390,7 @@
     正規分布より裾が重いと解釈されることが多い
     #+end_quote
 - [[color:green][正の超過尖度をもつ分布の例]]
-  - 自由度 \(\nu>4\) をもつ \(t\) 分布 \(t(\nu)\) の超過尖度は \(6/(\nu-4)\) \\
+  - 自由度 \(\nu>4\) をもつ \(t\)-分布 \(t(\nu)\) の超過尖度は \(6/(\nu-4)\) \\
     (\(\nu\leq 4\) のときは \(t(\nu)\) は4次モーメントをもたない)
   - ガンマ分布 \(\Gamma(\nu,\alpha)\) の超過尖度は \(6/\nu\)
 
@@ -431,7 +450,7 @@
   #+end_quote
 - 基本的な使い方
   #+begin_src R :eval no
-    library(e1071) # package::e1071 の読み込み．必要なら install する
+    library("e1071") # package::e1071 の読み込み．必要なら install する
     skewness(x, na.rm = FALSE, type = 3) # 標本歪度
     kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
     ## x: ベクトル，データフレームなど
@@ -462,7 +481,7 @@
 
 #+begin_src R :eval no :exports none :tangle yes
   ### 練習問題 歪度と超過尖度の計算
-  library(e1071)
+  library("e1071")
   ## データの読み込み
   TW.data <- read.csv("data/tokyo_weather.csv")
   ## 全データによる計算
@@ -611,22 +630,22 @@
 - *中央値* もしくは *メディアン* (median) :
   #+begin_quote
   データを昇順に並べ替えたとき中央にくる値
-  #+end_quote
   - \(n\) が奇数の場合 : \(X_{((n+1)/2)}\)
   - \(n\) が偶数の場合 : \((X_{(n/2)}+X_{(n/2+1)})/2\)
+  #+end_quote
 - 中央値は平均と同様にデータを代表する値
 - データ中の *外れ値* (異常な値)の影響を受けにくい
 
 ** 分位点
 - \(100\alpha\) % *分位点* (percentile/quantile) :
   #+begin_quote
-  メディアンの一般化
-  #+end_quote
-- \(\alpha\in[0,1]\) に対して,
+  \(\alpha\in[0,1]\) に対して,
   その点以下のデータの個数が全体の約 \(100\alpha\) % になるような点
   - *第1四分位点* : 25%分位点
   - *第2四分位点* : 50%分位点 (中央値と等価)
   - *第3四分位点* : 75%分位点
+  #+end_quote
+  - メディアンの一般化
 
 ** 中央値・分位点の計算
 - 基本的な使い方

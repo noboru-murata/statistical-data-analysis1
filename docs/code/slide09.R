@@ -55,7 +55,7 @@ for(inum in 1:3){
 }
 
 ### 練習問題 歪度と超過尖度の計算
-library(e1071)
+library("e1071")
 ## データの読み込み
 TW.data <- read.csv("data/tokyo_weather.csv")
 ## 全データによる計算
