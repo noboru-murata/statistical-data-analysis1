@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-24 13:36:57 mura>
+# Time-stamp: <2022-06-24 14:00:26 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -672,12 +672,12 @@
   #+end_quote
 
 ** 平均の区間推定 (分散未知)
-- \(\chi^2\) 分布の特徴付け
+- \(\chi^2\)-分布の特徴付け
   - 標準正規分布に従う \(k\) 個の独立な確率変数の
-    二乗和は自由度 \(k\) の \(\chi^2\) 分布に従う
-- \(t\) 分布の特徴付け
+    二乗和は自由度 \(k\) の \(\chi^2\)-分布に従う
+- \(t\)-分布の特徴付け
   - \(Z\) を標準正規分布に従う確率変数，
-    \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
+    \(Y\) を自由度 \(k\) の \(\chi^2\)-分布に従う確率変数とし，
     \(Z,Y\) は独立であるとする．
     このとき確率変数
     #+begin_quote
@@ -687,7 +687,7 @@
       \end{equation}
     #+end_src
     #+end_quote
-    は自由度 \(k\) の \(t\) 分布に従う
+    は自由度 \(k\) の \(t\)-分布に従う
 
 #+reveal: split
 - 標本平均と不偏分散の性質
@@ -701,7 +701,7 @@
     \end{equation}
   #+end_src
   とすると， \(\bar{X}\) と \(s^2\) は独立であり，
-  確率変数 \((n{-}1)s^2/\sigma^2\) は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う．
+  確率変数 \((n{-}1)s^2/\sigma^2\) は自由度 \(n{-}1\) の \(\chi^2\)-分布に従う．
   #+end_quote
 
 #+reveal: split
@@ -720,13 +720,13 @@
       % {\sqrt{\frac{(n{-}1)s^2}{\sigma^2}\Big/(n{-}1)}}
     \end{equation}
   #+end_src
-  は自由度 \(n{-}1\) の \(t\) 分布に従う．
+  は自由度 \(n{-}1\) の \(t\)-分布に従う．
   #+end_quote
 
 #+reveal: split
 - 信頼区間の構成
   #+begin_quote
-  \(t_{1{-}\alpha/2}(n{-}1)\) を自由度 \(n{-}1\) の \(t\) 分布の
+  \(t_{1{-}\alpha/2}(n{-}1)\) を自由度 \(n{-}1\) の \(t\)-分布の
   \(1{-}\alpha/2\) 分位点とすれば
   #+begin_src latex
     \begin{equation}
@@ -748,12 +748,12 @@
 ** 分散の区間推定
 - 不偏分散の性質
   #+begin_quote
-  \((n{-}1)s^2/\sigma^2\) は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う
+  \((n{-}1)s^2/\sigma^2\) は自由度 \(n{-}1\) の \(\chi^2\)-分布に従う
   #+end_quote
 - 不偏分散の確率
   #+begin_quote
   \(\chi^2_{\alpha/2}(n{-}1)\) ,  \(\chi^2_{1{-}\alpha/2}(n{-}1)\) を
-  それぞれ自由度 \(n{-}1\) の \(\chi^2\) 分布の
+  それぞれ自由度 \(n{-}1\) の \(\chi^2\)-分布の
   \(\alpha/2, 1{-}\alpha/2\) 分位点とすれば
   #+begin_src latex
     \begin{equation}
@@ -867,7 +867,7 @@
     #+end_src
     #+end_quote
   - 実問題で平均はわからないが，分散はわかるという場合はあまりない
-  - \(t\) -分布は自由度 \(n\to\infty\) で標準正規分布になる
+  - \(t\)-分布は自由度 \(n\to\infty\) で標準正規分布になる
 
 #+reveal: split
 - 信頼区間の構成

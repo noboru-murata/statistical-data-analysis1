@@ -3,14 +3,19 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-09 14:39:28 mura>
-:reveal:
+# Time-stamp: <2022-06-24 14:22:09 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
+
+* COMMENT メモ
+- 検定に関するMCを充実させたい
+- 正規母集団でなくても使えるが正規分布を仮定することを言う
+- 演習問題を整理するべきか
 
 * 講義の内容
 - 検定
@@ -28,11 +33,6 @@
 #+begin_src R :exports none
   setwd("~/Desktop/lectures/u-tokyo/spring/slide")
 #+end_src
-
-* COMMENT メモ
-- 検定に関するMCを充実させたい
-- 正規母集団でなくても使えるが正規分布を仮定することを言う
-- 演習問題を整理するべきか
 
 
 * 検定とは
@@ -71,11 +71,11 @@
 
 ** 帰無仮説と対立仮説
 - [[color:green][薬の治験の例]] (単純な場合)
-  - 帰無仮説 \(H_0\): 新しい薬も古い薬も効能は同じ
-  - 対立仮説 \(H_1\): 新しい薬と古い薬の効能は異なる
+  - 帰無仮説 \(H_0\) : 新しい薬も古い薬も効能は同じ
+  - 対立仮説 \(H_1\) : 新しい薬と古い薬の効能は異なる
 - [[color:green][薬の治験の例]] (新薬がより良いことを期待する場合)
-  - 帰無仮説 \(H_0\): 新しい薬も古い薬も効能は同じ
-  - 対立仮説 \(H_1\): 新しい薬の方が古い薬より効能が高い
+  - 帰無仮説 \(H_0\) : 新しい薬も古い薬も効能は同じ
+  - 対立仮説 \(H_1\) : 新しい薬の方が古い薬より効能が高い
 
 ** 検定の用語
 - *帰無分布*
@@ -87,11 +87,11 @@
   帰無仮説の下で統計量の取り得るべき範囲の外の領域
   #+end_quote
 - 仮説検定
-  - 帰無仮説を *棄却*: 帰無仮説は誤っていると判断すること
-  - 帰無仮説を *受容*: 帰無仮説を積極的に棄却できないこと
+  - 帰無仮説を *棄却* : 帰無仮説は誤っていると判断すること
+  - 帰無仮説を *受容* : 帰無仮説を積極的に棄却できないこと
 - 検定の誤り
-  - *第一種過誤*: "正しい帰無仮説を棄却する"誤り
-  - *第二種過誤*: "誤った帰無仮説を受容する"誤り
+  - *第一種過誤* : "正しい帰無仮説を棄却する"誤り
+  - *第二種過誤* : "誤った帰無仮説を受容する"誤り
 
 ** 検定の設計指針
 - 検定統計量 \(T\) に対して棄却域 \(R\) を設計
@@ -104,7 +104,7 @@
       \end{equation}
     #+end_src
     #+end_quote
-  - *検出力*: 第二種過誤が *起きない確率*
+  - *検出力* : 第二種過誤が *起きない確率*
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -119,7 +119,7 @@
   #+end_quote
 
 ** 棄却域の決め方
-- 検定を構成する場合の一般的な戦略: \\
+- 検定を構成する場合の一般的な戦略 : \\
   棄却域 \(R_{\alpha}\) は以下のように設定する
   - *サイズを小さく* (有意水準 \(\alpha\) 以下に) 抑える
   - 可能な限り *検出力を大きく* する
@@ -135,12 +135,12 @@
     #+end_quote
 - 対立仮説によって棄却域の形は変わりうる
 
-** \(p\)-値 (有意確率)
-- 帰無分布における検定統計量の評価:
+** @@latex:@@\(p\)-値 (有意確率)
+- 帰無分布における検定統計量の評価
   #+begin_quote
   検定統計量の値が棄却域に含まれる有意水準の最小値を考える
   #+end_quote
-- *\(p\)-値 (有意確率)*: (検定統計量 \(T\), 棄却域 \(R_{\alpha}\))
+- *\(p\)-値 (有意確率)* : (検定統計量 \(T\), 棄却域 \(R_{\alpha}\))
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -152,13 +152,13 @@
 - \(p\)-値が有意水準未満のときに帰無仮説を棄却する
 
 ** 検定に関する注意
-- 帰無仮説の受容の意味:
+- 帰無仮説の受容の意味
   #+begin_quote
   帰無仮説が正しいと仮定しても矛盾は生じない
 
   帰無仮説の正しさを積極的に支持する結果ではない
   #+end_quote
-- 第二種過誤:
+- 第二種過誤
   #+begin_quote
   一般に第二種過誤の起こる確率については何ら仮定がないため，
   その確率は非常に大きい可能性がある
@@ -202,7 +202,7 @@
 - 標本平均 \(\bar{X}\) (推定量) が
   帰無仮説のもとでの真の平均 \(\mu_0\) とどの程度離れているかを検証
 - 平均と分散の推定量を用いて検定統計量を構成
-  - 標本平均: (正規分布に従う)
+  - 標本平均 : (正規分布に従う)
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -210,7 +210,7 @@
       \end{equation}
     #+end_src
     #+end_quote
-  - 不偏分散: (\(\chi^2\)-分布に従う)
+  - 不偏分散 : (\(\chi^2\)-分布に従う)
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -220,7 +220,7 @@
     #+end_quote
 
 #+reveal: split
-- 検定統計量:
+- 検定統計量
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -230,11 +230,11 @@
   #+end_quote
 - 帰無分布 (帰無仮説 \(H_0\) のもとでの検定統計量 \(t\) の分布)
   は自由度 \(n{-}1\) の \(t\)-分布
-- *Studentの \(t\) 検定*
+- *Studentの \(t\)-検定*
 
 ** 棄却域を用いる場合
-- 有意水準を選択: \(\alpha\in(0,1)\)
-- \(H_0\) の下で以下が成立:
+- 有意水準を選択 : \(\alpha\in(0,1)\)
+- \(H_0\) の下で以下が成立
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -242,7 +242,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-  - \(t_{1{-}\alpha/2}(n{-}1)\):
+  - \(t_{1{-}\alpha/2}(n{-}1)\) :
     自由度 \(n{-}1\) の \(t\)-分布の \(1{-}\alpha/2\) 分位点
 - 第一種過誤の上限が \(\alpha\) の棄却域:
   #+begin_quote
@@ -257,7 +257,7 @@
 
 #+reveal: split
 - データから検定統計量 \(t\) の値を計算
-- 以下の場合，帰無仮説を棄却:
+- 以下の場合，帰無仮説を棄却
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -267,8 +267,8 @@
   #+end_src
   #+end_quote
 
-** \(p\)-値を用いる場合
-- \(p\)-値を計算: ( \(f(x)\):自由度 \(n{-}1\) の \(t\)-分布の密度)
+** @@latex:@@\(p\)-値を用いる場合
+- \(p\)-値を計算 : ( \(f(x)\) : 自由度 \(n{-}1\) の \(t\)-分布の密度)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -277,7 +277,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却:
+- \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -308,8 +308,8 @@
   観測データを生成している分布の平均 \(\mu\) が
   \(\mu_0\) より大きいかを検定する
   #+end_quote
-  - 帰無仮説: \(\mu=\mu_0\)
-  - 対立仮説: \(\mu>\mu_0\)
+  - 帰無仮説 : \(\mu=\mu_0\)
+  - 対立仮説 : \(\mu>\mu_0\)
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -317,13 +317,13 @@
       \end{equation}
     #+end_src
     #+end_quote
-- 検定統計量の標本分布:
+- 検定統計量の標本分布 : 
   - 帰無仮説は同一なので検定統計量 \(t\) の帰無分布も同一となる
   - 対立仮説の下で \(t\) の値は正の方向に大きくなると期待される
 - 棄却域 "\(t>c\)" (\(c\) は正の数) を考えるのが自然
 
 ** 棄却域を用いる場合
-- 有意水準を選択: \(\alpha\in(0,1)\)
+- 有意水準を選択 : \(\alpha\in(0,1)\)
 - \(H_0\) の下で以下が成立:
   #+begin_quote
   #+begin_src latex
@@ -334,7 +334,7 @@
   #+end_quote
   - \(t_{1{-}\alpha}(n{-}1)\):
     自由度 \(n{-}1\) の \(t\)-分布の \(1{-}\alpha\) 分位点
-- 第一種過誤の上限が \(\alpha\) の棄却域:
+- 第一種過誤の上限が \(\alpha\) の棄却域
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -346,7 +346,7 @@
 
 #+reveal: split
 - データから検定統計量 \(t\) の値を計算
-- 以下の場合，帰無仮説を棄却:
+- 以下の場合，帰無仮説を棄却
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -355,8 +355,8 @@
   #+end_src
   #+end_quote
 
-** \(p\)-値を用いる場合
-- \(p\)-値を計算: ( \(f(x)\):自由度 \(n{-}1\) の \(t\)-分布の密度)
+** @@latex:@@\(p\)-値を用いる場合
+- \(p\)-値を計算 : ( \(f(x)\):自由度 \(n{-}1\) の \(t\)-分布の密度)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -368,10 +368,10 @@
 - \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却
 
 ** 両側検定と片側検定
-- *右片側検定*: 棄却域がある定数 \(a\) によって \((a,\infty)\)
-- *左片側検定*: 棄却域がある定数 \(a\) によって \((-\infty,a)\)
+- *右片側検定* : 棄却域がある定数 \(a\) によって \((a,\infty)\)
+- *左片側検定* : 棄却域がある定数 \(a\) によって \((-\infty,a)\)
   - 右片側検定と左片側検定を合わせて *片側検定* と呼ぶ
-- *両側検定*: 棄却域がある定数 \(a < b\) によって \((-\infty,a)\cup(b,\infty)\)
+- *両側検定* : 棄却域がある定数 \(a < b\) によって \((-\infty,a)\cup(b,\infty)\)
 - 平均の検定の場合:
   - 対立仮説を \(H_1:\mu\neq\mu_0\) にとった場合は両側検定
   - 対立仮説を \(H_1:\mu>\mu_0\) にとった場合は右片側検定
@@ -387,7 +387,7 @@
   #+end_src
   #+end_quote
 - 検定の手続き
-  - 以下の場合，帰無仮説を棄却:
+  - 以下の場合，帰無仮説を棄却
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -399,7 +399,7 @@
     #+end_quote
   #   - \(t_{\alpha}(n{-}1)\):
   #     自由度 \(n{-}1\) の \(t\)-分布の \(\alpha\) 分位点
-  - 以下の \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却:
+  - 以下の \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -424,9 +424,9 @@
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
@@ -436,13 +436,13 @@
   #+begin_src R :eval no
     ## 例えば適当な数値を指定して以下のような実験を行えばよい
     myTrial <- function(n){ 
-      result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
-      return(result$p.value)}
+        result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
+        return(result$p.value)}
     myData <- replicate(mc, myTrial(n))
     hist(myData) # p.valueの分布を見る
     table(myData<alpha)/mc # alpha以下のデータの数を調べる
   #+end_src
-
+  
 #+begin_src R :eval no :exports none :tangle yes
   ### 練習問題 t検定のMonte-Carlo実験
   n <- 10
@@ -451,37 +451,37 @@
   mc <- 10000
   alpha <- 0.05
   myTrial <- function(n){ 
-    result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
-    return(result$p.value)}
+      result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
+      return(result$p.value)}
   myData <- replicate(mc, myTrial(n))
   hist(myData,xlab="p value") # p.valueの分布を見る
   table(myData<alpha)/mc # alpha以下の結果の数を調べる=サイズ
 #+end_src
 
 #+reveal: split
-- ある番組の視聴率が2桁に達したかどうか知りたいとする．
-  \(n\) 人にその番組を観たかどうか確認したところ
-  #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      X_{i}=
-      \begin{cases}
-        1,&\text{番組を観た}\\
-        0,&\text{番組を観ていない}
-      \end{cases},\;
-      i=1,2,\dotsc,n
-    \end{equation}
-  #+end_src
-  という結果が得られた．
-  これを用いた検定を考えてみよ．
-  #+end_quote
-  #+begin_src R :eval no
-    ## Xの生成は例えば mu1 を真の視聴率として以下のようにすればよい
-    x <- sample(0:1, n, replace=TRUE, prob=c(1-mu1,mu1))
-    ## n 人分の視聴結果 {1,0} のベクトルが得られる
-  #+end_src
-  - ヒント: \(X\) は正規分布には従わないが，
-    \(\bar{X}\) は正規分布で近似できることが利用できる
+    - ある番組の視聴率が2桁に達したかどうか知りたいとする．
+      \(n\) 人にその番組を観たかどうか確認したところ
+      #+begin_quote
+      #+begin_src latex
+        \begin{equation}
+          X_{i}=
+          \begin{cases}
+            1,&\text{番組を観た}\\
+            0,&\text{番組を観ていない}
+          \end{cases},\;
+          i=1,2,\dotsc,n
+        \end{equation}
+      #+end_src
+      #+end_quote
+      という結果が得られた．
+      これを用いた検定を考えてみよ．
+      #+begin_src R :eval no
+        ## Xの生成は例えば mu1 を真の視聴率として以下のようにすればよい
+        x <- sample(0:1, n, replace=TRUE, prob=c(1-mu1,mu1))
+        ## n 人分の視聴結果 {1,0} のベクトルが得られる
+      #+end_src
+      - ヒント: \(X\) は正規分布には従わないが，
+        \(\bar{X}\) は正規分布で近似できることが利用できる
 
 #+begin_src R :eval no :exports none :tangle yes
   ### 練習問題 視聴率の検定
@@ -497,9 +497,9 @@
   mc <- 10000
   alpha <- 0.03 # 
   myTrial <- function(n){ 
-    x <- sample(0:1,n,replace=TRUE,prob=c(1-mu1,mu1))
-    result <- t.test(x,mu=mu0,alternative="greater")
-    return(result$p.value)}
+      x <- sample(0:1,n,replace=TRUE,prob=c(1-mu1,mu1))
+      result <- t.test(x,mu=mu0,alternative="greater")
+      return(result$p.value)}
   myData <- replicate(mc, myTrial(n))
   hist(myData,xlab="p value") # p.valueの分布を見る
   table(myData<alpha)/mc # alpha以下のデータの数を調べる=検出力
@@ -509,7 +509,7 @@
   hist(myData,xlab="p value") # p.valueの分布を見る
   table(myData<alpha)/mc # alpha以下のデータの数を調べる=検出力
 #+end_src
-       
+
 
 * 分散の検定
 ** 分散の検定
@@ -519,8 +519,8 @@
   観測データを生成している分布の分散 \(\sigma^2\) が
   \(\sigma_0^2\) であるか否かを検定する
   #+end_quote
-  - 帰無仮説: \(\sigma^2=\sigma_0^2\)
-  - 対立仮説: \(\sigma^2\neq\sigma_0^2\)
+  - 帰無仮説 : \(\sigma^2=\sigma_0^2\)
+  - 対立仮説 : \(\sigma^2\neq\sigma_0^2\)
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -533,7 +533,7 @@
 - 不偏分散 \(s^2\) が
   真の分散 \(\sigma_{0}^{2}\) とどの程度離れているかを検証
 - 分散の推定量の性質を用いて検定統計量を構成
-  - 不偏分散: (\(\chi^2\)-分布に従う)
+  - 不偏分散 : (\(\chi^2\)-分布に従う)
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -543,7 +543,7 @@
     #+end_quote
 
 #+reveal: split
-- 検定統計量:
+- 検定統計量
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -555,8 +555,8 @@
   (*\(\chi^2\)-検定*) 
 
 ** 棄却域を用いる場合
-- 有意水準を選択: \(\alpha\in(0,1)\)
-- \(H_0\) の下で以下が成立:
+- 有意水準を選択 : \(\alpha\in(0,1)\)
+- \(H_0\) の下で以下が成立
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -570,7 +570,7 @@
     自由度 \(n{-}1\) の \(\chi^2\)-分布の \(\alpha/2\) 分位点
   - \(\chi^2_{1{-}\alpha/2}(n{-}1)\):
     自由度 \(n{-}1\) の \(\chi^2\)-分布の \(1{-}\alpha/2\) 分位点
-- 第一種過誤の上限が \(\alpha\) となる棄却域:
+- 第一種過誤の上限が \(\alpha\) となる棄却域
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -583,7 +583,7 @@
 
 #+reveal: split
 - データから検定統計量 \(\chi^2\) の値を計算
-- 以下の場合，帰無仮説を棄却:
+- 以下の場合，帰無仮説を棄却
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -593,8 +593,8 @@
   #+end_src
   #+end_quote
 
-** \(p\)-値を用いる場合
-- \(p\)-値を計算: ( \(f(x)\): 自由度 \(n{-}1\) の \(\chi^2\)-分布の密度)
+** @@latex:@@\(p\)-値を用いる場合
+- \(p\)-値を計算 : ( \(f(x)\): 自由度 \(n{-}1\) の \(\chi^2\)-分布の密度)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -606,9 +606,9 @@
 - \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却
 
 ** 片側検定
-- 対立仮説が片側 (右側対立仮説) の場合:
-  - 帰無仮説: \(\sigma^2=\sigma_0^2\)
-  - 対立仮説: \(\sigma^2>\sigma_0^2\)
+- 対立仮説が片側 (右側対立仮説) の場合 :
+  - 帰無仮説 : \(\sigma^2=\sigma_0^2\)
+  - 対立仮説 : \(\sigma^2>\sigma_0^2\)
     #+begin_quote
     #+begin_src latex
       \begin{equation}%\label{two-side}
@@ -620,9 +620,9 @@
   - /[[color:gray][左側対立仮説 \(H_1:\sigma^2 < \sigma_0^2\) も以下の議論は同様]]/
 
 ** 棄却域を用いる場合
-- 自由度 \(n{-}1\) の \(\chi^2\)-分布の \(1{-}\alpha\) 分位点:
+- 自由度 \(n{-}1\) の \(\chi^2\)-分布の \(1{-}\alpha\) 分位点 :
   \(\chi^2_{1{-}\alpha}(n{-}1)\)
-- 以下の場合，帰無仮説を棄却:
+- 以下の場合，帰無仮説を棄却
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -631,8 +631,8 @@
   #+end_src
   #+end_quote
 
-** \(p\)-値を用いる場合
-- \(p\)-値を計算: ( \(f(x)\):自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
+** @@latex:@@\(p\)-値を用いる場合
+- \(p\)-値を計算 : ( \(f(x)\):自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -657,9 +657,9 @@
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
@@ -674,7 +674,7 @@
     ## この平均値は以下のように計算される
     mean(aggregate(temp ~ month, data=TW.data, FUN=var)$temp)
   #+end_src
-
+  
 #+begin_src R :eval no :exports none :tangle yes
   ### 練習問題 6月の気温の分散の検定
   TW.data <- read.csv("data/tokyo_weather.csv")
@@ -696,11 +696,11 @@
   p0 <- pchisq(chi2, df=n-1)
   (p <- 2*min(p0,1-p0))
 #+end_src
-     
+
 
 * 2標本正規母集団に対する検定
 ** 2標本データに対する仮定
-- 2種類の観測データ:
+- 2種類の観測データ :
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -711,7 +711,7 @@
   #+end_quote
   # - \(X_1,X_2,\dotsc,X_m\)
   # - \(Y_1,Y_2,\dotsc,Y_n\)
-- 3つの条件を仮定:
+- 3つの条件を仮定 :
   - \(X_1,X_2,\dotsc,X_m,Y_1,Y_2,\dotsc,Y_n\) は
     独立な確率変数列
   - \(X_1,\dotsc,X_m\) は同分布で
@@ -739,7 +739,7 @@
   - 平均と分散が元の確率変数と一致するように近似
 
 ** 考え方
-- \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_m\) の不偏分散:
+- \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_m\) の不偏分散 :
   \(s_1^2\),\(s_2^2\)
   #+begin_quote
   #+begin_src latex
@@ -749,7 +749,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- 標本平均と不偏分散の性質:
+- 標本平均と不偏分散の性質 :
   - \(\bar{X}-\bar{Y},s_1^2,s_2^2\) は独立となる
   - \((m{-}1)s_1^2/\sigma_1^2\)
     は自由度 \(m{-}1\) の \(\chi^2\)-分布に従う 
@@ -773,7 +773,7 @@
   - 平均と分散を合わせる
 
 #+reveal: split
-- 検定統計量:
+- 検定統計量
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -782,9 +782,9 @@
     \end{equation}
   #+end_src
   #+end_quote
-- \(\bar{X}-\bar{Y},s_1^2/m+s_2^2/n\) は独立
-- \(\bar{X}-\bar{Y},c\chi^2_\nu\) も独立と考える
-- \(t\) の分布は \((\bar{X}-\bar{Y})/\sqrt{c\chi^2_\nu}\) で近似できる
+  - \(\bar{X}-\bar{Y},s_1^2/m+s_2^2/n\) は独立
+  - \(\bar{X}-\bar{Y},c\chi^2_\nu\) も独立と考える
+  - \(t\) の分布は \((\bar{X}-\bar{Y})/\sqrt{c\chi^2_\nu}\) で近似できる
 
 ** 帰無分布の近似
 - データの正規性から以下は標準正規分布に従う
@@ -813,7 +813,7 @@
 - 検定統計量 \(t\) の帰無分布は自由度 \(\nu\) の \(t\)-分布で近似できる
 - \(\nu\) は未知の分散 \(\sigma_1^2,\sigma_2^2\) を含むので
   不偏推定量 \(s_1^2,s_2^2\) で代用し，
-  自由度 \(\hat{\nu}\) は次式を用いる:
+  自由度 \(\hat{\nu}\) は次式を用いる
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -823,11 +823,11 @@
     \end{equation}
   #+end_src
   #+end_quote
-- *Welchの \(t\)検定* 
+- *Welchの \(t\)-検定* 
 
 ** 棄却域を用いる場合
-- 有意水準を選択: \(\alpha\in(0,1)\)
-- 棄却域:
+- 有意水準を選択 : \(\alpha\in(0,1)\)
+- 棄却域
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -836,9 +836,10 @@
     \end{equation}
   #+end_src
   #+end_quote
-  - \(t_{1{-}\alpha/2}(\hat{\nu})\):
+  - \(t_{1{-}\alpha/2}(\hat{\nu})\) :
     自由度 \(\hat{\nu}\) の \(t\)-分布の \(1{-}\alpha/2\) 分位点
-- 検定統計量 \(t\) の値を計算し，以下の場合は帰無仮説を棄却:
+- 検定統計量 \(t\) の値を計算
+- 以下の場合は帰無仮説を棄却
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -846,7 +847,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- /[[color:gray][\(p\)-値の計算や片側対立仮説への対応は前と同様]]/
+  - /[[color:gray][\(p\)-値の計算や片側対立仮説への対応は前と同様]]/
 
 ** 対応がある場合の平均の差の検定
 - 対応がある観測データの平均の差の検定では
@@ -862,7 +863,7 @@
 - \(Z_i=X_i-Y_i\) \((i=1,\dotsc,n)\) として，
   \(Z_1,\dotsc,Z_n\) の平均が0か否かを検定すれば良い
   
-** R: \(t\)-検定の関数
+** R : \(t\)-検定の関数
 - 基本書式 
   #+begin_src R :eval no
     t.test(x, y = NULL, # 2標本の場合
@@ -893,12 +894,12 @@
   の不偏分散: \(s_1^2\), \(s_2^2\)
   # - \(X_1,\dotsc,X_m\) の不偏分散: \(s_1^2\)
   # - \(Y_1,\dotsc,Y_n\) の不偏分散: \(s_2^2\)
-  - このとき \(s_1^2,s_2^2\) は独立でそれぞれ
+  - このとき \(s_1^2,s_2^2\) は独立 :
     - \((m{-}1)s_1^2/\sigma_1^2\)
       自由度 \(m{-}1\) の \(\chi^2\)-分布に従う
     - \((n{-}1)s_2^2/\sigma_2^2\)
       は自由度 \(n{-}1\) の \(\chi^2\)-分布に従う
-  - 検定統計量:
+  - 検定統計量
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -910,8 +911,8 @@
     (*\(F\)-検定*)
 
 ** 棄却域を用いる場合
-- 有意水準を選択: \(\alpha\in(0,1)\)
-- \(H_0\) の下では以下が成立:
+- 有意水準を選択 : \(\alpha\in(0,1)\)
+- \(H_0\) の下では以下が成立
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -924,7 +925,7 @@
     自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(\alpha/2\) 分位点
   - \(F_{1{-}\alpha/2}(m{-}1,n{-}1)\):
     自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(1{-}\alpha/2\) 分位点
-- 第一種過誤の上限が \(\alpha\) の棄却域:
+- 第一種過誤の上限が \(\alpha\) の棄却域
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -946,9 +947,9 @@
     \end{equation}
   #+end_src
   #+end_quote
-- /[[color:gray][\(p\)-値の計算や片側対立仮説への対応は前と同様]]/
+  - /[[color:gray][\(p\)-値の計算や片側対立仮説への対応は前と同様]]/
 
-** R: F-検定の関数
+** R : \(F\)-検定の関数
 - 基本書式 
   #+begin_src R :eval no
     var.test(x, y, ratio = 1,
@@ -962,9 +963,9 @@
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
