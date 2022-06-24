@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-09 14:28:10 mura>
+# Time-stamp: <2022-06-24 13:36:57 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -11,6 +11,12 @@
 # <m C-i でlatex block (math env用)
 # C-c '
 :END:
+
+* COMMENT メモ
+- 若干量が多めなので，的を絞った方がよい
+- 演習問題とひもづけて最尤推定による区間推定だけ扱ってもよいか?
+- 次週検定をやるので考え方は重要
+- 一般的な枠組みにして，あとで具体例を当て嵌めるか
 
 * 講義の内容
 - 点推定
@@ -28,12 +34,6 @@
 #+begin_src R :exports none
   setwd("~/Desktop/lectures/u-tokyo/spring/slide")
 #+end_src
-
-* COMMENT メモ
-- 若干量が多めなので，的を絞った方がよい
-- 演習問題とひもづけて最尤推定による区間推定だけ扱ってもよいか?
-- 次週検定をやるので考え方は重要
-- 一般的な枠組みにして，あとで具体例を当て嵌めるか
 
 
 * 推定とは
@@ -59,63 +59,63 @@
 
 * 点推定
 ** 点推定
-- 定義
-  #+begin_quote
-  \(\mathcal{L}\) 
-  に含まれるパラメタ \(\theta\) を \(X_1,\dotsc,X_n\) の関数
-  #+begin_src latex
-    \begin{equation}
-      \hat{\theta}=\hat{\theta}(X_1,\dots,X_n)
-    \end{equation}
-  #+end_src
-  で推定することで，
-  \(\hat{\theta}\) を \(\theta\) の *推定量* と呼ぶ．
-  #+end_quote
-- 記述統計量は分布のパラメタの1つ
-- [[color:green][推定量の例]]
-  #+begin_quote
-  \(\mathcal{L}\) の平均 \(\mu\) を
-  標本平均 \(\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\) によって
-  推定することが点推定であり,
-  \(\bar{X}\) は \(\mu\) の推定量となる．
-  #+end_quote
+  - 定義
+    #+begin_quote
+    \(\mathcal{L}\) 
+    に含まれるパラメタ \(\theta\) を \(X_1,\dotsc,X_n\) の関数
+    #+begin_src latex
+      \begin{equation}
+        \hat{\theta}=\hat{\theta}(X_1,\dots,X_n)
+      \end{equation}
+    #+end_src
+    で推定することで，
+    \(\hat{\theta}\) を \(\theta\) の *推定量* と呼ぶ．
+    #+end_quote
+  - 記述統計量は分布のパラメタの1つ
+  - [[color:green][推定量の例]]
+    #+begin_quote
+    \(\mathcal{L}\) の平均 \(\mu\) を
+    標本平均 \(\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\) によって
+    推定することが点推定であり,
+    \(\bar{X}\) は \(\mu\) の推定量となる．
+    #+end_quote
 
 ** 良い推定量
-- 一般に1つのパラメタの推定量は無数に存在
-- 推定量の良さの代表的な基準: *不偏性・一致性*
-  - \(\hat{\theta}\) が \(\theta\) の不偏推定量:
-    #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \mathbb{E}[\hat{\theta}]=\theta
-      \end{equation}
-    #+end_src
-    #+end_quote
-  - \(\hat{\theta}\) が \(\theta\) の(強)一致推定量:
-    #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \text{\(\hat{\theta}\) が \(\theta\) に収束する確率が1}\quad (n\to\infty)
-      \end{equation}
-    #+end_src
-    #+end_quote
-  - [[color:green][良い推定量の例]]
-    #+begin_quote
-    標本平均, 不偏分散はそれぞれ
-    \(\mathcal{L}\) の平均, 分散の不偏かつ一致性をもつ推定量
-    #+end_quote
+    - 一般に1つのパラメタの推定量は無数に存在
+    - 推定量の良さの代表的な基準 : *不偏性・一致性*
+      - \(\hat{\theta}\) が \(\theta\) の不偏推定量
+        #+begin_quote
+        #+begin_src latex
+          \begin{equation}
+            \mathbb{E}[\hat{\theta}]=\theta
+          \end{equation}
+        #+end_src
+        #+end_quote
+      - \(\hat{\theta}\) が \(\theta\) の(強)一致推定量
+        #+begin_quote
+        #+begin_src latex
+          \begin{equation}
+            \text{\(\hat{\theta}\) が \(\theta\) に収束する確率が1}\quad (n\to\infty)
+          \end{equation}
+        #+end_src
+        #+end_quote
+      - [[color:green][良い推定量の例]]
+        #+begin_quote
+        標本平均, 不偏分散はそれぞれ
+        \(\mathcal{L}\) の平均, 分散の不偏かつ一致性をもつ推定量
+        #+end_quote
 
 ** 良い不偏推定量
 - 一般に不偏推定量も複数存在
   #+begin_quote
   [[color:green][例: \(\mathcal{L}\) の平均 \(\mu\) の不偏推定量]]
   - 標本平均 \(\bar{X}\) 
-  - \(X_1\) 
   - \(X_1,\dots,X_n\) のメディアン
     ( \(\mathcal{L}\) が \(x=\mu\) に関して対称な場合)
+  - \(X_1\) 
   #+end_quote
 - 不偏推定量の良さを評価する基準が必要
-- *一様最小分散不偏推定量*:
+- *一様最小分散不偏推定量* 
   #+begin_quote
   \(\theta\) の任意の不偏推定量 \(\hat{\theta}'\) 
   に対して推定値のばらつき(分散)が最も小さいもの
@@ -134,10 +134,10 @@
   偏微分可能であるとする．
   このとき，緩やかな仮定の下で，
   \(\theta\) の任意の不偏推定量 \(\hat{\theta}\) に対して
-  以下の不等式が成り立つ:
+  以下の不等式が成り立つ．
   #+begin_src latex
     \begin{equation}%\label{cr-bound}
-      \mathrm{Var}(\hat{\theta})\ge \frac{1}{nI(\theta)}.
+      \mathrm{Var}(\hat{\theta})\ge \frac{1}{nI(\theta)},
     \end{equation}
   #+end_src
   ただし
@@ -161,9 +161,9 @@
   それは一様最小分散不偏推定量となる．
   #+end_quote
 
-** 例: 正規分布モデルの標本平均
+** 例 : 正規分布モデルの標本平均
 - \(\mathcal{L}\) は平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布
-  - 平均パラメタ \(\mu\) に関するFisher情報量:
+  - 平均パラメタ \(\mu\) に関するFisher情報量 :
     #+begin_quote
     #+begin_src latex
       \begin{align}
@@ -174,15 +174,15 @@
       \end{align}
     #+end_src
     #+end_quote
-  - Cramér-Rao下界: \(\sigma^2/n\) 
+  - Cramér-Rao下界 : \(\sigma^2/n\) 
   - 標本平均 \(\bar{X}\) の分散: \(\sigma^2/n\) (=Cramér-Rao下界)
 - \(\bar{X}\) は \(\mu\) の一様最小分散不偏推定量
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
@@ -193,28 +193,28 @@
   - 標本平均 (mean)
   - 中央値 (median)
   - 最大値と最小値の平均 ((max+min)/2)
-- ヒント: 以下のような関数を作り，Monte-Carlo実験を行えばよい
+- ヒント : 以下のような関数を作り，Monte-Carlo実験を行えばよい
   #+begin_src R :eval no
     myMeanEst <- function(n, min, max){ # 観測データ数
-      x <- runif(n, min=min, max=max) # 一様乱数を生成，範囲は引数から
-      return(c(xbar=mean(x),med=median(x),mid=(max(x)+min(x))/2))
+        x <- runif(n, min=min, max=max) # 一様乱数を生成，範囲は引数から
+        return(c(xbar=mean(x),med=median(x),mid=(max(x)+min(x))/2))
     } # 3つまとめて計算する関数
   #+end_src
-
+  
 #+begin_src R :eval no :exports none :tangle yes
   ### 練習問題 一様分布の平均の推定
   set.seed(1234) # 乱数のシード値の指定
   ## 平均値の推定を行う関数(標本平均，x1，最大最小)
   myMeanEst <- function(n, min, max){
-    x <- runif(n, min=min, max=max)
-    return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
+      x <- runif(n, min=min, max=max)
+      return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
   }
   ## 実験の設定 
   n <- 10 # 観測データのサンプル数
   mc <- 10000 # 実験回数
   a <- 0; b <- 50 # 一様乱数の区間
   myData <- as.data.frame(t( # mc行 x 3種に変換(転置)
-    replicate(mc, myMeanEst(n, min=a, max=b))
+      replicate(mc, myMeanEst(n, min=a, max=b))
   ))
   ## replicate は3行 x mc 列の行列を返すことに注意
   ## ここでは data.frame として扱うために型を変換している
@@ -224,20 +224,20 @@
   ## もう少し詳しくみてみる
   summary(myData) # 四分位点を表示
   for(i in 1:3) { # それぞれのヒストグラムを書いてみる
-    hist(myData[,i], breaks=40, 
-         xlim=c(a,b), ylim=c(0,2000), # 同じ大きさの図にする
-         col="pink", border="brown",
-         xlab="est", main=names(myData)[i])
+      hist(myData[,i], breaks=40, 
+           xlim=c(a,b), ylim=c(0,2000), # 同じ大きさの図にする
+           col="pink", border="brown",
+           xlab="est", main=names(myData)[i])
   }
 #+end_src
-   
+
 
 * 最尤法
 ** 離散分布の場合
 - 観測値 \(X_1=x_1,X_2=x_2,\dots,X_n=x_n\) の同時確率
-  - 確率(質量)関数: \(f_{\boldsymbol{\theta}}(x)\) 
-  - 確率関数のパラメタ: \(\boldsymbol{\theta}:=(\theta_1,\dots,\theta_p)\) 
-  - 独立な確率変数の同時確率:
+  - 確率(質量)関数 : \(f_{\boldsymbol{\theta}}(x)\) 
+  - 確率関数のパラメタ : \(\boldsymbol{\theta}=(\theta_1,\dots,\theta_p)\) 
+  - 独立な確率変数の同時確率 :
     #+begin_quote
     #+begin_src latex
       \begin{align}
@@ -260,7 +260,7 @@
   #+begin_src latex
     \begin{equation}
       L(\boldsymbol{\theta})
-      :=\prod_{i=1}^nf_{\boldsymbol{\theta}}(X_i)
+      =\prod_{i=1}^nf_{\boldsymbol{\theta}}(X_i)
     \end{equation}
   #+end_src
   を
@@ -275,13 +275,13 @@
     の値がどの程度尤もらしいかを測る尺度
 
 ** 最尤法
-- 最尤法: 
+- 最尤法
   #+begin_quote
   観測データに対して「最も尤もらしい」パラメタ値
   を \(\boldsymbol{\theta}\) の推定量として採用する方法
   を最尤法という．
   #+end_quote
-- 最尤推定量:
+- 最尤推定量
   #+begin_quote
   \(\Theta\) を尤度関数の定義域として，
   尤度関数を最大とする  \(\hat{\boldsymbol{\theta}}\) 
@@ -303,12 +303,12 @@
   #+end_quote
 
 ** 最尤推定量の計算
-- *対数尤度関数*:
+- *対数尤度関数*
   #+begin_quote
   #+begin_src latex
     \begin{equation}
       \ell(\boldsymbol{\theta})
-      :=\log L(\boldsymbol{\theta})
+      =\log L(\boldsymbol{\theta})
       =\sum_{i=1}^n\log f_{\boldsymbol{\theta}}(X_i).
     \end{equation}
   #+end_src
@@ -324,7 +324,7 @@
 
 ** 連続分布の場合
 - *確率密度関数* \(f_{\boldsymbol{\theta}}(x)\) を用いて尤度を定義
-- *尤度関数*:
+- *尤度関数*
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -336,20 +336,20 @@
     \end{equation}
   #+end_src
   #+end_quote
-- *対数尤度関数*:
+- *対数尤度関数*
   #+begin_quote
   #+begin_src latex
     \begin{equation}
       \ell(\boldsymbol{\theta})
-      :=\log L(\boldsymbol{\theta})
+      =\log L(\boldsymbol{\theta})
       =\sum_{i=1}^n\log f_{\boldsymbol{\theta}}(X_i)
     \end{equation}
   #+end_src
   #+end_quote
 
-** 例: Poisson 分布の最尤推定
+** 例 : Poisson 分布の最尤推定
 - \(\mathcal{L}\) をパラメタ \(\lambda>0\) のPoisson分布でモデル化
-  - 対数尤度関数 (未知パラメタ: \(\lambda\) )
+  - 対数尤度関数 (未知パラメタ : \(\lambda\) )
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -359,10 +359,10 @@
     #+end_src
     #+end_quote
   - 少なくとも1つの \(i\) について \(X_i>0\) を仮定する
-
+    
 #+reveal: split
 - (Poisson分布のつづき)
-  - \(\ell(\lambda)\) の微分:
+  - \(\ell(\lambda)\) の微分
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -372,7 +372,7 @@
     #+end_src
     #+end_quote
   - 方程式 \(\ell'(\lambda)=0\) の解が \(\ell(\lambda)\) を最大化
-  - \(\lambda\) の最尤推定量:
+  - \(\lambda\) の最尤推定量
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -381,9 +381,9 @@
     #+end_src
     #+end_quote
 
-** 例: 指数分布の最尤推定
+** 例 : 指数分布の最尤推定
 - \(\mathcal{L}\) をパラメタ \(\lambda>0\) の指数分布でモデル化
-  - 対数尤度関数 (未知パラメタ: \(\lambda\) )
+  - 対数尤度関数 (未知パラメタ : \(\lambda\) )
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -395,7 +395,7 @@
 
 #+reveal: split
 - (指数分布のつづき)
-  - \(\ell(\lambda)\) の微分:
+  - \(\ell(\lambda)\) の微分
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -405,7 +405,7 @@
     #+end_src
     #+end_quote
   - 方程式 \(\ell'(\lambda)=0\) の解が \(\ell(\lambda)\) を最大化
-  - \(\lambda\) の最尤推定量:
+  - \(\lambda\) の最尤推定量
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -414,9 +414,9 @@
     #+end_src
     #+end_quote
 
-** 例: ガンマ分布の最尤推定
+** 例 : ガンマ分布の最尤推定
 - \(\mathcal{L}\) をパラメタ \(\nu,\alpha>0\) のガンマ分布でモデル化
-  - 対数尤度関数 (未知パラメタ: \(\nu,\alpha\) )
+  - 対数尤度関数 (未知パラメタ : \(\nu,\alpha\) )
     #+begin_quote
     #+begin_src latex
       \begin{align}
@@ -429,22 +429,22 @@
   - \(\ell(\nu,\alpha)\) を最大化する \(\nu,\alpha\) は解析的に求まらないので実際の計算では数値的に求める
 
 #+reveal: split
-- Rでの計算例 (ガンマ分布の最尤推定量の例)
+- Rでの計算例 [[color:green][(ガンマ分布の最尤推定量)]]
   #+begin_src R :eval no
     library(stats4) # 関数mleを利用するため
     ## 数値最適化のためには尤度関数を最初に評価する初期値が必要
     mle.gamma <- function(x, # 観測データ
                           nu0=1, alpha0=1){ # nu, alphaの初期値
-      ## 負の対数尤度関数を定義 (最小化を考えるため)
-      ll <- function(nu, alpha) # nuとalphaの関数として定義 
-        suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
-      ## suppressWarnings は定義域外で評価された際の警告を表示させない
-      ## 最尤推定(負の尤度の最小化)
-      est <- mle(minuslogl=ll, # 負の対数尤度関数
-                 start=list(nu=nu0, alpha=alpha0), # 初期値
-                 method="BFGS", # 最適化方法 (選択可能)
-                 nobs=length(x)) # 観測データ数
-      return(coef(est)) # 推定値のみ返す
+        ## 負の対数尤度関数を定義 (最小化を考えるため)
+        ll <- function(nu, alpha) # nuとalphaの関数として定義 
+            suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
+        ## suppressWarnings は定義域外で評価された際の警告を表示させない
+        ## 最尤推定(負の尤度の最小化)
+        est <- mle(minuslogl=ll, # 負の対数尤度関数
+                   start=list(nu=nu0, alpha=alpha0), # 初期値
+                   method="BFGS", # 最適化方法 (選択可能)
+                   nobs=length(x)) # 観測データ数
+        return(coef(est)) # 推定値のみ返す
     }
   #+end_src
   # % - 数値計算の際に対数尤度関数の勾配(偏導関数からなるベクトル)があると便利なので計算しておく: 
@@ -458,9 +458,9 @@
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
@@ -494,20 +494,20 @@
                         nu0=1, # nuの初期値
                         alpha0=1, # alphaの初期値
                         verbose=FALSE){ # debug用に追加
-    ## 負の対数尤度関数を定義 (最小化を考えるため)
-    ll <- function(nu, alpha) # nuとalphaの関数として定義 
-      suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
-    ## suppressWarnings は定義域外で評価された際の警告を表示させない
-    ## 最尤推定(負の尤度の最小化)
-    est <- mle(minuslogl=ll, # 負の対数尤度関数
-               start=list(nu=nu0, alpha=alpha0), # 初期値
-               method="BFGS", # 最適化方法 (選択可能)
-               nobs=length(x)) # 観測データ数
-    if(verbose) { 
-      return(est) # verbose=TRUEならmleの結果を全て返す
-    } else {
-      return(coef(est)) # 推定値のみ返す
-    }
+      ## 負の対数尤度関数を定義 (最小化を考えるため)
+      ll <- function(nu, alpha) # nuとalphaの関数として定義 
+          suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
+      ## suppressWarnings は定義域外で評価された際の警告を表示させない
+      ## 最尤推定(負の尤度の最小化)
+      est <- mle(minuslogl=ll, # 負の対数尤度関数
+                 start=list(nu=nu0, alpha=alpha0), # 初期値
+                 method="BFGS", # 最適化方法 (選択可能)
+                 nobs=length(x)) # 観測データ数
+      if(verbose) { 
+          return(est) # verbose=TRUEならmleの結果を全て返す
+      } else {
+          return(coef(est)) # 推定値のみ返す
+      }
   }
   (theta <- with(TW.data, mle.gamma(wind))) # 最尤推定
   
@@ -520,19 +520,19 @@
   nu <- 5; alpha <- 2 # 真のパラメタ
   mc <- 2000 # 実験回数 (計算が重いので少なめにしている)
   for(n in c(10, 100, 300)){ # データ数を変えて実験
-    ## Monte-Carlo実験
-    myEst <- data.frame(t( # 推定値のdata.frame
-      replicate(mc, mle.gamma(rgamma(n, nu, alpha)))
-    ))
-    ## 結果をヒストグラムで表示
-    hist(myEst$nu, breaks=30, col="skyblue1", border="skyblue4",
-         xlim=c(0, 20), main=paste0("n=",n), xlab=expression(nu))
-    abline(h=0, lwd=2, lty="dotted") # x軸 (y=0) を表示
-    abline(v=nu, col="tomato", lwd=2, lty="solid") # nuの真値
-    hist(myEst$alpha, breaks=30, col="seagreen1", border="seagreen4",
-         xlim=c(0, 10), main=paste0("n=",n), xlab=expression(alpha))
-    abline(h=0, lwd=2, lty="dotted")  # x軸 (y=0) を表示
-    abline(v=alpha, col="tomato", lwd=2, lty="solid") # alphaの真値
+      ## Monte-Carlo実験
+      myEst <- data.frame(t( # 推定値のdata.frame
+          replicate(mc, mle.gamma(rgamma(n, nu, alpha)))
+      ))
+      ## 結果をヒストグラムで表示
+      hist(myEst$nu, breaks=30, col="skyblue1", border="skyblue4",
+           xlim=c(0, 20), main=paste0("n=",n), xlab=expression(nu))
+      abline(h=0, lwd=2, lty="dotted") # x軸 (y=0) を表示
+      abline(v=nu, col="tomato", lwd=2, lty="solid") # nuの真値
+      hist(myEst$alpha, breaks=30, col="seagreen1", border="seagreen4",
+           xlim=c(0, 10), main=paste0("n=",n), xlab=expression(alpha))
+      abline(h=0, lwd=2, lty="dotted")  # x軸 (y=0) を表示
+      abline(v=alpha, col="tomato", lwd=2, lty="solid") # alphaの真値
   }
 #+end_src
 
@@ -905,9 +905,9 @@
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
@@ -940,13 +940,13 @@
   ## 信頼区間の正答率の評価
   mc <- 100
   myTrial <- function(n){ # nを変えて実験できるように
-    idx <- sample(nrow(TW.data),n)
-    xbar <- with(TW.data[idx,], mean(solar)) # 標本平均
-    s <- with(TW.data[idx,], sd(solar)) # 標本標準偏差
-    return(c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
+      idx <- sample(nrow(TW.data),n)
+      xbar <- with(TW.data[idx,], mean(solar)) # 標本平均
+      s <- with(TW.data[idx,], sd(solar)) # 標本標準偏差
+      return(c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
   }
   myCIs <- as.data.frame(t( # confidence intervals
-    replicate(mc,myTrial(n))
+      replicate(mc,myTrial(n))
   ))
   apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"]))
   table(apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"])))
@@ -954,7 +954,7 @@
   ### 補遺: 信頼区間について多数で評価する
   mc <- 2000
   myCIs <- as.data.frame(t(
-    replicate(mc,myTrial(n))
+      replicate(mc,myTrial(n))
   ))
   table(apply(myCIs,1,function(x)(x["L"]<mu & mu<x["U"])))/mc # 確率を見る
   ### 補遺: グラフを描いてみる
