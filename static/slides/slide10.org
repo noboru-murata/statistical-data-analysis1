@@ -1,9 +1,9 @@
 #+TITLE: 推定
-#+SUBTITLE: 確率分布を推定する
+#+SUBTITLE: 確率分布を特徴づけるパラメタを推測する
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-24 14:00:26 mura>
+# Time-stamp: <2022-06-30 17:56:55 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -59,51 +59,51 @@
 
 * 点推定
 ** 点推定
-  - 定義
-    #+begin_quote
-    \(\mathcal{L}\) 
-    に含まれるパラメタ \(\theta\) を \(X_1,\dotsc,X_n\) の関数
-    #+begin_src latex
-      \begin{equation}
-        \hat{\theta}=\hat{\theta}(X_1,\dots,X_n)
-      \end{equation}
-    #+end_src
-    で推定することで，
-    \(\hat{\theta}\) を \(\theta\) の *推定量* と呼ぶ．
-    #+end_quote
-  - 記述統計量は分布のパラメタの1つ
-  - [[color:green][推定量の例]]
-    #+begin_quote
-    \(\mathcal{L}\) の平均 \(\mu\) を
-    標本平均 \(\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\) によって
-    推定することが点推定であり,
-    \(\bar{X}\) は \(\mu\) の推定量となる．
-    #+end_quote
+- 定義
+  #+begin_quote
+  \(\mathcal{L}\) 
+  に含まれるパラメタ \(\theta\) を \(X_1,\dotsc,X_n\) の関数
+  #+begin_src latex
+    \begin{equation}
+      \hat{\theta}=\hat{\theta}(X_1,\dots,X_n)
+    \end{equation}
+  #+end_src
+  で推定することで，
+  \(\hat{\theta}\) を \(\theta\) の *推定量* と呼ぶ．
+  #+end_quote
+- 記述統計量は分布のパラメタの1つ
+- [[color:green][推定量の例]]
+  #+begin_quote
+  \(\mathcal{L}\) の平均 \(\mu\) を
+  標本平均 \(\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\) によって
+  推定することが点推定であり,
+  \(\bar{X}\) は \(\mu\) の推定量となる．
+  #+end_quote
 
 ** 良い推定量
-    - 一般に1つのパラメタの推定量は無数に存在
-    - 推定量の良さの代表的な基準 : *不偏性・一致性*
-      - \(\hat{\theta}\) が \(\theta\) の不偏推定量
-        #+begin_quote
-        #+begin_src latex
-          \begin{equation}
-            \mathbb{E}[\hat{\theta}]=\theta
-          \end{equation}
-        #+end_src
-        #+end_quote
-      - \(\hat{\theta}\) が \(\theta\) の(強)一致推定量
-        #+begin_quote
-        #+begin_src latex
-          \begin{equation}
-            \text{\(\hat{\theta}\) が \(\theta\) に収束する確率が1}\quad (n\to\infty)
-          \end{equation}
-        #+end_src
-        #+end_quote
-      - [[color:green][良い推定量の例]]
-        #+begin_quote
-        標本平均, 不偏分散はそれぞれ
-        \(\mathcal{L}\) の平均, 分散の不偏かつ一致性をもつ推定量
-        #+end_quote
+- 一般に1つのパラメタの推定量は無数に存在
+- 推定量の良さの代表的な基準 : *不偏性・一致性*
+  - \(\hat{\theta}\) が \(\theta\) の不偏推定量
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}
+        \mathbb{E}[\hat{\theta}]=\theta
+      \end{equation}
+    #+end_src
+    #+end_quote
+  - \(\hat{\theta}\) が \(\theta\) の(強)一致推定量
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}
+        \text{\(\hat{\theta}\) が \(\theta\) に収束する確率が1}\quad (n\to\infty)
+      \end{equation}
+    #+end_src
+    #+end_quote
+  - [[color:green][良い推定量の例]]
+    #+begin_quote
+    標本平均, 不偏分散はそれぞれ
+    \(\mathcal{L}\) の平均, 分散の不偏かつ一致性をもつ推定量
+    #+end_quote
 
 ** 良い不偏推定量
 - 一般に不偏推定量も複数存在
@@ -688,6 +688,73 @@
     #+end_src
     #+end_quote
     は自由度 \(k\) の \(t\)-分布に従う
+
+#+reveal: split
+- \(\chi^{2}\)-分布
+#+begin_leftcol
+#+begin_src R :file figs/pdf_chisq.png :exports results :results graphics
+  par(family="HiraginoSans-W4") 
+  plot(function(x)dchisq(x,3,ncp=0), -1, 10,
+       col=4, lwd=3,
+       xlab="x",ylab="確率密度")
+#+end_src
+#+CAPTION: \(\chi^{2}\)-分布 (自由度\(3\))
+#+NAME: fig:pdf_chisq
+#+ATTR_HTML: :width 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/pdf_chisq.png]]
+#+end_leftcol  
+#+begin_rightcol
+#+begin_quote
+- 見本空間 : \([0,\infty)\)
+- 母数 : 自由度 \(\nu\)
+- 密度関数 :
+  #+begin_src latex
+    \begin{multline}
+      f(x)=
+      \frac{1}{2^{\nu/2}\Gamma(\frac{\nu}{2})}x^{\nu/2-1}e^{-x/2}\\
+      \Gamma(z)=\int_0^\infty e^{-t}t^{z-1}dt
+    \end{multline}
+  #+end_src
+  - 備考 : \(\nu\) 個の標準正規分布に従う確率変数の2乗和の分布で，
+    区間推定や検定に利用される．
+#+end_quote
+#+end_rightcol
+
+#+reveal: split
+- \(t\)-分布
+#+begin_leftcol
+#+begin_src R :file figs/pdf_t.png :exports results :results graphics
+  par(family="HiraginoSans-W4") 
+  plot(function(x)dt(x,df=3,ncp=0), -6, 6,
+       col=5, lwd=3, ylim=c(0,0.4),
+       xlab="x",ylab="確率密度")
+#+end_src
+#+CAPTION: \(t\)-分布 (自由度\(3\))
+#+NAME: fig:pdf_t
+#+ATTR_HTML: :width 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/pdf_t.png]]
+#+end_leftcol  
+#+begin_rightcol
+#+begin_quote
+- 見本空間 : \((-\infty,\infty)\)
+- 母数 : 自由度 \(\nu\)
+- 密度関数 :
+  #+begin_src latex
+    \begin{equation}
+      f(x)=
+      \frac{\Gamma\left(\frac{\nu+1}{2}\right)}
+      {\sqrt{\nu\pi}\;\Gamma\left(\frac{\nu}{2}\right)}
+      \left(1+\frac{x^{2}}{\nu}\right)^{-\frac{1}{2}(\nu+1)}
+    \end{equation}
+  #+end_src
+  - 備考 : 標準正規分布と
+    自由度 \(\nu\) の \(\chi^{2}\)-分布
+    に従う確率変数の比に関する分布で，
+    区間推定や検定に利用される．
+#+end_quote
+#+end_rightcol  
 
 #+reveal: split
 - 標本平均と不偏分散の性質

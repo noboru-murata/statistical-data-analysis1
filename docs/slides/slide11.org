@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-24 14:22:09 mura>
+# Time-stamp: <2022-06-30 17:57:38 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -39,8 +39,8 @@
 ** 統計的仮説検定
 - ある現象・母集団に対して仮定された仮説の真偽を
   データに基づいて統計的に検証する方法
+- [[color:green][薬の治験の例]]
   #+begin_quote
-  [[color:green][薬の治験の例]]
   新しい薬の効能が古い薬よりも優れていること(仮説)を
   薬の治験結果(データ)から検証したい
   #+end_quote
@@ -232,6 +232,36 @@
   は自由度 \(n{-}1\) の \(t\)-分布
 - *Studentの \(t\)-検定*
 
+#+reveal: split
+- \(t\)-分布
+#+begin_leftcol
+#+CAPTION: \(t\)-分布 (自由度\(3\))
+#+NAME: fig:pdf_t
+#+ATTR_HTML: :width 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/pdf_t.png]]
+#+end_leftcol  
+#+begin_rightcol
+#+begin_quote
+- 見本空間 : \((-\infty,\infty)\)
+- 母数 : 自由度 \(\nu\)
+- 密度関数 :
+  #+begin_src latex
+    \begin{equation}
+      f(x)=
+      \frac{\Gamma\left(\frac{\nu+1}{2}\right)}
+      {\sqrt{\nu\pi}\;\Gamma\left(\frac{\nu}{2}\right)}
+      \left(1+\frac{x^{2}}{\nu}\right)^{-\frac{1}{2}(\nu+1)}
+    \end{equation}
+  #+end_src
+  - 備考 : 標準正規分布と
+    自由度 \(\nu\) の \(\chi^{2}\)-分布
+    に従う独立な確率変数の比に関する分布で，
+    検定に利用される．
+#+end_quote
+#+end_rightcol  
+  
+
 ** 棄却域を用いる場合
 - 有意水準を選択 : \(\alpha\in(0,1)\)
 - \(H_0\) の下で以下が成立
@@ -244,7 +274,7 @@
   #+end_quote
   - \(t_{1{-}\alpha/2}(n{-}1)\) :
     自由度 \(n{-}1\) の \(t\)-分布の \(1{-}\alpha/2\) 分位点
-- 第一種過誤の上限が \(\alpha\) の棄却域:
+- 第一種過誤の上限が \(\alpha\) の棄却域
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -268,7 +298,7 @@
   #+end_quote
 
 ** @@latex:@@\(p\)-値を用いる場合
-- \(p\)-値を計算 : ( \(f(x)\) : 自由度 \(n{-}1\) の \(t\)-分布の密度)
+- \(p\)-値を計算 ( \(f(x)\) : 自由度 \(n{-}1\) の \(t\)-分布の密度)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -324,7 +354,7 @@
 
 ** 棄却域を用いる場合
 - 有意水準を選択 : \(\alpha\in(0,1)\)
-- \(H_0\) の下で以下が成立:
+- \(H_0\) の下で以下が成立
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -356,7 +386,7 @@
   #+end_quote
 
 ** @@latex:@@\(p\)-値を用いる場合
-- \(p\)-値を計算 : ( \(f(x)\):自由度 \(n{-}1\) の \(t\)-分布の密度)
+- \(p\)-値を計算 ( \(f(x)\):自由度 \(n{-}1\) の \(t\)-分布の密度)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -410,7 +440,7 @@
     #+end_quote
 
 ** R: \(t\)-検定の関数
-- 基本書式 
+- 使い方
   #+begin_src R :eval no
     t.test(x, # 1標本の場合
            alternative = c("two.sided", "less", "greater"),
@@ -459,29 +489,29 @@
 #+end_src
 
 #+reveal: split
-    - ある番組の視聴率が2桁に達したかどうか知りたいとする．
-      \(n\) 人にその番組を観たかどうか確認したところ
-      #+begin_quote
-      #+begin_src latex
-        \begin{equation}
-          X_{i}=
-          \begin{cases}
-            1,&\text{番組を観た}\\
-            0,&\text{番組を観ていない}
-          \end{cases},\;
-          i=1,2,\dotsc,n
-        \end{equation}
-      #+end_src
-      #+end_quote
-      という結果が得られた．
-      これを用いた検定を考えてみよ．
-      #+begin_src R :eval no
-        ## Xの生成は例えば mu1 を真の視聴率として以下のようにすればよい
-        x <- sample(0:1, n, replace=TRUE, prob=c(1-mu1,mu1))
-        ## n 人分の視聴結果 {1,0} のベクトルが得られる
-      #+end_src
-      - ヒント: \(X\) は正規分布には従わないが，
-        \(\bar{X}\) は正規分布で近似できることが利用できる
+- ある番組の視聴率が2桁に達したかどうか知るために
+  \(n\) 人にその番組を観たかどうか確認したところ
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      X_{i}=
+      \begin{cases}
+        1,&\text{番組を観た}\\
+        0,&\text{番組を観ていない}
+      \end{cases},\;
+      i=1,2,\dotsc,n
+    \end{equation}
+  #+end_src
+  #+end_quote
+  となった．
+  これを用いた検定を考えてみよ．
+  #+begin_src R :eval no
+    ## Xの生成は例えば mu1 を真の視聴率として以下のようにすればよい
+    x <- sample(0:1, n, replace=TRUE, prob=c(1-mu1,mu1))
+    ## n 人分の視聴結果 {1,0} のベクトルが得られる
+  #+end_src
+  - ヒント: \(X\) は正規分布には従わないが，
+    \(\bar{X}\) は正規分布で近似できることが利用できる
 
 #+begin_src R :eval no :exports none :tangle yes
   ### 練習問題 視聴率の検定
@@ -554,6 +584,32 @@
 - 帰無分布は自由度 \(n{-}1\) の \(\chi^2\)-分布
   (*\(\chi^2\)-検定*) 
 
+#+reveal: split
+- \(\chi^{2}\)-分布
+#+begin_leftcol
+#+CAPTION: \(\chi^{2}\)-分布 (自由度\(3\))
+#+NAME: fig:pdf_chisq
+#+ATTR_HTML: :width 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/pdf_chisq.png]]
+#+end_leftcol  
+#+begin_rightcol
+#+begin_quote
+- 見本空間 : \([0,\infty)\)
+- 母数 : 自由度 \(\nu\)
+- 密度関数 :
+  #+begin_src latex
+    \begin{multline}
+      f(x)=
+      \frac{1}{2^{\nu/2}\Gamma(\frac{\nu}{2})}x^{\nu/2-1}e^{-x/2}\\
+      \Gamma(z)=\int_0^\infty e^{-t}t^{z-1}dt
+    \end{multline}
+  #+end_src
+  - 備考 : \(\nu\) 個の標準正規分布に従う確率変数の2乗和の分布で，
+    検定に利用される．
+#+end_quote
+#+end_rightcol
+  
 ** 棄却域を用いる場合
 - 有意水準を選択 : \(\alpha\in(0,1)\)
 - \(H_0\) の下で以下が成立
@@ -650,7 +706,7 @@
     x # 観測データ
     sigma0 # 帰無仮説で用いる標準偏差
     n <- length(x) # データ数
-    chi2 <- (n-1)*var(x)/sigma0^2 # 検定統計量
+    chi2 <- (n-1)*var(x)/sigma0^2 # 検定統計量を計算する
     p0 <- pchisq(chi2, df=n-1)
     2*min(p0, 1-p0) # p値 (両側検定の場合)
   #+end_src
@@ -852,8 +908,8 @@
 ** 対応がある場合の平均の差の検定
 - 対応がある観測データの平均の差の検定では
   2種類のデータ間の自然な対応を考慮することがある
+- [[color:green][薬の投薬の例]]
   #+begin_quote
-  [[color:green][薬の投薬の例]]
   - 2種類の薬の効能を比較するために被験者に両方の薬を投与
   - 被験者 \(i\) にそれぞれの薬を投与した場合の治験結果: \(X_i,Y_i\)
   - \(X_i\) と \(Y_i\) には"同一の被験者に対する治験結果"という意味で対応がある
@@ -864,7 +920,7 @@
   \(Z_1,\dotsc,Z_n\) の平均が0か否かを検定すれば良い
   
 ** R : \(t\)-検定の関数
-- 基本書式 
+- 使い方
   #+begin_src R :eval no
     t.test(x, y = NULL, # 2標本の場合
            alternative = c("two.sided", "less", "greater"),
@@ -910,6 +966,41 @@
   - 帰無分布は自由度 \(m{-}1,n{-}1\) の \(F\)-分布
     (*\(F\)-検定*)
 
+#+reveal: split
+- \(F\)-分布
+#+begin_leftcol
+#+begin_src R :file figs/pdf_f.png :exports results :results graphics
+  par(family="HiraginoSans-W4") 
+  plot(function(x)df(x,df1=3,df2=5,ncp=0), -1, 6,
+       col=5, lwd=3, ylim=c(0,0.7),
+       xlab="x",ylab="確率密度")
+#+end_src
+#+CAPTION: \(F\)-分布 (自由度\(3,5\))
+#+NAME: fig:pdf_f
+#+ATTR_HTML: :width 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/pdf_f.png]]
+#+end_leftcol  
+#+begin_rightcol
+#+begin_quote
+- 標本空間: \([0,\infty)\)
+- 母数: 自由度 \(\nu_{1},\nu_{2}\)
+- 密度関数:
+  #+begin_src latex
+    \begin{equation}
+      f(x)
+      =
+      \frac{(\nu_{1}/\nu_{2})^{\nu_{1}/2}}{B(\nu_{1}/2,\nu_{2}/2)}
+      \frac{x^{\nu_{1}/2-1}}{(1+\nu_{1}x/\nu_{2})^{(\nu_{1}+\nu_{2})/2}}
+    \end{equation}
+  #+end_src
+- 備考 :
+  自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う
+  独立な確率変数の比の分布で，
+  分散の検定に利用される．
+#+end_quote
+#+end_rightcol  
+
 ** 棄却域を用いる場合
 - 有意水準を選択 : \(\alpha\in(0,1)\)
 - \(H_0\) の下では以下が成立
@@ -950,7 +1041,7 @@
   - /[[color:gray][\(p\)-値の計算や片側対立仮説への対応は前と同様]]/
 
 ** R : \(F\)-検定の関数
-- 基本書式 
+- 使い方
   #+begin_src R :eval no
     var.test(x, y, ratio = 1,
              alternative = c("two.sided", "less", "greater"),
