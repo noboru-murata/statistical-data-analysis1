@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-30 17:57:38 mura>
+# Time-stamp: <2022-07-01 15:59:34 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -93,6 +93,57 @@
   - *第一種過誤* : "正しい帰無仮説を棄却する"誤り
   - *第二種過誤* : "誤った帰無仮説を受容する"誤り
 
+
+#+reveal: split
+#+begin_src R :file figs/test1.png :exports results :results graphics
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
+  shape<-3; rate<-1
+  curve(dgamma(x,shape=shape,rate=rate), 0, 10,
+        col="blue", lwd=2, ann=FALSE, axes=FALSE)
+  abline(h=0, col=gray(0.9))
+  box()
+  title(main="帰無分布")
+  text(3,.04,labels="帰無仮説の下で")
+  text(3,.02,labels="良く出る領域")
+  text(7,.04,labels="対立仮説の下で")
+  text(7,.02,labels="良く出る領域")
+#+end_src
+#+CAPTION: 検定の考え方
+#+NAME: fig:test1
+#+ATTR_HTML: :height 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/test1.png]]
+
+#+reveal: split
+#+begin_src R :file figs/test2.png :exports results :results graphics
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
+  shape<-3; rate<-1
+  curve(dgamma(x,shape=shape,rate=rate), 0, 10,
+        col="blue", lwd=2, ann=FALSE, axes=FALSE)
+  abline(h=0, col=gray(0.9))
+  box()
+  d <- 0.02
+  z <- rbind(c(qgamma(0.95,shape=shape,rate=rate), 10))
+  for (i in 1:nrow(z)) {
+    x <- seq(min(z[i,]), max(z[i,]), 0.1)
+    xx <- c(x,max(z[i,]), min(z[i,]))
+    yy <- c(dgamma(x,shape=shape,rate=rate), rep(0,2))
+    lines(c(z[i,1], z[i,1]), c(dgamma(z[i,1],shape=shape,rate=rate)+d, -d),
+          col="pink", lty="solid", lwd=2)
+    polygon(xx, yy, col="pink")
+  }
+  axis(1, at=c(z[,1]-1), lab="受容")
+  axis(1, at=c(z[,1]+1), lab="棄却")
+  text(z[,1]+1.5,.04,labels="棄却域")
+  points(z[,1]-1,0,pch="X")
+  points(z[,1]+1,0,pch="X")
+#+end_src
+#+CAPTION: 棄却と受容
+#+NAME: fig:test1
+#+ATTR_HTML: :height 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/test2.png]]
+
 ** 検定の設計指針
 - 検定統計量 \(T\) に対して棄却域 \(R\) を設計
   - *サイズ*: 第一種過誤が *起きる確率*
@@ -118,6 +169,37 @@
   第一種過誤が起きる確率(サイズ)として許容する上限
   #+end_quote
 
+#+reveal: split
+#+begin_src R :file figs/test3.png :exports results :results graphics
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
+  shape<-3; rate<-1
+  curve(dgamma(x,shape=shape,rate=rate), 0, 10,
+       col="blue", lwd=2, ann=FALSE, axes=FALSE)
+  abline(h=0, col=gray(0.9))
+  box()
+  d <- 0.02
+  z <- rbind(c(qgamma(0.80,shape=shape,rate=rate), 10),
+             c(qgamma(0.95,shape=shape,rate=rate), 10))
+  rcol <- c("palegreen","pink")
+  for (i in 1:nrow(z)) {
+    x <- seq(min(z[i,]), max(z[i,]), 0.1)
+    xx <- c(x,max(z[i,]), min(z[i,]))
+    yy <- c(dgamma(x,shape=shape,rate=rate), rep(0,2))
+    lines(c(z[i,1], z[i,1]), c(dgamma(z[i,1],shape=shape,rate=rate)+d, -d),
+          col=rcol[i], lty="solid", lwd=2)
+    polygon(xx, yy, col=rcol[i])
+  }
+  axis(1, at=c(z[,1]), lab=c("水準大","水準小"))
+  curve(dgamma(x,shape=shape+4,rate=rate), 0, 10,
+       col="darkgreen", lwd=2, add=TRUE)
+  text(7,.2,labels="対立仮説の分布")
+#+end_src
+#+CAPTION: 検定の設計
+#+NAME: fig:test3
+#+ATTR_HTML: :height 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/test3.png]]
+  
 ** 棄却域の決め方
 - 検定を構成する場合の一般的な戦略 : \\
   棄却域 \(R_{\alpha}\) は以下のように設定する
@@ -177,7 +259,7 @@
   #+end_quote
   # \(X_1,X_2,\dotsc,X_n\)
 - \(X_{i}\) は平均 \(\mu\), 分散 \(\sigma^2\) の正規分布に従う
-- 以下では \(\mu\) および分散 \(\sigma^2\) に対する検定を説明
+- 以下では平均 \(\mu\) および分散 \(\sigma^2\) に対する検定を説明
 
 
 * 平均の検定
@@ -188,8 +270,7 @@
   観測データを生成している分布の平均 \(\mu\) が
   \(\mu_0\) であるか否かを検定する
   #+end_quote
-  - 帰無仮説: \(\mu=\mu_0\)
-  - 対立仮説: \(\mu\neq\mu_0\)
+  - 帰無仮説と対立仮説
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -228,8 +309,9 @@
     \end{equation}
   #+end_src
   #+end_quote
-- 帰無分布 (帰無仮説 \(H_0\) のもとでの検定統計量 \(t\) の分布)
-  は自由度 \(n{-}1\) の \(t\)-分布
+  - 帰無分布は自由度 \(n{-}1\) の \(t\)-分布 \\
+    (帰無仮説 \(H_0\) のもとでの検定統計量 \(t\) の分布)
+    
 - *Studentの \(t\)-検定*
 
 #+reveal: split
@@ -261,7 +343,6 @@
 #+end_quote
 #+end_rightcol  
   
-
 ** 棄却域を用いる場合
 - 有意水準を選択 : \(\alpha\in(0,1)\)
 - \(H_0\) の下で以下が成立
@@ -313,8 +394,11 @@
     \begin{align}
       |t|>t_{1{-}\alpha/2}(n{-}1)
       &\Leftrightarrow
-        \int_{-\infty}^{|t|}f(x)dx>1{-}\alpha/2\\
+        \int_{-\infty}^{|t|}f(x)dx>
+        \int_{-\infty}^{t_{1{-}\alpha/2}(n{-}1)}f(x)dx=1{-}\alpha/2\\
       &\Leftrightarrow
+        \int_{|t|}^\infty f(x)dx < \alpha/2
+        \Leftrightarrow
         2\int_{|t|}^\infty f(x)dx < \alpha
     \end{align}
   #+end_src
@@ -332,14 +416,13 @@
 - 対立仮説によって棄却域の形は変わりうる
 
 ** 平均の検定
-- 片側検定
+- 右片側検定
   #+begin_quote
   \(\mu_0\) を既知の定数として，
   観測データを生成している分布の平均 \(\mu\) が
   \(\mu_0\) より大きいかを検定する
   #+end_quote
-  - 帰無仮説 : \(\mu=\mu_0\)
-  - 対立仮説 : \(\mu>\mu_0\)
+  - 帰無仮説と対立仮説
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -397,26 +480,16 @@
   #+end_quote
 - \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却
 
-** 両側検定と片側検定
-- *右片側検定* : 棄却域がある定数 \(a\) によって \((a,\infty)\)
-- *左片側検定* : 棄却域がある定数 \(a\) によって \((-\infty,a)\)
-  - 右片側検定と左片側検定を合わせて *片側検定* と呼ぶ
-- *両側検定* : 棄却域がある定数 \(a < b\) によって \((-\infty,a)\cup(b,\infty)\)
-- 平均の検定の場合:
-  - 対立仮説を \(H_1:\mu\neq\mu_0\) にとった場合は両側検定
-  - 対立仮説を \(H_1:\mu>\mu_0\) にとった場合は右片側検定
-  - 対立仮説を \(H_1:\mu<\mu_0\) にとった場合は左片側検定
-
-** 左片側検定
-- 反対向きの対立仮説 \(\mu < \mu_0\) を考えた検定
-  #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      H_0:\mu=\mu_0\quad\text{vs}\quad H_1:\mu < \mu_0.
-    \end{equation}
-  #+end_src
-  #+end_quote
-- 検定の手続き
+** 平均の検定
+- 左片側検定
+  - 反対向きの対立仮説 \(\mu < \mu_0\) を考えた検定
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}
+        H_0:\mu=\mu_0\quad\text{vs}\quad H_1:\mu < \mu_0.
+      \end{equation}
+    #+end_src
+    #+end_quote
   - 以下の場合，帰無仮説を棄却
     #+begin_quote
     #+begin_src latex
@@ -439,7 +512,69 @@
     #+end_src
     #+end_quote
 
-** R: \(t\)-検定の関数
+** 両側検定と片側検定
+- *右片側検定* : 棄却域がある定数 \(a\) によって \((a,\infty)\)
+- *左片側検定* : 棄却域がある定数 \(a\) によって \((-\infty,a)\)
+  - 右片側検定と左片側検定を合わせて *片側検定* と呼ぶ
+- *両側検定* : 棄却域がある定数 \(a < b\) によって \((-\infty,a)\cup(b,\infty)\)
+- 平均の検定の場合:
+  - 対立仮説を \(H_1:\mu\neq\mu_0\) にとった場合は両側検定
+  - 対立仮説を \(H_1:\mu>\mu_0\) にとった場合は右片側検定
+  - 対立仮説を \(H_1:\mu<\mu_0\) にとった場合は左片側検定
+
+#+reveal: split
+#+begin_leftcol
+#+begin_src R :file figs/cr_two.png :exports results :results graphics
+  plot(function(x)dnorm(x,mean=0,sd=1), -4, 4,
+       col="blue", lwd=2, ann=FALSE, axes=FALSE)
+  abline(h=0, col=gray(0.9))
+  box()
+  d <- 0.02
+  z <- rbind(c(qnorm(0.025), -4), c(qnorm(0.975), 4))
+  
+  for (i in 1:nrow(z)) {
+      x <- seq(min(z[i,]), max(z[i,]), 0.1)
+      xx <- c(x,max(z[i,]), min(z[i,]))
+      yy <- c(dnorm(x), rep(0,2))
+      lines(c(z[i,1], z[i,1]), c(dnorm(z[i,1])+d, -d),
+            col="red", lty="solid", lwd=2)
+      polygon(xx, yy, col="gray")
+  }
+  axis(1, at=c(z[,1]), 
+       lab=c(expression(-z[1-alpha/2],z[1-alpha/2])))
+  title(main="two side", xlab="test statistics", ylab="density")
+#+end_src
+#+NAME: fig:cr_two
+#+ATTR_HTML: :width 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/cr_two.png]]
+#+end_leftcol
+#+begin_rightcol
+#+begin_src R :file figs/cr_one.png :exports results :results graphics
+  plot(function(x)dnorm(x,mean=0,sd=1), -4, 4,
+       col="blue", lwd=2, ann=FALSE, axes=FALSE)
+  abline(h=0, col=gray(0.9))
+  box()
+  d <- 0.02
+  z <- rbind(c(qnorm(0.95), 4))
+  for (i in 1:nrow(z)) {
+    x <- seq(min(z[i,]), max(z[i,]), 0.1)
+    xx <- c(x,max(z[i,]), min(z[i,]))
+    yy <- c(dnorm(x), rep(0,2))
+    lines(c(z[i,1], z[i,1]), c(dnorm(z[i,1])+d, -d),
+	  col="red", lty="solid", lwd=2)
+    polygon(xx, yy, col="gray")
+  }
+  axis(1, at=c(z[,1]), lab=c(expression(z[1-alpha])))
+  title(main="one side", xlab="test statistics", ylab="density")
+#+end_src
+#+NAME: fig:cr_one
+#+ATTR_HTML: :width 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/cr_one.png]]
+#+end_rightcol
+
+** R : \(t\)-検定の関数
 - 使い方
   #+begin_src R :eval no
     t.test(x, # 1標本の場合
@@ -510,7 +645,7 @@
     x <- sample(0:1, n, replace=TRUE, prob=c(1-mu1,mu1))
     ## n 人分の視聴結果 {1,0} のベクトルが得られる
   #+end_src
-  - ヒント: \(X\) は正規分布には従わないが，
+  - ヒント : \(X\) は正規分布には従わないが，
     \(\bar{X}\) は正規分布で近似できることが利用できる
 
 #+begin_src R :eval no :exports none :tangle yes
@@ -549,8 +684,7 @@
   観測データを生成している分布の分散 \(\sigma^2\) が
   \(\sigma_0^2\) であるか否かを検定する
   #+end_quote
-  - 帰無仮説 : \(\sigma^2=\sigma_0^2\)
-  - 対立仮説 : \(\sigma^2\neq\sigma_0^2\)
+  - 帰無仮説と対立仮説
     #+begin_quote
     #+begin_src latex
       \begin{equation}
@@ -581,8 +715,8 @@
     \end{equation}
   #+end_src
   #+end_quote
-- 帰無分布は自由度 \(n{-}1\) の \(\chi^2\)-分布
-  (*\(\chi^2\)-検定*) 
+  - 帰無分布は自由度 \(n{-}1\) の \(\chi^2\)-分布
+- *\(\chi^2\)-検定*
 
 #+reveal: split
 - \(\chi^{2}\)-分布
@@ -599,11 +733,11 @@
 - 母数 : 自由度 \(\nu\)
 - 密度関数 :
   #+begin_src latex
-    \begin{multline}
-      f(x)=
+    \begin{align}
+      f(x)=&
       \frac{1}{2^{\nu/2}\Gamma(\frac{\nu}{2})}x^{\nu/2-1}e^{-x/2}\\
-      \Gamma(z)=\int_0^\infty e^{-t}t^{z-1}dt
-    \end{multline}
+      &\Gamma(z)=\int_0^\infty e^{-t}t^{z-1}dt
+    \end{align}
   #+end_src
   - 備考 : \(\nu\) 個の標準正規分布に従う確率変数の2乗和の分布で，
     検定に利用される．
@@ -650,7 +784,7 @@
   #+end_quote
 
 ** @@latex:@@\(p\)-値を用いる場合
-- \(p\)-値を計算 : ( \(f(x)\): 自由度 \(n{-}1\) の \(\chi^2\)-分布の密度)
+- \(p\)-値を計算 ( \(f(x)\): 自由度 \(n{-}1\) の \(\chi^2\)-分布の密度)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -662,9 +796,8 @@
 - \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却
 
 ** 片側検定
-- 対立仮説が片側 (右側対立仮説) の場合 :
-  - 帰無仮説 : \(\sigma^2=\sigma_0^2\)
-  - 対立仮説 : \(\sigma^2>\sigma_0^2\)
+- 対立仮説が片側 (右側対立仮説) の場合
+  - 帰無仮説と対立仮説
     #+begin_quote
     #+begin_src latex
       \begin{equation}%\label{two-side}
@@ -673,7 +806,7 @@
       \end{equation}
     #+end_src
     #+end_quote
-  - /[[color:gray][左側対立仮説 \(H_1:\sigma^2 < \sigma_0^2\) も以下の議論は同様]]/
+- 左側対立仮説 \(H_1:\sigma^2 < \sigma_0^2\) も以下の議論は同様
 
 ** 棄却域を用いる場合
 - 自由度 \(n{-}1\) の \(\chi^2\)-分布の \(1{-}\alpha\) 分位点 :
@@ -688,7 +821,7 @@
   #+end_quote
 
 ** @@latex:@@\(p\)-値を用いる場合
-- \(p\)-値を計算 : ( \(f(x)\):自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
+- \(p\)-値を計算 ( \(f(x)\):自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -699,9 +832,9 @@
   #+end_quote
 - \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却
 
-** R: \(\chi^2\)-検定の関数
+** R : \(\chi^2\)-検定の関数
 - 関数 ~chisq.test~ はあるが目的が違うので注意 (適合度検定・独立性検定)
-- 以下のように計算できる
+- \(\chi^2\) 分布に関する関数を用いて直接計算することができる
   #+begin_src R :eval no
     x # 観測データ
     sigma0 # 帰無仮説で用いる標準偏差
@@ -779,14 +912,18 @@
 
 * 平均の差の検定
 ** 平均の差の検定
-- 2種類のデータの平均が等しいか否かを検定する
+- 両側検定
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}%\label{mean-equal}
-      H_0:\mu_1=\mu_2\quad\text{vs}\quad H_1:\mu_1\neq\mu_2
-    \end{equation}
-  #+end_src
+  2種類のデータの平均が等しいか否かを検定する
   #+end_quote
+  - 帰無仮説と対立仮説
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}%\label{mean-equal}
+        H_0:\mu_1=\mu_2\quad\text{vs}\quad H_1:\mu_1\neq\mu_2
+      \end{equation}
+    #+end_src
+    #+end_quote
 - *Behrens-Fisher問題* 
   - 正確かつ適切な検定を導出することは難しい
 - *Welch(またはSatterthwaite)の近似法*
@@ -894,6 +1031,8 @@
   #+end_quote
   - \(t_{1{-}\alpha/2}(\hat{\nu})\) :
     自由度 \(\hat{\nu}\) の \(t\)-分布の \(1{-}\alpha/2\) 分位点
+
+#+reveal: split
 - 検定統計量 \(t\) の値を計算
 - 以下の場合は帰無仮説を棄却
   #+begin_quote
@@ -936,14 +1075,18 @@
 
 * 分散の比の検定
 ** 分散の比の検定
-- 2種類のデータの分散が等しいか否かを検定する
+- 両側検定
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      H_0:\sigma_1^2=\sigma_2^2\quad\text{vs}\quad H_1:\sigma_1^2\neq\sigma_2^2
-    \end{equation}
-  #+end_src
+  2種類のデータの分散が等しいか否かを検定する
   #+end_quote
+  - 帰無仮説と対立仮説
+    #+begin_quote
+    #+begin_src latex
+      \begin{equation}
+        H_0:\sigma_1^2=\sigma_2^2\quad\text{vs}\quad H_1:\sigma_1^2\neq\sigma_2^2
+      \end{equation}
+    #+end_src
+    #+end_quote
 
 ** 考え方
 - \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
@@ -955,16 +1098,16 @@
       自由度 \(m{-}1\) の \(\chi^2\)-分布に従う
     - \((n{-}1)s_2^2/\sigma_2^2\)
       は自由度 \(n{-}1\) の \(\chi^2\)-分布に従う
-  - 検定統計量
-    #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        F=\frac{s_1^2}{s_2^2}
-      \end{equation}
-    #+end_src
-    #+end_quote
+- 検定統計量
+  #+begin_quote
+  #+begin_src latex
+    \begin{equation}
+      F=\frac{s_1^2}{s_2^2}
+    \end{equation}
+  #+end_src
+  #+end_quote
   - 帰無分布は自由度 \(m{-}1,n{-}1\) の \(F\)-分布
-    (*\(F\)-検定*)
+- *\(F\)-検定*
 
 #+reveal: split
 - \(F\)-分布
@@ -1112,6 +1255,7 @@
 - 二元配置
   - 二元配置のモデル
   - 検定の構成
+
 
 * Footnotes
 * COMMENT ローカル変数
