@@ -9,12 +9,12 @@ x <- pi/6*(0:12)
 plot(x, sin(x)) # x の値に対する y=sin(x) の値を対応づけて描画
 
 x <- pi/6*(0:12)
-plot(x,sin(x),type="l",lwd=3,col="blue",ylab="y=sin(x)")
+plot(x, sin(x), type="l", lwd=3, col="blue", ylab="y=sin(x)")
 
 x <- seq(0, 4*pi, by=0.5)
 y <- sin(x)
 z <- cos(x)
-plot(x, y, type="b", pch="x", ylim=c(-2,2), col="red") # "b"="p+l"
+plot(x, y, type="b", pch=4, ylim=c(-2,2), col="red") # "b"="p+l"
 points(x, z, col="blue", pch="C") # 点を追加. pchは文字も指定できる
 lines(x, z, col="cyan", lwd=3) # 折れ線を追加
 
@@ -192,7 +192,7 @@ persp(x, y, z, theta=30, phi=30, expand=0.5, # 俯瞰する視線の設定
       col="royalblue", main=expression(z==x^2-y^2))
 
 ## install.packages("scatterplot3d") # 初めて使う時に必要
-library(scatterplot3d) # パッケージのロード
+library("scatterplot3d") # パッケージのロード
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
 ## 風速, 日射, 気温の3次元散布図を作成する
 scatterplot3d(subset(TW.data, select=c(wind, solar, temp)),

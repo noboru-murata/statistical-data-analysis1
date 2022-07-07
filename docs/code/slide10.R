@@ -40,7 +40,7 @@ with(TW.data, hist(wind, breaks=30, freq=FALSE, # 密度
                    main="風速のヒストグラム", xlab="風速 [m/s]", ylab="密度"))
 
 ## ガンマ関数による最尤推定
-library(stats4) # 関数mleを利用
+library("stats4") # 関数mleを利用
 ## ガンマ分布の最尤推定量
 mle.gamma <- function(x, # 観測データ
                       nu0=1, # nuの初期値

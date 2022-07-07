@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-05-20 15:11:19 mura>
+# Time-stamp: <2022-07-07 10:48:02 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -790,7 +790,7 @@
 ** 3次元グラフのためのパッケージ
 - 以下は ~scatterplot3d()~ の例
   #+begin_src R :eval no
-    library(scatterplot3d) # パッケージの読み込み
+    library("scatterplot3d") # パッケージの読み込み
     scatterplot3d(x, color, angle = 40, ...) # ... は関数 plot() とは若干異なる
     ## x: x,y,z座標を指定するデータフレーム
     ##    関数 persp() のようにx,y,zを個別に指定することも可能
@@ -804,7 +804,7 @@
 - 関数 ~scatterplot3d()~ による3次元散布図
   #+begin_src R :file figs/graph-plot3d2.png :results graphics :tangle yes
     ## install.packages("scatterplot3d") # 初めて使う時に必要
-    library(scatterplot3d) # パッケージのロード
+    library("scatterplot3d") # パッケージのロード
     if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
     ## 風速, 日射, 気温の3次元散布図を作成する
     scatterplot3d(subset(TW.data, select=c(wind, solar, temp)),

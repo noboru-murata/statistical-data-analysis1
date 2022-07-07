@@ -1,9 +1,9 @@
 #+TITLE: 記述統計量
-#+SUBTITLE: 基礎的な記述統計量とデータの集約
+#+SUBTITLE: 第9講 - 基礎的な記述統計量とデータの集約
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-17 15:55:13 mura>
+# Time-stamp: <2022-07-07 11:03:20 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent

@@ -1,9 +1,9 @@
 #+TITLE: 検定
-#+SUBTITLE: 仮説の正当性をデータから検証する
+#+SUBTITLE: 第11講 - 仮説の正当性をデータから検証する
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-07-01 15:59:34 mura>
+# Time-stamp: <2022-07-07 11:06:31 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -16,6 +16,7 @@
 - 検定に関するMCを充実させたい
 - 正規母集団でなくても使えるが正規分布を仮定することを言う
 - 演習問題を整理するべきか
+- 早稲田版の説明から一部抜粋してもよい (BF問題とか図とか)
 
 * 講義の内容
 - 検定
@@ -93,7 +94,6 @@
   - *第一種過誤* : "正しい帰無仮説を棄却する"誤り
   - *第二種過誤* : "誤った帰無仮説を受容する"誤り
 
-
 #+reveal: split
 #+begin_src R :file figs/test1.png :exports results :results graphics
   if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
@@ -101,8 +101,12 @@
   curve(dgamma(x,shape=shape,rate=rate), 0, 10,
         col="blue", lwd=2, ann=FALSE, axes=FALSE)
   abline(h=0, col=gray(0.9))
-  box()
   title(main="帰無分布")
+  ## curve(dgamma(x,shape=shape+4,rate=rate), 0, 10,
+  ##     col="darkgreen", lwd=2, add=TRUE)
+  ## text(3,.2,labels="帰無仮説の分布")
+  ## text(7,.2,labels="対立仮説の分布")
+  box()
   text(3,.04,labels="帰無仮説の下で")
   text(3,.02,labels="良く出る領域")
   text(7,.04,labels="対立仮説の下で")
@@ -1211,7 +1215,7 @@
 #+begin_src R :eval no :exports none :tangle yes
   ### 練習問題 7月と8月の気温の平均の差の検定
   ## install.packages("beeswarm") # consoleからinstallする場合
-  library(beeswarm) # boxplot上に散布図を表示するため
+  library("beeswarm") # boxplot上に散布図を表示するため
   TW.data <- read.csv("data/tokyo_weather.csv")
   boxplot(temp~month, col="pink",
           data=TW.data, subset=month%in%7:8) # 月を限定

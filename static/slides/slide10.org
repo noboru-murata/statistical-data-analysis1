@@ -1,9 +1,9 @@
 #+TITLE: 推定
-#+SUBTITLE: 確率分布を特徴づけるパラメタを推測する
+#+SUBTITLE: 第10講 - 確率分布を特徴づけるパラメタを推測する
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-30 17:56:55 mura>
+# Time-stamp: <2022-07-07 11:04:54 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -431,7 +431,7 @@
 #+reveal: split
 - Rでの計算例 [[color:green][(ガンマ分布の最尤推定量)]]
   #+begin_src R :eval no
-    library(stats4) # 関数mleを利用するため
+    library("stats4") # 関数mleを利用するため
     ## 数値最適化のためには尤度関数を最初に評価する初期値が必要
     mle.gamma <- function(x, # 観測データ
                           nu0=1, alpha0=1){ # nu, alphaの初期値
@@ -488,7 +488,7 @@
                      main="風速のヒストグラム", xlab="風速 [m/s]", ylab="密度"))
   
   ## ガンマ関数による最尤推定
-  library(stats4) # 関数mleを利用
+  library("stats4") # 関数mleを利用
   ## ガンマ分布の最尤推定量
   mle.gamma <- function(x, # 観測データ
                         nu0=1, # nuの初期値

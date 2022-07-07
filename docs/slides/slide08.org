@@ -1,9 +1,9 @@
 #+TITLE: 確率分布
-#+SUBTITLE: いろいろな離散分布と連続分布
+#+SUBTITLE: 第8講 - いろいろな離散分布と連続分布
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-06-10 15:09:24 mura>
+# Time-stamp: <2022-07-07 10:56:54 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent

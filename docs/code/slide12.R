@@ -4,12 +4,12 @@
 fact <- as.factor(rep(LETTERS[1:3],c(10,8,12))) # 因子
 alt <- rep(c(1,-1,1),c(10,8,12)) # 対立仮説の例
 foo <- data.frame( # 帰無仮説が正しい場合
-  obs=rnorm(length(fact),mean=3,sd=2), # 観測値
-  fact=fact) # 因子
+    obs=rnorm(length(fact),mean=3,sd=2), # 観測値
+    fact=fact) # 因子
 bar <- data.frame( # 対立仮説が正しい場合
-  obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
-  fact=fact) # 因子
-library(beeswarm) # boxplot上に散布図を表示するため
+    obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
+    fact=fact) # 因子
+library("beeswarm") # boxplot上に散布図を表示するため
 boxplot(obs ~ fact, data=foo, 
         col="pink", main="H0 = TRUE")
 beeswarm(obs ~ fact, data=foo,
@@ -23,19 +23,19 @@ anova(aov(obs ~ fact, data=bar))
 
 ## 実験
 myTrial <- function(h0=TRUE){
-  if(h0) {
-    tmp <- data.frame( # 帰無仮説が正しい場合
-      obs=rnorm(length(fact),mean=3,sd=2), # 観測値
-      fact=fact # 因子
-    )
-  } else {
-    tmp <- data.frame( # 対立仮説が正しい場合
-      obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
-      fact=fact # 因子
-    )
-  }
-  return(anova(aov(obs ~ fact, data=tmp))["fact",c("F value","Pr(>F)"),drop=TRUE])
-  ## p-値を返す
+    if(h0) {
+        tmp <- data.frame( # 帰無仮説が正しい場合
+            obs=rnorm(length(fact),mean=3,sd=2), # 観測値
+            fact=fact # 因子
+        )
+    } else {
+        tmp <- data.frame( # 対立仮説が正しい場合
+            obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
+            fact=fact # 因子
+        )
+    }
+    return(anova(aov(obs ~ fact, data=tmp))["fact",c("F value","Pr(>F)"),drop=TRUE])
+    ## p-値を返す
 }
 ## 帰無仮説が正しい場合のF-値/p-値の分布 (一様分布になる)
 foo <- replicate(2000,myTrial())
@@ -62,7 +62,7 @@ days <- with(TW.data,
 wdays <- weekdays(days) # 各日付の曜日を計算
 TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
 ## 箱ひげ図で可視化
-par(family="HiraginoSans-W4") # 日本語フォントの指定
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 boxplot(temp ~ weekday, data=TW.data, 
         col="lavender", main="曜日ごとの気温") 
 aggregate(temp ~ weekday, data=TW.data, FUN=mean)
@@ -91,7 +91,7 @@ anova(myAov)["month","Pr(>F)"] # p値の取得 (行・列の番号で指定し�
 ## 性別(gender)と学歴(education_level)による仕事の満足度
 ## 満足度にそれぞれの因子の効果があるかを検証
 ## install.packages("datarium") # 検定用のデータが集められている
-library(datarium) # packageの読み込み
+library("datarium") # packageの読み込み
 head(jobsatisfaction) # データの一部を見る
 View(jobsatisfaction) # 左上ペインに表を表示する
 ## boxplotによる視覚化

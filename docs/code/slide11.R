@@ -60,7 +60,7 @@ p0 <- pchisq(chi2, df=n-1)
 
 ### 練習問題 7月と8月の気温の平均の差の検定
 ## install.packages("beeswarm") # consoleからinstallする場合
-library(beeswarm) # boxplot上に散布図を表示するため
+library("beeswarm") # boxplot上に散布図を表示するため
 TW.data <- read.csv("data/tokyo_weather.csv")
 boxplot(temp~month, col="pink",
         data=TW.data, subset=month%in%7:8) # 月を限定
