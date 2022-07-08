@@ -47,8 +47,8 @@
 </section>
 
 <section>
-<section id="slide-org66c0fc8">
-<h2 id="org66c0fc8">講義の内容</h2>
+<section id="slide-org05f7ed1">
+<h2 id="org05f7ed1">講義の内容</h2>
 <ul>
 <li>回帰分析</li>
 <li>回帰係数の推定
@@ -70,26 +70,26 @@
 </section>
 </section>
 <section>
-<section id="slide-org7f25747">
-<h2 id="org7f25747">回帰分析</h2>
-<div class="outline-text-2" id="text-org7f25747">
+<section id="slide-orga99434b">
+<h2 id="orga99434b">回帰分析</h2>
+<div class="outline-text-2" id="text-orga99434b">
 </div>
 </section>
-<section id="slide-orgd2723d5">
-<h3 id="orgd2723d5">回帰分析</h3>
+<section id="slide-org9570489">
+<h3 id="org9570489">回帰分析</h3>
 <ul>
 <li>データのある変量をその他の変量を用いて説明・予測するモデル
 (<b>回帰モデル</b>)を構築するための分析法</li>
 <li>変量の分類
 <ul>
-<li>説明される側: <b>目的変数</b> (または被説明，従属，応答変数など)</li>
-<li>説明する側: <b>説明変数</b> (または独立変数，共変量など)</li>
+<li>説明する側 : <b>説明変数</b> (または独立変数，共変量など)</li>
+<li>説明される側 : <b>目的変数</b> (または被説明，従属，応答変数など)</li>
 
 </ul></li>
-<li>目的変数・説明変数ともに複数個あってもよい 
+<li>説明変数・目的変数ともに複数個あってもよい 
 <ul>
 <li>目的変数は通常は1つ (複数の場合は個別に回帰モデルを構築)</li>
-<li>説明変数は，1つの場合を <b>単回帰</b>, 2つ以上の場合を <b>重回帰</b></li>
+<li>説明変数が1つの場合を <b>単回帰</b>, 2つ以上の場合を <b>重回帰</b></li>
 <li>この講義では単回帰のみ扱う</li>
 
 </ul></li>
@@ -98,13 +98,13 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org8266089">
-<h3 id="org8266089">回帰モデル</h3>
+<section id="slide-orgc20b139">
+<h3 id="orgc20b139">回帰モデル</h3>
 <ul>
-<li>\(X\): 説明変数</li>
-<li>\(Y\): 目的変数</li>
+<li>説明変数 : \(X\)</li>
+<li>目的変数 : \(Y\)</li>
 <li><p>
-\(Y\) を \(X\) で説明する関係式として一次関数を考える:
+\(Y\) を \(X\) で説明する関係式として一次関数を考える
 </p>
 <blockquote>
 <div>
@@ -119,7 +119,7 @@
 <li>\(\beta\): \(X\) の <b>回帰係数</b></li>
 
 </ul></li>
-<li><b>注意</b>: 非線形な関係への対応
+<li><b>注意</b> : 非線形な関係への対応
 <ul>
 <li>適切な変数変換(二乗, 対数など)を施して線形な関係に変換</li>
 <li>弱い非線形性を線形で近似</li>
@@ -133,13 +133,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org934845d">
-<h2 id="org934845d">回帰係数の点推定</h2>
-<div class="outline-text-2" id="text-org934845d">
+<section id="slide-org9f427a3">
+<h2 id="org9f427a3">回帰係数の点推定</h2>
+<div class="outline-text-2" id="text-org9f427a3">
 </div>
 </section>
-<section id="slide-org072a533">
-<h3 id="org072a533">回帰係数の点推定</h3>
+<section id="slide-orgfe975d5">
+<h3 id="orgfe975d5">回帰係数の点推定</h3>
 <ul>
 <li><p>
 \(n\) 個の説明変数と目的変数の組 \((X,Y)\) を観測
@@ -153,7 +153,7 @@
 </div>
 </blockquote></li>
 <li><p>
-回帰モデル: データには観測誤差が含まれる
+回帰モデル : データには観測誤差が含まれる
 </p>
 <blockquote>
 <div>
@@ -164,7 +164,7 @@
 </div>
 </blockquote>
 <ul>
-<li>\(\epsilon_1,\epsilon_2,\dotsc,\epsilon_n\): <b>誤差項</b> または <b>撹乱項</b></li>
+<li>\(\epsilon_1,\epsilon_2,\dotsc,\epsilon_n\) : <b>誤差項</b> または <b>撹乱項</b></li>
 
 </ul></li>
 <li>線形回帰モデルのパラメータ \(\alpha,\beta\) を推定</li>
@@ -173,25 +173,26 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org59a3593">
-<h3 id="org59a3593">分析における仮定</h3>
+<section id="slide-org600aa6c">
+<h3 id="org600aa6c">分析における仮定</h3>
 <ul>
 <li>説明変数 \(X_1,\dotsc,X_n\) は確率変数ではなく <b>確定値</b></li>
-<li>説明変数は一定値ではない (\(X_1=\cdots=X_n\) ではない)</li>
+<li>説明変数は一定値ではない <br />
+(\(X_1=\cdots=X_n\) ではない)</li>
 <li>誤差項 \(\epsilon_1,\dotsc,\epsilon_n\) は
 独立同分布な確率変数列</li>
-<li>誤差項は 平均0, 分散 \(\sigma^2\)</li>
+<li>誤差項は 平均 \(0\) 分散 \(\sigma^2\)</li>
 
 </ul>
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org76f787b">
-<h3 id="org76f787b">最小二乗法</h3>
+<section id="slide-org7f13c68">
+<h3 id="org7f13c68">最小二乗法</h3>
 <ul>
 <li><p>
 係数 \(\alpha,\beta\) の回帰式で説明できない
-目的変数の変動:
+目的変数の変動
 </p>
 <blockquote>
 <div>
@@ -236,11 +237,12 @@
 </div>
 </blockquote></li>
 <li><p>
-\((\hat{\alpha},\hat{\beta})\): <b>最小二乗推定量</b>
+<b>最小二乗推定量</b>
 </p>
 <blockquote>
 <p>
-\(S(\alpha,\beta)\) を最小にするパラメータの組 \((\alpha,\beta)\)
+\(S(\alpha,\beta)\) を最小にするパラメータの組
+\((\hat{\alpha},\hat{\beta})\)
 </p>
 </blockquote></li>
 
@@ -251,7 +253,7 @@
 <section>
 <ul>
 <li><p>
-最小二乗推定量
+最小二乗推定量の解
 </p>
 <blockquote>
 <div>
@@ -280,16 +282,16 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org85c8140">
-<h3 id="org85c8140">R: 回帰分析の関数</h3>
+<section id="slide-orga23300d">
+<h3 id="orga23300d">R : 回帰分析の関数</h3>
 <ul>
 <li><p>
-線形モデルを当てはめる関数 <code>lm()</code>
+関数 <code>lm()</code> : 線形モデルを当てはめる
 </p>
 <div class="org-src-container">
 
 <pre><code class="R" >lm(formula, data, subset, na.action, ...)
-## formula: 式．(目的変数 ~ 説明変数)
+## formula: 式 (目的変数 ~ 説明変数)
 ## data: データフレーム
 ## subset: 対象とする部分データ
 ## na.action: 欠損値の扱い
@@ -304,12 +306,12 @@
 </section>
 </section>
 <section>
-<section id="slide-orga8b1890" data-background="#fef4f4">
-<h2 id="orga8b1890">演習</h2>
+<section id="slide-org0036234" data-background="#fef4f4">
+<h2 id="org0036234">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9ad9d0c" data-background="#fef4f4">
-<h3 id="org9ad9d0c">練習問題</h3>
+<section id="slide-orgdfadc63" data-background="#fef4f4">
+<h3 id="orgdfadc63">練習問題</h3>
 <ul>
 <li>東京の気象データを用いて，
 必要であれば適当な期間を抽出し，
@@ -321,13 +323,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org807cfe7">
-<h2 id="org807cfe7">回帰係数の区間推定</h2>
-<div class="outline-text-2" id="text-org807cfe7">
+<section id="slide-org7b53db3">
+<h2 id="org7b53db3">回帰係数の区間推定</h2>
+<div class="outline-text-2" id="text-org7b53db3">
 </div>
 </section>
-<section id="slide-orgea66851">
-<h3 id="orgea66851">誤差項に関する仮定</h3>
+<section id="slide-orgacfc47d">
+<h3 id="orgacfc47d">誤差項に関する仮定</h3>
 <ul>
 <li>\(\epsilon_i\) は正規分布に従う</li>
 <li>上の仮定より
@@ -352,8 +354,8 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org41d7d96">
-<h3 id="org41d7d96">誤差分散の推定</h3>
+<section id="slide-orgf0aebf4">
+<h3 id="orgf0aebf4">誤差分散の推定</h3>
 <ul>
 <li>一般に \(\sigma^2\) は <b>既知でない</b> ためデータから推定
 <ul>
@@ -362,7 +364,7 @@
 
 </ul></li>
 <li><p>
-誤差と回帰式の関係:
+誤差と回帰式の関係
 </p>
 <blockquote>
 <div>
@@ -374,7 +376,7 @@
 </div>
 </blockquote></li>
 <li><p>
-\(\sigma^2\) の自然な推定量(良いとは限らない):
+\(\sigma^2\) の自然な推定量(良いとは限らない)
 </p>
 <blockquote>
 <div>
@@ -396,7 +398,7 @@
 <ul>
 <li><p>
 <b>残差</b> \(\hat{\epsilon}_1,\dotsc,\hat{\epsilon}_n\) の性質
-(資料; 正規方程式):
+(資料; 正規方程式)
 </p>
 <blockquote>
 <div>
@@ -408,7 +410,7 @@
 </div>
 </blockquote></li>
 <li><p>
-残差の二乗平均の性質 (標本分散と同様の計算):
+残差の二乗平均の性質 (標本分散と同様の計算)
 </p>
 <blockquote>
 <div>
@@ -420,7 +422,7 @@
 </div>
 </blockquote></li>
 <li><p>
-\(\sigma^{2}\) の不偏推定量:
+\(\sigma^{2}\) の不偏推定量
 </p>
 <blockquote>
 <div>
@@ -435,11 +437,11 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgc735646">
-<h3 id="orgc735646">回帰係数の性質</h3>
+<section id="slide-org9356faa">
+<h3 id="org9356faa">回帰係数の性質</h3>
 <ul>
 <li><p>
-\(\hat{\alpha},\hat{\beta}\) の分散の推定量 (資料; Gauss-Markovの定理):
+\(\hat{\alpha},\hat{\beta}\) の分散の推定量 (資料; Gauss-Markovの定理)
 </p>
 <blockquote>
 <div>
@@ -458,7 +460,7 @@
 
 </ul></li>
 <li><p>
-以下は \(\hat{\beta}\) と独立で自由度 \(n{-}2\) の \(\chi^2\) 分布に従う:
+以下は \(\hat{\beta}\) と独立で自由度 \(n{-}2\) の \(\chi^2\) 分布に従う
 </p>
 <blockquote>
 <div>
@@ -473,11 +475,11 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org281112c">
-<h3 id="org281112c">回帰係数の区間推定</h3>
+<section id="slide-orgf35be33">
+<h3 id="orgf35be33">回帰係数の区間推定</h3>
 <ul>
 <li><p>
-以下の確率変数は自由度 \(n{-}2\) の \(t\) 分布に従う:
+以下の確率変数は自由度 \(n{-}2\) の \(t\) 分布に従う
 </p>
 <blockquote>
 <div>
@@ -490,7 +492,7 @@
 </div>
 </blockquote></li>
 <li><p>
-\(\gamma\in(0,1)\) に対する \(\beta\) の \(1-\gamma\) 信頼区間:
+\(\gamma\in(0,1)\) に対する \(\beta\) の \(1-\gamma\) 信頼区間
 </p>
 <blockquote>
 <div>
@@ -508,11 +510,11 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgc76b373">
-<h3 id="orgc76b373">R: 区間推定の関数</h3>
+<section id="slide-orgccc3c6c">
+<h3 id="orgccc3c6c">R : 区間推定の関数</h3>
 <ul>
 <li><p>
-係数の信頼区間を求める関数 <code>confint()</code>
+関数 <code>confint()</code> : 係数の信頼区間を求める
 </p>
 <div class="org-src-container">
 
@@ -524,7 +526,7 @@
 </code></pre>
 </div></li>
 <li><p>
-予測値の信頼区間を求める関数 <code>predict()</code>
+関数 <code>predict()</code> : 予測値の信頼区間を求める
 </p>
 <div class="org-src-container">
 
@@ -544,12 +546,12 @@
 </section>
 </section>
 <section>
-<section id="slide-orgae0bac5" data-background="#fef4f4">
-<h2 id="orgae0bac5">演習</h2>
+<section id="slide-orgca50adb" data-background="#fef4f4">
+<h2 id="orgca50adb">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org82f6df5" data-background="#fef4f4">
-<h3 id="org82f6df5">練習問題</h3>
+<section id="slide-org94c6e2c" data-background="#fef4f4">
+<h3 id="org94c6e2c">練習問題</h3>
 <ul>
 <li>前問で作成した回帰モデルについて
 区間推定を行いなさい．</li>
@@ -560,16 +562,16 @@
 </section>
 </section>
 <section>
-<section id="slide-org7875264">
-<h2 id="org7875264">回帰係数の有意性検定</h2>
-<div class="outline-text-2" id="text-org7875264">
+<section id="slide-org4fa7f54">
+<h2 id="org4fa7f54">回帰係数の有意性検定</h2>
+<div class="outline-text-2" id="text-org4fa7f54">
 </div>
 </section>
-<section id="slide-org3d43d8b">
-<h3 id="org3d43d8b">回帰係数の有意性</h3>
+<section id="slide-orgb4c333b">
+<h3 id="orgb4c333b">回帰係数の有意性</h3>
 <ul>
 <li><p>
-説明変数 \(X\) が目的変数 \(Y\) を説明・予測するのに本当に役立っているかを検証:
+説明変数 \(X\) が目的変数 \(Y\) を説明・予測するのに本当に役立っているかを検証
 </p>
 <blockquote>
 <div>
@@ -593,8 +595,8 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org19534ea">
-<h3 id="org19534ea">回帰係数の有意性検定</h3>
+<section id="slide-orgfe9c47e">
+<h3 id="orgfe9c47e">回帰係数の有意性検定</h3>
 <ul>
 <li><p>
 帰無仮説 \(H_0\) が正しければ以下の統計量
@@ -619,7 +621,7 @@
 <section>
 <ul>
 <li><p>
-棄却域による検定:
+棄却域による検定
 </p>
 <blockquote>
 <p>
@@ -634,7 +636,7 @@
 </div>
 </blockquote></li>
 <li><p>
-\(p\) 値による検定:
+\(p\) 値による検定
 </p>
 <blockquote>
 <p>
@@ -653,11 +655,11 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org9d846ba">
-<h3 id="org9d846ba">R: 係数の検定のための関数</h3>
+<section id="slide-orgdfaf1c0">
+<h3 id="orgdfaf1c0">R : 係数の検定のための関数</h3>
 <ul>
 <li><p>
-推定されたモデルの情報を引き出す関数 <code>summary()</code>
+関数 <code>summary()</code> : 推定されたモデルの情報を引き出す
 </p>
 <div class="org-src-container">
 
@@ -667,8 +669,8 @@
 </div></li>
 <li>出力 (リスト名 $&ldquo;名前&rdquo; で参照可能)
 <ul>
-<li><code>coefficients</code> : 係数とt値</li>
-<li><code>fstatistics</code> : F値 (モデルの評価)</li>
+<li><code>coefficients</code> : 係数と \(t\)-値</li>
+<li><code>fstatistics</code> : \(F\)-値 (モデルの評価)</li>
 
 </ul></li>
 
@@ -679,12 +681,12 @@
 </section>
 </section>
 <section>
-<section id="slide-orgc627e26" data-background="#fef4f4">
-<h2 id="orgc627e26">演習</h2>
+<section id="slide-org0e2d71b" data-background="#fef4f4">
+<h2 id="org0e2d71b">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5d6b66e" data-background="#fef4f4">
-<h3 id="org5d6b66e">練習問題</h3>
+<section id="slide-org26699fd" data-background="#fef4f4">
+<h3 id="org26699fd">練習問題</h3>
 <ul>
 <li>前問で作成した回帰モデルについて
 係数の検定を行いなさい．</li>
@@ -695,17 +697,17 @@
 </section>
 </section>
 <section>
-<section id="slide-org1d0b396">
-<h2 id="org1d0b396">決定係数</h2>
-<div class="outline-text-2" id="text-org1d0b396">
+<section id="slide-orgd1f7e16">
+<h2 id="orgd1f7e16">決定係数</h2>
+<div class="outline-text-2" id="text-orgd1f7e16">
 </div>
 </section>
-<section id="slide-orgdd826bc">
-<h3 id="orgdd826bc">決定係数</h3>
+<section id="slide-orgd110ad2">
+<h3 id="orgd110ad2">決定係数</h3>
 <ul>
 <li>\(X\) が \(Y\) の変動をどの程度説明できるかを数量化</li>
 <li><p>
-<b>決定係数</b> (あるいは <b>寄与率</b>):
+<b>決定係数</b> (あるいは <b>寄与率</b>)
 </p>
 <blockquote>
 <div>
@@ -715,8 +717,8 @@
 \end{equation}
 
 </div>
-</blockquote>
-<p>
+</blockquote></li>
+<li><p>
 \(\hat{Y}_{i}\) は
 <b>あてはめ値</b> または <b>予測値</b> と呼ばれる
 </p>
@@ -737,7 +739,7 @@
 <section>
 <ul>
 <li><p>
-以下の等式が成立:
+以下の等式が成立
 </p>
 <blockquote>
 <div>
@@ -759,7 +761,7 @@
 <section>
 <ul>
 <li><p>
-決定係数:
+決定係数
 </p>
 <blockquote>
 <div>
@@ -770,26 +772,30 @@
 
 </div>
 </blockquote></li>
-<li>\(R^2\) の意味
+<li>\(R^2\) の成分
 <ul>
-<li>\(R^2\) の分子: あてはめ値の(標本平均まわりでの)変動</li>
-<li>\(R^2\) の分母: 目的変数の(標本平均まわりでの)変動</li>
+<li>\(R^2\) の分子 : あてはめ値の(標本平均まわりでの)変動</li>
+<li>\(R^2\) の分母 : 目的変数の(標本平均まわりでの)変動</li>
 
 </ul></li>
+<li>\(R^2\) の意味
+<ul>
 <li>回帰式が目的変数の変動をどの位説明できるか評価</li>
 <li>大きいほど説明力が高いと解釈される</li>
+
+</ul></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orge1ad6a7">
-<h3 id="orge1ad6a7">決定係数の別表現</h3>
+<section id="slide-org2b017d0">
+<h3 id="org2b017d0">決定係数の別表現</h3>
 <ul>
-<li>\(R^2\) は以下のように書き直すことも可能:
+<li>\(R^2\) は以下のように書き直すことも可能
 <ul>
 <li><p>
-目的変数の観測データとあてはめ値の相関の二乗:
+目的変数の観測データとあてはめ値の相関の二乗
 </p>
 <blockquote>
 <div>
@@ -806,7 +812,7 @@
 </div>
 </blockquote></li>
 <li><p>
-説明変数と目的変数の観測データの間の相関の二乗:
+説明変数と目的変数の観測データの間の相関の二乗
 </p>
 <blockquote>
 <div>
@@ -829,13 +835,13 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgfd557fe">
-<h3 id="orgfd557fe">自由度調整済み決定係数</h3>
+<section id="slide-orgc98ea56">
+<h3 id="orgc98ea56">自由度調整済み決定係数</h3>
 <ul>
-<li>不偏分散による \(R^2\) の修正:
+<li>不偏分散による \(R^2\) の修正
 <ul>
 <li><p>
-残差 \(\epsilon_i\) と目的変数 \(Y_i\) の標本分散による表現:
+残差 \(\epsilon_i\) と目的変数 \(Y_i\) の標本分散による表現
 </p>
 <blockquote>
 <div>
@@ -847,7 +853,7 @@
 </div>
 </blockquote></li>
 <li><p>
-不偏推定量で代替: <b>自由度調整済み決定係数</b> (または寄与率)
+不偏推定量で代替 : <b>自由度調整済み決定係数</b> (または寄与率)
 </p>
 <blockquote>
 <div>
@@ -865,11 +871,11 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgd0b623c">
-<h3 id="orgd0b623c">R: 決定係数のための関数</h3>
+<section id="slide-orgdf1048c">
+<h3 id="orgdf1048c">R : 決定係数のための関数</h3>
 <ul>
 <li><p>
-推定されたモデルの情報を引き出す関数 <code>summary()</code>
+関数 <code>summary()</code> : 推定されたモデルの情報を引き出す
 </p>
 <div class="org-src-container">
 
@@ -891,12 +897,12 @@
 </section>
 </section>
 <section>
-<section id="slide-orgce0812b" data-background="#fef4f4">
-<h2 id="orgce0812b">演習</h2>
+<section id="slide-org545364d" data-background="#fef4f4">
+<h2 id="org545364d">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgf60c223" data-background="#fef4f4">
-<h3 id="orgf60c223">練習問題</h3>
+<section id="slide-org4c3259b" data-background="#fef4f4">
+<h3 id="org4c3259b">練習問題</h3>
 <ul>
 <li>前問で作成した回帰モデルについて
 決定係数を確認しなさい．</li>
@@ -905,8 +911,6 @@
 
 </ul>
 <div class="slide-footer"><br></div>
-</section>
-</section>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>

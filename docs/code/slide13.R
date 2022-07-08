@@ -4,7 +4,7 @@
 ## 気候データによる例
 TW.data <- read.csv("data/tokyo_weather.csv")
 ## データの散布図 (1年分)
-par(family="HiraginoSans-W4") 
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 plot(temp ~ solar, # Y軸 ~ X軸
      data=TW.data,
      pch=20, col="blue")
@@ -13,15 +13,29 @@ plot(temp ~ solar, # Y軸 ~ X軸
                data=TW.data)) # 気温を日射量で説明
 ## 回帰直線の図示 (重ね描き)
 abline(reg=myModel, # 得られた回帰式を用いて描画
-       col="red", lwd=2)
+       col="royalblue", lwd=2)
 ## 期間を限って分析する
 ## データの散布図 (夏のモデル)
 plot(formula(myModel), # myModel で用いた式を再利用する
-     data=TW.data, subset=month%in%7:9, # 7月-9月
+     data=TW.data,
+     subset=month%in%7:9, # 7月-9月を指定
      pch=20, col="orange")
 (myMode2 <- lm(formula(myModel),
-               data=TW.data, subset=month%in%7:9)) 
-abline(reg=myMode2, col="red", lwd=2)
+               data=TW.data,
+               subset=month%in%7:9)) 
+abline(reg=myMode2,
+       col="red", lwd=2)
+## 全データのモデルと夏のモデルを比較する
+plot(formula(myModel),
+     data=model.frame(myModel), # myModel で整理されたデータを利用する
+     pch=20, col="gray")
+abline(reg=myModel, 
+       col="royalblue", lwd=2)
+points(formula(myMode2),
+     data=model.frame(myMode2), # myMode2 で整理されたデータを利用する
+     pch=20, col="orange")
+abline(reg=myMode2,
+       col="red", lwd=2)
 
 ### 練習問題 回帰モデルの区間推定
 ## 気候データによる例
@@ -38,7 +52,7 @@ y <- predict(myModel,
              newdata=data.frame(solar=x), # 予測値を計算
              interval="confidence", level=0.95) # 信頼区間を付与
 matlines(x, y, lwd=2,
-         lty=c(1,4,4), col=c("red","pink","pink"))
+         lty=c(1,4,4), col=c("royalblue","steelblue","steelblue"))
 ## myMode2: 夏のモデル 
 confint(myMode2)
 plot(formula(myMode2),
