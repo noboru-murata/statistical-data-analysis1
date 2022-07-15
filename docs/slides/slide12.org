@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-07-07 11:08:23 mura>
+# Time-stamp: <2022-07-08 17:37:17 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -15,7 +15,7 @@
 * COMMENT メモ
 - 修正事項
 - 水準 A_i とする必要はなさそう (二元の問題のためであった)
-
+- MC実験のところは整理してわかりやすく
   
 * 講義の内容
 - 分散分析とは

@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-07-08 16:09:02 mura>
+# Time-stamp: <2022-07-15 12:40:06 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -14,7 +14,8 @@
 
 * COMMENT メモ
 - 重回帰の問題
-
+- MC実験を付けた方が良いかも
+  
 * 講義の内容
 - 回帰分析
 - 回帰係数の推定
@@ -43,6 +44,37 @@
   - 目的変数は通常は1つ (複数の場合は個別に回帰モデルを構築)
   - 説明変数が1つの場合を *単回帰*, 2つ以上の場合を *重回帰*
   - この講義では単回帰のみ扱う
+
+#+reveal: split
+#+begin_src R :file figs/r-brainbody.png :exports results :results graphics
+  ### 線形回帰分析(単回帰)の例
+  ### - Brain and Body Weights for 28 Species
+  library("MASS") 
+  library("tidyverse") 
+  library("ggfortify")
+  data(Animals)
+  ## 回帰分析 (単回帰)
+  model <- lm(log(brain) ~ log(body), data=Animals)
+  ## 区間推定
+  yc <- exp(predict(model, newdata=Animals, interval="confidence"))
+  colnames(yc) <- paste("c",colnames(yc),sep=".")
+  yp <- exp(predict(model, newdata=Animals, interval="prediction"))
+  colnames(yp) <- paste("p",colnames(yp),sep=".")
+  mydat <- cbind(Animals, yc, yp)
+  ## 回帰式および信頼区間・予測区間の表示
+  ggplot(mydat, aes(body, brain, label=rownames(mydat))) +
+      scale_x_log10() + scale_y_log10() + # log-log plot
+      geom_line(aes(y=c.fit), color="dodgerblue", lwd=1.2) +
+      geom_ribbon(aes(ymin=c.lwr,ymax=c.upr), fill="blue", alpha=0.2)+
+      geom_ribbon(aes(ymin=p.lwr,ymax=p.upr), fill="blue", alpha=0.1)+
+      geom_text(size=3) + 
+      labs(title="Brain and Body Weights", x="body [kg]", y="brain [g]")
+#+end_src
+#+CAPTION: 脳の重さと体重の関係
+#+NAME: fig:r-brainbody
+#+ATTR_HTML: :height 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/r-brainbody.png]]
 
 ** 回帰モデル
 - 説明変数 : \(X\)
