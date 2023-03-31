@@ -3,14 +3,14 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2021-04-02 16:16:30 mura>
-:reveal:
+# Time-stamp: <2023-03-31 18:26:06 mura>
+:REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
-#+STARTUP: hidestars content
+#+STARTUP: hidestars content indent
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
-:end:
+:END:
 
 * Rのインストール手順
 ** 準備
@@ -52,6 +52,15 @@
   3. ダウンロードしたインストーラを起動
   4. 指示に従って RStudio をインストールする
 
+* 参考
+- 以下のサイトは自習の助けになります
+  - RStudio.cloud の自習コース \\
+      https://rstudio.cloud/learn/primers
+  - Data Camp のR入門コース
+      https://www.datacamp.com/onboarding
+- *"R オンライン 講座"* などで検索して下さい
+    
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted

@@ -1,9 +1,9 @@
 #+TITLE: 回帰分析
-#+SUBTITLE: 変数間の関係を推測する
+#+SUBTITLE: 第13講 - 変数間の関係を推測する
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@eb.waseda.ac.jp
 #+DATE: 
-# Time-stamp: <2022-07-15 12:40:06 mura>
+# Time-stamp: <2022-07-15 16:20:06 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent

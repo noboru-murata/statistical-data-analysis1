@@ -46,14 +46,13 @@
 </section>
 
 <section>
-<section id="slide-org022a878">
-<h2 id="org022a878">Rのインストール手順</h2>
-<div class="outline-text-2" id="text-org022a878">
+<section id="slide-orgabdc90f">
+<h2 id="orgabdc90f">Rのインストール手順</h2>
+<div class="outline-text-2" id="text-orgabdc90f">
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgeef6f34">
-<h3 id="orgeef6f34">準備</h3>
+<section id="slide-org5006123">
+<h3 id="org5006123">準備</h3>
 <ol>
 <li><span class="underline">R: The R project for Statistical Computing</span>
 にアクセス
@@ -72,11 +71,11 @@
 </ul></li>
 
 </ol>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-org624827e">
-<h3 id="org624827e">Windowsの場合</h3>
+<section id="slide-org63ac36b">
+<h3 id="org63ac36b">Windowsの場合</h3>
 <ol>
 <li><span class="underline">Download R for Windows</span>
 をクリック</li>
@@ -88,11 +87,11 @@
 <li>指示に従って R をインストールする</li>
 
 </ol>
-
 <div class="slide-footer"><br></div>
+
 </section>
-<section id="slide-orge144830">
-<h3 id="orge144830">Macの場合</h3>
+<section id="slide-org095b761">
+<h3 id="org095b761">Macの場合</h3>
 <ol>
 <li><span class="underline">Download R for (Mac) OS X</span>
 をクリック</li>
@@ -102,13 +101,13 @@
 <li>指示に従って R をインストールする</li>
 
 </ol>
-
 <div class="slide-footer"><br></div>
+
 </section>
 </section>
 <section>
-<section id="slide-orgf0030d8">
-<h2 id="orgf0030d8">RStudioのインストール手順</h2>
+<section id="slide-org24e45e8">
+<h2 id="org24e45e8">RStudioのインストール手順</h2>
 <ol>
 <li><span class="underline">Download RStudio - RStudio</span>
 にアクセス
@@ -124,8 +123,25 @@
 
 </ol>
 <div class="slide-footer"><br></div>
+
 </section>
 </section>
+<section>
+<section id="slide-org742ba8e">
+<h2 id="org742ba8e">参考</h2>
+<ul>
+<li>以下のサイトは自習の助けになります
+<ul>
+<li>RStudio.cloud の自習コース <br />
+<a href="https://rstudio.cloud/learn/primers">https://rstudio.cloud/learn/primers</a></li>
+<li>Data Camp のR入門コース
+<a href="https://www.datacamp.com/onboarding">https://www.datacamp.com/onboarding</a></li>
+
+</ul></li>
+<li><b>&ldquo;R オンライン 講座&rdquo;</b> などで検索して下さい</li>
+
+</ul>
+<div class="slide-footer"><br></div>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>
@@ -145,16 +161,15 @@ center: true,
 slideNumber: 'c',
 rollingLinks: false,
 keyboard: true,
-mouseWheel: true,
+mouseWheel: false,
 fragmentInURL: true,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
-
 overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }},
+spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
 
 // Plugins with reveal.js 4.x
 plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
@@ -162,7 +177,8 @@ plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
 // Optional libraries used to extend reveal.js
 dependencies: [
 { src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'}]
+{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
+{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
 
 });
 </script>
