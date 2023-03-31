@@ -1,5 +1,5 @@
 +++
-title = "記録"
+title = "動画記録"
 author = ["Noboru Murata"]
 date = 2022-04-08T00:00:00+09:00
 draft = false
