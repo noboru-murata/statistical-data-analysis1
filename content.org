@@ -18,7 +18,7 @@
 数値シミュレーションを行いながら，
 確率論や推測統計の基礎を学びます．
 
-** 講義資料
+** COMMENT 講義資料
 以下は統計データ解析 I・II の資料です．
 1. Rの基礎編 [[github:pdfs/note1.pdf][(PDF)]] [[github:zips/script1.zip][(Rscript/Dataset)]] 
 2. 確率と統計編 [[github:pdfs/note2.pdf][(PDF)]] [[github:zips/script2.zip][(Rscript/Dataset)]] 
@@ -27,13 +27,14 @@
 
    特に統計データ解析Iでは「Rの基礎」と「確率と統計」を用います．
    
-** 参考資料
+** COMMENT 参考資料
 その他，必要な参考書等については講義中に指示します．
 
 秋期に開講する統計データ解析IIの資料は
 [[https://noboru-murata.github.io/statistical-data-analysis2/][こちら]]
 にあります．
    
+
 * 第1講
 :PROPERTIES:
 :EXPORT_FILE_NAME: lecture01
@@ -260,6 +261,24 @@
 #    - [[github:pdfs/slide14.pdf][PDF file]]
 # ** COMMENT 解答例
 #    - [[github:code/slide14.R][RScript]]
+
+* 講義資料
+:PROPERTIES:
+:EXPORT_FILE_NAME: notes
+:EXPORT_DATE: <2023-03-31 Fri>
+:END:
+<2023-03-31 Fri> 更新
+以下は統計データ解析 I・II の資料です．
+1. Rの基礎編 [[github:pdfs/note1.pdf][(PDF)]] [[github:zips/script1.zip][(Rscript/Dataset)]] 
+2. 確率と統計編 [[github:pdfs/note2.pdf][(PDF)]] [[github:zips/script2.zip][(Rscript/Dataset)]] 
+3. 多変量解析編 [[github:pdfs/note3.pdf][(PDF)]] [[github:zips/script3.zip][(Rscript/Dataset)]] 
+   (随時更新します)
+
+特に統計データ解析Iでは「Rの基礎」と「確率と統計」を用います．
+   
+秋期に開講する統計データ解析IIの資料は
+[[https://noboru-murata.github.io/statistical-data-analysis2/][こちら]]
+にあります．
 
 * 記録
 :PROPERTIES:

@@ -6,7 +6,7 @@
     <description>Recent content in Pages on 統計データ解析I</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Apr 2022 00:00:00 +0900</lastBuildDate><atom:link href="https://noboru-murata.github.io/statistical-data-analysis1/page/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 31 Mar 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://noboru-murata.github.io/statistical-data-analysis1/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>第1講</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture01/</link>
@@ -135,6 +135,17 @@
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture13/</guid>
       <description>&amp;lt;2023-03-31 Fri&amp;gt; 更新
 スライド full size ハンドアウト PDF file 解答例 RScript </description>
+    </item>
+    
+    <item>
+      <title>講義資料</title>
+      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/notes/</link>
+      <pubDate>Fri, 31 Mar 2023 00:00:00 +0900</pubDate>
+      
+      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/notes/</guid>
+      <description>&amp;lt;2023-03-31 Fri&amp;gt; 更新以下は統計データ解析 I・II の資料です．
+Rの基礎編 (PDF) (Rscript/Dataset) 確率と統計編 (PDF) (Rscript/Dataset) 多変量解析編 (PDF) (Rscript/Dataset) (随時更新します) 特に統計データ解析Iでは「Rの基礎」と「確率と統計」を用います．
+秋期に開講する統計データ解析IIの資料は こちら にあります．</description>
     </item>
     
     <item>
