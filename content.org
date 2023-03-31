@@ -39,7 +39,7 @@
 :EXPORT_FILE_NAME: lecture01
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-04-02 Sat> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide01" >}}
 ** ハンドアウト
@@ -52,7 +52,7 @@
 :EXPORT_FILE_NAME: lecture02
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2021-04-16 Fri> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide02" >}}
 ** ハンドアウト
@@ -65,7 +65,7 @@
 :EXPORT_FILE_NAME: lecture03
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-04-15 Fri> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide03" >}}
 ** ハンドアウト
@@ -78,7 +78,7 @@
 :EXPORT_FILE_NAME: lecture04
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-05-06 Fri> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide04" >}}
 ** ハンドアウト
@@ -93,7 +93,7 @@
 :EXPORT_FILE_NAME: lecture05
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-05-13 Fri> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide05" >}}
 ** ハンドアウト
@@ -108,7 +108,7 @@
 :EXPORT_FILE_NAME: lecture06
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-05-13 Fri> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide06" >}}
 ** ハンドアウト
@@ -123,7 +123,7 @@
 :EXPORT_FILE_NAME: lecture07
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-05-13 Fri> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide07" >}}
 ** ハンドアウト
@@ -136,7 +136,7 @@
 :EXPORT_FILE_NAME: lecture08
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-06-09 Thu> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide08" >}}
 ** ハンドアウト
@@ -149,7 +149,7 @@
 :EXPORT_FILE_NAME: lecture09
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-06-17 Fri> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide09" >}}
 ** ハンドアウト
@@ -162,7 +162,7 @@
 :EXPORT_FILE_NAME: lecture10
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-06-30 Thu> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide10" >}}
 ** ハンドアウト
@@ -175,7 +175,7 @@
 :EXPORT_FILE_NAME: lecture11
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-06-30 Thu> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide11" >}}
 ** ハンドアウト
@@ -188,7 +188,7 @@
 :EXPORT_FILE_NAME: lecture12
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2022-07-07 Thu> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide12" >}}
 ** ハンドアウト
@@ -227,7 +227,7 @@
 :EXPORT_FILE_NAME: lecture13
 :EXPORT_DATE: <2021-04-03 Sat>
 :END:
-<2022-07-08 Fri> 更新
+<2023-03-31 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide13" >}}
 ** ハンドアウト
@@ -266,20 +266,22 @@
 :EXPORT_FILE_NAME: record
 :EXPORT_DATE: <2022-04-08 Fri>
 :END:
-<2022-07-18 Mon> 更新
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/ptSybmpsRFYwK8DpBmre4YOgCez4oClsi_xr8YfHwGDqxgPg7cufu9tXuJQKgmRv.uj86kUO3yatUw1-Z][第1講 (2022年4月8日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/sK8UtM2HXwltqTaOdY1f_pbl0KOaRdvtappnA_wLl2ohnr5GmZiSMOGxRtFdCMJp.9fqz37Jhkan6-1Gk][第2講 (2022年4月15日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/O0uqrCy0MqxY2x48ZM2s3rERnjabQlGo2pXGsxiWmQmpCHRZq8va2-N3rYEFngbt.FR6tYK7tojm20KHp][第3講 (2022年4月22日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/Aw4_mIJUYrczXwJiADpmaN4X8atXvsKN0ea9m2OifmCBq0qj4lTmMUB6s3dUYKbG.0eh6rL7QAallJseB][第4講 (2022年5月6日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/N5YfF0Q0-0b-zQ1ALhlbDohfVYYt5mZ0_6gIeewwJ40iGqYtRqzHarWAT5g5pTIn.Qy_QRypOy_1R3kLH?startTime=1653031559000][第5講 (2022年5月20日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/XIMJU-nZqWQR7CLQPFaGPBzRPQ1zaWeeIGTgoYPIuwuHEsZpYBF-O4D_t_hwdCA.FK4U884hRFC1bAwJ][第6講 (2022年5月27日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/wZVaPqHmfQ2oe2X4Az-8edZdXY8IIcj2lIUL3k4IeaT00_WwsokPH-FYsobFziD-.xCJcWsGGzsbqSIdp][第7講 (2022年6月3日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/ULoVvOnYINUTSc4za3Tt4JIAi9nRcaAK5fYU60q75cJ8QE9Lo-sCbISyaru91GY.UUgvIatNOcAYNlPa][第8講 (2022年6月10日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/oef2OvMqG7I43WUgohmGPErk8H62w-kx9O75wVEEymGw931eFJ4K0TRA0i5Cwy5Y.xGF3eqpYpxfMPpMl][第9講 (2022年6月17日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/-p8_seD-9Ya9waSrBhciBSW8KkZW8UlxQyjPlrPZ-3zOlFzdwn_EJlgUS1LiGGQP.Sp9dzT5Sm3HWxVhW][第10講 (2022年6月24日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/oH54sLdfWQwtVNMYU9Tep38bayiF9ec1LX4EmdIWL83Pkjc0tf6bD44QoIRK7zCI.JsWs3k6Sj0i246_K][第11講 (2022年7月1日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/4sUu-g352X0mx0ovVmI7wnwwK007Vg7IR9H6y5E1NCyWtmVt8zoTX5fBv4IZ4Vwy.sjAgAsu1MO3peHXI][第12講 (2022年7月8日)]]
-- [[https://u-tokyo-ac-jp.zoom.us/rec/share/WmZqjKIQy5wR8UPCUDUvm5p2LI05grk3mbtNsgir-WOqKtpTLkuTlcd3n1ngRGzN.Gen2IIrfEf9kguOT][第13講 (2022年7月15日)]]
+<2023-03-31 Fri> 更新
+
+講義の進捗に合わせて追加します．
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/ptSybmpsRFYwK8DpBmre4YOgCez4oClsi_xr8YfHwGDqxgPg7cufu9tXuJQKgmRv.uj86kUO3yatUw1-Z][第1講 (2022年4月8日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/sK8UtM2HXwltqTaOdY1f_pbl0KOaRdvtappnA_wLl2ohnr5GmZiSMOGxRtFdCMJp.9fqz37Jhkan6-1Gk][第2講 (2022年4月15日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/O0uqrCy0MqxY2x48ZM2s3rERnjabQlGo2pXGsxiWmQmpCHRZq8va2-N3rYEFngbt.FR6tYK7tojm20KHp][第3講 (2022年4月22日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/Aw4_mIJUYrczXwJiADpmaN4X8atXvsKN0ea9m2OifmCBq0qj4lTmMUB6s3dUYKbG.0eh6rL7QAallJseB][第4講 (2022年5月6日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/N5YfF0Q0-0b-zQ1ALhlbDohfVYYt5mZ0_6gIeewwJ40iGqYtRqzHarWAT5g5pTIn.Qy_QRypOy_1R3kLH?startTime=1653031559000][第5講 (2022年5月20日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/XIMJU-nZqWQR7CLQPFaGPBzRPQ1zaWeeIGTgoYPIuwuHEsZpYBF-O4D_t_hwdCA.FK4U884hRFC1bAwJ][第6講 (2022年5月27日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/wZVaPqHmfQ2oe2X4Az-8edZdXY8IIcj2lIUL3k4IeaT00_WwsokPH-FYsobFziD-.xCJcWsGGzsbqSIdp][第7講 (2022年6月3日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/ULoVvOnYINUTSc4za3Tt4JIAi9nRcaAK5fYU60q75cJ8QE9Lo-sCbISyaru91GY.UUgvIatNOcAYNlPa][第8講 (2022年6月10日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/oef2OvMqG7I43WUgohmGPErk8H62w-kx9O75wVEEymGw931eFJ4K0TRA0i5Cwy5Y.xGF3eqpYpxfMPpMl][第9講 (2022年6月17日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/-p8_seD-9Ya9waSrBhciBSW8KkZW8UlxQyjPlrPZ-3zOlFzdwn_EJlgUS1LiGGQP.Sp9dzT5Sm3HWxVhW][第10講 (2022年6月24日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/oH54sLdfWQwtVNMYU9Tep38bayiF9ec1LX4EmdIWL83Pkjc0tf6bD44QoIRK7zCI.JsWs3k6Sj0i246_K][第11講 (2022年7月1日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/4sUu-g352X0mx0ovVmI7wnwwK007Vg7IR9H6y5E1NCyWtmVt8zoTX5fBv4IZ4Vwy.sjAgAsu1MO3peHXI][第12講 (2022年7月8日)]]
+# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/WmZqjKIQy5wR8UPCUDUvm5p2LI05grk3mbtNsgir-WOqKtpTLkuTlcd3n1ngRGzN.Gen2IIrfEf9kguOT][第13講 (2022年7月15日)]]
 
 # * COMMENT 講義13
 #   :PROPERTIES:
@@ -318,10 +320,10 @@
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: ./post
 :EXPORT_FILE_NAME: post1
-:EXPORT_DATE: <2021-04-02 Fri>
+:EXPORT_DATE: <2023-03-31 Fri>
 :END:
 ** スライド
-#+zoom: {{< myslide base="statistical-data-analysis1" name="install" >}}
+#+hugo: {{< myslide base="statistical-data-analysis1" name="install" >}}
 ** ハンドアウト
 - [[github:pdfs/install.pdf][PDF file]]
 * スライドの使い方
