@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-04-04 Tue 16:12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="author" content="Noboru Murata" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<div id="outline-container-orgc1889f2" class="outline-2">
+<h2 id="orgc1889f2"><span class="section-number-2">1.</span> 動画記録 (2022年度)</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/ptSybmpsRFYwK8DpBmre4YOgCez4oClsi_xr8YfHwGDqxgPg7cufu9tXuJQKgmRv.uj86kUO3yatUw1-Z">第1講 (2022年4月8日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/sK8UtM2HXwltqTaOdY1f_pbl0KOaRdvtappnA_wLl2ohnr5GmZiSMOGxRtFdCMJp.9fqz37Jhkan6-1Gk">第2講 (2022年4月15日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/O0uqrCy0MqxY2x48ZM2s3rERnjabQlGo2pXGsxiWmQmpCHRZq8va2-N3rYEFngbt.FR6tYK7tojm20KHp">第3講 (2022年4月22日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/Aw4_mIJUYrczXwJiADpmaN4X8atXvsKN0ea9m2OifmCBq0qj4lTmMUB6s3dUYKbG.0eh6rL7QAallJseB">第4講 (2022年5月6日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/N5YfF0Q0-0b-zQ1ALhlbDohfVYYt5mZ0_6gIeewwJ40iGqYtRqzHarWAT5g5pTIn.Qy_QRypOy_1R3kLH?startTime=1653031559000">第5講 (2022年5月20日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/XIMJU-nZqWQR7CLQPFaGPBzRPQ1zaWeeIGTgoYPIuwuHEsZpYBF-O4D_t_hwdCA.FK4U884hRFC1bAwJ">第6講 (2022年5月27日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/wZVaPqHmfQ2oe2X4Az-8edZdXY8IIcj2lIUL3k4IeaT00_WwsokPH-FYsobFziD-.xCJcWsGGzsbqSIdp">第7講 (2022年6月3日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/ULoVvOnYINUTSc4za3Tt4JIAi9nRcaAK5fYU60q75cJ8QE9Lo-sCbISyaru91GY.UUgvIatNOcAYNlPa">第8講 (2022年6月10日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/oef2OvMqG7I43WUgohmGPErk8H62w-kx9O75wVEEymGw931eFJ4K0TRA0i5Cwy5Y.xGF3eqpYpxfMPpMl">第9講 (2022年6月17日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/-p8_seD-9Ya9waSrBhciBSW8KkZW8UlxQyjPlrPZ-3zOlFzdwn_EJlgUS1LiGGQP.Sp9dzT5Sm3HWxVhW">第10講 (2022年6月24日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/oH54sLdfWQwtVNMYU9Tep38bayiF9ec1LX4EmdIWL83Pkjc0tf6bD44QoIRK7zCI.JsWs3k6Sj0i246_K">第11講 (2022年7月1日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/4sUu-g352X0mx0ovVmI7wnwwK007Vg7IR9H6y5E1NCyWtmVt8zoTX5fBv4IZ4Vwy.sjAgAsu1MO3peHXI">第12講 (2022年7月8日)</a></li>
+<li><a href="https://u-tokyo-ac-jp.zoom.us/rec/share/WmZqjKIQy5wR8UPCUDUvm5p2LI05grk3mbtNsgir-WOqKtpTLkuTlcd3n1ngRGzN.Gen2IIrfEf9kguOT">第13講 (2022年7月15日)</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Noboru Murata</p>
+<p class="date">Created: 2023-04-04 Tue 16:12</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
