@@ -1,12 +1,14 @@
 # -*- eval: (visual-line-mode) -*-
 
-# SPDX-FileCopyrightText: 2017-2020 Jens Lechtenbörger
+# SPDX-FileCopyrightText: 2017-2022 Jens Lechtenbörger
 # SPDX-License-Identifier: CC-BY-SA-4.0
 
 # Neither generate table of contents nor section numbers
 #+OPTIONS: toc:nil num:nil
 
 # Enable: browser history, fragment IDs in URLs, mouse wheel, links between presentations
+# Note that option "history" implies option "hash", which makes sure that
+# reload leads to the same slide: https://revealjs.com/config/
 #+OPTIONS: reveal_history:t reveal_fragmentinurl:t
 #+OPTIONS: reveal_mousewheel:t reveal_inter_presentation_links:t
 
@@ -26,29 +28,13 @@
 #+REVEAL_PLUGINS: (notes search zoom)
 
 # The following variables are non-standard.
-# Do not display TOC-progress on title slide.
-#+REVEAL_TITLE_SLIDE_STATE: no-toc-progress
-# Do not display TOC-progress on TOC slide.
-#+REVEAL_TOC_SLIDE_STATE: no-toc-progress
-# Do not include TOC slide in TOC-progress.
-#+REVEAL_TOC_SLIDE_CLASS: no-toc-progress
 # Use different heading for TOC.
 #+REVEAL_TOC_SLIDE_TITLE: Agenda
 
-#+REVEAL_EXTRA_CSS: ./reveal.js/plugin/accessibility/helper.css
-#+REVEAL_EXTRA_CSS: ./reveal.js/plugin/toc-progress/toc-progress.css
-#+REVEAL_EXTRA_CSS: ./reveal.js/dist/theme/toc-style.css
 #+REVEAL_EXTRA_CSS: ./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css
 
 # Allow to selectively hide links.
 #+REVEAL_EXTRA_SCRIPTS: ("./reveal.js/dist/theme/hidelinks.js")
-
-# The following creates an empty footer, for which the css style defines
-# a height that agrees with the TOC-progress footer’s height.
-# In this way, the footer’s height is taken into account by reveal.js’s
-# size calculations.
-#+REVEAL_SLIDE_FOOTER: <br>
-#+OPTIONS: reveal_toc_footer:t
 
 # Set a default bib file.
 #+MACRO: bibliographyfile bibliography:references.bib
@@ -60,7 +46,7 @@
 # Square Bracket Close ]
 #+MACRO: BC @@latex:\char93{}@@@@html:&#93;@@
 
-# Macro for forced line break, e.g., in titles.
+# Macro for forced line break/newline, e.g., in titles.
 #+MACRO: BR @@latex:\\@@@@html:<br />@@
 
 # Macro to generate abbr element in HTML.  If a second argument is given, it
@@ -84,9 +70,11 @@
 #+LATEX_HEADER: \newenvironment{rightcol40}{\begin{minipage}{.39\textwidth}}{\end{minipage}}
 #+LATEX_HEADER: \newenvironment{rightcol60}{\begin{minipage}{.59\textwidth}}{\end{minipage}}
 #+LATEX_HEADER: \newenvironment{rightcol70}{\begin{minipage}{.69\textwidth}}{\end{minipage}}
+#+LATEX_HEADER: \usepackage{textcomp} % For € in Unicode
 #+LATEX_HEADER: \usepackage{newunicodechar}
 #+LATEX_HEADER: \newunicodechar{≈}{$\approx$}
 #+LATEX_HEADER: \newunicodechar{⋮}{\vdots}
+#+LATEX_HEADER: \newunicodechar{→}{$\to$}
 #+LATEX_HEADER: \newunicodechar{ }{~}
 #+LATEX_HEADER: \usepackage{xcolor}
 #+LATEX_HEADER: \definecolor{darkred}{rgb}{0.3, 0.0, 0.0}

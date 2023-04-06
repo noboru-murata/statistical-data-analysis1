@@ -1,5 +1,5 @@
 /**
- * SPDX-FileCopyrightText: 2017-2020 Jens Lechtenbörger
+ * SPDX-FileCopyrightText: 2017-2021 Jens Lechtenbörger
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
@@ -53,6 +53,22 @@ a[href^="http"]:not(.nooutlink):after {
   background-position: 50% 66%;
   margin: 0px 1px 0px 3px;
   padding-right: 16px; }
+
+a[href].basiclink:not(.hiddenlink):after {
+  margin: 0;
+  padding-right: 0;
+  background: none;
+  content: " 🛈"; }
+a[href].beyondlink:not(.hiddenlink):after {
+  margin: 0;
+  padding-right: 0;
+  background: none;
+  content: " 🚀"; }
+a[href].revisitlink:not(.hiddenlink):after {
+  margin: 0;
+  padding-right: 0;
+  background: none;
+  content: " ↔"; }
 
 img {
   margin: 5px 0px 5px 0px;

@@ -47,8 +47,8 @@
 </section>
 
 <section>
-<section id="slide-org7735c73">
-<h2 id="org7735c73">講義概要</h2>
+<section id="slide-org95b5442">
+<h2 id="org95b5442">講義概要</h2>
 <ul>
 <li>R言語の概要</li>
 <li>RStudioのUI (ユーザインタフェース)</li>
@@ -61,13 +61,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org266b3af">
-<h2 id="org266b3af">R言語の概要</h2>
-<div class="outline-text-2" id="text-org266b3af">
+<section id="slide-org02a2a9a">
+<h2 id="org02a2a9a">R言語の概要</h2>
+<div class="outline-text-2" id="text-org02a2a9a">
 </div>
 </section>
-<section id="slide-org2cfd8ad">
-<h3 id="org2cfd8ad">R言語とは</h3>
+<section id="slide-orgda035f2">
+<h3 id="orgda035f2">R言語とは</h3>
 <ul>
 <li>統計計算のための言語と環境の総称</li>
 <li>オープンソース・フリーソフトウェア</li>
@@ -83,8 +83,8 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgfe81f6a">
-<h3 id="orgfe81f6a">RStudioとは</h3>
+<section id="slide-org9d45171">
+<h3 id="org9d45171">RStudioとは</h3>
 <ul>
 <li>RStudio社が開発している統合開発環境(IDE)
 <ul>
@@ -99,8 +99,8 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org6e3a45b">
-<h3 id="org6e3a45b">Rの得意分野</h3>
+<section id="slide-org45e93cc">
+<h3 id="org45e93cc">Rの得意分野</h3>
 <ul>
 <li>データの分類・集計・整理</li>
 <li>記述統計量 (基本・要約統計量) の計算</li>
@@ -113,8 +113,8 @@
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orge2a2202">
-<h3 id="orge2a2202">データ形式の分類</h3>
+<section id="slide-orgc9b5259">
+<h3 id="orgc9b5259">データ形式の分類</h3>
 <ul>
 <li>構造化データ
 <ul>
@@ -139,16 +139,16 @@
 </section>
 </section>
 <section>
-<section id="slide-orgf5c3a0d">
-<h2 id="orgf5c3a0d">RStudio の UI</h2>
-<div class="outline-text-2" id="text-orgf5c3a0d">
+<section id="slide-orgac43cb0">
+<h2 id="orgac43cb0">RStudio の UI</h2>
+<div class="outline-text-2" id="text-orgac43cb0">
 </div>
 </section>
-<section id="slide-org66a5a3c">
-<h3 id="org66a5a3c">起動画面</h3>
+<section id="slide-orgb815ca9">
+<h3 id="orgb815ca9">起動画面</h3>
 <ul>
 <li><b>以下 RStudio を用いて説明する</b></li>
-<li>起動すると4グループのペイン(枠; pane)を持つウィンドウが立ち上がる
+<li>起動すると4(あるいは3)グループの <b>ペイン</b> (枠; pane)を持つウィンドウが立ち上がる
 <ul>
 <li>左上: エディタ (開いていない場合もある)</li>
 <li>左下: コンソール</li>
@@ -156,14 +156,15 @@
 <li>右下: パッケージ・グラフィックス・ヘルプ</li>
 
 </ul></li>
-<li><i><span style="color:orange;">ペインの配置や数は個別に設定することもできる</span></i></li>
+<li>各ペインの中には複数の <b>タブ</b> (つまみ; tab) が存在する</li>
+<li><i><span style="color:orange;">ペイン・タブの配置や数はカスタマイズ可能</span></i></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgd1ccce6">
-<h3 id="orgd1ccce6">コンソール (左下)</h3>
+<section id="slide-org115ae4d">
+<h3 id="org115ae4d">コンソール (左下)</h3>
 <ul>
 <li>コマンドを入力するためのペイン</li>
 <li><p>
@@ -175,32 +176,34 @@ R を終了させることができる
 <pre><code class="R" >q() # "Save workspace image?" と聞かれることがある (後述)
 </code></pre>
 </div></li>
-<li><i><span style="color:orange;">終了できない場合はOSの機能で強制終了</span></i></li>
+<li><span style="color:gray;">終了できない場合はOSの機能で強制終了</span></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org6abf255">
-<h3 id="org6abf255">作業ディレクトリ</h3>
+<section id="slide-org6a2176e">
+<h3 id="org6a2176e">エディタ (左上)</h3>
 <ul>
-<li>プログラムが実行されるディレクトリ(フォルダ)</li>
-<li>作業ディレクトリにあるファイルの読み書きはパスを指定する必要がない</li>
-<li>現在の作業ディレクトリはコンソールタブで確認</li>
-<li><b>Session</b> メニューの <b>Set Working Directory</b> で指定
+<li>コマンドを記述したファイルを扱うためのペイン</li>
+<li>コンソールで入力したコマンドは直ちに実行される</li>
+<li>履歴は右上ペインの <b>History</b> タブに残る</li>
+<li>複雑なコマンドを書いたり修正するための機能
 <ul>
-<li>読み込んだファイルの場所を選択</li>
-<li><b>Files</b> タブ (右下ペイン) の場所を選択 (<b>More</b> からも選択可)</li>
-<li>ディレクトリを直接選択</li>
+<li>コマンドを実行順に記述したファイル (<b>R Script</b>) を作成</li>
+<li>ファイルを保存</li>
+<li>ファイルを実行</li>
+<li><b>History</b> からコピーできる</li>
 
 </ul></li>
+<li><span style="color:gray;">講義の中で使いながら説明</span></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org265dcb4">
-<h3 id="org265dcb4">プロジェクト</h3>
+<section id="slide-orgb35cad3">
+<h3 id="orgb35cad3">プロジェクト</h3>
 <ul>
 <li>作業環境をまとめて設定
 <ul>
@@ -224,28 +227,26 @@ R を終了させることができる
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgdb31a34">
-<h3 id="orgdb31a34">エディタ (左上)</h3>
+<section id="slide-org259a934">
+<h3 id="org259a934">作業ディレクトリ</h3>
 <ul>
-<li>コマンドを記述したファイルを扱うためのペイン</li>
-<li>コンソールで入力したコマンドは直ちに実行される</li>
-<li>履歴は <b>History Pane</b> に残る</li>
-<li>複雑なコマンドを書いたり修正するための機能
+<li>プログラムが実行されるディレクトリ(フォルダ)</li>
+<li>作業ディレクトリにあるファイルの読み書きはパスを指定する必要がない</li>
+<li>現在の作業ディレクトリはコンソールタブで確認</li>
+<li><b>Session</b> メニューの <b>Set Working Directory</b> で指定
 <ul>
-<li>コマンドを実行順に記述したファイル (<b>R Script</b>) を作成</li>
-<li>ファイルを保存</li>
-<li>ファイルを実行</li>
-<li><b>History Pane</b> からコピーできる</li>
+<li>読み込んだファイルの場所を選択</li>
+<li><b>Files</b> タブ (右下ペイン) の場所を選択 (<b>More</b> からも選択可)</li>
+<li>ディレクトリを直接選択</li>
 
 </ul></li>
-<li><i><span style="color:orange;">講義の中で使いながら説明</span></i></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgc5a6578">
-<h3 id="orgc5a6578">終了時の注意</h3>
+<section id="slide-org097ef5d">
+<h3 id="org097ef5d">終了時の注意</h3>
 <ul>
 <li><p>
 終了時に以下のメッセージが表示される場合がある
@@ -264,6 +265,7 @@ Save workspace image? [y/n/c]:
 
 </ul></li>
 <li>セーブした場合次回起動時に読み込まれる</li>
+<li>プロジェクトを閉じる場合も同様</li>
 
 </ul>
 <div class="slide-footer"><br></div>
@@ -271,13 +273,13 @@ Save workspace image? [y/n/c]:
 </section>
 </section>
 <section>
-<section id="slide-org5ad7cd8">
-<h2 id="org5ad7cd8">基本的な使い方</h2>
-<div class="outline-text-2" id="text-org5ad7cd8">
+<section id="slide-org127fe47">
+<h2 id="org127fe47">基本的な使い方</h2>
+<div class="outline-text-2" id="text-org127fe47">
 </div>
 </section>
-<section id="slide-org292d641">
-<h3 id="org292d641">式の入力</h3>
+<section id="slide-orgd130c52">
+<h3 id="orgd130c52">式の入力</h3>
 <ul>
 <li>四則演算や数学関数は直感的な文法で計算可能
 <ul>
@@ -313,8 +315,8 @@ Save workspace image? [y/n/c]:
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org45a89ae">
-<h3 id="org45a89ae">エディタからの実行</h3>
+<section id="slide-org7d3b4c0">
+<h3 id="org7d3b4c0">エディタからの実行</h3>
 <ul>
 <li>新規ファイルの作成 (以下のいずれか)
 <ul>
@@ -325,19 +327,22 @@ Save workspace image? [y/n/c]:
 更に <b>R Script</b> を選択</li>
 
 </ul></li>
-<li>エディタ上でコマンドを記述</li>
+<li>エディタ上でコマンドを記述
+<ul>
+<li><b>History</b> タブ内のコマンド列をコピーすることもできる</li>
+
+</ul></li>
 <li>実行範囲の選択
 <ul>
-<li>一行のみ: カーソルをその行に移動</li>
-<li>複数行: クリックしてながら移動して選択する</li>
+<li>一行のみ : カーソルをその行に移動</li>
+<li>複数行 : クリックしたまま移動して選択する</li>
 
 </ul></li>
 <li>選択範囲の実行 (以下のいずれか)
 <ul>
 <li>左上の <b>Run</b> をクリック</li>
 <li><b>Code</b> から 
-<b>Selected Line(s)</b> を選択
-(Ctrl/Command+Enter)</li>
+<b>Run Selected Line(s)</b> を選択</li>
 
 </ul></li>
 
@@ -345,8 +350,8 @@ Save workspace image? [y/n/c]:
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org19db53c">
-<h3 id="org19db53c">ファイルの保存</h3>
+<section id="slide-org0190efa">
+<h3 id="org0190efa">ファイルの保存</h3>
 <ul>
 <li>保存 (以下のいずれか)
 <ul>
@@ -357,11 +362,11 @@ Save workspace image? [y/n/c]:
 </ul></li>
 <li>ファイル作成に関する注意
 <ul>
-<li>保存する時にファイル名の入力が求められる</li>
+<li>最初に保存する時にファイル名の入力が求められる</li>
 <li>拡張子は通常
 <b>.R</b> または
 <b>.r</b> を利用する</li>
-<li><b>#</b> 以降の字列は実行されない (コメントを残す際に有用)</li>
+<li><b>#</b> 以降の文字列は実行されない (コメント機能)</li>
 
 </ul></li>
 
@@ -369,8 +374,8 @@ Save workspace image? [y/n/c]:
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgf548111" data-background="#fef4f4">
-<h3 id="orgf548111">練習問題</h3>
+<section id="slide-orgd091ec7" data-background="#fef4f4">
+<h3 id="orgd091ec7">練習問題</h3>
 <p>
 基本的な操作に慣れよう
 </p>
@@ -390,13 +395,13 @@ Save workspace image? [y/n/c]:
 </section>
 </section>
 <section>
-<section id="slide-org83afe30">
-<h2 id="org83afe30">より進んだ使い方</h2>
-<div class="outline-text-2" id="text-org83afe30">
+<section id="slide-org6bbea7f">
+<h2 id="org6bbea7f">より進んだ使い方</h2>
+<div class="outline-text-2" id="text-org6bbea7f">
 </div>
 </section>
-<section id="slide-org3011875">
-<h3 id="org3011875">関数</h3>
+<section id="slide-orgafdd9f5">
+<h3 id="orgafdd9f5">関数</h3>
 <ul>
 <li>関数の取り扱いは一般的な計算機言語とほぼ同様</li>
 <li>関数は引数とその値を指定して実行</li>
@@ -412,7 +417,7 @@ f(value1, value2) # 上と同値．順序に注意
 </code></pre>
 </div>
 <ul>
-<li><i><span style="color:orange;">擬似コード = 実行しても動かない</span></i></li>
+<li><span style="color:gray;">擬似コード = 実行しても動かない</span></li>
 
 </ul></li>
 
@@ -420,8 +425,8 @@ f(value1, value2) # 上と同値．順序に注意
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org2a252d9">
-<h3 id="org2a252d9">関数の実行例</h3>
+<section id="slide-orga4d8792">
+<h3 id="orga4d8792">関数の実行例</h3>
 <ul>
 <li><p>
 <span style="color:green;">正弦関数の計算</span>
@@ -429,7 +434,7 @@ f(value1, value2) # 上と同値．順序に注意
 <div class="org-src-container">
 
 <pre><code class="R" >sin(x = pi/2) 
-sin(pi/2) # 上と同値
+sin(pi/2) # 前の行とこの行は同じ結果になる
 </code></pre>
 </div>
 
@@ -443,8 +448,8 @@ sin(pi/2) # 上と同値
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" ># x,bを適当な数値に置き換えて実行せよ
-log(x, b) # 底をbとする対数
+<pre><code class="R" ># 以下は擬似コード．x,bを適当な数値に置き換えて実行せよ
+log(x, b) # 底をbとする対数 
 log(x=x, base=b) #上と同値
 log(base=b, x=x) #上と同値
 log(b,x) # = log(x=b,base=x) 
@@ -456,8 +461,10 @@ log(x) # 自然対数 =log(x,base=exp(1))
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgfbe7c0c">
-<h3 id="orgfbe7c0c">オブジェクト</h3>
+<section id="slide-orgd3f17d2">
+<h3 id="orgd3f17d2">オブジェクト</h3>
+<ul>
+<li>Rで扱う対象を総称して <b>オブジェクト</b> と呼ぶ
 <ul>
 <li>Rで扱うことのできる数値
 <ul>
@@ -465,17 +472,20 @@ log(x) # 自然対数 =log(x,base=exp(1))
 <li>無限大や不定な数など特殊なものにも対応</li>
 
 </ul></li>
-<li>文字列を名前として数値等を保持することができる</li>
-<li>変数，関数，計算結果などRで扱う対象を総称して <b>オブジェクト</b> と呼ぶ</li>
-<li>オブジェクトの情報は右上の
-<b>Environment Pane</b> で確認できる</li>
+<li>一続きの文字 (文字列)</li>
+<li>計算手続きをまとめたもの (関数)</li>
+
+</ul></li>
+<li>オブジェクトには名前を付けることができる</li>
+<li>オブジェクトの情報は右上ペインの
+<b>Environment</b> タブで確認できる</li>
 
 </ul>
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org2c713e0">
-<h3 id="org2c713e0">オブジェクトの代入</h3>
+<section id="slide-orga1e9533">
+<h3 id="orga1e9533">オブジェクトの代入</h3>
 <ul>
 <li>オブジェクトの内容(情報)を別のオブジェクトに代入することができる</li>
 <li>計算結果や良く使う文字列の保存に利用できる</li>
@@ -500,11 +510,18 @@ print(bar) # 変数の内容を表示．コンソールでは単に bar だけ�
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org024cfc0">
-<h3 id="org024cfc0">ヘルプ機能</h3>
+<section id="slide-org44bde4c">
+<h3 id="org44bde4c">ヘルプ機能</h3>
 <ul>
-<li>各関数の詳細(機能，引数名，引数の既定値，実行例など)を記述した
-ヘルプが用意されている</li>
+<li>各関数の詳細を記述したヘルプが用意されている
+<ul>
+<li>Description (機能の概要)</li>
+<li>Usage (関数の呼び出し方)</li>
+<li>Arguments (関数の引数)</li>
+<li>Value (関数の返り値)</li>
+<li>Examples (実行例)</li>
+
+</ul></li>
 <li>ヘルプに関連する関数:
 <ul>
 <li><code>help()</code> (使い方や例の表示)</li>
@@ -512,14 +529,14 @@ print(bar) # 変数の内容を表示．コンソールでは単に bar だけ�
 <li><code>help.search()</code> (キーワード検索)</li>
 
 </ul></li>
-<li>右下 <b>Help Pane</b> の右上にある検索窓で参照可能</li>
+<li>右下ペイン <b>Help</b> タブの右上にある検索窓で参照可能</li>
 
 </ul>
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-orgd1bdc92">
-<h3 id="orgd1bdc92">ヘルプの利用例</h3>
+<section id="slide-orge00a098">
+<h3 id="orge00a098">ヘルプの利用例</h3>
 <ul>
 <li><p>
 <span style="color:green;">ヘルプの使い方</span> 
@@ -534,7 +551,7 @@ help.search("log") # "log"に関連する項目は？
 </code></pre>
 </div>
 <ul>
-<li><i><span style="color:orange;">ヘルプは右下のペインに表示される</span></i></li>
+<li><span style="color:gray;">ヘルプは右下のペインに表示される</span></li>
 
 </ul></li>
 
@@ -542,10 +559,12 @@ help.search("log") # "log"に関連する項目は？
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org12b17c8">
-<h3 id="org12b17c8">パッケージの操作</h3>
+<section id="slide-orgde89110">
+<h3 id="orgde89110">パッケージの操作</h3>
 <ul>
-<li>機能を拡張するために多数のパッケージが用意されている</li>
+<li>機能を拡張する多数のパッケージが用意されている</li>
+<li>利用可能なパッケージは右下ペインの
+<b>Package</b> タブに表示される</li>
 <li>パッケージのインストール方法
 <ul>
 <li>RStudioの機能を利用する方法</li>
@@ -554,20 +573,18 @@ help.search("log") # "log"に関連する項目は？
 </ul></li>
 <li>RStudioの機能を利用したインストール手順
 <ul>
-<li>右下 <b>Package Pane</b> をクリック</li>
+<li><b>Package</b> タブをクリック</li>
 <li>左上の <b>Install</b> をクリック</li>
 <li>パッケージ名を入力し <b>Install</b> をクリック</li>
 
 </ul></li>
-<li>利用可能なパッケージの情報は
-右下 <b>Package Pane</b> で確認できる</li>
 
 </ul>
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org632fd52" data-background="#fef4f4">
-<h3 id="org632fd52">練習問題</h3>
+<section id="slide-org6592f88" data-background="#fef4f4">
+<h3 id="org6592f88">練習問題</h3>
 <p>
 パッケージを導入してみよう
 </p>
@@ -588,13 +605,13 @@ help.search("log") # "log"に関連する項目は？
 </section>
 </section>
 <section>
-<section id="slide-org5e4e385">
-<h2 id="org5e4e385">データ構造</h2>
-<div class="outline-text-2" id="text-org5e4e385">
+<section id="slide-org3c72288">
+<h2 id="org3c72288">データ構造</h2>
+<div class="outline-text-2" id="text-org3c72288">
 </div>
 </section>
-<section id="slide-org1cfeede">
-<h3 id="org1cfeede">Rに用意されているデータ構造</h3>
+<section id="slide-org58aa867">
+<h3 id="org58aa867">Rに用意されているデータ構造</h3>
 <ul>
 <li>下記は代表的なもので，これ以外にもある
 <ul>
@@ -610,10 +627,10 @@ help.search("log") # "log"に関連する項目は？
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org78baa06">
-<h3 id="org78baa06">ベクトルとは</h3>
+<section id="slide-orgbe56bd4">
+<h3 id="orgbe56bd4">ベクトルとは</h3>
 <ul>
-<li>スカラー値(単一の値)の集合</li>
+<li>スカラー値 (単一の値) の集合</li>
 <li><p>
 スカラー値として扱われる主なもの
 </p>
@@ -624,7 +641,7 @@ help.search("log") # "log"に関連する項目は？
 
 </ul>
 <p>
-<i><span style="color:orange;">これらは&ldquo;データ型&rdquo;が異なるという</span></i>  
+これらは <b>データ型</b> が異なるという
 </p></li>
 <li>Rオブジェクトの多くはベクトルとして扱われる</li>
 <li>スカラーは長さ1のベクトルとして扱われる</li>
@@ -633,12 +650,12 @@ help.search("log") # "log"に関連する項目は？
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org2a1e3e8">
-<h3 id="org2a1e3e8">ベクトルの作成と操作</h3>
+<section id="slide-orgc6d05e5">
+<h3 id="orgc6d05e5">ベクトルの作成と操作</h3>
 <ul>
 <li>関数 <code>c()</code> を用いて作成する</li>
 <li><p>
-<span style="color:green;">数値や文字列の要素からなるベクトルの生成</span>
+<span style="color:green;">数値や文字列のベクトルの生成</span>
 </p>
 <div class="org-src-container">
 
@@ -667,17 +684,17 @@ y[c(1,3,4)] # 複数の要素 = c(y[1],y[3],y[4])
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org635a665">
-<h3 id="org635a665">データフレームとは</h3>
+<section id="slide-orgf4e48d1">
+<h3 id="orgf4e48d1">データフレームとは</h3>
 <ul>
 <li>長さの等しいベクトルを束ねたリスト</li>
 <li>ベクトルのデータ型はバラバラでも良い</li>
 <li>複数の個体について複数の属性を集計したデータ</li>
 <li><span style="color:green;">ある小学校の1年生の身長・体重・性別・血液型</span>
 <ul>
-<li>各成分はある固体のある属性に関する観測データ</li>
-<li>個体数は集計項目に関わらず変化しないが，
-集計項目によっては定量的データ・定性的データの違いが出てくるので
+<li>各成分はある個体のある属性に関する観測データ</li>
+<li>個体数は集計項目に関わらず変化しない</li>
+<li>集計項目によっては定量的データ・定性的データの違いが出てくるので
 データ型は変わりうる</li>
 
 </ul></li>
@@ -688,8 +705,8 @@ y[c(1,3,4)] # 複数の要素 = c(y[1],y[3],y[4])
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org68726ab">
-<h3 id="org68726ab">データフレームの生成と操作</h3>
+<section id="slide-org0c68eb7">
+<h3 id="org0c68eb7">データフレームの生成と操作</h3>
 <ul>
 <li>関数 <code>data.frame()</code> を用いて作成する</li>
 <li><p>
@@ -698,7 +715,8 @@ y[c(1,3,4)] # 複数の要素 = c(y[1],y[3],y[4])
 <div class="org-src-container">
 
 <pre><code class="R" >(df &lt;- data.frame(A=x,B=y,C=z)) # x,y,zは同じ長さ．列名はA,B,C
-## 外側の () は代入した結果の表示．print() と同義．
+## 外側の () は代入した結果の表示(再掲)．以下と同義
+## df &lt;- data.frame(A=x,B=y,C=z); print(df)
 </code></pre>
 </div>
 
@@ -729,7 +747,7 @@ df[,c("A","C")] # 1,3列目の要素からなるデータフレームの取得
 </code></pre>
 </div>
 
-<pre class="example" id="orga6d6442">
+<pre class="example" id="orgfa12710">
 [1] FALSE
    A   B     C
 2 -2 Bob FALSE
@@ -751,8 +769,8 @@ df[,c("A","C")] # 1,3列目の要素からなるデータフレームの取得
 <div class="slide-footer"><br></div>
 
 </section>
-<section id="slide-org9cd77f9" data-background="#fef4f4">
-<h3 id="org9cd77f9">練習問題</h3>
+<section id="slide-orgedf8817" data-background="#fef4f4">
+<h3 id="orgedf8817">練習問題</h3>
 <p>
 データフレームの操作に慣れよう
 </p>
@@ -823,8 +841,8 @@ df[,c("A","C")] # 1,3列目の要素からなるデータフレームの取得
 </section>
 </section>
 <section>
-<section id="slide-org06608a8">
-<h2 id="org06608a8">次回の予定</h2>
+<section id="slide-org04b9375">
+<h2 id="org04b9375">次回の予定</h2>
 <ul>
 <li>R言語のデータ構造</li>
 <li>ベクトル・行列・リストの操作</li>
@@ -832,8 +850,6 @@ df[,c("A","C")] # 1,3列目の要素からなるデータフレームの取得
 
 </ul>
 <div class="slide-footer"><br></div>
-</section>
-</section>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>

@@ -1,6 +1,6 @@
 /**
  * SPDX-FileCopyrightText: 2014-2016 Hakim El Hattab
- * SPDX-FileCopyrightText: 2017-2020 Jens Lechtenbörger
+ * SPDX-FileCopyrightText: 2017-2021 Jens Lechtenbörger
  *
  * SPDX-License-Identifier: LicenseRef-MIT-HEH-JL
  *
@@ -14,6 +14,12 @@
  */
 section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
   color: #fff; }
+
+/* Setup quizzes to show all questions with print-pdf. */
+html.print-pdf li.question { display: list-item; }
+html.print-pdf div.quizArea { box-shadow: none; font-size: 18px; }
+html.print-pdf li.question div.questionCount { display: none; }
+html.print-pdf li.question a.checkAnswer { display: none; }
 
 /*********************************************
  * GLOBAL STYLES
@@ -422,7 +428,8 @@ div.ribbon-legalese a {
   font-size: 0.8em;
   margin-left: 0; }
 
-.reveal .org-ref-bib {
+.reveal .org-ref-bib,
+.reveal div.csl-bib-body {
   font-size: 0.6em;
   overflow: auto;
   padding-right: 5px;
@@ -595,6 +602,23 @@ div.ribbon-legalese a {
   padding-right: 0;
   content: none;
   background: none; }
+
+/* Special types of outgoing links. */
+.reveal a[href].basiclink:not(.hiddenlink):after {
+  margin: 0;
+  padding-right: 0;
+  background: none;
+  content: " 🛈"; }
+.reveal a[href].beyondlink:not(.hiddenlink):after {
+  margin: 0;
+  padding-right: 0;
+  background: none;
+  content: " 🚀"; }
+.reveal a[href].revisitlink:not(.hiddenlink):after {
+  margin: 0;
+  padding-right: 0;
+  background: none;
+  content: " ↔"; }
 
 /* Indicate direction of internal link. */
 .reveal a[href].backwardlink:not(.hiddenlink):before {
