@@ -40,7 +40,7 @@
 :EXPORT_FILE_NAME: lecture01
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2023-04-06 Thu> 更新
+<2023-04-08 Sat> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide01" >}}
 ** ハンドアウト
@@ -286,10 +286,11 @@
 :EXPORT_FILE_NAME: record
 :EXPORT_DATE: <2022-04-08 Fri>
 :END:
-<2023-03-31 Fri> 更新
+<2023-04-08 Sat> 更新
 
 講義の進捗に合わせて追加します．
-# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/ptSybmpsRFYwK8DpBmre4YOgCez4oClsi_xr8YfHwGDqxgPg7cufu9tXuJQKgmRv.uj86kUO3yatUw1-Z][第1講 (2022年4月8日)]]
+
+- [[https://u-tokyo-ac-jp.zoom.us/rec/share/60OdjHpiRfFVlQc-Zio4gVhvdl3GRS1M6jfXTA0TLWl1NrvB_GWxj35Zta0XM5KX.2QBn84WSnz_Gi7JW?startTime=1680853485000][第1講 (2023年4月7日)]]
 # - [[https://u-tokyo-ac-jp.zoom.us/rec/share/sK8UtM2HXwltqTaOdY1f_pbl0KOaRdvtappnA_wLl2ohnr5GmZiSMOGxRtFdCMJp.9fqz37Jhkan6-1Gk][第2講 (2022年4月15日)]]
 # - [[https://u-tokyo-ac-jp.zoom.us/rec/share/O0uqrCy0MqxY2x48ZM2s3rERnjabQlGo2pXGsxiWmQmpCHRZq8va2-N3rYEFngbt.FR6tYK7tojm20KHp][第3講 (2022年4月22日)]]
 # - [[https://u-tokyo-ac-jp.zoom.us/rec/share/Aw4_mIJUYrczXwJiADpmaN4X8atXvsKN0ea9m2OifmCBq0qj4lTmMUB6s3dUYKbG.0eh6rL7QAallJseB][第4講 (2022年5月6日)]]
@@ -328,6 +329,7 @@
 #    - [[github:pdfs/slide14.pdf][PDF file]]
 # ** COMMENT 解答例
 #    - [[github:code/slide14.R][RScript]]
+
 
 * COMMENT お知らせの雛形
 :PROPERTIES:
