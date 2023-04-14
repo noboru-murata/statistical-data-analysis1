@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-04-13 14:06:23 mura>
+# Time-stamp: <2023-04-14 16:16:02 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -263,7 +263,7 @@
   rownames(FOO) <- c("first","second")
   FOO
   ## 列名をつけることもできる
-  colnames(BAZ) <- c("alpha","beta","gamma")
+  colnames(BAZ) <- c("alpha","beta")
   BAZ
 #+end_src
 
@@ -720,7 +720,6 @@
   ### 練習問題 ベクトルと行列の計算
   ## 1から10までの2乗値からなるベクトル
   (1:10)^2 # ^2も関数として成分ごとに計算される
-  (1:10)*(1:10) # 2乗程度なら Hadamard 積も利用することができる
   
   ## エラーになる理由を考察
   A %*% b # 列ベクトル (3x1型行列)
