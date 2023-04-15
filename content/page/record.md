@@ -11,3 +11,4 @@ weight = 1016
 講義の進捗に合わせて追加します．
 
 -   [第1講 (2023年4月7日)](https://u-tokyo-ac-jp.zoom.us/rec/share/60OdjHpiRfFVlQc-Zio4gVhvdl3GRS1M6jfXTA0TLWl1NrvB_GWxj35Zta0XM5KX.2QBn84WSnz_Gi7JW?startTime=1680853485000)
+-   [第2講 (2023年4月14日)](https://u-tokyo-ac-jp.zoom.us/rec/share/lQxvLGiGbh4Ap_26mDFWs7P6oCfPBBJmUFXKNdLj2W7K6DHf7G2Kk33KcYixpikQ.Lv4MNw1aHhQhNS4L?startTime=1681458260000)
