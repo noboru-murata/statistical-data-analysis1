@@ -79,7 +79,7 @@
 :EXPORT_FILE_NAME: lecture04
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2023-03-31 Fri> 更新
+<2023-04-22 Sat> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide04" >}}
 ** ハンドアウト
@@ -292,7 +292,8 @@
 
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/60OdjHpiRfFVlQc-Zio4gVhvdl3GRS1M6jfXTA0TLWl1NrvB_GWxj35Zta0XM5KX.2QBn84WSnz_Gi7JW?startTime=1680853485000][第1講 (2023年4月7日)]]
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/lQxvLGiGbh4Ap_26mDFWs7P6oCfPBBJmUFXKNdLj2W7K6DHf7G2Kk33KcYixpikQ.Lv4MNw1aHhQhNS4L?startTime=1681458260000][第2講 (2023年4月14日)]]
-# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/O0uqrCy0MqxY2x48ZM2s3rERnjabQlGo2pXGsxiWmQmpCHRZq8va2-N3rYEFngbt.FR6tYK7tojm20KHp][第3講 (2022年4月22日)]]
+- [[https://u-tokyo-ac-jp.zoom.us/rec/share/bBdOeZ6Ayr5L2hecQt0xBcrFnEZ12Ohf5CwrbfLY-um980OpH3WIfkRylUSTuYYp.urKmTnQBNH1DP_TT?startTime=1682063065000][第3講 (2023年4月21日)]]
+  
 # - [[https://u-tokyo-ac-jp.zoom.us/rec/share/Aw4_mIJUYrczXwJiADpmaN4X8atXvsKN0ea9m2OifmCBq0qj4lTmMUB6s3dUYKbG.0eh6rL7QAallJseB][第4講 (2022年5月6日)]]
 # - [[https://u-tokyo-ac-jp.zoom.us/rec/share/N5YfF0Q0-0b-zQ1ALhlbDohfVYYt5mZ0_6gIeewwJ40iGqYtRqzHarWAT5g5pTIn.Qy_QRypOy_1R3kLH?startTime=1653031559000][第5講 (2022年5月20日)]]
 # - [[https://u-tokyo-ac-jp.zoom.us/rec/share/XIMJU-nZqWQR7CLQPFaGPBzRPQ1zaWeeIGTgoYPIuwuHEsZpYBF-O4D_t_hwdCA.FK4U884hRFC1bAwJ][第6講 (2022年5月27日)]]
