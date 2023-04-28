@@ -77,9 +77,9 @@ dim(my_data) # データフレームの大きさを確認
 write.csv(my_data,file="data/my_data.csv") # csvファイルとして書き出し
 
 ## 関数 read.csv() の使い方 (CSVファイルの操作)
-(newData <- read.csv(file="data/my_data.csv", # 前の例のファイル
+(new_data <- read.csv(file="data/my_data.csv", # 前の例のファイル
                      row.names=1)) # 1列目を行名に指定
-dim(newData) # 正しく読み込めたか大きさを確認
+dim(new_data) # 正しく読み込めたか大きさを確認
 
 ### 関数 save() の使い方 (RDataファイルの操作)
 (my_data_1 <- subset(airquality, Temp>95, select=-Ozone)) 

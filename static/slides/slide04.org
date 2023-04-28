@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-04-22 18:08:17 mura>
+# Time-stamp: <2023-04-28 16:14:21 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -279,9 +279,9 @@
 - [[color:green][CSVファイルの読み込みの例]] 
   #+begin_src R :tangle yes
     ## 関数 read.csv() の使い方 (CSVファイルの操作)
-    (newData <- read.csv(file="data/my_data.csv", # 前の例のファイル
+    (new_data <- read.csv(file="data/my_data.csv", # 前の例のファイル
                          row.names=1)) # 1列目を行名に指定
-    dim(newData) # 正しく読み込めたか大きさを確認
+    dim(new_data) # 正しく読み込めたか大きさを確認
   #+end_src
 
 ** 関数 ~save()~
@@ -435,7 +435,7 @@
   - 関数 ~max()~: 最大値
   - 関数 ~min()~: 最小値
   - 関数 ~summary()~: 基本統計量
-- /[[color:orange][これ以外にも集約を行なう関数は沢山ある]]/
+- [[color:gray][これ以外にも集約を行なう関数は沢山ある]]
 
 ** 集約の関数の使い方
 - [[color:green][練習問題のデータの集計を行う]]
