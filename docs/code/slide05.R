@@ -139,6 +139,9 @@ pie(bar, clockwise=TRUE, main="日射量別の日数の割合",
 tc_data <- read.csv(file="data/tokyo_covid19_2021.csv",fileEncoding="utf8")
 names(tc_data)[1] <- "年月日" # CSVファイルの1列目の名前が空白なので定義しておく
 tc_data <- transform(tc_data,年月日=as.Date(年月日)) # 日付の属性を変えておく
+## 日本語の扱いでうまくいかない場合は以下で対応して下さい．
+## library(readr)
+## tc_data <- read_csv(file="data/tokyo_covid19_2021.csv")
 
 ## 折れ線グラフ
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  

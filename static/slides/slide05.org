@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-05-19 15:24:42 mura>
+# Time-stamp: <2023-05-19 15:36:12 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -86,7 +86,7 @@
     #+end_quote
   - 作業ディレクトリのdata内に置いて読み込む場合
     #+begin_src R :eval no
-      TC.data <- read.csv(file="data/tokyo_covid19_2021.csv", fileEncoding="utf8")
+      tc_data <- read.csv(file="data/tokyo_covid19_2021.csv", fileEncoding="utf8")
     #+end_src
 
 
@@ -674,7 +674,10 @@
   tc_data <- read.csv(file="data/tokyo_covid19_2021.csv",fileEncoding="utf8")
   names(tc_data)[1] <- "年月日" # CSVファイルの1列目の名前が空白なので定義しておく
   tc_data <- transform(tc_data,年月日=as.Date(年月日)) # 日付の属性を変えておく
-  
+  ## 日本語の扱いでうまくいかない場合は以下で対応して下さい．
+  ## library(readr)
+  ## tc_data <- read_csv(file="data/tokyo_covid19_2021.csv")
+
   ## 折れ線グラフ
   if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
   plot(tc_data$陽性者数, type="l", col="red", ylab="陽性者数") 
@@ -684,12 +687,12 @@
             type="l", col="red", ylab="陽性者数"))
   ## 日付は月日から文字列操作で作ることもできる
   ## days <- with(tc_data,as.Date(paste("2021",月,日,sep="-"))) # 2021-月-日
-  
+
   ## x軸のラベルのフォーマットを指定する例
   plot(陽性者数 ~ 年月日, data=tc_data, xaxt="n",
        type="l", col="red", ylab="陽性者数")
   axis.Date(1, tc_data$年月日, format="%m/%d", labels=TRUE) #x軸ラベルを書く
-  
+
   ## 検査実施人数の推移 (棒グラフ)
   barplot(tc_data$総検査実施件数, col="lightblue", ylab="検査実施件数") # 棒グラフ
   plot(tc_data$総検査実施件数, type="h", # 棒が多い場合はこういう方法もある
@@ -698,7 +701,7 @@
   with(tc_data,
        plot(年月日, 総検査実施件数, type="h", col="blue", ylab="検査実施人数")) 
   grid(col="darkgray") # 格子線の追加
-  
+
   ## 曜日ごとの検査実施件数 (箱ひげ図)
   boxplot(総検査実施件数 ~ 曜日, data=tc_data, col=cm.colors(7))
   ## 曜日の並び順を修正
