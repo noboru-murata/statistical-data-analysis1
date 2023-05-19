@@ -253,9 +253,10 @@ tcp_data <- read.csv(file="data/tokyo_covid19_patients_2021.csv")
 table(subset(tcp_data, select=c(患者_年代))) # 名前のついたベクトル
 barplot(table(subset(tcp_data, select=c(患者_年代))))
 ## 月別の年齢分布を調べる
+library(lubridate) # 年月日の文字列を操作するパッケージ
 foo <-with(tcp_data,
            data.frame(age=患者_年代,
-                      month=months(as.Date(公表_年月日))))
+                      month=month(公表_年月日,label=TRUE,abbr=FALSE)))
 (bar <- table(foo)) # (年齢 x 月) の患者数の表(行列)
 (baz <- apply(bar, 2, function(z){z/sum(z)})) # 月ごとの年齢分布
 ## 描画

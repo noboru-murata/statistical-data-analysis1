@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-05-19 15:06:37 mura>
+# Time-stamp: <2023-05-19 15:24:42 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -953,7 +953,7 @@
   scatterplot3d(subset(jp_data, select=c(婚姻,離婚,失業)), 
                 pch=19, color="blue")
   pairs(subset(jp_data, select=c(婚姻,離婚,失業)), col="blue") # 三面図で見てみる
-  
+
   ### 凡例の追加 (tokyo_covid19_2021.csvを用いた例)
   ## データの読み込み
   if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
@@ -965,7 +965,7 @@
   legend("topright", inset=0.01, 
          legend=c("検査実施件数/10","陽性者数"),
          col=c("blue","red"), lwd=3, lty=1)
-  
+
   ### 凡例の追加 (tokyo_covid19_patients_2021.csvを用いた例)
   ## データの読み込み
   tcp_data <- read.csv(file="data/tokyo_covid19_patients_2021.csv")
@@ -973,9 +973,10 @@
   table(subset(tcp_data, select=c(患者_年代))) # 名前のついたベクトル
   barplot(table(subset(tcp_data, select=c(患者_年代))))
   ## 月別の年齢分布を調べる
+  library(lubridate) # 年月日の文字列を操作するパッケージ
   foo <-with(tcp_data,
              data.frame(age=患者_年代,
-                        month=months(as.Date(公表_年月日))))
+                        month=month(公表_年月日,label=TRUE,abbr=FALSE)))
   (bar <- table(foo)) # (年齢 x 月) の患者数の表(行列)
   (baz <- apply(bar, 2, function(z){z/sum(z)})) # 月ごとの年齢分布
   ## 描画
