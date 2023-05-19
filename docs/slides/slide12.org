@@ -1,9 +1,9 @@
 #+TITLE: 分散分析
 #+SUBTITLE: 第12講 - 複数のグループ間の違いを検証する
 #+AUTHOR: 村田 昇
-#+EMAIL: noboru.murata@eb.waseda.ac.jp
+#+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2022-07-08 17:37:17 mura>
+# Time-stamp: <2023-05-12 16:56:04 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -12,11 +12,6 @@
 # C-c '
 :END:
 
-* COMMENT メモ
-- 修正事項
-- 水準 A_i とする必要はなさそう (二元の問題のためであった)
-- MC実験のところは整理してわかりやすく
-  
 * 講義の内容
 - 分散分析とは
 - 一元配置
@@ -27,12 +22,17 @@
   - 検定の構成
 
 #+begin_src R :eval no :exports none :tangle yes
-  ### 第12回 練習問題解答例
+  ### 第12講 練習問題解答例
 #+end_src
 #+begin_src R :exports none
-  setwd("~/Desktop/lectures/u-tokyo/spring/slide")
+  setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
 
+* COMMENT メモ
+- 修正事項
+- 水準 A_i とする必要はなさそう (二元の問題のためであった)
+- MC実験のところは整理してわかりやすく
+  
 
 * 分散分析とは
 ** 分散分析
@@ -424,7 +424,7 @@
   anova(aov(obs ~ fact, data=bar))
   
   ## 実験
-  myTrial <- function(h0=TRUE){
+  my_trial <- function(h0=TRUE){
       if(h0) {
           tmp <- data.frame( # 帰無仮説が正しい場合
               obs=rnorm(length(fact),mean=3,sd=2), # 観測値
@@ -440,13 +440,13 @@
       ## p-値を返す
   }
   ## 帰無仮説が正しい場合のF-値/p-値の分布 (一様分布になる)
-  foo <- replicate(2000,myTrial())
+  foo <- replicate(2000,my_trial())
   hist(unlist(foo["F value",]),
        xlab="F-value", main="H0 = TRUE")
   hist(unlist(foo["Pr(>F)",]),
        xlab="p-value", main="H0 = TRUE")
   ## 対立仮説が正しい場合のp-値の分布 (小さな値に偏る)
-  bar <- replicate(2000,myTrial(h0=FALSE))
+  bar <- replicate(2000,my_trial(h0=FALSE))
   hist(unlist(bar["F value",]),
        xlab="F-value", main="H0 = FALSE")
   hist(unlist(bar["Pr(>F)",]),
@@ -473,11 +473,11 @@
   aggregate(temp ~ weekday, data=TW.data, FUN=var)
   aggregate(temp ~ weekday, data=TW.data, FUN=sd)
   ## 曜日ごとの気温差に関する分散分析
-  (myAov <- aov(temp ~ weekday, data=TW.data)) # aovによる分析
-  summary(myAov) # 分散分析表の表示(棄却されない)
-  anova(myAov)["weekday","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
-  model.tables(myAov, type="means")   # 水準(曜日)ごとの平均値
-  model.tables(myAov, type="effects") # 水準(曜日)ごとの効果
+  (my_aov <- aov(temp ~ weekday, data=TW.data)) # aovによる分析
+  summary(my_aov) # 分散分析表の表示(棄却されない)
+  anova(my_aov)["weekday","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
+  model.tables(my_aov, type="means")   # 水準(曜日)ごとの平均値
+  model.tables(my_aov, type="effects") # 水準(曜日)ごとの効果
   ## 検定のみ実行する場合
   oneway.test(temp ~ weekday, data=TW.data, var.equal=TRUE) # 等分散での検定
   oneway.test(temp ~ weekday, data=TW.data) # Welchの近似法による検定
@@ -486,9 +486,9 @@
   TW.data$month <- as.factor(TW.data$month) # 月を因子化
   boxplot(temp ~ month, data=TW.data, 
           col="lavender", main="月ごとの気温") 
-  (myAov <- aov(temp ~ month, data=TW.data)) # aovによる分析
-  summary(myAov) # 分散分析表の表示(棄却される)
-  anova(myAov)["month","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
+  (my_aov <- aov(temp ~ month, data=TW.data)) # aovによる分析
+  summary(my_aov) # 分散分析表の表示(棄却される)
+  anova(my_aov)["month","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
 #+end_src
 
 
@@ -806,11 +806,11 @@
          lwd=3, cex=0.5,
          legend=c("school","college","university"))
   ## 二元配置分散分析
-  (myAov <- aov(score ~ gender + education_level,
+  (my_aov <- aov(score ~ gender + education_level,
                 data=jobsatisfaction))
-  summary(myAov)
-  model.tables(myAov, type="means")  
-  model.tables(myAov, type="effects")
+  summary(my_aov)
+  model.tables(my_aov, type="means")  
+  model.tables(my_aov, type="effects")
 #+end_src
 
 

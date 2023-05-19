@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-04-28 14:53:41 mura>
+# Time-stamp: <2023-05-19 15:06:37 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -20,7 +20,7 @@
 - 多次元データの視覚化
 
 #+begin_src R :eval no :exports none :tangle yes
-  ### 第05回 練習問題解答例
+  ### 第5講 練習問題解答例
 #+end_src
 #+begin_src R :exports none
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
@@ -968,7 +968,7 @@
   
   ### 凡例の追加 (tokyo_covid19_patients_2021.csvを用いた例)
   ## データの読み込み
-  tcp_data <- read.csv(file="data/covid19_tokyo_patients.csv")
+  tcp_data <- read.csv(file="data/tokyo_covid19_patients_2021.csv")
   ## 簡単な集計には関数table()を使うとよい
   table(subset(tcp_data, select=c(患者_年代))) # 名前のついたベクトル
   barplot(table(subset(tcp_data, select=c(患者_年代))))
