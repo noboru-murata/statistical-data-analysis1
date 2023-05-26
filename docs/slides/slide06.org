@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-05-12 16:38:46 mura>
+# Time-stamp: <2023-05-26 14:06:26 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -175,7 +175,7 @@
       return(dice)
     }
     ## 乱数のシード値を指定
-    set.seed(20220520)
+    set.seed(20230526)
     ## Monte-Carlo法を実行
     my_data <- replicate(10, # 10回実験
                         my_trial()) # 実行する関数を指定
@@ -184,18 +184,16 @@
 
 
 * 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
 - 以下のようなコイン投げの賭けを考える．
   #+begin_quote
-  Alice と Bob の二人で交互にコインを投げる．
-  最初に表が出た方を勝ちとするとき，
-  それぞれの勝率はいくつとなるか？
+  Alice と Bob の二人で交互にコインを投げ，最初に表が出た方を勝ちとする．
   #+end_quote
   この賭けの勝率を求めるための確率シミュレーションを行いなさい．
 

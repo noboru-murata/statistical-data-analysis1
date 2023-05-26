@@ -109,7 +109,7 @@
 :EXPORT_FILE_NAME: lecture06
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2023-03-31 Fri> 更新
+<2023-05-26 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide06" >}}
 ** ハンドアウト
@@ -117,7 +117,7 @@
 ** 解答例
 - [[github:code/slide06.R][RScript]]
 - [[github:zips/mc.zip][確率シミュレーションの例]]
-- [[github:zips/epidemic.zip][確率シミュレーションの例 (追加)]]
+- [[https://github.com/noboru-murata/epidemic-model][確率シミュレーションの例 (追加)]]
 
 * 第7講
 :PROPERTIES:
@@ -286,7 +286,7 @@
 :EXPORT_FILE_NAME: record
 :EXPORT_DATE: <2022-04-08 Fri>
 :END:
-<2023-04-29 Sat> 更新
+<2023-05-26 Fri> 更新
 
 講義の進捗に合わせて追加します．
 
