@@ -6,7 +6,7 @@ draft = false
 weight = 1007
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-03-31 Fri&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-05-26 Fri&gt; </span></span> 更新
 
 
 ## スライド {#スライド}
@@ -23,4 +23,4 @@ weight = 1007
 
 -   [RScript](https://noboru-murata.github.io/statistical-data-analysis1/code/slide06.R)
 -   [確率シミュレーションの例](https://noboru-murata.github.io/statistical-data-analysis1/zips/mc.zip)
--   [確率シミュレーションの例 (追加)](https://noboru-murata.github.io/statistical-data-analysis1/zips/epidemic.zip)
+-   [確率シミュレーションの例 (追加)](https://github.com/noboru-murata/epidemic-model)
