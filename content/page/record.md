@@ -6,7 +6,7 @@ draft = false
 weight = 1016
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-05-26 Fri&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-06-01 Thu&gt; </span></span> 更新
 
 講義の進捗に合わせて追加します．
 
@@ -15,3 +15,4 @@ weight = 1016
 -   [第3講 (2023年4月21日)](https://u-tokyo-ac-jp.zoom.us/rec/share/bBdOeZ6Ayr5L2hecQt0xBcrFnEZ12Ohf5CwrbfLY-um980OpH3WIfkRylUSTuYYp.urKmTnQBNH1DP_TT?startTime=1682063065000)
 -   [第4講 (2023年4月28日)](https://u-tokyo-ac-jp.zoom.us/rec/share/eSnV1Cb_cAAP9DsmsNERwns71ml0w-4vL4mfrHbFQEq_3DMuCFxlJ8bic6W6Bkdj.LkBAPcNhkfLFoHVJ?startTime=1682667888000)
 -   [第5講 (2023年5月19日)](https://u-tokyo-ac-jp.zoom.us/rec/share/iWWFc5pfvldIMNrE-9oK4JUjyAr7bFkbNisErqzirhs7cFkNHaNhogmyBRA_P-Oi.EaKwo_5nUwXXmPSX?startTime=1684482171000) (plotの説明の最初の30分ほどが欠落しています)
+-   [第6講 (2023年5月26日)](https://u-tokyo-ac-jp.zoom.us/rec/share/S_rSdTx_lN6DzzjI81-LFFOEcvb20svt-EB1-XZ76Bs3DiaBgv2FfNryV6p1WgVp.KEfuEnBRNBhUv2L7?startTime=1685086798000)

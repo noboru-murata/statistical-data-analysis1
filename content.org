@@ -286,7 +286,7 @@
 :EXPORT_FILE_NAME: record
 :EXPORT_DATE: <2022-04-08 Fri>
 :END:
-<2023-05-26 Fri> 更新
+<2023-06-01 Thu> 更新
 
 講義の進捗に合わせて追加します．
 
@@ -295,8 +295,8 @@
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/bBdOeZ6Ayr5L2hecQt0xBcrFnEZ12Ohf5CwrbfLY-um980OpH3WIfkRylUSTuYYp.urKmTnQBNH1DP_TT?startTime=1682063065000][第3講 (2023年4月21日)]]
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/eSnV1Cb_cAAP9DsmsNERwns71ml0w-4vL4mfrHbFQEq_3DMuCFxlJ8bic6W6Bkdj.LkBAPcNhkfLFoHVJ?startTime=1682667888000][第4講 (2023年4月28日)]]
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/iWWFc5pfvldIMNrE-9oK4JUjyAr7bFkbNisErqzirhs7cFkNHaNhogmyBRA_P-Oi.EaKwo_5nUwXXmPSX?startTime=1684482171000][第5講 (2023年5月19日)]] (plotの説明の最初の30分ほどが欠落しています)
+- [[https://u-tokyo-ac-jp.zoom.us/rec/share/S_rSdTx_lN6DzzjI81-LFFOEcvb20svt-EB1-XZ76Bs3DiaBgv2FfNryV6p1WgVp.KEfuEnBRNBhUv2L7?startTime=1685086798000][第6講 (2023年5月26日)]]
   
-# - [[https://u-tokyo-ac-jp.zoom.us/rec/share/XIMJU-nZqWQR7CLQPFaGPBzRPQ1zaWeeIGTgoYPIuwuHEsZpYBF-O4D_t_hwdCA.FK4U884hRFC1bAwJ][第6講 (2022年5月27日)]]
 # - [[https://u-tokyo-ac-jp.zoom.us/rec/share/wZVaPqHmfQ2oe2X4Az-8edZdXY8IIcj2lIUL3k4IeaT00_WwsokPH-FYsobFziD-.xCJcWsGGzsbqSIdp][第7講 (2022年6月3日)]]
 # - [[https://u-tokyo-ac-jp.zoom.us/rec/share/ULoVvOnYINUTSc4za3Tt4JIAi9nRcaAK5fYU60q75cJ8QE9Lo-sCbISyaru91GY.UUgvIatNOcAYNlPa][第8講 (2022年6月10日)]]
 # - [[https://u-tokyo-ac-jp.zoom.us/rec/share/oef2OvMqG7I43WUgohmGPErk8H62w-kx9O75wVEEymGw931eFJ4K0TRA0i5Cwy5Y.xGF3eqpYpxfMPpMl][第9講 (2022年6月17日)]]
