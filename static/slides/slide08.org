@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-05-12 16:44:51 mura>
+# Time-stamp: <2023-06-02 15:58:03 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -12,7 +12,7 @@
 # C-c '
 :END:
 
-* 講義の内容
+* 講義概要
 - 一般の確率変数
 - 離散分布
   - 離散一様分布・二項分布
@@ -33,10 +33,10 @@
 
 * 一般の確率変数
 ** 確率分布
-- 確率変数 \(X\) : 
+- 確率変数 \(X\) 
   - 値がランダムに決定される変数
   - 任意の区間 \([a,b]\) に含まれる確率が定められている
-- 確率分布 \(P\) (または単に分布) :
+- 確率分布 \(P\) (または単に分布) 
   - 区間 \([a,b]\) \((a\leq b)\) に \(X\) が含まれる確率
     #+begin_quote
     #+begin_src latex
@@ -92,14 +92,14 @@
 
 * 離散分布
 ** 離散分布
-- 離散型確率変数 :
+- 離散型確率変数 
   - 取りうる値が有限個 \\
     もしくは可算無限個 (例えば整数値のみとる場合)
-- 離散分布 :
+- 離散分布 
   - 離散型確率変数の確率分布
   - \(X=x\) となる確率 \(P(X=x)\) で完全に決定される
   - 関数 \(f(x)=P(X=x)\) を 
-    *確率関数* (*確率質量関数*) 
+    *確率質量関数* (*確率関数*)
     と呼ぶ
 
 ** 離散分布の平均
@@ -162,12 +162,12 @@
     ### 離散一様分布で用いた例
   #+end_src
 
-** 離散一様分布の確率関数
-- 集合 \(\{x_{1},\dotsc,x_n\}\) 上の離散一様分布 : \\
+** 離散一様分布の確率質量関数
+- 集合 \(\{x_{1},\dotsc,x_n\}\) 上の離散一様分布 \\
   相異なる実数
   \(x_{1},\dotsc,x_n\) 
   を箱(壺)から無作為に取り出す試行
-- 確率関数 :
+- 確率質量関数 
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -178,7 +178,7 @@
   #+end_quote
 
 ** 離散一様分布の平均と分散
-- 平均 :
+- 平均
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -188,7 +188,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- 分散 :
+- 分散
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -218,10 +218,10 @@
     ### 二項分布で用いた例
   #+end_src
 
-** 二項分布の確率関数
-- 試行回数 \(n\) , 成功確率 \(p\) の二項分布 : \\
+** 二項分布の確率質量関数
+- 試行回数 \(n\) , 成功確率 \(p\) の二項分布 \\
   確率 \(p\) で成功する試行を \(n\) 回行った総成功回数
-- 確率関数 :
+- 確率質量関数
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -231,8 +231,8 @@
   #+end_quote
   #   - 平均は \(np\) , 分散は \(np(1-p)\) で与えられる
 
-** 二項分布の平均と分散
-- 平均 :
+** 二項分布の平均
+- 平均
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -246,8 +246,8 @@
   #+end_src
   #+end_quote
 
-** 二項分布の平均と分散
-- 2次モーメント :
+** 二項分布の分散
+- 2次モーメント 
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -262,7 +262,7 @@
     \end{align}
   #+end_src
   #+end_quote
-- 分散 :
+- 分散 
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -282,11 +282,11 @@
     rbinom(10, size=1, prob=0.2) # Bernoulli分布(10個)
     rbinom(20, size=5, prob=0.6) # 二項分布(20個)
   #+end_src
-- 確率関数は関数 ~dbinom()~ で計算できる
+- 確率質量関数は関数 ~dbinom()~ で計算できる
   # % - なお, 原則として, ある確率分布に従う乱数を発生するためのRの
   # %   関数の命名規則は,「\texttt{r} + その乱数が従う分布の名前の省略
   # %   形」となっている(離散一様分布など一部例外がある)
-  # % - また, 離散分布の場合, その確率関数を計算するための関数が,
+  # % - また, 離散分布の場合, その確率質量関数を計算するための関数が,
   # %   同じ省略形の文頭に\texttt{d}をつけることで得られる
 
 
@@ -295,10 +295,7 @@
   :reveal_background: #fef4f4
   :END:
 ** 数値実験の雛形(離散分布)
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-- 人工的に生成した乱数と理論曲線(確率関数)との比較を行う
+- 人工的に生成した乱数と理論曲線(確率質量関数)との比較を行う
 - 数値実験の雛形は以下のようになる
   #+begin_src R :eval no
     mc <- 10000 # 実験回数を指定
@@ -351,11 +348,11 @@
     ### Poisson 分布で用いた例
   #+end_src
 
-** Poisson 分布の確率関数
-- 強度 \(\lambda\) の Poisson 分布 :
+** Poisson 分布の確率質量関数
+- 強度 \(\lambda\) の Poisson 分布
   \(Po(\lambda)\) (\(\lambda > 0\))\\ 
   少数の法則に現れた滅多に起こらない事象の起こる回数の分布
-- 確率関数 :
+- 確率質量関数
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -366,7 +363,7 @@
   #   - 平均は \(\lambda\) , 分散は \(\lambda\) で与えられる
 
 ** Poisson 分布の平均
-- 平均 :
+- 平均
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -380,7 +377,7 @@
   #+end_quote
 
 ** Poisson 分布の分散
-- 2次モーメント :
+- 2次モーメント
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -393,7 +390,7 @@
     \end{align}
   #+end_src
   #+end_quote
-- 分散 :
+- 分散
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -413,7 +410,7 @@
     rpois(15, lambda=1) # 強度1の Poisson 分布(15個)
     rpois(15, lambda=10) # 強度10の Poisson 分布(15個)
   #+end_src
-- 確率関数は関数 ~dpois()~ で計算できる
+- 確率質量関数は関数 ~dpois()~ で計算できる
 
 
 * 演習
@@ -459,11 +456,11 @@
     ### 幾何分布で用いた例
   #+end_src
 
-** 幾何分布の確率関数
-- 成功確率 \(p\) の幾何分布 :
+** 幾何分布の確率質量関数
+- 成功確率 \(p\) の幾何分布 
   \((0 < p\leq 1)\) \\
   成功するまでの回数の分布
-- 確率関数 :
+- 確率質量関数 
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -473,7 +470,7 @@
   #+end_quote
 
 ** 幾何分布の平均
-- 平均 :
+- 平均 
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -489,7 +486,7 @@
   #+end_quote
 
 ** 幾何分布の分散
-- 2次モーメント :
+- 2次モーメント
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -503,7 +500,7 @@
     \end{align}
   #+end_src
   #+end_quote
-- 分散 :
+- 分散
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -522,15 +519,15 @@
   #+begin_src R :tangle yes
     rgeom(15, prob=0.1) # 成功確率0.1の幾何分布(15個)
   #+end_src
-- 確率関数は関数 ~dgeom()~ で計算できる
+- 確率質量関数は関数 ~dgeom()~ で計算できる
 
 
 * 連続分布
 ** 連続分布
-- 連続型確率変数 :
+- 連続型確率変数
   - 取りうる値が任意の実数またはある範囲の実数\\
     取りうる値のパターンが数多いため実数で近似
-- 連続分布 :
+- 連続分布
   - 連続型の確率変数の確率分布
   - 非負の値をとる実数上の関数 \(f\) の積分で表される
     #+begin_quote
@@ -543,7 +540,7 @@
   - 関数 \(f\) を *確率密度関数* (または *密度*)と呼ぶ
 
 ** 連続分布の平均
-- 連続型の確率変数 \(X\) の平均 : \\
+- 連続型の確率変数 \(X\) の平均 \\
   積分 \(\int_{-\infty}^\infty xf(x)dx\) が絶対収束するとき
   \(X\) の *平均* (または *期待値*)を
   #+begin_quote
@@ -561,7 +558,7 @@
   # - \(X\) を連続型の確率変数, \(f\) を \(X\) の分布の確率密度関数とする
 
 #+reveal: split
-- 確率変数の変換 \(\varphi(X)\) の期待値 :
+- 確率変数の変換 \(\varphi(X)\) の期待値
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -569,7 +566,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- \(p\) 次の *モーメント* (あるいは *積率* ) :
+- \(p\) 次の *モーメント* (あるいは *積率* )
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -581,7 +578,7 @@
   \(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ
 
 ** 連続分布の分散
-- 分散 :
+- 分散
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -599,11 +596,11 @@
     ### 一様分布で用いた例
   #+end_src
 
-** 一様分布の密度関数
-- 区間 \((a,b)\) 上の一様分布 :
+** 一様分布の確率密度関数
+- 区間 \((a,b)\) 上の一様分布
   \(U(a,b)\) \\
   区間 \((a,b)\) のランダムな値の選択を表す分布
-- 確率密度関数 :
+- 確率密度関数
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -617,7 +614,7 @@
   #+end_quote
 
 ** 一様分布の平均
-- 平均 :
+- 平均
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -631,7 +628,7 @@
   #+end_quote
 
 ** 一様分布の分散
-- 2次モーメント :
+- 2次モーメント
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -643,7 +640,7 @@
     \end{align}
   #+end_src
   #+end_quote
-- 分散 :
+- 分散
   #+begin_quote
   #+begin_src latex
     \begin{align}
@@ -670,11 +667,11 @@
     ### 正規分布で用いた例
   #+end_src
 
-** 正規分布の密度関数
-- 平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布 :
+** 正規分布の確率密度関数
+- 平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布
   \(N(\mu,\sigma^2)\) \\
   (\(\mu\) は実数, \(\sigma\) は正の実数)
-- 確率密度関数 :
+- 確率密度関数
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -809,11 +806,11 @@
     ### ガンマ分布で用いた例
   #+end_src
 
-** ガンマ分布の密度関数
-- パラメータ \(\nu\) , \(\alpha\) のガンマ分布 : \\
+** ガンマ分布の確率密度関数
+- パラメータ \(\nu\) , \(\alpha\) のガンマ分布 \\
   \(\Gamma(\nu,\alpha)\) または \(G(\alpha,\nu)\) 
   (\(\nu > 0\) , \(\alpha > 0\))
-- 確率密度関数 :
+- 確率密度関数
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -850,8 +847,8 @@
   #+end_src
   - 確率密度関数は ~dgamma()~ で計算できる
 
-** 指数分布の密度関数
-- パラメータ \(\lambda\) の指数分布 :
+** 指数分布の確率密度関数
+- パラメータ \(\lambda\) の指数分布
   \(\mathrm{Exp}(\lambda)\) (\(\lambda > 0\))
   #+begin_quote
   #+begin_src latex
@@ -874,8 +871,8 @@
     rexp(8, rate=0.5) # レート0.5の指数分布(8個)
   #+end_src
 
-** @@latex:@@\(\chi^2\)-分布の密度関数
-- 自由度 \(k\) の \(\chi^2\) 分布 :
+** @@latex:@@\(\chi^2\)-分布の確率密度関数
+- 自由度 \(k\) の \(\chi^2\) 分布 
   \(\chi^2(k)\) (\(k > 0\))
   #+begin_quote
   #+begin_src latex
@@ -941,10 +938,10 @@
     ### t-分布で用いた例
   #+end_src
 
-** @@latex:@@\(t\)-分布の密度関数
-- 自由度 \(\nu\) の(Studentの) \(t\) 分布 :
+** @@latex:@@\(t\)-分布の確率密度関数
+- 自由度 \(\nu\) の(Studentの) \(t\) 分布
   \(t(\nu)\) (\(\nu > 0\))
-- 確率密度関数 :
+- 確率密度関数
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -958,7 +955,7 @@
   - *Student* は \(t\)-分布を導入した統計学者Gossetのペンネーム
 
 ** @@latex:@@\(t\)-分布の平均と分散
-- 平均 :
+- 平均
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -967,7 +964,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- 分散 :
+- 分散
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -1039,7 +1036,16 @@
   curve(dt(x, df=k), # 確率密度関数(理論)
         add=TRUE, col="red", lwd=3) 
   legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-         col=c("lightblue", "red"), lwd=3) 
+         col=c("lightblue", "red"), lwd=3)
+  ## グラフの上下が切れてしまう場合は ylim で表示を調整することができる
+  hist(my_data, freq=FALSE, breaks=40,
+       col="lightblue", border="white",
+       ylim=c(0,0.4), # 自動調整ではなく0.4まで表示する
+       xlab="x", main=bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")")))
+  curve(dt(x, df=k), # 確率密度関数(理論)
+        add=TRUE, col="red", lwd=3) 
+  legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+         col=c("lightblue", "red"), lwd=3)
 #+end_src
 
 
@@ -1048,10 +1054,10 @@
     ### F-分布で用いた例
   #+end_src
 
-** @@latex:@@\(F\)-分布の密度関数
-- 自由度 \(\nu_{1},\nu_{2}\) の \(F\) 分布 :
+** @@latex:@@\(F\)-分布の確率密度関数
+- 自由度 \(\nu_{1},\nu_{2}\) の \(F\) 分布
   \(F(\nu_{1},\nu_{2})\) (\(\nu_{1} > 0, \nu_{2} > 0\))
-- 確率密度関数:
+- 確率密度関数
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -1066,7 +1072,7 @@
   #+end_quote
 
 ** @@latex:@@\(F\)-分布の平均と分散
-- 平均 :
+- 平均
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -1075,7 +1081,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- 分散 :
+- 分散
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -1150,15 +1156,25 @@
         add=TRUE, col="red", lwd=3) 
   legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
          col=c("lightblue", "red"), lwd=3) 
+  ## グラフの一部に着目したい場合は xlim/ylim で表示を調整することができる
+  hist(my_data, freq=FALSE, 
+       col="lightblue", border="white",
+       breaks=80, # ビンの数を多めに指定する
+       xlim=c(0,6), ylim=c(0,0.8), # 表示領域を指定する
+       xlab="x",
+       main=bquote(paste(frac(Y[1]/k[1],Y[2]/k[2]),
+                         " (",k[1]==.(k1),
+                         ", ",k[2]==.(k2),")"))) 
+  curve(df(x, df1=k1, df2=k2), # 確率密度関数(理論)
+        add=TRUE, col="red", lwd=3) 
+  legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+         col=c("lightblue", "red"), lwd=3) 
 #+end_src
 
-** COMMENT 課題
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-- 来週までに自身の興味のあるデータを収集しておく
-  - データ収集の方法を整理しておく
-  - 講義で利用する
+** 参考
+- 来週までに興味のあるデータを収集しておくと良い
+  - データ収集・整理の方法の復習になる
+  - 統計量の計算やモデルのあてはめの練習になる
 - 参考となるサイト
   - e-Stat (総務省) https://www.e-stat.go.jp
   - 気象庁 http://www.jma.go.jp/jma/index.html

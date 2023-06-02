@@ -1,4 +1,4 @@
-### 第08回 練習問題解答例
+### 第8講 練習問題解答例
 
 ### 離散一様分布で用いた例
 
@@ -14,16 +14,16 @@ rbinom(20, size=5, prob=0.6) # 二項分布(20個)
 mc <- 10000 # 実験回数を指定
 n <- 16 
 p <- 0.6
-myRandom <- function(){ # Bernolli分布をm個生成して合計
+my_random <- function(){ # Bernolli分布をm個生成して合計
   sum(rbinom(n, size=1, prob=p))}
-myData <- replicate(mc, myRandom())
-myTable <- table(myData)/mc # 出現確率ごとの表(度数分布表)を作成
+my_data <- replicate(mc, my_random())
+my_table <- table(my_data)/mc # 出現確率ごとの表(度数分布表)を作成
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-plot(myTable, type="h", lwd=5, col="royalblue",
+plot(my_table, type="h", lwd=5, col="royalblue",
      xlab="値", ylab="確率",
      main=paste0("二項分布(試行回数", n, ", 成功確率", p, ")"))
-myRange <- min(myData):max(myData) # 範囲を取得
-lines(myRange + 0.3, dbinom(myRange, size=n, prob=p),
+my_range <- min(my_data):max(my_data) # 範囲を取得
+lines(my_range + 0.3, dbinom(my_range, size=n, prob=p),
       type="h", col="red", lwd=5) # 理論上の出現確率
 legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
        col=c("royalblue", "red"), lwd=5) # 凡例を作成
@@ -37,17 +37,17 @@ rpois(15, lambda=10) # 強度10の Poisson 分布(15個)
 mc <- 10000 
 lambda1 <- 5
 lambda2 <- 12
-myRandom <- function(){ # 2つの Poisson 分布の和
+my_random <- function(){ # 2つの Poisson 分布の和
   rpois(1, lambda=lambda1)+rpois(1, lambda=lambda2)}
-myData <- replicate(mc, myRandom())
-myTable <- table(myData)/mc 
+my_data <- replicate(mc, my_random())
+my_table <- table(my_data)/mc 
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-plot(myTable, type="h", lwd=5, col="royalblue",
+plot(my_table, type="h", lwd=5, col="royalblue",
      xlab="値", ylab="確率",
      main=paste0("Poisson 分布(強度", lambda1+lambda2, ")"))
-myRange <- min(myData):max(myData) 
-lines(myRange + 0.3,
-      dpois(myRange, lambda=lambda1+lambda2), 
+my_range <- min(my_data):max(my_data) 
+lines(my_range + 0.3,
+      dpois(my_range, lambda=lambda1+lambda2), 
       type="h", col="red", lwd=5) # 理論上の出現確率
 legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
        col=c("royalblue", "red"), lwd=5)
@@ -68,13 +68,13 @@ rnorm(8,mean=1,sd=2) # 平均1分散4=2^2の正規乱数
 
 ### 練習問題 正規分布
 mc <- 10000 # 実験回数を指定
-myRandom <- function(){ # 一方の分布を確認する
+my_random <- function(){ # 一方の分布を確認する
   u1 <- runif(1)
   u2 <- runif(1)
   return(sqrt(-2*log(u1))*cos(2*pi*u2))}
-myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+my_data <- replicate(mc, my_random()) # Monte-Carlo実験
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-hist(myData, freq=FALSE, breaks=40,
+hist(my_data, freq=FALSE, breaks=40,
      col="lightblue", border="white", 
      xlab="x", main=paste0("標準正規分布")) # ヒストグラム(密度表示)
 curve(dnorm(x, mean=0, sd=1), add=TRUE, 
@@ -116,11 +116,11 @@ rchisq(8, df=4) # 自由度4のカイ二乗分布(8個)
 ### 練習問題 カイ二乗分布
 mc <- 10000 # 実験回数を指定
 k <- 8 # 自由度を設定
-myRandom <- function(){ 
+my_random <- function(){ 
   sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
-myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+my_data <- replicate(mc, my_random()) # Monte-Carlo実験
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-hist(myData, freq=FALSE, breaks=25,
+hist(my_data, freq=FALSE, breaks=25,
      col="lightblue", border="white", 
      xlab="x", main=bquote(paste(chi^2,"分布(自由度",.(k),")"))) 
 curve(dchisq(x, k), # 理論曲線(確率密度)
@@ -136,15 +136,24 @@ rt(8, df=4) # 自由度4のt分布(8個)
 ### 練習問題 t分布
 mc <- 10000 # 実験回数を指定
 k <- 7
-myRandom <- function(){ 
+my_random <- function(){ 
   y <- rchisq(1, df=k) # 自由度kのカイ2乗分布
   ## y <- sum(rnorm(k)^2) # 正規乱数を用いてもよい
   z <- rnorm(1) # 標準正規乱数
   return(z/sqrt(y/k))}
-myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+my_data <- replicate(mc, my_random()) # Monte-Carlo実験
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-hist(myData, freq=FALSE, breaks=40,
+hist(my_data, freq=FALSE, breaks=40,
      col="lightblue", border="white",  
+     xlab="x", main=bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")")))
+curve(dt(x, df=k), # 確率密度関数(理論)
+      add=TRUE, col="red", lwd=3) 
+legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+       col=c("lightblue", "red"), lwd=3)
+## グラフの上下が切れてしまう場合は ylim で表示を調整することができる
+hist(my_data, freq=FALSE, breaks=40,
+     col="lightblue", border="white",
+     ylim=c(0,0.4), # 自動調整ではなく0.4まで表示する
      xlab="x", main=bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")")))
 curve(dt(x, df=k), # 確率密度関数(理論)
       add=TRUE, col="red", lwd=3) 
@@ -160,16 +169,29 @@ rf(10, df1=7, df2=12) # 自由度7,12のF分布(10個)
 mc <- 10000 # 実験回数を指定
 k1 <- 20
 k2 <- 10
-myRandom <- function(){ 
+my_random <- function(){ 
   y1 <- rchisq(1, df=k1) # 自由度20のカイ二乗分布
   y2 <- rchisq(1, df=k2) # 自由度10のカイ二乗分布
   ## y1 <- sum(rnorm(k1)^2) # 正規乱数を用いてもよい
   ## y2 <- sum(rnorm(k2)^2) 
   return((y1/k1)/(y2/k2))}
-myData <- replicate(mc, myRandom()) # Monte-Carlo実験
+my_data <- replicate(mc, my_random()) # Monte-Carlo実験
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-hist(myData, freq=FALSE, breaks=40,
+hist(my_data, freq=FALSE, breaks=40,
      col="lightblue", border="white",
+     xlab="x",
+     main=bquote(paste(frac(Y[1]/k[1],Y[2]/k[2]),
+                       " (",k[1]==.(k1),
+                       ", ",k[2]==.(k2),")"))) 
+curve(df(x, df1=k1, df2=k2), # 確率密度関数(理論)
+      add=TRUE, col="red", lwd=3) 
+legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
+       col=c("lightblue", "red"), lwd=3) 
+## グラフの一部に着目したい場合は xlim/ylim で表示を調整することができる
+hist(my_data, freq=FALSE, 
+     col="lightblue", border="white",
+     breaks=80, # ビンの数を多めに指定する
+     xlim=c(0,6), ylim=c(0,0.8), # 表示領域を指定する
      xlab="x",
      main=bquote(paste(frac(Y[1]/k[1],Y[2]/k[2]),
                        " (",k[1]==.(k1),
