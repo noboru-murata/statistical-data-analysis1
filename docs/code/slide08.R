@@ -128,7 +128,7 @@ curve(dchisq(x, k), # 理論曲線(確率密度)
 legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
        col=c("lightblue", "red"), lwd=3)
 
-### t-分布で用いた例
+### t 分布で用いた例
 
 rt(8, df=1) # 自由度1のt分布(8個)
 rt(8, df=4) # 自由度4のt分布(8個)
@@ -160,7 +160,7 @@ curve(dt(x, df=k), # 確率密度関数(理論)
 legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
        col=c("lightblue", "red"), lwd=3)
 
-### F-分布で用いた例
+### F 分布で用いた例
 
 rf(10, df1=4, df2=7) # 自由度4,7のF分布(10個)
 rf(10, df1=7, df2=12) # 自由度7,12のF分布(10個)

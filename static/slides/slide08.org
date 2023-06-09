@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-06-02 15:58:03 mura>
+# Time-stamp: <2023-06-09 15:09:30 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -19,7 +19,7 @@
   - Poisson 分布・幾何分布
 - 連続分布
   - 一様分布・正規分布
-  - ガンマ分布・\(t\)-分布・\(F\)-分布
+  - ガンマ分布・\(t\) 分布・\(F\) 分布
 
 #+begin_src R :eval no :exports none :tangle yes
   ### 第8講 練習問題解答例
@@ -871,7 +871,7 @@
     rexp(8, rate=0.5) # レート0.5の指数分布(8個)
   #+end_src
 
-** @@latex:@@\(\chi^2\)-分布の確率密度関数
+** @@latex:@@\(\chi^2\) 分布の確率密度関数
 - 自由度 \(k\) の \(\chi^2\) 分布 
   \(\chi^2(k)\) (\(k > 0\))
   #+begin_quote
@@ -887,13 +887,13 @@
   #+end_src
   #+end_quote
 
-** @@latex:@@\(\chi^2\)-分布の特徴付け
+** @@latex:@@\(\chi^2\) 分布の特徴付け
 - \(\chi^2\) は *カイ二乗* と読む
 - 平均, 分散はそれぞれ \(k\) , \(2k\) で与えられる
 - 標準正規分布に従う \(k\) 個の独立な確率変数の
   二乗和は自由度 \(k\) の \(\chi^2\) 分布に従う
 
-** @@latex:@@\(\chi^2\)-分布に従う乱数
+** @@latex:@@\(\chi^2\) 分布に従う乱数
 - 乱数の発生は関数 ~rchisq()~ を用いる
   #+begin_src R :tangle yes
     rchisq(8, df=1) # 自由度1のカイ二乗分布(8個)
@@ -933,12 +933,12 @@
 #+end_src
 
 
-* @@latex:@@\(t\)-分布
+* @@latex:@@\(t\) 分布
   #+begin_src R :exports none :tangle yes
-    ### t-分布で用いた例
+    ### t 分布で用いた例
   #+end_src
 
-** @@latex:@@\(t\)-分布の確率密度関数
+** @@latex:@@\(t\) 分布の確率密度関数
 - 自由度 \(\nu\) の(Studentの) \(t\) 分布
   \(t(\nu)\) (\(\nu > 0\))
 - 確率密度関数
@@ -952,9 +952,9 @@
     \end{equation}
   #+end_src
   #+end_quote
-  - *Student* は \(t\)-分布を導入した統計学者Gossetのペンネーム
+  - *Student* は \(t\) 分布を導入した統計学者Gossetのペンネーム
 
-** @@latex:@@\(t\)-分布の平均と分散
+** @@latex:@@\(t\) 分布の平均と分散
 - 平均
   #+begin_quote
   #+begin_src latex
@@ -974,7 +974,7 @@
   #+end_src
   #+end_quote
 
-** @@latex:@@\(t\)-分布の特徴付け 
+** @@latex:@@\(t\) 分布の特徴付け 
 - \(Z\) を標準正規分布に従う確率変数，
   \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
   \(Z,Y\) は独立であるとする．
@@ -986,9 +986,9 @@
     \end{equation}
   #+end_src
   #+end_quote
-  は自由度 \(k\) の \(t\)-分布に従う
+  は自由度 \(k\) の \(t\) 分布に従う
 
-** @@latex:@@\(t\)-分布に従う乱数
+** @@latex:@@\(t\) 分布に従う乱数
 - 乱数の発生は関数 ~rt()~ を用いる
   #+begin_src R :tangle yes
     rt(8, df=1) # 自由度1のt分布(8個)
@@ -1049,12 +1049,12 @@
 #+end_src
 
 
-* @@latex:@@\(F\)-分布
+* @@latex:@@\(F\) 分布
   #+begin_src R :exports none :tangle yes
-    ### F-分布で用いた例
+    ### F 分布で用いた例
   #+end_src
 
-** @@latex:@@\(F\)-分布の確率密度関数
+** @@latex:@@\(F\) 分布の確率密度関数
 - 自由度 \(\nu_{1},\nu_{2}\) の \(F\) 分布
   \(F(\nu_{1},\nu_{2})\) (\(\nu_{1} > 0, \nu_{2} > 0\))
 - 確率密度関数
@@ -1071,7 +1071,7 @@
   #+end_src
   #+end_quote
 
-** @@latex:@@\(F\)-分布の平均と分散
+** @@latex:@@\(F\) 分布の平均と分散
 - 平均
   #+begin_quote
   #+begin_src latex
@@ -1092,7 +1092,7 @@
   #+end_src
   #+end_quote
 
-** @@latex:@@\(F\)-分布の特徴付け
+** @@latex:@@\(F\) 分布の特徴付け
 - \(Y_{1},Y_{2}\) をそれぞれ自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う独立な
   確率変数とする．このとき, 確率変数
   #+begin_quote
@@ -1104,7 +1104,7 @@
   #+end_quote
   は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従う
 
-** @@latex:@@\(F\)-分布に従う乱数
+** @@latex:@@\(F\) 分布に従う乱数
 - 乱数の発生は関数 ~rf()~ を用いる
   #+begin_src R :tangle yes
     rf(10, df1=4, df2=7) # 自由度4,7のF分布(10個)

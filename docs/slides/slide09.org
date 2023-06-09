@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-05-12 16:48:50 mura>
+# Time-stamp: <2023-06-09 15:35:41 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -12,7 +12,7 @@
 # C-c '
 :END:
 
-* 講義の内容
+* 講義概要
 - 基本的な記述統計量
 - "モーメント"に基づく記述統計量
   - 歪度と尖度
@@ -52,7 +52,7 @@
 - 手に入るのは(少数の)サンプル(観測データ) \\
   (観測データを \(X_1,X_2,\dots,X_n\) で表す)
 - *推定* = 観測データから知りたい量を計算する方法
-- 真の値と観測データによる推定値には差がある *(誤差)* 
+- 真の値と観測データによる推定値には差 *(誤差)* がある 
 
 ** 独立同分布性
 - 統計解析における重要な仮定とその帰結 :
@@ -72,7 +72,7 @@
 
 ** 推定量の一致性
 - サンプル数が大きい場合に "合理的な" 推定量となる根拠の1つ
-- *(強)一致性* (consistency) :
+- *(強)一致性* (consistency) 
   #+begin_quote
   推定量がサンプル数
   \(n\to\infty\) のとき確率1で真の値に収束する性質
@@ -91,7 +91,7 @@
 
 ** 推定量の不偏性
 - サンプル数が小さい場合の推定量の良さに関する性質の1つ
-- *不偏性* (unbiasedness) : 
+- *不偏性* (unbiasedness) 
   #+begin_quote
   推定量 \(\hat{\theta}\)
   が不偏であるとは,
@@ -108,7 +108,7 @@
 
 * "モーメント"に基づく記述統計量
 ** 平均
-- *平均* (mean) :
+- *平均* (mean)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -117,7 +117,7 @@
   #+end_src
   #+end_quote
   - データの代表値を表す記述統計量
-- *標本平均* (sample mean) :
+- *標本平均* (sample mean)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -130,7 +130,7 @@
   #+end_quote
 
 ** 分散・標準偏差
-- *分散* (variance) :
+- *分散* (variance)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -139,7 +139,7 @@
   #+end_src
   #+end_quote
   - データのばらつきを表す記述統計量
-- *標本分散* (sample variance) :
+- *標本分散* (sample variance)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -208,7 +208,7 @@
 
 ** 標準化
 - 多次元データの分析のために単位や基準を揃える
-- データ \(X_{1},X_{2},\dotsc,X_{n}\) の *標準化* :
+- データ \(X_{1},X_{2},\dotsc,X_{n}\) の *標準化*
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -225,7 +225,7 @@
 ** 偏差値
 - 別の基準での標準化
   - 教育学や心理学では, 平均50, 標準偏差10が好まれる
-- 標本平均50, 標準偏差10に線形変換 :
+- 標本平均50, 標準偏差10に線形変換
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -265,7 +265,7 @@
   # #+begin_src R :eval no
   #   TW.data <- read.csv("data/tokyo_weather.csv") # 読み込み方の例
   # #+end_src
-  - 全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数366)
+  - 全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数365)
   - 毎月5日のデータのみを用いて各項目の平均・分散・標準偏差を求めよ．(データ数12)
   - 5の付く日(各月の5,15,25)のデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数36)
   - ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，
@@ -331,7 +331,7 @@
 * 歪度と尖度
 ** 歪度と尖度
 - 正規分布からのずれを調べるための統計量
-- 正規分布の特徴 : 
+- 正規分布の特徴 
   - 確率分布のうち最も基本的なもの *(中心極限定理)*
   - 平均と分散を決めると完全に決定される
 - 正規分布に従うデータでは標本平均と標本分散(不偏分散)を考えれば十分
@@ -339,7 +339,7 @@
 
 ** 歪度
 - 分布の非対称性を表す統計量
-- *歪度* (skewness) : 
+- *歪度* (skewness)
   #+begin_quote
   平均 \(\mu\) , 分散 \(\sigma^2\) で
   3次モーメントをもつ確率変数 \(X\) 
@@ -357,7 +357,7 @@
 
 ** 尖度
 - 平均の周囲の分布の尖り具合を表す統計量
-- *尖度* (kurtosis) :
+- *尖度* (kurtosis)
   #+begin_quote
   4次のモーメントをもつ確率変数 \(X\)
   #+begin_src latex
@@ -422,7 +422,7 @@
 
 ** 標本歪度と標本尖度
 - 観測データ \(X_{1},X_{2},\dotsc,X_{n}\) による推定
-- *標本歪度* (sample skewness):
+- *標本歪度* (sample skewness)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -430,7 +430,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- *標本尖度* (sample kurtosis):
+- *標本尖度* (sample kurtosis)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -474,7 +474,7 @@
   風速 (~wind~) 
   #+end_quote
   の項目について以下の問に答えよ．
-  - 全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数366)
+  - 全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数365)
   - 5のつく日のデータのみを用いて各項目の歪度と超過尖度を求めよ．(データ数36)
   - それぞれの値から正規分布から逸脱していると思われる項目はいずれか考察せよ．
   - 各データのヒストグラムを描き，データから計算される平均と分散を持つ正規分布と比較せよ．
@@ -515,7 +515,7 @@
 * 相関と共分散
 ** 共分散
 - 複数のデータ間の関係を知るための記述統計量
-- *共分散* (covariance) :
+- *共分散* (covariance) 
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -523,7 +523,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- *標本共分散* (sample covariance) : \\
+- *標本共分散* (sample covariance)
   #+begin_quote
   \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) に対して
   #+begin_src latex
@@ -537,7 +537,7 @@
 
 ** 相関
 - 複数のデータ間の正規化した記述統計量
-- *相関* (correlation) : 
+- *相関* (correlation) 
   #+begin_quote
   #+begin_src latex
     \begin{equation}
@@ -545,7 +545,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- *標本相関* (sample correlation) : \\
+- *標本相関* (sample correlation)
   #+begin_quote
   \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) に対して
   #+begin_src latex
@@ -627,7 +627,7 @@
     \end{equation}
   #+end_src
   #+end_quote
-- *中央値* もしくは *メディアン* (median) :
+- *中央値* もしくは *メディアン* (median)
   #+begin_quote
   データを昇順に並べ替えたとき中央にくる値
   - \(n\) が奇数の場合 : \(X_{((n+1)/2)}\)
@@ -637,7 +637,7 @@
 - データ中の *外れ値* (異常な値)の影響を受けにくい
 
 ** 分位点
-- \(100\alpha\) % *分位点* (percentile/quantile) :
+- \(100\alpha\) % *分位点* (percentile/quantile)
   #+begin_quote
   \(\alpha\in[0,1]\) に対して,
   その点以下のデータの個数が全体の約 \(100\alpha\) % になるような点
@@ -663,7 +663,7 @@
 
 ** 連続分布の分位点
 - 分位点は推定や検定において重要な役割を果たす
-- 連続分布の \(100\alpha\) % *分位点* :
+- 連続分布の \(100\alpha\) % *分位点*
   #+begin_quote
   \(0<\alpha<1\) に対して，その分布に従う確率変数を \(X\) としたとき，
   不等式
@@ -710,15 +710,15 @@
 
 ** ばらつきの指標
 - 分位点を利用したデータのばらつきの指標
-- *範囲* (range) :
+- *範囲* (range)
   #+begin_quote
   最大値と最小値の差 (外れ値の影響を大きく受ける)
   #+end_quote
-- *四分位範囲* (interquantile range) :
+- *四分位範囲* (interquantile range)
   #+begin_quote
   第3四分位点と第1四分位点の差
   #+end_quote
-- *中央絶対偏差* (median absolute deviation) :
+- *中央絶対偏差* (median absolute deviation)
   #+begin_quote
   \(X_1,X_2,\dots,X_n\) の中央値を \(m\) としたとき,
   \(|X_1-m|,|X_2-m|,\dots,|X_n-m|\) の中央値
@@ -727,7 +727,7 @@
 
 * "頻度"に基づく統計量
 ** 頻度に基づく統計量
-- *最頻値* もしくは *モード* (mode) :
+- *最頻値* もしくは *モード* (mode)
   #+begin_quote
   データの中で最も頻度が高く現れる値
   #+end_quote
@@ -753,7 +753,7 @@
   #+end_quote
   を用いて
   以下の問に答えよ．
-  - 全てのデータを用いて気温の四分位点を求めよ．(データ数366)
+  - 全てのデータを用いて気温の四分位点を求めよ．(データ数365)
   - 5の付く日(各月の5,15,25)の気温の四分位点を求めよ．(データ数36)
   - ランダムに選んだ36日分のデータで気温の四分位点がどのくらいばらつくか確認せよ．
   - 風向の最頻値を求めよ．
