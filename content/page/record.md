@@ -17,3 +17,4 @@ weight = 1016
 -   [第5講 (2023年5月19日)](https://u-tokyo-ac-jp.zoom.us/rec/share/iWWFc5pfvldIMNrE-9oK4JUjyAr7bFkbNisErqzirhs7cFkNHaNhogmyBRA_P-Oi.EaKwo_5nUwXXmPSX?startTime=1684482171000) (plotの説明の最初の30分ほどが欠落しています)
 -   [第6講 (2023年5月26日)](https://u-tokyo-ac-jp.zoom.us/rec/share/S_rSdTx_lN6DzzjI81-LFFOEcvb20svt-EB1-XZ76Bs3DiaBgv2FfNryV6p1WgVp.KEfuEnBRNBhUv2L7?startTime=1685086798000)
 -   [第7講 (2023年6月2日)](https://u-tokyo-ac-jp.zoom.us/rec/share/VMoWk8XAt_zRsLl4WBBSqC1QFbOPIRXMuO9M8zJFR7iFvcnYEA7WzTmh7v68AXZ9.Fge_yBuXSNCrGp9a?startTime=1685691408000)
+-   [第8講 (2023年6月9日)](https://u-tokyo-ac-jp.zoom.us/rec/share/pxlx5NGPNi2LpGwladYgUsmUblwD29tyIDiFIhKAgyoWgNzBsgN8I3kSDgekq3Ns.dEtk_Xli8H05xd7u?startTime=1686295967000)
