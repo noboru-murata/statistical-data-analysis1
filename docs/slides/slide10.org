@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-05-12 16:52:25 mura>
+# Time-stamp: <2023-06-16 15:26:38 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -478,12 +478,12 @@
 #+begin_src R :eval no :exports none :tangle yes
   ### 練習問題 ガンマ分布による風速データのモデル化
   ## データの取得
-  TW.data <- read.csv("data/tokyo_weather.csv")
-  ## 以下では関数 with を利用しているが，TW.data から風速を取り出しておいても良い
+  tw_data <- read.csv("data/tokyo_weather.csv")
+  ## 以下では関数 with を利用しているが，tw_data から風速を取り出しておいても良い
   
   ## ヒストグラムの描画
   if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-  with(TW.data, hist(wind, breaks=30, freq=FALSE, # 密度
+  with(tw_data, hist(wind, breaks=30, freq=FALSE, # 密度
                      col="skyblue", border="blue",
                      main="風速のヒストグラム", xlab="風速 [m/s]", ylab="密度"))
   
@@ -509,7 +509,7 @@
           return(coef(est)) # 推定値のみ返す
       }
   }
-  (theta <- with(TW.data, mle.gamma(wind))) # 最尤推定
+  (theta <- with(tw_data, mle.gamma(wind))) # 最尤推定
   
   ## 結果の重ね描き
   curve(dgamma(x, theta[1], theta[2]), # あてはめたガンマ分布の密度関数
@@ -989,27 +989,27 @@
 #+begin_src R :eval no :exports none :tangle yes
   ### 練習問題 日射量データの区間推定
   ## データの取得
-  TW.data <- read.csv("data/tokyo_weather.csv")
-  ## 以下では関数 with を利用しているが，TW.data から日射量を取り出しておいても良い
+  tw_data <- read.csv("data/tokyo_weather.csv")
+  ## 以下では関数 with を利用しているが，tw_data から日射量を取り出しておいても良い
   
   ## 全データによる平均値の計算
-  (mu <- with(TW.data, mean(solar))) # 真値
+  (mu <- with(tw_data, mean(solar))) # 真値
   
   ## 50点による90%信頼区間
   set.seed(1357) # 乱数のシード値の指定
   n <- 50
-  idx <- sample(nrow(TW.data),n) # データの抽出
-  (xbar <- with(TW.data[idx,], mean(solar))) # 標本平均
-  (s <- with(TW.data[idx,], sd(solar))) # 標本標準偏差
+  idx <- sample(nrow(tw_data),n) # データの抽出
+  (xbar <- with(tw_data[idx,], mean(solar))) # 標本平均
+  (s <- with(tw_data[idx,], sd(solar))) # 標本標準偏差
   z95 <- qnorm(0.95) # 標準正規分布の0.95分位点
   (ci <- c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
   
   ## 信頼区間の正答率の評価
   mc <- 100
   my_trial <- function(n){ # nを変えて実験できるように
-      idx <- sample(nrow(TW.data),n)
-      xbar <- with(TW.data[idx,], mean(solar)) # 標本平均
-      s <- with(TW.data[idx,], sd(solar)) # 標本標準偏差
+      idx <- sample(nrow(tw_data),n)
+      xbar <- with(tw_data[idx,], mean(solar)) # 標本平均
+      s <- with(tw_data[idx,], sd(solar)) # 標本標準偏差
       return(c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
   }
   my_ci <- as.data.frame(t( # confidence intervals

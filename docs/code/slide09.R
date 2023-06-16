@@ -77,7 +77,7 @@ for(inum in 1:3){
   foo <- tw_data[,my_items[inum]] # ベクトルにする必要がある
   ## foo <- subset(tw_data, select=my_items[inum], drop=TRUE) # でもよい
   if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-  hist(foo, breaks=30, freq=FALSE,
+  hist(foo, breaks=20, freq=FALSE,
        col="lightgreen", border="green",
        xlab=my_items[inum], main=my_items[inum])
   curve(dnorm(x,mean=mean(foo),sd=sd(foo)), # x は curve の変数
