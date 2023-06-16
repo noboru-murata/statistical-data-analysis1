@@ -92,9 +92,9 @@ my_data <- subset(tw_data,
                  select = c(temp,rain,solar,snow,wind,press,humid)) # 数値データ
 (my_cov <- cov(my_data))
 (my_cor <- cor(my_data))
-my_cor==min(my_cor) # 負の最大相関の位置を確認 (solar,humid)
+my_cor==min(my_cor) # 負の最大相関の位置を確認 (solar,rain)
 my_cor==max(my_cor-diag(diag(my_cor))) # 対角を除く最大相関の位置を確認 (temp,humid)
-abs(my_cor)==min(abs(my_cor)) # 最小相関の位置を確認 (snow,wind)
+abs(my_cor)==min(abs(my_cor)) # 最小相関の位置を確認 (snow,humid)
 ## 散布図の描画
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 pairs(~ solar + humid, data=my_data, col="blue")
