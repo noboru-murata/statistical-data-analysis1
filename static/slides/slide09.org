@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-06-16 15:40:19 mura>
+# Time-stamp: <2023-06-16 15:42:18 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -610,9 +610,9 @@
   abs(my_cor)==min(abs(my_cor)) # 最小相関の位置を確認 (snow,humid)
   ## 散布図の描画
   if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-  pairs(~ solar + humid, data=my_data, col="blue")
+  pairs(~ solar + rain, data=my_data, col="blue")
   pairs(~ temp + humid, data=my_data, col="red")
-  pairs(~ snow + wind, data=my_data, col="grey")
+  pairs(~ snow + humid, data=my_data, col="grey")
   pairs(my_data, col="orange") # 数値データを全部表示してみる
 #+end_src
    

@@ -97,9 +97,9 @@ my_cor==max(my_cor-diag(diag(my_cor))) # 対角を除く最大相関の位置を
 abs(my_cor)==min(abs(my_cor)) # 最小相関の位置を確認 (snow,humid)
 ## 散布図の描画
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-pairs(~ solar + humid, data=my_data, col="blue")
+pairs(~ solar + rain, data=my_data, col="blue")
 pairs(~ temp + humid, data=my_data, col="red")
-pairs(~ snow + wind, data=my_data, col="grey")
+pairs(~ snow + humid, data=my_data, col="grey")
 pairs(my_data, col="orange") # 数値データを全部表示してみる
 
 ### 練習問題 分位点と最頻値の計算
