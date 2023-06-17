@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-06-16 15:26:38 mura>
+# Time-stamp: <2023-06-16 16:46:38 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -12,7 +12,7 @@
 # C-c '
 :END:
 
-* 講義の内容
+* 講義概要
 - 点推定
   - 不偏推定量
   - Cramér-Raoの不等式
@@ -175,7 +175,7 @@
     #+end_src
     #+end_quote
   - Cramér-Rao下界 : \(\sigma^2/n\) 
-  - 標本平均 \(\bar{X}\) の分散: \(\sigma^2/n\) (=Cramér-Rao下界)
+  - 標本平均 \(\bar{X}\) の分散 : \(\sigma^2/n\) (=Cramér-Rao下界)
 - \(\bar{X}\) は \(\mu\) の一様最小分散不偏推定量
 
 
@@ -674,10 +674,10 @@
 ** 平均の区間推定 (分散未知)
 - \(\chi^2\)-分布の特徴付け
   - 標準正規分布に従う \(k\) 個の独立な確率変数の
-    二乗和は自由度 \(k\) の \(\chi^2\)-分布に従う
+    二乗和は自由度 \(k\) の \(\chi^2\) 分布に従う
 - \(t\)-分布の特徴付け
   - \(Z\) を標準正規分布に従う確率変数，
-    \(Y\) を自由度 \(k\) の \(\chi^2\)-分布に従う確率変数とし，
+    \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
     \(Z,Y\) は独立であるとする．
     このとき確率変数
     #+begin_quote
@@ -687,7 +687,7 @@
       \end{equation}
     #+end_src
     #+end_quote
-    は自由度 \(k\) の \(t\)-分布に従う
+    は自由度 \(k\) の \(t\) 分布に従う
 
 #+reveal: split
 - \(\chi^{2}\)-分布
@@ -698,7 +698,7 @@
        col=4, lwd=3,
        xlab="x",ylab="確率密度")
 #+end_src
-#+CAPTION: \(\chi^{2}\)-分布 (自由度\(3\))
+#+CAPTION: \(\chi^{2}\) 分布 (自由度\(3\))
 #+NAME: fig:pdf_chisq
 #+ATTR_HTML: :width 100%
 #+ATTR_LATEX: :width 0.6\linewidth
@@ -722,7 +722,7 @@
 #+end_rightcol
 
 #+reveal: split
-- \(t\)-分布
+- \(t\) 分布
 #+begin_leftcol
 #+begin_src R :file figs/pdf_t.png :exports results :results graphics
   par(family="HiraginoSans-W4") 
@@ -730,7 +730,7 @@
        col=5, lwd=3, ylim=c(0,0.4),
        xlab="x",ylab="確率密度")
 #+end_src
-#+CAPTION: \(t\)-分布 (自由度\(3\))
+#+CAPTION: \(t\) 分布 (自由度\(3\))
 #+NAME: fig:pdf_t
 #+ATTR_HTML: :width 100%
 #+ATTR_LATEX: :width 0.6\linewidth
@@ -750,7 +750,7 @@
     \end{equation}
   #+end_src
   - 備考 : 標準正規分布と
-    自由度 \(\nu\) の \(\chi^{2}\)-分布
+    自由度 \(\nu\) の \(\chi^{2}\) 分布
     に従う確率変数の比に関する分布で，
     区間推定や検定に利用される．
 #+end_quote
@@ -768,7 +768,7 @@
     \end{equation}
   #+end_src
   とすると， \(\bar{X}\) と \(s^2\) は独立であり，
-  確率変数 \((n{-}1)s^2/\sigma^2\) は自由度 \(n{-}1\) の \(\chi^2\)-分布に従う．
+  確率変数 \((n{-}1)s^2/\sigma^2\) は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う．
   #+end_quote
 
 #+reveal: split
@@ -787,7 +787,7 @@
       % {\sqrt{\frac{(n{-}1)s^2}{\sigma^2}\Big/(n{-}1)}}
     \end{equation}
   #+end_src
-  は自由度 \(n{-}1\) の \(t\)-分布に従う．
+  は自由度 \(n{-}1\) の \(t\) 分布に従う．
   #+end_quote
 
 #+reveal: split
@@ -934,7 +934,7 @@
     #+end_src
     #+end_quote
   - 実問題で平均はわからないが，分散はわかるという場合はあまりない
-  - \(t\)-分布は自由度 \(n\to\infty\) で標準正規分布になる
+  - \(t\) 分布は自由度 \(n\to\infty\) で標準正規分布になる
 
 #+reveal: split
 - 信頼区間の構成
