@@ -286,7 +286,7 @@
 :EXPORT_FILE_NAME: record
 :EXPORT_DATE: <2022-04-08 Fri>
 :END:
-<2023-06-17 Sat> 更新
+<2023-06-24 Sat> 更新
 
 講義の進捗に合わせて追加します．
 
