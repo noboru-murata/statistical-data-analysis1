@@ -4,15 +4,15 @@
 set.seed(1234) # 乱数のシード値の指定
 ## 平均値の推定を行う関数(標本平均，x1，最大最小)
 my_mean_est <- function(n, min, max){
-    x <- runif(n, min=min, max=max)
-    return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
+  x <- runif(n, min=min, max=max)
+  return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
 }
 ## 実験の設定 
 n <- 10 # 観測データのサンプル数
 mc <- 10000 # 実験回数
 a <- 0; b <- 50 # 一様乱数の区間
 my_data <- as.data.frame(t( # mc行 x 3種に変換(転置)
-    replicate(mc, my_mean_est(n, min=a, max=b))
+  replicate(mc, my_mean_est(n, min=a, max=b))
 ))
 ## replicate は3行 x mc 列の行列を返すことに注意
 ## ここでは data.frame として扱うために型を変換している
@@ -22,11 +22,26 @@ apply(my_data,2,var)  # 推定値の分散
 ## もう少し詳しくみてみる
 summary(my_data) # 四分位点を表示
 for(i in 1:3) { # それぞれのヒストグラムを書いてみる
-    hist(my_data[,i], breaks=40, 
-         xlim=c(a,b), ylim=c(0,2000), # 同じ大きさの図にする
-         col="pink", border="brown",
-         xlab="est", main=names(my_data)[i])
+  hist(my_data[,i], breaks=40, 
+       xlim=c(a,b), ylim=c(0,2000), # 同じ大きさの図にする
+       col="pink", border="brown",
+       xlab="est", main=names(my_data)[i])
 }
+## 補遺: 違う分布で試してみる 
+my_mean_est2 <- function(n){
+  x <- rt(n, df=2) # 自由度2のt分布 (裾が重く平均が推定しにくい分布)
+  return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
+}
+my_data <- as.data.frame(t(
+  replicate(mc, my_mean_est2(n))))
+for(i in 1:3) { # それぞれの分布を書いてみる
+  hist(my_data[,i],
+       breaks=40, freq=FALSE, # 密度表示
+       xlim=c(-10,10), # x軸を同じにする
+       col="pink", border="brown",
+       xlab="est", main=names(my_data)[i])
+}
+## この分布では中央値が良い推定となることがわかる
 
 ### 練習問題 ガンマ分布による風速データのモデル化
 ## データの取得

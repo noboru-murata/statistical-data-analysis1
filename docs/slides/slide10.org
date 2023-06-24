@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-06-16 16:46:38 mura>
+# Time-stamp: <2023-06-24 10:25:27 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -112,7 +112,8 @@
   - 標本平均 \(\bar{X}\) 
   - \(X_1,\dots,X_n\) のメディアン
     ( \(\mathcal{L}\) が \(x=\mu\) に関して対称な場合)
-  - \(X_1\) 
+  - \(X_1\)
+    (最初の観測データだけ信じる極端な例)
   #+end_quote
 - 不偏推定量の良さを評価する基準が必要
 - *一様最小分散不偏推定量* 
@@ -152,12 +153,12 @@
 
 ** 一様最小分散不偏推定量
 - 用語の定義
-  - 下界 \(1/(nI(\theta))\) : *Cramér-Rao 下界*
+  - 下界 \(1/nI(\theta)\) : *Cramér-Rao 下界*
   - \(I(\theta)\) : *Fisher 情報量*
 - 定理 (Cramér-Rao の不等式の系)
   #+begin_quote
   \(\theta\) の不偏推定量 \(\hat{\theta}\) で
-  分散が Cramér-Rao 下界 \(1/(nI(\theta))\) に一致するものが存在すれば，
+  分散が Cramér-Rao 下界 \(1/nI(\theta)\) に一致するものが存在すれば，
   それは一様最小分散不偏推定量となる．
   #+end_quote
 
@@ -206,15 +207,15 @@
   set.seed(1234) # 乱数のシード値の指定
   ## 平均値の推定を行う関数(標本平均，x1，最大最小)
   my_mean_est <- function(n, min, max){
-      x <- runif(n, min=min, max=max)
-      return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
+    x <- runif(n, min=min, max=max)
+    return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
   }
   ## 実験の設定 
   n <- 10 # 観測データのサンプル数
   mc <- 10000 # 実験回数
   a <- 0; b <- 50 # 一様乱数の区間
   my_data <- as.data.frame(t( # mc行 x 3種に変換(転置)
-      replicate(mc, my_mean_est(n, min=a, max=b))
+    replicate(mc, my_mean_est(n, min=a, max=b))
   ))
   ## replicate は3行 x mc 列の行列を返すことに注意
   ## ここでは data.frame として扱うために型を変換している
@@ -224,11 +225,26 @@
   ## もう少し詳しくみてみる
   summary(my_data) # 四分位点を表示
   for(i in 1:3) { # それぞれのヒストグラムを書いてみる
-      hist(my_data[,i], breaks=40, 
-           xlim=c(a,b), ylim=c(0,2000), # 同じ大きさの図にする
-           col="pink", border="brown",
-           xlab="est", main=names(my_data)[i])
+    hist(my_data[,i], breaks=40, 
+         xlim=c(a,b), ylim=c(0,2000), # 同じ大きさの図にする
+         col="pink", border="brown",
+         xlab="est", main=names(my_data)[i])
   }
+  ## 補遺: 違う分布で試してみる 
+  my_mean_est2 <- function(n){
+    x <- rt(n, df=2) # 自由度2のt分布 (裾が重く平均が推定しにくい分布)
+    return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
+  }
+  my_data <- as.data.frame(t(
+    replicate(mc, my_mean_est2(n))))
+  for(i in 1:3) { # それぞれの分布を書いてみる
+    hist(my_data[,i],
+         breaks=40, freq=FALSE, # 密度表示
+         xlim=c(-10,10), # x軸を同じにする
+         col="pink", border="brown",
+         xlab="est", main=names(my_data)[i])
+  }
+  ## この分布では中央値が良い推定となることがわかる
 #+end_src
 
 
@@ -429,7 +445,7 @@
   - \(\ell(\nu,\alpha)\) を最大化する \(\nu,\alpha\) は解析的に求まらないので実際の計算では数値的に求める
 
 #+reveal: split
-- Rでの計算例 [[color:green][(ガンマ分布の最尤推定量)]]
+- [[color:green][Rでの計算例]] (ガンマ分布の最尤推定量)
   #+begin_src R :eval no
     library("stats4") # 関数mleを利用するため
     ## 数値最適化のためには尤度関数を最初に評価する初期値が必要
@@ -638,6 +654,18 @@
   #+end_src
   は標準正規分布に従う．
   #+end_quote
+- 標準正規分布の \(\alpha\) 分位点
+  #+begin_quote
+  \(0<\alpha<1\) に対して，標準正規分布に従う確率変数を \(X\) としたとき，
+  #+begin_src latex
+    \begin{equation}
+      P(X\leq z_\alpha)=\alpha
+    \end{equation}
+  #+end_src
+  を満たす実数 \(z_{\alpha}\) のこと．
+  #+end_quote
+
+#+reveal: split
 - 標準化した確率変数の確率
   #+begin_quote
   \(z_{1{-}\alpha/2}\) を標準正規分布の
@@ -649,7 +677,8 @@
     \end{equation}
   #+end_src
   #+end_quote
-
+  - 区間の外側(正負両側にある)の確率が\(\alpha\)となる
+    
 #+reveal: split
 - 信頼区間の構成
   #+begin_quote
@@ -672,25 +701,27 @@
   #+end_quote
 
 ** 平均の区間推定 (分散未知)
-- \(\chi^2\)-分布の特徴付け
-  - 標準正規分布に従う \(k\) 個の独立な確率変数の
-    二乗和は自由度 \(k\) の \(\chi^2\) 分布に従う
-- \(t\)-分布の特徴付け
-  - \(Z\) を標準正規分布に従う確率変数，
-    \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
-    \(Z,Y\) は独立であるとする．
-    このとき確率変数
-    #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \frac{Z}{\sqrt{Y/k}}
-      \end{equation}
-    #+end_src
-    #+end_quote
-    は自由度 \(k\) の \(t\) 分布に従う
+- \(\chi^2\) 分布の特徴付け
+  #+begin_quote
+  標準正規分布に従う \(k\) 個の独立な確率変数の
+  二乗和は自由度 \(k\) の \(\chi^2\) 分布に従う
+  #+end_quote
+- \(t\) 分布の特徴付け
+  #+begin_quote
+  \(Z\) を標準正規分布に従う確率変数，
+  \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
+  \(Z,Y\) は独立であるとする．
+  このとき確率変数
+  #+begin_src latex
+    \begin{equation}
+      \frac{Z}{\sqrt{Y/k}}
+    \end{equation}
+  #+end_src
+  は自由度 \(k\) の \(t\) 分布に従う
+  #+end_quote
 
 #+reveal: split
-- \(\chi^{2}\)-分布
+- \(\chi^{2}\) 分布
 #+begin_leftcol
 #+begin_src R :file figs/pdf_chisq.png :exports results :results graphics
   par(family="HiraginoSans-W4") 
@@ -793,7 +824,7 @@
 #+reveal: split
 - 信頼区間の構成
   #+begin_quote
-  \(t_{1{-}\alpha/2}(n{-}1)\) を自由度 \(n{-}1\) の \(t\)-分布の
+  \(t_{1{-}\alpha/2}(n{-}1)\) を自由度 \(n{-}1\) の \(t\) 分布の
   \(1{-}\alpha/2\) 分位点とすれば
   #+begin_src latex
     \begin{equation}
@@ -815,12 +846,12 @@
 ** 分散の区間推定
 - 不偏分散の性質
   #+begin_quote
-  \((n{-}1)s^2/\sigma^2\) は自由度 \(n{-}1\) の \(\chi^2\)-分布に従う
+  \((n{-}1)s^2/\sigma^2\) は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う
   #+end_quote
 - 不偏分散の確率
   #+begin_quote
   \(\chi^2_{\alpha/2}(n{-}1)\) ,  \(\chi^2_{1{-}\alpha/2}(n{-}1)\) を
-  それぞれ自由度 \(n{-}1\) の \(\chi^2\)-分布の
+  それぞれ自由度 \(n{-}1\) の \(\chi^2\) 分布の
   \(\alpha/2, 1{-}\alpha/2\) 分位点とすれば
   #+begin_src latex
     \begin{equation}
@@ -830,6 +861,7 @@
     \end{equation}
   #+end_src
   #+end_quote
+  - 左右非対称なので，2つの分位点が必要となる
 
 #+reveal: split
 - 信頼区間の構成
