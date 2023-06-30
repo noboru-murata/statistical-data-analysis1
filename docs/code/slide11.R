@@ -51,8 +51,8 @@ x <- subset(tw_data, subset=month==6, select=temp, drop=TRUE)
 (chi2 <- (n-1)*var(x)/v0) # 検定統計量
 p0 <- pchisq(chi2, df=n-1)
 (p <- 2*min(p0,1-p0))
-## 分散が最も大きな9月を検定してみる
-x <- subset(tw_data, subset=month==9, select=temp, drop=TRUE)
+## 分散が小さな7月を検定してみる
+x <- subset(tw_data, subset=month==7, select=temp, drop=TRUE)
 (n <- length(x)) # データ数
 (chi2 <- (n-1)*var(x)/v0) # 検定統計量
 p0 <- pchisq(chi2, df=n-1)

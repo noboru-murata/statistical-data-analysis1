@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-06-27 17:28:41 mura>
+# Time-stamp: <2023-06-30 14:41:32 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -421,6 +421,59 @@
   #+end_quote
 - 対立仮説によって棄却域の形は変わりうる
 
+#+reveal: split
+#+begin_leftcol
+#+begin_src R :file figs/cr_two.png :exports results :results graphics
+  plot(function(x)dnorm(x,mean=0,sd=1), -4, 4,
+       col="blue", lwd=2, ann=FALSE, axes=FALSE)
+  abline(h=0, col=gray(0.9))
+  box()
+  d <- 0.02
+  z <- rbind(c(qnorm(0.025), -4), c(qnorm(0.975), 4))
+  
+  for (i in 1:nrow(z)) {
+      x <- seq(min(z[i,]), max(z[i,]), 0.1)
+      xx <- c(x,max(z[i,]), min(z[i,]))
+      yy <- c(dnorm(x), rep(0,2))
+      lines(c(z[i,1], z[i,1]), c(dnorm(z[i,1])+d, -d),
+            col="red", lty="solid", lwd=2)
+      polygon(xx, yy, col="pink")
+  }
+  axis(1, at=c(z[,1]), 
+       lab=c(expression(-Q[1-alpha/2],Q[1-alpha/2])))
+  title(main="two side", xlab="test statistics", ylab="density")
+#+end_src
+#+NAME: fig:cr_two
+#+ATTR_HTML: :width 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/cr_two.png]]
+#+end_leftcol
+#+begin_rightcol
+#+begin_src R :file figs/cr_one.png :exports results :results graphics
+  plot(function(x)dnorm(x,mean=0,sd=1), -4, 4,
+       col="blue", lwd=2, ann=FALSE, axes=FALSE)
+  abline(h=0, col=gray(0.9))
+  box()
+  d <- 0.02
+  z <- rbind(c(qnorm(0.95), 4))
+  for (i in 1:nrow(z)) {
+    x <- seq(min(z[i,]), max(z[i,]), 0.1)
+    xx <- c(x,max(z[i,]), min(z[i,]))
+    yy <- c(dnorm(x), rep(0,2))
+    lines(c(z[i,1], z[i,1]), c(dnorm(z[i,1])+d, -d),
+	  col="red", lty="solid", lwd=2)
+    polygon(xx, yy, col="pink")
+  }
+  axis(1, at=c(z[,1]), lab=c(expression(Q[1-alpha])))
+  title(main="one side", xlab="test statistics", ylab="density")
+#+end_src
+#+NAME: fig:cr_one
+#+ATTR_HTML: :width 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/cr_one.png]]
+#+end_rightcol
+
+  
 ** 平均の検定
 - 右片側検定
   #+begin_quote
@@ -542,56 +595,18 @@
 
 #+reveal: split
 #+begin_leftcol
-#+begin_src R :file figs/cr_two.png :exports results :results graphics
-  plot(function(x)dnorm(x,mean=0,sd=1), -4, 4,
-       col="blue", lwd=2, ann=FALSE, axes=FALSE)
-  abline(h=0, col=gray(0.9))
-  box()
-  d <- 0.02
-  z <- rbind(c(qnorm(0.025), -4), c(qnorm(0.975), 4))
-  
-  for (i in 1:nrow(z)) {
-      x <- seq(min(z[i,]), max(z[i,]), 0.1)
-      xx <- c(x,max(z[i,]), min(z[i,]))
-      yy <- c(dnorm(x), rep(0,2))
-      lines(c(z[i,1], z[i,1]), c(dnorm(z[i,1])+d, -d),
-            col="red", lty="solid", lwd=2)
-      polygon(xx, yy, col="pink")
-  }
-  axis(1, at=c(z[,1]), 
-       lab=c(expression(-z[1-alpha/2],z[1-alpha/2])))
-  title(main="two side", xlab="test statistics", ylab="density")
-#+end_src
-#+NAME: fig:cr_two
+#+NAME: fig:cr_two_again
 #+ATTR_HTML: :width 100%
 #+ATTR_LATEX: :width 0.6\linewidth
 [[file:figs/cr_two.png]]
 #+end_leftcol
 #+begin_rightcol
-#+begin_src R :file figs/cr_one.png :exports results :results graphics
-  plot(function(x)dnorm(x,mean=0,sd=1), -4, 4,
-       col="blue", lwd=2, ann=FALSE, axes=FALSE)
-  abline(h=0, col=gray(0.9))
-  box()
-  d <- 0.02
-  z <- rbind(c(qnorm(0.95), 4))
-  for (i in 1:nrow(z)) {
-    x <- seq(min(z[i,]), max(z[i,]), 0.1)
-    xx <- c(x,max(z[i,]), min(z[i,]))
-    yy <- c(dnorm(x), rep(0,2))
-    lines(c(z[i,1], z[i,1]), c(dnorm(z[i,1])+d, -d),
-	  col="red", lty="solid", lwd=2)
-    polygon(xx, yy, col="pink")
-  }
-  axis(1, at=c(z[,1]), lab=c(expression(z[1-alpha])))
-  title(main="one side", xlab="test statistics", ylab="density")
-#+end_src
-#+NAME: fig:cr_one
+#+NAME: fig:cr_one_again
 #+ATTR_HTML: :width 100%
 #+ATTR_LATEX: :width 0.6\linewidth
 [[file:figs/cr_one.png]]
 #+end_rightcol
-
+    
 ** R : \(t\) 検定の関数
 - 使い方
   #+begin_src R :eval no
@@ -900,8 +915,8 @@
   (chi2 <- (n-1)*var(x)/v0) # 検定統計量
   p0 <- pchisq(chi2, df=n-1)
   (p <- 2*min(p0,1-p0))
-  ## 分散が最も大きな9月を検定してみる
-  x <- subset(tw_data, subset=month==9, select=temp, drop=TRUE)
+  ## 分散が小さな7月を検定してみる
+  x <- subset(tw_data, subset=month==7, select=temp, drop=TRUE)
   (n <- length(x)) # データ数
   (chi2 <- (n-1)*var(x)/v0) # 検定統計量
   p0 <- pchisq(chi2, df=n-1)
