@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-06-30 14:41:32 mura>
+# Time-stamp: <2023-06-30 15:40:42 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -648,12 +648,34 @@
   sd0 <- 3
   mc <- 10000
   alpha <- 0.05
+
+  ## 検定統計量の分布を調べてみる
+  my_trial <- function(n){ 
+       result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
+       return(result$statistic)} # 検定統計量を取り出す
+  my_data <- replicate(mc, my_trial(n))
+  hist(my_data,breaks=40,freq=FALSE, # 密度表示にする
+       xlab="statistic") 
+  curve(dnorm,add=TRUE,col="red",lwd=2)
+  curve(dt(x,df=n-1),add=TRUE,col="blue",lwd=2)
+  ## 自由度 n-1 の t分布が良く当て嵌まることが確認できる
+
+  ## p 値の分布を見る
   my_trial <- function(n){ 
       result <- t.test(rnorm(n,mean=mu0,sd=sd0),mu=mu0)
-      return(result$p.value)}
+      return(result$p.value)} # p値を取り出す
   my_data <- replicate(mc, my_trial(n))
-  hist(my_data,xlab="p value") # p.valueの分布を見る
+  hist(my_data,xlab="p value") 
   table(my_data<alpha)/mc # alpha以下の結果の数を調べる=サイズ
+  ## p値は一様に分布し，有意水準と第一種の過誤の関係が確認できる
+
+  ## 帰無仮説が成り立たない場合の p 値の分布を見る
+  my_trial <- function(n){ 
+      result <- t.test(rnorm(n,mean=mu0+1,sd=sd0),mu=mu0)
+      return(result$p.value)} # p値を取り出す
+  my_data <- replicate(mc, my_trial(n))
+  hist(my_data,xlab="p value") 
+  ## p値は一様に分布しなくなることが確認できる
 #+end_src
 
 ** 練習問題

@@ -1,4 +1,4 @@
-### 第12回 練習問題解答例
+### 第12講 練習問題解答例
 
 ### 分散分析(一元配置)の Monte-Carlo 実験
 fact <- as.factor(rep(LETTERS[1:3],c(10,8,12))) # 因子
@@ -22,7 +22,7 @@ beeswarm(obs ~ fact, data=bar,
 anova(aov(obs ~ fact, data=bar))
 
 ## 実験
-myTrial <- function(h0=TRUE){
+my_trial <- function(h0=TRUE){
     if(h0) {
         tmp <- data.frame( # 帰無仮説が正しい場合
             obs=rnorm(length(fact),mean=3,sd=2), # 観測値
@@ -38,13 +38,13 @@ myTrial <- function(h0=TRUE){
     ## p-値を返す
 }
 ## 帰無仮説が正しい場合のF-値/p-値の分布 (一様分布になる)
-foo <- replicate(2000,myTrial())
+foo <- replicate(2000,my_trial())
 hist(unlist(foo["F value",]),
      xlab="F-value", main="H0 = TRUE")
 hist(unlist(foo["Pr(>F)",]),
      xlab="p-value", main="H0 = TRUE")
 ## 対立仮説が正しい場合のp-値の分布 (小さな値に偏る)
-bar <- replicate(2000,myTrial(h0=FALSE))
+bar <- replicate(2000,my_trial(h0=FALSE))
 hist(unlist(bar["F value",]),
      xlab="F-value", main="H0 = FALSE")
 hist(unlist(bar["Pr(>F)",]),
@@ -55,36 +55,36 @@ hist(unlist(bar["Pr(>F)",]),
 ### 練習問題 一元配置分散分析
 ## 気候データによる例
 ## 曜日ごとの気温に差があるか否かを分散分析
-TW.data <- read.csv("data/tokyo_weather.csv")
+tw_data <- read.csv("data/tokyo_weather.csv")
 ## 曜日の情報を付加
-days <- with(TW.data,
+days <- with(tw_data,
              as.Date(paste(year,month,day,sep="-"))) # 日付を作成
 wdays <- weekdays(days) # 各日付の曜日を計算
-TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
+tw_data <- cbind(tw_data, weekday=as.factor(wdays)) # 曜日因子を追加
 ## 箱ひげ図で可視化
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-boxplot(temp ~ weekday, data=TW.data, 
+boxplot(temp ~ weekday, data=tw_data, 
         col="lavender", main="曜日ごとの気温") 
-aggregate(temp ~ weekday, data=TW.data, FUN=mean)
-aggregate(temp ~ weekday, data=TW.data, FUN=var)
-aggregate(temp ~ weekday, data=TW.data, FUN=sd)
+aggregate(temp ~ weekday, data=tw_data, FUN=mean)
+aggregate(temp ~ weekday, data=tw_data, FUN=var)
+aggregate(temp ~ weekday, data=tw_data, FUN=sd)
 ## 曜日ごとの気温差に関する分散分析
-(myAov <- aov(temp ~ weekday, data=TW.data)) # aovによる分析
-summary(myAov) # 分散分析表の表示(棄却されない)
-anova(myAov)["weekday","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
-model.tables(myAov, type="means")   # 水準(曜日)ごとの平均値
-model.tables(myAov, type="effects") # 水準(曜日)ごとの効果
+(my_aov <- aov(temp ~ weekday, data=tw_data)) # aovによる分析
+summary(my_aov) # 分散分析表の表示(棄却されない)
+anova(my_aov)["weekday","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
+model.tables(my_aov, type="means")   # 水準(曜日)ごとの平均値
+model.tables(my_aov, type="effects") # 水準(曜日)ごとの効果
 ## 検定のみ実行する場合
-oneway.test(temp ~ weekday, data=TW.data, var.equal=TRUE) # 等分散での検定
-oneway.test(temp ~ weekday, data=TW.data) # Welchの近似法による検定
+oneway.test(temp ~ weekday, data=tw_data, var.equal=TRUE) # 等分散での検定
+oneway.test(temp ~ weekday, data=tw_data) # Welchの近似法による検定
 
 ## 参考: 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
-TW.data$month <- as.factor(TW.data$month) # 月を因子化
-boxplot(temp ~ month, data=TW.data, 
+tw_data$month <- as.factor(tw_data$month) # 月を因子化
+boxplot(temp ~ month, data=tw_data, 
         col="lavender", main="月ごとの気温") 
-(myAov <- aov(temp ~ month, data=TW.data)) # aovによる分析
-summary(myAov) # 分散分析表の表示(棄却される)
-anova(myAov)["month","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
+(my_aov <- aov(temp ~ month, data=tw_data)) # aovによる分析
+summary(my_aov) # 分散分析表の表示(棄却される)
+anova(my_aov)["month","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
 
 ### 練習問題 二元配置分散分析
 ## datarium::jobsatisfaction による例
@@ -108,8 +108,8 @@ legend("topleft",inset=0.05,
        lwd=3, cex=0.5,
        legend=c("school","college","university"))
 ## 二元配置分散分析
-(myAov <- aov(score ~ gender + education_level,
+(my_aov <- aov(score ~ gender + education_level,
               data=jobsatisfaction))
-summary(myAov)
-model.tables(myAov, type="means")  
-model.tables(myAov, type="effects")
+summary(my_aov)
+model.tables(my_aov, type="means")  
+model.tables(my_aov, type="effects")

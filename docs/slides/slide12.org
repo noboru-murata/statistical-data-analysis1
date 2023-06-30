@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-05-12 16:56:04 mura>
+# Time-stamp: <2023-06-30 15:12:21 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -12,7 +12,7 @@
 # C-c '
 :END:
 
-* 講義の内容
+* 講義概要
 - 分散分析とは
 - 一元配置
   - 一元配置のモデル
@@ -74,13 +74,14 @@
   # - \(Y_1,\dotsc,Y_n\) の不偏分散: \(s_2^2\)
   - このとき \(s_1^2,s_2^2\) は独立でそれぞれ
     - \((m{-}1)s_1^2/\sigma_1^2\)
-      は自由度 \(m{-}1\) の \(\chi^2\)-分布に従う
+      は自由度 \(m{-}1\) の \(\chi^2\) 分布に従う
     - \((n{-}1)s_2^2/\sigma_2^2\)
-      は自由度 \(n{-}1\) の \(\chi^2\)-分布に従う
-  - 検定統計量:
+      は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う
+  - *\(F\) 検定*
     #+begin_quote
     #+begin_src latex
       \begin{equation}
+        \text{検定統計量 : }
         F=\frac{s_1^2}{s_2^2}
         \left(
           =
@@ -91,8 +92,7 @@
       \end{equation}
     #+end_src
     #+end_quote
-  - 帰無分布は自由度 \(m{-}1,n{-}1\) の \(F\)-分布
-    (*\(F\)-検定*)
+    - 帰無分布は自由度 \(m{-}1,n{-}1\) の \(F\) 分布
 
 ** 両側検定の棄却域
 - 有意水準を選択 : \(\alpha\in(0,1)\)
@@ -306,17 +306,17 @@
   #+end_src
   #+end_quote
 
-** @@latex:@@\(p\)-値を用いる場合
-- \(p\)-値を計算 (右片側検定の場合の計算方法)
+** @@latex:@@\(p\) 値を用いる場合
+- \(p\) 値を計算 (右片側検定の場合の計算方法)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
-      \text{(\(p\)-値)}=\int_{F}^\infty f(x)dx
+      \text{(\(p\) 値)}=\int_{F}^\infty f(x)dx
     \end{equation}
   #+end_src
   #+end_quote
   - \(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の確率密度
-- \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却
+- \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 
 ** 分散分析表 (一元配置の場合)
 |--------+-----------+----------+------------------+----------+--------------------------------------+---|
@@ -393,11 +393,11 @@
   - 曜日ごとの気温の平均と分散を求めよ．
     #+begin_src R :eval no
       ## 週日を因子(factor)とするには例えば以下のような項目を加えればよい
-      TW.data <- read.csv("data/tokyo_weather.csv")
-      days <- with(TW.data, # 日付を取り出して整形する
+      tw_data <- read.csv("data/tokyo_weather.csv")
+      days <- with(tw_data, # 日付を取り出して整形する
                    as.Date(paste(year,month,day,sep="-"))) 
       wdays <- weekdays(days) # 各日付の曜日を計算
-      TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
+      tw_data <- cbind(tw_data, weekday=as.factor(wdays)) # 曜日因子を追加
     #+end_src
   - 曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．
 
@@ -459,34 +459,34 @@
   ### 練習問題 一元配置分散分析
   ## 気候データによる例
   ## 曜日ごとの気温に差があるか否かを分散分析
-  TW.data <- read.csv("data/tokyo_weather.csv")
+  tw_data <- read.csv("data/tokyo_weather.csv")
   ## 曜日の情報を付加
-  days <- with(TW.data,
+  days <- with(tw_data,
                as.Date(paste(year,month,day,sep="-"))) # 日付を作成
   wdays <- weekdays(days) # 各日付の曜日を計算
-  TW.data <- cbind(TW.data, weekday=as.factor(wdays)) # 曜日因子を追加
+  tw_data <- cbind(tw_data, weekday=as.factor(wdays)) # 曜日因子を追加
   ## 箱ひげ図で可視化
   if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-  boxplot(temp ~ weekday, data=TW.data, 
+  boxplot(temp ~ weekday, data=tw_data, 
           col="lavender", main="曜日ごとの気温") 
-  aggregate(temp ~ weekday, data=TW.data, FUN=mean)
-  aggregate(temp ~ weekday, data=TW.data, FUN=var)
-  aggregate(temp ~ weekday, data=TW.data, FUN=sd)
+  aggregate(temp ~ weekday, data=tw_data, FUN=mean)
+  aggregate(temp ~ weekday, data=tw_data, FUN=var)
+  aggregate(temp ~ weekday, data=tw_data, FUN=sd)
   ## 曜日ごとの気温差に関する分散分析
-  (my_aov <- aov(temp ~ weekday, data=TW.data)) # aovによる分析
+  (my_aov <- aov(temp ~ weekday, data=tw_data)) # aovによる分析
   summary(my_aov) # 分散分析表の表示(棄却されない)
   anova(my_aov)["weekday","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
   model.tables(my_aov, type="means")   # 水準(曜日)ごとの平均値
   model.tables(my_aov, type="effects") # 水準(曜日)ごとの効果
   ## 検定のみ実行する場合
-  oneway.test(temp ~ weekday, data=TW.data, var.equal=TRUE) # 等分散での検定
-  oneway.test(temp ~ weekday, data=TW.data) # Welchの近似法による検定
+  oneway.test(temp ~ weekday, data=tw_data, var.equal=TRUE) # 等分散での検定
+  oneway.test(temp ~ weekday, data=tw_data) # Welchの近似法による検定
   
   ## 参考: 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
-  TW.data$month <- as.factor(TW.data$month) # 月を因子化
-  boxplot(temp ~ month, data=TW.data, 
+  tw_data$month <- as.factor(tw_data$month) # 月を因子化
+  boxplot(temp ~ month, data=tw_data, 
           col="lavender", main="月ごとの気温") 
-  (my_aov <- aov(temp ~ month, data=TW.data)) # aovによる分析
+  (my_aov <- aov(temp ~ month, data=tw_data)) # aovによる分析
   summary(my_aov) # 分散分析表の表示(棄却される)
   anova(my_aov)["month","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
 #+end_src
@@ -625,7 +625,7 @@
 - 帰無仮説 \(H_0\) が正しい場合
   - 変動 \(SS_A,SS_E\) はともに観測誤差のみが原因で生じる
   - 自由度を除けば本質的な違いはない
-  - \(SS_A/(a{-}1)\), \(SS_E/\{(a{-}1)(b{-}1)\}\) は \(\sigma^2\) の不偏推定量
+  - \(SS_A/(a{-}1)\), \(SS_E/(a{-}1)(b{-}1)\) は \(\sigma^2\) の不偏推定量
 
 #+reveal: split
 - 変動の分解
@@ -648,7 +648,7 @@
   #+begin_quote
   #+begin_src latex
     \begin{equation}
-      F_A=\frac{SS_A/(a{-}1)}{SS_E/\{(a{-}1)(b{-}1)\}}
+      F_A=\frac{SS_A/(a{-}1)}{SS_E/(a{-}1)(b{-}1)}
     \end{equation}
   #+end_src
   #+end_quote
@@ -692,17 +692,17 @@
   #+end_src
   #+end_quote
 
-** @@latex:@@\(p\)-値を用いる場合
-- \(p\)-値を計算 (右片側検定の場合の計算方法)
+** @@latex:@@\(p\) 値を用いる場合
+- \(p\) 値を計算 (右片側検定の場合の計算方法)
   #+begin_quote
   #+begin_src latex
     \begin{equation}
-      \text{(\(p\)-値)}=\int_{F_A}^\infty f(x)dx
+      \text{(\(p\) 値)}=\int_{F_A}^\infty f(x)dx
     \end{equation}
   #+end_src
   #+end_quote
   - \(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度
-- \(p\)-値が \(\alpha\) 未満なら帰無仮説を棄却
+- \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 
 ** 分散分析表 (二元配置の場合)
 |------------------+--------------------+----------+----------------------------------------------+----------------+-------------------------------------------|
