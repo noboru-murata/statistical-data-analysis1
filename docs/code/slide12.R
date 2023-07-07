@@ -35,15 +35,15 @@ my_trial <- function(h0=TRUE){
         )
     }
     return(anova(aov(obs ~ fact, data=tmp))["fact",c("F value","Pr(>F)"),drop=TRUE])
-    ## p-値を返す
+    ## p値を返す
 }
-## 帰無仮説が正しい場合のF-値/p-値の分布 (一様分布になる)
+## 帰無仮説が正しい場合のF値/p値の分布 (一様分布になる)
 foo <- replicate(2000,my_trial())
 hist(unlist(foo["F value",]),
      xlab="F-value", main="H0 = TRUE")
 hist(unlist(foo["Pr(>F)",]),
      xlab="p-value", main="H0 = TRUE")
-## 対立仮説が正しい場合のp-値の分布 (小さな値に偏る)
+## 対立仮説が正しい場合のp値の分布 (小さな値に偏る)
 bar <- replicate(2000,my_trial(h0=FALSE))
 hist(unlist(bar["F value",]),
      xlab="F-value", main="H0 = FALSE")

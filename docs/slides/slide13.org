@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-05-12 17:12:48 mura>
+# Time-stamp: <2023-07-07 15:23:23 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -12,7 +12,7 @@
 # C-c '
 :END:
 
-* 講義の内容
+* 講義概要
 - 回帰分析
 - 回帰係数の推定
   - 点推定
@@ -460,7 +460,7 @@
 - 棄却域による検定
   #+begin_quote
   有意水準を \(\gamma\in(0,1)\) とし，
-  \(\hat{\beta}\) の *\(t\)-値* が以下の場合には帰無仮説を棄却
+  \(\hat{\beta}\) の *\(t\) 値* が以下の場合には帰無仮説を棄却
   #+begin_src latex
     \begin{equation}
       |t| > t_{1-\gamma/2}(n{-}2)
@@ -469,11 +469,11 @@
   #+end_quote
 - \(p\) 値による検定
   #+begin_quote
-  以下で定義される \(\hat{\beta}\) の *\(p\)-値* が
+  以下で定義される \(\hat{\beta}\) の *\(p\) 値* が
   \(\gamma\) 未満の場合に帰無仮説を棄却
   #+begin_src latex
     \begin{equation}
-      \text{(\(p\)-値)}=2\int_{|t|}^\infty f(x)dx
+      \text{(\(p\) 値)}=2\int_{|t|}^\infty f(x)dx
     \end{equation}
   #+end_src
   #+end_quote
@@ -488,8 +488,8 @@
     ## object: 関数 lm で推定したモデル
   #+end_src
 - 出力 (リスト名 $"名前" で参照可能)
-  - ~coefficients~ : 係数と \(t\)-値
-  - ~fstatistics~ : \(F\)-値 (モデルの評価)
+  - ~coefficients~ : 係数と \(t\) 値
+  - ~fstatistics~ : \(F\) 値 (モデルの評価)
 
 
 * 演習
