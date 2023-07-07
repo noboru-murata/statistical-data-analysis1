@@ -60,7 +60,12 @@ tw_data <- read.csv("data/tokyo_weather.csv")
 days <- with(tw_data,
              as.Date(paste(year,month,day,sep="-"))) # 日付を作成
 wdays <- weekdays(days) # 各日付の曜日を計算
-tw_data <- cbind(tw_data, weekday=as.factor(wdays)) # 曜日因子を追加
+idx <- min(which(wdays=="Sunday")) # 最初の日曜を抽出
+tw_data <- cbind(tw_data,
+                 weekday=factor(wdays, # 曜日因子を追加
+                                levels=wdays[0:6+idx])) # 日曜から順に
+## 上記は基本関数のみを利用して記述しているが
+## 曜日の因子化などは package::lubridate に含まれる関数などを使っても良い
 ## 箱ひげ図で可視化
 if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
 boxplot(temp ~ weekday, data=tw_data, 
@@ -75,8 +80,10 @@ anova(my_aov)["weekday","Pr(>F)"] # p値の取得 (行・列の番号で指定�
 model.tables(my_aov, type="means")   # 水準(曜日)ごとの平均値
 model.tables(my_aov, type="effects") # 水準(曜日)ごとの効果
 ## 検定のみ実行する場合
-oneway.test(temp ~ weekday, data=tw_data, var.equal=TRUE) # 等分散での検定
-oneway.test(temp ~ weekday, data=tw_data) # Welchの近似法による検定
+## 級内の分散が等しいことを仮定
+oneway.test(temp ~ weekday, data=tw_data, var.equal=TRUE) 
+## 級内の分散が等しいことが仮定できない場合はWelchの近似法による検定が行われる
+oneway.test(temp ~ weekday, data=tw_data) # 
 
 ## 参考: 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
 tw_data$month <- as.factor(tw_data$month) # 月を因子化
