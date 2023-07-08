@@ -6,7 +6,7 @@ draft = false
 weight = 1016
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-07-07 Fri&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-07-08 Sat&gt; </span></span> 更新
 
 講義の進捗に合わせて追加します．
 
@@ -21,3 +21,4 @@ weight = 1016
 -   [第9講 (2023年6月16日)](https://u-tokyo-ac-jp.zoom.us/rec/share/AJdn2_vLdQG5b406NConkrG5pq9rlgnxWgN_YAmdFls3LYsVCiQOfr5q8XxYgK_U.MX7MSz4sxYHPHomJ?startTime=1686900866000)
 -   [第10講 (2023年6月23日)](https://u-tokyo-ac-jp.zoom.us/rec/share/IKset5KrJuRNTxQodb4ApxPso9lHVfQdw12luNYBNpKITcAI7we-jHb6FznNWyMe.wKL1oAY4cWL2SoAn?startTime=1687506914000)
 -   [第11講 (2023年6月30日)](https://u-tokyo-ac-jp.zoom.us/rec/share/JLIJIAh1b-MVblR08ec3wlrHCPSlFcmf7OHwDzEdf29qOssXO2LDXolhAlCzZ_E-.R738TpM-SZ_6YGqA?startTime=1688109943000)
+-   [第12講 (2023年7月7日)](https://u-tokyo-ac-jp.zoom.us/rec/share/gTynRS74BuR8K5hL4zng5FcRQgjGGihY8R3w9RzKBR4iJ9xgcwvdWsf3OsyqHngw.mYtGHfQ0mEbMGYYV?startTime=1688714707000)
