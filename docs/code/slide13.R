@@ -116,3 +116,125 @@ abline(reg=my_model4, col="red", lwd=2)
 summary(my_model4)
 ## 夏場は雨が降ると気温が下がる傾向が有意にあることが読み取れる
 ## 決定係数が低いのはそもそも気温のばらつきが大きいことに起因すると考えられる
+
+### 補遺
+### ggplot2 を用いた線形回帰分析(単回帰)の例
+### - Brain and Body Weights for 28 Species
+
+## パッケージの読み込み
+require(MASS) 
+require(tidyverse) 
+require(ggfortify)
+
+## データの読み込み ("MASS::Animals"を用いる)
+data(Animals)
+## 以下 "Animals" で参照可能
+
+## データの内容を確認
+help(Animals)  # 内容の詳細を表示 
+print(Animals) # データの表示
+
+## データのプロット (normal plot)
+ggplot(Animals, # 用いるdata の指定
+       aes(body, brain)) + # x軸，y軸に用いる列の指定
+    geom_point(colour="royalblue") + # 点の追加
+    labs(title="Brain and Body Weights (normal plot)",
+         x="body [kg]", y="brain [g]") # タイトルと軸名の追加
+
+## データのプロット (log plot)
+ggplot(Animals,
+       aes(body, brain)) +
+    scale_x_log10() + scale_y_log10() + # log-log plot を指定
+    geom_point(colour="royalblue") +
+    labs(title="Brain and Body Weights (log-log plot)",
+         x="body [kg]", y="brain [g]")
+
+## データの分布から両対数変換が分析においては適切であることがわかる
+
+## 回帰分析 (単回帰)
+model <- lm(log(brain) ~ log(body), # 対数変換した変数で線形回帰
+            data=Animals)
+summary(model) # 分析結果のまとめを表示
+
+## あてはめ値を用いた回帰式の表示
+ggplot(Animals,
+       aes(body, brain)) + 
+    scale_x_log10() + scale_y_log10() + # log-log plot
+    geom_line(aes(y=exp(predict(model,newdata=Animals))), 
+              color="dodgerblue", lwd=1.2) +
+    geom_text(size=3, label=rownames(Animals)) + # 各点の名前を追加
+    labs(title="Brain and Body Weights",
+         x="body [kg]", y="brain [g]")
+
+## ggplot の機能を用いた信頼区間付きでの回帰式の表示
+ggplot(Animals,
+       aes(body, brain)) + 
+    scale_x_log10() + scale_y_log10() + # log-log plot
+    geom_smooth(method='lm', formula=y ~ x, # 95%信頼区間付 (不要ならse=FALSE)
+                color="dodgerblue", lwd=1.2) + 
+    geom_text(size=3, label=rownames(Animals)) + # 各点の名前を追加
+    labs(title="Brain and Body Weights",
+         x="body [kg]", y="brain [g]")
+
+## 信頼区間・予測区間の推定
+yc <- exp(predict(model, 
+                  interval="confidence", # 信頼区間を指定
+                  newdata=Animals))
+## predict は newdata で指定されたデータの fit, lwr, upr を返す
+colnames(yc) <- paste("c",colnames(yc),sep=".")
+## 信頼区間であることを明示するために列名に "c." を追加
+yp <- exp(predict(model, 
+                  interval="prediction", # 予測区間
+                  newdata=Animals))
+colnames(yp) <- paste("p",colnames(yp),sep=".")
+## 予測区間についても同様に "p.c" を追加
+
+## 区間推定の結果を含めた data.frame を作成
+my_data <- cbind(Animals, yc, yp)
+
+## 回帰式および信頼区間・予測区間の表示
+ggplot(my_data,
+       aes(body, brain)) + 
+    scale_x_log10() + scale_y_log10() + # log-log plot
+    geom_line(aes(y=c.fit), # あてはめ値を用いて回帰直線
+              color="dodgerblue", lwd=1.2) +
+    geom_ribbon(aes(ymin=c.lwr,ymax=c.upr), # 信頼区間
+                fill="blue", alpha=0.2)+
+    geom_ribbon(aes(ymin=p.lwr,ymax=p.upr), # 予測区間
+                fill="blue", alpha=0.1)+
+    geom_text(size=3, label=rownames(my_data)) + # 各点の名前を追加
+    labs(title="Brain and Body Weights",
+         x="body [kg]", y="brain [g]")
+
+## 診断プロット
+autoplot(model, colour="royalblue",
+         smooth.colour="gray50", smooth.linetype="dashed",
+         ad.colour="blue",
+         label.size=3, label.n=5, label.colour="red")
+
+## 外れ値を除いた回帰分析
+idx <- c(6,16,26) # 外れ値のindex
+model <- lm(log(brain) ~ log(body), data=Animals, subset=-idx)
+summary(model)
+
+## 区間推定
+yc <- exp(predict(model, newdata=Animals, interval="confidence"))
+colnames(yc) <- paste("c",colnames(yc),sep=".")
+yp <- exp(predict(model, newdata=Animals, interval="prediction"))
+colnames(yp) <- paste("p",colnames(yp),sep=".")
+my_data <- cbind(Animals, yc, yp)
+
+## 回帰式および信頼区間・予測区間の表示
+ggplot(my_data, aes(body, brain)) +
+    scale_x_log10() + scale_y_log10() +
+    geom_line(aes(y=c.fit), color="royalblue", lwd=1.2) +
+    geom_ribbon(aes(ymin=c.lwr,ymax=c.upr), fill="blue", alpha=0.2)+
+    geom_ribbon(aes(ymin=p.lwr,ymax=p.upr), fill="blue", alpha=0.1)+
+    geom_text(size=3, label=rownames(my_data)) + 
+    labs(title="Brain and Body Weights", x="body [kg]", y="brain [g]")
+
+## 診断プロット
+autoplot(model, colour="royalblue",
+         smooth.colour="gray50", smooth.linetype="dashed",
+         ad.colour="blue",
+         label.size=3, label.n=5, label.colour="red")
