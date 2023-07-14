@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-07-14 16:05:01 mura>
+# Time-stamp: <2023-07-14 18:40:37 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -306,8 +306,8 @@
     \begin{align}
       &\mathbb{E}[\hat{\alpha}]=\alpha,
       &&\mathbb{E}[\hat{\beta}]=\beta,\\
-      &\mathrm{Var}(\hat{\alpha})=\frac{\sigma^2\sum_{i=1}^{n}X_i^2}{n\sum_i(X_i-\bar{X})^2},
-      &&\mathrm{Var}(\hat{\beta})=\frac{\sigma^2}{n\sum_{i=1}^{n}(X_i-\bar{X})^2}
+      &\mathrm{Var}(\hat{\alpha})=\frac{\sigma^2\sum_{i=1}^{n}X_i^2}{n_{i=1}^{n}(X_i-\bar{X})^2},
+      &&\mathrm{Var}(\hat{\beta})=\frac{\sigma^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}
     \end{align}
   #+end_src
   #+end_quote
