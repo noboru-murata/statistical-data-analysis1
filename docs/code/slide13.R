@@ -1,5 +1,52 @@
 ### 第13講 練習問題解答例
 
+### 回帰分析の Monte-Carlo 実験
+## 人工データによる回帰モデルの推定
+alpha <- 2
+beta <- 3
+n <- 20
+sigma <- 0.3
+x <- runif(n)
+epsilon <- rnorm(n,sd=sigma)
+y <- alpha + beta * x + epsilon
+plot(x,y, type="p")
+my_data <- data.frame(x=x,y=y)
+est <- lm(y ~ x, data=my_data)
+summary(est)
+abline(coef=c(alpha,beta),col="red")
+abline(reg=est,col="blue")
+
+## 実験
+my_trial <- function(){
+  x <- runif(n)
+  epsilon <- rnorm(n,sd=sigma)
+  y <- alpha + beta * x + epsilon
+  est <- lm(y ~ x) 
+  return(coef(est))
+}
+foo <- replicate(2000,my_trial())
+## 推定値の分布
+if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
+hist(foo[1,],
+     breaks=30, freq=FALSE,
+     col="pink",
+     xlab=expression(hat(alpha)), main="切片の分布")
+abline(v=alpha,col="orange",lwd=2)
+hist(foo[2,],
+     breaks=30, freq=FALSE,
+     col="palegreen",
+     xlab=expression(hat(beta)), main="傾きの分布")
+abline(v=beta,col="darkgreen",lwd=2)
+
+## 推定された回帰式のばらつきの表示
+plot(x,y, type="n",
+     main="推定された回帰式のばらつき") # 表示するための適当な領域を指定
+for(i in seq(1,ncol(foo),by=10)) { # 推定された回帰式を間引いて表示
+  abline(coef=foo[,i],col="gray90")
+}
+abline(coef=c(alpha,beta),col="red")
+## 同じ生成モデルでも，生成されたデータによって推定結果がばらつくことがわかる
+
 ### 練習問題 回帰モデルの点推定
 ## 気候データによる例
 tw_data <- read.csv("data/tokyo_weather.csv")
