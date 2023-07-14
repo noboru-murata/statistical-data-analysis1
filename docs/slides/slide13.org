@@ -3,7 +3,7 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-07-14 18:40:37 mura>
+# Time-stamp: <2023-07-14 22:52:25 mura>
 :REVEAL:
 #+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
@@ -225,9 +225,8 @@
 
     ## 実験
     my_trial <- function(){
-      x <- runif(n)
       epsilon <- rnorm(n,sd=sigma)
-      y <- alpha + beta * x + epsilon
+      y <- alpha + beta * x + epsilon # 説明変数は固定しておく
       est <- lm(y ~ x) 
       return(coef(est))
     }

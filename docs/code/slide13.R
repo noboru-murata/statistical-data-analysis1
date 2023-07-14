@@ -18,9 +18,8 @@ abline(reg=est,col="blue")
 
 ## 実験
 my_trial <- function(){
-  x <- runif(n)
   epsilon <- rnorm(n,sd=sigma)
-  y <- alpha + beta * x + epsilon
+  y <- alpha + beta * x + epsilon # 説明変数は固定しておく
   est <- lm(y ~ x) 
   return(coef(est))
 }
