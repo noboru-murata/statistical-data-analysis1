@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>R および RStudio の導入方法</title>
+<title>R および RStudio の導入</title>
 <meta name="author" content="村田 昇"/>
 <style type="text/css">
 .underline { text-decoration: underline; }
@@ -30,7 +30,7 @@
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
 <div class="talk-title">
-    <h1 class="no-toc-progress">R および RStudio の導入方法</h1>
+    <h1 class="no-toc-progress">R および RStudio の導入</h1>
 </div>
 <div class="talk-subtitle">
     <p>R 環境の構築</p>
@@ -44,38 +44,67 @@
 </div>
 
 </section>
-
 <section>
-<section id="slide-orgabdc90f">
-<h2 id="orgabdc90f">Rのインストール手順</h2>
-<div class="outline-text-2" id="text-orgabdc90f">
-</div>
-</section>
-<section id="slide-org5006123">
-<h3 id="org5006123">準備</h3>
+<section id="slide-org66aaa65">
+<h2 id="org66aaa65">準備</h2>
 <ol>
-<li><span class="underline">R: The R project for Statistical Computing</span>
+<li><span class="underline">DOWNLOAD RStudio Desktop</span>
 にアクセス
 <ul>
-<li><a href="http://www.r-project.org/">http://www.r-project.org/</a> を直接入力</li>
-<li>または <span style="color:orange;">&ldquo;r install&rdquo;</span> などで検索</li>
+<li><a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a></li>
+<li><b>&ldquo;rstudio install&rdquo;</b> などで検索</li>
 
 </ul></li>
-<li><span class="underline">download R</span>
-というリンクをクリック</li>
-<li>CRANのミラーサイトを選ぶ:
+<li><span class="underline">1: Install R</span> 
+の下の
+<span class="underline">DOWNLOAD AND INSTALL R</span>
+を選択 
 <ul>
-<li>どれでも利用可だが <span style="color:orange;">&ldquo;Japan&rdquo; のいずれか</span> を選ぶと良い</li>
+<li>Rのインストールへ</li>
+
+</ul></li>
+<li><span class="underline">2: Install RStudio</span>
+の下の
+<span class="underline">DOWNLOAD RSTUDIO DESKTOP FOR XXX</span>
+の XXX を確認
+<ul>
+<li>RStudioのインストールへ</li>
+
+</ul></li>
+
+</ol>
+<div class="slide-footer"><br></div>
+</section>
+</section>
+<section>
+<section id="slide-orgd97aa8b">
+<h2 id="orgd97aa8b">Rのインストール</h2>
+<div class="outline-text-2" id="text-orgd97aa8b">
+</div>
+</section>
+<section id="slide-org821e71e">
+<h3 id="org821e71e">The Comprehensive R Archive Network</h3>
+<ol>
+<li>Rの配布元
+<ul>
+<li><span class="underline">1: Install R</span> からここに来ているはず</li>
+<li><a href="http://www.r-project.org/">http://www.r-project.org/</a> から辿っても良い</li>
+<li>または <b>&ldquo;r install&rdquo;</b> などで検索しても良い</li>
+
+</ul></li>
+<li>CRANのミラーサイトを選ぶ (左メニューの <b>Mirros</b>)
+<ul>
+<li>どれでも利用可だが <b>&ldquo;Japan&rdquo; のいずれか</b> を選ぶと良い</li>
+<li>rstudio.com のミラーサイトのままでも良い</li>
 <li>OSごとにインストール方法が異なるので注意</li>
 
 </ul></li>
 
 </ol>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org63ac36b">
-<h3 id="org63ac36b">Windowsの場合</h3>
+<section id="slide-org776099e">
+<h3 id="org776099e">Windowsの場合</h3>
 <ol>
 <li><span class="underline">Download R for Windows</span>
 をクリック</li>
@@ -88,10 +117,9 @@
 
 </ol>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org095b761">
-<h3 id="org095b761">Macの場合</h3>
+<section id="slide-org4fce6fc">
+<h3 id="org4fce6fc">Macの場合</h3>
 <ol>
 <li><span class="underline">Download R for (Mac) OS X</span>
 をクリック</li>
@@ -102,39 +130,41 @@
 
 </ol>
 <div class="slide-footer"><br></div>
-
 </section>
 </section>
 <section>
-<section id="slide-org24e45e8">
-<h2 id="org24e45e8">RStudioのインストール手順</h2>
+<section id="slide-org667c1fd">
+<h2 id="org667c1fd">RStudioのインストール</h2>
 <ol>
-<li><span class="underline">Download RStudio - RStudio</span>
-にアクセス
+<li>インストーラをダウンロード
 <ul>
-<li><a href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a></li>
-<li><span style="color:orange;">&ldquo;rstudio install&rdquo;</span> などで検索</li>
+<li><span class="underline">DOWNLOAD RSTUDIO DESKTOP FOR XXX</span>
+の XXX が OS名と一致していればそのまま選択</li>
+<li>XXX が OS名と異なる場合は
+<span class="underline">All Installers and Tarballs</span>
+から適切なインストーラを選択</li>
 
 </ul></li>
-<li><span class="underline">Installers for Supported Platforms</span>
-から自分の環境に合わせて OS を選択</li>
 <li>ダウンロードしたインストーラを起動</li>
 <li>指示に従って RStudio をインストールする</li>
 
 </ol>
 <div class="slide-footer"><br></div>
-
 </section>
 </section>
 <section>
-<section id="slide-org742ba8e">
-<h2 id="org742ba8e">参考</h2>
+<section id="slide-orgc9d1c33">
+<h2 id="orgc9d1c33">参考</h2>
 <ul>
-<li>以下のサイトは自習の助けになります
+<li>以下のサイトも参考に
 <ul>
+<li>RStudio の初心者向ガイド <br />
+<a href="https://education.rstudio.com/learn/beginner/">https://education.rstudio.com/learn/beginner/</a></li>
+<li>Chester Ismay and Albert Y. Kim による解説 <br />
+<a href="https://moderndive.netlify.app/1-getting-started">https://moderndive.netlify.app/1-getting-started</a></li>
 <li>RStudio.cloud の自習コース <br />
 <a href="https://rstudio.cloud/learn/primers">https://rstudio.cloud/learn/primers</a></li>
-<li>Data Camp のR入門コース
+<li>Data Camp のR入門コース <br />
 <a href="https://www.datacamp.com/onboarding">https://www.datacamp.com/onboarding</a></li>
 
 </ul></li>

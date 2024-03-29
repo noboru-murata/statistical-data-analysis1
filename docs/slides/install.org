@@ -1,63 +1,82 @@
-#+TITLE: R および RStudio の導入方法
+#+TITLE: R および RStudio の導入
 #+SUBTITLE: R 環境の構築
 #+AUTHOR: 村田 昇
-#+EMAIL: noboru.murata@eb.waseda.ac.jp
+#+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-03-31 18:26:06 mura>
-:REVEAL:
-#+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
+# Time-stamp: <2024-03-29 14:30:08 mura>
+:REVEAL:
+#+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :END:
 
-* Rのインストール手順
-** 準備
-   1. _R: The R project for Statistical Computing_
-      にアクセス
-      - http://www.r-project.org/ を直接入力
-      - または [[color:orange]["r install"]] などで検索
-   2. _download R_
-      というリンクをクリック
-   3. CRANのミラーサイトを選ぶ:
-      - どれでも利用可だが [[color:orange]["Japan" のいずれか]] を選ぶと良い
-      - OSごとにインストール方法が異なるので注意
+* 準備
+1. _DOWNLOAD RStudio Desktop_
+   にアクセス
+   - [[https://posit.co/download/rstudio-desktop/]] 
+   - *"rstudio install"* などで検索
+2. _1: Install R_ 
+   の下の
+   _DOWNLOAD AND INSTALL R_
+   を選択 
+   - Rのインストールへ
+3. _2: Install RStudio_
+   の下の
+   _DOWNLOAD RSTUDIO DESKTOP FOR XXX_
+   の XXX を確認
+   - RStudioのインストールへ
+
+* Rのインストール
+** The Comprehensive R Archive Network
+1. Rの配布元
+   - _1: Install R_ からここに来ているはず
+   - http://www.r-project.org/ から辿っても良い
+   - または *"r install"* などで検索しても良い
+2. CRANのミラーサイトを選ぶ (左メニューの *Mirros*)
+   - どれでも利用可だが *"Japan" のいずれか* を選ぶと良い
+   - rstudio.com のミラーサイトのままでも良い
+   - OSごとにインストール方法が異なるので注意
 
 ** Windowsの場合
-   1. _Download R for Windows_
-      をクリック
-   2. _base_
-      をクリック
-   3. _Download R (バージョン名) for Windows_
-      をクリック
-   4. ダウンロードされたインストーラを起動
-   5. 指示に従って R をインストールする 
+1. _Download R for Windows_
+   をクリック
+2. _base_
+   をクリック
+3. _Download R (バージョン名) for Windows_
+   をクリック
+4. ダウンロードされたインストーラを起動
+5. 指示に従って R をインストールする 
 
 ** Macの場合
-   1. _Download R for (Mac) OS X_
-      をクリック
-   2. _R-(バージョン名).pkg_
-      をクリック
-   3. ダウンロードされたインストーラを起動
-   4. 指示に従って R をインストールする 
+1. _Download R for (Mac) OS X_
+   をクリック
+2. _R-(バージョン名).pkg_
+   をクリック
+3. ダウンロードされたインストーラを起動
+4. 指示に従って R をインストールする 
 
-* RStudioのインストール手順
-  1. _Download RStudio - RStudio_
-     にアクセス
-     - https://www.rstudio.com/products/rstudio/download/ 
-     - [[color:orange]["rstudio install"]] などで検索
-  2. _Installers for Supported Platforms_
-     から自分の環境に合わせて OS を選択
-  3. ダウンロードしたインストーラを起動
-  4. 指示に従って RStudio をインストールする
+* RStudioのインストール
+1. インストーラをダウンロード
+   - _DOWNLOAD RSTUDIO DESKTOP FOR XXX_
+     の XXX が OS名と一致していればそのまま選択
+   - XXX が OS名と異なる場合は
+     _All Installers and Tarballs_
+     から適切なインストーラを選択
+2. ダウンロードしたインストーラを起動
+3. 指示に従って RStudio をインストールする
 
 * 参考
-- 以下のサイトは自習の助けになります
+- 以下のサイトも参考に
+  - RStudio の初心者向ガイド \\
+    https://education.rstudio.com/learn/beginner/
+  - Chester Ismay and Albert Y. Kim による解説 \\
+    https://moderndive.netlify.app/1-getting-started
   - RStudio.cloud の自習コース \\
-      https://rstudio.cloud/learn/primers
-  - Data Camp のR入門コース
-      https://www.datacamp.com/onboarding
+    https://rstudio.cloud/learn/primers
+  - Data Camp のR入門コース \\
+    https://www.datacamp.com/onboarding
 - *"R オンライン 講座"* などで検索して下さい
     
 * Footnotes

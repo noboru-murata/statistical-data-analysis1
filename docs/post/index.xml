@@ -6,26 +6,21 @@
     <description>Recent content in Posts on 統計データ解析I</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Mar 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://noboru-murata.github.io/statistical-data-analysis1/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 31 Mar 2023 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://noboru-murata.github.io/statistical-data-analysis1/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>R/RStudioの導入方法</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/post/post1/</link>
       <pubDate>Fri, 31 Mar 2023 00:00:00 +0900</pubDate>
-      
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/post/post1/</guid>
       <description>スライド full size ハンドアウト PDF file </description>
     </item>
-    
     <item>
       <title>スライドの使い方</title>
       <link>https://noboru-murata.github.io/statistical-data-analysis1/post/post2/</link>
       <pubDate>Fri, 02 Apr 2021 00:00:00 +0900</pubDate>
-      
       <guid>https://noboru-murata.github.io/statistical-data-analysis1/post/post2/</guid>
-      <description>スライドは reveal.js を使って作っています．
-スライドを click して &amp;ldquo;?&amp;rdquo; を入力すると shortcut key が表示されますが，これ以外にも以下の key などが使えます．
-フルスクリーン f フルスクリーン表示 esc 元に戻る 黒板 w スライドと黒板の切り替え (toggle) x/y チョークの色の切り替え (巡回) c 消去 メモ書き e 編集モードの切り替え (toggle) x/y ペンの色の切り替え (巡回) c 消去 </description>
+      <description>スライドは reveal.js を使って作っています．&#xA;スライドを click して &amp;ldquo;?&amp;rdquo; を入力すると shortcut key が表示されますが，これ以外にも以下の key などが使えます．&#xA;フルスクリーン f フルスクリーン表示 esc 元に戻る 黒板 w スライドと黒板の切り替え (toggle) x/y チョークの色の切り替え (巡回) c 消去 メモ書き e 編集モードの切り替え (toggle) x/y ペンの色の切り替え (巡回) c 消去 </description>
     </item>
-    
   </channel>
 </rss>
