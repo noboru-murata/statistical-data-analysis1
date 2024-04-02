@@ -1,12 +1,12 @@
 #+TITLE: ガイダンス
 #+SUBTITLE: 講義の概要と進め方
 #+AUTHOR: 村田 昇
-#+EMAIL: noboru.murata@eb.waseda.ac.jp
+#+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2022-04-01 16:46:47 mura>
-:REVEAL:
-#+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
+# Time-stamp: <2024-04-02 13:50:12 mura>
+:REVEAL:
+#+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
@@ -37,6 +37,7 @@
 - 講義資料
   - Webを利用して配布
   - 事前に目を通しておくことが望ましい
+  - https://noboru-murata.github.io/statistical-data-analysis1/
 
 ** 講義計画 (13回を予定)
 #+begin_leftcol
@@ -64,6 +65,8 @@
   - 課題は自身で設定
   - レポートとプログラム(およびデータ)を提出
 
+    
+* Footnotes
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted
