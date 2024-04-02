@@ -1,4 +1,4 @@
-MSG = "2023 version"
+MSG = "2024 version"
 
 all: html
 
