@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-02 17:41:54 mura>
+# Time-stamp: <2024-04-04 12:24:41 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -18,6 +18,8 @@
 - それ以外は第2回に移したのでそろそろ消しても良い
 - 第1回は一緒に使いながら説明と同時に細々練習を行う
 - projectを導入したのでworking directoryなどは概念だけで良いかも
+- 実習，練習問題という形に整理する
+
 
 * 講義概要
 - R言語の概要
@@ -130,7 +132,7 @@
 4. 指示に従って RStudio をインストールする
 
 
-* RStudio の構成
+* RStudio の UI
 ** 起動画面
 - 以下 *RStudio* を用いて説明する
 - 複数の *タブ* (tab; つまみ) を含む4つの *ペイン* (pane; 枠) が立ち上がる
@@ -462,6 +464,11 @@
   #+end_src
   コンソール上部にも記載されている
 
+
+* 実習
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
@@ -543,7 +550,7 @@
 - ただし引数名は順序を守れば省略可能
 - [[color:green][関数の呼び出し方]]
   #+begin_src R :eval no
-    f(arg1=value1, arg2=value2) # 擬似コード
+    f(arg1 = value1, arg2 = value2) # 擬似コード
     ## arg1, arg2 は引数の名前，value1, value2 は引数に渡す値を表す
     f(value1, value2) # 上と同値．順序に注意
   #+end_src
@@ -568,10 +575,10 @@
   #+begin_src R :eval no
     # 以下は擬似コード．x,bを適当な数値に置き換えて実行せよ
     log(x, b) # 底をbとする対数 
-    log(x=x, base=b) #上と同値
-    log(base=b, x=x) #上と同値
-    log(b,x) # = log(x=b,base=x) 
-    log(x) # 自然対数 =log(x,base=exp(1))
+    log(x = x, base = b) #上と同値
+    log(base = b, x = x) #上と同値
+    log(b, x) # = log(x = b, base = x) 
+    log(x) # 自然対数 =log(x, base = exp(1))
   #+end_src
   
 ** ヘルプ機能
@@ -654,7 +661,7 @@
   #+begin_src R
     (foo <- 3) # 数値を変数 foo に代入
     ## 外側の () は代入した結果の表示．下記の print() と同義
-    bar <- sin(2/3*pi) + cos(foo * pi/4) # 計算結果を代入
+    bar <- sin(2/3 * pi) + cos(foo * pi/4) # 計算結果を代入
     print(bar) # 変数の内容を表示．コンソールでは単に bar だけでもよい
   #+end_src
 
@@ -750,6 +757,11 @@
   #   #+end_src
   #   ~require()~ を用いると1度読み込んだものは再読み込みしない？
 
+
+* 実習
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
@@ -784,7 +796,8 @@
   #' ---------------------------------------------------------------------------
 #+end_src
 
-* データ構造
+
+* Rで用いるデータ構造
 ** データ型
 - Rではさまざまな数値を扱うことができる
   - 実数および複素数 (指数表記にも対応)
@@ -809,7 +822,6 @@
 | ~array~                 | 多次元配列          |
 | ~data.frame~ (~tibble~) | 表形式のデータ集合    |
 | ~list~                  | 異なるデータ集合の集合 |
-
 
 ** ベクトルとは
 - 同じデータ型の値 (スカラー値) の集合 
@@ -844,7 +856,7 @@
   #+end_src
   
 ** ベクトルの要素の選択
-- ~[]~ を用いて指定する
+- 演算子 ~[]~ を用いて指定する
   - 単一の要素を選択する
   - 複数の要素をベクトルを用いて選択することもできる
 - [[color:green][要素の選択の例]]
@@ -915,10 +927,10 @@
   #+begin_src R :exports code
     #' 同じ長さのベクトル(関数 base::c() で作成)を並べる (関数 tibble::tibble())
     #' (... <- ...) は代入した結果を表示
-    (foo <- tibble(one = c(1,2,3),two = c("AB","CD","EF"))) 
-    (bar <- tibble(three = c("x","y","z"),four = c(0.9,0.5,-0.3)))
+    (foo <- tibble(one = c(1,2,3), two = c("AB","CD","EF"))) 
+    (bar <- tibble(three = c("x","y","z"), four = c(0.9,0.5,-0.3)))
     #' データフレームを結合する (関数 dplyr::bind_cols())
-    (baz <- bind_cols(foo,bar)) # bind columns
+    (baz <- bind_cols(foo, bar)) # bind columns
   #+end_src
   #+begin_src R :exports none
     #' @notes
@@ -939,8 +951,8 @@
   #+end_src
   #+begin_src R :exports code
     z <- tibble(one = c(1,2,3),
-                    two = c("AB","CD","EF"),
-                    three = 6:8)
+                two = c("AB","CD","EF"),
+                three = 6:8)
     z[1,2] # 1行2列の要素を選択
     z[-c(1,3),] # 1,3行を除外
     z[c(TRUE,FALSE,TRUE),] # 1,3行を選択
@@ -952,6 +964,11 @@
     z$two      # 上記と同様の結果
   #+end_src
 
+
+* 実習
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
@@ -967,7 +984,8 @@
   | Eve   |   50 |   80 |   75 | 100 |
   |-------+------+------+------+-----|
 - データフレームの要素の選択を試みなさい
-#+begin_src R :exports none
+
+#+begin_src R :eval no :exports none
   #' ---------------------------------------------------------------------------
   #' @practice データフレームの操作
   #' 

@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-03 18:02:54 mura>
+# Time-stamp: <2024-04-04 15:46:18 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -164,7 +164,7 @@
 - データフレームは行列を拡張したもの
 
 ** 行列の生成
-- すべての要素が ~a~ である \(m\times n\) 行列の生成 \\
+- すべての要素が ~a~ である \(m\times n\) 型行列の生成 \\
   (関数 ~matrix()~)
   #+begin_src R :exports none
     #' @exercise 行列の生成
@@ -175,7 +175,7 @@
   #+end_src
   
 #+reveal: split
-- 長さ \(mn\) のベクトル ~a~ を \(m\times n\) 行列に変換 \\
+- 長さ \(mn\) のベクトル ~a~ を \(m\times n\) 型行列に変換 \\
   (関数 ~matrix()~)
   #+begin_src R
     a <- 2:13 # 変数 a に値を代入 (m*n = 12 文字用意)
@@ -219,8 +219,8 @@
     A[3,4] # (3,4)成分
     A[3, ] # 第3行のベクトル
     A[ ,4] # 第4列のベクトル
-    A[c(1,3),] # 1,3行からなる部分行列
-    A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列
+    A[c(1,3),] # 1,3行からなる部分行列．2x4型行列になる
+    A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列になる
   #+end_src
   # ベクトルの場合と同様に，
   # 添え字をベクトルで指定することで部分行列の取り出しも可能
@@ -257,19 +257,19 @@
   #' ---------------------------------------------------------------------------
   #' @practice 行列の操作
   #' 行列の作成
-  (M <- matrix(1:6,2,3,byrow=TRUE))
-  (N <- rbind(1:3,4:6)) # cbind を使って作ることもできる
+  (M <- matrix(1:6, 2, 3, byrow = TRUE))
+  (M2 <- rbind(1:3, 4:6)) # cbind を使って作ることもできる
   #' 2行2列成分を取り出す
   M[2,2]
   #' 転置行列を作成する
-  (Mt <- matrix(1:6,3,2)) # 愚直に作成し直す
-  t(N) # 関数t()を調べてみよう
+  matrix(1:6, 3, 2) # 愚直に作成し直す
+  t(M) # 関数t()を調べてみよう
   #' 行名をつける
   rownames(M) <- c("first","second")
   M # print(M) と同様
   #' 列名をつけることもできる
-  colnames(N) <- c("alpha","beta")
-  N
+  colnames(M2) <- c("alpha","beta","gamma")
+  M2
   #' ---------------------------------------------------------------------------
 #+end_src
 
@@ -330,7 +330,7 @@
 
 ** データフレームの生成
 - データフレームの生成 (関数 ~data.frame()~)
-  #+begin_src R
+  #+begin_src R :eval no
     #' 前回の練習問題
     library(tibble)
     (foo <-
@@ -346,24 +346,28 @@
 
 * ベクトルの計算
 ** ベクトルの表記
-- ベクトルは太字で，要素は下付き添字で表す
+- ベクトルは太字，要素は下付き添字で表す
+  #+begin_quote
   \begin{equation}
     \boldsymbol{a}
     =(a_{1},a_{2},\dotsc,a_{k})
   \end{equation}
+  #+end_quote
 - 別の書き方
+  #+begin_quote
   \begin{equation}
     (\boldsymbol{a})_{i}
     =\text{(ベクトル \(\boldsymbol{a}\) の第 \(i\) 成分)}  
   \end{equation}
+  #+end_quote
 - Rの書式 (関数 ~c()~)
-  #+begin_src R :eval no
+  #+begin_src R :eval no :tangle no
     a <- c(a1,a2,...,ak) # k次元ベクトルの作成 (擬似コード)
   #+end_src
 
 ** ベクトルの加法
-- *同じ長さのベクトル* の和および差 \\
-  [[color:gray][数値の和と差のように扱うことができる]]
+- *同じ長さのベクトル* の和および差
+  #+begin_quote
   \begin{equation}
     \boldsymbol{a}\pm\boldsymbol{b}
     =(a_{1}\pm b_{1},a_{2}\pm b_{2},\dotsc,a_{k}\pm b_{k})
@@ -372,7 +376,15 @@
     (\boldsymbol{a}\pm\boldsymbol{b})_{i}
     =a_{i}\pm b_{i}
   \end{equation}
+  #+end_quote
+  - 数値の和と差のように扱うことができる
 - Rの書式 (演算子 ~+,-~)
+  #+begin_src R :eval no :exports none
+    #' @exercise ベクトルの計算
+    #' 以下の計算例に用いるベクトルを定義する
+    (a <- 1:6)
+    (b <- c(2,3,5,7,11,13))
+  #+end_src
   #+begin_src R :eval no
     a + b # 同じ長さのベクトル a,b の和．同じ長さのベクトルが返る
     a - b # ベクトルの差
@@ -387,6 +399,7 @@
 
 ** Hadamard 積
 - *同じ長さのベクトル* の成分ごとの積
+  #+begin_quote
   \begin{equation}
     \boldsymbol{a}\circ\boldsymbol{b}
     =(a_{1}b_{1},a_{2}b_{2},\dotsc,a_{k}b_{k})
@@ -395,6 +408,7 @@
     (\boldsymbol{a}\circ\boldsymbol{b})_{i}
     =a_{i}b_{i}
   \end{equation}
+  #+end_quote
 - Rの書式 (演算子 ~*,/~)
   #+begin_src R :eval no
     a * b # ベクトルの成分ごとの積．同じ長さのベクトルが返る
@@ -403,11 +417,13 @@
 
 ** 内積
 - *同じ長さのベクトル* の内積
+  #+begin_quote
   \begin{align}
     \boldsymbol{a}\cdot\boldsymbol{b}
     &=a_{1}b_{1}+a_{2}b_{2}+\dotsb+a_{k}b_{k}\\
     &=\sum_{i=1}^{k}a_{i}b_{i}
   \end{align}
+  #+end_quote
 - Rの書式 (演算子 ~%*%~)
   #+begin_src R :exports code
     a %*% b # ベクトルの内積．1x1型の行列が返る
@@ -416,7 +432,8 @@
 
 * 行列の計算
 ** 行列の表記
-- 行列は大文字で，要素は下付き添字で表す
+- 行列は大文字，要素は下付き添字で表す
+  #+begin_quote
   \begin{equation}
     A
     =
@@ -432,23 +449,34 @@
     %   a_{m1}&a_{m2}&\dots&a_{mn}
     % \end{pmatrix}
   \end{equation}
+  #+end_quote
 - 別の書き方
+  #+begin_quote
   \begin{equation}
     (A)_{ij}
     =\text{(行列 \(A\) の \(ij\) 成分)}
   \end{equation}
+  #+end_quote
 - Rの書式 (関数 ~matrix()~)
-  #+begin_src R :eval no
-    A <- matrix(c(a11,a21,...,amn),m,n) # m x n 行列の作成 (擬似コード)
+  #+begin_src R :eval no :tangle no
+    A <- matrix(c(a11,a21,...,amn), m, n) # m x n 行列の作成 (擬似コード)
   #+end_src
 
 ** 行列の加法
-- *同じ大きさの行列* の和および差 \\
-  [[color:gray][ベクトルと同じように記述することができる]]
+- *同じ大きさの行列* の和および差
+  #+begin_quote
   \begin{equation}
     (A\pm B)_{ij}=a_{ij}\pm b_{ij}
   \end{equation}
+  #+end_quote
+  - ベクトルと同じように記述することができる
 - Rの書式
+  #+begin_src R :eval no :exports none
+    #' @exercise 行列の計算
+    #' 以下の計算例に用いる行列を定義する
+    (A <- matrix(1:6, 3, 2))
+    (B <- matrix(c(2,3,5,7,11,13), 3, 2))
+  #+end_src
   #+begin_src R :eval no
     A + B # 同じサイズの行列の和．同じサイズの行列が返る
     A - B # 行列の差
@@ -463,9 +491,11 @@
 
 ** Hadamard 積
 - *同じ大きさの行列* の成分ごとの積
+  #+begin_quote
   \begin{equation}
     (A\circ B)_{ij}=a_{ij}b_{ij}
   \end{equation}
+  #+end_quote
 - Rの書式 (演算子 ~*,/~)
   #+begin_src R :eval no
     A * B # 行列の成分ごとの積．同じサイズの行列が返る
@@ -474,37 +504,51 @@
 
 ** 行列の積
 - *\(n\times m\) 型行列 \(A\) と \(m\times l\) 型行列 \(B\)* の積
+  #+begin_quote
   \begin{equation}
     (AB)_{ij}=\sum_{k=1}^{m}a_{ik}b_{kj}
     \quad\text{(\(AB\)は\(n\times l\)行列)}
   \end{equation}
+  #+end_quote
 - Rの書式 (演算子 ~%*%~)
+  #+begin_src R :eval no :exports none
+    #' Bの型を変更しておく
+    (B <- matrix(c(2,3,5,7,11,13), 2, 3)) 
+  #+end_src
   #+begin_src R :eval no
     A %*% B # 行列の積．n x l 型行列が返る
   #+end_src
 
 ** 行列式
 - *\(n\) 次正方行列* \(A\) の行列式
+  #+begin_quote
   \begin{equation}
     \det(A)\quad (=|A|)
   \end{equation}
-  /[[color:orange][正方行列でなければ定義されないことに注意する]]/
+  #+end_quote
+  - *正方行列でなければ定義されない* ことに注意する
 - Rの書式 (関数 ~det()~)
+  #+begin_src R :eval no :exports none
+    #' Aを正方行列にしておく
+    (A <- matrix(1:9, 3, 3))
+  #+end_src
   #+begin_src R :eval no
     det(A) # 行列式 
   #+end_src
 
 ** トレース
 - *\(n\) 次正方行列* \(A\) のトレース(対角成分の総和)
+  #+begin_quote
   \begin{equation}
     \mathrm{trace}(A)=\sum_{i=1}^{n}a_{ii}
   \end{equation}
+  #+end_quote
 - Rの書式 (関数は用意されていないので以下を利用) 
   #+begin_src R :eval no
     sum(diag(A)) # 行列のトレース
   #+end_src
   - 関数 ~diag()~ : 行列の対角成分を取り出す \\
-    (ベクトルを対角行列にすることもできる)
+    (ベクトルを引数とする場合はそれを対角成分とする対角行列を返す)
   - 関数 ~sum()~ : ベクトルの総和を計算する 
 
 
@@ -515,22 +559,25 @@
 ** 例題
 - 適当な2次正方行列 \(A\) で
   Hamilton-Cayley の定理
+  #+begin_quote
   \begin{equation}
     A^2-\mathrm{trace}(A)A+\det(A)E_{2}=O_{2}
   \end{equation}
-  の成立を確認せよ\\
-  ただし \(E_{2}\) は2次単位行列，\(O_{2}\) は2次正方零行列
+  #+end_quote
+  の成立を確認せよ．
+  ただし \(E_{2}\) は2次単位行列，\(O_{2}\) は2次正方零行列とする．
 
-** 解答例
-#+begin_src R :eval no :exports none :tangle yes
-  ### 例題 Hamilton-Cayleyの定理の確認
-#+end_src
-#+begin_src R :exports both :results output :tangle yes
-  ## 行列を作成 (好きに設定してよい)
-  (A <- matrix(1:4,2,2) - diag(rep(3,2)))
-  ## 左辺を計算 (丸め誤差の範囲で0になる)
-  A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
-#+end_src
+#+reveal: split
+- 解答例
+  #+begin_src R :exports none
+    #' @exercise Hamilton-Cayleyの定理の確認
+  #+end_src
+  #+begin_src R 
+    #' 行列を作成 (好きに設定してよい)
+    (A <- matrix(1:4,2,2) - diag(rep(3,2)))
+    #' 左辺を計算 (丸め誤差の範囲で0になる)
+    A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
+  #+end_src
 
 ** 練習問題
 :PROPERTIES:
@@ -540,6 +587,7 @@
 - 1から10までの和を計算せよ
 - 行列を用いて九九の表を作成せよ
 - 30度の回転行列を2回乗ずると60度の回転行列となることを確認せよ
+  #+begin_quote
   \begin{equation}
     \text{(回転行列)}
     =
@@ -548,53 +596,57 @@
       \sin(\theta)& \cos(\theta)
     \end{pmatrix}
   \end{equation}
+  #+end_quote
  
-#+begin_src R :eval no :exports none :tangle yes
-  ### 練習問題 ベクトルおよび行列の計算
-  ## 1から10までの2乗値からなるベクトル
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice ベクトルおよび行列の計算
+  #' 
+  #' 1から10までの2乗値からなるベクトル
   1:10 # 1から10までのベクトル
   1:10 * 1:10 # Hadamard積を利用する
-  
-  ## 1から10までの和
-  1:10 %*% rep(1,10) # (1,2,...,10)と(1,1,...,1)の内積
+  #'
+  #' 1から10までの和
+  1:10 %*% rep(1, 10) # (1,2,...,10)と(1,1,...,1)の内積
   sum(1:10) # 関数sum()はベクトルの成分の合計を計算することもできる
-  
-  ## 九九の表
-  matrix(rep(1:9,9),9,9) # 行ごとに1から9を並べる
-  matrix(rep(1:9,9),9,9,byrow=TRUE) # 列ごとに1から9を並べる
-  matrix(rep(1:9,9),9,9) * matrix(rep(1:9,9),9,9,byrow=TRUE)
-  (FOO <- matrix(rep(1:9,9),9,9))
-  FOO * t(FOO) # 行列とその転置を利用してもよい
-  (BAR <- matrix(1:9,9,1)) 
-  BAR %*% t(BAR) # 行列による別の方法
-  (BAZ <- 1:9); BAZ %o% BAZ # 講義の範囲外の方法
-  
-  ## 30度の回転行列の2乗は60度の回転行列
+  #'
+  #' 九九の表
+  matrix(rep(1:9, 9), 9, 9) # 行ごとに1から9を並べる
+  matrix(rep(1:9, 9), 9, 9, byrow = TRUE) # 列ごとに1から9を並べる
+  matrix(rep(1:9, 9), 9, 9) * matrix(rep(1:9, 9), 9, 9, byrow = TRUE)
+  (M <- matrix(rep(1:9, 9), 9, 9))
+  M * t(M) # 行列とその転置を利用してもよい
+  (M9 <- matrix(1:9,9,1)) 
+  M9 %*% t(M9) # 9x1型行列の内積による別の方法
+  (V9 <- 1:9); V9 %o% V9 # 講義の範囲外の方法 (%o% はベクトルの積の一つ)
+  #'
+  #' 30度の回転行列の2乗は60度の回転行列
   theta <- pi/6 # 30度のラジアン値
   (R30 <- # 30度の回転行列
-     matrix(c(cos(theta),sin(theta),
-              -sin(theta),cos(theta)),2,2))
+     matrix(c(cos(theta),-sin(theta),
+              sin(theta), cos(theta)), 2, 2, byrow = T))
   (R60 <- # 60度の回転行列
-     matrix(c(cos(2*theta),sin(2*theta),
-              -sin(2*theta),cos(2*theta)),2,2))
+     matrix(c(cos(2*theta),-sin(2*theta),
+              sin(2*theta), cos(2*theta)), 2, 2, byrow = T))
   R30 %*% R30 # 30度の回転行列の2乗を表示
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 
 * ベクトルと行列の計算
-#+begin_src R :exports none :tangle yes
-  ### ベクトルと行列の計算で用いた例
-#+end_src
-
 ** ベクトルと行列の乗法
-- 列(縦)ベクトル・行(横)ベクトルという *区別はない*
-- 行列とベクトルの順序で適切に判断される
-- 計算結果は *行列* で表現される (演算子 ~%*%~)
-  #+begin_src R :tangle yes
-    A <- matrix(1:4,2,2); b <- c(5,6) # 行列とベクトルを作成
+- 演算子 ~%*%~ を用いて計算する
+  - 列(縦)ベクトル・行(横)ベクトルという *区別はない*
+  - 行列とベクトルの順序で適切に判断される
+  - 演算子 ~%*%~ による計算結果は *行列* で表現される 
+  #+begin_src R :exports none
+    #' @exercise ベクトルと行列の乗法
+  #+end_src
+  #+begin_src R
+    A <- matrix(1:4, 2, 2); b <- c(5,6) # 行列とベクトルを作成
     A %*% b # 行列 x ベクトル = 列ベクトル
   #+end_src
-  #+begin_src R :tangle yes
+  #+begin_src R
     b %*% A # ベクトル x 行列 = 行ベクトル
   #+end_src
 
@@ -602,49 +654,54 @@
 - 連立1次方程式
   - \(A\) : \(n\) 次正則行列
   - \(\boldsymbol{b},\boldsymbol{x}\) : \(n\) 次元列ベクトル
-    \begin{align}
-      A\boldsymbol{x}&=\boldsymbol{b}
-      &&\text{(連立1次方程式)}\\
-      \boldsymbol{x}&=A^{-1}\boldsymbol{b}
-      &&\text{(\(A\)が正則な場合)}
-    \end{align}
+  #+begin_quote
+  \begin{align}
+    A\boldsymbol{x}&=\boldsymbol{b}
+    &&\text{(連立1次方程式)}\\
+    \boldsymbol{x}&=A^{-1}\boldsymbol{b}
+    &&\text{(\(A\)が正則な場合)}
+  \end{align}
+  #+end_quote
 - 解を求めるには関数 ~solve()~ を利用する
-  #+begin_src R :eval no :tangle yes
+  #+begin_src R :eval no
     x <- solve(A, b) 
   #+end_src
-- ベクトル \(\boldsymbol{b}\) の代わりに行列も扱える
+  - ベクトル \(\boldsymbol{b}\) の代わりに行列も扱える
 
 ** 逆行列
 - 正則な \(n\) 次正方行列 \(A\) の逆行列 \(A^{-1}\)
+  #+begin_quote
   \begin{equation}
     AA^{-1}=A^{-1}A=E_{n}
     \quad\text{(\(E_{n}\)は\(n\)次単位行列)}
   \end{equation}
+  #+end_quote
 - 関数 ~solve()~ を利用して求めることができる
-  \begin{align}
-    AX&=E_{n}\\
-    X&=A^{-1}E_{n}=A^{-1}
-  \end{align}
+  #+begin_quote
+  \begin{equation}
+    AX = E_{n},\quad X = A^{-1}E_{n} = A^{-1}
+  \end{equation}
+  #+end_quote
   #+begin_src R :eval no
     solve(A,B) # AX=B の解Xを求める
     solve(A) # 逆行列 (Bが単位行列の場合省略できる)
   #+end_src
-- [[color:gray][他にもいくつか方法は用意されている]]
+  - 他にもいくつか方法は用意されている
 
 ** 関数の適用
 - ベクトルや行列に関数( \(\sin,\exp,\dots\) など)を適用すると
   成分ごとに計算した結果が返される
 - [[color:green][ベクトル \(\boldsymbol{a}\) ，行列 \(A\) に関数 \(\sin\) を適用する]]
+  #+begin_quote
   \begin{equation}
     (\sin(\boldsymbol{a}))_{i}=\sin(a_{i})
   \end{equation}
-  #+begin_src R :eval no
-    sin(a) # 成分ごとに計算される．sin(a)[i]=sin(a[i])
-  #+end_src
   \begin{equation}
     (\sin(A))_{ij}=\sin(a_{ij})
   \end{equation}
+  #+end_quote
   #+begin_src R :eval no
+    sin(a) # 成分ごとに計算される．sin(a)[i]=sin(a[i])
     sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
   #+end_src
 
@@ -656,23 +713,26 @@
 ** 例題
 - 適当な3次正方行列 \(A\) と3次元ベクトル \(\boldsymbol{b}\) を作成して
   \(\boldsymbol{x}\) に関する以下の連立1次方程式を解きなさい
+  #+begin_quote
   \begin{equation}
     A\boldsymbol{x}=\boldsymbol{b}
   \end{equation}
+  #+end_quote
 
-** 解答例
-#+begin_src R :exports none :tangle yes
-  ### 例題 3元連立1次方程式の解法
-#+end_src
-#+begin_src R :exports both :results output :tangle yes
-  (A <- matrix(rnorm(9),3,3)+diag(rep(1,3))) # 行列とベクトルを作成
-  ## rnorm(9) は正規乱数を9つ作成する(後の講義で詳しく説明)
-  (b <- 1:3)
-#+end_src
-#+begin_src R :exports both :results output :tangle yes
-  (x <- solve(A,b)) # 解を計算
-  A %*% x # 結果の確認(b になるはず)
-#+end_src
+#+reveal: split
+- 解答例
+  #+begin_src R :exports none
+    #' @exercise 3元連立1次方程式の解法
+  #+end_src
+  #+begin_src R
+    (A <- matrix(rnorm(9),3,3)+diag(rep(1,3))) # 行列とベクトルを作成
+    #' rnorm(9) は正規乱数を9つ作成する(後の講義で詳しく説明)
+    (b <- 1:3)
+  #+end_src
+  #+begin_src R
+    (x <- solve(A,b)) # 解を計算
+    A %*% x # 結果の確認(b になるはず)
+  #+end_src
 
 ** 練習問題
 :PROPERTIES:
@@ -680,33 +740,39 @@
 :END:
 - 1から10の2乗値からなるベクトルを作成せよ
 - 例題の \(A\) と \(\boldsymbol{b}\) を用いて
-  #+begin_src R :eval no
+  以下を計算するとエラーになる
+  #+begin_src R :eval no :tangle no
     A %*% b + b %*% A   
   #+end_src
-  を計算するとエラーになるが，何故そうなるか理由を考えよ
+  何故そうなるか理由を考えよ
 - 2次元ベクトルを回転行列で変換しても長さが変わらないことを確かめよ
  
-#+begin_src R :eval no :exports none :tangle yes
-  ### 練習問題 ベクトルと行列の計算
-  ## 1から10までの2乗値からなるベクトル
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice ベクトルと行列の計算
+  #' 
+  #' 1から10までの2乗値からなるベクトル
   (1:10)^2 # ^2も関数として成分ごとに計算される
-  
-  ## エラーになる理由を考察
+  #'
+  #' エラーになる理由を考察
   A %*% b # 列ベクトル (3x1型行列)
   b %*% A # 行ベクトル (1x3型行列)
   A %*% b + b %*% A # 異なる次元(大きさ)の行列は足し算できない
-
-  ## 回転してもベクトルの長さが変わらないことを確認
-  ## 回転行列とベクトルを作成 (好きに設定してよい)
+  #'
+  #' 回転してもベクトルの長さが変わらないことを確認
+  #' 回転行列とベクトルを作成 (好きに設定してよい)
   theta <- 2*pi/3 # 120度のラジアン値
-  (R <- matrix(c(cos(theta),sin(theta),
-                 -sin(theta),cos(theta)),2,2))
+  (R <- matrix(c(cos(theta),-sin(theta),
+                 sin(theta), cos(theta)), 2, 2, byrow = T))
   (x <- 1:2)
-  (y <- R %*% x) # xを回転してyを作成 (結果は行列になる)
-  ## 長さの2乗はベクトルの内積で計算できる
-  x %*% x # xの長さの2乗
+  (y <- R %*% x) # xを回転してyを作成 (結果は行列になるので扱いに注意が必要)
+  #'
+  x %*% x # xの長さの2乗はベクトルの内積で計算できる
   as.vector(y) %*% as.vector(y) # yの長さの2乗
   t(y) %*% y # 行列の積として計算することもできる
+  sum(y*y) # 行列の要素積を計算して全ての成分の和で計算することもできる
+  sum(y^2) # 上記と同様の計算は各成分の2乗和として計算することもできる(xも同様)
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 

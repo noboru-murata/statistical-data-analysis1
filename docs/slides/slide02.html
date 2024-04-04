@@ -45,10 +45,9 @@
 </div>
 
 </section>
-
 <section>
-<section id="slide-org3f415c8">
-<h2 id="org3f415c8">講義概要</h2>
+<section id="slide-orgf6fe158">
+<h2 id="orgf6fe158">講義概要</h2>
 <ul>
 <li>R言語のデータ構造</li>
 <li>ベクトル・行列・リストの操作</li>
@@ -56,17 +55,16 @@
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
 </section>
 <section>
-<section id="slide-org1e25d0f">
-<h2 id="org1e25d0f">R言語のデータ構造</h2>
-<div class="outline-text-2" id="text-org1e25d0f">
+<section id="slide-orgc6dae2e">
+<h2 id="orgc6dae2e">R言語のデータ構造</h2>
+<div class="outline-text-2" id="text-orgc6dae2e">
 </div>
 </section>
-<section id="slide-orgaa4c54d">
-<h3 id="orgaa4c54d">基本的なデータ構造</h3>
+<section id="slide-orgc644ff0">
+<h3 id="orgc644ff0">基本的なデータ構造</h3>
 <ul>
 <li>下記は基本的なもので標準環境で利用できる
 <ul>
@@ -77,31 +75,27 @@
 <li>配列 (array) (今回は扱わない)</li>
 
 </ul></li>
-<li><span style="color:gray;">パッケージなどで拡張することができる</span>
+<li><b>パッケージ</b> で拡張することができる
 <ul>
-<li><span style="color:green;">データフレームの拡張</span> (<code>data.table</code> など)</li>
-<li><span style="color:green;">時系列の扱い</span> (<code>zoo,xts</code> など)</li>
+<li><span style="color:green;">データフレームの拡張</span> (<code>tibble, data.table</code> など)</li>
+<li><span style="color:green;">時系列の扱い</span> (<code>zoo, xts</code> など)</li>
 
 </ul></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
-
-
 </section>
 </section>
 <section>
-<section id="slide-org5c0dc79">
-<h2 id="org5c0dc79">ベクトル</h2>
-<div class="outline-text-2" id="text-org5c0dc79">
+<section id="slide-orgc4517eb">
+<h2 id="orgc4517eb">ベクトル</h2>
+<div class="outline-text-2" id="text-orgc4517eb">
 </div>
 </section>
-<section id="slide-orgd7e8cdd">
-<h3 id="orgd7e8cdd">ベクトルとは</h3>
+<section id="slide-org3036e3d">
+<h3 id="org3036e3d">ベクトルとは</h3>
 <ul>
-<li>スカラー値(単一の値)の集合</li>
-<li>スカラー値として扱われる主なデータ型
+<li>同じデータ型の値 (スカラー値) の集合
 <ul>
 <li>数値 (実数や複素数)</li>
 <li>文字列 (&rsquo;や&ldquo;で囲まれた文字．&rdquo;foo&ldquo;，&rdquo;bar&ldquo;など)</li>
@@ -113,48 +107,27 @@
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org1adc889">
-<h3 id="org1adc889">ベクトルの生成と操作</h3>
+<section id="slide-orgd1ea834">
+<h3 id="orgd1ea834">ベクトルの生成</h3>
 <ul>
-<li>基本的には関数 <code>c()</code> を用いて作成する</li>
 <li><p>
 数値や文字列の要素からなるベクトルの生成
 </p>
 <div class="org-src-container">
 
 <pre><code class="R" >(x &lt;- c("Alice","Bob","Cathy","David")) # 文字列のベクトル
-(y &lt;- c(1,-2,3,-4,5)) # 数値のベクトル
+(y &lt;- c(1,-2, 3,-4, 5)) # 数値のベクトル
 (z &lt;- c("apple","berry","cat","dog","elephant")) # 文字列のベクトル
-## 外側の () は代入した結果の表示．print() と同義
+#' 外側の () は代入した結果の表示．print() と同義
 </code></pre>
-</div></li>
+</div>
 
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section>
-<ul>
-<li><p>
-ベクトルの長さの取得 (関数 <code>length()</code>)
-</p>
-<div class="org-src-container">
-
-<pre><code class="R" >length(x) # 最後の要素を参照する場合などに利用できる    
-</code></pre>
-</div></li>
-
-<li><p>
-ベクトルの要素の取得 (演算子 <code>[]</code>)
-</p>
-<div class="org-src-container">
-
-<pre><code class="R" >x[3] # xの第3要素 (ベクトルの添え字は1から始まる)
-y[c(1,3,4)] # 複数の要素 = c(y[1],y[3],y[4])
-</code></pre>
-</div></li>
+<pre class="example">
+[1] "Alice" "Bob"   "Cathy" "David"
+[1]  1 -2  3 -4  5
+[1] "apple"    "berry"    "cat"      "dog"      "elephant"
+</pre></li>
 
 </ul>
 
@@ -174,7 +147,13 @@ a &lt;- 29.5; b &lt;- 24
 a:b # 逆の場合は1ずつ減少する系列が作成される
 29.5:24 # 直接数値を書いてもよい
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[1]  8  9 10 11 12 13 14 15
+[1] 29.5 28.5 27.5 26.5 25.5 24.5
+[1] 29.5 28.5 27.5 26.5 25.5 24.5
+</pre></li>
 
 <li><p>
 <code>a</code> から <code>b</code> まで
@@ -183,27 +162,47 @@ a:b # 逆の場合は1ずつ減少する系列が作成される
 <div class="org-src-container">
 
 <pre><code class="R" >a &lt;- 1; b &lt;- 16; c &lt;- 2 # 変数 a,b,c に値を代入
-seq(a,b,by=c) # 明示する場合は seq(from=a,to=b,by=c)
+seq(a, b, by = c) # 明示する場合は seq(from = a, to = b, by = c)
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[1]  1  3  5  7  9 11 13 15
+</pre></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
 </section>
-<section>
+<section id="slide-org5f23f17">
+<h3 id="org5f23f17">ベクトルの操作</h3>
 <ul>
 <li><p>
-ベクトルの繰り返し (関数 <code>rep()</code>)
+ベクトルの長さの取得 (関数 <code>length()</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >rep(y,3) # 長さは length(y) * 3
-rep(y,times=3) # 単純に繰り返す．上記と同様
-rep(y,each=3)  # 各要素を繰り返す
-rep(y,length.out=12)  # 繰り返した結果の長さを指定する
+<pre><code class="R" >length(x) # 最後の要素を参照する場合などに利用できる    
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[1] 4
+</pre></li>
+
+<li><p>
+ベクトルの要素の取得 (演算子 <code>[]</code>)
+</p>
+<div class="org-src-container">
+
+<pre><code class="R" >x[3] # xの第3要素 (ベクトルの添え字は1から始まる)
+y[c(1,3,4)] # 複数の要素 = c(y[1], y[3], y[4])
+</code></pre>
+</div>
+
+<pre class="example">
+[1] "Cathy"
+[1]  1  3 -4
+</pre></li>
 
 </ul>
 
@@ -218,34 +217,64 @@ rep(y,length.out=12)  # 繰り返した結果の長さを指定する
 
 <pre><code class="R" >rev(x)
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[1] "David" "Cathy" "Bob"   "Alice"
+</pre></li>
 
 <li><p>
 ベクトルの結合 (関数 <code>c()</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >c(x,z) # 同じデータ型のもの単純に結合される
-c(x,y) # 異なるデータ型のものは結合できないので自動的に書き換えられる
+<pre><code class="R" >c(x, z) # 同じデータ型のものは単純に結合される
+c(x, y) # 異なるデータ型のものは結合できないので自動的に書き換えられる
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[1] "Alice"    "Bob"      "Cathy"    "David"    "apple"    "berry"    "cat"     
+[8] "dog"      "elephant"
+[1] "Alice" "Bob"   "Cathy" "David" "1"     "-2"    "3"     "-4"    "5"
+</pre></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+<ul>
+<li><p>
+ベクトルの繰り返し (関数 <code>rep()</code>)
+</p>
+<div class="org-src-container">
+
+<pre><code class="R" >rep(y, 3) # 長さは length(y) * 3
+rep(y, times = 3) # 単純に繰り返す．上記と同様
+rep(y, each = 3)  # 各要素を繰り返す
+rep(y, length.out = 12)  # 繰り返した結果の長さを指定する
+</code></pre>
+</div>
+
+<pre class="example">
+ [1]  1 -2  3 -4  5  1 -2  3 -4  5  1 -2  3 -4  5
+[1]  1 -2  3 -4  5  1 -2  3 -4  5  1 -2  3 -4  5
+[1]  1  1  1 -2 -2 -2  3  3  3 -4 -4 -4  5  5  5
+[1]  1 -2  3 -4  5  1 -2  3 -4  5  1 -2
+</pre></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
-
 </section>
 </section>
 <section>
-<section id="slide-org39b9755" data-background="#fef4f4">
-<h2 id="org39b9755">演習</h2>
+<section id="slide-orgcab5ec9" data-background="#fef4f4">
+<h2 id="orgcab5ec9">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org35a92d8" data-background="#fef4f4">
-<h3 id="org35a92d8">練習問題</h3>
-<p>
-ベクトルの操作に慣れよう
-</p>
+<section id="slide-orgdbb896c" data-background="#fef4f4">
+<h3 id="orgdbb896c">練習問題</h3>
 <ul>
 <li>以下に示すベクトルを作成してみよう
 <ul>
@@ -264,17 +293,16 @@ c(x,y) # 異なるデータ型のものは結合できないので自動的に�
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
 </section>
 <section>
-<section id="slide-org8898063">
-<h2 id="org8898063">行列</h2>
-<div class="outline-text-2" id="text-org8898063">
+<section id="slide-orgd6b2d2e">
+<h2 id="orgd6b2d2e">行列</h2>
+<div class="outline-text-2" id="text-orgd6b2d2e">
 </div>
 </section>
-<section id="slide-orgc14a358">
-<h3 id="orgc14a358">行列とは</h3>
+<section id="slide-org459c622">
+<h3 id="org459c622">行列とは</h3>
 <ul>
 <li>スカラー値を2次元状(縦横)に並べたもの
 <ul>
@@ -287,21 +315,27 @@ c(x,y) # 異なるデータ型のものは結合できないので自動的に�
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-orgb248095">
-<h3 id="orgb248095">行列の生成と操作</h3>
+<section id="slide-org7fac3fa">
+<h3 id="org7fac3fa">行列の生成</h3>
 <ul>
 <li><p>
-すべての要素が <code>a</code> である \(m\times n\) 行列の生成 <br />
+すべての要素が <code>a</code> である \(m\times n\) 型行列の生成 <br />
 (関数 <code>matrix()</code>)
 </p>
 <div class="org-src-container">
 
 <pre><code class="R" >a &lt;- 2; m &lt;- 3; n &lt;- 4 # 変数 a,m,n に値を代入
-matrix(a,m,n) # 明示する場合は matrix(data=a, nrow=m, ncol=n)
+matrix(a, m, n) # 明示する場合は matrix(data=a, nrow=m, ncol=n)
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[,1] [,2] [,3] [,4]
+[1,]    2    2    2    2
+[2,]    2    2    2    2
+[3,]    2    2    2    2
+</pre></li>
 
 </ul>
 
@@ -310,15 +344,22 @@ matrix(a,m,n) # 明示する場合は matrix(data=a, nrow=m, ncol=n)
 <section>
 <ul>
 <li><p>
-長さ \(mn\) のベクトル <code>a</code> を \(m\times n\) 行列に変換 <br />
+長さ \(mn\) のベクトル <code>a</code> を \(m\times n\) 型行列に変換 <br />
 (関数 <code>matrix()</code>)
 </p>
 <div class="org-src-container">
 
 <pre><code class="R" >a &lt;- 2:13 # 変数 a に値を代入 (m*n = 12 文字用意)
-(A &lt;- matrix(a,m,n)) # 並び順を変えるには matrix(a,m,n,byrow=TRUE)
+(A &lt;- matrix(a, m, n)) # 並び順を変えるには matrix(a,m,n,byrow=TRUE)
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[,1] [,2] [,3] [,4]
+[1,]    2    5    8   11
+[2,]    3    6    9   12
+[3,]    4    7   10   13
+</pre></li>
 <li><p>
 行列のベクトル化 (関数 <code>as.vector()</code>)
 </p>
@@ -326,7 +367,11 @@ matrix(a,m,n) # 明示する場合は matrix(data=a, nrow=m, ncol=n)
 
 <pre><code class="R" >as.vector(A) # matrix の逆変換にあたる
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[1]  2  3  4  5  6  7  8  9 10 11 12 13
+</pre></li>
 
 </ul>
 
@@ -341,16 +386,28 @@ matrix(a,m,n) # 明示する場合は matrix(data=a, nrow=m, ncol=n)
 <div class="org-src-container">
 
 <pre><code class="R" >a &lt;- 4:7; b &lt;- 10:7; c &lt;- c(2,4,8,16) # 変数 a,b,c に値を代入
-rbind(a,b,c) # 行ベクトルとして結合 (row vector bind)
-cbind(a,b,c) # 列ベクトルとして結合 (column vector bind)
+rbind(a, b, c) # 行ベクトルとして結合 (row vector bind)
+cbind(a, b, c) # 列ベクトルとして結合 (column vector bind)
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[,1] [,2] [,3] [,4]
+a    4    5    6    7
+b   10    9    8    7
+c    2    4    8   16
+a  b  c
+[1,] 4 10  2
+[2,] 5  9  4
+[3,] 6  8  8
+[4,] 7  7 16
+</pre></li>
 
 </ul>
-
 <div class="slide-footer"><br></div>
 </section>
-<section>
+<section id="slide-org613b2f3">
+<h3 id="org613b2f3">行列の操作</h3>
 <ul>
 <li><p>
 行列のサイズの取得 (関数 <code>dim()</code> とその仲間)
@@ -363,7 +420,15 @@ ncol(A) # 列数
 dim(A)[1] # nrow(A) と同値
 dim(A)[2] # ncol(A) と同値
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[1] 3 4
+[1] 3
+[1] 4
+[1] 3
+[1] 4
+</pre></li>
 
 </ul>
 
@@ -379,17 +444,28 @@ dim(A)[2] # ncol(A) と同値
 <pre><code class="R" >A[3,4] # (3,4)成分
 A[3, ] # 第3行のベクトル
 A[ ,4] # 第4列のベクトル
-A[c(1,3),] # 1,3行からなる部分行列
-A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列
+A[c(1,3),] # 1,3行からなる部分行列．2x4型行列になる
+A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列になる
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[1] 13
+[1]  4  7 10 13
+[1] 11 12 13
+[,1] [,2] [,3] [,4]
+[1,]    2    5    8   11
+[2,]    4    7   10   13
+[,1] [,2] [,3]
+[1,]    5    8   11
+[2,]    7   10   13
+</pre></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-orgea063dc">
-<h3 id="orgea063dc">行列の操作に関する補足</h3>
+<section id="slide-orgefa392c">
+<h3 id="orgefa392c">行列の操作に関する補足</h3>
 <ul>
 <li>関数 <code>cbind()/rbind()</code> は行数・列数が等しい行列も横・縦に結合できる</li>
 <li>行列の高次元版として配列(array)が用意されている</li>
@@ -398,26 +474,22 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列
 
 </ul>
 <div class="slide-footer"><br></div>
-
-
 </section>
 </section>
 <section>
-<section id="slide-orge234045" data-background="#fef4f4">
-<h2 id="orge234045">演習</h2>
+<section id="slide-orgeb2970e" data-background="#fef4f4">
+<h2 id="orgeb2970e">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgf652c90" data-background="#fef4f4">
-<h3 id="orgf652c90">練習問題</h3>
-<p>
-行列の操作に慣れよう
-</p>
+<section id="slide-orgc71758c" data-background="#fef4f4">
+<h3 id="orgc71758c">練習問題</h3>
 <ul>
 <li><p>
 以下に示す行列を作成してみよう
 </p>
 <div>
 \begin{equation}
+  M = 
   \begin{pmatrix}
     1  & 2  & 3  \\
     4  & 5  & 6 
@@ -425,7 +497,6 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列
 \end{equation}
 
 </div></li>
-
 <li>行列を操作してみよう
 <ul>
 <li>2行2列成分を取り出す</li>
@@ -436,17 +507,16 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
 </section>
 <section>
-<section id="slide-org24c9fe1">
-<h2 id="org24c9fe1">その他のデータ構造</h2>
-<div class="outline-text-2" id="text-org24c9fe1">
+<section id="slide-orgaf0fe43">
+<h2 id="orgaf0fe43">その他のデータ構造</h2>
+<div class="outline-text-2" id="text-orgaf0fe43">
 </div>
 </section>
-<section id="slide-org3bbdf8f">
-<h3 id="org3bbdf8f">リストとは</h3>
+<section id="slide-org03fe32e">
+<h3 id="org03fe32e">リストとは</h3>
 <ul>
 <li>異なる構造のオブジェクトを1つにまとめたもの
 <ul>
@@ -462,10 +532,9 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org2a1c493">
-<h3 id="org2a1c493">リストの生成と操作</h3>
+<section id="slide-org46f8c0a">
+<h3 id="org46f8c0a">リストの生成と操作</h3>
 <ul>
 <li><p>
 リストの生成 (関数 <code>list()</code>)
@@ -474,7 +543,15 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列
 
 <pre><code class="R" >(L &lt;- list(x,y)) # x,yを要素とするリスト
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[[1]]
+[1] "Alice" "Bob"   "Cathy" "David"
+
+[[2]]
+[1]  1 -2  3 -4  5
+</pre></li>
 
 <li><p>
 リストの要素の参照 (演算子 <code>[[]]</code>)
@@ -483,7 +560,11 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列
 
 <pre><code class="R" >L[[1]] # リストの第1要素
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[1] "Alice" "Bob"   "Cathy" "David"
+</pre></li>
 
 </ul>
 
@@ -496,19 +577,36 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >## 方法1 (作成時に名前を付与)
+<pre><code class="R" >#' 方法1 (作成時に名前を付与)
 (L1 &lt;- list(first=x, second=y))
 </code></pre>
 </div>
 
+<pre class="example">
+$first
+[1] "Alice" "Bob"   "Cathy" "David"
+
+$second
+[1]  1 -2  3 -4  5
+</pre>
+
+
 <div class="org-src-container">
 
-<pre><code class="R" >## 方法2 (作成後に名前を変更)
+<pre><code class="R" >#' 方法2 (作成後に名前を変更)
 L2 &lt;- list(x,y) 
 names(L2) &lt;- c("1st","2nd")
 L2 # リストを表示
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+$`1st`
+[1] "Alice" "Bob"   "Cathy" "David"
+
+$`2nd`
+[1]  1 -2  3 -4  5
+</pre></li>
 
 </ul>
 
@@ -521,24 +619,32 @@ L2 # リストを表示
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >## 方法1 (リストの名前で参照)
+<pre><code class="R" >#' 方法1 (リストの名前で参照)
 L2[["1st"]] 
 </code></pre>
 </div>
 
+<pre class="example">
+[1] "Alice" "Bob"   "Cathy" "David"
+</pre>
+
+
 <div class="org-src-container">
 
-<pre><code class="R" >## 方法2 (記号$を用いる場合は""は不要なことに注意)
+<pre><code class="R" >#' 方法2 (記号$を用いる場合は""は不要なことに注意)
 L1$first      
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+[1] "Alice" "Bob"   "Cathy" "David"
+</pre></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org55560dd">
-<h3 id="org55560dd">データフレームとは</h3>
+<section id="slide-org757e2c6">
+<h3 id="org757e2c6">データフレームとは</h3>
 <ul>
 <li>長さの等しいベクトルを束ねたリスト</li>
 <li>複数の属性を持つ実データに則したデータ構造</li>
@@ -550,65 +656,65 @@ L1$first
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org002465b">
-<h3 id="org002465b">データフレームの生成</h3>
+<section id="slide-org7c56e7a">
+<h3 id="org7c56e7a">データフレームの生成</h3>
 <ul>
 <li><p>
 データフレームの生成 (関数 <code>data.frame()</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >## 前回の練習問題の例
-df &lt;- data.frame(
-    literature=c(90,80,70,60),
-    math=c(25,50,75,100),
-    english=c(65,100,70,40))
-row.names(df) &lt;- x # 各行の名前を書き換える
-df
+<pre><code class="R" >#' 前回の練習問題
+library(tibble)
+(foo &lt;-
+   tibble(
+     name = c("Alice", "Bob", "Carol", "Dave", "Eve"),
+     math = c(90, 80, 70, 60, 50),
+     phys = c(25, 50, 75,100, 80),
+     chem = c(65,100, 70, 40, 75),
+     bio  = c(70, 50, 30, 80,100)))
 </code></pre>
 </div></li>
-
-<li><span style="color:gray;">操作については別の講義で詳細に説明する</span></li>
+<li><span style="color:gray;">操作については別の回に詳細に説明する</span></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
-
 </section>
 </section>
 <section>
-<section id="slide-org48d9f78">
-<h2 id="org48d9f78">ベクトルの計算</h2>
-<div class="outline-text-2" id="text-org48d9f78">
+<section id="slide-orgb410ed7">
+<h2 id="orgb410ed7">ベクトルの計算</h2>
+<div class="outline-text-2" id="text-orgb410ed7">
 </div>
 </section>
-<section id="slide-orgc5a66f8">
-<h3 id="orgc5a66f8">ベクトルの表記</h3>
+<section id="slide-org1918e60">
+<h3 id="org1918e60">ベクトルの表記</h3>
 <ul>
 <li><p>
-ベクトルは太字で，要素は下付き添字で表す
+ベクトルは太字，要素は下付き添字で表す
 </p>
+<blockquote>
 <div>
 \begin{equation}
   \boldsymbol{a}
   =(a_{1},a_{2},\dotsc,a_{k})
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 別の書き方
 </p>
+<blockquote>
 <div>
 \begin{equation}
   (\boldsymbol{a})_{i}
   =\text{(ベクトル \(\boldsymbol{a}\) の第 \(i\) 成分)}  
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 Rの書式 (関数 <code>c()</code>)
 </p>
@@ -620,15 +726,14 @@ Rの書式 (関数 <code>c()</code>)
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-orgbf8d4d4">
-<h3 id="orgbf8d4d4">ベクトルの加法</h3>
+<section id="slide-org7129656">
+<h3 id="org7129656">ベクトルの加法</h3>
 <ul>
 <li><p>
-<b>同じ長さのベクトル</b> の和および差 <br />
-<span style="color:gray;">数値の和と差のように扱うことができる</span>
+<b>同じ長さのベクトル</b> の和および差
 </p>
+<blockquote>
 <div>
 \begin{equation}
   \boldsymbol{a}\pm\boldsymbol{b}
@@ -642,8 +747,12 @@ Rの書式 (関数 <code>c()</code>)
   =a_{i}\pm b_{i}
 \end{equation}
 
-</div></li>
+</div>
+</blockquote>
+<ul>
+<li>数値の和と差のように扱うことができる</li>
 
+</ul></li>
 <li><p>
 Rの書式 (演算子 <code>+,-</code>)
 </p>
@@ -656,10 +765,9 @@ a - b # ベクトルの差
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org320aafe">
-<h3 id="org320aafe">ベクトルの乗法</h3>
+<section id="slide-org1e963b9">
+<h3 id="org1e963b9">ベクトルの乗法</h3>
 <ul>
 <li><p>
 <b>同じ長さの2つのベクトル</b> の乗法
@@ -676,14 +784,14 @@ a - b # ベクトルの差
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-orgab6939a">
-<h3 id="orgab6939a">Hadamard 積</h3>
+<section id="slide-org1273539">
+<h3 id="org1273539">Hadamard 積</h3>
 <ul>
 <li><p>
 <b>同じ長さのベクトル</b> の成分ごとの積
 </p>
+<blockquote>
 <div>
 \begin{equation}
   \boldsymbol{a}\circ\boldsymbol{b}
@@ -697,8 +805,8 @@ a - b # ベクトルの差
   =a_{i}b_{i}
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 Rの書式 (演算子 <code>*,/</code>)
 </p>
@@ -711,14 +819,14 @@ a / b # 成分ごとの商も計算可
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-orgca9a4e5">
-<h3 id="orgca9a4e5">内積</h3>
+<section id="slide-org25bb92a">
+<h3 id="org25bb92a">内積</h3>
 <ul>
 <li><p>
 <b>同じ長さのベクトル</b> の内積
 </p>
+<blockquote>
 <div>
 \begin{align}
   \boldsymbol{a}\cdot\boldsymbol{b}
@@ -726,8 +834,8 @@ a / b # 成分ごとの商も計算可
   &=\sum_{i=1}^{k}a_{i}b_{i}
 \end{align}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 Rの書式 (演算子 <code>%*%</code>)
 </p>
@@ -739,22 +847,21 @@ Rの書式 (演算子 <code>%*%</code>)
 
 </ul>
 <div class="slide-footer"><br></div>
-
-
 </section>
 </section>
 <section>
-<section id="slide-org218d726">
-<h2 id="org218d726">行列の計算</h2>
-<div class="outline-text-2" id="text-org218d726">
+<section id="slide-org48a19cf">
+<h2 id="org48a19cf">行列の計算</h2>
+<div class="outline-text-2" id="text-org48a19cf">
 </div>
 </section>
-<section id="slide-orgdcde1f2">
-<h3 id="orgdcde1f2">行列の表記</h3>
+<section id="slide-org227b517">
+<h3 id="org227b517">行列の表記</h3>
 <ul>
 <li><p>
-行列は大文字で，要素は下付き添字で表す
+行列は大文字，要素は下付き添字で表す
 </p>
+<blockquote>
 <div>
 \begin{equation}
   A
@@ -772,46 +879,50 @@ Rの書式 (演算子 <code>%*%</code>)
   % \end{pmatrix}
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 別の書き方
 </p>
+<blockquote>
 <div>
 \begin{equation}
   (A)_{ij}
   =\text{(行列 \(A\) の \(ij\) 成分)}
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 Rの書式 (関数 <code>matrix()</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >A &lt;- matrix(c(a11,a21,...,amn),m,n) # m x n 行列の作成 (擬似コード)
+<pre><code class="R" >A &lt;- matrix(c(a11,a21,...,amn), m, n) # m x n 行列の作成 (擬似コード)
 </code></pre>
 </div></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-orgb672f9f">
-<h3 id="orgb672f9f">行列の加法</h3>
+<section id="slide-org3600a64">
+<h3 id="org3600a64">行列の加法</h3>
 <ul>
 <li><p>
-<b>同じ大きさの行列</b> の和および差 <br />
-<span style="color:gray;">ベクトルと同じように記述することができる</span>
+<b>同じ大きさの行列</b> の和および差
 </p>
+<blockquote>
 <div>
 \begin{equation}
   (A\pm B)_{ij}=a_{ij}\pm b_{ij}
 \end{equation}
 
-</div></li>
+</div>
+</blockquote>
+<ul>
+<li>ベクトルと同じように記述することができる</li>
 
+</ul></li>
 <li><p>
 Rの書式
 </p>
@@ -824,10 +935,9 @@ A - B # 行列の差
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org38d1a7b">
-<h3 id="org38d1a7b">行列の乗法</h3>
+<section id="slide-org4b95ffc">
+<h3 id="org4b95ffc">行列の乗法</h3>
 <ul>
 <li><p>
 2つの行列の乗法
@@ -844,21 +954,21 @@ A - B # 行列の差
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org1067ec7">
-<h3 id="org1067ec7">Hadamard 積</h3>
+<section id="slide-orgb2ab702">
+<h3 id="orgb2ab702">Hadamard 積</h3>
 <ul>
 <li><p>
 <b>同じ大きさの行列</b> の成分ごとの積
 </p>
+<blockquote>
 <div>
 \begin{equation}
   (A\circ B)_{ij}=a_{ij}b_{ij}
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 Rの書式 (演算子 <code>*,/</code>)
 </p>
@@ -871,22 +981,22 @@ A / B # 成分ごとの商も計算可
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org9d685be">
-<h3 id="org9d685be">行列の積</h3>
+<section id="slide-org8d88bf9">
+<h3 id="org8d88bf9">行列の積</h3>
 <ul>
 <li><p>
 <b>\(n\times m\) 型行列 \(A\) と \(m\times l\) 型行列 \(B\)</b> の積
 </p>
+<blockquote>
 <div>
 \begin{equation}
   (AB)_{ij}=\sum_{k=1}^{m}a_{ik}b_{kj}
   \quad\text{(\(AB\)は\(n\times l\)行列)}
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 Rの書式 (演算子 <code>%*%</code>)
 </p>
@@ -898,24 +1008,25 @@ Rの書式 (演算子 <code>%*%</code>)
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org02da50e">
-<h3 id="org02da50e">行列式</h3>
+<section id="slide-org3a62f64">
+<h3 id="org3a62f64">行列式</h3>
 <ul>
 <li><p>
 <b>\(n\) 次正方行列</b> \(A\) の行列式
 </p>
+<blockquote>
 <div>
 \begin{equation}
   \det(A)\quad (=|A|)
 \end{equation}
 
 </div>
+</blockquote>
+<ul>
+<li><b>正方行列でなければ定義されない</b> ことに注意する</li>
 
-<p>
-<i><span style="color:orange;">正方行列でなければ定義されないことに注意する</span></i>
-</p></li>
+</ul></li>
 <li><p>
 Rの書式 (関数 <code>det()</code>)
 </p>
@@ -927,21 +1038,21 @@ Rの書式 (関数 <code>det()</code>)
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-orgf523c4c">
-<h3 id="orgf523c4c">トレース</h3>
+<section id="slide-org396dd8e">
+<h3 id="org396dd8e">トレース</h3>
 <ul>
 <li><p>
 <b>\(n\) 次正方行列</b> \(A\) のトレース(対角成分の総和)
 </p>
+<blockquote>
 <div>
 \begin{equation}
   \mathrm{trace}(A)=\sum_{i=1}^{n}a_{ii}
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 Rの書式 (関数は用意されていないので以下を利用) 
 </p>
@@ -952,60 +1063,72 @@ Rの書式 (関数は用意されていないので以下を利用)
 </div>
 <ul>
 <li>関数 <code>diag()</code> : 行列の対角成分を取り出す <br />
-(ベクトルを対角行列にすることもできる)</li>
+(ベクトルを引数とする場合はそれを対角成分とする対角行列を返す)</li>
 <li>関数 <code>sum()</code> : ベクトルの総和を計算する</li>
 
 </ul></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
-
 </section>
 </section>
 <section>
-<section id="slide-org98f4a4e" data-background="#fef4f4">
-<h2 id="org98f4a4e">演習</h2>
+<section id="slide-org1e23bcc" data-background="#fef4f4">
+<h2 id="org1e23bcc">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org0e51b14">
-<h3 id="org0e51b14">例題</h3>
+<section id="slide-org33dee38">
+<h3 id="org33dee38">例題</h3>
 <ul>
 <li><p>
 適当な2次正方行列 \(A\) で
 Hamilton-Cayley の定理
 </p>
+<blockquote>
 <div>
 \begin{equation}
   A^2-\mathrm{trace}(A)A+\det(A)E_{2}=O_{2}
 \end{equation}
 
 </div>
-
+</blockquote>
 <p>
-の成立を確認せよ<br />
-ただし \(E_{2}\) は2次単位行列，\(O_{2}\) は2次正方零行列
+の成立を確認せよ．
+ただし \(E_{2}\) は2次単位行列，\(O_{2}\) は2次正方零行列とする．
 </p></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 
+<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6dea3ce">
-<h3 id="org6dea3ce">解答例</h3>
+<section>
+<ul>
+<li><p>
+解答例
+</p>
 <div class="org-src-container">
 
-<pre><code class="R" >## 行列を作成 (好きに設定してよい)
+<pre><code class="R" >#' 行列を作成 (好きに設定してよい)
 (A &lt;- matrix(1:4,2,2) - diag(rep(3,2)))
-## 左辺を計算 (丸め誤差の範囲で0になる)
+#' 左辺を計算 (丸め誤差の範囲で0になる)
 A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
 </code></pre>
 </div>
-<div class="slide-footer"><br></div>
 
+<pre class="example">
+[,1] [,2]
+[1,]   -2    3
+[2,]    2    1
+[,1]         [,2]
+[1,] 1.776357e-15 0.000000e+00
+[2,] 0.000000e+00 1.776357e-15
+</pre></li>
+
+</ul>
+<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfb2fd5e" data-background="#fef4f4">
-<h3 id="orgfb2fd5e">練習問題</h3>
+<section id="slide-org5a78266" data-background="#fef4f4">
+<h3 id="org5a78266">練習問題</h3>
 <ul>
 <li>1から10の2乗値からなるベクトルを作成せよ</li>
 <li>1から10までの和を計算せよ</li>
@@ -1013,6 +1136,7 @@ A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
 <li><p>
 30度の回転行列を2回乗ずると60度の回転行列となることを確認せよ
 </p>
+<blockquote>
 <div>
 \begin{equation}
   \text{(回転行列)}
@@ -1023,47 +1147,61 @@ A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
   \end{pmatrix}
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
 </section>
 <section>
-<section id="slide-org518e270">
-<h2 id="org518e270">ベクトルと行列の計算</h2>
-<div class="outline-text-2" id="text-org518e270">
+<section id="slide-orgaac4164">
+<h2 id="orgaac4164">ベクトルと行列の計算</h2>
+<div class="outline-text-2" id="text-orgaac4164">
 </div>
 </section>
-<section id="slide-org39ac8d7">
-<h3 id="org39ac8d7">ベクトルと行列の乗法</h3>
+<section id="slide-org513a453">
+<h3 id="org513a453">ベクトルと行列の乗法</h3>
+<ul>
+<li><p>
+演算子 <code>%*%</code> を用いて計算する
+</p>
 <ul>
 <li>列(縦)ベクトル・行(横)ベクトルという <b>区別はない</b></li>
 <li>行列とベクトルの順序で適切に判断される</li>
-<li><p>
-計算結果は <b>行列</b> で表現される (演算子 <code>%*%</code>)
-</p>
+<li>演算子 <code>%*%</code> による計算結果は <b>行列</b> で表現される</li>
+
+</ul>
 <div class="org-src-container">
 
-<pre><code class="R" >A &lt;- matrix(1:4,2,2); b &lt;- c(5,6) # 行列とベクトルを作成
+<pre><code class="R" >A &lt;- matrix(1:4, 2, 2); b &lt;- c(5,6) # 行列とベクトルを作成
 A %*% b # 行列 x ベクトル = 列ベクトル
 </code></pre>
 </div>
+
+<pre class="example">
+[,1]
+[1,]   23
+[2,]   34
+</pre>
+
 
 <div class="org-src-container">
 
 <pre><code class="R" >b %*% A # ベクトル x 行列 = 行ベクトル
 </code></pre>
-</div></li>
+</div>
+
+<pre class="example">
+     [,1] [,2]
+[1,]   17   39
+</pre></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
-
 </section>
-<section id="slide-orgf987987">
-<h3 id="orgf987987">連立1次方程式の解法</h3>
+<section id="slide-org9e69b6e">
+<h3 id="org9e69b6e">連立1次方程式の解法</h3>
 <ul>
 <li><p>
 連立1次方程式
@@ -1073,6 +1211,7 @@ A %*% b # 行列 x ベクトル = 列ベクトル
 <li>\(\boldsymbol{b},\boldsymbol{x}\) : \(n\) 次元列ベクトル</li>
 
 </ul>
+<blockquote>
 <div>
 \begin{align}
   A\boldsymbol{x}&=\boldsymbol{b}
@@ -1081,8 +1220,8 @@ A %*% b # 行列 x ベクトル = 列ベクトル
   &&\text{(\(A\)が正則な場合)}
 \end{align}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 解を求めるには関数 <code>solve()</code> を利用する
 </p>
@@ -1090,69 +1229,69 @@ A %*% b # 行列 x ベクトル = 列ベクトル
 
 <pre><code class="R" >x &lt;- solve(A, b) 
 </code></pre>
-</div></li>
+</div>
+<ul>
 <li>ベクトル \(\boldsymbol{b}\) の代わりに行列も扱える</li>
+
+</ul></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-orga525c19">
-<h3 id="orga525c19">逆行列</h3>
+<section id="slide-orgc1580ab">
+<h3 id="orgc1580ab">逆行列</h3>
 <ul>
 <li><p>
 正則な \(n\) 次正方行列 \(A\) の逆行列 \(A^{-1}\)
 </p>
+<blockquote>
 <div>
 \begin{equation}
   AA^{-1}=A^{-1}A=E_{n}
   \quad\text{(\(E_{n}\)は\(n\)次単位行列)}
 \end{equation}
 
-</div></li>
-
+</div>
+</blockquote></li>
 <li><p>
 関数 <code>solve()</code> を利用して求めることができる
 </p>
+<blockquote>
 <div>
-\begin{align}
-  AX&=E_{n}\\
-  X&=A^{-1}E_{n}=A^{-1}
-\end{align}
+\begin{equation}
+  AX = E_{n},\quad X = A^{-1}E_{n} = A^{-1}
+\end{equation}
 
 </div>
-
+</blockquote>
 <div class="org-src-container">
 
 <pre><code class="R" >solve(A,B) # AX=B の解Xを求める
 solve(A) # 逆行列 (Bが単位行列の場合省略できる)
 </code></pre>
-</div></li>
-<li><span style="color:gray;">他にもいくつか方法は用意されている</span></li>
+</div>
+<ul>
+<li>他にもいくつか方法は用意されている</li>
+
+</ul></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
-<section id="slide-org2d114a6">
-<h3 id="org2d114a6">関数の適用</h3>
+<section id="slide-org3a464b9">
+<h3 id="org3a464b9">関数の適用</h3>
 <ul>
 <li>ベクトルや行列に関数( \(\sin,\exp,\dots\) など)を適用すると
 成分ごとに計算した結果が返される</li>
 <li><p>
 <span style="color:green;">ベクトル \(\boldsymbol{a}\) ，行列 \(A\) に関数 \(\sin\) を適用する</span>
 </p>
+<blockquote>
 <div>
 \begin{equation}
   (\sin(\boldsymbol{a}))_{i}=\sin(a_{i})
 \end{equation}
 
-</div>
-
-<div class="org-src-container">
-
-<pre><code class="R" >sin(a) # 成分ごとに計算される．sin(a)[i]=sin(a[i])
-</code></pre>
 </div>
 <div>
 \begin{equation}
@@ -1160,51 +1299,64 @@ solve(A) # 逆行列 (Bが単位行列の場合省略できる)
 \end{equation}
 
 </div>
-
+</blockquote>
 <div class="org-src-container">
 
-<pre><code class="R" >sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
+<pre><code class="R" >sin(a) # 成分ごとに計算される．sin(a)[i]=sin(a[i])
+sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
 </code></pre>
 </div></li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
-
 </section>
 </section>
 <section>
-<section id="slide-orgb60b314" data-background="#fef4f4">
-<h2 id="orgb60b314">演習</h2>
+<section id="slide-orgf822a8c" data-background="#fef4f4">
+<h2 id="orgf822a8c">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc044f5b">
-<h3 id="orgc044f5b">例題</h3>
+<section id="slide-orgc597c28">
+<h3 id="orgc597c28">例題</h3>
 <ul>
 <li><p>
 適当な3次正方行列 \(A\) と3次元ベクトル \(\boldsymbol{b}\) を作成して
 \(\boldsymbol{x}\) に関する以下の連立1次方程式を解きなさい
 </p>
+<blockquote>
 <div>
 \begin{equation}
   A\boldsymbol{x}=\boldsymbol{b}
 \end{equation}
 
-</div></li>
+</div>
+</blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 
+<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org18f2d42">
-<h3 id="org18f2d42">解答例</h3>
+<section>
+<ul>
+<li><p>
+解答例
+</p>
 <div class="org-src-container">
 
 <pre><code class="R" >(A &lt;- matrix(rnorm(9),3,3)+diag(rep(1,3))) # 行列とベクトルを作成
-## rnorm(9) は正規乱数を9つ作成する(後の講義で詳しく説明)
+#' rnorm(9) は正規乱数を9つ作成する(後の講義で詳しく説明)
 (b &lt;- 1:3)
 </code></pre>
 </div>
+
+<pre class="example">
+          [,1]       [,2]       [,3]
+[1,] 1.5878313  0.3760501 -1.3131373
+[2,] 0.8653146  0.0234271 -0.6202166
+[3,] 1.8258937 -0.4927867  0.8785636
+[1] 1 2 3
+</pre>
+
 
 <div class="org-src-container">
 
@@ -1212,15 +1364,25 @@ solve(A) # 逆行列 (Bが単位行列の場合省略できる)
 A %*% x # 結果の確認(b になるはず)
 </code></pre>
 </div>
-<div class="slide-footer"><br></div>
 
+<pre class="example">
+[1]  0.4724799 -9.5544641 -2.9263803
+[,1]
+[1,]    1
+[2,]    2
+[3,]    3
+</pre></li>
+
+</ul>
+<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8c47293" data-background="#fef4f4">
-<h3 id="org8c47293">練習問題</h3>
+<section id="slide-org279c965" data-background="#fef4f4">
+<h3 id="org279c965">練習問題</h3>
 <ul>
 <li>1から10の2乗値からなるベクトルを作成せよ</li>
 <li><p>
 例題の \(A\) と \(\boldsymbol{b}\) を用いて
+以下を計算するとエラーになる
 </p>
 <div class="org-src-container">
 
@@ -1228,18 +1390,17 @@ A %*% x # 結果の確認(b になるはず)
 </code></pre>
 </div>
 <p>
-を計算するとエラーになるが，何故そうなるか理由を考えよ
+何故そうなるか理由を考えよ
 </p></li>
 <li>2次元ベクトルを回転行列で変換しても長さが変わらないことを確かめよ</li>
 
 </ul>
 <div class="slide-footer"><br></div>
-
 </section>
 </section>
 <section>
-<section id="slide-orgb0efefc">
-<h2 id="orgb0efefc">次回の予定</h2>
+<section id="slide-org7c70422">
+<h2 id="org7c70422">次回の予定</h2>
 <ul>
 <li>R言語における関数</li>
 <li>引数の扱い方 (引数名・順序・既定値)</li>

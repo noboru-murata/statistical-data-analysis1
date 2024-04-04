@@ -123,10 +123,10 @@ library(tidyverse)
 
 #' 同じ長さのベクトル(関数 base::c() で作成)を並べる (関数 tibble::tibble())
 #' (... <- ...) は代入した結果を表示
-(foo <- tibble(one = c(1,2,3),two = c("AB","CD","EF"))) 
-(bar <- tibble(three = c("x","y","z"),four = c(0.9,0.5,-0.3)))
+(foo <- tibble(one = c(1,2,3), two = c("AB","CD","EF"))) 
+(bar <- tibble(three = c("x","y","z"), four = c(0.9,0.5,-0.3)))
 #' データフレームを結合する (関数 dplyr::bind_cols())
-(baz <- bind_cols(foo,bar)) # bind columns
+(baz <- bind_cols(foo, bar)) # bind columns
 
 #' @notes
 #' "foo", "bar", "baz" は使い捨ての変数名として良く用いられる
@@ -135,8 +135,8 @@ library(tidyverse)
 #' @exercise データフレームの要素の選択
 
 z <- tibble(one = c(1,2,3),
-                two = c("AB","CD","EF"),
-                three = 6:8)
+            two = c("AB","CD","EF"),
+            three = 6:8)
 z[1,2] # 1行2列の要素を選択
 z[-c(1,3),] # 1,3行を除外
 z[c(TRUE,FALSE,TRUE),] # 1,3行を選択
