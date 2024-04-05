@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-02 13:50:12 mura>
+# Time-stamp: <2024-04-05 14:11:35 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -27,6 +27,26 @@
 - 数理科学科で同内容の講義 (後期)
 - 統計データ解析IIでは多変量解析を扱う
 
+** 講義計画 (13回を予定)
+#+begin_leftcol
+- R・RStudio 入門 (6回)
+  - R 言語の使い方
+  - データの整理
+  - データの視覚化
+  - 確率シミュレーション
+- 確率論 (2回)
+  - 極限定理
+  - 確率分布
+#+end_leftcol
+#+begin_rightcol
+- 統計学 (5回)
+  - 基礎的な記述統計量とデータの集約
+  - 推定
+  - 検定
+  - 分散分析
+  - 回帰分析
+#+end_rightcol
+
 ** 受講の注意
 - 以下の科目は既習であることが望ましい
   - 微分積分学
@@ -39,31 +59,13 @@
   - 事前に目を通しておくことが望ましい
   - https://noboru-murata.github.io/statistical-data-analysis1/
 
-** 講義計画 (13回を予定)
-#+begin_leftcol
-- R・RStudio 入門
-  - R 言語の使い方
-  - データの整理
-  - データの視覚化
-  - 確率シミュレーション
-- 確率
-  - 極限定理
-  - 確率分布
-#+end_leftcol
-#+begin_rightcol
-- 統計
-  - 基礎的な記述統計量とデータの集約
-  - 推定
-  - 検定
-  - 分散分析
-  - 回帰分析
-#+end_rightcol
-
 ** 成績評価
 - 期末レポートにより評価
 - 確率シミュレーションまたはデータ解析
   - 課題は自身で設定
   - レポートとプログラム(およびデータ)を提出
+- 締切は授業終了から1週間後
+  - 詳細は後日LMSに掲載
 
     
 * Footnotes

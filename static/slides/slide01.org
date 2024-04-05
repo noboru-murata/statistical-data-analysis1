@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-04 12:24:41 mura>
+# Time-stamp: <2024-04-05 15:34:59 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -55,7 +55,7 @@
 - https://www.r-project.org/ (プロジェクトのサイト)
 
 ** RStudioとは
-- RStudio社が開発している統合開発環境 (IDE)
+- Posit Software が開発している統合開発環境 (IDE)
   - R によるデータ解析や統計計算・パッケージ開発を支援
   - OSにほとんど依存しない対話型操作環境を提供
 - 本講義ではRStudioを用いて説明を行う
@@ -210,7 +210,7 @@
     - 既にあるディレクトリを用いる場合は *Existing Directory* 
     - Github などを利用する場合は *Version Control* 
   - *Project Type* ダイアログで *New Project* を選択
-  - *Directry Name* とその親ディレクトリを指定
+  - *Directory Name* とその親ディレクトリを指定
 # - 中断するときは *Close Project* を選択
   
 ** 終了時の注意
@@ -768,10 +768,10 @@
 :END:
 - パッケージを導入して
   含まれている関数について調べてみよう
-  - package 'e1071' を導入する
+  - package 'e1071' をインストールする
   - 関数 kurtosis を調べる
   - 関数 kurtosis を呼び出す
-- パッケージをインストールしてみよう
+- パッケージ群を導入してみよう
   - package 'tidyverse' をインストールする
   
 # *swir* パッケージを導入して
