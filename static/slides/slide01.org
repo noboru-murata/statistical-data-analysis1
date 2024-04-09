@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-05 15:34:59 mura>
+# Time-stamp: <2024-04-05 15:56:31 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -22,6 +22,9 @@
 
 
 * 講義概要
+:PROPERTIES:
+:ID:       912C12E8-D242-4F63-B8C7-7D2440FCDDEB
+:END:
 - R言語の概要
 - RStudio の UI (ユーザインタフェース)
 - R言語の使い方
@@ -50,7 +53,7 @@
 - 統計計算のための言語と環境の総称
 - オープンソース・フリーソフトウェア
 - *パッケージ* を利用して容易に機能拡張が可能
-  - パッケージの開発は非常に活発 (現在10000を越える)
+  - パッケージの開発は非常に活発 (現在20000を越える)
   - 最新の技術や方法が簡単に導入できることも多い
 - https://www.r-project.org/ (プロジェクトのサイト)
 
@@ -321,6 +324,7 @@
 
 ** 電卓として使う
 :PROPERTIES:
+:ID:       39F770F0-4FB7-494F-A528-95BFF8DC9CC9
 :END:
 - [[color:green][コンソール上での計算例]]
   #+begin_src R :exports none
@@ -472,6 +476,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       352F50B2-453D-4ED2-8C0C-ED2E64E334D0
 :END:
 基本的な操作に慣れよう
 - 以下の計算を行う R Script を作成し保存しなさい
@@ -523,6 +528,7 @@
 
 ** 関数の実行例
 :PROPERTIES:
+:ID:       E76E827F-569F-45C0-8A2A-C1BDB518AC3B
 :END:
 - [[color:green][正弦関数の計算]]
   #+begin_src R :exports none
@@ -612,6 +618,7 @@
 
 ** ヘルプ機能の利用例
 :PROPERTIES:
+:ID:       005E69AF-A74D-48B4-BDC3-DCFB559518B4
 :END:
 - [[color:green][ヘルプの使い方]] 
   #+begin_src R :exports none
@@ -640,6 +647,7 @@
 
 ** オブジェクトの代入の例
 :PROPERTIES:
+:ID:       346CF2E2-FF66-4A3E-826E-708E65A82046
 :END:
 - [[color:green][代入操作の例]]
   #+begin_src R
@@ -765,6 +773,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       4CFD7C92-5054-4948-9B8D-25CCFC8823E9
 :END:
 - パッケージを導入して
   含まれている関数について調べてみよう
@@ -838,6 +847,9 @@
   #+end_quote
 
 ** ベクトルの作成
+:PROPERTIES:
+:ID:       73CD7720-4675-4F8A-9322-689C67ED541F
+:END:
 - 作成方法はいくつか用意されている
   - 関数 ~c()~ を用いて作成する
   - 演算子 ~:~ や関数 ~seq()~ を利用する (等差数列)
@@ -856,6 +868,9 @@
   #+end_src
   
 ** ベクトルの要素の選択
+:PROPERTIES:
+:ID:       D10D89C0-7E01-4A92-9067-9795FCADF8F0
+:END:
 - 演算子 ~[]~ を用いて指定する
   - 単一の要素を選択する
   - 複数の要素をベクトルを用いて選択することもできる
@@ -886,6 +901,7 @@
 
 ** "base R" vs "tidyverse"
 :PROPERTIES:
+:ID:       7FA20D3C-6744-4398-93D4-15A0DF612108
 :END:
 - データ操作とグラフィクスの枠組
   - *base R* : R の標準環境
@@ -914,6 +930,7 @@
   
 ** データフレームの作成
 :PROPERTIES:
+:ID:       1685F060-3E34-4356-95AB-DF75D147825F
 :END:
 - 作成方法はいくつか用意されている
   - 同じ長さのベクトルを並べる(関数 ~tibble::tibble()~)
@@ -940,6 +957,7 @@
 
 ** データフレームの要素の選択
 :PROPERTIES:
+:ID:       3554AF9D-23E0-47C7-8593-24373533EF42
 :END:
 - 選択方法はいくつか用意されている
   - 添字の番号を指定する (マイナスは除外)
@@ -972,6 +990,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       7EF7532D-E2FB-4AF5-AEEE-55A6E9ECCFFA
 :END:
 - 次の表に対応するデータフレームを作成しなさい
   |-------+------+------+------+-----|

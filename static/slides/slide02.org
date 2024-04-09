@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-04 15:46:18 mura>
+# Time-stamp: <2024-04-09 15:36:13 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -115,7 +115,7 @@
     rep(y, length.out = 12)  # 繰り返した結果の長さを指定する
   #+end_src
 
-
+  
 * 演習
 :PROPERTIES:
 :reveal_background: #fef4f4
