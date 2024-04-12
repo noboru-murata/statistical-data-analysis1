@@ -1,4 +1,4 @@
-MSG = "2024 version"
+MSG = $(shell head -1 VERSION)
 
 all: html
 
@@ -7,7 +7,7 @@ html:
 
 push:
 	git add --all
-	git commit -m ${MSG}
+	git commit -m "${MSG}"
 	git push -u origin master
 
 stat:

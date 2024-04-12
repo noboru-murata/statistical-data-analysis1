@@ -6,11 +6,11 @@ draft = false
 weight = 1016
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2024-04-04 Thu&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2024-04-12 Fri&gt; </span></span> 更新
 
 講義の進捗に合わせて追加します．
 
--   第1講 (2024年4月5日)
+-   [第1講 (2024年4月5日)](https://u-tokyo-ac-jp.zoom.us/rec/share/UDiG9s_v8UbZwoDISJEmsf-R3J7zM3ADoy9qaNPhNapvuRktF3N1sq2nn4QxzQw9.ulecTtdKmS8TWuoZ?startTime=1712304155000)
 -   第2講 (2024年4月19日)
 -   第3講 (2024年4月26日)
 -   第4講 (2024年5月10日)
