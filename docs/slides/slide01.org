@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-05 15:56:31 mura>
+# Time-stamp: <2024-04-12 15:22:44 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -19,7 +19,6 @@
 - 第1回は一緒に使いながら説明と同時に細々練習を行う
 - projectを導入したのでworking directoryなどは概念だけで良いかも
 - 実習，練習問題という形に整理する
-
 
 * 講義概要
 :PROPERTIES:
@@ -778,7 +777,7 @@
 - パッケージを導入して
   含まれている関数について調べてみよう
   - package 'e1071' をインストールする
-  - 関数 kurtosis を調べる
+  - 関数 kurtosis (尖度) を調べる
   - 関数 kurtosis を呼び出す
 - パッケージ群を導入してみよう
   - package 'tidyverse' をインストールする

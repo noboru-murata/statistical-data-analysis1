@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-09 15:36:13 mura>
+# Time-stamp: <2024-04-12 16:26:26 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -18,6 +18,9 @@
 - 最後の関数の話は第3回に移動したのでそろそろ消しても良い
 
 * 講義概要
+:PROPERTIES:
+:ID:       5C75BD3B-039A-4CBB-8CED-D21CEE224D87
+:END:
 - R言語のデータ構造
 - ベクトル・行列・リストの操作
 - ベクトルと行列のさまざまな計算
@@ -53,6 +56,9 @@
 - スカラーは長さ1のベクトルとして扱われる
 
 ** ベクトルの生成
+:PROPERTIES:
+:ID:       12149471-FF31-4E68-94C8-99AA830D2AF6
+:END:
 - 数値や文字列の要素からなるベクトルの生成
   #+begin_src R :exports none
     #' @exercise ベクトルの生成
@@ -82,6 +88,9 @@
   #+end_src
  
 ** ベクトルの操作
+:PROPERTIES:
+:ID:       6FCA0144-240B-4227-9CC0-B8EF6454128E
+:END:
 - ベクトルの長さの取得 (関数 ~length()~)
   #+begin_src R :exports none
     #' @exercise ベクトルの操作
@@ -116,13 +125,14 @@
   #+end_src
 
   
-* 演習
+* 実習
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       0C7D2DB5-DBA2-40D6-AE2C-1DD964C9F1BD
 :END:
 - 以下に示すベクトルを作成してみよう
   - 1から10までの自然数のベクトル
@@ -140,10 +150,10 @@
   #' 1から10までの自然数のベクトル
   (foo <- 1:10)
   #' 1以上30以下の奇数を昇順に並べたベクトル
-  (bar <- seq(from=1,to=30,by=2)) # 変数名を含めた丁寧な書き方
+  (bar <- seq(from = 1, to = 30, by = 2)) # 変数名を含めた丁寧な書き方
   #' すべての要素が1からなる長さ10のベクトル
-  (baz <- rep(1,length.out=10)) # 関数rep_len() もある
-  rep(1,len=15) # 変数名は見分けられれば短くてもOK
+  (baz <- rep(1, length.out = 10)) # 関数rep_len() もある
+  rep(1, len = 15) # 変数名は見分けられれば短くてもOK
   #' 
   #' ベクトルの長さを求める
   length(foo)
@@ -164,6 +174,9 @@
 - データフレームは行列を拡張したもの
 
 ** 行列の生成
+:PROPERTIES:
+:ID:       6A425781-655C-4377-B379-7DD7F0095D57
+:END:
 - すべての要素が ~a~ である \(m\times n\) 型行列の生成 \\
   (関数 ~matrix()~)
   #+begin_src R :exports none
@@ -201,6 +214,9 @@
   # ~cbind()/rbind()~ は行列の結合にも使える
 
 ** 行列の操作
+:PROPERTIES:
+:ID:       487F9F06-C054-4E8F-B790-771E9EDC15DD
+:END:
 - 行列のサイズの取得 (関数 ~dim()~ とその仲間)
   #+begin_src R :exports none
     #' @exercise 行列の操作
@@ -232,13 +248,14 @@
 - [[color:gray][これらの機能は講義の中で使いながら説明する]]
 
 
-* 演習
+* 実習
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       6523ABE4-A3FF-4F2A-9CE2-F1D17CAC0080
 :END:
 - 以下に示す行列を作成してみよう
   \begin{equation}
@@ -283,6 +300,9 @@
   - Rの関数の操作ではときどき必要
 
 ** リストの生成と操作
+:PROPERTIES:
+:ID:       DA385867-2EF8-43CF-9748-AB43C8F833BE
+:END:
 - リストの生成 (関数 ~list()~)
   #+begin_src R :exports none
     #' @exercise リストの生成と操作
@@ -329,6 +349,9 @@
   行列と同様にして各変数を取得できる
 
 ** データフレームの生成
+:PROPERTIES:
+:ID:       F1573615-2B04-4FD8-BDDA-E19EB5C69E07
+:END:
 - データフレームの生成 (関数 ~data.frame()~)
   #+begin_src R :eval no
     #' 前回の練習問題
@@ -366,6 +389,9 @@
   #+end_src
 
 ** ベクトルの加法
+:PROPERTIES:
+:ID:       0B078940-9F0D-48BB-ABCF-B62E29B6F6B8
+:END:
 - *同じ長さのベクトル* の和および差
   #+begin_quote
   \begin{equation}
@@ -398,6 +424,9 @@
 - データ解析ではどちらも良く用いられる
 
 ** Hadamard 積
+:PROPERTIES:
+:ID:       C7CB5C5D-F364-4FEE-AA03-EB5025DEAE8E
+:END:
 - *同じ長さのベクトル* の成分ごとの積
   #+begin_quote
   \begin{equation}
@@ -416,6 +445,9 @@
   #+end_src
 
 ** 内積
+:PROPERTIES:
+:ID:       5B0AF400-22B1-421A-B8AB-27E8115D2D21
+:END:
 - *同じ長さのベクトル* の内積
   #+begin_quote
   \begin{align}
@@ -463,6 +495,9 @@
   #+end_src
 
 ** 行列の加法
+:PROPERTIES:
+:ID:       C71C99E2-1AB7-4A2C-8CF8-4868DFA42C52
+:END:
 - *同じ大きさの行列* の和および差
   #+begin_quote
   \begin{equation}
@@ -490,6 +525,9 @@
 - データ解析ではどちらも良く用いられる
 
 ** Hadamard 積
+:PROPERTIES:
+:ID:       54B79A6C-B19F-4C09-9176-A27E7A16895F
+:END:
 - *同じ大きさの行列* の成分ごとの積
   #+begin_quote
   \begin{equation}
@@ -503,6 +541,9 @@
   #+end_src
 
 ** 行列の積
+:PROPERTIES:
+:ID:       5917CA3E-912F-4FA9-9EF6-DB7FAFD83C4F
+:END:
 - *\(n\times m\) 型行列 \(A\) と \(m\times l\) 型行列 \(B\)* の積
   #+begin_quote
   \begin{equation}
@@ -520,6 +561,9 @@
   #+end_src
 
 ** 行列式
+:PROPERTIES:
+:ID:       100473BC-4534-4BFB-A1C7-29BAEEC855AD
+:END:
 - *\(n\) 次正方行列* \(A\) の行列式
   #+begin_quote
   \begin{equation}
@@ -537,6 +581,9 @@
   #+end_src
 
 ** トレース
+:PROPERTIES:
+:ID:       9671F7CE-5F96-4EF6-9D6A-8A2BADF016EA
+:END:
 - *\(n\) 次正方行列* \(A\) のトレース(対角成分の総和)
   #+begin_quote
   \begin{equation}
@@ -552,11 +599,14 @@
   - 関数 ~sum()~ : ベクトルの総和を計算する 
 
 
-* 演習
+* 実習
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
 ** 例題
+:PROPERTIES:
+:ID:       33F6D79F-5E44-48DF-B085-357B9FB833A7
+:END:
 - 適当な2次正方行列 \(A\) で
   Hamilton-Cayley の定理
   #+begin_quote
@@ -582,6 +632,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       0CCCA281-E991-4D26-9475-30BEAC3A6F3F
 :END:
 - 1から10の2乗値からなるベクトルを作成せよ
 - 1から10までの和を計算せよ
@@ -635,6 +686,9 @@
 
 * ベクトルと行列の計算
 ** ベクトルと行列の乗法
+:PROPERTIES:
+:ID:       5048C2B2-20DA-4E1E-90A1-51057DE0388B
+:END:
 - 演算子 ~%*%~ を用いて計算する
   - 列(縦)ベクトル・行(横)ベクトルという *区別はない*
   - 行列とベクトルの順序で適切に判断される
@@ -651,6 +705,9 @@
   #+end_src
 
 ** 連立1次方程式の解法
+:PROPERTIES:
+:ID:       44523FBA-58EC-461F-B832-C3569A9BD0A1
+:END:
 - 連立1次方程式
   - \(A\) : \(n\) 次正則行列
   - \(\boldsymbol{b},\boldsymbol{x}\) : \(n\) 次元列ベクトル
@@ -669,6 +726,9 @@
   - ベクトル \(\boldsymbol{b}\) の代わりに行列も扱える
 
 ** 逆行列
+:PROPERTIES:
+:ID:       F6532929-58F0-466A-9368-44A1BE07363A
+:END:
 - 正則な \(n\) 次正方行列 \(A\) の逆行列 \(A^{-1}\)
   #+begin_quote
   \begin{equation}
@@ -689,6 +749,9 @@
   - 他にもいくつか方法は用意されている
 
 ** 関数の適用
+:PROPERTIES:
+:ID:       53D49552-E421-484F-86D5-18C196FD91DA
+:END:
 - ベクトルや行列に関数( \(\sin,\exp,\dots\) など)を適用すると
   成分ごとに計算した結果が返される
 - [[color:green][ベクトル \(\boldsymbol{a}\) ，行列 \(A\) に関数 \(\sin\) を適用する]]
@@ -706,11 +769,14 @@
   #+end_src
 
 
-* 演習
+* 実習
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
 ** 例題
+:PROPERTIES:
+:ID:       4FE892DD-5082-45DB-BF18-0A334B106EB0
+:END:
 - 適当な3次正方行列 \(A\) と3次元ベクトル \(\boldsymbol{b}\) を作成して
   \(\boldsymbol{x}\) に関する以下の連立1次方程式を解きなさい
   #+begin_quote
@@ -725,18 +791,19 @@
     #' @exercise 3元連立1次方程式の解法
   #+end_src
   #+begin_src R
-    (A <- matrix(rnorm(9),3,3)+diag(rep(1,3))) # 行列とベクトルを作成
+    (A <- matrix(rnorm(9), 3, 3) + diag(rep(1, 3))) # 行列とベクトルを作成
     #' rnorm(9) は正規乱数を9つ作成する(後の講義で詳しく説明)
     (b <- 1:3)
   #+end_src
   #+begin_src R
-    (x <- solve(A,b)) # 解を計算
+    (x <- solve(A, b)) # 解を計算
     A %*% x # 結果の確認(b になるはず)
   #+end_src
 
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       F218A689-EFC6-48F8-BC4F-DA49D63FC370
 :END:
 - 1から10の2乗値からなるベクトルを作成せよ
 - 例題の \(A\) と \(\boldsymbol{b}\) を用いて
@@ -774,289 +841,6 @@
   sum(y^2) # 上記と同様の計算は各成分の2乗和として計算することもできる(xも同様)
   #' ---------------------------------------------------------------------------
 #+end_src
-
-
-* COMMENT 関数の定義
-** 自作関数
-- 他の言語と同様にRでも関数を定義できる   
-- 関数の定義には関数 ~function()~ を利用する 
-- [[color:green][半径 r から球の体積と表面積を求める関数]]
-  #+begin_src R 
-    myfunc <- function(r){
-      V <- (4/3) * pi * r^3 # 球の体積
-      S <- 4 * pi * r^2     # 球の表面積
-      out <- c(V,S) # 返り値のベクトルを作る
-      names(out) <- c("volume", "area") # 返り値の要素に名前を付ける
-      return(out) # 値を返す
-    }
-    myfunc(1) # 実行
-  #+end_src
-
-* COMMENT 制御構造
-** 制御文
-- 最適化や数値計算などを行うためには，
-  条件分岐や繰り返しを行うための仕組みが必要となる
-- R言語を含む多くの計算機言語では
-  - ~if~  (条件分岐)
-  - ~for~  (繰り返し・回数指定)
-  - ~while~  (繰り返し・条件指定)
-- これを *制御文* と言う 
-
-** ~if~ 文
-- 条件Aが *真* のときプログラムXを実行する
-  #+begin_src R :exports code
-    if(条件A) プログラムX
-  #+end_src
-- 上記の ~if~ 文に条件Aが *偽* のときプログラムYを実行することを追加する
-  #+begin_src R :exports code
-    if(条件A) プログラムX else プログラムY    
-  #+end_src
-
-** ~if~ 文の例
-- [[color:green][20200724が19で割り切れるか?]]
-  #+begin_src R :exports none :tangle yes
-    ### 例題3
-    ### if文の例
-  #+end_src
-  #+begin_src R :tangle yes
-    if(20200724 %% 19 == 0) {# %% は余りを計算
-      print("割り切れます")
-      print(20200724 %/% 19) # 商を表示
-    } else { # {}で囲まれたブロックが1つのプログラム
-      print("割り切れません")
-      print(20200724 %% 19) # 余りを表示
-    } 
-  #+end_src
-
-** ~for~ 文
-- ベクトル ~V~ の要素を *順に* 変数 ~i~ に代入して
-  プログラムXを繰り返し実行する
-  #+begin_src R :exports code
-    for(i in V) プログラムX
-  #+end_src
-- プログラムXは変数 ~i~ によって実行内容が変わる
-
-** ~for~ 文の例
-- [[color:green][アルファベットの20,15,11,25,15番目を表示]]
-  #+begin_src R :exports none :tangle yes
-    ### 例題4
-    ### for文の例
-  #+end_src
-  #+begin_src R :tangle yes
-    print(LETTERS) # LETTERS ベクトルの内容を表示
-    for(i in c(20,15,11,25,15)) {
-      print(LETTERS[i]) # 順番に表示
-    }
-  #+end_src
-
-** ~while~ 文
-- 条件Aが *真* である限りプログラムXを繰り返す
-  #+begin_src R :exports code
-    while(条件A) プログラムX
-  #+end_src
-- プログラムXは実行するたびに実行内容が変わり，
-  いつか条件Aが満たされなくなるように書く
-- /(~repeat~ 文というものもある)/
-
-** ~while~ 文の例
-- [[color:green][20200809を素因数分解する]]
-  #+begin_src R :exports none :tangle yes
-    ### 例題5
-    ### while文の例
-  #+end_src
-  #+begin_src R :tangle yes
-    n <- 20200809 # 分解の対象
-    p <- 2 # 最初に調べる数
-    while(n != 1){ # 商が1になるまで計算する
-      for(i in p:n){ # pからnまで順に調べる
-        if(n%%i == 0) { # 余りが0か確認
-          print(i) # 割り切った数を表示
-          n <- n/i # 商を計算して分解の対象を更新
-          p <- i # 最初に調べる数を更新
-          break # for文を途中で終了
-        }  
-      }
-    }
-  #+end_src
-  # ** ~repeat~ 文
-  #    - プログラムXを繰り返し実行
-  #      #+begin_src R :exports code
-  #        repeat プログラムX
-  #      #+end_src
-  #    - プログラムXには
-  #      #+begin_src R :exports code
-  #        if(条件A) break
-  #      #+end_src
-  #      という記述が含まれている必要がある．
-  #      この記述は，「条件Aが成立したら繰り返しをやめる」という意味
-
-* COMMENT 演習
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-** 例題
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-- 三角形の3辺の長さ \(x,y,z\) を与えると
-  面積 \(S\) を計算する関数を作成せよ．
-- 参考: *ヘロンの公式* より
-  # #+begin_export latex
-  \begin{equation}
-    S=\sqrt{s(s-x)(s-y)(s-z)},\qquad
-    s=\frac{x+y+z}{2}
-  \end{equation}
-  # #+end_export
-  が成り立つ．
-
-** 解答例
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-#+begin_src R :exports none :tangle yes
-  ### 例題6
-  ### 三角形の面積を計算する関数
-#+end_src
-#+begin_src R :exports both :results output :tangle yes
-  area <- function(x,y,z){
-    s <- (x+y+z)/2
-    S <- (s*(s-x)*(s-y)*(s-z))^(1/2)
-    ## S <- sqrt(s*(s-x)*(s-y)*(s-z)) # 平方根を求める関数を用いても良い
-    return(S)
-  }
-  area(3,4,5) # 直角三角形で検算
-  area(12,13,5)
-#+end_src
-
-** 演習
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-- 非負の整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ．
-
-#+begin_src R :exports none :tangle yes
-  ### 練習3.1
-  ### 階乗を計算する関数
-  ## for文を用いた関数
-  fact1 <- function(n){
-    val <- 1
-    for(i in 1:n){
-      val <- val*i
-    }
-    return(val)
-  }
-  fact1(0) # 間違い
-  fact1(1)
-  fact1(2)
-  fact1(3)
-  fact1(4)
-  ## if文を用いた修正版
-  fact2 <- function(n){
-    if(n==0){
-      return(1)
-    } else {
-      val <- 1
-      for(i in 1:n){
-        val <- val*i
-      }
-      return(val)
-    }
-  }
-  fact2(0) # 正しい
-  fact2(1)
-  fact2(2)
-  fact2(3)
-  fact2(4)
-  ## while文を用いた関数
-  fact3 <- function(n){
-    val <- 1
-    while(n>0){
-      val <- val*n
-      n <- n-1
-    }
-    return(val)
-  }
-  fact3(0)
-  fact3(1)
-  fact3(2)
-  fact3(3)
-  fact3(4)
-#+end_src
-
-- 整数 \(n\) の Fibonacci数を求める関数を作成せよ．
-  #+begin_export latex
-  \begin{align}
-    F_{0}&=0\\
-    F_{1}&=1\\
-    F_{n}&=F_{n-1}+F_{n-2}
-  \end{align}
-  #+end_export
-
-#+begin_src R :exports none :tangle yes
-  ### 練習3.2
-  ### Fibonacci数を返す関数
-  fibo <- function(n){
-    f0 <- 0 # 第0項の設定
-    f1 <- 1 # 第1項の設定
-    if(n<0) {
-      print("計算できません")
-      return(NA) # 欠損値を返す
-    }
-    if(n==0) { # n=0の場合
-      return(f0)
-    }
-    if(n==1) { # n=1の場合
-      return(f1)
-    }
-    for(i in 2:n) { # n>=2の場合
-      fn <- f1 + f0 # fn = fn-1 + fn-2 の計算
-      f0 <- f1 # fn-2 の値の更新
-      f1 <- fn # fn-1 の値の更新
-    }
-    return(fn) # 計算結果を返す
-  }
-#+end_src
-
-- 行列 \(X\) が与えられたとき，各列の平均を計算する関数を作成せよ．
-  
-#+begin_src R :exports none :tangle yes
-  ### 練習3.3
-  ### 行列の列の平均を計算する関数
-  colave <- function(X) {
-    ave <- rep(0,length=ncol(X)) # 平均を記録するベクトルを用意
-    for(i in 1:ncol(X)){ # 列ごとに計算
-      ave[i] <- sum(X[,i])/nrow(X) # 平均の定義に従って計算
-      ## ave[i] <- mean(X[,i]) # 平均を計算する関数を用いても良い
-    }
-    return(ave)
-  }
-  (A <- matrix(1:12,3,4,byrow=TRUE))
-  colave(A)
-#+end_src
-
-- 前問で \(X\) がベクトルの場合にはその平均を計算するように修正せよ．\\
-  /(関数 ~is.vector()~ が利用できる)/
-  
-#+begin_src R :exports none :tangle yes
-  ### 練習3.4
-  ### ベクトルと行列を扱えるように修正
-  colave <- function(X){ 
-    if(is.vector(X)){
-      ave <- mean(X)
-    } else {
-      ave <- rep(0,length=ncol(X))
-      for(i in 1:ncol(X)){
-        ave[i] <- mean(X[,i])
-      }
-    }
-    return(ave)
-  }
-  (A <- matrix(1:12,3,4,byrow=TRUE))
-  colave(A)
-  (x <- 1:12)
-  colave(x)
-#+end_src
-
 
 
 * 次回の予定

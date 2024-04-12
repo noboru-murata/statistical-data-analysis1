@@ -3,136 +3,161 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-04-14 15:22:17 mura>
-:REVEAL:
-#+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
+# Time-stamp: <2024-04-12 16:46:15 mura>
+:REVEAL:
+#+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :END:
 
+* COMMENT メモ
+  - 関数の使い方，引数の扱い，順番，既定値
+    
 * 講義概要
+:PROPERTIES:
+:ID:       C073F474-E721-47E7-A84C-1BC3444600F8
+:END:
 - R言語における関数
 - 引数の扱い方 (引数名・順序・既定値)
 - 自作関数の定義
 - 制御構造 (条件分岐・繰り返し)
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 第3講 練習問題解答例
-#+end_src
-#+begin_src R :exports none
+#+begin_src R :exports none :tangle no
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
+#+begin_src R :exports none
+  ### 第3講 サンプルコード
+#+end_src
   
-* COMMENT メモ
-  - 関数の使い方，引数の扱い，順番，既定値
-    
 
 * R言語における関数
-#+begin_src R :exports none :tangle yes
-  ### R言語における関数で用いた例
+:PROPERTIES:
+:ID:       D1727D10-2C52-4C79-A21F-F5A6EFAF1E55
+:END:
+#+begin_src R :exports none
+  #' @exercise R言語における関数
 #+end_src
 
-** 関数
+** 関数 (復習)
 - 関数の取り扱いは一般的な計算機言語とほぼ同様
-- 関数は引数とその値を指定して実行 \\
-  [[color:gray][引数がない場合もある]]
+- 関数は引数とその値を指定して実行
 - 引数名は順序を守れば省略可能
 - [[color:green][関数の呼び出し方の例]]
-  #+begin_src R :eval no
-    f(arg1=value1, arg2=value2) # 擬似コード
-    ## arg1, arg2 は引数の名前，value1, value2 は引数に渡す値を表す
+  #+begin_src R :eval no :tangle no
+    f(arg1 = value1, arg2 = value2) # 擬似コード
+    #' arg1, arg2 は引数の名前，value1, value2 は引数に渡す値を表す
     f(value1, value2) # 上と同値．順序に注意
   #+end_src
+- 引数がない場合もある
 
 ** 関数の実行例
+:PROPERTIES:
+:ID:       94252376-DA9B-4D25-B3E5-19FCE8F99DF5
+:END:
 - [[color:green][正弦関数の計算]]
-  #+begin_src R :tangle yes
+  #+begin_src R :eval no
     sin(x = pi/2) # "引数名 = 値" で指定 
     sin(pi/2) # 上と同値 (引数と値の関係が明かなら引数名は省略可能)
   #+end_src
 - [[color:green][対数関数の計算]] 
-  #+begin_src R :eval no :tangle yes
+  #+begin_src R :eval no
     help(log) # ヘルプを表示して使い方を確認する
     x <- 16; b <- 2 # xやbに適当な数値を代入する．複数コマンドは ; で区切る
-    log(x=x, base=b) # 底をbとする対数
+    log(x = x, base = b) # 底をbとする対数
     log(x, b) # 上と同値
-    log(base=b, x=x) # 上と同値
-    log(b,x) # 上と異なる (=log(x=b,base=x))
-    log(x) # 自然対数 (既定値による計算 =log(x,base=exp(1)))
+    log(base = b, x = x) # 上と同値
+    log(b, x) # 上と異なる (=log(x = b, base = x))
+    log(x) # 自然対数 (既定値による計算 =log(x, base = exp(1)))
   #+end_src
 
 ** 引数と返値
+:PROPERTIES:
+:ID:       B3015D1C-80EE-4680-B49D-BE6DB3F719C0
+:END:
 - ヘルプにより関数の引数および返値を確認できる
   - 引数については "Arguments" の項を参照
   - 返値については "Values" の項を参照
 - 引数を省略すると既定値 (default) が用いられる
 - [[color:green][ヘルプによる関数仕様の表示の例]]
-  #+begin_src R :eval no :tangle yes
-    ## 正規乱数を生成する関数
+  #+begin_src R :eval no
+    #' 正規乱数を生成する関数
     help(rnorm) # Help タブから指定しても良い
-    ## ヒストグラムを表示する関数
-    ?hist
+    #' ヒストグラムを表示する関数
+    ?hist # help(hist) と同値
   #+end_src
 
 ** 既定値を持つ関数の実行例 (1/2)
+:PROPERTIES:
+:ID:       B2CF5566-081B-44EF-AB52-AAC7E36B7B9C
+:END:
 - [[color:green][正規乱数の生成]] 
-  #+begin_src R :tangle yes
-    rnorm(7) # 平均0 分散1 の正規乱数を7個生成
-    rnorm(7, mean=10) # 平均10 分散1 の正規乱数を7個生成
-    rnorm(sd=0.1, n=7) # 平均0 分散0.01 の正規乱数を7個生成
-    rnorm(n=7, mean=2, sd=2) # 平均2 分散4 の正規乱数を7個生成
+  #+begin_src R
+    rnorm(5) # 平均0 分散1 の正規乱数を5個生成
+    rnorm(5, mean = 10) # 平均10 分散1 の正規乱数を5個生成
+    rnorm(sd = 0.1, n = 5) # 平均0 分散0.01 の正規乱数を5個生成
+    rnorm(n = 5, mean = 2, sd = 2) # 平均2 分散4 の正規乱数を5個生成
   #+end_src
 
 ** 既定値を持つ関数の実行例 (2/2)
+:PROPERTIES:
+:ID:       48085950-B006-4748-A59C-BE1DDE53FECC
+:END:
 - [[color:green][ヒストグラムの表示]] 
-  #+begin_src R :tangle yes
-    foo <- rnorm(n=10000, mean=50, sd=10) # 平均50 標準偏差10 の正規乱数
+  #+begin_src R :eval no
+    foo <- rnorm(n = 10000, mean = 50, sd = 10) # 平均50 標準偏差10 の正規乱数
     hist(foo) # データ以外全て既定値で表示
     hist(foo, # 既定値のいくつかを変更する
-         breaks=30, # ビンを30程度に調整する
-         col="lightgreen", # 色の指定
-         main="mathematics", # タイトルの指定
-         xlab="score") # x軸ラベルの指定
-    ## Plots タブで描画結果を確認
+         breaks = 30, # ビンを30程度に調整する
+         col = "lightgreen", # 色の指定
+         main = "mathematics", # タイトルの指定
+         xlab = "score") # x軸ラベルの指定
+    #' Plots タブで描画結果を確認
   #+end_src
 
 
-* 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+* 実習
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       2DCBC52A-66C2-4DB8-B7F2-5C8C5F945F95
 :END:
 - ヘルプ機能 (Help タブの検索窓, 関数 ~help(),?~)
   を用いて関数 ~sample()~ を調べてみよう
 - サイコロを1回振る試行を模擬してみよう
 - サイコロを10回振る試行を模擬してみよう
-  - 引数 replace を調べよ
+  - 引数 ~replace~ を調べよ
 - 1が出易いサイコロを作ってみよう
-  - 引数 prob を調べよ
+  - 引数 ~prob~ を調べよ
 - 1から6をランダムに並べ替えてみよう 
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 練習問題 関数の使い方
-  ## sample を調べる
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice 関数の使い方
+  #'
+  #' sample を調べる
   help(sample)
-  ## サイコロを1回振る試行
-  sample(x=1:6, size=1)
-  ## サイコロを10回振る試行
-  sample(x=1:6, size=10) # エラーになる
-  sample(x=1:6, size=10, replace=TRUE)
-  ## 1が他の目の3倍出易いサイコロ
-  sample(1:6, 10, replace=TRUE, prob=c(3,rep(1,5))) # 引数の一部を省略
-  ## 1から6をランダムに並べ替える
-  sample(1:6, 6) # 既定値ではreplaceしない(復元抽出)ので並べ替えになる
+  #' サイコロを1回振る試行
+  sample(x = 1:6, size = 1)
+  #' サイコロを10回振る試行
+  sample(x = 1:6, size = 10) # エラーになる
+  sample(x = 1:6, size = 10, replace = TRUE)
+  #' 1が他の目の3倍出易いサイコロ
+  sample(1:6, 10, replace = TRUE, prob = c(3, rep(1,5))) # 引数の一部を省略
+  #' 1から6をランダムに並べ替える
+  sample(1:6, 6) # 既定値ではreplaceしない(復元抽出しない)ので並べ替えになる
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 
 * 関数の定義
+:PROPERTIES:
+:ID:       C19905FF-69D0-406B-B3CF-B23D37767D5E
+:END:
   #+begin_src R :exports none :tangle yes
     ### 関数の定義で用いた例
   #+end_src
@@ -140,76 +165,87 @@
 ** 自作関数
 - 他の言語と同様にRでも関数を定義できる   
 - 関数の定義には関数 ~function()~ を利用する 
-  #+begin_src R :eval no
-    ## 関数 function() 記法 (擬似コード)
+  #+begin_src R :eval no :tangle no
+    #' 関数 function() 記法 (擬似コード)
     関数名 <- function(引数){ # 計算ブロックの開始
-      ## このブロック内に必要な手続きを記述する．複数行に渡って構わない
+      #' このブロック内に必要な手続きを記述する．複数行に渡って構わない
       return(返値) # 計算結果を明示的に示す
     } # ブロックの終了
   #+end_src
 
-** 自作関数の例
+** 自作関数の例 (1/2)
+:PROPERTIES:
+:ID:       0731BAA2-46A9-47D1-95E7-81453746EAA4
+:END:
 - [[color:green][半径 r から球の体積と表面積を求める関数]]
-  #+begin_src R :tangle yes
+  #+begin_src R
     foo <- function(r){
       volume <- (4/3) * pi * r^3 # 球の体積
       surface <- 4 * pi * r^2     # 球の表面積
-      out <- c(volume,surface) # 返り値のベクトルを作る
+      out <- c(volume, surface) # 返り値のベクトルを作る
       names(out) <- c("volume", "surface_area") # 返り値の要素に名前を付ける
       return(out) # 値を返す
     }
-    foo(r=2) # 実行
+    foo(r = 2) # 実行
     foo(3) 
   #+end_src
 
-#+reveal: split
+** 自作関数の例 (2/2)
+:PROPERTIES:
+:ID:       7EF4B3CC-D412-44CD-9BB2-EB9E5CCE7EB1
+:END:
 - [[color:green][初項 a 公比 r の等比数列の最初のn項 (既定値は5)]]
   #+begin_src R :tangle yes
     bar <- function(a, r, n=5){
       out <- a*r^(1:n-1) # 1:n-1 と 1:(n-1) は異なるので注意
       return(out) # 値を返す
     }
-    bar(1,2) # 初項1 公比2 の最初の5項
-    bar(1,2,10) # 初項1 公比2 の最初の10項
-    bar(n=10,1,2) # 変数名を指定すると引数の位置を変えることができる
-    bar(r=0.5,n=10,a=512) # 同上
+    bar(1, 2) # 初項1 公比2 の最初の5項
+    bar(1, 2, 10) # 初項1 公比2 の最初の10項
+    bar(n = 10, 1, 2) # 変数名を指定すると引数の位置を変えることができる
+    bar(r = 0.5, n = 10, a = 512) # 同上
   #+end_src
 
 
-* 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+* 実習
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 例題
+:PROPERTIES:
+:ID:       E590B2F2-9348-4133-89AE-FE9209502BC2
+:END:
 - 三角形の3辺の長さ \(x,y,z\) を与えると
   面積 \(S\) を計算する関数を作成せよ．
   - 参考: *ヘロンの公式* より
-    #+begin_src latex
-      \begin{equation}
-        S=\sqrt{s(s-x)(s-y)(s-z)},\quad
-        s=\frac{x+y+z}{2}
-      \end{equation}
-    #+end_src
+    #+begin_quote
+    \begin{equation}
+      S=\sqrt{s(s-x)(s-y)(s-z)},\quad
+      s=\frac{x+y+z}{2}
+    \end{equation}
+    #+end_quote
     が成り立つ．
 
-** 解答例
-#+begin_src R :exports none :tangle yes
-  ### 例題 三角形の面積を計算する関数
-#+end_src
-#+begin_src R :exports both :results output :tangle yes
-  my_heron <- function(x,y,z){
-    ## 関数名は上書きされるので独特の名前にするのがお薦め
-    s <- (x+y+z)/2 # 補助変数 s の計算
-    S <- sqrt(s*(s-x)*(s-y)*(s-z)) # ヘロンの公式による面積の計算
-    return(S) # 面積を返す
-  }
-  my_heron(3,4,5) # よく知られた直角三角形を使って計算結果を確認する
-  my_heron(12,13,5) 
-#+end_src
+#+reveal: split
+- 解答例
+  #+begin_src R :exports none
+    #' @exercise 三角形の面積を計算する関数
+  #+end_src
+  #+begin_src R
+    my_heron <- function(x, y, z){
+      #' 関数名は上書きされるので独特の名前にするのがお薦め
+      s <- (x+y+z)/2 # 補助変数 s の計算
+      S <- sqrt(s*(s-x)*(s-y)*(s-z)) # ヘロンの公式による面積の計算
+      return(S) # 面積を返す
+    }
+    my_heron(3, 4, 5) # よく知られた直角三角形を使って計算結果を確認する
+    my_heron(12, 13, 5) 
+  #+end_src
 
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       292EC7C5-8439-4BA1-A862-56DD7E72CB72
 :END:
 - 1から整数 \(n\) までの和を求める関数を作成せよ
   - 関数 ~sum()~ を調べよ (~help(sum)~)
@@ -217,34 +253,39 @@
 - 整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ
   - 関数 ~prod()~ を調べよ (~help(prod)~)
 
-#+begin_src R :exports none :tangle yes
-  ### 練習問題 自作関数の定義
-  ## 和 (summation) を計算する関数
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice 自作関数の定義
+  #'
+  #' 和 (summation) を計算する関数
   my_sum <- function(n){
     out <- sum(1:n) # 1からnまでの整数を生成して和を求める
     return(out)
   }
   my_sum(10) # 1から10までの和は?
-  ## 別解
+  #' 別解
   my_sum2 <- function(n){
     out <- n*(n+1)/2 # 等差数列の和を利用した場合
     return(out)
   }
   my_sum2(10)
-  ## 階乗 (factorial) を計算する関数
+  #' 階乗 (factorial) を計算する関数
   my_fact <- function(n){
     out <- prod(1:n) # 1からnまでの整数を生成して積を求める
     return(out)
   }
   my_fact(5) # 5! は?
+  #' ---------------------------------------------------------------------------
 #+end_src
 	  
 
 * 制御構造
-  #+begin_src R :exports none :tangle yes
-    ### 制御構造で用いた例
-  #+end_src
-
+:PROPERTIES:
+:ID:       AD7173AC-89E2-42B8-B624-6926E5DE002C
+:END:
+#+begin_src R :exports none
+  #' @exercise 制御構造で用いた例
+#+end_src
 ** 制御文
 - 最適化や数値計算などを行うためには，
   条件分岐や繰り返しを行うための仕組みが必要となる
@@ -256,37 +297,44 @@
 
 ** ~if~ 文
 - 条件Aが *真* のとき処理Xを実行する
-  #+begin_src R :eval no
+  #+begin_src R :eval no :tangle no
     if(条件A) {処理X} # 括弧内は複数行に渡ってよい
   #+end_src
 - 上記の ~if~ 文に条件Aが *偽* のとき処理Yを実行することを追加する
-  #+begin_src R :eval no
+  #+begin_src R :eval no :tangle no
     if(条件A) {処理X} else {処理Y}    
   #+end_src
 
 ** ~if~ 文の例
-- [[color:green][20230421が19で割り切れるか?]]
-  #+begin_src R :tangle yes
-    if(20230421 %% 19 == 0) {# %% は余りを計算
+:PROPERTIES:
+:ID:       CC3E9C52-EE98-4D5E-B6B9-ACD244546979
+:END:
+- [[color:green][20240426が19で割り切れるか?]]
+  #+begin_src R
+    today <- 20240426 # 今日の日付
+    if(today %% 19 == 0) {# %% は余りを計算
       print("割り切れます．商は以下の値です．") 
-      print(20230421 %/% 19) # 商を表示
+      print(today %/% 19) # 商を表示
     } else { # {}で囲まれたブロックが1つのまとまった処理に対応する
       print("割り切れません．余りは以下の値です．")
-      print(20230421 %% 19) # 余りを表示
+      print(today %% 19) # 余りを表示
     } 
   #+end_src
 
 ** ~for~ 文
 - ベクトル ~V~ の要素を *順に* 変数 ~i~ に代入して
   処理Xを繰り返し実行する
-  #+begin_src R :eval no
+  #+begin_src R :eval no :tangle no
     for(i in V) {処理X}
   #+end_src
 - 処理Xは変数 ~i~ によって実行内容が変わってよい
 
 ** ~for~ 文の例
+:PROPERTIES:
+:ID:       2FD5DEC3-3F82-4B49-AD64-E9CB1F0D1E56
+:END:
 - [[color:green][アルファベットの20,15,11,25,15番目を表示]]
-  #+begin_src R :tangle yes
+  #+begin_src R
     print(LETTERS) # LETTERS ベクトルの内容を表示
     for(i in c(20,15,11,25,15)) {
       print(LETTERS[i]) # 順番に表示
@@ -295,17 +343,20 @@
 
 ** ~while~ 文
 - 条件Aが *真* である限り処理Xを繰り返す
-  #+begin_src R :eval no
+  #+begin_src R :eval no :tangle no
     while(条件A) {処理X}
   #+end_src
 - 処理Xは繰り返し必要な実行内容を記述し，
   終了するときに条件Aが満たされなくなるように書く
-- [[color:gray][~repeat~ 文というものもあるので調べてみよ]]
+- 参考 : ~repeat~ 文というものもあるので調べてみよ
 
 ** ~while~ 文の例
+:PROPERTIES:
+:ID:       D6458B1D-774E-421B-9CFD-07FDBAAF75A2
+:END:
 - [[color:green][素因数分解する]]
-  #+begin_src R :tangle yes
-    n <- 20230421 # 分解の対象．2*2*3*19, my_fact(5) なども試してみよ
+  #+begin_src R
+    (n <- 2*11*17*31) # 分解の対象．今日の日付や my_fact(5) なども試してみよ
     p <- 2 # 最初に調べる数
     while(n != 1){ # 商(for文の中で計算している)が1になるまで計算する
       if(n%%p == 0) { # 余りが0か確認
@@ -313,7 +364,7 @@
         n <- n/p # 商を計算して分解の対象を更新
       } else {
         p <- p+1 # 割り切れない場合は次の数を調べる
-      } # 更新される p は素数とは限らないが，上手く動く理由を考えてみよ
+      } # 更新される p は素数とは限らないのに上手く動く理由を考えてみよう
     }
   #+end_src
 
@@ -349,98 +400,103 @@
    #      この記述は，「条件Aが成立したら繰り返しをやめる」という意味
    
 
-* 演習
-  :PROPERTIES:
-  :reveal_background: #fef4f4
-  :END:
+* 実習
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
 ** 例題
+:PROPERTIES:
+:ID:       0EEDBD63-5FA6-48F1-AB71-E6573998C90B
+:END:
 - 制御構造を利用して非負の整数 $n$ の階乗 $n!$ を求める関数を作成せよ．
   ただし，関数 ~prod()~ を用いないこと．
 
-** 解答例
-- ~for~ 文を用いた例
-
-#+begin_src R :eval no :exports none :tangle yes
-  ### 例題 nの階乗を求める関数 (for文)
-#+end_src
-#+begin_src R :exports both :results output :tangle yes
-  my_fact1 <- function(n){
-    val <- 1 # 初期値の代入
-    for(i in 1:n){ # 1からnまで順に掛ける
-      val <- val*i
+#+reveal: split
+- ~for~ 文を用いた解答例
+  #+begin_src R :exports none
+    #' @exercise nの階乗を求める関数 (for文を用いた例)
+  #+end_src
+  #+begin_src R
+    my_fact1 <- function(n){
+      val <- 1 # 初期値の代入
+      for(i in 1:n){ # 1からnまで順に掛ける
+        val <- val*i
+      }
+      return(val) # 計算結果を返す
     }
-    return(val) # 計算結果を返す
-  }
-  my_fact1(4) # 正しい
-  my_fact1(3) # 正しい
-  my_fact1(2) # 正しい
-  my_fact1(1) # 正しい
-  my_fact1(0) # 間違い (0!=1)
-#+end_src
+    my_fact1(4) # 正しい
+    my_fact1(3) # 正しい
+    my_fact1(2) # 正しい
+    my_fact1(1) # 正しい
+    my_fact1(0) # 間違い (0!=1)
+  #+end_src
 
 #+reveal: split
 - ~if~ 文を用いた修正版
+  #+begin_src R :exports none
+    #' @exercise nの階乗を求める関数 (if文を用いた修正版)
+  #+end_src
+  #+begin_src R
+    my_fact2 <- function(n){
+      if(n==0){ # n=0 か確認して分岐する
+        return(1)
+      } else {
+        val <- 1
+        for(i in 1:n){ val <- val*i }
+        return(val)
+      }
+    }
+    my_fact2(4) # 正しい
+    my_fact2(3) # 正しい
+    my_fact2(2) # 正しい
+    my_fact2(1) # 正しい
+    my_fact2(0) # 正しい
+  #+end_src
 
-#+begin_src R :exports both :results output :tangle yes
-  my_fact2 <- function(n){
-    if(n==0){ # n=0 か確認して分岐する
-      return(1)
-    } else {
-      val <- 1
-      for(i in 1:n){
-        val <- val*i
+#+reveal: split
+- ~while~ 文を用いた解答例
+  #+begin_src R :exports none
+    #' @exercise nの階乗を求める関数 (while文を用いた例)
+  #+end_src
+  #+begin_src R
+    my_fact3 <- function(n){
+      val <- 1 # 初期値の代入
+      while(n>0){ # nから1まで順に掛ける．nが0なら計算しない
+        val <- val*n
+        n <- n-1
       }
       return(val)
     }
-  }
-  my_fact2(4) # 正しい
-  my_fact2(3) # 正しい
-  my_fact2(2) # 正しい
-  my_fact2(1) # 正しい
-  my_fact2(0) # 正しい
-#+end_src
-   
-#+reveal: split
-- ~while~ 文を用いた例
-
-#+begin_src R :exports both :results output :tangle yes
-  my_fact3 <- function(n){
-    val <- 1 # 初期値の代入
-    while(n>0){ # nから1まで順に掛ける．nが0なら計算しない
-      val <- val*n
-      n <- n-1
-    }
-    return(val)
-  }
-  my_fact3(4) # 正しい
-  my_fact3(3) # 正しい
-  my_fact3(2) # 正しい
-  my_fact3(1) # 正しい
-  my_fact3(0) # 正しい
-#+end_src
+    my_fact3(4) # 正しい
+    my_fact3(3) # 正しい
+    my_fact3(2) # 正しい
+    my_fact3(1) # 正しい
+    my_fact3(0) # 正しい
+  #+end_src
 
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       A55181AE-3549-4B79-9C0D-749D411C8E16
 :END:
 - 整数 \(n\) の Fibonacci 数を求める関数を作成せよ
   - Fibonacci 数は以下の漸化式で計算される
     #+begin_quote
-    #+begin_src latex
-      \begin{align}
-        F_{0}&=0\\
-        F_{1}&=1\\
-        F_{n}&=F_{n-1}+F_{n-2}
-      \end{align}
-    #+end_src
+    \begin{align}
+      F_{0}&=0\\
+      F_{1}&=1\\
+      F_{n}&=F_{n-1}+F_{n-2}
+    \end{align}
     #+end_quote
 - 行列 \(X\) が与えられたとき，各列の平均を計算する関数を作成せよ
 - 前問で \(X\) がベクトルの場合にはその平均を計算するように修正せよ 
   - 関数 ~is.vector()~ が利用できる
 
-#+begin_src R :exports none :tangle yes
-  ### 練習問題 制御構造
-  ## Fibonacci 数を返す関数
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice 制御構造
+  #'
+  #' Fibonacci 数を返す関数
   my_fibo <- function(n){
     f0 <- 0 # 第0項の設定
     f1 <- 1 # 第1項の設定
@@ -456,19 +512,19 @@
     }
     for(i in 2:n) { # n>=2の場合
       fn <- f1 + f0 # fn = fn-1 + fn-2 の計算
-      f0 <- f1 # fn-2 の値の更新
-      f1 <- fn # fn-1 の値の更新
+      f0 <- f1 # fn-2 の値の更新 (f0が覚えておく)
+      f1 <- fn # fn-1 の値の更新 (f1が覚えておく)
     }
     return(fn) # 計算結果を返す
   }
-  ## Fibonacci 数を6項目まで計算
+  #' Fibonacci 数を6項目まで計算
   c(my_fibo(1),my_fibo(2),my_fibo(3),my_fibo(4),my_fibo(5),my_fibo(6))
-  ## 同じ関数に別の値を入れて計算する方法はいくつか用意されている
+  #' 同じ関数に別の値を入れて計算する方法はいくつか用意されている
   sapply(1:30, my_fibo)
-
-  ## 行列の列の平均を計算する関数
+  #'
+  #' 行列の列の平均を計算する関数
   my_col_ave <- function(X) {
-    ave <- rep(0,length=ncol(X)) # 平均を記録するベクトルを用意
+    ave <- rep(0, length = ncol(X)) # 平均を記録するベクトルを用意
     for(i in 1:ncol(X)){ # 列ごとに計算
       ave[i] <- sum(X[,i])/nrow(X) # 平均の定義に従って計算
       ## ave[i] <- mean(X[,i]) # 平均を計算する関数を用いても良い
@@ -479,8 +535,8 @@
   my_col_ave(A) # 正しい答えを返す
   (x <- 1:12)
   my_col_ave(x) # うまく動かない
-
-  ## ベクトルと行列を扱えるように修正
+  #'
+  #' ベクトルと行列を扱えるように修正
   my_col_ave <- function(X){ 
     if(is.vector(X)){ # ベクトルとそれ以外の場合分け
       ave <- mean(X)
@@ -494,7 +550,7 @@
   }
   my_col_ave(A)
   my_col_ave(x) # 正しい答えを返す
-  ##
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 
