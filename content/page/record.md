@@ -11,7 +11,7 @@ weight = 1016
 講義の進捗に合わせて追加します．
 
 -   [第1講 (2024年4月5日)](https://u-tokyo-ac-jp.zoom.us/rec/share/UDiG9s_v8UbZwoDISJEmsf-R3J7zM3ADoy9qaNPhNapvuRktF3N1sq2nn4QxzQw9.ulecTtdKmS8TWuoZ?startTime=1712304155000)
--   第2講 (2024年4月19日)
+-   [第2講 (2024年4月19日)](https://u-tokyo-ac-jp.zoom.us/rec/share/CSFEIlbsqmdfxWn-GOpaO1pveX36j8cUp33zd8mOp9KHiMg7gAkIGIF8jdc7RhcI.ACPnds7I_dMfcur3?startTime=1713513700000)
 -   第3講 (2024年4月26日)
 -   第4講 (2024年5月10日)
 -   第5講 (2024年5月24日)
@@ -26,7 +26,7 @@ weight = 1016
 
 ---
 
-以下は昨年度の記録
+以下は2023年度の記録
 
 -   [第1講 (2023年4月7日)](https://u-tokyo-ac-jp.zoom.us/rec/share/60OdjHpiRfFVlQc-Zio4gVhvdl3GRS1M6jfXTA0TLWl1NrvB_GWxj35Zta0XM5KX.2QBn84WSnz_Gi7JW?startTime=1680853485000)
 -   [第2講 (2023年4月14日)](https://u-tokyo-ac-jp.zoom.us/rec/share/lQxvLGiGbh4Ap_26mDFWs7P6oCfPBBJmUFXKNdLj2W7K6DHf7G2Kk33KcYixpikQ.Lv4MNw1aHhQhNS4L?startTime=1681458260000)
