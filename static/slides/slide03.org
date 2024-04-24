@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-12 16:46:15 mura>
+# Time-stamp: <2024-04-24 17:16:51 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -39,7 +39,6 @@
 #+begin_src R :exports none
   #' @exercise R言語における関数
 #+end_src
-
 ** 関数 (復習)
 - 関数の取り扱いは一般的な計算機言語とほぼ同様
 - 関数は引数とその値を指定して実行
@@ -159,9 +158,8 @@
 :ID:       C19905FF-69D0-406B-B3CF-B23D37767D5E
 :END:
   #+begin_src R :exports none :tangle yes
-    ### 関数の定義で用いた例
+    #' @exercise 関数の定義
   #+end_src
-
 ** 自作関数
 - 他の言語と同様にRでも関数を定義できる   
 - 関数の定義には関数 ~function()~ を利用する 
@@ -284,7 +282,7 @@
 :ID:       AD7173AC-89E2-42B8-B624-6926E5DE002C
 :END:
 #+begin_src R :exports none
-  #' @exercise 制御構造で用いた例
+  #' @exercise 制御構造
 #+end_src
 ** 制御文
 - 最適化や数値計算などを行うためには，
