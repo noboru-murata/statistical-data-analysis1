@@ -50,15 +50,18 @@ length(foo)
 bar[3]
 #' 最後の要素を取り出す
 bar[length(bar)] # tail(bar,n=1) という方法もある
+#' 
+#' @notes
+#' 関数 rep() や関数 seq() には高速化された派生型がいくつかある
 #' ---------------------------------------------------------------------------
 
 #' @exercise 行列の生成
 
 a <- 2; m <- 3; n <- 4 # 変数 a,m,n に値を代入
-matrix(a, m, n) # 明示する場合は matrix(data=a, nrow=m, ncol=n)
+matrix(a, m, n) # 明示する場合は matrix(data = a, nrow = m, ncol = n)
 
 a <- 2:13 # 変数 a に値を代入 (m*n = 12 文字用意)
-(A <- matrix(a, m, n)) # 並び順を変えるには matrix(a,m,n,byrow=TRUE)
+(A <- matrix(a, m, n)) # 並び順を変えるには matrix(a,m,n,byrow = TRUE)
 
 as.vector(A) # matrix の逆変換にあたる
 
@@ -68,7 +71,7 @@ cbind(a, b, c) # 列ベクトルとして結合 (column vector bind)
 
 #' @exercise 行列の操作
 
-dim(A) # 長さ2のベクトル (行数,列数) となることに注意
+dim(A) # 関数の返値は長さ2のベクトル (行数,列数) となることに注意
 nrow(A) # 行数
 ncol(A) # 列数
 dim(A)[1] # nrow(A) と同値
@@ -113,10 +116,12 @@ names(L2) <- c("1st","2nd")
 L2 # リストを表示
 
 #' 方法1 (リストの名前で参照)
-L2[["1st"]]
+L1[["first"]]
+L2[["2nd"]]
 
 #' 方法2 (記号$を用いる場合は""は不要なことに注意)
-L1$first
+L1$first      
+L2$`2nd` # 数字で始まる文字列は``を用いる必要がある
 
 #' 前回の練習問題
 library(tibble)
@@ -196,10 +201,10 @@ M9 %*% t(M9) # 9x1型行列の内積による別の方法
 theta <- pi/6 # 30度のラジアン値
 (R30 <- # 30度の回転行列
    matrix(c(cos(theta),-sin(theta),
-            sin(theta), cos(theta)), 2, 2, byrow = T))
+            sin(theta), cos(theta)), 2, 2, byrow = TRUE))
 (R60 <- # 60度の回転行列
    matrix(c(cos(2*theta),-sin(2*theta),
-            sin(2*theta), cos(2*theta)), 2, 2, byrow = T))
+            sin(2*theta), cos(2*theta)), 2, 2, byrow = TRUE))
 R30 %*% R30 # 30度の回転行列の2乗を表示
 #' ---------------------------------------------------------------------------
 
@@ -242,7 +247,7 @@ A %*% b + b %*% A # 異なる次元(大きさ)の行列は足し算できない
 #' 回転行列とベクトルを作成 (好きに設定してよい)
 theta <- 2*pi/3 # 120度のラジアン値
 (R <- matrix(c(cos(theta),-sin(theta),
-               sin(theta), cos(theta)), 2, 2, byrow = T))
+               sin(theta), cos(theta)), 2, 2, byrow = TRUE))
 (x <- 1:2)
 (y <- R %*% x) # xを回転してyを作成 (結果は行列になるので扱いに注意が必要)
 #'

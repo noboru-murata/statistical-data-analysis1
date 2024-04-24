@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-12 16:26:26 mura>
+# Time-stamp: <2024-04-23 11:00:41 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -161,6 +161,9 @@
   bar[3]
   #' 最後の要素を取り出す
   bar[length(bar)] # tail(bar,n=1) という方法もある
+  #' 
+  #' @notes
+  #' 関数 rep() や関数 seq() には高速化された派生型がいくつかある
   #' ---------------------------------------------------------------------------
 #+end_src
 
@@ -184,7 +187,7 @@
   #+end_src
   #+begin_src R
     a <- 2; m <- 3; n <- 4 # 変数 a,m,n に値を代入
-    matrix(a, m, n) # 明示する場合は matrix(data=a, nrow=m, ncol=n)
+    matrix(a, m, n) # 明示する場合は matrix(data = a, nrow = m, ncol = n)
   #+end_src
   
 #+reveal: split
@@ -192,7 +195,7 @@
   (関数 ~matrix()~)
   #+begin_src R
     a <- 2:13 # 変数 a に値を代入 (m*n = 12 文字用意)
-    (A <- matrix(a, m, n)) # 並び順を変えるには matrix(a,m,n,byrow=TRUE)
+    (A <- matrix(a, m, n)) # 並び順を変えるには matrix(a,m,n,byrow = TRUE)
   #+end_src
   # - 関数 ~dim()~ によるベクトルから行列への変換:
   #   #+begin_src R :exports code
@@ -222,7 +225,7 @@
     #' @exercise 行列の操作
   #+end_src
   #+begin_src R
-    dim(A) # 長さ2のベクトル (行数,列数) となることに注意
+    dim(A) # 関数の返値は長さ2のベクトル (行数,列数) となることに注意
     nrow(A) # 行数
     ncol(A) # 列数
     dim(A)[1] # nrow(A) と同値
@@ -298,6 +301,7 @@
   - 複数のデータフレームを扱うときなどに応用可能
 - 本講義のデータ解析ではほとんど用いない
   - Rの関数の操作ではときどき必要
+- データフレームはリストの特殊なもの
 
 ** リストの生成と操作
 :PROPERTIES:
@@ -332,11 +336,13 @@
 - 名前によるリストの要素の取得 (演算子 ~[[]],$~)
   #+begin_src R
     #' 方法1 (リストの名前で参照)
-    L2[["1st"]] 
+    L1[["first"]]
+    L2[["2nd"]] 
   #+end_src
   #+begin_src R
     #' 方法2 (記号$を用いる場合は""は不要なことに注意)
     L1$first      
+    L2$`2nd` # 数字で始まる文字列は``を用いる必要がある
   #+end_src
   
 ** データフレームとは
@@ -491,7 +497,7 @@
   #+end_quote
 - Rの書式 (関数 ~matrix()~)
   #+begin_src R :eval no :tangle no
-    A <- matrix(c(a11,a21,...,amn), m, n) # m x n 行列の作成 (擬似コード)
+    A <- matrix(c(a11,a21,...,amn), m, n) # m x n 型行列の作成 (擬似コード)
   #+end_src
 
 ** 行列の加法
@@ -675,10 +681,10 @@
   theta <- pi/6 # 30度のラジアン値
   (R30 <- # 30度の回転行列
      matrix(c(cos(theta),-sin(theta),
-              sin(theta), cos(theta)), 2, 2, byrow = T))
+              sin(theta), cos(theta)), 2, 2, byrow = TRUE))
   (R60 <- # 60度の回転行列
      matrix(c(cos(2*theta),-sin(2*theta),
-              sin(2*theta), cos(2*theta)), 2, 2, byrow = T))
+              sin(2*theta), cos(2*theta)), 2, 2, byrow = TRUE))
   R30 %*% R30 # 30度の回転行列の2乗を表示
   #' ---------------------------------------------------------------------------
 #+end_src
@@ -830,7 +836,7 @@
   #' 回転行列とベクトルを作成 (好きに設定してよい)
   theta <- 2*pi/3 # 120度のラジアン値
   (R <- matrix(c(cos(theta),-sin(theta),
-                 sin(theta), cos(theta)), 2, 2, byrow = T))
+                 sin(theta), cos(theta)), 2, 2, byrow = TRUE))
   (x <- 1:2)
   (y <- R %*% x) # xを回転してyを作成 (結果は行列になるので扱いに注意が必要)
   #'

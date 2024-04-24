@@ -3,37 +3,36 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-04-28 16:14:21 mura>
-:REVEAL:
-#+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
+# Time-stamp: <2024-04-24 17:09:08 mura>
+:REVEAL:
+#+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :END:
 
+* COMMENT メモ
+- jpdata の整理を忘れずに
+- 天気のデータでもでできると良いが
 * 講義概要
 - データフレームの操作
 - ファイルの取り扱い
 - データの集計
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 第4講 練習問題解答例
-#+end_src
-#+begin_src R :exports none
+#+begin_src R :exports none :tangle no
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
+#+begin_src R :exports none
+  ### 第4講 サンプルコード
+#+end_src
     
-* COMMENT メモ
-- jpdata の整理を忘れずに
-- 天気のデータでもでできると良いが
 
 * データフレームの操作
-#+begin_src R :exports none :tangle yes
-  ### データフレームの操作で用いた例
+#+begin_src R :exports none
+  #' @exercise データフレームの操作
 #+end_src
-
-** Rに用意されているデータ構造
+** COMMENT Rに用意されているデータ構造
 - 下記は基本的なもので標準環境で利用できる
   - ベクトル (vector)
   - 行列 (matrix)
@@ -41,16 +40,46 @@
   - *データフレーム (data frame)*
   - 配列 (array)
 
-** データフレームからの項目の抽出
-- 添字の番号(行と列)を指定
-- 要素の名前で指定
-- *除外* : マイナス記号(-)をつけて指定
-- 論理値で指定
-  - ~TRUE~ : 要素の *選択*
-  - ~FALSE~ : 要素の *除外*
-- *欠損値 ~NA~* の扱いは状況依存なので注意
-  - ~NA~ : 値が得られていないことを表すスカラー値
+** データ構造
+- Rに用意されている基本的なデータ構造
+  - ベクトル (~vector~) : 1次元配列
+  - 行列 (~matrix~) : 2次元配列
+  - 配列 (~array~) : 多次元配列
+  - *データフレーム* (~data.frame~, ~tibble~) : 表 (2次元配列)
+- 特殊なもの
+  - リスト (~list~) : オブジェクトの集合 
 
+** データフレーム
+- 複数の個体について，いくつかの属性を集計した表
+  - 長さの等しい列ベクトルをまとめたもの
+  - 各列のデータ型はバラバラでも良い
+- [[color:green][データフレームの例]]
+  #+begin_quote
+  ある小学校の1年生の身長・体重・性別・血液型のデータ
+  | 名前 | 身長 [cm] | 体重 [kg] | 性別 | 血液型 |
+  |-----+----------+----------+-----+------|
+  | 太郎 |      108 |       19 | 男   | B    |
+  | 花子 |      116 |       21 | 女   | O    |
+  | 次郎 |      130 |       25 | 男   | AB   |
+  | ... |      ... |      ... | ... | ...  |
+  #+end_quote
+- (特殊な) *行列* でもあり *リスト* でもある
+
+** "tidyverse" パッケージ
+- データ操作とグラフィクスの拡張 (再掲)
+  - *tidyverse* : Hadley Wickham @posit による拡張パッケージ集
+    - https://www.tidyverse.org/packages/
+    - https://tidyverse.tidyverse.org/
+- パッケージ集の利用には以下が必要 
+  #+begin_src R :exports code
+    #' 最初に一度だけ以下のいずれかを実行しておく
+    #'  - Package タブから tidyverse をインストール
+    #'  - コンソール上で次のコマンドを実行 'install.packages("tidyverse")'
+    #' tidyverse パッケージの読み込み
+    library(tidyverse)
+  #+end_src
+- データフレームの拡張である ~tibble~ を利用
+  
 ** データ例
 - *~datasets::airquality~*
   #+begin_quote
@@ -66,65 +95,86 @@
     - [,5]   Month   numeric Month (1--12)
     - [,6]   Day     numeric Day of month (1--31)
   #+end_quote
-  - ~help("airquality")~ で詳細を確認
+  - '~?airquality~' で詳細を確認
   - ~datasets~ はRの標準パッケージ
-  - *パッケージ名::オブジェクト* という書き方で同名のオブジェクトを区別できる
+  - *パッケージ名::オブジェクト* という書き方で同名のオブジェクトを区別
 
-** 行の抽出 (素朴な方法)
+#+reveal: split
+- ~tibble~ 形式への変換
+  #+begin_src R :exports none
+    #' @exercise tibble 形式への変換
+  #+end_src
+  #+begin_src R :exports code
+    aq_tbl <- as_tibble(airquality) # tibble 形式へ変換
+    aq_df <- airquality # 比較のため data.frame を別名で定義 (コピー)
+    aq_tbl # 最初の10行のみ表示される
+    aq_df  # 全てのデータが表示される
+    print(aq_tbl, n = 15)  # 最初の15行が表示される．'?tibble::print.tbl' を参照
+    print(aq_tbl, n = Inf) # 全て表示
+    head(aq_df, n = 10)    # 最初の10行が表示される．tibbleでも同様
+    tail(aq_df, n = 10)    # 最後の10行が表示される．tibbleでも同様
+  #+end_src
+
+** 項目の抽出
+- 添字の番号(行と列)を指定
+  - 要素の名前で指定
+  - *除外* : マイナス記号(-)をつけて指定
+  - 論理値で指定
+    - ~TRUE~ : 要素の *選択*
+    - ~FALSE~ : 要素の *除外*
+  #+begin_src R :exports code
+    aq_tbl[1,2] # 1行2列の要素を選択
+    aq_tbl[-seq(2, nrow(aq_tbl), by = 2),] # 偶数行を除外
+    aq_tbl[,c(TRUE,FALSE,TRUE,TRUE,FALSE,TRUE)] # 1,3,4,6列を選択
+    aq_tbl["Ozone"] # Ozone列を選択．aq_tbl[,"Ozone"] でも同様
+    aq_tbl[c("Ozone","Wind")] # 複数列の選択も同様
+    aq_tbl[["Ozone"]] # リストとして扱い1列を選択するとベクトルになる
+    aq_tbl$Ozone      # 同上
+  #+end_src
+- *欠損値 ~NA~* の扱いは状況依存なので注意
+  - ~NA~ : 値が得られていないことを表すスカラー値(論理値)
+
+** 行の選択 (素朴な方法)
 - 行番号による指定
-  #+begin_src R :tangle yes
-    ## 行番号のベクトルで指定して抽出
-    airquality[1:10,] # 1-10行を抽出
+  #+begin_src R :exports code
+    #' 行番号のベクトルで指定して抽出
+    aq_tbl[20:30,] # 20-30行を抽出
   #+end_src
-
-#+reveal: split
 - 条件の指定
-  #+begin_src R :tangle yes
-    ## 条件の指定の仕方
-    airquality[1:15,]$Ozone>100 # 条件に合致する行はTRUE (NAは欠損値)
-    airquality[1:15,]$Ozone>100 & airquality[1:15,]$Wind<=5 # 条件のAND
-    with(airquality[1:15,], Ozone>100 & Wind<=5) # 上と同じ(短い書き方)
-    with(airquality[1:60,], Ozone>100 | Wind<=5) # 条件のOR
-  #+end_src
-
-#+reveal: split
-- 条件に合致する行番号の抽出
-  #+begin_src R :tangle yes
-    ## 関数 which() でTRUEの番号を抽出
-    which(with(airquality, Ozone>100 & Wind<=5)) # 全データからTRUEを抽出
+  #+begin_src R :exports code
+    #' 条件の指定の仕方
+    aq_tbl[1:15,]$Ozone > 100 # 条件に合致する行はTRUE (NAは欠損値)
+    aq_tbl[1:15,]$Ozone > 100 & aq_tbl[1:15,]$Wind <= 5 # 条件のAND
+    with(aq_tbl[1:15,], Ozone > 100 & Wind <= 5) # 上と同じ(短い書き方)
+    with(aq_tbl[1:60,], Ozone > 100 | Wind <= 5) # 条件のOR
   #+end_src
 - 条件に合致する行の抽出
-  #+begin_src R :tangle yes
-    ## 条件を指定して行を抽出
-    airquality[which(with(airquality, Ozone>100 & Wind<=5)), ] 
+  #+begin_src R :exports code
+    #' 関数 which() でTRUEとなる行番号を抽出して指定
+    which(with(aq_tbl, Ozone>100 & Wind<=5)) 
+    aq_tbl[which(with(aq_tbl, Ozone>100 & Wind<=5)), ] 
   #+end_src
 
-** 列の抽出 (素朴な方法)
+** 列の選択 (素朴な方法)
 - 列番号による指定
-  #+begin_src R :tangle yes
-    ## 列番号のベクトルで指定して抽出
-    airquality[which(with(airquality, Ozone>100 & Wind<=5)), c(1,5,6)] 
+  #+begin_src R :exports code
+    #' 列番号のベクトルで指定して抽出
+    aq_tbl[which(with(aq_tbl, Ozone>100 & Wind <= 5)), c(1,5,6)] 
   #+end_src
-
-#+reveal: split
 - 列名による指定
-  #+begin_src R :tangle yes
-    ## 複数の列の場合
-    airquality[which(with(airquality, Ozone>100 & Wind<=5)), 
-               c("Month","Day")] 
+  #+begin_src R :exports code
+    #' 複数の列の場合
+    aq_tbl[which(with(aq_tbl, Ozone > 100 & Wind <= 5)), c("Month","Day")] 
   #+end_src
-
-#+reveal: split
 - 列名による指定 (1つの場合)
-  #+begin_src R :tangle yes
-    ## 1つの列の場合は以下でも良い (ただしデータフレームではなくベクトルになる)
-    airquality[which(with(airquality, Ozone>100 & Wind<=5)),]$Month
-    airquality[which(with(airquality, Ozone>100 & Wind<=5)),"Month"] # 上と同じ
-    ## データフレームとして抽出したい場合は drop=FALSE を指定する
-    airquality[which(with(airquality, Ozone>100 & Wind<=5)),"Month",drop=FALSE]
+  #+begin_src R :exports code
+    #' 1つの列の場合はリストの操作として取り出せるが，ベクトルとなることに注意
+    aq_tbl[which(with(aq_tbl, Ozone > 100 & Wind <= 5)),]$Month  # ベクトル
+    aq_tbl[which(with(aq_tbl, Ozone > 100 & Wind <= 5)),][["Month"]] # 同上
+    aq_tbl[which(with(aq_tbl, Ozone > 100 & Wind <= 5)),"Month"] # データフレーム
   #+end_src
 
-** 関数 ~subset()~
+** COMMENT 関数 ~subset()~
 - 複合的な条件を指定してデータを整理する関数
   #+begin_src R :eval no
     subset(x, subset, select, drop = FALSE)
@@ -134,7 +184,7 @@
     ## drop: 結果が1行または1列の場合の扱い．ベクトル(TRUE)・データフレーム(FALSE)
   #+end_src
 
-** 関数 ~subset()~ の使い方
+** COMMENT 関数 ~subset()~ の使い方
 - [[color:green][前出の例の書き換え]]
   #+begin_src R :tangle yes
     ### 関数 subset() の使い方
@@ -164,6 +214,139 @@
            select = -Temp)
   #+end_src
 
+** COMMENT 要素の選択
+- 選択方法はいくつか用意されている
+  - 添字の番号を指定する (マイナスは除外)
+  - 論理値 (TRUE/FALSE) で指定する
+  - 要素の名前で指定する
+- [[color:green][データフレームの要素の選択]]
+  #+begin_src R :exports none
+    #' @exercise 要素の選択
+  #+end_src
+  #+begin_src R :exports code
+    z <- tibble(one = c(1,2,3),
+                    two = c("AB","CD","EF"),
+                    three = 6:8)
+    z[1,2] # 1行2列の要素を選択
+    z[-c(1,3),] # 1,3行を除外
+    z[c(TRUE,FALSE,TRUE),] # 1,3行を選択
+    z[,"two"] # 列名"two"を選択(1列のデータフレームになる)
+    z["two"]  # 上記と同様の結果
+    z[,c("one","three")] # 列名"one"と"three"を選択(データフレームになる)
+    z[c("one","three")]  # 上記と同様の結果
+    z[["two"]] # 列名"two"のベクトルを選択(1列の場合しか使えない)
+    z$two      # 上記と同様の結果
+  #+end_src
+
+** 行の選択
+- 関数 ~dplyr::filter()~ : 条件を指定して行を選択
+  #+begin_src R :eval no :tangle no
+    filter(.data, ..., .by = NULL, .preserve = FALSE)
+    #' .data: データフレーム 
+    #' ...: 行に関する条件
+    #' .by: グループ化を指定(実験的な実装)
+    #' .preserve: グループ化を維持するか指定(実験的な実装)
+    #' 詳細は '?dplyr::filter' を参照
+  #+end_src
+- 行に関する条件指定には以下を用いることができる
+  - 等号 : ~==~ (否定は ~!=~)
+  - 不等号 : ~<,>,<=,>=~
+  - 論理式 : ~&~ (かつ), ~|~ (または)
+
+** 列の選択
+- 関数 ~dplyr::select()~ : 条件を指定して列を選択
+  #+begin_src R :eval no :tangle no
+    select(.data, ...)
+    #' .data: データフレーム 
+    #' ...: 列に関する条件(列の番号，名前，名前に関する条件式を利用する)
+    #' 詳細は '?dplyr::select' を参照
+  #+end_src
+- 条件指定には例えば以下のような方法がある
+  - 含めない : ~!列名~, ~!c(列名,列名,...)~, ~!(列名:列名)~
+  - 特定の文字列で始まる : ~starts_with("文字列")~
+  - 特定の文字列で終わる : ~ends_with("文字列")~,
+  - 組み合わせ : ~&~ (かつ), ~|~ (または)
+
+** パイプ演算子
+- 処理を順次結合する演算子 (いくつか定義がある)
+  - ~|>~ (base R で定義; この講義ではこちらで記述する) 
+  - ~%>%~ (~package::magrittr~)
+- [[color:green][データフレームの部分集合の取得]]
+  #+begin_src R :exports code
+    #' 素朴の方法の例は以下のように書ける
+    aq_tbl |> filter(Ozone > 100 & Wind <= 5) |> select(1,5,6)
+    aq_tbl |> filter(Ozone > 100 & Wind <= 5) |> select(Month,Day)
+    #' Ozoneに欠測(NA)がなく, かつDayが5か10のデータのWindからDayまでの列を抽出
+    aq_tbl |> filter(!is.na(Ozone) & Day %in% c(5,10)) |> select(Wind:Day)
+    #' Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
+    aq_tbl |> filter(Ozone > 120 | Wind <= 3) |> select(-Temp)
+  #+end_src
+    
+** COMMENT データフレームの形の変更
+- 関数 ~dplyr::pivot_longer()~ : 同じ属性の列をまとめる
+  #+begin_src R :eval no :tangle no
+    pivot_longer(
+      data,
+      cols,
+      ...,
+      cols_vary = "fastest",
+      names_to = "name", names_prefix = NULL, names_sep = NULL, names_pattern = NULL,
+      names_ptypes = NULL, names_transform = NULL, names_repair = "check_unique",
+      values_to = "value", values_drop_na = FALSE, values_ptypes = NULL,
+      values_transform = NULL
+    )
+    #' data: データフレーム
+    #' cols: 操作の対象とする列(列の番号，名前，名前に関する条件式など)
+    #' names_to: 対象の列名をラベルとする新しい列の名前(既定値は"name")
+    #' values_to: 対象の列の値を保存する新しい列の名前(既定値は"value")
+    #' 詳細は '?dplyr::pivot_longer' を参照
+  #+end_src
+- 列ごとのグラフを視覚化する際に多用する
+** COMMENT 変更の例
+- [[color:green][成績表の形式の変更]]
+  #+begin_src R :exports none
+    #' @exercise データフレームの形式の変更
+  #+end_src
+  #+begin_src R :exports code
+    #' 練習問題の成績表を用いた例
+    pivot_longer(grade_data,
+                 !name, # name 列以外をまとめる
+                 names_to = "subject") # もとの列名を subject 列にまとめる
+    #' この例ではもとのデータフレームに "name" という列があるため
+    #' 既定値は使えないので，科目を表す "subject" を用いている
+  #+end_src
+
+** COMMENT 練習問題
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- ~pcr_case_daily.csv~ から以下の条件を満たすデータを取り出しなさい
+  - 医療機関 (~mi~) での検査件数が2000を越えたときの
+    国立感染症研究所 (~niid~) と医療機関 (~mi~) のデータ
+  - 大学等 (~univ~) と医療機関 (~mi~) でともに検査件数が2000を越えたデータ
+  - 2020年3月の各機関(~sub,total~ は集計なので除く)の検査件数データ
+
+#+begin_src R :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice データフレームの操作
+#+end_src
+#+begin_src R :eval no :exports none
+  #' 医療機関(mi)での検査数が2000を越えたときの国立感染症研究所(niid)と医療機関(mi)のデータ
+  pcr_data |>            # データフレーム
+    filter(mi > 2000) |> # 行の条件による絞り込み
+    select(c(niid,mi))   # 列の選択 select(niid,mi) としても良い
+  #' 大学等(univ)と医療機関(mi)でともに検査件数が2000を越えたデータ
+  pcr_data |>
+    filter(univ > 2000 & mi > 2000) # 複合的な条件の指定
+  #' 2020年3月の各機関(sub,totalは除く)の検査件数データ
+  pcr_data |>
+    filter(date >= "2020-03-01" & date < "2020-04-01") |> # 日付の範囲の指定
+    select(!c(sub,total)) # 列の削除 select(-c(sub,total)), select(-sub,-total) も可
+#+end_src
+#+begin_src R :exports none
+  #' ---------------------------------------------------------------------------
+#+end_src
+
 
 * 演習
 :PROPERTIES:
@@ -182,31 +365,33 @@
     欠測 (~NA~) でないデータの月 (~Month~) と日 (~Day~)
 
 #+begin_src R :exports none :tangle yes
-  ### 練習問題 関数 subset() によるデータフレームの操作
-  ## 7月のオゾン濃度
-  subset(airquality,
-         subset = Month==7, # Month %in% 7 などとしても良い
-         select = Ozone)
-  
-  ## 風速時速10マイル以上かつ気温が華氏80度以上
-  subset(airquality,
-         subset = Wind>=10 & Temp>=80)
-  
+  #' ---------------------------------------------------------------------------
+  #' @practice データフレームの操作
+  #'
+  #' 7月のオゾン濃度
+  aq_tbl |>
+    filter(Month == 7) |> # Month %in% 7 などとしても良い
+    select(Ozone)
+  #'
+  #' 風速時速10マイル以上かつ気温が華氏80度以上
+  aq_tbl |>
+    filter(Wind >= 10 & Temp >= 80)
+  #' 
   ## 日射量が欠測でないデータの月と日
-  subset(airquality,
-         subset = !is.na(Ozone) & !is.na(Solar.R),
-         select = c(Month,Day)) # 書いた順に並ぶ
-  subset(airquality, # 書き方はいろいろある
-         subset = !(is.na(Ozone) | is.na(Solar.R)),
-         select = Month:Day) # もともと並んでいるので c(Month,Day) と同じ
+  aq_tbl |>
+    filter(!is.na(Ozone) & !is.na(Solar.R)) |>
+    select(Month,Day) # 書いた順に並ぶ
+  aq_tbl |>
+    filter(!is.na(Ozone) & !is.na(Solar.R)) |>
+    select(Month:Day) # もともと並んでいるので c(Month,Day) と同じ
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 
 * ファイルの取り扱い
 #+begin_src R :exports none :tangle yes
-  ### ファイルの取り扱いで用いた例
+  #' @exercise ファイルの取り扱い
 #+end_src
-  
 ** データファイルの読み書き
 - 実際の解析においては以下の操作が必要
   - 収集されたデータを読み込む
@@ -218,30 +403,67 @@
 - データフレームを対象とした扱いを整理する
 
 ** 作業ディレクトリ
-- Rは *作業ディレクトリ* で実行される
+- Rの処理は *作業ディレクトリ* で実行される
   - ファイルは作業ディレクトリに存在するものとして扱われる
   - それ以外のファイルを扱う場合はパスを含めて指定する
-- 作業ディレクトリの確認の仕方
+- 作業ディレクトリの確認
   - コンソールの上部の表示
   - 関数 ~getwd()~
-- 作業ディレクトリの変更の仕方
+- 作業ディレクトリの変更
   - *Session* メニューの *Set Working Directory* で指定
     - 読み込んだファイルの場所を選択
     - Files Pane の場所を選択
     - ディレクトリを直接選択
   - 関数 ~setwd()~
+- プロジェクトでは適切に設定される
 
-** 関数 ~getwd()/setwd()~ の使い方
-- [[color:green][コンソール・RScriptからの作業ディレクトリの操作]]
-  #+begin_src R :eval no
-    ## 作業ディレクトリの確認 (環境によって実行結果が異なる)
-    getwd()
-    ## 作業ディレクトリの移動 (環境によって指定の仕方も異なる)
-    setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダに移動
+** 作業ディレクトリの操作
+- 関数 ~base::getwd()~ : 作業ディレクトリの確認
+  #+begin_src R :eval no :tangle no
+    getwd() # 環境によって実行結果は異なる
   #+end_src
   - 作業ディレクトリはコンソールのタブにも表示されている
+- 関数 ~base::setwd()~ : 作業ディレクトリの変更
+  #+begin_src R :eval no :tangle no
+    setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダに移動
+  #+end_src
+  - 環境によって指定の仕方は異なる
 
-** 関数 ~write.csv()~
+** CSV ファイルの操作
+- 関数 ~readr::write_csv()~ : ファイルの書き出し
+  #+begin_src R :eval no :tangle no
+    write_csv(x,         # データフレーム
+              file, ...) # ファイル名
+    #' 細かなオプションについては '?readr::write_csv' を参照
+  #+end_src
+- 関数 ~readr::read_csv()~ : ファイルの読み込み
+  #+begin_src R :eval no :tangle no
+    read_csv(file, ...) # ファイル名
+    #' 細かなオプションについては '?readr::read_csv' を参照
+  #+end_src
+  - ~tibble~ クラスとして読み込まれる
+
+#+reveal: split
+- [[color:green][書き出しの例]]
+  #+begin_src R :eval no
+    #' 関数 write_csv() の使い方 (CSVファイルの操作)
+    my_data <- # データフレームの整理
+      aq_tbl |> 
+      filter(Ozone > 80) |> # Ozone が80を越える日を抽出
+      select(-Temp)          # 温度は除く
+    dim(my_data) # データフレームの大きさを確認
+    #' 作業ディレクトリの中に data というフォルダを用意しておく
+    write_csv(my_data, # 保存するデータフレーム
+              file = "data/my_data.csv") # (場所と)ファイル名
+  #+end_src
+- [[color:green][読み込みの例]] 
+  #+begin_src R :eval no
+    #' 関数 read_csv() の使い方 (CSVファイルの操作)
+    new_data <- read_csv(file = "data/my_data.csv") # 前の例のファイル
+    dim(new_data) # 正しく読み込めたか大きさを確認
+  #+end_src
+
+** COMMENT 関数 ~write.csv()~
 - データフレームをCSVファイルへ書き出す関数
   #+begin_src R :eval no
     write.csv(x, file = "ファイル名")
@@ -250,7 +472,7 @@
   #+end_src
   - 他にも細かい指定ができるので詳しくはヘルプを参照
 
-** 関数 ~write.csv()~ の使い方
+** COMMENT 関数 ~write.csv()~ の使い方
 - [[color:green][CSVファイルの書き出しの例]]
   #+begin_src R :tangle yes
     ## 関数 write.csv() の使い方 (CSVファイルの操作)
@@ -262,7 +484,7 @@
     write.csv(my_data,file="data/my_data.csv") # csvファイルとして書き出し
   #+end_src
 
-** 関数 ~read.csv()~
+** COMMENT 関数 ~read.csv()~
 - CSVファイルからデータフレームを読み込む関数
   #+begin_src R :eval no
     read.csv(file = "ファイル名", header = TRUE,
@@ -275,7 +497,7 @@
   - 他にも細かい指定ができるので詳しくはヘルプを参照
   - 必要に応じて関数 ~read.table()~ , ~scan()~ なども参考に
 
-** 関数 ~read.csv()~ の使い方
+** COMMENT 関数 ~read.csv()~ の使い方
 - [[color:green][CSVファイルの読み込みの例]] 
   #+begin_src R :tangle yes
     ## 関数 read.csv() の使い方 (CSVファイルの操作)
@@ -284,7 +506,42 @@
     dim(new_data) # 正しく読み込めたか大きさを確認
   #+end_src
 
-** 関数 ~save()~
+** RData ファイルの操作
+- 関数 ~base::save()~ : ファイルの書き出し
+  #+begin_src R :eval no :tangle no
+    save(..., # 保存するオブジェクト (複数可，データフレーム以外も可)
+         list = character(), # 保存するオブジェクトの名前(文字列)でも指定可能
+         file = stop("'file' must be specified"), ...) # ファイル名
+    #' 細かなオプションについては '?base::save' を参照
+  #+end_src
+  - *複数* のオブジェクトをまとめて保存することができる
+- 関数 ~base::load()~ : ファイルの読み込み
+  #+begin_src R :eval no :tangle no
+    load(file, ...) # ファイル名
+    #' 細かなオプションについては '?base::load' を参照
+  #+end_src
+  - 同じ名前のオブジェクトがあると上書きするので注意
+
+#+reveal: split
+- [[color:green][書き出しの例]]
+  #+begin_src R :eval no
+    #' 関数 save() の使い方 (RDataファイルの操作)
+    my_data_1 <- aq_tbl |> filter(Temp > 90) |> select(-Ozone)
+    my_data_2 <- aq_tbl |> filter(Temp < 60) |> select(-Ozone)
+    dim(my_data_1); dim(my_data_2) # 大きさを確認
+    save(my_data_1, my_data_2, # 保存するオブジェクトを列挙
+         file = "data/my_data.rdata") # ファイル名
+  #+end_src
+- [[color:green][読み込みの例]] 
+  #+begin_src R :eval no
+    #' 関数 load() の使い方 (RDataファイルの操作)
+    my_data_1 <- aq_tbl |> filter(Ozone > 160) # 新たに作成
+    load(file = "data/my_data.rdata") # ファイル名
+    my_data_1 # saveしたときの名前で読み込まれ上書きされる
+    my_data_2 
+  #+end_src
+
+** COMMENT 関数 ~save()~
 - RData ファイルへ書き出す関数
   #+begin_src R :eval no
     save(..., file = "ファイル名")
@@ -294,7 +551,7 @@
   - CSV形式と異なり
     *複数* のデータフレームを1つのファイルに保存することができる
 
-** 関数 ~save()~ の使い方
+** COMMENT 関数 ~save()~ の使い方
 - [[color:green][RDataファイルの書き出しの例]]
   #+begin_src R :tangle yes
     ### 関数 save() の使い方 (RDataファイルの操作)
@@ -304,7 +561,7 @@
     save(my_data_1,my_data_2,file="data/my_data.rdata") # RData形式で書き出し
   #+end_src
 
-** 関数 ~load()~ 
+** COMMENT 関数 ~load()~ 
 - RDataファイルから読み込む関数
   #+begin_src R :eval no
     load(file = "ファイル名")
@@ -312,7 +569,7 @@
   #+end_src
   - 同じ名前のオブジェクトがあると上書きするので注意
 
-** 関数 ~load()~ の使い方
+** COMMENT 関数 ~load()~ の使い方
 - [[color:green][RDataファイルの読み込みの例]]
   #+begin_src R :tangle yes
     ## 関数 load() の使い方 (RDataファイルの操作)
@@ -321,7 +578,7 @@
     my_data_1 # saveしたときの名前で読み込まれ上書きされる
     my_data_2 
   #+end_src
-** csv 形式の操作 (~package::readr~ )
+** COMMENT csv 形式の操作 (~package::readr~ )
 - 日本語などの扱いに問題がある場合に推奨
   #+begin_src R :eval no
     install.packages("readr") # Package タブを使っても可能
@@ -336,6 +593,86 @@
   #+end_src
 - 行名の扱いに違いがあるので注意
 
+** COMMENT 練習問題
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- 前の演習で作成したデータフレームを適当なファイルに書き出しなさい
+- 書き出したファイルから別の変数に読み込みなさい
+- ~pcr_case_daily.csv~ (厚労省からダウンロードしたファイル)を
+  変数 ~pcr_data~ に読み込みなさい
+
+#+begin_src R :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice ファイルの読み書き
+#+end_src
+#+begin_src R :eval no :exports none
+  #' 前の練習問題で作ったデータフレームを利用する
+  write_csv(grade_data, file = "data/grade_data.csv")
+  #' File タブからファイルの中身を確認することができる
+  #' 以下を実行すると grade_copy というオブジェクトにファイルの内容が代入される
+  (grade_copy <- read_csv(file = "data/grade_data.csv")) 
+#+end_src
+#+begin_src R :exports none
+  #' ダウンロードしたファイルの読み込み
+  #' ファイル名 pcr_case_daily.csv として作業ディレクトリの data 以下に保存
+  pcr_data <- read_csv("data/pcr_case_daily.csv") # 一般的な読み込み方
+  View(pcr_data) # 中身を左上ペインに表示
+  (pcr_colnames <- names(pcr_data)) # 列名を確認して保存 colnames(pcr_data) でも良い
+  names(pcr_data) <- # 列名を扱い易いように英語略記に変更する
+    c("date","niid","ciq","hc","ai","univ","mi","sub","si","total")
+  #' National Institute of Infectious Diseases
+  #' Customs-Immigration-Quarantine
+  #' Health Center
+  #' Administrative Inspection
+  #' University
+  #' Medical Institution
+  #' subtotal
+  #' Self Inspection
+  #' total
+  pcr_data # 中身を確認(10行だけ表示される)
+  #' 以降の処理のために date 列を関数 lubridate::date() で date 型に変換する
+  #' 列の変換・追加などには関数 dplyr::mutate() を用いる
+  (pcr_data <- mutate(pcr_data, date = date(date))) 
+#+end_src
+#+begin_src R :eval no :exports none
+  #' @notes
+  #' Files タブの操作で読み込みことも可能なので確認せよ
+  #' 関数 print() を用いると表示する行数を指定できる
+  print(pcr_data, n = 5) # 全ては n = Inf
+  #' 日本語を含むファイルでは文字化けが起こった場合は以下で対応する
+  #' 関数 readr::guess_encoding() でファイルの文字コードを推測する
+  guess_encoding("data/pcr_case_daily.csv")
+  #' "UTF-8" であると 1 の信頼度で認識される
+  #' 文字コードを指定して読み込む場合は以下のように記述する
+  pcr_data <- # 文字コードとして UTF-8 を指定
+    read_csv(file = "data/pcr_case_daily.csv",
+             locale = locale(encoding = "utf-8"))
+  #' その他の文字コードとしては "sjis", "shift-jis", "shift_jis", 
+  #' "cp932"(拡張文字を含む)などを大文字小文字は区別せず指定できる
+  #' URLを指定して読み込むこともできる 
+  pcr_data <- # 更新される情報を追跡する場合に利用を推奨
+    read_csv("https://www.mhlw.go.jp/content/pcr_case_daily.csv")
+  #' 列名の変更にはいろいろな方法があるので適宜使用する
+  #' 読み込み時に行う方法
+  pcr_data <- read_csv("data/pcr_case_daily.csv",
+                       skip = 1, # 列名の行を読み飛ばす
+                       col_names = c("date","niid","ciq","hc","ai",
+                                     "univ","mi","sub","si","total"))
+  pcr_data <- mutate(pcr_data, date = date(date)) # date型に変更
+  #' 関数 dplyr::rename() を使う方法
+  pcr_data <- read_csv("data/pcr_case_daily.csv") # そのまま読み込む
+  (pcr_colnames <- set_names(names(pcr_data), # 新旧の列名に対応するベクトルを作成
+                             c("date","niid","ciq","hc","ai",
+                               "univ","mi","sub","si","total")))
+  pcr_data <- rename(pcr_data, all_of(pcr_colnames)) # 列名を変更
+  pcr_data <- mutate(pcr_data, date = date(date)) # date型に変更
+#+end_src
+#+begin_src R :exports none
+  #' ---------------------------------------------------------------------------
+#+end_src
+
+
 
 * 演習
 :PROPERTIES:
@@ -345,90 +682,96 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-- 以下のデータを読み込み，操作を行ってみよう．
-  - https://www.e-stat.go.jp より取得したデータ\\
-    (地域から探す / 全県を選択 / 項目を選択してダウンロード)
+- 以下のデータを読み込んで操作してみよう
+  #+begin_quote
   - データファイル (文字コード : utf8)
     - jpdata1.csv : 県別の対象データ
     - jpdata2.csv : 対象データの内容説明
     - jpdata3.csv : 県と地域の対応関係
+  - https://www.e-stat.go.jp より取得したデータ\\
+    (地域から探す / 全県を選択 / 項目を選択してダウンロード)
+  #+end_quote
   - 作業ディレクトリの data 内に置いて読み込む
-    #+begin_src R :eval no
-      jp_data <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
-      jp_item <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
-      jp_area <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
+    #+begin_src R :exports code :tangle no
+      jp_data <- read_csv(file = "data/jpdata1.csv")
+      jp_item <- read_csv(file = "data/jpdata2.csv")
+      jp_area <- read_csv(file = "data/jpdata3.csv")
     #+end_src
   - 日本語に問題がある場合は英語版を読み込む
-    #+begin_src R :eval no
-      jp_data_en <- read.csv(file="data/jpdata1-en.csv", row.names=1)
-      jp_area_en <- read.csv(file="data/jpdata3-en.csv")
+    #+begin_src R :exports code :tangle no
+      jp_data_en <- read_csv(file = "data/jpdata1-en.csv")
+      jp_area_en <- read_csv(file = "data/jpdata3-en.csv")
     #+end_src
     
-#+begin_src R :exports none :tangle yes
-  ### 練習問題 サンプルデータの読み込み
-  jp_data <- read.csv(file="data/jpdata1.csv", fileEncoding="utf8", row.names=1)
-  jp_item <- read.csv(file="data/jpdata2.csv", fileEncoding="utf8")
-  jp_area <- read.csv(file="data/jpdata3.csv", fileEncoding="utf8")
-
-  ### データ操作の例
-  ## 項目名の内容を確認
-  jp_item 
-  ## 最初の6県を表示
-  head(jp_data) 
-  ## 最後の6県を表示
-  tail(jp_data)
-  ## 地方名を確認
-  jp_area
-  ## 人口の最大値を見る
-  with(jp_data,max(人口))
-  ## どの都道府県の人口多いか調べる
-  with(jp_data,which.max(人口)) # 行番号が返る
-  jp_data[with(jp_data,which.max(人口)),] 
-  ## 人口の多い順に都道府県を並べる
-  with(jp_data,order(人口,decreasing=TRUE)) # 行番号を取得
-  rownames(jp_data)[with(jp_data,order(人口,decreasing=TRUE))] # 県名を表示
-
-  ## 上記と同じ内容を英語版で実行する場合
-  jp_data_en <- read.csv(file="data/jpdata1-en.csv", row.names=1)
-  jp_area_en <- read.csv(file="data/jpdata3-en.csv")
-  ## データを確認する
-  head(jp_data_en) 
-  tail(jp_data_en)
-  jp_area_en
-  ## 人口の最大値を見る
-  with(jp_data_en,max(population))
-  ## 人口の最大値を与える県の番号を見る (help("which.max")を参照)
-  with(jp_data_en,which.max(population))
-  ## どの都道府県の人口多いか調べる
-  jp_data_en[with(jp_data_en,which.max(population)),] 
-  ## 人口の多い順に都道府県を並べる (help("order")を参照)
-  rownames(jp_data_en)[with(jp_data_en,order(population,decreasing=TRUE))]
-
-  ## 上記とほぼ同じ内容を readr パッケージで実行する場合
-  jp_data_readr <- read_csv(file="data/jpdata1.csv")
-  jp_item_readr <- read.csv(file="data/jpdata2.csv")
-  jp_area_readr <- read_csv(file="data/jpdata3.csv")
-  ## データを確認する
-  head(jp_data_readr) 
-  tail(jp_data_readr)
-  jp_area_readr
-  ## 人口の最大値を見る
-  with(jp_data_readr,max(人口))
-  ## 人口の最大値を与える県の番号を見る (help("which.max")を参照)
-  with(jp_data_readr,which.max(人口))
-  ## どの都道府県の人口多いか調べる
-  jp_data_readr[with(jp_data_readr,which.max(人口)),] 
-  ## 人口の多い順に都道府県を並べる (help("order")を参照)
-  with(jp_data_readr,県名[order(人口,decreasing=TRUE)])
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice データの読み込みと操作
+  #' 
+  jp_data <- read_csv(file = "data/jpdata1.csv")
+  jp_item <- read_csv(file = "data/jpdata2.csv")
+  jp_area <- read_csv(file = "data/jpdata3.csv")
+  #'
+  #' @notes
+  #' 文字コードは関数 readr::guess_encoding() により推測される
+  #' guess_encoding("data/jpdata1.csv")
+  #'
+  #' データ操作の例
+  #' 項目名の内容を確認
+  jp_item
+  #' 最初の10県を表示
+  head(jp_data, n = 10) 
+  #' 最後の10県を表示
+  tail(jp_data, n = 10)
+  #' 地方名を確認
+  View(jp_area) # 左上ペインに表として表示される
+  #' 人口の最大値を見る
+  with(jp_data, max(人口))
+  #' どの都道府県の人口多いか調べる ('?which.max' を参照)
+  with(jp_data, which.max(人口)) # 行番号が返る
+  jp_data[with(jp_data, which.max(人口)),]
+  #' 行を抽出するには関数 dplyr::filter() を使うのが簡単
+  jp_data |> filter(人口 == max(人口))
+  #' 人口の多い順に都道府県を並べる ('?order' を参照)
+  with(jp_data, order(人口, decreasing = TRUE)) # 行番号を取得
+  jp_data[with(jp_data, order(人口, decreasing = TRUE)),] # 並べ替え
+  with(jp_data, 県名[order(人口, decreasing = TRUE)]) # 県名のみを表示
+  #' 行を並べ替えるには関数 dplyr::arrange() を使うのが簡単 
+  jp_data |> arrange(desc(人口)) |> print(n = Inf) # ('?dplyr::desc' を参照)
+  #'
+  #' 上記と同じ内容を英語版で実行する場合
+  jp_data_en <- read_csv(file="data/jpdata1-en.csv")
+  jp_area_en <- read_csv(file="data/jpdata3-en.csv")
+  #' データを確認する
+  head(jp_data_en, n = 10) 
+  tail(jp_data_en, n = 10)
+  View(jp_area_en)
+  #' 人口の最大値を見る
+  with(jp_data_en, max(population))
+  #' 人口の最大値を与える県の番号を見る
+  with(jp_data_en, which.max(population))
+  #' どの都道府県の人口多いか調べる
+  jp_data_en |> filter(population == max(population))
+  #' 人口の多い順に都道府県を並べる
+  jp_data_en |> arrange(desc(population)) |> View()
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 
 * データの集計
 #+begin_src R :exports none :tangle yes
-  ### データの集計で用いた例
+  #' @exercise データの集計
 #+end_src
+** 統計量の計算
+- データを集約した値 = 統計量
+  - 関数 ~base::sum()~ : 総和を計算する
+  - 関数 ~base::mean()~ : 平均
+  - 関数 ~base::max()~ : 最大値
+  - 関数 ~base::min()~ : 最小値
+  - 関数 ~stats::median()~ : 中央値
+  - 関数 ~stats::quantile()~ : 分位点
+- これ以外にも沢山あるので調べてみよう
 
-** 集約のための関数
+** COMMENT 集約のための関数
 - データを集約するために用意されている関数群
   - 関数 ~sum()~: 総和
   - 関数 ~mean()~: 平均
@@ -437,7 +780,7 @@
   - 関数 ~summary()~: 基本統計量
 - [[color:gray][これ以外にも集約を行なう関数は沢山ある]]
 
-** 集約の関数の使い方
+** COMMENT 集約の関数の使い方
 - [[color:green][練習問題のデータの集計を行う]]
   #+begin_src R :tangle yes
     jp_data <- read.csv(file="data/jpdata1.csv", # ファイルの指定
@@ -473,7 +816,25 @@
     with(jp_data_readr,max(老人))  # 老年人口の最大値 (関数 with() を利用)
   #+end_src
 
-** 関数 ~apply()~
+** 集約のための関数の使い方
+- [[color:green][データの集計の例]]
+  #+begin_src R :exports code
+    #' 練習問題のデータを用いる
+    sum(jp_data$人口)        # 全国の総人口 (列名でベクトルを選択)
+    sum(jp_data[,"人口"])     # 1列のデータフレームとして計算
+    jp_data |> select(人口) |> sum() # 同上
+    mean(jp_data[,5])       # 1列のデータフレームではエラーになる
+    mean(jp_data[[5]])      # ベクトルとして抜き出す必要がある
+    median(jp_data[[5]])    # 面積の中央値 (リストとして列を選択)
+    jp_data |> select(5) |> median() # データフレームなので動かない
+    min(jp_data["若年"])     # 若年人口の最小値 (列名で選択)
+    jp_data |> select("若年") |> min() # 同上
+    with(jp_data, max(老人)) # 老年人口の最大値 (関数 with() を利用)
+    jp_data |> select("老人") |> max() # 同上
+  #+end_src
+  - ベクトルでないと正しく動かない関数 (~mean~, ~median~) もあるので注意
+
+** COMMENT 関数 ~apply()~
 - 列あるいは行ごとの計算を行う関数
   #+begin_src R :eval no
     apply(X, MARGIN, FUN)
@@ -486,7 +847,7 @@
     - 行和・列和 : *~rowSums()/colSums()~*
     - 行の平均・列の平均 : *~rowMeans()/colMeans()~*
 
-** 関数 ~apply()~ の使い方
+** COMMENT 関数 ~apply()~ の使い方
 - [[color:green][抽出したデータの集計を行う]]
   #+begin_src R :tangle yes
     ### 関数 apply() の使い方
@@ -519,7 +880,7 @@
     apply(x, 2, function(z){sum(z>mean(z))}) # 平均より大きいデータ数 (return 省略版)
   #+end_src
   
-** 関数 ~aggregate()~
+** COMMENT 関数 ~aggregate()~
 - 各行をグループにまとめて統計量を計算する関数
   #+begin_src R :eval no
     aggregate(x, by, FUN)
@@ -644,6 +1005,128 @@
                              過疎 = 人口<=median(人口)))
 #+end_src
 
+** 列ごとの集約
+:PROPERTIES:
+:END:
+- 関数 ~dplyr::summarise()~ : 行ごとに計算する
+  #+begin_src R :eval no :tangle no
+    summarise(.data, ..., .by = NULL, .groups = NULL)
+    #' .data: データフレーム
+    #' ...: 求めたい統計量を計算するための処理を記述
+    #' .by: グループ化を指定(実験的な実装)
+    #' .groups: グループ化の結果を指定(実験的な実装)
+  #+end_src
+- [[color:green][集計値の算出]]
+  #+begin_src R :exports none
+    #' @exercise 列ごとの集計
+  #+end_src
+  #+begin_src R :exports code
+    #' 練習問題のデータを用いた例
+    jp_data |> summarise(平均失業率 = mean(失業), 件数 = n()) # 失業率の平均
+    jp_data |> summarise(across(婚姻:失業, mean)) # 婚姻から失業の平均
+    jp_data |> summarise(across(!県名, max)) # 県名の列以外の最大値
+    jp_data |> summarise(across(where(is.double), min)) # 数値列の最小値
+  #+end_src
+  #+begin_src R :exports none
+    #' @notes
+    #' 関数 dplyr::across() の列の指定には上記以外にも様々な関数が使える
+    #' 詳細は '?dplyr::across' を参照
+  #+end_src
+
+** グループごとの操作
+:PROPERTIES:
+:END:
+- 関数 ~dplyr::group_by()~ : グループ化を行う
+  #+begin_src R :eval no :tangle no
+    group_by(.data, ..., .add = FALSE, .drop = group_by_drop_default(.data))
+    #' .data: データフレーム
+    #' ...: グループ化を行う項目を含む列や条件を記述
+    #' .add: グループ化の上書きを制御(既定値FALSEは上書き)
+    #' .drop: グループ化に関与しない因子の扱い方
+  #+end_src
+- [[color:green][グループごとに集計]]
+  #+begin_src R :exports code
+    #' 練習問題のデータを用いた例
+    #' 地方ごとに人口から面積の列の合計を計算する
+    jp_data |>
+      mutate(地方 = as_factor(jp_area[["地方"]])) |> # 地方の情報を付加
+      group_by(地方) |> # 地方ごとにグループ化
+      summarize((across(人口:面積, sum))) # グループごとに集計
+  #+end_src
+  #+begin_src R :eval no :exports none
+    #' @notes
+    #' 関数 dplyr::mutate() で新たな列を加えることができる
+    #' 関数 forcats::as_factor() で文字列を出現順に順序付因子にすると
+    #' 集計結果は因子の順番で表示される
+    #'
+    #' 関数 dplyr::group_by() は複数の条件で条件付けることもできる
+    jp_data |>
+      mutate(地方 = as_factor(jp_area[["地方"]]), # 地方の情報を付加
+             過疎 = 人口 <= median(人口)) |>       # 人口が中央値以下
+          group_by(地方, 過疎) |> # 地方ごとにグループ化
+          summarize((across(人口:面積, sum))) # グループごとに集計
+  #+end_src
+
+** COMMENT 練習問題
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- ~pcr_case_daily.csv~ を集計しなさい
+  - 各機関でのPCR検査件数の最大値
+  - 2021年の各機関でのPCR検査件数の月ごとの最大値
+- ~datasets::mtcars~ を集計しなさい
+  - ヘルプを用いてデータの内容を調べなさい
+  - 気筒数 (~cyl~) ごとに排気量 (~disp~) の最大値，最小値
+  - 気筒数 (~cyl~) とギア数 (~gear~) ごとの燃費 (~mpg~) の平均値
+
+#+begin_src R :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice データフレームの集約
+#+end_src
+#+begin_src R :eval no :exports none
+  #' pcr_case_daily.csv の集計
+  #' 各機関でのPCR検査件数の最大値
+  pcr_data |> summarise(across(!date, max))
+  #' max の計算で NA を除く
+  pcr_data |> # max の無名関数を利用する
+    summarise(across(!date, \(x) max(x, na.rm = TRUE)))
+  pcr_data |> # package::purrr の lambda 式を利用する
+    summarise(across(!date, ~ max(.x, na.rm = TRUE)))
+  #' 2021年の月ごとの各機関でのPCR検査件数の最大値
+  pcr_data |>
+    filter(year(date) == 2021) |>
+    group_by(month(date)) |>
+    summarise(across(!date, max))
+#+end_src
+#+begin_src R :eval no :exports none
+  #' datasets::mtcars の集計
+  #' 気筒数ごとに排気量の最大値，最小値
+  mtcars |>
+    group_by(cyl) |>
+    summarise(max_disp = max(disp))
+  mtcars |>
+    group_by(cyl) |>
+    summarise(min_disp = min(disp))
+  mtcars |> # まとめて計算することも可能
+    group_by(cyl) |> # 列名の作られ方に注意
+    summarise(across(disp, list(max = max, min = min)))
+  #' 気筒数とギア数ごとの燃費の平均値
+  mtcars |>
+    group_by(cyl, gear) |>
+    summarise(mpg = mean(mpg))
+
+  #' @notes
+  #' グループは既定値では順次解除されるので以下のような集計も可能
+  mtcars |> 
+    group_by(cyl, gear) |>
+    summarise(mpg = mean(mpg)) |> # cyl のグループは残っている
+    summarise(mpg = max(mpg)) # cyl ごとに平均値の最大値を求める
+#+end_src
+#+begin_src R :exports none
+  #' ---------------------------------------------------------------------------
+#+end_src
+
+
 
 * 演習
 :PROPERTIES:
@@ -663,115 +1146,47 @@
       「婚姻可能な人口1000人当たり」
       と考えて計算しなさい．
 
-#+begin_src R :exports none :tangle yes
-  ### 練習問題 データの集計
-  ### 県別の人口密度 (人口/面積)
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice データの集計
+  #' 
+  #' 県別の人口密度 (人口/面積)
   with(jp_data, 人口/面積) # 値のみ返す
-  ## 人口密度に関係するデータをまとめてデータフレームを作成
-  (jp_data_1 <- transform(subset(jp_data, select = c(人口,面積)),
-                       人口密度 = 人口/面積))
-  ## 以下でも同じデータフレームを作成できる
-  ## (jp_data_1 <- data.frame(subset(jp_data,select=c(人口,面積)),
-  ##			   人口密度=with(jp_data,人口/面積)))
-  
-  ### 地方別の人口密度 (地方の総人口/地方の総面積)
-  ## 地方ごとに人口と面積の合計を計算
-  (jp_data_2 <- aggregate(subset(jp_data, select = c(人口,面積)),
-                       by = list(地方 = jp_area$地方), FUN = sum))
-  ## 人口密度を計算して追加
-  (jp_data_2 <- transform(jp_data_2, 
-                       人口密度 = 人口/面積))
-  
-  ### 地方別の婚姻・離婚数/1000人
-  ## 婚姻可能な人口を推計
-  (foo <- transform(subset(jp_data, select = 婚姻:離婚), # 人口，若年は含まない
-                    婚姻可能 = with(jp_data, 人口-若年))) 
-  ## 婚姻数/1000人と離婚数/1000人から人数を推計
-  (foo <- transform(foo,
-                    婚姻数 = 婚姻可能*婚姻/1000,
-                    離婚数 = 婚姻可能*離婚/1000,
-                    地方 = jp_area$地方))
-  ## 地方別の婚姻・離婚数を集計
-  (jp_data_3 <- aggregate(. ~ 地方, FUN = sum,
-                       data = subset(foo, select = -c(婚姻,離婚))))
-  ## 地方別の婚姻率(婚姻数/1000人)・離婚率(離婚数/1000人)を計算して追加
-  (jp_data_3 <- transform(jp_data_3,
-                       婚姻率 = 婚姻数/婚姻可能*1000,
-                       離婚率 = 離婚数/婚姻可能*1000))
+  #'
+  #' 都道府県別の人口密度
+  jp_data |>
+    select(県名, 人口, 面積) |> # 県名，人口，面積を選択
+    mutate(人口密度 = 人口/面積) # 人口密度を計算
+  #'
+  #' 地方別の人口密度 (地方の総人口/地方の総面積)
+  jp_data |>
+    mutate(地方 = as_factor(jp_area[["地方"]])) |> # 地方の情報を付加
+    group_by(地方) |> # 地方ごとにグループ化
+    summarize((across(c(人口, 面積), sum))) |> # 地方ごとに人口と面積を集計
+    mutate(人口密度 = 人口/面積) # 地方別の人口密度を計算
+  #'
+  #' 地方別の婚姻・離婚数/1000人
+  jp_data |>
+    mutate(婚姻可能 = 人口-若年, # 婚姻可能な人口を推計 
+           婚姻数 = 婚姻可能*婚姻/1000, # 婚姻数/1000人から人数を推計
+           離婚数 = 婚姻可能*離婚/1000, # 離婚数/1000人から人数を推計
+           地方 = as_factor(jp_area[["地方"]])) |> # 地方の情報を付加
+    group_by(地方) |> # 地方ごとにグループ化
+    summarize((across(婚姻可能:離婚数, sum))) |> # 地方別の合計を計算
+    mutate(婚姻 = 婚姻数/婚姻可能*1000, # 1000人あたりの婚姻数を計算
+           離婚 = 離婚数/婚姻可能*1000) # 1000人あたりの離婚数を計算
+  #'
+  #' @notes
+  #' 日本語に不具合がある場合は
+  #'   jp_data -> jp_data_en
+  #'   人口 -> population
+  #'   若年 -> young_population
+  #'   婚姻 -> marriage 
+  #'   離婚 -> divorce
+  #' など書き換えて試してみて下さい．
+  #' ---------------------------------------------------------------------------
 #+end_src
 
-#+begin_src R :exports none :tangle yes
-  ### 日本語に不具合がある場合
-  
-  ### 県別の人口密度 (人口/面積)
-  with(jp_data_en,population/area) # 値のみ返す
-  ## 人口密度に関係するデータをまとめてデータフレームを作成
-  (jp_data_1_en <- transform(subset(jp_data_en,select=c(population,area)),
-                         density=population/area))
-  
-  ### 地方別の人口密度 (地方の総人口/地方の総面積)
-  ## 地方ごとに人口と面積の合計を計算
-  (jp_data_2_en <- aggregate(subset(jp_data_en,select=c(population,area)),
-                         by=list(region=jp_area_en$region), FUN=sum))
-  ## 人口密度を計算して追加
-  (jp_data_2_en <- transform(jp_data_2_en, 
-                         density=population/area))
-  
-  ### 地方別の婚姻・離婚件数/1000人
-  ## 婚姻可能な人口を推計
-  (foo <- transform(subset(jp_data_en, select=marriage:divorce),
-                    marriageable=with(jp_data_en,population-young_population)))
-  ## 婚姻件数/1000人と離婚件数/1000人から人数を推計
-  (foo <- transform(foo,
-                    nmarriage=marriageable*marriage/1000,
-                    ndivorce=marriageable*divorce/1000,
-                    region=jp_area_en$region))
-  ## 地方別の婚姻・離婚数を集計
-  (jp_data_3_en <- aggregate(. ~ region, FUN=sum,
-                         data=subset(foo,select=-c(marriage,divorce))))
-  ## 地方別の婚姻率(婚姻数/1000人)・離婚率(離婚数/1000人)を計算して追加
-  (jp_data_3_en <- transform(jp_data_3_en,
-                         ratio_marriage=nmarriage/marriageable*1000,
-                         ratio_divorce=ndivorce/marriageable*1000))
-#+end_src
-
-#+begin_src R :exports none :tangle yes
-  ### readr パッケージで読み込んだ場合
-  ### 県名の取り扱いに注意
-  ### 県別の人口密度 (人口/面積)
-  with(jp_data_readr, 人口/面積) # 値のみ返す
-  ## 人口密度に関係するデータをまとめてデータフレームを作成
-  (jp_data_readr_1 <- transform(subset(jp_data_readr, select = c(県名,人口,面積)),
-                       人口密度 = 人口/面積))
-  ## 以下でも同じデータフレームを作成できる
-  ## (jp_data_readr_1 <- data.frame(subset(jp_data_readr,select=c(県名,人口,面積)),
-  ##			   人口密度=with(jp_data_readr,人口/面積)))
-
-  ### 地方別の人口密度 (地方の総人口/地方の総面積)
-  ## 地方ごとに人口と面積の合計を計算
-  (jp_data_readr_2 <- aggregate(subset(jp_data_readr, select = c(人口,面積)),
-                       by = list(地方 = jp_area_readr$地方), FUN = sum))
-  ## 人口密度を計算して追加
-  (jp_data_readr_2 <- transform(jp_data_readr_2, 
-                       人口密度 = 人口/面積))
-
-  ### 地方別の婚姻・離婚数/1000人
-  ## 婚姻可能な人口を推計
-  (foo <- transform(subset(jp_data_readr, select = c(県名,婚姻:離婚)), # 人口，若年は含まない
-                    婚姻可能 = with(jp_data_readr, 人口-若年))) 
-  ## 婚姻数/1000人と離婚数/1000人から人数を推計
-  (foo <- transform(foo,
-                    婚姻数 = 婚姻可能*婚姻/1000,
-                    離婚数 = 婚姻可能*離婚/1000,
-                    地方 = jp_area_readr$地方))
-  ## 地方別の婚姻・離婚数を集計
-  (jp_data_readr_3 <- aggregate(. ~ 地方, FUN = sum,
-                       data = subset(foo, select = -c(県名,婚姻,離婚))))
-  ## 地方別の婚姻率(婚姻数/1000人)・離婚率(離婚数/1000人)を計算して追加
-  (jp_data_readr_3 <- transform(jp_data_readr_3,
-                       婚姻率 = 婚姻数/婚姻可能*1000,
-                       離婚率 = 離婚数/婚姻可能*1000))
-#+end_src
 
 * 次回の予定
 - 可視化の重要性
