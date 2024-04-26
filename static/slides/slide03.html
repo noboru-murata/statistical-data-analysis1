@@ -46,8 +46,8 @@
 
 </section>
 <section>
-<section id="slide-org58860a9">
-<h2 id="org58860a9">講義概要</h2>
+<section id="slide-org0ffddd3">
+<h2 id="org0ffddd3">講義概要</h2>
 <ul>
 <li>R言語における関数</li>
 <li>引数の扱い方 (引数名・順序・既定値)</li>
@@ -59,12 +59,12 @@
 </section>
 </section>
 <section>
-<section id="slide-orgab79d4e">
-<h2 id="orgab79d4e">R言語における関数</h2>
+<section id="slide-org51e3405">
+<h2 id="org51e3405">R言語における関数</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd3750a5">
-<h3 id="orgd3750a5">関数 (復習)</h3>
+<section id="slide-orgd12bfc6">
+<h3 id="orgd12bfc6">関数 (復習)</h3>
 <ul>
 <li>関数の取り扱いは一般的な計算機言語とほぼ同様</li>
 <li>関数は引数とその値を指定して実行</li>
@@ -84,8 +84,8 @@ f(value1, value2) # 上と同値．順序に注意
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org04496ef">
-<h3 id="org04496ef">関数の実行例</h3>
+<section id="slide-org2c26a17">
+<h3 id="org2c26a17">関数の実行例</h3>
 <ul>
 <li><p>
 <span style="color:green;">正弦関数の計算</span>
@@ -102,7 +102,7 @@ sin(pi/2) # 上と同値 (引数と値の関係が明かなら引数名は省略
 <div class="org-src-container">
 
 <pre><code class="R" >help(log) # ヘルプを表示して使い方を確認する
-x &lt;- 16; b &lt;- 2 # xやbに適当な数値を代入する．複数コマンドは ; で区切る
+x &lt;- 16; b &lt;- 2 # xやbに適当な数値を代入する．1行で複数の処理を行う場合は ; を用いて並べる
 log(x = x, base = b) # 底をbとする対数
 log(x, b) # 上と同値
 log(base = b, x = x) # 上と同値
@@ -114,8 +114,8 @@ log(x) # 自然対数 (既定値による計算 =log(x, base = exp(1)))
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgdff16a6">
-<h3 id="orgdff16a6">引数と返値</h3>
+<section id="slide-org713c67a">
+<h3 id="org713c67a">引数と返値</h3>
 <ul>
 <li>ヘルプにより関数の引数および返値を確認できる
 <ul>
@@ -139,8 +139,8 @@ help(rnorm) # Help タブから指定しても良い
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb5b634c">
-<h3 id="orgb5b634c">既定値を持つ関数の実行例 (1/2)</h3>
+<section id="slide-orgd64a964">
+<h3 id="orgd64a964">既定値を持つ関数の実行例 (1/2)</h3>
 <ul>
 <li><p>
 <span style="color:green;">正規乱数の生成</span> 
@@ -155,17 +155,17 @@ rnorm(n = 5, mean = 2, sd = 2) # 平均2 分散4 の正規乱数を5個生成
 </div>
 
 <pre class="example">
-[1] -0.3570437  1.2608802 -1.0615962  1.4019398 -0.4166390
-[1]  9.960544  9.594294  9.540453 10.203320 10.798761
-[1]  0.04284254 -0.07624699 -0.01197531 -0.10761344  0.03878823
-[1] 3.0775912 4.1749186 2.3618358 4.9071891 0.6664869
+[1]  0.7987612  0.4284254 -0.7624699 -0.1197531 -1.0761344
+[1] 10.38788 10.53880 11.08746 10.18092 11.45359
+[1] -0.066675654 -0.135083640  0.008429749  0.005835604 -0.181368959
+[1] -0.7958739  3.6377440  6.5379324  1.3335692  2.3699861
 </pre></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org0e2e48f">
-<h3 id="org0e2e48f">既定値を持つ関数の実行例 (2/2)</h3>
+<section id="slide-org0e6c633">
+<h3 id="org0e6c633">既定値を持つ関数の実行例 (2/2)</h3>
 <ul>
 <li><p>
 <span style="color:green;">ヒストグラムの表示</span> 
@@ -188,12 +188,12 @@ hist(foo, # 既定値のいくつかを変更する
 </section>
 </section>
 <section>
-<section id="slide-orgdb6d607" data-background="#fef4f4">
-<h2 id="orgdb6d607">実習</h2>
+<section id="slide-orgcff91b4" data-background="#fef4f4">
+<h2 id="orgcff91b4">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9805abe" data-background="#fef4f4">
-<h3 id="org9805abe">練習問題</h3>
+<section id="slide-org4af9d3f" data-background="#fef4f4">
+<h3 id="org4af9d3f">練習問題</h3>
 <ul>
 <li>ヘルプ機能 (Help タブの検索窓, 関数 <code>help(),?</code>)
 を用いて関数 <code>sample()</code> を調べてみよう</li>
@@ -215,12 +215,12 @@ hist(foo, # 既定値のいくつかを変更する
 </section>
 </section>
 <section>
-<section id="slide-org7640da2">
-<h2 id="org7640da2">関数の定義</h2>
+<section id="slide-orge7b9a83">
+<h2 id="orge7b9a83">関数の定義</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgdb6076b">
-<h3 id="orgdb6076b">自作関数</h3>
+<section id="slide-orgd857af9">
+<h3 id="orgd857af9">自作関数</h3>
 <ul>
 <li>他の言語と同様にRでも関数を定義できる</li>
 <li><p>
@@ -239,8 +239,8 @@ hist(foo, # 既定値のいくつかを変更する
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org863f5f5">
-<h3 id="org863f5f5">自作関数の例 (1/2)</h3>
+<section id="slide-orgd841e42">
+<h3 id="orgd841e42">自作関数の例 (1/2)</h3>
 <ul>
 <li><p>
 <span style="color:green;">半径 r から球の体積と表面積を求める関数</span>
@@ -269,15 +269,15 @@ volume surface_area
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgdbc7b97">
-<h3 id="orgdbc7b97">自作関数の例 (2/2)</h3>
+<section id="slide-org4e5e917">
+<h3 id="org4e5e917">自作関数の例 (2/2)</h3>
 <ul>
 <li><p>
 <span style="color:green;">初項 a 公比 r の等比数列の最初のn項 (既定値は5)</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >bar &lt;- function(a, r, n=5){
+<pre><code class="R" >bar &lt;- function(a, r, n = 5){
   out &lt;- a*r^(1:n-1) # 1:n-1 と 1:(n-1) は異なるので注意
   return(out) # 値を返す
 }
@@ -300,12 +300,12 @@ bar(r = 0.5, n = 10, a = 512) # 同上
 </section>
 </section>
 <section>
-<section id="slide-org09d6b0f" data-background="#fef4f4">
-<h2 id="org09d6b0f">実習</h2>
+<section id="slide-org689bdeb" data-background="#fef4f4">
+<h2 id="org689bdeb">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8c0d8e0">
-<h3 id="org8c0d8e0">例題</h3>
+<section id="slide-org32759fa">
+<h3 id="org32759fa">例題</h3>
 <ul>
 <li>三角形の3辺の長さ \(x,y,z\) を与えると
 面積 \(S\) を計算する関数を作成せよ．
@@ -358,8 +358,8 @@ my_heron(12, 13, 5)
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8c92e4e" data-background="#fef4f4">
-<h3 id="org8c92e4e">練習問題</h3>
+<section id="slide-org85e7327" data-background="#fef4f4">
+<h3 id="org85e7327">練習問題</h3>
 <ul>
 <li>1から整数 \(n\) までの和を求める関数を作成せよ
 <ul>
@@ -378,12 +378,12 @@ my_heron(12, 13, 5)
 </section>
 </section>
 <section>
-<section id="slide-orgc85cb02">
-<h2 id="orgc85cb02">制御構造</h2>
+<section id="slide-org818209a">
+<h2 id="org818209a">制御構造</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd08b277">
-<h3 id="orgd08b277">制御文</h3>
+<section id="slide-org437b203">
+<h3 id="org437b203">制御文</h3>
 <ul>
 <li>最適化や数値計算などを行うためには，
 条件分岐や繰り返しを行うための仕組みが必要となる</li>
@@ -403,8 +403,8 @@ R言語を含む多くの計算機言語では
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5d00d35">
-<h3 id="org5d00d35"><code>if</code> 文</h3>
+<section id="slide-org79e28e8">
+<h3 id="org79e28e8"><code>if</code> 文</h3>
 <ul>
 <li><p>
 条件Aが <b>真</b> のとき処理Xを実行する
@@ -419,18 +419,18 @@ R言語を含む多くの計算機言語では
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >if(条件A) {処理X} else {処理Y}    
+<pre><code class="R" >if(条件A) {処理X} else {処理Y} # 複数行で記述する場合は改行位置に注意   
 </code></pre>
 </div></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org075bb9e">
-<h3 id="org075bb9e"><code>if</code> 文の例</h3>
+<section id="slide-org42b0286">
+<h3 id="org42b0286"><code>if</code> 文の例</h3>
 <ul>
 <li><p>
-<span style="color:green;">20240426が19で割り切れるか?</span>
+<span style="color:green;">今日の日付が19で割り切れるか?</span>
 </p>
 <div class="org-src-container">
 
@@ -453,8 +453,8 @@ if(today %% 19 == 0) {# %% は余りを計算
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd68cd98">
-<h3 id="orgd68cd98"><code>for</code> 文</h3>
+<section id="slide-org23fe965">
+<h3 id="org23fe965"><code>for</code> 文</h3>
 <ul>
 <li><p>
 ベクトル <code>V</code> の要素を <b>順に</b> 変数 <code>i</code> に代入して
@@ -462,7 +462,7 @@ if(today %% 19 == 0) {# %% は余りを計算
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >for(i in V) {処理X}
+<pre><code class="R" >for(i in V) {処理X} # V の要素はどんなデータ型でも良い
 </code></pre>
 </div></li>
 <li>処理Xは変数 <code>i</code> によって実行内容が変わってよい</li>
@@ -470,8 +470,8 @@ if(today %% 19 == 0) {# %% は余りを計算
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6884f0a">
-<h3 id="org6884f0a"><code>for</code> 文の例</h3>
+<section id="slide-orgcc766cf">
+<h3 id="orgcc766cf"><code>for</code> 文の例</h3>
 <ul>
 <li><p>
 <span style="color:green;">アルファベットの20,15,11,25,15番目を表示</span>
@@ -486,8 +486,8 @@ for(i in c(20,15,11,25,15)) {
 </div>
 
 <pre class="example">
- [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T"
-[21] "U" "V" "W" "X" "Y" "Z"
+ [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q"
+[18] "R" "S" "T" "U" "V" "W" "X" "Y" "Z"
 [1] "T"
 [1] "O"
 [1] "K"
@@ -498,8 +498,8 @@ for(i in c(20,15,11,25,15)) {
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcf74906">
-<h3 id="orgcf74906"><code>while</code> 文</h3>
+<section id="slide-org36f4a01">
+<h3 id="org36f4a01"><code>while</code> 文</h3>
 <ul>
 <li><p>
 条件Aが <b>真</b> である限り処理Xを繰り返す
@@ -516,8 +516,8 @@ for(i in c(20,15,11,25,15)) {
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org48f707a">
-<h3 id="org48f707a"><code>while</code> 文の例</h3>
+<section id="slide-orgaee1b4f">
+<h3 id="orgaee1b4f"><code>while</code> 文の例</h3>
 <ul>
 <li><p>
 <span style="color:green;">素因数分解する</span>
@@ -550,12 +550,12 @@ while(n != 1){ # 商(for文の中で計算している)が1になるまで計算
 </section>
 </section>
 <section>
-<section id="slide-orgbdeea40" data-background="#fef4f4">
-<h2 id="orgbdeea40">実習</h2>
+<section id="slide-orgccafe33" data-background="#fef4f4">
+<h2 id="orgccafe33">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8ed1d9b">
-<h3 id="org8ed1d9b">例題</h3>
+<section id="slide-org2ca1294">
+<h3 id="org2ca1294">例題</h3>
 <ul>
 <li>制御構造を利用して非負の整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ．
 ただし，関数 <code>prod()</code> を用いないこと．</li>
@@ -668,8 +668,8 @@ my_fact3(0) # 正しい
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7b65ab2" data-background="#fef4f4">
-<h3 id="org7b65ab2">練習問題</h3>
+<section id="slide-orga935cd8" data-background="#fef4f4">
+<h3 id="orga935cd8">練習問題</h3>
 <ul>
 <li>整数 \(n\) の Fibonacci 数を求める関数を作成せよ
 <ul>
@@ -700,8 +700,8 @@ Fibonacci 数は以下の漸化式で計算される
 </section>
 </section>
 <section>
-<section id="slide-orgb2b40e0">
-<h2 id="orgb2b40e0">次回の予定</h2>
+<section id="slide-orga142e93">
+<h2 id="orga142e93">次回の予定</h2>
 <ul>
 <li>データフレームの操作</li>
 <li>ファイルの取り扱い</li>

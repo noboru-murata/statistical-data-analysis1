@@ -6,7 +6,7 @@ sin(x = pi/2) # "引数名 = 値" で指定
 sin(pi/2) # 上と同値 (引数と値の関係が明かなら引数名は省略可能)
 
 help(log) # ヘルプを表示して使い方を確認する
-x <- 16; b <- 2 # xやbに適当な数値を代入する．複数コマンドは ; で区切る
+x <- 16; b <- 2 # xやbに適当な数値を代入する．1行で複数の処理を行う場合は ; を用いて並べる
 log(x = x, base = b) # 底をbとする対数
 log(x, b) # 上と同値
 log(base = b, x = x) # 上と同値
@@ -60,7 +60,7 @@ foo <- function(r){
 foo(r = 2) # 実行
 foo(3)
 
-bar <- function(a, r, n=5){
+bar <- function(a, r, n = 5){
   out <- a*r^(1:n-1) # 1:n-1 と 1:(n-1) は異なるので注意
   return(out) # 値を返す
 }
@@ -177,6 +177,15 @@ my_fact3(3) # 正しい
 my_fact3(2) # 正しい
 my_fact3(1) # 正しい
 my_fact3(0) # 正しい
+
+#' @notes
+#' 再帰を用いて書くこともできる
+my_fact4 <- function(n){
+  if(n<0) return(NA)
+  if(n == 0 | n == 1) return(1)
+  return(n * my_fact4(n-1))
+}
+sapply(-2:5, my_fact4) # -2から5を my_fact4 で計算した結果を返す
 
 #' ---------------------------------------------------------------------------
 #' @practice 制御構造
