@@ -175,88 +175,6 @@ jp_data |> select("若年") |> min() # 同上
 with(jp_data, max(老人)) # 老年人口の最大値 (関数 with() を利用)
 jp_data |> select("老人") |> max() # 同上
 
-### 関数 aggregate() の使い方
-## 人口から面積まで地方ごとの平均値を計算
-x <- subset(jp_data, select = 人口:面積)
-aggregate(x, by = list(地方 = jp_area$地方), FUN = sum)
-
-aggregate(subset(jp_data, select = 人口:面積),
-          by = list(地方 = jp_area$地方),
-          FUN = sum)
-
-y <- transform(x, 地方 = jp_area$地方) # データフレームを変更
-aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-          data = y, FUN = sum)
-
-aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-          data = transform(subset(jp_data, select = 人口:面積),
-                           地方 = jp_area$地方), 
-          FUN = sum)
-
-## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-aggregate(x,
-          by = list(地方 = jp_area$地方,
-                    過疎 = with(jp_data, 人口<=median(人口))),
-          FUN = sum)
-
-aggregate( . ~ 地方 + 過疎,
-          FUN = sum, # + で条件を追加
-          data = transform(subset(jp_data, select = 人口:面積),
-                           地方 = jp_area$地方,
-                           過疎 = 人口<=median(人口)))
-
-### 日本語に不具合がある場合
-## 人口から面積まで地方ごとの平均値を計算
-x <- subset(jp_data_en,select=population:area)
-aggregate(x, by=list(region=jp_area_en$region), FUN=sum) 
-
-aggregate(subset(jp_data_en,select=population:area),
-          by=list(region=jp_area_en$region),
-          FUN=sum) 
-
-y <- transform(x,region=jp_area_en$region) 
-aggregate( . ~ region, data=y, FUN=sum)
-
-aggregate( . ~ region, # 右辺で条件付けて左辺(右辺以外)を計算
-          data=transform(subset(jp_data_en,select=population:area),
-                         region=jp_area_en$region), 
-          FUN=sum)
-
-## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-aggregate(x, by=list(region=jp_area_en$region,
-                     depop=with(jp_data_en, population<=median(population))),
-          FUN=sum)
-
-aggregate( . ~ region + depop, FUN=sum, 
-          data=transform(subset(jp_data_en,select=population:area),
-                         region=jp_area_en$region,
-                         depop=population<=median(population)))
-
-### readr パッケージで読み込んだ場合
-## 人口から面積まで地方ごとの平均値を計算
-x <- subset(jp_data_readr, select = 人口:面積)
-aggregate(x, by = list(地方 = jp_area_readr$地方), FUN = sum) 
-aggregate(subset(jp_data_readr, select = 人口:面積),
-          by = list(地方 = jp_area_readr$地方),
-          FUN = sum) 
-y <- transform(x, 地方 = jp_area_readr$地方) # データフレームを変更
-aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-          data = y, FUN = sum)
-aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-          data = transform(subset(jp_data_readr, select = 人口:面積),
-                           地方 = jp_area_readr$地方), 
-          FUN = sum)
-## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-aggregate(x,
-          by = list(地方 = jp_area_readr$地方,
-                    過疎 = with(jp_data_readr, 人口<=median(人口))),
-          FUN = sum)
-aggregate( . ~ 地方 + 過疎,
-          FUN = sum, # + で条件を追加
-          data = transform(subset(jp_data_readr, select = 人口:面積),
-                           地方 = jp_area_readr$地方,
-                           過疎 = 人口<=median(人口)))
-
 #' @exercise 列ごとの集計
 
 #' 練習問題のデータを用いた例
@@ -280,12 +198,12 @@ jp_data |>
 #' 関数 dplyr::mutate() で新たな列を加えることができる
 #' 関数 forcats::as_factor() で文字列を出現順に順序付因子にすると
 #' 集計結果は因子の順番で表示される
-#'
 #' 関数 dplyr::group_by() は複数の条件で条件付けることもできる
 jp_data |>
   mutate(地方 = as_factor(jp_area[["地方"]]), # 地方の情報を付加
-         過疎 = 人口 <= median(人口)) |>       # 人口が中央値以下
-      group_by(地方, 過疎) |> # 地方ごとにグループ化
+         人口密度 = 人口/面積,                  # 人口密度を計算
+         過密 = 人口密度 >= median(人口密度)) |> # 人口密度が中央値以上
+      group_by(地方, 過密) |> # 地方ごとにグループ化
       summarize((across(人口:面積, sum))) # グループごとに集計
 
 #' ---------------------------------------------------------------------------

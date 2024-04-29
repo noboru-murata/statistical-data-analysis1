@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-25 12:43:37 mura>
+# Time-stamp: <2024-04-29 18:20:15 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -65,7 +65,7 @@
   #+end_quote
 - (特殊な) *行列* でもあり *リスト* でもある
 
-** "tidyverse" パッケージ
+** 'tidyverse' パッケージ
 - データ操作とグラフィクスの拡張 (再掲)
   - *tidyverse* : Hadley Wickham @posit による拡張パッケージ集
     - https://www.tidyverse.org/packages/
@@ -894,7 +894,7 @@
   #+end_src
   - 同様な目的に関数 ~tapply()~ も利用可
 
-** 関数 ~aggregate()~ の使い方
+** COMMENT 関数 ~aggregate()~ の使い方
 - [[color:green][同じ値を持つグループごとの合計値を求める]]
   #+begin_src R :tangle yes
     ### 関数 aggregate() の使い方
@@ -1058,12 +1058,12 @@
     #' 関数 dplyr::mutate() で新たな列を加えることができる
     #' 関数 forcats::as_factor() で文字列を出現順に順序付因子にすると
     #' 集計結果は因子の順番で表示される
-    #'
     #' 関数 dplyr::group_by() は複数の条件で条件付けることもできる
     jp_data |>
       mutate(地方 = as_factor(jp_area[["地方"]]), # 地方の情報を付加
-             過疎 = 人口 <= median(人口)) |>       # 人口が中央値以下
-          group_by(地方, 過疎) |> # 地方ごとにグループ化
+             人口密度 = 人口/面積,                  # 人口密度を計算
+             過密 = 人口密度 >= median(人口密度)) |> # 人口密度が中央値以上
+          group_by(地方, 過密) |> # 地方ごとにグループ化
           summarize((across(人口:面積, sum))) # グループごとに集計
   #+end_src
 

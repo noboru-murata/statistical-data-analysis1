@@ -45,8 +45,8 @@
 
 </section>
 <section>
-<section id="slide-org790e16f">
-<h2 id="org790e16f">講義概要</h2>
+<section id="slide-orgdb82e26">
+<h2 id="orgdb82e26">講義概要</h2>
 <ul>
 <li>データフレームの操作</li>
 <li>ファイルの取り扱い</li>
@@ -57,13 +57,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org72ff18b">
-<h2 id="org72ff18b">データフレームの操作</h2>
-<div class="outline-text-2" id="text-org72ff18b">
+<section id="slide-orgcafa4d3">
+<h2 id="orgcafa4d3">データフレームの操作</h2>
+<div class="outline-text-2" id="text-orgcafa4d3">
 </div>
 </section>
-<section id="slide-org9ee67a1">
-<h3 id="org9ee67a1">データ構造</h3>
+<section id="slide-org962e000">
+<h3 id="org962e000">データ構造</h3>
 <ul>
 <li>Rに用意されている基本的なデータ構造
 <ul>
@@ -82,8 +82,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8a27b0e">
-<h3 id="org8a27b0e">データフレーム</h3>
+<section id="slide-org94d3cd5">
+<h3 id="org94d3cd5">データフレーム</h3>
 <ul>
 <li>複数の個体について，いくつかの属性を集計した表
 <ul>
@@ -161,8 +161,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge08e26a">
-<h3 id="orge08e26a">&ldquo;tidyverse&rdquo; パッケージ</h3>
+<section id="slide-org3d6e243">
+<h3 id="org3d6e243">&rsquo;tidyverse&rsquo; パッケージ</h3>
 <ul>
 <li>データ操作とグラフィクスの拡張 (再掲)
 <ul>
@@ -191,8 +191,8 @@ library(tidyverse)
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5175e0d">
-<h3 id="org5175e0d">データ例</h3>
+<section id="slide-org960d70f">
+<h3 id="org960d70f">データ例</h3>
 <ul>
 <li><p>
 <b><code>datasets::airquality</code></b>
@@ -250,8 +250,8 @@ tail(aq_df, n = 10)    # 最後の10行が表示される．tibbleでも同様
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org71ec169">
-<h3 id="org71ec169">項目の抽出</h3>
+<section id="slide-org5a18c83">
+<h3 id="org5a18c83">項目の抽出</h3>
 <ul>
 <li><p>
 添字の番号(行と列)を指定
@@ -287,8 +287,8 @@ aq_tbl$Ozone      # 同上
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7cd66a3">
-<h3 id="org7cd66a3">行の選択 (素朴な方法)</h3>
+<section id="slide-org61de570">
+<h3 id="org61de570">行の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 行番号による指定
@@ -325,8 +325,8 @@ aq_tbl[which(with(aq_tbl, Ozone&gt;100 &amp; Wind&lt;=5)), ]
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org57b2528">
-<h3 id="org57b2528">列の選択 (素朴な方法)</h3>
+<section id="slide-org8c26f9b">
+<h3 id="org8c26f9b">列の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 列番号による指定
@@ -361,8 +361,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),"Month"] # デー�
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7a47187">
-<h3 id="org7a47187">行の選択</h3>
+<section id="slide-org8fc84bf">
+<h3 id="org8fc84bf">行の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::filter()</code> : 条件を指定して行を選択
@@ -388,8 +388,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),"Month"] # デー�
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd32b583">
-<h3 id="orgd32b583">列の選択</h3>
+<section id="slide-org437c9f7">
+<h3 id="org437c9f7">列の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::select()</code> : 条件を指定して列を選択
@@ -414,8 +414,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),"Month"] # デー�
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbff186b">
-<h3 id="orgbff186b">パイプ演算子</h3>
+<section id="slide-orgfec555f">
+<h3 id="orgfec555f">パイプ演算子</h3>
 <ul>
 <li>処理を順次結合する演算子 (いくつか定義がある)
 <ul>
@@ -443,12 +443,12 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 </section>
 </section>
 <section>
-<section id="slide-org359ba5a" data-background="#fef4f4">
-<h2 id="org359ba5a">演習</h2>
+<section id="slide-org344e72c" data-background="#fef4f4">
+<h2 id="org344e72c">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org819cf70" data-background="#fef4f4">
-<h3 id="org819cf70">練習問題</h3>
+<section id="slide-orgd71bd1c" data-background="#fef4f4">
+<h3 id="orgd71bd1c">練習問題</h3>
 <ul>
 <li><code>datasets::airquality</code> に対して
 以下の条件を満たすデータを取り出しなさい．
@@ -466,13 +466,13 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 </section>
 </section>
 <section>
-<section id="slide-org2c63120">
-<h2 id="org2c63120">ファイルの取り扱い</h2>
-<div class="outline-text-2" id="text-org2c63120">
+<section id="slide-orgb106fa4">
+<h2 id="orgb106fa4">ファイルの取り扱い</h2>
+<div class="outline-text-2" id="text-orgb106fa4">
 </div>
 </section>
-<section id="slide-org5591d59">
-<h3 id="org5591d59">データファイルの読み書き</h3>
+<section id="slide-org392ab6d">
+<h3 id="org392ab6d">データファイルの読み書き</h3>
 <ul>
 <li>実際の解析においては以下の操作が必要
 <ul>
@@ -492,8 +492,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org46e580b">
-<h3 id="org46e580b">作業ディレクトリ</h3>
+<section id="slide-org8b12544">
+<h3 id="org8b12544">作業ディレクトリ</h3>
 <ul>
 <li>Rの処理は <b>作業ディレクトリ</b> で実行される
 <ul>
@@ -524,8 +524,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgaf33a40">
-<h3 id="orgaf33a40">作業ディレクトリの操作</h3>
+<section id="slide-org774c1d1">
+<h3 id="org774c1d1">作業ディレクトリの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::getwd()</code> : 作業ディレクトリの確認
@@ -555,8 +555,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7169ec7">
-<h3 id="org7169ec7">CSV ファイルの操作</h3>
+<section id="slide-org2ca2ecf">
+<h3 id="org2ca2ecf">CSV ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>readr::write_csv()</code> : ファイルの書き出し
@@ -618,8 +618,8 @@ dim(new_data) # 正しく読み込めたか大きさを確認
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga293255">
-<h3 id="orga293255">RData ファイルの操作</h3>
+<section id="slide-orga946ff1">
+<h3 id="orga946ff1">RData ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::save()</code> : ファイルの書き出し
@@ -687,12 +687,12 @@ my_data_2
 </section>
 </section>
 <section>
-<section id="slide-org7973d9c" data-background="#fef4f4">
-<h2 id="org7973d9c">演習</h2>
+<section id="slide-orgc2ce52b" data-background="#fef4f4">
+<h2 id="orgc2ce52b">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2192202" data-background="#fef4f4">
-<h3 id="org2192202">練習問題</h3>
+<section id="slide-orgd01016e" data-background="#fef4f4">
+<h3 id="orgd01016e">練習問題</h3>
 <ul>
 <li><p>
 以下のデータを読み込んで操作してみよう
@@ -739,13 +739,13 @@ jp_area_en &lt;- read_csv(file = "data/jpdata3-en.csv")
 </section>
 </section>
 <section>
-<section id="slide-org094339a">
-<h2 id="org094339a">データの集計</h2>
-<div class="outline-text-2" id="text-org094339a">
+<section id="slide-org2cecf11">
+<h2 id="org2cecf11">データの集計</h2>
+<div class="outline-text-2" id="text-org2cecf11">
 </div>
 </section>
-<section id="slide-orgf27f289">
-<h3 id="orgf27f289">統計量の計算</h3>
+<section id="slide-orgdaa7b90">
+<h3 id="orgdaa7b90">統計量の計算</h3>
 <ul>
 <li>データを集約した値 = 統計量
 <ul>
@@ -762,8 +762,8 @@ jp_area_en &lt;- read_csv(file = "data/jpdata3-en.csv")
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org605cef1">
-<h3 id="org605cef1">集約のための関数の使い方</h3>
+<section id="slide-org6be17b9">
+<h3 id="org6be17b9">集約のための関数の使い方</h3>
 <ul>
 <li><p>
 <span style="color:green;">データの集計の例</span>
@@ -792,204 +792,8 @@ jp_data |&gt; select("老人") |&gt; max() # 同上
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgdd48dc1">
-<h3 id="orgdd48dc1">関数 <code>aggregate()</code> の使い方</h3>
-<ul>
-<li><p>
-<span style="color:green;">同じ値を持つグループごとの合計値を求める</span>
-</p>
-<div class="org-src-container">
-
-<pre><code class="R" >### 関数 aggregate() の使い方
-## 人口から面積まで地方ごとの平均値を計算
-x &lt;- subset(jp_data, select = 人口:面積)
-aggregate(x, by = list(地方 = jp_area$地方), FUN = sum) 
-</code></pre>
-</div>
-
-<pre class="example">
-地方     人口    若年     老人    面積
-1   関東 43248000 5159000 10948000 3243305
-2   近畿 22431000 2770000  6291000 3312565
-3   九州 14360000 1951000  4088000 4451160
-4   四国  3788000  449000  1223000 1880366
-5   中国  7369000  932000  2243000 3192167
-6   中部 21356000 2726000  6008000 6680678
-7   東北  8836000 1016000  2716000 6694744
-8 北海道  5320000  588000  1632000 7842078
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section>
-<ul>
-<li><p>
-<span style="color:green;">代入せずにまとめて書くこともできる</span>
-</p>
-<div class="org-src-container">
-
-<pre><code class="R" >aggregate(subset(jp_data, select = 人口:面積),
-          by = list(地方 = jp_area$地方),
-          FUN = sum) 
-</code></pre>
-</div>
-
-<pre class="example">
-    地方     人口    若年     老人    面積
-1   関東 43248000 5159000 10948000 3243305
-2   近畿 22431000 2770000  6291000 3312565
-3   九州 14360000 1951000  4088000 4451160
-4   四国  3788000  449000  1223000 1880366
-5   中国  7369000  932000  2243000 3192167
-6   中部 21356000 2726000  6008000 6680678
-7   東北  8836000 1016000  2716000 6694744
-8 北海道  5320000  588000  1632000 7842078
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section>
-<ul>
-<li><p>
-<span style="color:green;">以下も同じ結果を返す</span>
-</p>
-<div class="org-src-container">
-
-<pre><code class="R" >y &lt;- transform(x, 地方 = jp_area$地方) # データフレームを変更
-aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-          data = y, FUN = sum)
-</code></pre>
-</div>
-
-<pre class="example">
-地方     人口    若年     老人    面積
-1   関東 43248000 5159000 10948000 3243305
-2   近畿 22431000 2770000  6291000 3312565
-3   九州 14360000 1951000  4088000 4451160
-4   四国  3788000  449000  1223000 1880366
-5   中国  7369000  932000  2243000 3192167
-6   中部 21356000 2726000  6008000 6680678
-7   東北  8836000 1016000  2716000 6694744
-8 北海道  5320000  588000  1632000 7842078
-</pre>
-
-
-<ul>
-<li><code>help("transform")</code> を参照</li>
-
-</ul></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section>
-<ul>
-<li><p>
-<span style="color:green;">まとめて書くこともできる</span>
-</p>
-<div class="org-src-container">
-
-<pre><code class="R" >aggregate( . ~ 地方, # 右辺で条件付けて左辺(右辺以外)を計算
-          data = transform(subset(jp_data, select = 人口:面積),
-                           地方 = jp_area$地方), 
-          FUN = sum)
-</code></pre>
-</div>
-
-<pre class="example">
-    地方     人口    若年     老人    面積
-1   関東 43248000 5159000 10948000 3243305
-2   近畿 22431000 2770000  6291000 3312565
-3   九州 14360000 1951000  4088000 4451160
-4   四国  3788000  449000  1223000 1880366
-5   中国  7369000  932000  2243000 3192167
-6   中部 21356000 2726000  6008000 6680678
-7   東北  8836000 1016000  2716000 6694744
-8 北海道  5320000  588000  1632000 7842078
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section>
-<ul>
-<li><p>
-<span style="color:green;">複数の条件でグループ分け</span>
-</p>
-<div class="org-src-container">
-
-<pre><code class="R" >## 地方と，人口が中央値以下か否かでグループ分けして平均値を計算
-aggregate(x,
-          by = list(地方 = jp_area$地方,
-                    過疎 = with(jp_data, 人口&lt;=median(人口))),
-          FUN = sum)
-</code></pre>
-</div>
-
-<pre class="example" id="org2dcc434">
-地方  過疎     人口    若年     老人    面積
-1    関東 FALSE 43248000 5159000 10948000 3243305
-2    近畿 FALSE 18725000 2295000  5222000 2069269
-3    九州 FALSE  6872000  912000  1915000 1239600
-4    中国 FALSE  4736000  611000  1376000 1559395
-5    中部 FALSE 17551000 2257000  4866000 4971734
-6    東北 FALSE  4205000  500000  1200000 2106612
-7  北海道 FALSE  5320000  588000  1632000 7842078
-8    近畿  TRUE  3706000  475000  1069000 1243296
-9    九州  TRUE  7488000 1039000  2173000 3211560
-10   四国  TRUE  3788000  449000  1223000 1880366
-11   中国  TRUE  2633000  321000   867000 1632772
-12   中部  TRUE  3805000  469000  1142000 1708944
-13   東北  TRUE  4631000  516000  1516000 4588132
-</pre></li>
-
-</ul>
-
-<div class="slide-footer"><br></div>
-</section>
-<section>
-<ul>
-<li><p>
-<span style="color:green;">別の書き方</span> 
-</p>
-<div class="org-src-container">
-
-<pre><code class="R" >aggregate( . ~ 地方 + 過疎,
-          FUN = sum, # + で条件を追加
-          data = transform(subset(jp_data, select = 人口:面積),
-                           地方 = jp_area$地方,
-                           過疎 = 人口&lt;=median(人口)))
-</code></pre>
-</div>
-
-<pre class="example" id="orgf64ae64">
-     地方  過疎     人口    若年     老人    面積
-1    関東 FALSE 43248000 5159000 10948000 3243305
-2    近畿 FALSE 18725000 2295000  5222000 2069269
-3    九州 FALSE  6872000  912000  1915000 1239600
-4    中国 FALSE  4736000  611000  1376000 1559395
-5    中部 FALSE 17551000 2257000  4866000 4971734
-6    東北 FALSE  4205000  500000  1200000 2106612
-7  北海道 FALSE  5320000  588000  1632000 7842078
-8    近畿  TRUE  3706000  475000  1069000 1243296
-9    九州  TRUE  7488000 1039000  2173000 3211560
-10   四国  TRUE  3788000  449000  1223000 1880366
-11   中国  TRUE  2633000  321000   867000 1632772
-12   中部  TRUE  3805000  469000  1142000 1708944
-13   東北  TRUE  4631000  516000  1516000 4588132
-</pre></li>
-
-</ul>
-<div class="slide-footer"><br></div>
-</section>
-<section id="slide-org89dcdcd">
-<h3 id="org89dcdcd">列ごとの集約</h3>
+<section id="slide-org19d8136">
+<h3 id="org19d8136">列ごとの集約</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::summarise()</code> : 行ごとに計算する
@@ -1019,8 +823,8 @@ jp_data |&gt; summarise(across(where(is.double), min)) # 数値列の最小値
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb192166">
-<h3 id="orgb192166">グループごとの操作</h3>
+<section id="slide-orgab424f4">
+<h3 id="orgab424f4">グループごとの操作</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::group_by()</code> : グループ化を行う
@@ -1053,12 +857,12 @@ jp_data |&gt;
 </section>
 </section>
 <section>
-<section id="slide-org6f9819e" data-background="#fef4f4">
-<h2 id="org6f9819e">演習</h2>
+<section id="slide-org65d375f" data-background="#fef4f4">
+<h2 id="org65d375f">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcb07893" data-background="#fef4f4">
-<h3 id="orgcb07893">練習問題</h3>
+<section id="slide-orgff69d82" data-background="#fef4f4">
+<h3 id="orgff69d82">練習問題</h3>
 <ul>
 <li>サンプルデータ (<code>jpdata</code>) の整理をしてみよう．
 <ul>
@@ -1084,8 +888,8 @@ jp_data |&gt;
 </section>
 </section>
 <section>
-<section id="slide-orgca9ac4d">
-<h2 id="orgca9ac4d">次回の予定</h2>
+<section id="slide-orgd79951d">
+<h2 id="orgd79951d">次回の予定</h2>
 <ul>
 <li>可視化の重要性</li>
 <li>基本的な描画</li>
