@@ -1,11 +1,18 @@
 ### 第5講 サンプルコード
-library(tidyverse)
 
 #' 最初に一度だけ以下のいずれかを実行しておく
 #'  - Package タブから tidyverse をインストール
 #'  - コンソール上で次のコマンドを実行 'install.packages("tidyverse")'
 #' tidyverse パッケージの読み込み
 library(tidyverse)
+
+jp_data <- read_csv(file = "data/jpdata1.csv")
+jp_item <- read_csv(file = "data/jpdata2.csv")
+jp_area <- read_csv(file = "data/jpdata3.csv")
+
+tw_data <- read_csv(file = "data/tokyo_weather.csv")
+
+tc_data <- read_csv(file="data/tokyo_covid19_2021.csv")
 
 #' @exercise 折れ線グラフの描画
 #' 東京の5月の気温と日射量の推移
@@ -21,11 +28,13 @@ tw_data |> filter(month == 5) |> # 5月を抽出
 tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
   pivot_longer(!day, names_to = "index") |> 
   ggplot(aes(x = day, y = value, colour = index)) +
-  geom_line() + # index ごとに異なる色で線が引かれる
+  geom_line() + # index ごとにカラーパレットで指定された異なる色が用いられる
   labs(title = "Weather in May")
 
 #' @notes
-#' 色はカラーパレットに従って自動的に選択される
+#' 色は theme で設定されているカラーパレットに従って自動的に選択されるが
+#' 自身で設定することも可能．詳細は例えば以下を参照
+#' https://ggplot2-book.org/scales-colour
 
 tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
   pivot_longer(!day, names_to = "index") |> 
@@ -38,7 +47,7 @@ tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
 #' 属性ごとに描いた異なるグラフを並べる場合には
 #' 関数 ggplot2::facet_grid() (属性ごとに行・列を構成)や
 #' 関数 ggplot2::facet_wrap() (行数・列数を指定)を用いる
-foo <-
+foo <- # 基本となるグラフオブジェクトを保存
   tw_data |> filter(month %in% c(5,6,7,8)) |>
   select(c(month, day, temp, solar, wind)) |>
   pivot_longer(!c(month, day), names_to = "index") |> 
@@ -48,6 +57,85 @@ foo + facet_grid(rows = vars(index), cols = vars(month))
 foo + facet_grid(index ~ month) # 同上
 foo + facet_wrap(vars(index, month), nrow = 4, ncol = 3) # 4x3 に並べる
 foo + facet_wrap(index ~ month, nrow = 4, ncol = 3) # 同上
+
+#' ---------------------------------------------------------------------------
+#' @practice 基本的なグラフの描画(1)
+#' 
+#' データの読み込み
+tw_data <- read_csv(file = "data/tokyo_weather.csv")
+#'
+#' 6月の気温と湿度の折線グラフ
+#' 同じグラフに描いてみる
+tw_data |>
+  filter(month == 6) |> # 6月を選択
+  select(c(day, temp, humid)) |> # 必要な列を選択
+  pivot_longer(!day, names_to = "index") |> # long format に変換
+  ggplot(aes(x = day, y = value, colour = index)) + # 審美的属性を指定
+  geom_line() # 折線グラフの描画
+#' 物理的に異なる量なので facet を分ける
+tw_data |>
+  filter(month == 6) |> 
+  select(c(day, temp, humid)) |> 
+  pivot_longer(!day, names_to = "index") |> 
+  ggplot(aes(x = day, y = value, colour = index)) +
+  geom_line() +
+  facet_grid(rows = vars(index)) # index ごとに facet を行に並べる
+#' 値域が異なるので facet ごとにy軸を調整する
+tw_data |>
+  filter(month == 6) |> 
+  select(c(day, temp, humid)) |> 
+  pivot_longer(!day, names_to = "index") |> 
+  ggplot(aes(x = day, y = value, colour = index)) +
+  geom_line() +
+  facet_grid(rows = vars(index),
+             scales = "free_y") # y軸を個別に自動調整
+#' 不要な凡例の削除とタイトルの追加
+tw_data |>
+  filter(month == 6) |> 
+  select(c(day, temp, humid)) |> 
+  pivot_longer(!day, names_to = "index") |> 
+  ggplot(aes(x = day, y = value, colour = index)) +
+  geom_line(show.legend = FALSE) + # 凡例の削除
+  facet_grid(rows = vars(index), scales = "free_y") +
+  labs(title = "Weather in June") # タイトルの追加
+#' 1年間の気温と湿度の折線グラフ
+tw_data |>
+  select(c(temp, humid)) |> # 必要な列を抽出
+  rowid_to_column(var = "day") |> # 行番号を ID として列 day を作る
+  pivot_longer(!day, names_to = "index") |> 
+  ggplot(aes(x = day, y = value, colour = index)) +
+  geom_line(show.legend = FALSE) +
+  facet_grid(rows = vars(index), scales = "free_y") +
+  labs(title = "Weather in Tokyo") 
+#' x軸として日付を用いる
+tw_data |>
+  mutate(date = as_date(paste(year, month, day, sep = "-"))) |> # 日付
+  select(c(date, temp, humid)) |> # 必要な列を抽出
+  pivot_longer(!date, names_to = "index") |> 
+  ggplot(aes(x = date, y = value, colour = index)) +
+  geom_line(show.legend = FALSE) +
+  facet_grid(rows = vars(index), scales = "free_y") +
+  labs(title = "Weather in Tokyo") 
+#' 各月の平均気温と湿度の折線グラフを描け
+tw_data |>
+  group_by(month) |> # 月毎にまとめる
+  summarize(across(c(temp, humid), mean)) |> # 目的の指標を集計
+  pivot_longer(!month, names_to = "index") |> 
+  ggplot(aes(x = month, y = value, colour = index)) +
+  geom_line(show.legend = FALSE) +
+  facet_grid(vars(index), scales = "free_y") +
+  labs(title = "Weather in Tokyo") 
+#' x軸の目盛を指定
+tw_data |>
+  group_by(month) |> 
+  summarize(across(c(temp, humid), mean)) |>
+  pivot_longer(!month, names_to = "index") |> 
+  ggplot(aes(x = month, y = value, colour = index)) +
+  geom_line(show.legend = FALSE) +
+  facet_grid(vars(index), scales = "free_y") +
+  scale_x_continuous(breaks = 1:12) + # 1:12 の目盛を描く
+  labs(title = "Weather in Tokyo") 
+#' ---------------------------------------------------------------------------
 
 #' @exercise 散布図の描画
 #' 夏季の日射量と気温の関係
@@ -93,12 +181,29 @@ tw_data |> filter(month %in% 7:9) |> select(c(month, temp, solar, humid)) |>
 #' 事例ベースの使い方は以下のコマンドで見ることができる
 vig_ggally("ggpairs")
 
-if(Sys.info()["sysname"] == "Darwin") { # macOS か調べる
-  #' OS標準のヒラギノフォントを指定する場合
-  theme_update(text = element_text(family = "HiraginoSans-W4"))
-  #' gome_text/geom_label内で用いられる日本語フォントの指定
-  update_geom_defaults("text", list(family = theme_get()$text$family))
-  update_geom_defaults("label", list(family = theme_get()$text$family))}
+#' 最初に一度だけ以下のいずれかを実行しておく
+#'  - Package タブから plotly をインストール
+#'  - コンソール上で次のコマンドを実行 'install.packages("plotly")'
+#' plotly パッケージの読み込み
+library(plotly)
+
+#' @exercise 対話型のグラフへの変換
+
+#' 5月の気温と日射量の例
+tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
+  pivot_longer(!day, names_to = "index") |> 
+  ggplot(aes(x = day, y = value, colour = index)) +
+  geom_line() + labs(title = "Weather in May")
+ggplotly() # 最後に描いた ggplot オブジェクトを変換して 右下 Viewer タブに表示
+
+#' 夏季の日射量と温度と湿度の例
+bar <- # ggplot オブジェクトを保存
+  tw_data |> filter(month %in% 7:9) |> 
+  ggplot(aes(x = solar, y = temp, size = humid,
+             text = paste0("date: ", month, "/", day))) + # 日付を付加
+  geom_point(colour = "blue", shape = 19) + 
+  labs(x = "solar radiation", y = "temperature")
+ggplotly(bar) # 保存した ggplot オブジェクトを変換
 
 #' ---------------------------------------------------------------------------
 #' @practice 基本的なグラフの描画
@@ -150,7 +255,11 @@ jp_data |>
   labs(x = "1000人あたりの婚姻数",
        y = "1000人あたりの離婚数",
        title = "婚姻数と離婚数の散布図")
-#'
+#' @notes
+#' shape 属性は6種類までが推奨されている．
+#' そのままでは表示されないが，手動で設定すれば表示される
+ggplot2::last_plot() + # 最後に描いたグラフオブジェクトに追加
+  scale_shape_manual(values = 1:8) # 形は '?points' を参照
 #' @notes
 #' 図中に入れる文字を自動的に調整するパッケージもある
 #' 重なりが多いところはラベルを削除するので注意は必要
@@ -168,173 +277,168 @@ jp_data |>
   labs(x = "1000人あたりの婚姻数",
        y = "1000人あたりの離婚数",
        title = "婚姻数と離婚数の散布図")
+#' 上記と同様に shape については警告が出る
+ggplot2::last_plot() + 
+  scale_shape_manual(values = LETTERS) # 文字を指定することもできる
 #' ---------------------------------------------------------------------------
 
 #' @exercise ヒストグラムの描画
+#' 各日の全天日射量の頻度分布
 
-#' 行政検査(ai)での検査件数の分布
-pcr_data |>
-  ggplot(aes(x = ai)) + # 分布を描画する列を指定
-  geom_histogram(bins = 30, fill = "lightblue", colour = "blue") +
-  labs(x = pcr_colnames["ai"], y = "頻度", title = "検査件数のヒストグラム")
+tw_data |>
+  ggplot(aes(x = solar)) + # 分布を描画する列を指定
+  geom_histogram(bins = 30, fill = "pink", colour = "red") +
+  labs(x = expression(MJ/m^2), # 数式の表示は '?plotmath' を参照
+       title = "Solar Radiation in Tokyo")
 
 #' @notes
-#' 各ビンの頻度を表示するためには例えば以下のようにすればよい
-pcr_data |>
-  ggplot(aes(x = ai)) + # 分布を描画する列を指定
-  geom_histogram(bins = 30, fill = "lightblue", colour = "blue") +
+#' 関数 geom_text() を用いて各ビンの頻度を表示することができる
+tw_data |>
+  ggplot(aes(x = solar)) + 
+  geom_histogram(bins = 30, fill = "pink", colour = "red") +
   geom_text(stat="bin", bins = 30, colour = "darkblue", size = 3, 
-            aes(label = after_stat(count), y = after_stat(count) + 2)) +
-  labs(x = pcr_colnames["ai"], y = "頻度", title = "検査件数のヒストグラム")
+            aes(label = after_stat(count), y = after_stat(count) + 1)) +
+  labs(x = expression(paste("intensity [",MJ/m^2,"]")), # 文字列と数式を結合
+       y = "frequency", # geom_text で y軸のラベルが書き換えられるため
+       title = "Solar Radiation in Tokyo")
+
+#' @exercise 密度の描画
+#' 各日の全天日射量の密度推定
+
+tw_data |>
+  ggplot(aes(x = solar)) + 
+  geom_density(fill = "pink", colour = "red") + 
+  labs(x = expression(MJ/m^2), 
+       title = "Solar Radiation in Tokyo")
+
+#' @notes
+#' 関数 geom_function() を用いて理論曲線と比較することができる
+tw_data |>
+  ggplot(aes(x = solar)) + 
+  geom_density(fill = "pink", colour = "red") +
+  geom_function(fun = dnorm, # 正規分布と比較
+                args = with(tw_data, # 標本平均と標準偏差を計算
+                            list(mean = mean(solar),
+                                 sd = sd(solar))),
+                color = "blue") + # 色を指定
+  labs(x = expression(paste("intensity [",MJ/m^2,"]")),
+       y = "density", # geom_function で y軸のラベルが書き換えられるため
+       title = "Solar Radiation in Tokyo")
+#' ヒストグラムも理論曲線と重ねることができるが，
+#' 標準ではy軸は頻度なので，以下のように書き換える必要がある
+tw_data |>
+  ggplot(aes(x = solar)) + 
+  geom_histogram(aes(y = after_stat(density)), # y軸を密度表示
+                bins = 30, fill = "pink", colour = "red") +
+  geom_function(fun = dnorm, # 正規分布と比較
+                args = with(tw_data, # 標本平均と標準偏差を計算
+                            list(mean = mean(solar),
+                                 sd = sd(solar))),
+                color = "blue") + # 色を指定
+  labs(x = expression(paste("intensity [",MJ/m^2,"]")),
+       y = "density", # geom_function で y軸のラベルが書き換えられるため
+       title = "Solar Radiation in Tokyo")
 
 #' @exercise 箱ひげ図の描画
+#' 月ごとの日射量の分布
 
-#' 大学等(univ)での検査件数の分布(2021年分)
-pcr_data |>
-  filter(year(date) == 2021) |> # 2021年を抽出
-  mutate(date = as_factor(month(date))) |> # 月を因子化する
-  ggplot(aes(x = date, y = univ)) + # 月毎に集計する
+tw_data |>
+  mutate(month = as_factor(month)) |> # 月を因子化
+  ggplot(aes(x = month, y = solar)) + # 月毎に集計する
   geom_boxplot(fill = "orange") + # 塗り潰しの色を指定
-  labs(title = "月ごとの検査件数 (2021年)", x = "月", y = pcr_colnames["univ"])
+  labs(title = "Solar Radiation in Tokyo")
+
+#' @notes
+#' 関数 geom_violin() を用いると密度関数を表示することができる
+tw_data |>
+  mutate(month = as_factor(month)) |> 
+  ggplot(aes(x = month, y = solar)) + 
+  geom_violin(colour = "red", fill = "pink") + # 色を指定
+  labs(title = "Solar Radiation in Tokyo")
+#' 表示する幅を適切に調整すれば両者を重ねることもできる
+tw_data |>
+  mutate(month = as_factor(month)) |> 
+  ggplot(aes(x = month, y = solar)) + 
+  geom_violin(width = 1.5, colour = "red", fill = "pink") + 
+  geom_boxplot(width = 0.1, fill = "orange") + 
+  labs(title = "Solar Radiation in Tokyo")
 
 #' @exercise 棒グラフの描画
+#' 月ごとの日射量・降水量・降雪量の合計値の推移
 
-#' 機関ごとの月の検査件数の推移 (2021年分)
-pcr_data |>
-  filter(year(date) == 2021) |>
-  mutate(month = as_factor(month(date))) |> # 月を作成
-  select(!c(date,sub,total)) |> # 機関に限定
-  group_by(month) |> # 月でグループ化
-  summarize(across(everything(), sum)) |> # 全て(月以外)を集計
-  pivot_longer(!month, names_to = "organ", values_to = "nums",
-               names_transform = list(organ = as_factor)) |>
-  ## 最後のオプションは organ 列のラベルを出てきた順で因子化して元の列の並びにしている
-  ggplot(aes(x = organ, y = nums, fill = month)) +
+tw_data |> select(c(month,solar,rain,snow)) |> # 必要な列を選択
+  mutate(month = as_factor(month)) |> group_by(month) |>
+  summarize(across(everything(), sum)) |> # 月ごとに集計
+  pivot_longer(!month, names_to = "index") |> # values_to の既定値は "value"
+  ggplot(aes(x = index, y = value, fill = month)) +
   geom_bar(stat = "identity", position = "dodge", na.rm = TRUE) +
-  theme(legend.position = "top") + guides(fill = guide_legend(nrow = 1))
+  theme(legend.position = "top") + guides(fill = guide_legend(nrow = 2))
 
-## CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
-tc_data <- read.csv(file="data/tokyo_covid19_2021.csv",fileEncoding="utf8")
+#' @notes
+#' 並べ方の指定を変えてみるには以下のようにすればよい
+foo <- # 共通部分を保存
+  tw_data |> select(c(month,solar,rain,snow)) |> 
+  mutate(month = as_factor(month)) |> group_by(month) |>
+  summarize(across(everything(), sum)) |> 
+  pivot_longer(!month, names_to = "index") |>
+  mutate(index = as_factor(index)) |> # index を出現順に処理するために因子化
+  ggplot(aes(x = index, y = value, fill = month))
+#' 積み上げ (stack)
+foo + geom_bar(stat = "identity", position = "stack")
+#' 横並び (dodge) 
+foo + geom_bar(stat = "identity", position = "dodge")
+#' 比率の表示 (fill)
+foo + geom_bar(stat = "identity", position = "fill")
 
-### 練習問題 東京都の感染動向データによる例
-## 陽性患者数の推移 (折れ線グラフ)
-## データの読み込み
-tc_data <- read.csv(file="data/tokyo_covid19_2021.csv",fileEncoding="utf8")
-names(tc_data)[1] <- "年月日" # CSVファイルの1列目の名前が空白なので定義しておく
-tc_data <- transform(tc_data,年月日=as.Date(年月日)) # 日付の属性を変えておく
-## 日本語の扱いでうまくいかない場合は以下で対応して下さい．
-## library(readr)
-## tc_data <- read_csv(file="data/tokyo_covid19_2021.csv")
-
-## 折れ線グラフ
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
-plot(tc_data$陽性者数, type="l", col="red", ylab="陽性者数") 
-## 日付ラベルを用いた作図の例
-with(tc_data,
-     plot(年月日,陽性者数,
-          type="l", col="red", ylab="陽性者数"))
-## 日付は月日から文字列操作で作ることもできる
-## days <- with(tc_data,as.Date(paste("2021",月,日,sep="-"))) # 2021-月-日
-
-## x軸のラベルのフォーマットを指定する例
-plot(陽性者数 ~ 年月日, data=tc_data, xaxt="n",
-     type="l", col="red", ylab="陽性者数")
-axis.Date(1, tc_data$年月日, format="%m/%d", labels=TRUE) #x軸ラベルを書く
-
-## 検査実施人数の推移 (棒グラフ)
-barplot(tc_data$総検査実施件数, col="lightblue", ylab="検査実施件数") # 棒グラフ
-plot(tc_data$総検査実施件数, type="h", # 棒が多い場合はこういう方法もある
-     col="blue", ylab="検査実施件数") 
-## 日付ラベルの付加
-with(tc_data,
-     plot(年月日, 総検査実施件数, type="h", col="blue", ylab="検査実施人数")) 
-grid(col="darkgray") # 格子線の追加
-
-## 曜日ごとの検査実施件数 (箱ひげ図)
-boxplot(総検査実施件数 ~ 曜日, data=tc_data, col=cm.colors(7))
-## 曜日の並び順を修正
-tc_data <- transform(tc_data,
-                     曜日=factor(曜日,
-                                 levels=c("日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"), # 順序を指定
-                                 labels=c("日","月","火","水","木","金","土"))) # 名称を変更
-boxplot(総検査実施件数 ~ 曜日, data=tc_data, col=cm.colors(7))
-
-### 多次元データの視覚化で用いた例
-
-persp(x, y, z, theta = 0, phi = 15, expand = 1, ...) # ... は関数 plot() と同様に指定可能
-## x,y,z: x,y,z 座標
-##        z は点(x[i],y[j])に対応する値を(i,j) 成分とする行列で与える必要がある
-## theta,phi: 俯瞰の方向を指定する極座標
-## expand: z軸の拡大度
-
-f <- function(x,y) x^2 - y^2
-x <- seq(-3, 3, length=51) # x座標の定義域の分割
-y <- seq(-3, 3, length=51) # y座標の定義域の分割
-z <- outer(x, y, f) # z座標の計算
-## 基本的な俯瞰図
-## persp(x, y, z, col="lightblue")
-## 俯瞰する向きを指定
-persp(x, y, z, theta=30, phi=30, expand=0.5, # 俯瞰する視線の設定
-      col="royalblue", main=expression(z==x^2-y^2))
-
-library("scatterplot3d") # パッケージの読み込み
-scatterplot3d(x, color, angle = 40, ...) # ... は関数 plot() とは若干異なる
-## x: x,y,z座標を指定するデータフレーム
-##    関数 persp() のようにx,y,zを個別に指定することも可能
-## color: 色を指定(colではないので注意). 既定値は黒
-## angle: x軸とy軸の間の角度
-
-## install.packages("scatterplot3d") # 初めて使う時に必要
-library("scatterplot3d") # パッケージのロード
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
-## 風速, 日射, 気温の3次元散布図を作成する
-scatterplot3d(subset(tw_data, select=c(wind, solar, temp)),
-              xlab="風速",ylab="日射",zlab="気温", # 指定しなければ列名が使われる
-              pch=4, color="orchid")
-
-### 練習問題
-## 3次元の散布図 (jpdat1/3.csvを用いた例)
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
-scatterplot3d(subset(jp_data, select=c(婚姻,離婚,失業)), 
-              pch=19, color="blue")
-pairs(subset(jp_data, select=c(婚姻,離婚,失業)), col="blue") # 三面図で見てみる
-
-### 凡例の追加 (tokyo_covid19_2021.csvを用いた例)
-## データの読み込み
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
-plot(総検査実施件数/10 ~ 年月日, data=tc_data,
-     type="h", col="blue", xlab="日付", ylab="人数")
-abline(h=seq(0,2000,by=100), lty=2, col="darkgray") # 補助線の追加
-lines(陽性者数 ~ 年月日, data=tc_data, col="red") 
-title(main="検査実績の推移") 
-legend("topright", inset=0.01, 
-       legend=c("検査実施件数/10","陽性者数"),
-       col=c("blue","red"), lwd=3, lty=1)
-
-### 凡例の追加 (tokyo_covid19_patients_2021.csvを用いた例)
-## データの読み込み
-tcp_data <- read.csv(file="data/tokyo_covid19_patients_2021.csv")
-## 簡単な集計には関数table()を使うとよい
-table(subset(tcp_data, select=c(患者_年代))) # 名前のついたベクトル
-barplot(table(subset(tcp_data, select=c(患者_年代))))
-## 月別の年齢分布を調べる
-library(lubridate) # 年月日の文字列を操作するパッケージ
-foo <-with(tcp_data,
-           data.frame(age=患者_年代,
-                      month=month(公表_年月日,label=TRUE,abbr=FALSE)))
-(bar <- table(foo)) # (年齢 x 月) の患者数の表(行列)
-(baz <- apply(bar, 2, function(z){z/sum(z)})) # 月ごとの年齢分布
-## 描画
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
-barplot(bar, # 人数のグラフ
-        col=rainbow(13), # 13色に色分け
-        beside=TRUE, # 棒グラフを横に並べる
-        space=c(1.5, 3), # 棒グラフ間・変数間のスペースを指定
-        legend.text=rownames(bar), # 凡例の指定, 2列，縮小, 左上に表示
-        args.legend=list(ncol=2,cex=0.5,x="topleft",inset=0.01)) 
-barplot(baz, # 比率のグラフ
-        col=rainbow(13), # 13色に色分け
-        beside=TRUE, # 棒グラフを横に並べる
-        space=c(1.5, 3), # 棒グラフ間・変数間のスペースを指定
-        legend.text=rownames(baz), # 凡例の指定，2列，縮小
-        args.legend=list(ncol=2,cex=0.5))
+#' ---------------------------------------------------------------------------
+#' @practice いろいろなグラフの描画
+#' 東京都の感染動向データによる例
+#' (書き方はいろいろあるので，以下はあくまで一例)
+#'
+#' データの読み込み
+tc_data <- read_csv(file = "data/tokyo_covid19_2021.csv") |>
+  rename(年月日 = ...1) # CSVファイルの1列目の名前が空白なので定義しておく
+#'
+#' 陽性患者数の推移 (折れ線グラフ)
+tc_data |>
+  ggplot(aes(x = 年月日, y = 陽性者数)) +
+  geom_line(colour = "red") +
+  labs(title = "陽性患者数の推移")
+#' 陽性率の推移 (折れ線グラフ)
+tc_data |>
+  mutate(陽性率 = 陽性者数/総検査実施件数) |>
+  ggplot(aes(x = 年月日, y = 陽性率)) +
+  geom_line(colour = "blue") +
+  labs(title = "陽性率の推移")
+#' 両者を同時に表示する
+tc_data |>
+  mutate(陽性率 = 陽性者数/総検査実施件数) |>
+  pivot_longer(c(陽性者数,陽性率)) |>
+  ggplot(aes(x = 年月日, y = value, colour = name)) +
+  geom_line(show.legend = FALSE) +
+  facet_grid(rows = vars(name), scales = "free_y") +
+  labs(title = "陽性者数・陽性率の推移")
+#'
+#' 月ごとの検査実施件数の推移 (棒グラフ)
+tc_data |> 
+  mutate(月 = as_factor(月)) |> group_by(月) |>
+  summarize(検査実施件数合計 = sum(総検査実施件数)) |>
+  ggplot(aes(x = 月, y = 検査実施件数合計)) +
+  geom_bar(stat = "identity", position = "dodge",
+           colour = "blue", fill = "lightblue") +
+  labs(title = "月ごとの検査実施人数の推移")
+#'
+#' 曜日ごとの検査実施件数の分布 (箱ひげ図)
+tc_data |> 
+  ggplot(aes(x = 曜日, y = 総検査実施件数)) +
+  geom_boxplot(colour = "blue", fill = "lightblue") +
+  labs(title = "曜日ごとの検査実施件数の分布")
+#' 曜日を順序付きの因子に変換してグラフの表示順を制御する
+tc_data |> 
+  mutate(曜日 = factor(曜日, # levels で順序を指定．labels で名称を変更
+                       levels=c("日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"), 
+                       labels=c("日曜","月曜","火曜","水曜","木曜","金曜","土曜"))) |>
+  ggplot(aes(x = 曜日, y = 総検査実施件数)) +
+  geom_boxplot(colour = "blue", fill = "lightblue") +
+  labs(title = "曜日ごとの検査実施件数の分布")
+#' ---------------------------------------------------------------------------

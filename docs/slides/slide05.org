@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-29 18:08:10 mura>
+# Time-stamp: <2024-05-07 12:41:19 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -25,10 +25,11 @@
 #+begin_src R :exports none :tangle no
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
+
 #+begin_src R :exports none
   ### 第5講 サンプルコード
-  library(tidyverse)
 #+end_src
+
 
 
 * 可視化の重要性
@@ -68,6 +69,8 @@
     #' tidyverse パッケージの読み込み
     library(tidyverse)
   #+end_src
+
+
 - グラフィクスの拡張である ~ggplot2~ を利用
 ** サンプルデータの説明
 - ~jpdata[1-3].csv~ (再掲)
@@ -82,12 +85,12 @@
     - jpdata3.csv : 県と地域の対応関係
   #+end_quote
   - 作業ディレクトリのdata内に置いて読み込む場合
-    #+begin_src R :exports code :tangle no
+    #+begin_src R :exports code
       jp_data <- read_csv(file = "data/jpdata1.csv")
       jp_item <- read_csv(file = "data/jpdata2.csv")
       jp_area <- read_csv(file = "data/jpdata3.csv")
     #+end_src
-    - [[color:gray][変数名は自由に付けてよい]]
+    - 変数名は自由に付けてよい
 
 #+reveal: split 
 - ~tokyo_weather.csv~ (~tokyo.zip~ の中)
@@ -100,7 +103,7 @@
     平均気温(℃),降水量の合計(mm),合計全天日射量(MJ/㎡),降雪量合計(cm),最多風向(16方位),平均風速(m/s),平均現地気圧(hPa),平均湿度(％),平均雲量(10分比),天気概況(昼：06時〜18時),天気概況(夜：18時〜翌日06時)
   #+end_quote
   - 作業ディレクトリのdata内に置いて読み込む場合
-    #+begin_src R :exports code :tangle no
+    #+begin_src R :exports code
       tw_data <- read_csv(file = "data/tokyo_weather.csv")
     #+end_src
 
@@ -112,7 +115,7 @@
     陽性者数, 総検査実施件数, 発熱等相談件数
   #+end_quote
   - 作業ディレクトリのdata内に置いて読み込む場合
-    #+begin_src R :exports code :tangle no
+    #+begin_src R :exports code
       tc_data <- read_csv(file="data/tokyo_covid19_2021.csv")
     #+end_src
 
@@ -145,7 +148,7 @@
     #' 詳細は '?ggplot2::ggplot' を参照
   #+end_src
 
-** 基本的な描画 (折線グラフ)
+** 折線グラフ
 :PROPERTIES:
 :END:
 - 関数 ~ggplot2::geom_line()~ : 線の描画
@@ -174,17 +177,17 @@
     #' @exercise 折れ線グラフの描画
     #' 東京の5月の気温と日射量の推移
   #+end_src
-  #+begin_src R :file figs/02-geomline-geomline.png :results graphics
+  #+begin_src R :file figs/05-geomline-geomline.png :results graphics
     tw_data |> filter(month == 5) |> # 5月を抽出
       ggplot(aes(x = day)) + # day をx軸に指定
       geom_line(aes(y = temp), colour = "blue") + # 気温を青
       geom_line(aes(y = solar), colour = "red") + # 日射量を赤
       labs(y = "temp.(blue) / solar rad.(red)") # y軸のラベルを変更 
   #+end_src
-  #+name:   fig:02-geomline-geomline
+  #+name:   fig:05-geomline-geomline
   #+attr_html: :width 50%
   #+attr_latex: :width 0.6\linewidth
-  [[file:figs/02-geomline-geomline.png]]
+  [[file:figs/05-geomline-geomline.png]]
 
 ** データフレームの形の変更
 - 関数 ~dplyr::pivot_longer()~ : 列の集約
@@ -212,25 +215,27 @@
   #+begin_src R :exports none
     #' 前例の別の書き方
   #+end_src
-  #+begin_src R :file figs/02-geomline.png :results graphics
+  #+begin_src R :file figs/05-geomline.png :results graphics
     tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
       pivot_longer(!day, names_to = "index") |> 
       ggplot(aes(x = day, y = value, colour = index)) +
-      geom_line() + # index ごとに異なる色で線が引かれる
+      geom_line() + # index ごとにカラーパレットで指定された異なる色が用いられる
       labs(title = "Weather in May")
   #+end_src
   #+begin_src R :exports none
     #' @notes
-    #' 色はカラーパレットに従って自動的に選択される
+    #' 色は theme で設定されているカラーパレットに従って自動的に選択されるが
+    #' 自身で設定することも可能．詳細は例えば以下を参照
+    #' https://ggplot2-book.org/scales-colour
   #+end_src
-  #+name:   fig:02-geomline
+  #+name:   fig:05-geomline
   #+attr_html: :width 50%
   #+attr_latex: :width 0.6\linewidth
-  [[file:figs/02-geomline.png]]
+  [[file:figs/05-geomline.png]]
 
 #+reveal: split
 - [[color:green][個別のグラフでの描画]]
-  #+begin_src R :file figs/02-geomline-facetgrid.png :results graphics
+  #+begin_src R :file figs/05-geomline-facetgrid.png :results graphics
     tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
       pivot_longer(!day, names_to = "index") |> 
       ggplot(aes(x = day, y = value, colour = index)) +
@@ -243,7 +248,7 @@
     #' 属性ごとに描いた異なるグラフを並べる場合には
     #' 関数 ggplot2::facet_grid() (属性ごとに行・列を構成)や
     #' 関数 ggplot2::facet_wrap() (行数・列数を指定)を用いる
-    foo <-
+    foo <- # 基本となるグラフオブジェクトを保存
       tw_data |> filter(month %in% c(5,6,7,8)) |>
       select(c(month, day, temp, solar, wind)) |>
       pivot_longer(!c(month, day), names_to = "index") |> 
@@ -254,10 +259,10 @@
     foo + facet_wrap(vars(index, month), nrow = 4, ncol = 3) # 4x3 に並べる
     foo + facet_wrap(index ~ month, nrow = 4, ncol = 3) # 同上
   #+end_src
-  #+name:   fig:02-geomline-facetgrid
+  #+name:   fig:05-geomline-facetgrid
   #+attr_html: :width 50%
   #+attr_latex: :width 0.6\linewidth
-  [[file:figs/02-geomline-facetgrid.png]]
+  [[file:figs/05-geomline-facetgrid.png]]
 
 ** COMMENT 基本的な描画 (関数)
 - 1変数関数の範囲を指定して描画
@@ -276,148 +281,6 @@
     curve(...,add=TRUE, ...)            
     plot(...,add=TRUE, ...)            
   #+END_SRC
-
-** 基本的な描画 (散布図)
-:PROPERTIES:
-:ID:       E8AFEF95-4881-4872-A2EB-435C220102D0
-:END:
-- 関数 ~ggplot2::geom_point()~ : 点の描画
-  #+begin_src R :eval no :tangle no
-    geom_point(
-      mapping = NULL,
-      data = NULL,
-      stat = "identity",
-      position = "identity",
-      ...,
-      na.rm = FALSE, show.legend = NA, inherit.aes = TRUE
-    )
-    #' mapping: 審美的マップの設定
-    #' data: データフレーム
-    #' stat: 統計的な処理の指定
-    #' position: 描画位置の調整
-    #' ...: その他の描画オプション
-    #' na.rm: NA(欠損値)の削除(既定値は削除しない)
-    #' show.legend: 凡例の表示(既定値は表示)
-    #' 詳細は '?ggplot2::geom_point' を参照
-  #+end_src
-
-#+reveal: split
-- [[color:green][夏季の日射量と気温の関係]]
-  #+begin_src R :exports none
-    #' @exercise 散布図の描画
-    #' 夏季の日射量と気温の関係
-  #+end_src
-  #+begin_src R :file figs/02-geompoint.png :results graphics :tangle yes
-    tw_data |> filter(month %in% 7:9) |> # 7月-9月を抽出
-      ggplot(aes(x = solar, y = temp)) + # x軸を日射量，y軸を気温に設定
-      geom_point(colour = "blue", shape = 19) + # 色と形を指定(点の形は '?points' を参照)
-      labs(x = "solar radiation", y = "temperature") # 軸の名前を指定
-  #+end_src
-  #+name:   fig:02-geompoint
-  #+attr_html: :width 50%
-  #+attr_latex: :width 0.6\linewidth
-  [[file:figs/02-geompoint.png]]
-
-#+reveal: split
-- [[color:green][湿度の情報を追加]]
-  #+begin_src R :exports none
-    #' 湿度の情報を点のサイズとして追加
-  #+end_src
-  #+begin_src R :file figs/02-geompoint-size.png :results graphics :tangle yes
-    tw_data |> filter(month %in% 7:9) |> 
-      ggplot(aes(x = solar, y = temp, size = humid)) + # 湿度を点の大きさで表示
-      geom_point(colour = "blue", shape = 19) + 
-      labs(x = "solar radiation", y = "temperature")
-  #+end_src
-  #+name:   fig:02-geompoint-size
-  #+attr_html: :width 50%
-  #+attr_latex: :width 0.6\linewidth
-  [[file:figs/02-geompoint-size.png]]
-
-#+reveal: split
-- [[color:green][各軸を対数表示]]
-  #+begin_src R :exports none
-    #' 各軸を対数表示に変更
-  #+end_src
-  #+begin_src R :file figs/02-geompoint-scalelog.png :results graphics :tangle yes
-    tw_data |> filter(month %in% 7:9) |> 
-      ggplot(aes(x = solar, y = temp, size = humid)) + 
-      geom_point(colour = "blue", shape = 19) + 
-      labs(x = "solar radiation", y = "temperature") +
-      scale_x_log10() + scale_y_log10() # x軸，y軸を対数表示
-  #+end_src
-  #+name:   fig:02-geompoint-scalelog
-  #+attr_html: :width 50%
-  #+attr_latex: :width 0.6\linewidth
-  [[file:figs/02-geompoint-scalelog.png]]
-  
-** 基本的な描画 (散布図行列)
-:PROPERTIES:
-:ID:       67F7D346-1A96-43F6-8E5C-263BBEEBE364
-:END:
-- 複数の散布図を行列状に配置したもの
-- 関数 GGally::ggpairs() : 散布図行列の描画
-  #+begin_src R :eval no :tangle no
-    #' 必要であれば 'install.packages("GGally")' を実行
-    library(GGally) # パッケージのロード
-    ggpairs(
-      data, mapping = NULL,
-      columns = 1:ncol(data),
-      upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
-      lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
-      diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
-      ...,
-      axisLabels = c("show", "internal", "none"),
-      columnLabels = colnames(data[columns]),
-      legend = NULL
-    )
-    #' columns: 表示するデータフレームの列を指定
-    #' upper/lower/diag: 行列の上三角・下三角・対角の表示内容を設定
-    #' axisLabels: 各グラフの軸名の扱い方を指定
-    #' columnLabels: 表示する列のラベルを設定(既定値はデータフレームの列名)
-    #' legend: 凡例の設定(どの成分を使うか指定)
-    #' 詳細は '?GGally::ggpairs' を参照
-  #+end_src
-
-#+reveal: split
-- [[color:green][各検査機関での検査件数の関係を視覚化]]
-  #+begin_src R :exports none
-    #' @exercise 散布図行列の描画
-    #' 夏季の気温と日射量と湿度の関係
-    library(GGally)
-  #+end_src
-  #+begin_src R :file figs/02-ggpairs.png :results graphics
-    tw_data |> filter(month %in% 7:9) |> 
-      select(c(temp, solar, humid)) |> # 必要な列を選択
-      ggpairs() # 標準の散布図行列 (上三角は相関，対角は密度，下三角は散布図)
-  #+end_src
-  #+name:   fig:02-ggpairs
-  #+attr_html: :width 50%
-  #+attr_latex: :width 0.6\linewidth
-  [[file:figs/02-ggpairs.png]]
-
-#+reveal: split
-- [[color:green][日付の情報を付加]]
-  #+begin_src R :exports none
-    #' 月ごとに色分けして表示する
-  #+end_src
-  #+begin_src R :file figs/02-ggpairs-quarter.png :results graphics
-    tw_data |> filter(month %in% 7:9) |> select(c(month, temp, solar, humid)) |>
-      mutate(month = as_factor(month)) |> # 月を因子化(ラベルとして扱う)
-      ggpairs(columns = 2:4, legend = c(1,1), # 表示する列．凡例の雛型
-              aes(colour = month), # 月ごとに色づける
-              diag = list(continuous = "barDiag")) + # 対角をヒストグラム
-      theme(legend.position = "top") # 凡例(上で指定した1行1列の凡例)の位置
-  #+end_src
-  #+begin_src R :eval no :exports none
-    #' @notes
-    #' 事例ベースの使い方は以下のコマンドで見ることができる
-    vig_ggally("ggpairs")
-  #+end_src
-  #+name:   fig:02-ggpairs-quarter
-  #+attr_html: :width 50%
-  #+attr_latex: :width 0.6\linewidth
-  [[file:figs/02-ggpairs-quarter.png]]
 
 ** 図の保存
 - RStudioの機能を使う (少数の場合はこちらが簡便)
@@ -439,21 +302,6 @@
     #' device: 保存する形式("pdf","jpeg","png"など)
     #' 詳細は"?ggplot2::ggsave"を参照
   #+end_src
-
-** 日本語に関する注意
-- 日本語を含む図で文字化けが起こった場合 \\
-  (主にmacOS)
-  - 以下のように日本語フォントを指定する必要がある
-    #+begin_src R :eval no :tangle no
-      if(Sys.info()["sysname"] == "Darwin") { # macOS か調べる
-        #' OS標準のヒラギノフォントを指定する場合
-        theme_update(text = element_text(family = "HiraginoSans-W4"))
-        #' gome_text/geom_label内で用いられる日本語フォントの指定
-        update_geom_defaults("text", list(family = theme_get()$text$family))
-        update_geom_defaults("label", list(family = theme_get()$text$family))}
-    #+end_src
-  - 以下のサイトなども参考になる \\
-    https://oku.edu.mie-u.ac.jp/~okumura/stat/font.html
 
 ** COMMENT 練習問題
 :PROPERTIES:
@@ -495,7 +343,339 @@
 #+begin_src R :exports none
   #' ---------------------------------------------------------------------------
 #+end_src
+
+
+* 実習
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+** 練習問題
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- ~tokyo_weather.csv~ (東京都の気候データ)
+  を用いて以下の問に答えよ
+  - 6月の気温と湿度の折線グラフを描け
+  - 1年間の気温と湿度の折線グラフを描け
+  - 各月の平均気温と湿度の折線グラフを描け
+  - (参考) 読み込み方
+    #+begin_src R :eval no :tangle no
+      #' CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
+      tw_data <- read_csv(file = "data/tokyo_weather.csv")
+    #+end_src
+
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice 基本的なグラフの描画
+  #' 
+  #' データの読み込み
+  tw_data <- read_csv(file = "data/tokyo_weather.csv")
+  #'
+  #' 6月の気温と湿度の折線グラフ
+  #' 同じグラフに描いてみる
+  tw_data |>
+    filter(month == 6) |> # 6月を選択
+    select(c(day, temp, humid)) |> # 必要な列を選択
+    pivot_longer(!day, names_to = "index") |> # long format に変換
+    ggplot(aes(x = day, y = value, colour = index)) + # 審美的属性を指定
+    geom_line() # 折線グラフの描画
+  #' 物理的に異なる量なので facet を分ける
+  tw_data |>
+    filter(month == 6) |> 
+    select(c(day, temp, humid)) |> 
+    pivot_longer(!day, names_to = "index") |> 
+    ggplot(aes(x = day, y = value, colour = index)) +
+    geom_line() +
+    facet_grid(rows = vars(index)) # index ごとに facet を行に並べる
+  #' 値域が異なるので facet ごとにy軸を調整する
+  tw_data |>
+    filter(month == 6) |> 
+    select(c(day, temp, humid)) |> 
+    pivot_longer(!day, names_to = "index") |> 
+    ggplot(aes(x = day, y = value, colour = index)) +
+    geom_line() +
+    facet_grid(rows = vars(index),
+               scales = "free_y") # y軸を個別に自動調整
+  #' 不要な凡例の削除とタイトルの追加
+  tw_data |>
+    filter(month == 6) |> 
+    select(c(day, temp, humid)) |> 
+    pivot_longer(!day, names_to = "index") |> 
+    ggplot(aes(x = day, y = value, colour = index)) +
+    geom_line(show.legend = FALSE) + # 凡例の削除
+    facet_grid(rows = vars(index), scales = "free_y") +
+    labs(title = "Weather in June") # タイトルの追加
+  #'
+  #' 1年間の気温と湿度の折線グラフ
+  tw_data |>
+    select(c(temp, humid)) |> # 必要な列を抽出
+    rowid_to_column(var = "day") |> # 行番号を ID として列 day を作る
+    pivot_longer(!day, names_to = "index") |> 
+    ggplot(aes(x = day, y = value, colour = index)) +
+    geom_line(show.legend = FALSE) +
+    facet_grid(rows = vars(index), scales = "free_y") +
+    labs(title = "Weather in Tokyo") 
+  #' x軸として日付を用いる
+  tw_data |>
+    mutate(date = as_date(paste(year, month, day, sep = "-"))) |> # 日付
+    select(c(date, temp, humid)) |> # 必要な列を抽出
+    pivot_longer(!date, names_to = "index") |> 
+    ggplot(aes(x = date, y = value, colour = index)) +
+    geom_line(show.legend = FALSE) +
+    facet_grid(rows = vars(index), scales = "free_y") +
+    labs(title = "Weather in Tokyo") 
+  #'
+  #' 各月の平均気温と湿度の折線グラフを描け
+  tw_data |>
+    group_by(month) |> # 月毎にまとめる
+    summarize(across(c(temp, humid), mean)) |> # 目的の指標を集計
+    pivot_longer(!month, names_to = "index") |> 
+    ggplot(aes(x = month, y = value, colour = index)) +
+    geom_line(show.legend = FALSE) +
+    facet_grid(vars(index), scales = "free_y") +
+    labs(title = "Weather in Tokyo") 
+  #' x軸の目盛を指定
+  tw_data |>
+    group_by(month) |> 
+    summarize(across(c(temp, humid), mean)) |>
+    pivot_longer(!month, names_to = "index") |> 
+    ggplot(aes(x = month, y = value, colour = index)) +
+    geom_line(show.legend = FALSE) +
+    facet_grid(vars(index), scales = "free_y") +
+    scale_x_continuous(breaks = 1:12) + # 1:12 の目盛を描く
+    labs(title = "Weather in Tokyo") 
+  #' ---------------------------------------------------------------------------
+#+end_src
        
+** COMMENT 練習問題
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- ~sleep~ データ
+  (睡眠薬投与による睡眠時間の増減のデータ・詳細はhelp(sleep)参照)
+  において，
+  ~group~ が1のデータの ~extra~ を \(x\) 軸，
+  ~group~ が2のデータの ~extra~ を \(y\) 軸とした
+  散布図を描画せよ．
+  ただし，点の色は青，点の形は \(\times\) とし，
+  タイトルを"Sleep data"，
+  \(x\) 軸のラベルを"group 1"，
+  \(y\) 軸のラベルを"group 2"
+  とせよ．\(x\) 軸, \(y\) 軸のデータはそれぞれ
+  #+begin_src R :exports none
+    x <- subset(sleep,group==1,extra,drop=TRUE) 
+    y <- subset(sleep,group==2,extra,drop=TRUE)
+  #+end_src
+  としてつくるとよい．
+
+
+* 散布図の描画
+** 散布図
+:PROPERTIES:
+:ID:       E8AFEF95-4881-4872-A2EB-435C220102D0
+:END:
+- 関数 ~ggplot2::geom_point()~ : 点の描画
+  #+begin_src R :eval no :tangle no
+    geom_point(
+      mapping = NULL,
+      data = NULL,
+      stat = "identity",
+      position = "identity",
+      ...,
+      na.rm = FALSE, show.legend = NA, inherit.aes = TRUE
+    )
+    #' mapping: 審美的マップの設定
+    #' data: データフレーム
+    #' stat: 統計的な処理の指定
+    #' position: 描画位置の調整
+    #' ...: その他の描画オプション
+    #' na.rm: NA(欠損値)の削除(既定値は削除しない)
+    #' show.legend: 凡例の表示(既定値は表示)
+    #' 詳細は '?ggplot2::geom_point' を参照
+  #+end_src
+
+#+reveal: split
+- [[color:green][夏季の日射量と気温の関係]]
+  #+begin_src R :exports none
+    #' @exercise 散布図の描画
+    #' 夏季の日射量と気温の関係
+  #+end_src
+  #+begin_src R :file figs/05-geompoint.png :results graphics :tangle yes
+    tw_data |> filter(month %in% 7:9) |> # 7月-9月を抽出
+      ggplot(aes(x = solar, y = temp)) + # x軸を日射量，y軸を気温に設定
+      geom_point(colour = "blue", shape = 19) + # 色と形を指定(点の形は '?points' を参照)
+      labs(x = "solar radiation", y = "temperature") # 軸の名前を指定
+  #+end_src
+  #+name:   fig:05-geompoint
+  #+attr_html: :width 50%
+  #+attr_latex: :width 0.6\linewidth
+  [[file:figs/05-geompoint.png]]
+
+#+reveal: split
+- [[color:green][湿度の情報を追加]]
+  #+begin_src R :exports none
+    #' 湿度の情報を点のサイズとして追加
+  #+end_src
+  #+begin_src R :file figs/05-geompoint-size.png :results graphics :tangle yes
+    tw_data |> filter(month %in% 7:9) |> 
+      ggplot(aes(x = solar, y = temp, size = humid)) + # 湿度を点の大きさで表示
+      geom_point(colour = "blue", shape = 19) + 
+      labs(x = "solar radiation", y = "temperature")
+  #+end_src
+  #+name:   fig:05-geompoint-size
+  #+attr_html: :width 50%
+  #+attr_latex: :width 0.6\linewidth
+  [[file:figs/05-geompoint-size.png]]
+
+#+reveal: split
+- [[color:green][各軸を対数表示]]
+  #+begin_src R :exports none
+    #' 各軸を対数表示に変更
+  #+end_src
+  #+begin_src R :file figs/05-geompoint-scalelog.png :results graphics :tangle yes
+    tw_data |> filter(month %in% 7:9) |> 
+      ggplot(aes(x = solar, y = temp, size = humid)) + 
+      geom_point(colour = "blue", shape = 19) + 
+      labs(x = "solar radiation", y = "temperature") +
+      scale_x_log10() + scale_y_log10() # x軸，y軸を対数表示
+  #+end_src
+  #+name:   fig:05-geompoint-scalelog
+  #+attr_html: :width 50%
+  #+attr_latex: :width 0.6\linewidth
+  [[file:figs/05-geompoint-scalelog.png]]
+  
+** 散布図行列
+:PROPERTIES:
+:ID:       67F7D346-1A96-43F6-8E5C-263BBEEBE364
+:END:
+- 複数の散布図を行列状に配置したもの
+- 関数 GGally::ggpairs() : 散布図行列の描画
+  #+begin_src R :eval no :tangle no
+    #' 必要であれば 'install.packages("GGally")' を実行
+    library(GGally) # パッケージのロード
+    ggpairs(
+      data, mapping = NULL,
+      columns = 1:ncol(data),
+      upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
+      lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
+      diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
+      ...,
+      axisLabels = c("show", "internal", "none"),
+      columnLabels = colnames(data[columns]),
+      legend = NULL
+    )
+    #' columns: 表示するデータフレームの列を指定
+    #' upper/lower/diag: 行列の上三角・下三角・対角の表示内容を設定
+    #' axisLabels: 各グラフの軸名の扱い方を指定
+    #' columnLabels: 表示する列のラベルを設定(既定値はデータフレームの列名)
+    #' legend: 凡例の設定(どの成分を使うか指定)
+    #' 詳細は '?GGally::ggpairs' を参照
+  #+end_src
+
+#+reveal: split
+- [[color:green][気温と日射量と湿度の関係を視覚化]]
+  #+begin_src R :exports none
+    #' @exercise 散布図行列の描画
+    #' 夏季の気温と日射量と湿度の関係
+    library(GGally)
+  #+end_src
+  #+begin_src R :file figs/05-ggpairs.png :results graphics
+    tw_data |> filter(month %in% 7:9) |> 
+      select(c(temp, solar, humid)) |> # 必要な列を選択
+      ggpairs() # 標準の散布図行列 (上三角は相関，対角は密度，下三角は散布図)
+  #+end_src
+  #+name:   fig:05-ggpairs
+  #+attr_html: :width 50%
+  #+attr_latex: :width 0.6\linewidth
+  [[file:figs/05-ggpairs.png]]
+
+#+reveal: split
+- [[color:green][月ごとに情報を整理]]
+  #+begin_src R :exports none
+    #' 月ごとに色分けして表示する
+  #+end_src
+  #+begin_src R :file figs/05-ggpairs-quarter.png :results graphics
+    tw_data |> filter(month %in% 7:9) |> select(c(month, temp, solar, humid)) |>
+      mutate(month = as_factor(month)) |> # 月を因子化(ラベルとして扱う)
+      ggpairs(columns = 2:4, legend = c(1,1), # 表示する列．凡例の雛型
+              aes(colour = month), # 月ごとに色づける
+              diag = list(continuous = "barDiag")) + # 対角をヒストグラム
+      theme(legend.position = "top") # 凡例(上で指定した1行1列の凡例)の位置
+  #+end_src
+  #+begin_src R :eval no :exports none
+    #' @notes
+    #' 事例ベースの使い方は以下のコマンドで見ることができる
+    vig_ggally("ggpairs")
+  #+end_src
+  #+name:   fig:05-ggpairs-quarter
+  #+attr_html: :width 50%
+  #+attr_latex: :width 0.6\linewidth
+  [[file:figs/05-ggpairs-quarter.png]]
+
+** 対話型のグラフ
+- ~ggplot2~ で描画したグラフは
+  対話型 (interactive) のグラフに変換することができる
+- 変換には ~package::plotly~ が必要 
+  #+begin_src R :exports code
+    #' 最初に一度だけ以下のいずれかを実行しておく
+    #'  - Package タブから plotly をインストール
+    #'  - コンソール上で次のコマンドを実行 'install.packages("plotly")'
+    #' plotly パッケージの読み込み
+    library(plotly)
+  #+end_src
+
+#+reveal: split
+- 関数 ~plotly::ggplotly()~ : 対話型への変換
+  #+begin_src R :eval no :tangle no
+    ggplotly(
+      p = ggplot2::last_plot(),
+      width = NULL, height = NULL, tooltip = "all", dynamicTicks = FALSE,
+      layerData = 1, originalData = TRUE, source = "A",
+      ...
+    )
+    #' p: ggplot オブジェクト
+    #' 詳細は '?plotly::ggplotly' を参照
+    #' https://plotly.com/ggplot2/
+  #+end_src
+
+#+reveal: split
+- [[color:green][前出のグラフの変換例]]
+  #+begin_src R :exports none
+    #' @exercise 対話型のグラフへの変換
+  #+end_src
+  #+begin_src R :eval no :exports code
+    #' 5月の気温と日射量の例
+    tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
+      pivot_longer(!day, names_to = "index") |> 
+      ggplot(aes(x = day, y = value, colour = index)) +
+      geom_line() + labs(title = "Weather in May")
+    ggplotly() # 最後に描いた ggplot オブジェクトを変換して 右下 Viewer タブに表示
+  #+end_src
+  #+begin_src R :eval no :exports code
+    #' 夏季の日射量と温度と湿度の例
+    bar <- # ggplot オブジェクトを保存
+      tw_data |> filter(month %in% 7:9) |> 
+      ggplot(aes(x = solar, y = temp, size = humid,
+                 text = paste0("date: ", month, "/", day))) + # 日付を付加
+      geom_point(colour = "blue", shape = 19) + 
+      labs(x = "solar radiation", y = "temperature")
+    ggplotly(bar) # 保存した ggplot オブジェクトを変換
+  #+end_src
+
+** 日本語に関する注意 (主にmacOS)
+- 日本語を含む図で文字化けが起こる場合がある 
+- 以下のように日本語フォントを指定する必要がある
+  #+begin_src R :eval no :tangle no
+    if(Sys.info()["sysname"] == "Darwin") { # macOS か調べる
+      #' OS標準のヒラギノフォントを指定する場合
+      theme_update(text = element_text(family = "HiraginoSans-W4"))
+      #' gome_text/geom_label内で用いられる日本語フォントの指定
+      update_geom_defaults("text", list(family = theme_get()$text$family))
+      update_geom_defaults("label", list(family = theme_get()$text$family))}
+  #+end_src
+  - 以下のサイトなども参考になる \\
+    https://oku.edu.mie-u.ac.jp/~okumura/stat/font.html
+
 
 * 実習
 :PROPERTIES:
@@ -518,7 +698,7 @@
 
 #+begin_src R :eval no :exports none
   #' ---------------------------------------------------------------------------
-  #' @practice 基本的なグラフの描画
+  #' @practice 散布図の描画
   #' 
   #' データの読み込み
   jp_data <- read_csv(file = "data/jpdata1.csv")
@@ -555,6 +735,7 @@
     labs(x = "1000人あたりの婚姻数",
          y = "1000人あたりの離婚数",
          title = "婚姻数と離婚数の散布図")
+  #'
   #' 地方ごとに色と点の形を変える
   jp_data |> 
     mutate(地方 = as_factor(jp_area[["地方"]])) |> # 地方区分を追加
@@ -567,7 +748,11 @@
     labs(x = "1000人あたりの婚姻数",
          y = "1000人あたりの離婚数",
          title = "婚姻数と離婚数の散布図")
-  #'
+  #' @notes
+  #' shape 属性は6種類までが推奨されている．
+  #' そのままでは表示されないが，手動で設定すれば表示される
+  ggplot2::last_plot() + # 最後に描いたグラフオブジェクトに追加
+    scale_shape_manual(values = 1:8) # 形は '?points' を参照
   #' @notes
   #' 図中に入れる文字を自動的に調整するパッケージもある
   #' 重なりが多いところはラベルを削除するので注意は必要
@@ -585,30 +770,12 @@
     labs(x = "1000人あたりの婚姻数",
          y = "1000人あたりの離婚数",
          title = "婚姻数と離婚数の散布図")
+  #' 上記と同様に shape については警告が出る
+  ggplot2::last_plot() + 
+    scale_shape_manual(values = LETTERS) # 文字を指定することもできる
   #' ---------------------------------------------------------------------------
 #+end_src
        
-** COMMENT 練習問題
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-- ~sleep~ データ
-  (睡眠薬投与による睡眠時間の増減のデータ・詳細はhelp(sleep)参照)
-  において，
-  ~group~ が1のデータの ~extra~ を \(x\) 軸，
-  ~group~ が2のデータの ~extra~ を \(y\) 軸とした
-  散布図を描画せよ．
-  ただし，点の色は青，点の形は \(\times\) とし，
-  タイトルを"Sleep data"，
-  \(x\) 軸のラベルを"group 1"，
-  \(y\) 軸のラベルを"group 2"
-  とせよ．\(x\) 軸, \(y\) 軸のデータはそれぞれ
-  #+begin_src R :exports none
-    x <- subset(sleep,group==1,extra,drop=TRUE) 
-    y <- subset(sleep,group==2,extra,drop=TRUE)
-  #+end_src
-  としてつくるとよい．
-
 
 * さまざまなグラフ
 ** ヒストグラム
@@ -619,13 +786,14 @@
   各区間に含まれるデータの個数を棒グラフにした図
   - 棒グラフの幅が区間, 面積が区間に含まれるデータの個数に比例するようにグラフを作成
   - データ分布の可視化に有効(値の集中とばらつきを調べる)
+- 関数 ~ggplot2::geom_histogram()~ : 
   #+begin_src R :eval no :tangle no
     geom_histogram(
       mapping = NULL, data = NULL, stat = "bin", position = "stack",
       ...,
       binwidth = NULL,
       bins = NULL,
-      na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TRUE
+      na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TREU
     )
     #' binwidth: ヒストグラムのビンの幅を指定
     #' bins: ヒストグラムのビンの数を指定
@@ -633,45 +801,111 @@
   #+end_src
 
 #+reveal: split
-- [[color:green][行政検査での検査件数の分布]]
+- [[color:green][日射量の分布]]
   #+begin_src R :exports none
     #' @exercise ヒストグラムの描画
+    #' 各日の全天日射量の頻度分布
   #+end_src
-  #+begin_src R :file figs/02-geomhistogram.png :results graphics
-    #' 行政検査(ai)での検査件数の分布
-    pcr_data |>
-      ggplot(aes(x = ai)) + # 分布を描画する列を指定
-      geom_histogram(bins = 30, fill = "lightblue", colour = "blue") +
-      labs(x = pcr_colnames["ai"], y = "頻度", title = "検査件数のヒストグラム")
+  #+begin_src R :file figs/05-geomhistogram.png :results graphics
+    tw_data |>
+      ggplot(aes(x = solar)) + # 分布を描画する列を指定
+      geom_histogram(bins = 30, fill = "pink", colour = "red") +
+      labs(x = expression(MJ/m^2), # 数式の表示は '?plotmath' を参照
+           title = "Solar Radiation in Tokyo")
   #+end_src
   #+begin_src R :eval no :exports none
     #' @notes
-    #' 各ビンの頻度を表示するためには例えば以下のようにすればよい
-    pcr_data |>
-      ggplot(aes(x = ai)) + # 分布を描画する列を指定
-      geom_histogram(bins = 30, fill = "lightblue", colour = "blue") +
+    #' 関数 geom_text() を用いて各ビンの頻度を表示することができる
+    tw_data |>
+      ggplot(aes(x = solar)) + 
+      geom_histogram(bins = 30, fill = "pink", colour = "red") +
       geom_text(stat="bin", bins = 30, colour = "darkblue", size = 3, 
-                aes(label = after_stat(count), y = after_stat(count) + 2)) +
-      labs(x = pcr_colnames["ai"], y = "頻度", title = "検査件数のヒストグラム")
+                aes(label = after_stat(count), y = after_stat(count) + 1)) +
+      labs(x = expression(paste("intensity [",MJ/m^2,"]")), # 文字列と数式を結合
+           y = "frequency", # geom_text で y軸のラベルが書き換えられるため
+           title = "Solar Radiation in Tokyo")
   #+end_src
-  #+name:   fig:02-geomhistogram
+  #+name:   fig:05-geomhistogram
   #+attr_html: :width 50%
   #+attr_latex: :width 0.6\linewidth
-  [[file:figs/02-geomhistogram.png]]
+  [[file:figs/05-geomhistogram.png]]
   
 ** 密度
-densityとfun
+- データからカーネル法で確率密度を推定した図
+  - ヒストグラム同様データ分布の可視化に有効
+  - カーネルの幅や関数も選択可能
+- 関数 ~ggplot2::geom_density()~ : 
+  #+begin_src R :eval no :tangle no
+    geom_density(
+      mapping = NULL, data = NULL, stat = "density", position = "identity",
+      ...,
+      na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TRUE,
+      outline.type = "upper"
+    )
+    #' 詳細は '?ggplot2::geom_density' を参照
+    #' カーネルの幅や関数については '?stat::density' を参照
+    #' bw: カーネルの幅の計算方法 "nrd0", "ucv" など
+    #' kernel: カーネル関数 "gaussian", "epanechnikov" など
+  #+end_src
 
+#+reveal: split
+- [[color:green][日射量の分布]]
+  #+begin_src R :exports none
+    #' @exercise 密度の描画
+    #' 各日の全天日射量の密度推定
+  #+end_src
+  #+begin_src R :file figs/05-geomdensity.png :results graphics
+    tw_data |>
+      ggplot(aes(x = solar)) + 
+      geom_density(fill = "pink", colour = "red") + 
+      labs(x = expression(MJ/m^2), 
+           title = "Solar Radiation in Tokyo")
+  #+end_src
+  #+begin_src R :eval no :exports none
+    #' @notes
+    #' 関数 geom_function() を用いて理論曲線と比較することができる
+    tw_data |>
+      ggplot(aes(x = solar)) + 
+      geom_density(fill = "pink", colour = "red") +
+      geom_function(fun = dnorm, # 正規分布と比較
+                    args = with(tw_data, # 標本平均と標準偏差を計算
+                                list(mean = mean(solar),
+                                     sd = sd(solar))),
+                    color = "blue") + # 色を指定
+      labs(x = expression(paste("intensity [",MJ/m^2,"]")),
+           y = "density", # geom_function で y軸のラベルが書き換えられるため
+           title = "Solar Radiation in Tokyo")
+    #' ヒストグラムも理論曲線と重ねることができるが，
+    #' 標準ではy軸は頻度なので，以下のように書き換える必要がある
+    tw_data |>
+      ggplot(aes(x = solar)) + 
+      geom_histogram(aes(y = after_stat(density)), # y軸を密度表示
+                    bins = 30, fill = "pink", colour = "red") +
+      geom_function(fun = dnorm, # 正規分布と比較
+                    args = with(tw_data, # 標本平均と標準偏差を計算
+                                list(mean = mean(solar),
+                                     sd = sd(solar))),
+                    color = "blue") + # 色を指定
+      labs(x = expression(paste("intensity [",MJ/m^2,"]")),
+           y = "density", # geom_function で y軸のラベルが書き換えられるため
+           title = "Solar Radiation in Tokyo")
+  #+end_src
+  #+name:   fig:05-geomdensity
+  #+attr_html: :width 50%
+  #+attr_latex: :width 0.6\linewidth
+  [[file:figs/05-geomdensity.png]]
+  
 ** 箱ひげ図
 :PROPERTIES:
 :ID:       D83D77F9-3BDC-432E-97E3-B22B9C8772F4
 :END:
-- データ散らばり具合を考察するための図
+- データの散らばり具合を考察するための図
   - 長方形の辺は四分位点(下端が第1，中央が第2，上端が第3)
   - 中央値から第1四分位点・第3四分位点までの1.5倍以内にあるデータの
     最小の値・最大の値を下端・上端とする線(ひげ)
   - ひげの外側の点は外れ値
   # - 複数のデータの分布の比較の際に有効
+- 関数 ~ggplot2::geom_boxplot()~ :
   #+begin_src R :eval no :tangle no
     geom_boxplot(
       mapping = NULL, data = NULL, stat = "boxplot", position = "dodge2",
@@ -688,23 +922,38 @@ densityとfun
   #+end_src
 
 #+reveal: split
-- [[color:green][月ごとの大学等での検査件数の分布(分位点)]]
+- [[color:green][月ごとの日射量の分布(分位点)]]
   #+begin_src R :exports none
     #' @exercise 箱ひげ図の描画
+    #' 月ごとの日射量の分布
   #+end_src
-  #+begin_src R :file figs/02-geomboxplot.png :results graphics
-    #' 大学等(univ)での検査件数の分布(2021年分)
-    pcr_data |>
-      filter(year(date) == 2021) |> # 2021年を抽出
-      mutate(date = as_factor(month(date))) |> # 月を因子化する
-      ggplot(aes(x = date, y = univ)) + # 月毎に集計する
+  #+begin_src R :file figs/05-geomboxplot.png :results graphics
+    tw_data |>
+      mutate(month = as_factor(month)) |> # 月を因子化
+      ggplot(aes(x = month, y = solar)) + # 月毎に集計する
       geom_boxplot(fill = "orange") + # 塗り潰しの色を指定
-      labs(title = "月ごとの検査件数 (2021年)", x = "月", y = pcr_colnames["univ"])
+      labs(title = "Solar Radiation in Tokyo")
   #+end_src
-  #+NAME:   fig:02-geomboxplot
-  #+ATTR_HTML: :width 50%
-  #+ATTR_LATEX: :width 0.6\linewidth
-  [[file:figs/02-geomboxplot.png]]
+  #+begin_src R :eval no :exports none
+    #' @notes
+    #' 関数 geom_violin() を用いると密度関数を表示することができる
+    tw_data |>
+      mutate(month = as_factor(month)) |> 
+      ggplot(aes(x = month, y = solar)) + 
+      geom_violin(colour = "red", fill = "pink") + # 色を指定
+      labs(title = "Solar Radiation in Tokyo")
+    #' 表示する幅を適切に調整すれば両者を重ねることもできる
+    tw_data |>
+      mutate(month = as_factor(month)) |> 
+      ggplot(aes(x = month, y = solar)) + 
+      geom_violin(width = 1.5, colour = "red", fill = "pink") + 
+      geom_boxplot(width = 0.1, fill = "orange") + 
+      labs(title = "Solar Radiation in Tokyo")
+  #+end_src
+  #+name:   fig:05-geomboxplot
+  #+attr_html: :width 50%
+  #+attr_latex: :width 0.6\linewidth
+  [[file:figs/05-geomboxplot.png]]
 
 ** 棒グラフ
 :PROPERTIES:
@@ -729,31 +978,41 @@ densityとfun
   #+end_src
 
 #+reveal: split
-- [[color:green][機関ごとの月の検査件数の推移]]
+- [[color:green][月ごとの日射量・降水量・降雪量の合計値の推移]]
   #+begin_src R :exports none
     #' @exercise 棒グラフの描画
+    #' 月ごとの日射量・降水量・降雪量の合計値の推移
   #+end_src
-  #+begin_src R :file figs/02-geombar.png :results graphics
-    #' 機関ごとの月の検査件数の推移 (2021年分)
-    pcr_data |>
-      filter(year(date) == 2021) |>
-      mutate(month = as_factor(month(date))) |> # 月を作成
-      select(!c(date,sub,total)) |> # 機関に限定
-      group_by(month) |> # 月でグループ化
-      summarize(across(everything(), sum)) |> # 全て(月以外)を集計
-      pivot_longer(!month, names_to = "organ", values_to = "nums",
-                   names_transform = list(organ = as_factor)) |>
-      ## 最後のオプションは organ 列のラベルを出てきた順で因子化して元の列の並びにしている
-      ggplot(aes(x = organ, y = nums, fill = month)) +
+  #+begin_src R :file figs/05-geombar.png :results graphics
+    tw_data |> select(c(month,solar,rain,snow)) |> # 必要な列を選択
+      mutate(month = as_factor(month)) |> group_by(month) |>
+      summarize(across(everything(), sum)) |> # 月ごとに集計
+      pivot_longer(!month, names_to = "index") |> # values_to の既定値は "value"
+      ggplot(aes(x = index, y = value, fill = month)) +
       geom_bar(stat = "identity", position = "dodge", na.rm = TRUE) +
-      theme(legend.position = "top") + guides(fill = guide_legend(nrow = 1))
+      theme(legend.position = "top") + guides(fill = guide_legend(nrow = 2))
   #+end_src
-
-#+reveal: split
-  #+name:   fig:02-geombar
+  #+begin_src R :eval no :exports none
+    #' @notes
+    #' 並べ方の指定を変えてみるには以下のようにすればよい
+    foo <- # 共通部分を保存
+      tw_data |> select(c(month,solar,rain,snow)) |> 
+      mutate(month = as_factor(month)) |> group_by(month) |>
+      summarize(across(everything(), sum)) |> 
+      pivot_longer(!month, names_to = "index") |>
+      mutate(index = as_factor(index)) |> # index を出現順に処理するために因子化
+      ggplot(aes(x = index, y = value, fill = month))
+    #' 積み上げ (stack)
+    foo + geom_bar(stat = "identity", position = "stack")
+    #' 横並び (dodge) 
+    foo + geom_bar(stat = "identity", position = "dodge")
+    #' 比率の表示 (fill)
+    foo + geom_bar(stat = "identity", position = "fill")
+  #+end_src
+  #+name:   fig:05-geombar
   #+attr_html: :width 50%
   #+attr_latex: :width 0.6\linewidth
-  [[file:figs/02-geombar.png]]
+  [[file:figs/05-geombar.png]]
 
 ** COMMENT 円グラフ
 - 項目ごとの比率を円の分割で表示した図
@@ -818,6 +1077,92 @@ densityとfun
   - R言語に用意されているデータ (関数 ~data()~ で一覧表示)
 
 
+* 実習
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+** 練習問題
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- ~tokyo_covid19_2021.csv~ (東京都の新型コロナの動向データ)
+  を用いて以下の問に答えよ
+  - 陽性者数と陽性率の推移の折線グラフを描け
+  - 月ごとの総検査実施件数の推移の棒グラフを描け
+  - 曜日ごとの総検査実施件数の箱ひげ図を描け．
+  - (参考) 読み込み方
+    #+begin_src R :eval no :tangle no
+      #' CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
+      tc_data <- read_csv(file="data/tokyo_covid19_2021.csv")
+    #+end_src
+
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice いろいろなグラフの描画
+  #' 東京都の感染動向データによる例
+  #' (書き方はいろいろあるので，以下はあくまで一例)
+  #'
+  #' データの読み込み
+  tc_data <- read_csv(file = "data/tokyo_covid19_2021.csv") |>
+    rename(年月日 = ...1) # CSVファイルの1列目の名前が空白なので定義しておく
+  #'
+  #' 陽性患者数の推移 (折れ線グラフ)
+  tc_data |>
+    ggplot(aes(x = 年月日, y = 陽性者数)) +
+    geom_line(colour = "red") +
+    labs(title = "陽性患者数の推移")
+  #' 陽性率の推移 (折れ線グラフ)
+  tc_data |>
+    mutate(陽性率 = 陽性者数/総検査実施件数) |>
+    ggplot(aes(x = 年月日, y = 陽性率)) +
+    geom_line(colour = "blue") +
+    labs(title = "陽性率の推移")
+  #' 両者を同時に表示する
+  tc_data |>
+    mutate(陽性率 = 陽性者数/総検査実施件数) |>
+    pivot_longer(c(陽性者数,陽性率)) |>
+    ggplot(aes(x = 年月日, y = value, colour = name)) +
+    geom_line(show.legend = FALSE) +
+    facet_grid(rows = vars(name), scales = "free_y") +
+    labs(title = "陽性者数・陽性率の推移")
+  #'
+  #' 月ごとの検査実施件数の推移 (棒グラフ)
+  tc_data |> 
+    mutate(月 = as_factor(月)) |> group_by(月) |>
+    summarize(検査実施件数合計 = sum(総検査実施件数)) |>
+    ggplot(aes(x = 月, y = 検査実施件数合計)) +
+    geom_bar(stat = "identity", position = "dodge",
+             colour = "blue", fill = "lightblue") +
+    labs(title = "月ごとの検査実施人数の推移")
+  #'
+  #' 曜日ごとの検査実施件数の分布 (箱ひげ図)
+  tc_data |> 
+    ggplot(aes(x = 曜日, y = 総検査実施件数)) +
+    geom_boxplot(colour = "blue", fill = "lightblue") +
+    labs(title = "曜日ごとの検査実施件数の分布")
+  #' 曜日を順序付きの因子に変換してグラフの表示順を制御する
+  tc_data |> 
+    mutate(曜日 = factor(曜日, # levels で順序を指定．labels で名称を変更
+                         levels=c("日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"), 
+                         labels=c("日曜","月曜","火曜","水曜","木曜","金曜","土曜"))) |>
+    ggplot(aes(x = 曜日, y = 総検査実施件数)) +
+    geom_boxplot(colour = "blue", fill = "lightblue") +
+    labs(title = "曜日ごとの検査実施件数の分布")
+  #' ---------------------------------------------------------------------------
+#+end_src
+
+** COMMENT 練習問題
+:PROPERTIES:
+:reveal_background: #fef4f4
+:END:
+- Weylの一様分布定理において，
+  無理数 ~a~ を別の値に変更しても
+  ~x~ の分布の仕方は
+  区間 \((0,1)\) 上でほぼ均一となることを確かめよ．\\
+  (どの程度均一に近くなるかは ~a~ によって異なるため, いくつか確かめてみよ)
+
+
+
 * COMMENT 基本的な描画
 #+begin_src R :exports none :tangle yes
   ### 基本的な描画で用いた例
@@ -867,7 +1212,6 @@ densityとfun
     x <- pi/6*(0:12) # 30度(pi/6)おきに1周期分 (0-2*pi)
     plot(sin(x)) # x軸はベクトルの要素番号(Index)，y軸はsin(x)の値を描画
   #+end_src
-
 #+NAME:   fig:graph-plot1
 #+ATTR_HTML: :height 100%
 #+ATTR_LATEX: :width 0.6\linewidth
@@ -879,7 +1223,6 @@ densityとfun
     x <- pi/6*(0:12)
     plot(x, sin(x)) # x の値に対する y=sin(x) の値を対応づけて描画
   #+end_src
-
 #+NAME:   fig:graph-plot2
 #+ATTR_HTML: :height 100%
 #+ATTR_LATEX: :width 0.6\linewidth
@@ -922,7 +1265,6 @@ densityとfun
     points(x, z, col="blue", pch="C") # 点を追加. pchは文字も指定できる
     lines(x, z, col="cyan", lwd=3) # 折れ線を追加
   #+end_src
-
 #+reveal: split
 #+CAPTION: ベクトルデータの重ね描き
 #+NAME:   fig:graph-plot4
@@ -962,7 +1304,6 @@ densityとfun
           add=TRUE, # グラフを上書き
           col="red", lwd=2)
   #+end_src
-
 #+reveal: split
 #+CAPTION: 関数の描画
 #+NAME:   fig:graph-plot5
@@ -1108,7 +1449,6 @@ densityとfun
          labels=TRUE, # 各ビンの度数を表示
          col="lightpink", main="気温のヒストグラム")
   #+end_src
-
 #+reveal: split
 #+CAPTION: ヒストグラム
 #+NAME:   fig:graph-hist1
@@ -1173,7 +1513,6 @@ densityとfun
             names=c("気温","降雨","日射","降雪","風速")) # 各箱ひげ図の名前を指定
     ## names を指定しなければ列名が使われる 
   #+end_src
-
 #+reveal: split
 #+CAPTION: 箱ひげ図
 #+NAME:   fig:graph-boxplot1
@@ -1237,7 +1576,6 @@ densityとfun
     ## beside: 複数の変数を縦に並べるか・横に並べるか
     ## args.legend: 関数 legend() に渡す引数
   #+end_src
-
   #     - ...: 関数 ~plot()~ で指定できるオプションが利用可能
 
 ** 棒グラフの例
@@ -1253,7 +1591,6 @@ densityとfun
             names.arg=foo$month, # x軸のラベル
             xlab="月",main="平均気温") # タイトル 
   #+end_src
-
 #+reveal: split
 #+CAPTION: 棒グラフ
 #+NAME:   fig:graph-barplot1
@@ -1306,7 +1643,6 @@ densityとfun
     pie(bar, clockwise=TRUE, main="日射量別の日数の割合",
         col=heat.colors(length(bar),rev=TRUE)) # 日射量が高いほど赤を濃く指定
   #+end_src
-
 #+reveal: split
 #+CAPTION: 円グラフ
 #+NAME:   fig:graph-pie1
@@ -1315,82 +1651,7 @@ densityとfun
 [[file:figs/graph-pie1.png]]
 
 
-* 実習
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-** 練習問題
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-- ~tokyo_covid19_2021.csv~ (東京都の新型コロナの動向データ)
-  を用いて以下の問に答えよ．
-  - 陽性者数の推移の折線グラフを描け．
-  - 総検査実施件数の推移の棒グラフを描け．
-  - 曜日ごとの総検査実施件数の箱ひげ図を描け．
-  - (参考) 読み込み方
-    #+begin_src R :eval no 
-      ## CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
-      tc_data <- read.csv(file="data/tokyo_covid19_2021.csv",fileEncoding="utf8")
-    #+end_src
-
-#+begin_src R :exports none :tangle yes
-  ### 練習問題 東京都の感染動向データによる例
-  ## 陽性患者数の推移 (折れ線グラフ)
-  ## データの読み込み
-  tc_data <- read.csv(file="data/tokyo_covid19_2021.csv",fileEncoding="utf8")
-  names(tc_data)[1] <- "年月日" # CSVファイルの1列目の名前が空白なので定義しておく
-  tc_data <- transform(tc_data,年月日=as.Date(年月日)) # 日付の属性を変えておく
-  ## 日本語の扱いでうまくいかない場合は以下で対応して下さい．
-  ## library(readr)
-  ## tc_data <- read_csv(file="data/tokyo_covid19_2021.csv")
-
-  ## 折れ線グラフ
-  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
-  plot(tc_data$陽性者数, type="l", col="red", ylab="陽性者数") 
-  ## 日付ラベルを用いた作図の例
-  with(tc_data,
-       plot(年月日,陽性者数,
-            type="l", col="red", ylab="陽性者数"))
-  ## 日付は月日から文字列操作で作ることもできる
-  ## days <- with(tc_data,as.Date(paste("2021",月,日,sep="-"))) # 2021-月-日
-
-  ## x軸のラベルのフォーマットを指定する例
-  plot(陽性者数 ~ 年月日, data=tc_data, xaxt="n",
-       type="l", col="red", ylab="陽性者数")
-  axis.Date(1, tc_data$年月日, format="%m/%d", labels=TRUE) #x軸ラベルを書く
-
-  ## 検査実施人数の推移 (棒グラフ)
-  barplot(tc_data$総検査実施件数, col="lightblue", ylab="検査実施件数") # 棒グラフ
-  plot(tc_data$総検査実施件数, type="h", # 棒が多い場合はこういう方法もある
-       col="blue", ylab="検査実施件数") 
-  ## 日付ラベルの付加
-  with(tc_data,
-       plot(年月日, 総検査実施件数, type="h", col="blue", ylab="検査実施人数")) 
-  grid(col="darkgray") # 格子線の追加
-
-  ## 曜日ごとの検査実施件数 (箱ひげ図)
-  boxplot(総検査実施件数 ~ 曜日, data=tc_data, col=cm.colors(7))
-  ## 曜日の並び順を修正
-  tc_data <- transform(tc_data,
-                       曜日=factor(曜日,
-                                   levels=c("日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"), # 順序を指定
-                                   labels=c("日","月","火","水","木","金","土"))) # 名称を変更
-  boxplot(総検査実施件数 ~ 曜日, data=tc_data, col=cm.colors(7))
-#+end_src
-   
-** COMMENT 練習問題
-:PROPERTIES:
-:reveal_background: #fef4f4
-:END:
-- Weylの一様分布定理において，
-  無理数 ~a~ を別の値に変更しても
-  ~x~ の分布の仕方は
-  区間 \((0,1)\) 上でほぼ均一となることを確かめよ．\\
-  (どの程度均一に近くなるかは ~a~ によって異なるため, いくつか確かめてみよ)
-
-
-* 多次元データの視覚化
+* COMMENT 多次元データの視覚化
   #+begin_src R :exports none :tangle yes
     ### 多次元データの視覚化で用いた例
   #+end_src
@@ -1434,6 +1695,7 @@ densityとfun
     ## theta,phi: 俯瞰の方向を指定する極座標
     ## expand: z軸の拡大度
   #+end_src
+
   #     - ~...~: 関数 ~plot()~ で指定できるオプションが利用可能
 
 ** 3次元俯瞰図の例
@@ -1449,7 +1711,6 @@ densityとfun
     persp(x, y, z, theta=30, phi=30, expand=0.5, # 俯瞰する視線の設定
           col="royalblue", main=expression(z==x^2-y^2))
   #+end_src
-
 #+reveal: split
 #+CAPTION: 俯瞰図
 #+NAME:   fig:graph-plot3d1
@@ -1489,7 +1750,6 @@ densityとfun
 #+ATTR_LATEX: :width 0.6\linewidth
 [[file:figs/graph-plot3d2.png]]
 
-
 * COMMENT 凡例の追加
 #+begin_src R :exports none :tangle yes
   ### 凡例の追加で用いた例
@@ -1502,6 +1762,7 @@ densityとfun
     ## x,y: 凡例の位置を指定 (座標やキーワードで指定が可能)
     ## legend: 凡例の文字列ベクトル
   #+end_src
+
   - 複雑なオプションは ~help("legend")~ を参照
   - 数式の表示の詳細は ~help("plotmath")~ を参照
 
@@ -1553,7 +1814,6 @@ densityとfun
 #+ATTR_LATEX: :width 0.6\linewidth
 [[file:figs/graph-font.png]]
 
-
 * COMMENT 補遺
 ** 関数 ~par()~
 - グラフィクス環境の設定 (複数図の配置, 余白の設定など) をする関数
@@ -1598,8 +1858,7 @@ densityとfun
 #+ATTR_LATEX: :width 0.6\linewidth
 [[file:figs/brainbody.png]]
 
-
-* 実習
+* COMMENT 実習
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
@@ -1616,7 +1875,7 @@ densityとfun
   - 3次元の散布図を作成せよ．
   - 凡例を加えたグラフを作成せよ．
 
-#+begin_src R :exports none :tangle yes
+#+begin_src R :eval no :exports none
   ### 練習問題
   ## 3次元の散布図 (jpdat1/3.csvを用いた例)
   if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")} # 日本語表示  
