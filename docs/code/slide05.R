@@ -59,7 +59,7 @@ foo + facet_wrap(vars(index, month), nrow = 4, ncol = 3) # 4x3 に並べる
 foo + facet_wrap(index ~ month, nrow = 4, ncol = 3) # 同上
 
 #' ---------------------------------------------------------------------------
-#' @practice 基本的なグラフの描画(1)
+#' @practice 基本的なグラフの描画
 #' 
 #' データの読み込み
 tw_data <- read_csv(file = "data/tokyo_weather.csv")
@@ -98,6 +98,7 @@ tw_data |>
   geom_line(show.legend = FALSE) + # 凡例の削除
   facet_grid(rows = vars(index), scales = "free_y") +
   labs(title = "Weather in June") # タイトルの追加
+#'
 #' 1年間の気温と湿度の折線グラフ
 tw_data |>
   select(c(temp, humid)) |> # 必要な列を抽出
@@ -116,6 +117,7 @@ tw_data |>
   geom_line(show.legend = FALSE) +
   facet_grid(rows = vars(index), scales = "free_y") +
   labs(title = "Weather in Tokyo") 
+#'
 #' 各月の平均気温と湿度の折線グラフを描け
 tw_data |>
   group_by(month) |> # 月毎にまとめる
@@ -206,7 +208,7 @@ bar <- # ggplot オブジェクトを保存
 ggplotly(bar) # 保存した ggplot オブジェクトを変換
 
 #' ---------------------------------------------------------------------------
-#' @practice 基本的なグラフの描画
+#' @practice 散布図の描画
 #' 
 #' データの読み込み
 jp_data <- read_csv(file = "data/jpdata1.csv")
@@ -243,6 +245,7 @@ jp_data |>
   labs(x = "1000人あたりの婚姻数",
        y = "1000人あたりの離婚数",
        title = "婚姻数と離婚数の散布図")
+#'
 #' 地方ごとに色と点の形を変える
 jp_data |> 
   mutate(地方 = as_factor(jp_area[["地方"]])) |> # 地方区分を追加
