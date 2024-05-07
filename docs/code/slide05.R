@@ -25,23 +25,29 @@ tw_data |> filter(month == 5) |> # 5月を抽出
 
 #' 前例の別の書き方
 
-tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
-  pivot_longer(!day, names_to = "index") |> 
-  ggplot(aes(x = day, y = value, colour = index)) +
-  geom_line() + # index ごとにカラーパレットで指定された異なる色が用いられる
+tw_data |> filter(month == 5) |>
+  pivot_longer(c(temp, solar)) |> # 集約する列を指定
+  ggplot(aes(x = day, y = value, colour = name)) + 
+  geom_line() + # index ごとに定義されたカラーパレットの異なる色が用いられる
   labs(title = "Weather in May")
 
 #' @notes
+#' 描画に必要な情報は ggplot の中で指定されるが
+#' 以下のように必要な列を選択してもよい
+tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
+  pivot_longer(!day) |> # day 以外の列を集約
+  ggplot(aes(x = day, y = value, colour = name)) +
+  geom_line() + labs(title = "Weather in May")
 #' 色は theme で設定されているカラーパレットに従って自動的に選択されるが
 #' 自身で設定することも可能．詳細は例えば以下を参照
 #' https://ggplot2-book.org/scales-colour
 
-tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
-  pivot_longer(!day, names_to = "index") |> 
-  ggplot(aes(x = day, y = value, colour = index)) +
+tw_data |> filter(month == 5) |> 
+  pivot_longer(c(temp, solar)) |> 
+  ggplot(aes(x = day, y = value, colour = name)) +
   geom_line(show.legend  =  FALSE) + # 凡例は不要なので消す
   labs(title = "Weather in May") +
-  facet_grid(rows = vars(index)) # index ごとに行に並べる．(rowsは省略できる)
+  facet_grid(rows = vars(name)) # name ごとに行に並べる (rowsは省略可)
 
 #' @notes
 #' 属性ごとに描いた異なるグラフを並べる場合には
@@ -50,13 +56,13 @@ tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
 foo <- # 基本となるグラフオブジェクトを保存
   tw_data |> filter(month %in% c(5,6,7,8)) |>
   select(c(month, day, temp, solar, wind)) |>
-  pivot_longer(!c(month, day), names_to = "index") |> 
-  ggplot(aes(x = day, y = value, colour = index)) +
+  pivot_longer(!c(month, day)) |> 
+  ggplot(aes(x = day, y = value, colour = name)) +
   geom_line(show.legend  =  FALSE) 
-foo + facet_grid(rows = vars(index), cols = vars(month)) 
-foo + facet_grid(index ~ month) # 同上
-foo + facet_wrap(vars(index, month), nrow = 4, ncol = 3) # 4x3 に並べる
-foo + facet_wrap(index ~ month, nrow = 4, ncol = 3) # 同上
+foo + facet_grid(rows = vars(name), cols = vars(month)) 
+foo + facet_grid(name ~ month) # 同上
+foo + facet_wrap(vars(name, month), nrow = 4, ncol = 3) # 4x3 に並べる
+foo + facet_wrap(name ~ month, nrow = 4, ncol = 3) # 同上
 
 #' ---------------------------------------------------------------------------
 #' @practice 基本的なグラフの描画
@@ -69,16 +75,16 @@ tw_data <- read_csv(file = "data/tokyo_weather.csv")
 tw_data |>
   filter(month == 6) |> # 6月を選択
   select(c(day, temp, humid)) |> # 必要な列を選択
-  pivot_longer(!day, names_to = "index") |> # long format に変換
-  ggplot(aes(x = day, y = value, colour = index)) + # 審美的属性を指定
+  pivot_longer(!day) |> # long format に変換
+  ggplot(aes(x = day, y = value, colour = name)) + # 審美的属性を指定
   geom_line() # 折線グラフの描画
 #' 物理的に異なる量なので facet を分ける
 tw_data |>
   filter(month == 6) |> 
   select(c(day, temp, humid)) |> 
-  pivot_longer(!day, names_to = "index") |> 
-  ggplot(aes(x = day, y = value, colour = index)) +
-  geom_line() +
+  pivot_longer(!day, names_to = "index") |> # 列名を "index" に変更
+  ggplot(aes(x = day, y = value, colour = index)) + # こちらも "index"
+  geom_line() + # 凡例も "index" になっている
   facet_grid(rows = vars(index)) # index ごとに facet を行に並べる
 #' 値域が異なるので facet ごとにy軸を調整する
 tw_data |>
@@ -92,49 +98,48 @@ tw_data |>
 #' 不要な凡例の削除とタイトルの追加
 tw_data |>
   filter(month == 6) |> 
-  select(c(day, temp, humid)) |> 
-  pivot_longer(!day, names_to = "index") |> 
-  ggplot(aes(x = day, y = value, colour = index)) +
+  pivot_longer(c(temp, humid)) |> # 集約する列を指定(余計な列も存在)
+  ggplot(aes(x = day, y = value, colour = name)) +
   geom_line(show.legend = FALSE) + # 凡例の削除
-  facet_grid(rows = vars(index), scales = "free_y") +
+  facet_grid(rows = vars(name), scales = "free_y") +
   labs(title = "Weather in June") # タイトルの追加
 #'
 #' 1年間の気温と湿度の折線グラフ
 tw_data |>
   select(c(temp, humid)) |> # 必要な列を抽出
   rowid_to_column(var = "day") |> # 行番号を ID として列 day を作る
-  pivot_longer(!day, names_to = "index") |> 
-  ggplot(aes(x = day, y = value, colour = index)) +
+  pivot_longer(!day) |> 
+  ggplot(aes(x = day, y = value, colour = name)) +
   geom_line(show.legend = FALSE) +
-  facet_grid(rows = vars(index), scales = "free_y") +
+  facet_grid(rows = vars(name), scales = "free_y") +
   labs(title = "Weather in Tokyo") 
 #' x軸として日付を用いる
 tw_data |>
   mutate(date = as_date(paste(year, month, day, sep = "-"))) |> # 日付
   select(c(date, temp, humid)) |> # 必要な列を抽出
-  pivot_longer(!date, names_to = "index") |> 
-  ggplot(aes(x = date, y = value, colour = index)) +
+  pivot_longer(!date) |> 
+  ggplot(aes(x = date, y = value, colour = name)) +
   geom_line(show.legend = FALSE) +
-  facet_grid(rows = vars(index), scales = "free_y") +
+  facet_grid(rows = vars(name), scales = "free_y") +
   labs(title = "Weather in Tokyo") 
 #'
 #' 各月の平均気温と湿度の折線グラフを描け
 tw_data |>
   group_by(month) |> # 月毎にまとめる
   summarize(across(c(temp, humid), mean)) |> # 目的の指標を集計
-  pivot_longer(!month, names_to = "index") |> 
-  ggplot(aes(x = month, y = value, colour = index)) +
+  pivot_longer(!month) |> 
+  ggplot(aes(x = month, y = value, colour = name)) +
   geom_line(show.legend = FALSE) +
-  facet_grid(vars(index), scales = "free_y") +
+  facet_grid(vars(name), scales = "free_y") +
   labs(title = "Weather in Tokyo") 
 #' x軸の目盛を指定
 tw_data |>
   group_by(month) |> 
   summarize(across(c(temp, humid), mean)) |>
-  pivot_longer(!month, names_to = "index") |> 
-  ggplot(aes(x = month, y = value, colour = index)) +
+  pivot_longer(!month) |> 
+  ggplot(aes(x = month, y = value, colour = name)) +
   geom_line(show.legend = FALSE) +
-  facet_grid(vars(index), scales = "free_y") +
+  facet_grid(vars(name), scales = "free_y") +
   scale_x_continuous(breaks = 1:12) + # 1:12 の目盛を描く
   labs(title = "Weather in Tokyo") 
 #' ---------------------------------------------------------------------------
@@ -369,29 +374,29 @@ tw_data |>
 #' @exercise 棒グラフの描画
 #' 月ごとの日射量・降水量・降雪量の合計値の推移
 
-tw_data |> select(c(month,solar,rain,snow)) |> # 必要な列を選択
+tw_data |> 
   mutate(month = as_factor(month)) |> group_by(month) |>
-  summarize(across(everything(), sum)) |> # 月ごとに集計
-  pivot_longer(!month, names_to = "index") |> # values_to の既定値は "value"
-  ggplot(aes(x = index, y = value, fill = month)) +
+  summarize(across(c(solar, rain, snow), sum)) |> # 月ごとに集計
+  pivot_longer(!month) |> # long format に変更
+  ggplot(aes(x = name, y = value, fill = month)) +
   geom_bar(stat = "identity", position = "dodge", na.rm = TRUE) +
   theme(legend.position = "top") + guides(fill = guide_legend(nrow = 2))
 
 #' @notes
 #' 並べ方の指定を変えてみるには以下のようにすればよい
 foo <- # 共通部分を保存
-  tw_data |> select(c(month,solar,rain,snow)) |> 
+  tw_data |> 
   mutate(month = as_factor(month)) |> group_by(month) |>
-  summarize(across(everything(), sum)) |> 
-  pivot_longer(!month, names_to = "index") |>
-  mutate(index = as_factor(index)) |> # index を出現順に処理するために因子化
-  ggplot(aes(x = index, y = value, fill = month))
+  summarize(across(c(solar, rain, snow), sum)) |> 
+  pivot_longer(!month) |>
+  mutate(name = as_factor(name)) |> # name を出現順に処理するために因子化
+  ggplot(aes(x = name, y = value, fill = month))
 #' 積み上げ (stack)
-foo + geom_bar(stat = "identity", position = "stack")
+foo + geom_bar(stat = "identity", position = "stack") + labs(x = NULL)
 #' 横並び (dodge) 
-foo + geom_bar(stat = "identity", position = "dodge")
+foo + geom_bar(stat = "identity", position = "dodge") + labs(x = NULL)
 #' 比率の表示 (fill)
-foo + geom_bar(stat = "identity", position = "fill")
+foo + geom_bar(stat = "identity", position = "fill") + labs(x = NULL)
 
 #' ---------------------------------------------------------------------------
 #' @practice いろいろなグラフの描画
