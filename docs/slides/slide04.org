@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-29 18:20:15 mura>
+# Time-stamp: <2024-05-08 18:19:28 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -364,7 +364,7 @@
   - オゾン (~Ozone~) も日射量 (~Solar.R~) も
     欠測 (~NA~) でないデータの月 (~Month~) と日 (~Day~)
 
-#+begin_src R :exports none :tangle yes
+#+begin_src R :eval no :exports none
   #' ---------------------------------------------------------------------------
   #' @practice データフレームの操作
   #'

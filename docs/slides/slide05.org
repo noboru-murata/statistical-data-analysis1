@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-05-07 17:42:46 mura>
+# Time-stamp: <2024-05-07 17:45:27 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -25,7 +25,6 @@
 #+begin_src R :exports none :tangle no
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
-
 #+begin_src R :exports none
   ### 第5講 サンプルコード
 #+end_src
