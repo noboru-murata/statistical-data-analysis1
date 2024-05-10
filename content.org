@@ -285,13 +285,13 @@
 :EXPORT_FILE_NAME: record
 :EXPORT_DATE: <2022-04-08 Fri>
 :END:
-<2024-05-03 Fri> 更新
+<2024-05-10 Fri> 更新
 
 講義の進捗に合わせて追加します．
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/UDiG9s_v8UbZwoDISJEmsf-R3J7zM3ADoy9qaNPhNapvuRktF3N1sq2nn4QxzQw9.ulecTtdKmS8TWuoZ?startTime=1712304155000][第1講 (2024年4月5日)]]
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/CSFEIlbsqmdfxWn-GOpaO1pveX36j8cUp33zd8mOp9KHiMg7gAkIGIF8jdc7RhcI.ACPnds7I_dMfcur3?startTime=1713513700000][第2講 (2024年4月19日)]]
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/D2pwvcjNhnwAT2RijqxjAp8TrRU-d8Ym2A8dSDxo7m2ACPi97WRKtmuXJOohHYLq.mi-5XOfTjRLEXtWf?startTime=1714118474000][第3講 (2024年4月26日)]]
-- 第4講 (2024年5月10日)
+- [[https://u-tokyo-ac-jp.zoom.us/rec/share/DibD3uS9nJUaVGyApkJytQjJKWgOcA0WEyOyhNEMFJ1g-XbdS5-vB0Md_x36eafD.QnCAGFOAR5a9-jRf?startTime=1715327728000][第4講 (2024年5月10日)]]
 - 第5講 (2024年5月24日)
 - 第6講 (2024年5月31日)
 - 第7講 (2024年6月7日)
