@@ -57,7 +57,7 @@ aq_tbl |> filter(Ozone > 100 & Wind <= 5) |> select(Month,Day)
 #' Ozoneに欠測(NA)がなく, かつDayが5か10のデータのWindからDayまでの列を抽出
 aq_tbl |> filter(!is.na(Ozone) & Day %in% c(5,10)) |> select(Wind:Day)
 #' Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
-aq_tbl |> filter(Ozone > 120 | Wind <= 3) |> select(-Temp)
+aq_tbl |> filter(Ozone > 120 | Wind <= 3) |> select(!Temp)
 
 #' ---------------------------------------------------------------------------
 #' @practice データフレームの操作
@@ -86,7 +86,7 @@ aq_tbl |>
 my_data <- # データフレームの整理
   aq_tbl |> 
   filter(Ozone > 80) |> # Ozone が80を越える日を抽出
-  select(-Temp)          # 温度は除く
+  select(!Temp)          # 温度は除く
 dim(my_data) # データフレームの大きさを確認
 #' 作業ディレクトリの中に data というフォルダを用意しておく
 write_csv(my_data, # 保存するデータフレーム
@@ -97,8 +97,8 @@ new_data <- read_csv(file = "data/my_data.csv") # 前の例のファイル
 dim(new_data) # 正しく読み込めたか大きさを確認
 
 #' 関数 save() の使い方 (RDataファイルの操作)
-my_data_1 <- aq_tbl |> filter(Temp > 90) |> select(-Ozone)
-my_data_2 <- aq_tbl |> filter(Temp < 60) |> select(-Ozone)
+my_data_1 <- aq_tbl |> filter(Temp > 90) |> select(!Ozone)
+my_data_2 <- aq_tbl |> filter(Temp < 60) |> select(!Ozone)
 dim(my_data_1); dim(my_data_2) # 大きさを確認
 save(my_data_1, my_data_2, # 保存するオブジェクトを列挙
      file = "data/my_data.rdata") # ファイル名
@@ -178,8 +178,8 @@ jp_data |> select("老人") |> max() # 同上
 #' @exercise 列ごとの集計
 
 #' 練習問題のデータを用いた例
-jp_data |> summarise(平均失業率 = mean(失業), 件数 = n()) # 失業率の平均
-jp_data |> summarise(across(婚姻:失業, mean)) # 婚姻から失業の平均
+jp_data |> summarise(平均失業率 = mean(失業), 件数 = n()) # 失業の列の平均
+jp_data |> summarise(across(婚姻:失業, median)) # 婚姻から失業の列の中央値
 jp_data |> summarise(across(!県名, max)) # 県名の列以外の最大値
 jp_data |> summarise(across(where(is.double), min)) # 数値列の最小値
 

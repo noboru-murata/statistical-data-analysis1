@@ -1,10 +1,10 @@
-#+TITLE: データの整理と集計
++TITLE: データの整理と集計
 #+SUBTITLE: 第4講 - データフレームのより進んだ操作
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-05-08 18:19:28 mura>
+# Time-stamp: <2024-05-11 11:09:28 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -65,7 +65,7 @@
   #+end_quote
 - (特殊な) *行列* でもあり *リスト* でもある
 
-** 'tidyverse' パッケージ
+** tidyverse パッケージ
 - データ操作とグラフィクスの拡張 (再掲)
   - *tidyverse* : Hadley Wickham @posit による拡張パッケージ集
     - https://www.tidyverse.org/packages/
@@ -279,7 +279,7 @@
     #' Ozoneに欠測(NA)がなく, かつDayが5か10のデータのWindからDayまでの列を抽出
     aq_tbl |> filter(!is.na(Ozone) & Day %in% c(5,10)) |> select(Wind:Day)
     #' Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
-    aq_tbl |> filter(Ozone > 120 | Wind <= 3) |> select(-Temp)
+    aq_tbl |> filter(Ozone > 120 | Wind <= 3) |> select(!Temp)
   #+end_src
     
 ** COMMENT データフレームの形の変更
@@ -450,7 +450,7 @@
     my_data <- # データフレームの整理
       aq_tbl |> 
       filter(Ozone > 80) |> # Ozone が80を越える日を抽出
-      select(-Temp)          # 温度は除く
+      select(!Temp)          # 温度は除く
     dim(my_data) # データフレームの大きさを確認
     #' 作業ディレクトリの中に data というフォルダを用意しておく
     write_csv(my_data, # 保存するデータフレーム
@@ -526,8 +526,8 @@
 - [[color:green][書き出しの例]]
   #+begin_src R :eval no
     #' 関数 save() の使い方 (RDataファイルの操作)
-    my_data_1 <- aq_tbl |> filter(Temp > 90) |> select(-Ozone)
-    my_data_2 <- aq_tbl |> filter(Temp < 60) |> select(-Ozone)
+    my_data_1 <- aq_tbl |> filter(Temp > 90) |> select(!Ozone)
+    my_data_2 <- aq_tbl |> filter(Temp < 60) |> select(!Ozone)
     dim(my_data_1); dim(my_data_2) # 大きさを確認
     save(my_data_1, my_data_2, # 保存するオブジェクトを列挙
          file = "data/my_data.rdata") # ファイル名
@@ -1008,7 +1008,7 @@
 ** 列ごとの集約
 :PROPERTIES:
 :END:
-- 関数 ~dplyr::summarise()~ : 行ごとに計算する
+- 関数 ~dplyr::summarise()~ : 列ごとに計算する
   #+begin_src R :eval no :tangle no
     summarise(.data, ..., .by = NULL, .groups = NULL)
     #' .data: データフレーム
@@ -1022,8 +1022,8 @@
   #+end_src
   #+begin_src R :exports code
     #' 練習問題のデータを用いた例
-    jp_data |> summarise(平均失業率 = mean(失業), 件数 = n()) # 失業率の平均
-    jp_data |> summarise(across(婚姻:失業, mean)) # 婚姻から失業の平均
+    jp_data |> summarise(平均失業率 = mean(失業), 件数 = n()) # 失業の列の平均
+    jp_data |> summarise(across(婚姻:失業, median)) # 婚姻から失業の列の中央値
     jp_data |> summarise(across(!県名, max)) # 県名の列以外の最大値
     jp_data |> summarise(across(where(is.double), min)) # 数値列の最小値
   #+end_src

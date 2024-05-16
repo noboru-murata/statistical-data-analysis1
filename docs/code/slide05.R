@@ -26,16 +26,16 @@ tw_data |> filter(month == 5) |> # 5月を抽出
 #' 前例の別の書き方
 
 tw_data |> filter(month == 5) |>
-  pivot_longer(c(temp, solar)) |> # 集約する列を指定
+  pivot_longer(cols = c(temp, solar)) |> # 集約する列を指定
   ggplot(aes(x = day, y = value, colour = name)) + 
   geom_line() + # index ごとに定義されたカラーパレットの異なる色が用いられる
   labs(title = "Weather in May")
 
 #' @notes
 #' 描画に必要な情報は ggplot の中で指定されるが
-#' 以下のように必要な列を選択してもよい
-tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
-  pivot_longer(!day) |> # day 以外の列を集約
+#' 以下のように必要な列のみを選択してもよい
+tw_data |> filter(month == 5) |> select(day, temp, solar) |>
+  pivot_longer(!day) |> # day 以外の列を集約．引数名 cols は省略できる
   ggplot(aes(x = day, y = value, colour = name)) +
   geom_line() + labs(title = "Weather in May")
 #' 色は theme で設定されているカラーパレットに従って自動的に選択されるが
@@ -55,7 +55,7 @@ tw_data |> filter(month == 5) |>
 #' 関数 ggplot2::facet_wrap() (行数・列数を指定)を用いる
 foo <- # 基本となるグラフオブジェクトを保存
   tw_data |> filter(month %in% c(5,6,7,8)) |>
-  select(c(month, day, temp, solar, wind)) |>
+  select(month, day, temp, solar, wind) |>
   pivot_longer(!c(month, day)) |> 
   ggplot(aes(x = day, y = value, colour = name)) +
   geom_line(show.legend  =  FALSE) 
@@ -74,14 +74,14 @@ tw_data <- read_csv(file = "data/tokyo_weather.csv")
 #' 同じグラフに描いてみる
 tw_data |>
   filter(month == 6) |> # 6月を選択
-  select(c(day, temp, humid)) |> # 必要な列を選択
+  select(day, temp, humid) |> # 必要な列を選択
   pivot_longer(!day) |> # long format に変換
   ggplot(aes(x = day, y = value, colour = name)) + # 審美的属性を指定
   geom_line() # 折線グラフの描画
 #' 物理的に異なる量なので facet を分ける
 tw_data |>
   filter(month == 6) |> 
-  select(c(day, temp, humid)) |> 
+  select(day, temp, humid) |> 
   pivot_longer(!day, names_to = "index") |> # 列名を "index" に変更
   ggplot(aes(x = day, y = value, colour = index)) + # こちらも "index"
   geom_line() + # 凡例も "index" になっている
@@ -89,7 +89,7 @@ tw_data |>
 #' 値域が異なるので facet ごとにy軸を調整する
 tw_data |>
   filter(month == 6) |> 
-  select(c(day, temp, humid)) |> 
+  select(day, temp, humid) |> 
   pivot_longer(!day, names_to = "index") |> 
   ggplot(aes(x = day, y = value, colour = index)) +
   geom_line() +
@@ -98,16 +98,25 @@ tw_data |>
 #' 不要な凡例の削除とタイトルの追加
 tw_data |>
   filter(month == 6) |> 
-  pivot_longer(c(temp, humid)) |> # 集約する列を指定(余計な列も存在)
-  ggplot(aes(x = day, y = value, colour = name)) +
+  select(day, temp, humid) |> 
+  pivot_longer(!day, names_to = "index") |> 
+  ggplot(aes(x = day, y = value, colour = index)) +
   geom_line(show.legend = FALSE) + # 凡例の削除
-  facet_grid(rows = vars(name), scales = "free_y") +
+  facet_grid(rows = vars(index), scales = "free_y") +
   labs(title = "Weather in June") # タイトルの追加
+#' 関数selectを使わなくても同様な作図は可能
+tw_data |>
+  filter(month == 6) |> 
+  pivot_longer(cols = c(temp, humid)) |> # 集約する列を指定(余計な列も存在)
+  ggplot(aes(x = day, y = value, colour = name)) +
+  geom_line(show.legend = FALSE) + 
+  facet_grid(rows = vars(name), scales = "free_y") +
+  labs(title = "Weather in June") 
 #'
 #' 1年間の気温と湿度の折線グラフ
 tw_data |>
-  select(c(temp, humid)) |> # 必要な列を抽出
-  rowid_to_column(var = "day") |> # 行番号を ID として列 day を作る
+  select(temp, humid) |> # 必要な列を抽出
+  rowid_to_column(var = "day") |> # 行番号を ID として新たに列 day を作る
   pivot_longer(!day) |> 
   ggplot(aes(x = day, y = value, colour = name)) +
   geom_line(show.legend = FALSE) +
@@ -116,7 +125,7 @@ tw_data |>
 #' x軸として日付を用いる
 tw_data |>
   mutate(date = as_date(paste(year, month, day, sep = "-"))) |> # 日付
-  select(c(date, temp, humid)) |> # 必要な列を抽出
+  select(date, temp, humid) |> # 必要な列を抽出
   pivot_longer(!date) |> 
   ggplot(aes(x = date, y = value, colour = name)) +
   geom_line(show.legend = FALSE) +
@@ -172,12 +181,12 @@ tw_data |> filter(month %in% 7:9) |>
 library(GGally)
 
 tw_data |> filter(month %in% 7:9) |> 
-  select(c(temp, solar, humid)) |> # 必要な列を選択
+  select(temp, solar, humid) |> # 必要な列を選択
   ggpairs() # 標準の散布図行列 (上三角は相関，対角は密度，下三角は散布図)
 
 #' 月ごとに色分けして表示する
 
-tw_data |> filter(month %in% 7:9) |> select(c(month, temp, solar, humid)) |>
+tw_data |> filter(month %in% 7:9) |> select(month, temp, solar, humid) |>
   mutate(month = as_factor(month)) |> # 月を因子化(ラベルとして扱う)
   ggpairs(columns = 2:4, legend = c(1,1), # 表示する列．凡例の雛型
           aes(colour = month), # 月ごとに色づける
@@ -197,7 +206,7 @@ library(plotly)
 #' @exercise 対話型のグラフへの変換
 
 #' 5月の気温と日射量の例
-tw_data |> filter(month == 5) |> select(c(day, temp, solar)) |>
+tw_data |> filter(month == 5) |> select(day, temp, solar) |>
   pivot_longer(!day, names_to = "index") |> 
   ggplot(aes(x = day, y = value, colour = index)) +
   geom_line() + labs(title = "Weather in May")
@@ -300,7 +309,20 @@ tw_data |>
        title = "Solar Radiation in Tokyo")
 
 #' @notes
-#' 関数 geom_text() を用いて各ビンの頻度を表示することができる
+#' 横向きにする方法はいくつかある
+tw_data |>
+  ggplot(aes(y = solar)) + # 分布を描画する列をy軸に指定する
+  geom_histogram(bins = 30, fill = "pink", colour = "red") +
+  labs(x = expression(MJ/m^2), 
+       title = "Solar Radiation in Tokyo")
+tw_data |>
+  ggplot(aes(x = solar)) + 
+  geom_histogram(bins = 30, fill = "pink", colour = "red") +
+  labs(x = expression(MJ/m^2),
+       title = "Solar Radiation in Tokyo") +
+  coord_flip() # 座標を反転する
+#'
+#' 関数 geom_text() を用いると各ビンの頻度を表示することができる
 tw_data |>
   ggplot(aes(x = solar)) + 
   geom_histogram(bins = 30, fill = "pink", colour = "red") +
@@ -351,12 +373,24 @@ tw_data |>
 #' 月ごとの日射量の分布
 
 tw_data |>
-  mutate(month = as_factor(month)) |> # 月を因子化
+  mutate(month = as_factor(month)) |> # 月を因子(ラベル)化
   ggplot(aes(x = month, y = solar)) + # 月毎に集計する
   geom_boxplot(fill = "orange") + # 塗り潰しの色を指定
   labs(title = "Solar Radiation in Tokyo")
 
 #' @notes
+#' 因子があれば各因子で箱ひげ図を作成するが
+#' 関数 mutate() を使わずに以下のように書くこともできる
+tw_data |>
+  ggplot(aes(x = as_factor(month), y = solar)) + # 月を因子化して集計する
+  geom_boxplot(fill = "orange") + 
+  labs(title = "Solar Radiation in Tokyo",
+       x = "month") # 因子化のため書き変わるラベルを修正
+tw_data |>
+  ggplot(aes(x = month, y = solar)) + 
+  geom_boxplot(aes(group = month), fill = "orange") + # 月毎に集計
+  labs(title = "Solar Radiation in Tokyo") +
+  scale_x_continuous(breaks = 1:12) # x軸の目盛を明示的に指定
 #' 関数 geom_violin() を用いると密度関数を表示することができる
 tw_data |>
   mutate(month = as_factor(month)) |> 
@@ -367,7 +401,7 @@ tw_data |>
 tw_data |>
   mutate(month = as_factor(month)) |> 
   ggplot(aes(x = month, y = solar)) + 
-  geom_violin(width = 1.5, colour = "red", fill = "pink") + 
+  geom_violin(width = 1.2, colour = "red", fill = "pink") + 
   geom_boxplot(width = 0.1, fill = "orange") + 
   labs(title = "Solar Radiation in Tokyo")
 

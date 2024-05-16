@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>データの整理と集計</title>
 <meta name="author" content="村田 昇"/>
 <style type="text/css">
 .underline { text-decoration: underline; }
@@ -30,7 +29,7 @@
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
 <div class="talk-title">
-    <h1 class="no-toc-progress">データの整理と集計</h1>
+    <h1 class="no-toc-progress"></h1>
 </div>
 <div class="talk-subtitle">
     <p>第4講 - データフレームのより進んだ操作</p>
@@ -44,9 +43,12 @@
 </div>
 
 </section>
+<p>
++TITLE: データの整理と集計
+</p>
 <section>
-<section id="slide-orgdb82e26">
-<h2 id="orgdb82e26">講義概要</h2>
+<section id="slide-org6b1b48a">
+<h2 id="org6b1b48a">講義概要</h2>
 <ul>
 <li>データフレームの操作</li>
 <li>ファイルの取り扱い</li>
@@ -57,13 +59,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgcafa4d3">
-<h2 id="orgcafa4d3">データフレームの操作</h2>
-<div class="outline-text-2" id="text-orgcafa4d3">
+<section id="slide-org54422d4">
+<h2 id="org54422d4">データフレームの操作</h2>
+<div class="outline-text-2" id="text-org54422d4">
 </div>
 </section>
-<section id="slide-org962e000">
-<h3 id="org962e000">データ構造</h3>
+<section id="slide-orgce6b184">
+<h3 id="orgce6b184">データ構造</h3>
 <ul>
 <li>Rに用意されている基本的なデータ構造
 <ul>
@@ -82,8 +84,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org94d3cd5">
-<h3 id="org94d3cd5">データフレーム</h3>
+<section id="slide-org5144522">
+<h3 id="org5144522">データフレーム</h3>
 <ul>
 <li>複数の個体について，いくつかの属性を集計した表
 <ul>
@@ -161,8 +163,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3d6e243">
-<h3 id="org3d6e243">&rsquo;tidyverse&rsquo; パッケージ</h3>
+<section id="slide-org6753dff">
+<h3 id="org6753dff">tidyverse パッケージ</h3>
 <ul>
 <li>データ操作とグラフィクスの拡張 (再掲)
 <ul>
@@ -191,8 +193,8 @@ library(tidyverse)
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org960d70f">
-<h3 id="org960d70f">データ例</h3>
+<section id="slide-org6c82c83">
+<h3 id="org6c82c83">データ例</h3>
 <ul>
 <li><p>
 <b><code>datasets::airquality</code></b>
@@ -250,8 +252,8 @@ tail(aq_df, n = 10)    # 最後の10行が表示される．tibbleでも同様
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5a18c83">
-<h3 id="org5a18c83">項目の抽出</h3>
+<section id="slide-org3035832">
+<h3 id="org3035832">項目の抽出</h3>
 <ul>
 <li><p>
 添字の番号(行と列)を指定
@@ -287,8 +289,8 @@ aq_tbl$Ozone      # 同上
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org61de570">
-<h3 id="org61de570">行の選択 (素朴な方法)</h3>
+<section id="slide-orgfd8ba15">
+<h3 id="orgfd8ba15">行の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 行番号による指定
@@ -325,8 +327,8 @@ aq_tbl[which(with(aq_tbl, Ozone&gt;100 &amp; Wind&lt;=5)), ]
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8c26f9b">
-<h3 id="org8c26f9b">列の選択 (素朴な方法)</h3>
+<section id="slide-orge9785d0">
+<h3 id="orge9785d0">列の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 列番号による指定
@@ -361,8 +363,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),"Month"] # デー�
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8fc84bf">
-<h3 id="org8fc84bf">行の選択</h3>
+<section id="slide-orgbf592f2">
+<h3 id="orgbf592f2">行の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::filter()</code> : 条件を指定して行を選択
@@ -388,8 +390,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),"Month"] # デー�
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org437c9f7">
-<h3 id="org437c9f7">列の選択</h3>
+<section id="slide-orge74da88">
+<h3 id="orge74da88">列の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::select()</code> : 条件を指定して列を選択
@@ -414,8 +416,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),"Month"] # デー�
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfec555f">
-<h3 id="orgfec555f">パイプ演算子</h3>
+<section id="slide-org34ed01a">
+<h3 id="org34ed01a">パイプ演算子</h3>
 <ul>
 <li>処理を順次結合する演算子 (いくつか定義がある)
 <ul>
@@ -434,7 +436,7 @@ aq_tbl |&gt; filter(Ozone &gt; 100 &amp; Wind &lt;= 5) |&gt; select(Month,Day)
 #' Ozoneに欠測(NA)がなく, かつDayが5か10のデータのWindからDayまでの列を抽出
 aq_tbl |&gt; filter(!is.na(Ozone) &amp; Day %in% c(5,10)) |&gt; select(Wind:Day)
 #' Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
-aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
+aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 </code></pre>
 </div></li>
 
@@ -443,12 +445,12 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 </section>
 </section>
 <section>
-<section id="slide-org344e72c" data-background="#fef4f4">
-<h2 id="org344e72c">実習</h2>
+<section id="slide-orgc4c4363" data-background="#fef4f4">
+<h2 id="orgc4c4363">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd71bd1c" data-background="#fef4f4">
-<h3 id="orgd71bd1c">練習問題</h3>
+<section id="slide-org9584e51" data-background="#fef4f4">
+<h3 id="org9584e51">練習問題</h3>
 <ul>
 <li><code>datasets::airquality</code> に対して
 以下の条件を満たすデータを取り出しなさい．
@@ -466,13 +468,13 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 </section>
 </section>
 <section>
-<section id="slide-orgb106fa4">
-<h2 id="orgb106fa4">ファイルの取り扱い</h2>
-<div class="outline-text-2" id="text-orgb106fa4">
+<section id="slide-org448ceaf">
+<h2 id="org448ceaf">ファイルの取り扱い</h2>
+<div class="outline-text-2" id="text-org448ceaf">
 </div>
 </section>
-<section id="slide-org392ab6d">
-<h3 id="org392ab6d">データファイルの読み書き</h3>
+<section id="slide-orgba3c779">
+<h3 id="orgba3c779">データファイルの読み書き</h3>
 <ul>
 <li>実際の解析においては以下の操作が必要
 <ul>
@@ -492,8 +494,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8b12544">
-<h3 id="org8b12544">作業ディレクトリ</h3>
+<section id="slide-org1a9fbfb">
+<h3 id="org1a9fbfb">作業ディレクトリ</h3>
 <ul>
 <li>Rの処理は <b>作業ディレクトリ</b> で実行される
 <ul>
@@ -524,8 +526,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org774c1d1">
-<h3 id="org774c1d1">作業ディレクトリの操作</h3>
+<section id="slide-orgcf3539d">
+<h3 id="orgcf3539d">作業ディレクトリの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::getwd()</code> : 作業ディレクトリの確認
@@ -555,8 +557,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2ca2ecf">
-<h3 id="org2ca2ecf">CSV ファイルの操作</h3>
+<section id="slide-orgb3a2b91">
+<h3 id="orgb3a2b91">CSV ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>readr::write_csv()</code> : ファイルの書き出し
@@ -597,7 +599,7 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(-Temp)
 my_data &lt;- # データフレームの整理
   aq_tbl |&gt; 
   filter(Ozone &gt; 80) |&gt; # Ozone が80を越える日を抽出
-  select(-Temp)          # 温度は除く
+  select(!Temp)          # 温度は除く
 dim(my_data) # データフレームの大きさを確認
 #' 作業ディレクトリの中に data というフォルダを用意しておく
 write_csv(my_data, # 保存するデータフレーム
@@ -618,8 +620,8 @@ dim(new_data) # 正しく読み込めたか大きさを確認
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga946ff1">
-<h3 id="orga946ff1">RData ファイルの操作</h3>
+<section id="slide-org6be0364">
+<h3 id="org6be0364">RData ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::save()</code> : ファイルの書き出し
@@ -662,8 +664,8 @@ dim(new_data) # 正しく読み込めたか大きさを確認
 <div class="org-src-container">
 
 <pre><code class="R" >#' 関数 save() の使い方 (RDataファイルの操作)
-my_data_1 &lt;- aq_tbl |&gt; filter(Temp &gt; 90) |&gt; select(-Ozone)
-my_data_2 &lt;- aq_tbl |&gt; filter(Temp &lt; 60) |&gt; select(-Ozone)
+my_data_1 &lt;- aq_tbl |&gt; filter(Temp &gt; 90) |&gt; select(!Ozone)
+my_data_2 &lt;- aq_tbl |&gt; filter(Temp &lt; 60) |&gt; select(!Ozone)
 dim(my_data_1); dim(my_data_2) # 大きさを確認
 save(my_data_1, my_data_2, # 保存するオブジェクトを列挙
      file = "data/my_data.rdata") # ファイル名
@@ -687,12 +689,12 @@ my_data_2
 </section>
 </section>
 <section>
-<section id="slide-orgc2ce52b" data-background="#fef4f4">
-<h2 id="orgc2ce52b">実習</h2>
+<section id="slide-org8331c58" data-background="#fef4f4">
+<h2 id="org8331c58">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd01016e" data-background="#fef4f4">
-<h3 id="orgd01016e">練習問題</h3>
+<section id="slide-org2f6e922" data-background="#fef4f4">
+<h3 id="org2f6e922">練習問題</h3>
 <ul>
 <li><p>
 以下のデータを読み込んで操作してみよう
@@ -739,13 +741,13 @@ jp_area_en &lt;- read_csv(file = "data/jpdata3-en.csv")
 </section>
 </section>
 <section>
-<section id="slide-org2cecf11">
-<h2 id="org2cecf11">データの集計</h2>
-<div class="outline-text-2" id="text-org2cecf11">
+<section id="slide-org922cb54">
+<h2 id="org922cb54">データの集計</h2>
+<div class="outline-text-2" id="text-org922cb54">
 </div>
 </section>
-<section id="slide-orgdaa7b90">
-<h3 id="orgdaa7b90">統計量の計算</h3>
+<section id="slide-org1b925c1">
+<h3 id="org1b925c1">統計量の計算</h3>
 <ul>
 <li>データを集約した値 = 統計量
 <ul>
@@ -762,8 +764,8 @@ jp_area_en &lt;- read_csv(file = "data/jpdata3-en.csv")
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6be17b9">
-<h3 id="org6be17b9">集約のための関数の使い方</h3>
+<section id="slide-org2a22aac">
+<h3 id="org2a22aac">集約のための関数の使い方</h3>
 <ul>
 <li><p>
 <span style="color:green;">データの集計の例</span>
@@ -792,11 +794,11 @@ jp_data |&gt; select("老人") |&gt; max() # 同上
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org19d8136">
-<h3 id="org19d8136">列ごとの集約</h3>
+<section id="slide-org7924100">
+<h3 id="org7924100">列ごとの集約</h3>
 <ul>
 <li><p>
-関数 <code>dplyr::summarise()</code> : 行ごとに計算する
+関数 <code>dplyr::summarise()</code> : 列ごとに計算する
 </p>
 <div class="org-src-container">
 
@@ -813,8 +815,8 @@ jp_data |&gt; select("老人") |&gt; max() # 同上
 <div class="org-src-container">
 
 <pre><code class="R" >#' 練習問題のデータを用いた例
-jp_data |&gt; summarise(平均失業率 = mean(失業), 件数 = n()) # 失業率の平均
-jp_data |&gt; summarise(across(婚姻:失業, mean)) # 婚姻から失業の平均
+jp_data |&gt; summarise(平均失業率 = mean(失業), 件数 = n()) # 失業の列の平均
+jp_data |&gt; summarise(across(婚姻:失業, median)) # 婚姻から失業の列の中央値
 jp_data |&gt; summarise(across(!県名, max)) # 県名の列以外の最大値
 jp_data |&gt; summarise(across(where(is.double), min)) # 数値列の最小値
 </code></pre>
@@ -823,8 +825,8 @@ jp_data |&gt; summarise(across(where(is.double), min)) # 数値列の最小値
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgab424f4">
-<h3 id="orgab424f4">グループごとの操作</h3>
+<section id="slide-orga7198d5">
+<h3 id="orga7198d5">グループごとの操作</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::group_by()</code> : グループ化を行う
@@ -857,12 +859,12 @@ jp_data |&gt;
 </section>
 </section>
 <section>
-<section id="slide-org65d375f" data-background="#fef4f4">
-<h2 id="org65d375f">実習</h2>
+<section id="slide-orgf51d885" data-background="#fef4f4">
+<h2 id="orgf51d885">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgff69d82" data-background="#fef4f4">
-<h3 id="orgff69d82">練習問題</h3>
+<section id="slide-orgb63b642" data-background="#fef4f4">
+<h3 id="orgb63b642">練習問題</h3>
 <ul>
 <li>サンプルデータ (<code>jpdata</code>) の整理をしてみよう．
 <ul>
@@ -888,8 +890,8 @@ jp_data |&gt;
 </section>
 </section>
 <section>
-<section id="slide-orgd79951d">
-<h2 id="orgd79951d">次回の予定</h2>
+<section id="slide-org7ca84b1">
+<h2 id="org7ca84b1">次回の予定</h2>
 <ul>
 <li>可視化の重要性</li>
 <li>基本的な描画</li>
