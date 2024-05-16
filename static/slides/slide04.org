@@ -1,10 +1,10 @@
-+TITLE: データの整理と集計
+#+TITLE: データの整理と集計
 #+SUBTITLE: 第4講 - データフレームのより進んだ操作
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-05-11 11:09:28 mura>
+# Time-stamp: <2024-05-16 11:31:57 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
