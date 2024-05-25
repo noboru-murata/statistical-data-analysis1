@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-05-11 16:58:47 mura>
+# Time-stamp: <2024-05-25 17:11:53 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -16,6 +16,9 @@
 - tidyverse に全面的に修正
 
 * 講義の内容
+:PROPERTIES:
+:ID:       C97A9B41-24EF-4ED9-AEFE-EA9D664A76CE
+:END:
 - 可視化の重要性
 - 基本的な描画
 - いろいろな分布の視覚化
@@ -56,6 +59,9 @@
     を参照のこと
 
 ** tidyverse パッケージ
+:PROPERTIES:
+:ID:       A37A4209-00CE-4840-B92C-94B06F5D10BB
+:END:
 - データ操作とグラフィクスの拡張 (再掲)
   - *tidyverse* : Hadley Wickham @posit による拡張パッケージ集
     - https://www.tidyverse.org/packages/
@@ -72,6 +78,9 @@
 
 - グラフィクスの拡張である ~ggplot2~ を利用
 ** サンプルデータの説明
+:PROPERTIES:
+:ID:       9EF1CA72-C1A7-4AF9-993E-0BB3A26E6BDE
+:END:
 - ~jpdata[1-3].csv~ (再掲)
   #+begin_quote
   - https://www.e-stat.go.jp (統計局)
@@ -149,6 +158,7 @@
 
 ** 折線グラフ
 :PROPERTIES:
+:ID:       A42078C8-933A-499E-832C-56150234C52A
 :END:
 - 関数 ~ggplot2::geom_line()~ : 線の描画
   #+begin_src R :eval no :tangle no
@@ -189,6 +199,9 @@
   [[file:figs/05-geomline-geomline.png]]
 
 ** データフレームの形の変更
+:PROPERTIES:
+:ID:       A34DEB5C-D8BD-4E58-A812-5C38DC331AAC
+:END:
 - 関数 ~dplyr::pivot_longer()~ : 列の集約
   #+begin_src R :eval no :tangle no
     pivot_longer(
@@ -357,6 +370,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       825AEC11-1758-4063-8C4A-3F17943901A8
 :END:
 - ~tokyo_weather.csv~ (東京都の気候データ)
   を用いて以下の問に答えよ
@@ -626,6 +640,9 @@
   [[file:figs/05-ggpairs-quarter.png]]
 
 ** 対話型のグラフ
+:PROPERTIES:
+:ID:       B2CB215C-6EC6-4B64-9131-B1A846B36A3C
+:END:
 - ~ggplot2~ で描画したグラフは
   対話型 (interactive) のグラフに変換することができる
 - 変換には ~package::plotly~ が必要 
@@ -697,6 +714,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       D2717135-D54E-4622-AFB7-FBD84B682507
 :END:
 - ~jpdata1/3.csv~ (前回配布のデータ)を用いて以下の問に答えよ．
   - 人口1000人あたりの婚姻・離婚数の散布図を描け．
@@ -832,7 +850,7 @@
     tw_data |>
       ggplot(aes(y = solar)) + # 分布を描画する列をy軸に指定する
       geom_histogram(bins = 30, fill = "pink", colour = "red") +
-      labs(x = expression(MJ/m^2), 
+      labs(y = expression(MJ/m^2), 
            title = "Solar Radiation in Tokyo")
     tw_data |>
       ggplot(aes(x = solar)) + 
@@ -857,6 +875,9 @@
   [[file:figs/05-geomhistogram.png]]
   
 ** 密度
+:PROPERTIES:
+:ID:       3CB3FD47-581F-4FA5-8E59-6009C0820177
+:END:
 - データからカーネル法で確率密度を推定した図
   - ヒストグラム同様データ分布の可視化に有効
   - カーネルの幅や関数も選択可能
@@ -1019,12 +1040,12 @@
 - [[color:green][月ごとの日射量・降水量・降雪量の合計値の推移]]
   #+begin_src R :exports none
     #' @exercise 棒グラフの描画
-    #' 月ごとの日射量・降水量・降雪量の合計値の推移
+    #' 月ごとの日射量・降水量・風速の平均値の推移
   #+end_src
   #+begin_src R :file figs/05-geombar.png :results graphics
     tw_data |> 
       mutate(month = as_factor(month)) |> group_by(month) |>
-      summarize(across(c(solar, rain, snow), sum)) |> # 月ごとに集計
+      summarize(across(c(solar, rain, wind), mean)) |> # 月ごとに集計
       pivot_longer(!month) |> # long format に変更
       ggplot(aes(x = name, y = value, fill = month)) +
       geom_bar(stat = "identity", position = "dodge", na.rm = TRUE) +
@@ -1036,7 +1057,7 @@
     foo <- # 共通部分を保存
       tw_data |> 
       mutate(month = as_factor(month)) |> group_by(month) |>
-      summarize(across(c(solar, rain, snow), sum)) |> 
+      summarize(across(c(solar, rain, wind), mean)) |> 
       pivot_longer(!month) |>
       mutate(name = as_factor(name)) |> # name を出現順に処理するために因子化
       ggplot(aes(x = name, y = value, fill = month))
@@ -1049,15 +1070,17 @@
     #' 向きを変えるのはヒストグラムなどと同様
     tw_data |> 
       mutate(month = as_factor(month)) |> group_by(month) |>
-      summarize(across(c(solar, rain, snow), sum)) |> 
+      summarize(across(c(solar, rain, wind), mean)) |> 
       pivot_longer(!month) |> 
+      mutate(name = fct_reorder(name, value)) |> # value の小さい順に並べる
       ggplot(aes(y = name, x = value, fill = month)) + # xy軸を入れ替える
       geom_bar(stat = "identity", position = "dodge", na.rm = TRUE) +
       theme(legend.position = "top") + guides(fill = guide_legend(nrow = 2))
     tw_data |> 
       mutate(month = as_factor(month)) |> group_by(month) |>
-      summarize(across(c(solar, rain, snow), sum)) |> 
+      summarize(across(c(solar, rain, wind), mean)) |> 
       pivot_longer(!month) |> 
+      mutate(name = fct_reorder(name, value, .desc = TRUE)) |> # value の大きい順
       ggplot(aes(x = name, y = value, fill = month)) + 
       geom_bar(stat = "identity", position = "dodge", na.rm = TRUE) +
       theme(legend.position = "top") + guides(fill = guide_legend(nrow = 2)) +
@@ -1138,6 +1161,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       C1D936FE-2D7E-4191-88B9-4F4999CF280E
 :END:
 - ~tokyo_covid19_2021.csv~ (東京都の新型コロナの動向データ)
   を用いて以下の問に答えよ

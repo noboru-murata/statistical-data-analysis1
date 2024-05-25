@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-04-12 15:22:44 mura>
+# Time-stamp: <2024-05-24 12:31:50 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -1231,12 +1231,12 @@
 行列の操作に慣れよう
 - 以下に示す行列を作成してみよう
   # #+begin_export latex
-  \begin{equation*}
+  \begin{equation}
     \begin{pmatrix}
       1  & 2  & 3  \\
       4  & 5  & 6 
     \end{pmatrix}
-  \end{equation*}
+  \end{equation}
   # #+end_export
 - 行列を操作してみよう
   - 2行2列成分を取り出す

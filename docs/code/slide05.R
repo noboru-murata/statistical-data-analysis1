@@ -313,7 +313,7 @@ tw_data |>
 tw_data |>
   ggplot(aes(y = solar)) + # 分布を描画する列をy軸に指定する
   geom_histogram(bins = 30, fill = "pink", colour = "red") +
-  labs(x = expression(MJ/m^2), 
+  labs(y = expression(MJ/m^2), 
        title = "Solar Radiation in Tokyo")
 tw_data |>
   ggplot(aes(x = solar)) + 
@@ -406,11 +406,11 @@ tw_data |>
   labs(title = "Solar Radiation in Tokyo")
 
 #' @exercise 棒グラフの描画
-#' 月ごとの日射量・降水量・降雪量の合計値の推移
+#' 月ごとの日射量・降水量・風速の平均値の推移
 
 tw_data |> 
   mutate(month = as_factor(month)) |> group_by(month) |>
-  summarize(across(c(solar, rain, snow), sum)) |> # 月ごとに集計
+  summarize(across(c(solar, rain, wind), mean)) |> # 月ごとに集計
   pivot_longer(!month) |> # long format に変更
   ggplot(aes(x = name, y = value, fill = month)) +
   geom_bar(stat = "identity", position = "dodge", na.rm = TRUE) +
@@ -421,7 +421,7 @@ tw_data |>
 foo <- # 共通部分を保存
   tw_data |> 
   mutate(month = as_factor(month)) |> group_by(month) |>
-  summarize(across(c(solar, rain, snow), sum)) |> 
+  summarize(across(c(solar, rain, wind), mean)) |> 
   pivot_longer(!month) |>
   mutate(name = as_factor(name)) |> # name を出現順に処理するために因子化
   ggplot(aes(x = name, y = value, fill = month))
@@ -431,6 +431,24 @@ foo + geom_bar(stat = "identity", position = "stack") + labs(x = NULL)
 foo + geom_bar(stat = "identity", position = "dodge") + labs(x = NULL)
 #' 比率の表示 (fill)
 foo + geom_bar(stat = "identity", position = "fill") + labs(x = NULL)
+#' 向きを変えるのはヒストグラムなどと同様
+tw_data |> 
+  mutate(month = as_factor(month)) |> group_by(month) |>
+  summarize(across(c(solar, rain, wind), mean)) |> 
+  pivot_longer(!month) |> 
+  mutate(name = fct_reorder(name, value)) |> # value の小さい順に並べる
+  ggplot(aes(y = name, x = value, fill = month)) + # xy軸を入れ替える
+  geom_bar(stat = "identity", position = "dodge", na.rm = TRUE) +
+  theme(legend.position = "top") + guides(fill = guide_legend(nrow = 2))
+tw_data |> 
+  mutate(month = as_factor(month)) |> group_by(month) |>
+  summarize(across(c(solar, rain, wind), mean)) |> 
+  pivot_longer(!month) |> 
+  mutate(name = fct_reorder(name, value, .desc = TRUE)) |> # value の大きい順
+  ggplot(aes(x = name, y = value, fill = month)) + 
+  geom_bar(stat = "identity", position = "dodge", na.rm = TRUE) +
+  theme(legend.position = "top") + guides(fill = guide_legend(nrow = 2)) +
+  coord_flip()
 
 #' ---------------------------------------------------------------------------
 #' @practice いろいろなグラフの描画
