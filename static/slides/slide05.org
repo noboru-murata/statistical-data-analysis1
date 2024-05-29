@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-05-25 17:11:53 mura>
+# Time-stamp: <2024-05-29 16:24:27 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -918,7 +918,7 @@
                     args = with(tw_data, # 標本平均と標準偏差を計算
                                 list(mean = mean(solar),
                                      sd = sd(solar))),
-                    color = "blue") + # 色を指定
+                    colour = "blue") + # 色を指定
       labs(x = expression(paste("intensity [",MJ/m^2,"]")),
            y = "density", # geom_function で y軸のラベルが書き換えられるため
            title = "Solar Radiation in Tokyo")
@@ -932,7 +932,7 @@
                     args = with(tw_data, # 標本平均と標準偏差を計算
                                 list(mean = mean(solar),
                                      sd = sd(solar))),
-                    color = "blue") + # 色を指定
+                    colour = "blue") + # 色を指定
       labs(x = expression(paste("intensity [",MJ/m^2,"]")),
            y = "density", # geom_function で y軸のラベルが書き換えられるため
            title = "Solar Radiation in Tokyo")
