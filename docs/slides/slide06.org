@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-05-10 15:12:03 mura>
+# Time-stamp: <2024-05-31 15:44:45 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -169,7 +169,7 @@
     replicate(n, expr, simplify = "array")
     #' n: 繰り返し回数 
     #' expr: 評価する手続き(関数を定義) (1回の実験に相当)
-    #'' simplify: 出力の形式を指定
+    #' simplify: 出力の形式を指定
   #+end_src
 
 ** 数値実験の例
@@ -461,7 +461,7 @@
   \(r\) 番以降の応募者でそれまで面接した中で最も良い者を採用する"
   という戦略を取るとき，最適な \(r\) はいくつだろうか?
   #+end_quote
-secretary
+
 #+begin_src R :eval no :exports none
   #' ---------------------------------------------------------------------------
   #' @practice 秘書問題

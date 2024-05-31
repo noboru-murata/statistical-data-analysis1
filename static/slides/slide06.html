@@ -46,8 +46,8 @@
 
 </section>
 <section>
-<section id="slide-org328ebbe">
-<h2 id="org328ebbe">講義の内容</h2>
+<section id="slide-org6959853">
+<h2 id="org6959853">講義の内容</h2>
 <ul>
 <li>計算機による数値実験</li>
 <li>乱数とは</li>
@@ -58,13 +58,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org995d04b">
-<h2 id="org995d04b">計算機による数値実験</h2>
-<div class="outline-text-2" id="text-org995d04b">
+<section id="slide-org2d8b58c">
+<h2 id="org2d8b58c">計算機による数値実験</h2>
+<div class="outline-text-2" id="text-org2d8b58c">
 </div>
 </section>
-<section id="slide-org437b0ee">
-<h3 id="org437b0ee">データ解析の枠組</h3>
+<section id="slide-org5199393">
+<h3 id="org5199393">データ解析の枠組</h3>
 <ul>
 <li>分析の目的
 <ul>
@@ -91,8 +91,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8b706e1">
-<h3 id="org8b706e1">データのもつべき性質</h3>
+<section id="slide-org4df637c">
+<h3 id="org4df637c">データのもつべき性質</h3>
 <ul>
 <li>偏った一部のデータから全体の性質の推測は困難
 <ul>
@@ -120,8 +120,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org30b0708">
-<h3 id="org30b0708">理論解析と数値実験</h3>
+<section id="slide-orgd1cb56e">
+<h3 id="orgd1cb56e">理論解析と数値実験</h3>
 <ul>
 <li><p>
 <b>データ収集の問題</b> 
@@ -151,13 +151,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orge98d9de">
-<h2 id="orge98d9de">乱数とは</h2>
-<div class="outline-text-2" id="text-orge98d9de">
+<section id="slide-org486fc98">
+<h2 id="org486fc98">乱数とは</h2>
+<div class="outline-text-2" id="text-org486fc98">
 </div>
 </section>
-<section id="slide-orgfed5fc9">
-<h3 id="orgfed5fc9">擬似乱数</h3>
+<section id="slide-org9731eee">
+<h3 id="org9731eee">擬似乱数</h3>
 <ul>
 <li>コンピューターで生成された数列
 <ul>
@@ -177,8 +177,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfd69997">
-<h3 id="orgfd69997">基本的な乱数</h3>
+<section id="slide-org016e739">
+<h3 id="org016e739">基本的な乱数</h3>
 <ul>
 <li><b>ランダムサンプリング</b> (無作為抽出)
 <ul>
@@ -202,8 +202,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd2b692a">
-<h3 id="orgd2b692a">乱数を発生する関数</h3>
+<section id="slide-org3df3c30">
+<h3 id="org3df3c30">乱数を発生する関数</h3>
 <ul>
 <li>Rには様々な確率分布に従う乱数が実装されている
 <ul>
@@ -217,8 +217,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4808a19">
-<h3 id="org4808a19">関数の利用例</h3>
+<section id="slide-org84b09bd">
+<h3 id="org84b09bd">関数の利用例</h3>
 <ul>
 <li><p>
 <span style="color:green;">関数 <code>sample()</code> の使い方</span>
@@ -303,13 +303,13 @@ runif(5)    # 初めのseed=1の場合と同じ系列が再現される
 </section>
 </section>
 <section>
-<section id="slide-org6503513">
-<h2 id="org6503513">乱数を用いた数値実験</h2>
-<div class="outline-text-2" id="text-org6503513">
+<section id="slide-org6537749">
+<h2 id="org6537749">乱数を用いた数値実験</h2>
+<div class="outline-text-2" id="text-org6537749">
 </div>
 </section>
-<section id="slide-orgda2d0d9">
-<h3 id="orgda2d0d9">確率シミュレーション</h3>
+<section id="slide-org99dc72f">
+<h3 id="org99dc72f">確率シミュレーション</h3>
 <ul>
 <li>確率的現象の理解
 <ul>
@@ -338,8 +338,8 @@ runif(5)    # 初めのseed=1の場合と同じ系列が再現される
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org52eb739">
-<h3 id="org52eb739">繰り返し実験の関数</h3>
+<section id="slide-orge90eff3">
+<h3 id="orge90eff3">繰り返し実験の関数</h3>
 <ul>
 <li>同じ手続きを指定した回数繰り返して評価</li>
 <li><p>
@@ -350,15 +350,15 @@ runif(5)    # 初めのseed=1の場合と同じ系列が再現される
 <pre><code class="R" >replicate(n, expr, simplify = "array")
 #' n: 繰り返し回数 
 #' expr: 評価する手続き(関数を定義) (1回の実験に相当)
-#'' simplify: 出力の形式を指定
+#' simplify: 出力の形式を指定
 </code></pre>
 </div></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org69502c7">
-<h3 id="org69502c7">数値実験の例</h3>
+<section id="slide-org3d83a76">
+<h3 id="org3d83a76">数値実験の例</h3>
 <ul>
 <li><p>
 <span style="color:green;">2つのサイコロを振る試行</span>
@@ -391,12 +391,12 @@ print(my_data) # 実験結果は行列(配列)として保存されている
 </section>
 </section>
 <section>
-<section id="slide-org744214d" data-background="#fef4f4">
-<h2 id="org744214d">演習</h2>
+<section id="slide-orga1dff14" data-background="#fef4f4">
+<h2 id="orga1dff14">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3f2f7ea" data-background="#fef4f4">
-<h3 id="org3f2f7ea">練習問題</h3>
+<section id="slide-orgde387fc" data-background="#fef4f4">
+<h3 id="orgde387fc">練習問題</h3>
 <ul>
 <li><p>
 以下のようなコイン投げの賭けを考える
@@ -415,13 +415,13 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 </section>
 </section>
 <section>
-<section id="slide-org89182d8">
-<h2 id="org89182d8">確率シミュレーションの例</h2>
-<div class="outline-text-2" id="text-org89182d8">
+<section id="slide-orgf3cfbbc">
+<h2 id="orgf3cfbbc">確率シミュレーションの例</h2>
+<div class="outline-text-2" id="text-orgf3cfbbc">
 </div>
 </section>
-<section id="slide-org37293fe">
-<h3 id="org37293fe">Monty Hall 問題</h3>
+<section id="slide-org0588de2">
+<h3 id="org0588de2">Monty Hall 問題</h3>
 <ul>
 <li><p>
 問題
@@ -448,8 +448,8 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcdaac80">
-<h3 id="orgcdaac80">Buffon の針</h3>
+<section id="slide-org77e824a">
+<h3 id="org77e824a">Buffon の針</h3>
 <ul>
 <li><p>
 問題
@@ -471,8 +471,8 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcaca688">
-<h3 id="orgcaca688">秘書問題 (最適停止問題)</h3>
+<section id="slide-orgeb658ba">
+<h3 id="orgeb658ba">秘書問題 (最適停止問題)</h3>
 <ul>
 <li><p>
 問題
@@ -498,15 +498,12 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 </blockquote></li>
 
 </ul>
-<p>
-secretary
-</p>
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgf51d936">
-<h2 id="orgf51d936">次回の予定</h2>
+<section id="slide-orgd0d7486">
+<h2 id="orgd0d7486">次回の予定</h2>
 <ul>
 <li>独立な確率変数の性質</li>
 <li>大数の法則</li>
