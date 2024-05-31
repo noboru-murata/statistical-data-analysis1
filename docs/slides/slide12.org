@@ -3,15 +3,20 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-07-07 15:20:08 mura>
-:REVEAL:
-#+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
+# Time-stamp: <2024-05-31 14:48:40 mura>
+:REVEAL:
+#+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :END:
 
+* COMMENT メモ
+- 修正事項
+- 水準 A_i とする必要はなさそう (二元の問題のためであった)
+- MC実験のところは整理してわかりやすく
+  
 * 講義概要
 - 分散分析とは
 - 一元配置
@@ -21,18 +26,14 @@
   - 二元配置のモデル
   - 検定の構成
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 第12講 練習問題解答例
-#+end_src
-#+begin_src R :exports none
+#+begin_src R :exports none :tangle no
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
+#+begin_src R :exports none
+  ### 第12講 サンプルコード
+  library(tidyverse)
+#+end_src
 
-* COMMENT メモ
-- 修正事項
-- 水準 A_i とする必要はなさそう (二元の問題のためであった)
-- MC実験のところは整理してわかりやすく
-  
 
 * 分散分析とは
 ** 分散分析
@@ -60,11 +61,9 @@
 ** 分散の比の検定
 - 2種類のデータの分散が等しいか否かを検定する
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      H_0:\sigma_1^2=\sigma_2^2\quad\text{vs}\quad H_1:\sigma_1^2\neq\sigma_2^2
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    H_0:\sigma_1^2=\sigma_2^2\quad\text{vs}\quad H_1:\sigma_1^2\neq\sigma_2^2
+  \end{equation}
   #+end_quote
 
 ** 考え方
@@ -79,18 +78,16 @@
       は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う
   - *\(F\) 検定*
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \text{検定統計量 : }
-        F=\frac{s_1^2}{s_2^2}
-        \left(
-          =
-          \frac
-          {((m{-}1)s_1^2/\sigma_1^2)/(m{-}1)}
-          {((n{-}1)s_2^2/\sigma_2^2)/(n{-}1)}
-        \right)
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      \text{検定統計量 : }
+      F=\frac{s_1^2}{s_2^2}
+      \left(
+        =
+        \frac
+        {((m{-}1)s_1^2/\sigma_1^2)/(m{-}1)}
+        {((n{-}1)s_2^2/\sigma_2^2)/(n{-}1)}
+      \right)
+    \end{equation}
     #+end_quote
     - 帰無分布は自由度 \(m{-}1,n{-}1\) の \(F\) 分布
 
@@ -98,38 +95,32 @@
 - 有意水準を選択 : \(\alpha\in(0,1)\)
 - \(H_0\) の下では以下が成立
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      P(F < F_{\alpha/2}(m{-}1,n{-}1)
-      \text{ または }F > F_{1{-}\alpha/2}(m{-}1,n{-}1))=\alpha
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    P(F < F_{\alpha/2}(m{-}1,n{-}1)
+    \text{ または }F > F_{1{-}\alpha/2}(m{-}1,n{-}1))=\alpha
+  \end{equation}
   #+end_quote
   - 自由度 \(m{-}1,n{-}1\) の \(F\) 分布
     - \(F_{\alpha/2}(m{-}1,n{-}1)\) : \(\alpha/2\) 分位点
     - \(F_{1{-}\alpha/2}(m{-}1,n{-}1)\) : \(1{-}\alpha/2\) 分位点
 - 第一種過誤の上限が \(\alpha\) の棄却域
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      R_{\alpha}=
-      \left(-\infty,F_{\alpha/2}(m{-}1,n{-}1)\right)
-      \cup\left(F_{1{-}\alpha/2}(m{-}1,n{-}1),\infty\right)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    R_{\alpha}=
+    \left(-\infty,F_{\alpha/2}(m{-}1,n{-}1)\right)
+    \cup\left(F_{1{-}\alpha/2}(m{-}1,n{-}1),\infty\right)
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - データから検定統計量 \(F\) の値を計算
 - 以下の場合，帰無仮説を棄却
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      F < F_{\alpha/2}(m{-}1,n{-}1)
-      \quad\text{または}\quad
-      F>F_{1{-}\alpha/2}(m{-}1,n{-}1)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    F < F_{\alpha/2}(m{-}1,n{-}1)
+    \quad\text{または}\quad
+    F>F_{1{-}\alpha/2}(m{-}1,n{-}1)
+  \end{equation}
   #+end_quote
 
 
@@ -138,19 +129,15 @@
 - グループ分けが1種類 : \(p\) グループ
   \(A_1,A_2,\dotsc,A_p\)
   # #+begin_quote
-  # #+begin_src latex
   #   \begin{equation}
   #     A_1,A_2,\dotsc,A_p
   #   \end{equation}
-  # #+end_src
   # #+end_quote
 - 各グループ \(i\) ごとに \(n_i\) 個のデータを観測
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      Y_{i1},Y_{i2},\dotsc,Y_{in_i},\quad (i=1,2,\dotsc,p)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    Y_{i1},Y_{i2},\dotsc,Y_{in_i},\quad (i=1,2,\dotsc,p)
+  \end{equation}
   #+end_quote
 - [[color:green][小売店の売上高の問題]]
   #+begin_quote
@@ -164,11 +151,9 @@
   - *水準* : 因子内の各グループのこと ([[color:green][1月，2月，3月，…]])
 - 観測データのモデル
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      Y_{ij}=\mu_i+\varepsilon_{ij}\quad(i=1,\dotsc,p;\;j=1,\dotsc,n_i).
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    Y_{ij}=\mu_i+\varepsilon_{ij}\quad(i=1,\dotsc,p;\;j=1,\dotsc,n_i).
+  \end{equation}
   #+end_quote
 - モデルの仮定
   - 水準 \(A_i\) における観測データの平均値 \(\mu_i\) は定数
@@ -184,43 +169,37 @@
   - 帰無仮説 : 全ての水準で平均に差はない
   - 対立仮説 : 平均の異なる水準がある
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      H_0:\mu_1=\cdots=\mu_p\quad\text{vs}\quad
-      H_1:\text{ある\(i,j\)に対して}\mu_i\neq\mu_j.
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    H_0:\mu_1=\cdots=\mu_p\quad\text{vs}\quad
+    H_1:\text{ある\(i,j\)に対して}\mu_i\neq\mu_j.
+  \end{equation}
   #+end_quote
 
 ** 分析の考え方
 - データの変動から因子間での変動と観測誤差の変動を抽出して比較
 - 各種平均 (\(n=\sum_{i=1}^pn_i\) は全サンプル数)
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      &\text{(全データの標本平均)}
-      &\bar{Y}_{\cdot\cdot}&=\frac{1}{n}\sum_{i=1}^p\sum_{j=1}^{n_i}Y_{ij},\\
-      &\text{(水準\(A_i\)の標本平均)}
-      &\bar{Y}_{i\cdot}&=\frac{1}{n_i}\sum_{j=1}^{n_i}Y_{ij}\quad
-                         (i=1,\dotsc,p).
-    \end{align}
-  #+end_src
+  \begin{align}
+    &\text{(全データの標本平均)}
+    &\bar{Y}_{\cdot\cdot}&=\frac{1}{n}\sum_{i=1}^p\sum_{j=1}^{n_i}Y_{ij},\\
+    &\text{(水準\(A_i\)の標本平均)}
+    &\bar{Y}_{i\cdot}&=\frac{1}{n_i}\sum_{j=1}^{n_i}Y_{ij}\quad
+                       (i=1,\dotsc,p).
+  \end{align}
   #+end_quote
 
 #+reveal: split
 - 各種変動
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      &\text{(全変動)}
-      &SS_T&=\sum_{i=1}^p\sum_{j=1}^{n_i}(Y_{ij}-\bar{Y}_{\cdot\cdot})^2,\\
-      &\text{(級内変動)}
-      &SS_W&=\sum_{i=1}^p\sum_{j=1}^{n_i}(Y_{ij}-\bar{Y}_{i\cdot})^2,\\
-      &\text{(級間変動)}
-      &SS_B&=\sum_{i=1}^p\sum_{j=1}^{n_i}(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2
-             =\sum_{i=1}^pn_i(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2.
-    \end{align}
-  #+end_src
+  \begin{align}
+    &\text{(全変動)}
+    &SS_T&=\sum_{i=1}^p\sum_{j=1}^{n_i}(Y_{ij}-\bar{Y}_{\cdot\cdot})^2,\\
+    &\text{(級内変動)}
+    &SS_W&=\sum_{i=1}^p\sum_{j=1}^{n_i}(Y_{ij}-\bar{Y}_{i\cdot})^2,\\
+    &\text{(級間変動)}
+    &SS_B&=\sum_{i=1}^p\sum_{j=1}^{n_i}(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2
+           =\sum_{i=1}^pn_i(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2.
+  \end{align}
   #+end_quote
   - *級内変動* : 各水準内でのデータの変動の合計 (観測誤差に起因)
   - *級間変動* : 水準間でのデータの変動の合計 (水準ごとのデータ数で重みづけ)
@@ -228,13 +207,11 @@
 #+reveal: split
 - 変動の分解
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }n{-}1}
-      =\underbrace{\text{(級内変動) }SS_W}_{\text{自由度 }n{-}p}
-      +\underbrace{\text{(級間変動) }SS_B}_{\text{自由度 }p{-}1}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }n{-}1}
+    =\underbrace{\text{(級内変動) }SS_W}_{\text{自由度 }n{-}p}
+    +\underbrace{\text{(級間変動) }SS_B}_{\text{自由度 }p{-}1}
+  \end{equation}
   #+end_quote
 - 帰無仮説 \(H_0\) が正しい場合
   - 水準内・水準間でのデータの変動はともに観測誤差が原因
@@ -245,13 +222,11 @@
 #+reveal: split
 - 変動の分解
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }n{-}1}
-      =\underbrace{\text{(級内変動) }SS_W}_{\text{自由度 }n{-}p}
-      +\underbrace{\text{(級間変動) }SS_B}_{\text{自由度 }p{-}1}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }n{-}1}
+    =\underbrace{\text{(級内変動) }SS_W}_{\text{自由度 }n{-}p}
+    +\underbrace{\text{(級間変動) }SS_B}_{\text{自由度 }p{-}1}
+  \end{equation}
   #+end_quote
 - 対立仮説 \(H_1\) が正しい場合
   - 水準間での変動 \(SS_B\) は観測誤差と平均値の差に影響される
@@ -260,11 +235,9 @@
 ** 一元配置の検定
 - 検定統計量
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      F=\frac{SS_B/(p{-}1)}{SS_W/(n{-}p)}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    F=\frac{SS_B/(p{-}1)}{SS_W/(n{-}p)}
+  \end{equation}
   #+end_quote
 - 帰無仮説の下で次の事実が成り立つ
   - \(SS_B,SS_W\) は独立
@@ -279,41 +252,33 @@
   - \(F_{1{-}\alpha}(p{-}1,n{-}p)\) : \(1{-}\alpha\) 分位点
 - \(H_0\) の下で以下が成立
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      P(F>F_{1{-}\alpha}(p{-}1,n{-}p))=\alpha
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    P(F>F_{1{-}\alpha}(p{-}1,n{-}p))=\alpha
+  \end{equation}
   #+end_quote
 - 第一種過誤の上限が \(\alpha\) となる棄却域
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      R_{\alpha}=
-      \left(F_{1{-}\alpha}(p{-}1,n{-}p),\infty\right)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    R_{\alpha}=
+    \left(F_{1{-}\alpha}(p{-}1,n{-}p),\infty\right)
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - データから検定統計量 \(F\) の値を計算
 - 以下の場合，帰無仮説を棄却
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      F>F_{1{-}\alpha}(p{-}1,n{-}p)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    F>F_{1{-}\alpha}(p{-}1,n{-}p)
+  \end{equation}
   #+end_quote
 
 ** @@latex:@@\(p\) 値を用いる場合
 - \(p\) 値を計算 (右片側検定の場合の計算方法)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \text{(\(p\) 値)}=\int_{F}^\infty f(x)dx
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{(\(p\) 値)}=\int_{F}^\infty f(x)dx
+  \end{equation}
   #+end_quote
   - \(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の確率密度
 - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
@@ -335,21 +300,17 @@
   - 平均 \(\mu\) を基準とした各水準 \(A_i\) の相対的な効果 : \(\alpha_i\)
   - 平均値の別表現
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \mu_i=\mu+\alpha_i,\quad
-        \mu=\frac{1}{n}\sum_{i=1}^pn_i\mu_i,\quad
-        \sum_{i=1}^pn_i\alpha_i=0
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      \mu_i=\mu+\alpha_i,\quad
+      \mu=\frac{1}{n}\sum_{i=1}^pn_i\mu_i,\quad
+      \sum_{i=1}^pn_i\alpha_i=0
+    \end{equation}
     #+end_quote
 - 帰無仮説 \(H_0\) は以下と同等
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      H_{0}:\alpha_1=\cdots=\alpha_p=0
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    H_{0}:\alpha_1=\cdots=\alpha_p=0
+  \end{equation}
   #+end_quote
 
 ** R : 分散分析の関数
@@ -521,12 +482,10 @@
   - [[color:orange][各水準ごとに1つの観測値が得られる一番簡単な場合を想定]]
 - 観測データのモデル
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      Y_{ij}=\alpha_i+\beta_j+\varepsilon_{ij}\quad
-      (i=1,\dotsc,a;\;j=1,\dotsc,b).
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    Y_{ij}=\alpha_i+\beta_j+\varepsilon_{ij}\quad
+    (i=1,\dotsc,a;\;j=1,\dotsc,b).
+  \end{equation}
   #+end_quote
 - モデルの仮定
   - 因子 \(A,B\) の水準 \(A_i,B_j\) における効果
@@ -553,66 +512,58 @@
   - 帰無仮説 : 因子 \(A\) の効果 \(\alpha_{i}\) に差はない
   - 対立仮説 : 因子 \(A\) の効果に差のあるものがある
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        H_0:\alpha_1=\cdots=\alpha_a\quad\text{vs}\quad
-        H_1:\text{ある\(i_1,i_2\)に対して}\alpha_{i_1}\neq\alpha_{i_2}.
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      H_0:\alpha_1=\cdots=\alpha_a\quad\text{vs}\quad
+      H_1:\text{ある\(i_1,i_2\)に対して}\alpha_{i_1}\neq\alpha_{i_2}.
+    \end{equation}
     #+end_quote
 
 ** 分析の考え方
 - データの変動から因子間での変動と観測誤差の変動を抽出して比較
 - 各種平均 (\(n=ab\))
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      &\text{(全データの標本平均)}
-      &\bar{Y}_{\cdot\cdot}&=\frac{1}{n}\sum_{i=1}^a\sum_{j=1}^{b}Y_{ij},\\
-      &\text{(水準\(A_i\)の標本平均)}
-      &\bar{Y}_{i\cdot}&=\frac{1}{b}\sum_{j=1}^bY_{ij}\quad
-                         (i=1,\dotsc,a),\\
-      &\text{(水準\(B_j\)の標本平均)}
-      &\bar{Y}_{\cdot j}&=\frac{1}{a}\sum_{i=1}^aY_{ij}\quad
-                          (j=1,\dotsc,b).
-    \end{align}
-  #+end_src
+  \begin{align}
+    &\text{(全データの標本平均)}
+    &\bar{Y}_{\cdot\cdot}&=\frac{1}{n}\sum_{i=1}^a\sum_{j=1}^{b}Y_{ij},\\
+    &\text{(水準\(A_i\)の標本平均)}
+    &\bar{Y}_{i\cdot}&=\frac{1}{b}\sum_{j=1}^bY_{ij}\quad
+                       (i=1,\dotsc,a),\\
+    &\text{(水準\(B_j\)の標本平均)}
+    &\bar{Y}_{\cdot j}&=\frac{1}{a}\sum_{i=1}^aY_{ij}\quad
+                        (j=1,\dotsc,b).
+  \end{align}
   #+end_quote
 
 #+reveal: split
 - 因子効果の推定量としての標本平均
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \bar{Y}_{i\cdot}
-      &\to\alpha_i+\frac{1}{b}\sum_{j=1}^b\beta_j,\\
-      \bar{Y}_{\cdot j}
-      &\to\frac{1}{a}\sum_{i=1}^a\alpha_i+\beta_j,\\
-      \bar{Y}_{\cdot\cdot}
-      &\to\frac{1}{ab}\sum_{i=1}^a\sum_{j=1}^b(\alpha_i+\beta_j)=\frac{1}{a}\sum_{i=1}^a\alpha_i+\frac{1}{b}\sum_{j=1}^b\beta_j
-    \end{align}
-    \begin{equation}
-      Y_{ij}-\bar{Y}_{i\cdot}
-      -\bar{Y}_{\cdot j}+\bar{Y}_{\cdot\cdot}
-      \to\varepsilon_{ij}
-    \end{equation}
-  #+end_src
+  \begin{align}
+    \bar{Y}_{i\cdot}
+    &\to\alpha_i+\frac{1}{b}\sum_{j=1}^b\beta_j,\\
+    \bar{Y}_{\cdot j}
+    &\to\frac{1}{a}\sum_{i=1}^a\alpha_i+\beta_j,\\
+    \bar{Y}_{\cdot\cdot}
+    &\to\frac{1}{ab}\sum_{i=1}^a\sum_{j=1}^b(\alpha_i+\beta_j)=\frac{1}{a}\sum_{i=1}^a\alpha_i+\frac{1}{b}\sum_{j=1}^b\beta_j
+  \end{align}
+  \begin{equation}
+    Y_{ij}-\bar{Y}_{i\cdot}
+    -\bar{Y}_{\cdot j}+\bar{Y}_{\cdot\cdot}
+    \to\varepsilon_{ij}
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - 各種変動
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      &\text{(行間変動)}
-      &SS_A&=b\sum_{i=1}^a(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2,\\
-      &\text{(列間変動)}
-      &SS_B&=a\sum_{j=1}^b(\bar{Y}_{\cdot j}-\bar{Y}_{\cdot\cdot})^2,\\
-      &\text{(誤差変動)}
-      &SS_E&=\sum_{i=1}^a\sum_{j=1}^b(Y_{ij}-\bar{Y}_{i\cdot}
-             -\bar{Y}_{\cdot j}+\bar{Y}_{\cdot\cdot})^2.
-    \end{align}
-  #+end_src
+  \begin{align}
+    &\text{(行間変動)}
+    &SS_A&=b\sum_{i=1}^a(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2,\\
+    &\text{(列間変動)}
+    &SS_B&=a\sum_{j=1}^b(\bar{Y}_{\cdot j}-\bar{Y}_{\cdot\cdot})^2,\\
+    &\text{(誤差変動)}
+    &SS_E&=\sum_{i=1}^a\sum_{j=1}^b(Y_{ij}-\bar{Y}_{i\cdot}
+           -\bar{Y}_{\cdot j}+\bar{Y}_{\cdot\cdot})^2.
+  \end{align}
   #+end_quote
   - *行間変動* : 水準 \(A\) 内でのデータの変動
   - *列間変動* : 水準 \(B\) 内でのデータの変動
@@ -620,14 +571,12 @@
 #+reveal: split
 - 変動の分解
   #+begin_quote
-  #+begin_src latex
-    \begin{multline}
-      \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }ab-1}
-      =\underbrace{\text{(行間変動) }SS_A}_{\text{自由度 }a-1}\\
-      +\underbrace{\text{(列間変動) }SS_B}_{\text{自由度 }b-1}
-      +\underbrace{\text{(誤差変動) }SS_E}_{\text{自由度 }(a-1)(b-1)}
-    \end{multline}
-  #+end_src
+  \begin{multline}
+    \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }ab-1}
+    =\underbrace{\text{(行間変動) }SS_A}_{\text{自由度 }a-1}\\
+    +\underbrace{\text{(列間変動) }SS_B}_{\text{自由度 }b-1}
+    +\underbrace{\text{(誤差変動) }SS_E}_{\text{自由度 }(a-1)(b-1)}
+  \end{multline}
   #+end_quote
 - 帰無仮説 \(H_0\) が正しい場合
   - 変動 \(SS_A,SS_E\) はともに観測誤差のみが原因で生じる
@@ -637,14 +586,12 @@
 #+reveal: split
 - 変動の分解
   #+begin_quote
-  #+begin_src latex
-    \begin{multline}
-      \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }ab-1}
-      =\underbrace{\text{(行間変動) }SS_A}_{\text{自由度 }a-1}\\
-      +\underbrace{\text{(列間変動) }SS_B}_{\text{自由度 }b-1}
-      +\underbrace{\text{(誤差変動) }SS_E}_{\text{自由度 }(a-1)(b-1)}
-    \end{multline}
-  #+end_src
+  \begin{multline}
+    \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }ab-1}
+    =\underbrace{\text{(行間変動) }SS_A}_{\text{自由度 }a-1}\\
+    +\underbrace{\text{(列間変動) }SS_B}_{\text{自由度 }b-1}
+    +\underbrace{\text{(誤差変動) }SS_E}_{\text{自由度 }(a-1)(b-1)}
+  \end{multline}
   #+end_quote
 - 対立仮説 \(H_1\) が正しい場合
   - 因子 \(A\) 内の水準間での効果 \(\alpha_1,\dotsc,\alpha_a\) の差に影響される
@@ -653,11 +600,9 @@
 ** 二元配置の検定
 - 検定統計量
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      F_A=\frac{SS_A/(a{-}1)}{SS_E/(a{-}1)(b{-}1)}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    F_A=\frac{SS_A/(a{-}1)}{SS_E/(a{-}1)(b{-}1)}
+  \end{equation}
   #+end_quote
 - 帰無仮説の下で次の事実が成り立つ
   - \(SS_A,SS_E\) は独立
@@ -672,41 +617,33 @@
   - \(F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))\) : \(1{-}\alpha\) 分位点
 - \(H_0\) の下で以下が成立
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      P(F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)))=\alpha
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    P(F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)))=\alpha
+  \end{equation}
   #+end_quote
 - 第一種過誤の上限が \(\alpha\) となる棄却域
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      R_{\alpha}=
-      (F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)),\infty)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    R_{\alpha}=
+    (F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1)),\infty)
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - データから検定統計量 \(F_A\) の値を計算
 - 以下の場合，帰無仮説を棄却
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    F_A>F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))
+  \end{equation}
   #+end_quote
 
 ** @@latex:@@\(p\) 値を用いる場合
 - \(p\) 値を計算 (右片側検定の場合の計算方法)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \text{(\(p\) 値)}=\int_{F_A}^\infty f(x)dx
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{(\(p\) 値)}=\int_{F_A}^\infty f(x)dx
+  \end{equation}
   #+end_quote
   - \(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度
 - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
@@ -728,32 +665,28 @@
 相対効果による定式化
 - モデルの書き換え
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mu^*&=\bar{\alpha}+\bar{\beta},&
-                                        \alpha^*_i&=\alpha_i-\bar{\alpha},&
-                                                                            \beta^*_j&=\beta_j-\bar{\beta}\\
-           &&\bar{\alpha}&=\frac{1}{a}\sum_{i=1}^a\alpha_i,
-                                                  &\bar{\beta}&=\frac{1}{b}\sum_{j=1}^b\beta_j
-    \end{align}
-    \begin{equation}
-      Y_{ij}=\mu^*+\alpha^*_i+\beta^*_j+\varepsilon_{ij}\quad
-      (i=1,\dotsc,a;\;j=1,\dotsc,b)
-    \end{equation}
-    \begin{equation}
-      \text{ただし }\sum_{i=1}^a\alpha^*_i=\sum_{j=1}^b\beta^*_j=0
-    \end{equation}
-  #+end_src
+  \begin{align}
+    \mu^*&=\bar{\alpha}+\bar{\beta},&
+                                      \alpha^*_i&=\alpha_i-\bar{\alpha},&
+                                                                          \beta^*_j&=\beta_j-\bar{\beta}\\
+         &&\bar{\alpha}&=\frac{1}{a}\sum_{i=1}^a\alpha_i,
+                                                &\bar{\beta}&=\frac{1}{b}\sum_{j=1}^b\beta_j
+  \end{align}
+  \begin{equation}
+    Y_{ij}=\mu^*+\alpha^*_i+\beta^*_j+\varepsilon_{ij}\quad
+    (i=1,\dotsc,a;\;j=1,\dotsc,b)
+  \end{equation}
+  \begin{equation}
+    \text{ただし }\sum_{i=1}^a\alpha^*_i=\sum_{j=1}^b\beta^*_j=0
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - 帰無仮説 \(H_0\) は以下と同等
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      H_{0}:\alpha^*_1=\cdots=\alpha^*_a=0
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    H_{0}:\alpha^*_1=\cdots=\alpha^*_a=0
+  \end{equation}
   #+end_quote
 
 ** R : 分散分析の関数

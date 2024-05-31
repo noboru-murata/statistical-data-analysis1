@@ -3,15 +3,19 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-07-14 22:52:25 mura>
-:REVEAL:
-#+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
+# Time-stamp: <2024-05-31 14:52:36 mura>
+:REVEAL:
+#+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :END:
 
+* COMMENT メモ
+- 重回帰の問題
+- MC実験を付けた方が良いかも
+  
 * 講義概要
 - 回帰分析
 - 回帰係数の推定
@@ -21,17 +25,14 @@
   - 係数の有意性
 - 決定係数
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 第13講 練習問題解答例
-#+end_src
-#+begin_src R :exports none
+#+begin_src R :exports none :tangle no
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
+#+begin_src R :exports none
+  ### 第13講 サンプルコード
+  library(tidyverse)
+#+end_src
 
-* COMMENT メモ
-- 重回帰の問題
-- MC実験を付けた方が良いかも
-  
   
 * 回帰分析
 ** 回帰分析
@@ -81,11 +82,9 @@
 - 目的変数 : \(Y\)
 - \(Y\) を \(X\) で説明する関係式として一次関数を考える
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      Y=\alpha+\beta X\quad\text{(線形回帰モデル)}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    Y=\alpha+\beta X\quad\text{(線形回帰モデル)}
+  \end{equation}
   #+end_quote
   - \(\alpha\): *定数項*
   - \(\beta\): \(X\) の *回帰係数*
@@ -98,19 +97,15 @@
 ** 回帰係数の点推定
 - \(n\) 個の説明変数と目的変数の組 \((X,Y)\) を観測
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      (X_1,Y_1),(X_2,Y_2),\dotsc,(X_n,Y_n)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    (X_1,Y_1),(X_2,Y_2),\dotsc,(X_n,Y_n)
+  \end{equation}
   #+end_quote
 - 回帰モデル : データには観測誤差が含まれる
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      Y_i=\alpha+\beta X_i+\epsilon_i,\quad i=1,\dotsc,n.
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    Y_i=\alpha+\beta X_i+\epsilon_i,\quad i=1,\dotsc,n.
+  \end{equation}
   #+end_quote
   - \(\epsilon_1,\epsilon_2,\dotsc,\epsilon_n\) : *誤差項* または *撹乱項*
 - 線形回帰モデルのパラメータ \(\alpha,\beta\) を推定
@@ -127,11 +122,9 @@
 - 係数 \(\alpha,\beta\) の回帰式で説明できない
   目的変数の変動
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      e_i(\alpha,\beta)=Y_i-(\alpha+\beta X_i)\quad (i=1,\dotsc,n)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    e_i(\alpha,\beta)=Y_i-(\alpha+\beta X_i)\quad (i=1,\dotsc,n)
+  \end{equation}
   #+end_quote
 - 方針
   #+begin_quote
@@ -145,13 +138,11 @@
   #+begin_quote
   \(e_1(\alpha,\beta),\dotsc,e_n(\alpha,\beta)\) の平方和 (*残差平方和*)
   を最小にするように \(\alpha,\beta\) を決定
-  #+begin_src latex
-    \begin{equation}
-      S(\alpha,\beta)
-      =\sum_{i=1}^ne_i(\alpha,\beta)^2
-      =\sum_{i=1}^n\{Y_i-(\alpha+\beta X_i)\}^2
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    S(\alpha,\beta)
+    =\sum_{i=1}^ne_i(\alpha,\beta)^2
+    =\sum_{i=1}^n\{Y_i-(\alpha+\beta X_i)\}^2
+  \end{equation}
   #+end_quote
 - *最小二乗推定量*
   #+begin_quote
@@ -162,21 +153,17 @@
 #+reveal: split
 - 最小二乗推定量の解
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \hat{\beta}
-      =\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\sum_{i=1}^n(X_i-\bar{X})^2},
-      \quad
-      \hat{\alpha}=\bar{Y}-\hat{\beta}\bar{X}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \hat{\beta}
+    =\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\sum_{i=1}^n(X_i-\bar{X})^2},
+    \quad
+    \hat{\alpha}=\bar{Y}-\hat{\beta}\bar{X}
+  \end{equation}
   ただし
-  #+begin_src latex
-    \begin{equation}
-      \bar{X}=\frac{1}{n}\sum_{i=1}^nX_i,\quad
-      \bar{Y}=\frac{1}{n}\sum_{i=1}^nY_i.
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \bar{X}=\frac{1}{n}\sum_{i=1}^nX_i,\quad
+    \bar{Y}=\frac{1}{n}\sum_{i=1}^nY_i.
+  \end{equation}
   #+end_quote
 
   # 回帰モデルの推定には通常 *最小二乗法* が用いられる
@@ -301,14 +288,12 @@
   \(\hat{\alpha},\hat{\beta}\) は *正規分布* に従う
 - 点推定の平均と分散
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      &\mathbb{E}[\hat{\alpha}]=\alpha,
-      &&\mathbb{E}[\hat{\beta}]=\beta,\\
-      &\mathrm{Var}(\hat{\alpha})=\frac{\sigma^2\sum_{i=1}^{n}X_i^2}{n_{i=1}^{n}(X_i-\bar{X})^2},
-      &&\mathrm{Var}(\hat{\beta})=\frac{\sigma^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}
-    \end{align}
-  #+end_src
+  \begin{align}
+    &\mathbb{E}[\hat{\alpha}]=\alpha,
+    &&\mathbb{E}[\hat{\beta}]=\beta,\\
+    &\mathrm{Var}(\hat{\alpha})=\frac{\sigma^2\sum_{i=1}^{n}X_i^2}{n_{i=1}^{n}(X_i-\bar{X})^2},
+    &&\mathrm{Var}(\hat{\beta})=\frac{\sigma^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}
+  \end{align}
   #+end_quote
 - \(\sigma^2\) が *既知なら* 正規分布を用いて信頼区間を構成
 
@@ -318,98 +303,80 @@
   - \(\sigma^2\) は \(\epsilon_i\) の共通の分散
 - 誤差と回帰式の関係
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \epsilon_i=Y_i-(\alpha+\beta X_i)
-      \quad(i=1,\dotsc,n)      
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \epsilon_i=Y_i-(\alpha+\beta X_i)
+    \quad(i=1,\dotsc,n)      
+  \end{equation}
   #+end_quote
 - \(\sigma^2\) の自然な推定量(良いとは限らない)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \hat{\sigma}^2
-      =\frac{1}{n}\sum_{i=1}^n\hat{\epsilon}_i^2
-      \quad\text{ただし}\quad\hat{\epsilon}_i
-      =Y_i-(\hat{\alpha}+\hat{\beta}X_i),\quad(i=1,\dotsc,n)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \hat{\sigma}^2
+    =\frac{1}{n}\sum_{i=1}^n\hat{\epsilon}_i^2
+    \quad\text{ただし}\quad\hat{\epsilon}_i
+    =Y_i-(\hat{\alpha}+\hat{\beta}X_i),\quad(i=1,\dotsc,n)
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - *残差* \(\hat{\epsilon}_1,\dotsc,\hat{\epsilon}_n\) の性質
   (資料; 正規方程式)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \sum\hat{\epsilon}_i=0,\quad
-      \sum\hat{\epsilon}_iX_i=0.
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \sum\hat{\epsilon}_i=0,\quad
+    \sum\hat{\epsilon}_iX_i=0.
+  \end{equation}
   #+end_quote
 - 残差の二乗平均の性質 (標本分散と同様の計算)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[\hat{\epsilon}_i^2]=\sigma^2(n{-}2)/n\quad(i=1,\dotsc,n)      
-      % \mathbb{E}[\hat{\epsilon}_i^2]=\frac{n{-}2}{n}\sigma^2\quad(i=1,\dotsc,n)      
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[\hat{\epsilon}_i^2]=\sigma^2(n{-}2)/n\quad(i=1,\dotsc,n)      
+    % \mathbb{E}[\hat{\epsilon}_i^2]=\frac{n{-}2}{n}\sigma^2\quad(i=1,\dotsc,n)      
+  \end{equation}
   #+end_quote
 - \(\sigma^{2}\) の不偏推定量
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \hat{\sigma}^2=\frac{1}{n{-}2}\sum_{i=1}^n\hat{\epsilon}_i^2.
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \hat{\sigma}^2=\frac{1}{n{-}2}\sum_{i=1}^n\hat{\epsilon}_i^2.
+  \end{equation}
   #+end_quote
 
 ** 回帰係数の性質
 - \(\hat{\alpha},\hat{\beta}\) の分散の推定量 (資料; Gauss-Markovの定理)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{s.e.}(\hat{\alpha})^2
-      =\frac{\hat{\sigma}^2\sum_iX_i^2}{n\sum_i(X_i-\bar{X})^2},
-      \quad
-      \mathrm{s.e.}(\hat{\beta})^2
-      =\frac{\hat{\sigma}^2}{\sum_i(X_i-\bar{X})^2}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{s.e.}(\hat{\alpha})^2
+    =\frac{\hat{\sigma}^2\sum_iX_i^2}{n\sum_i(X_i-\bar{X})^2},
+    \quad
+    \mathrm{s.e.}(\hat{\beta})^2
+    =\frac{\hat{\sigma}^2}{\sum_i(X_i-\bar{X})^2}
+  \end{equation}
   #+end_quote
   - \(\mathrm{s.e.}(\hat{\alpha}),\mathrm{s.e.}(\hat{\beta})\) は *標準誤差* と呼ばれる
 - 以下は \(\hat{\beta}\) と独立で自由度 \(n{-}2\) の \(\chi^2\) 分布に従う
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \frac{(n{-}2)\mathrm{s.e.}(\hat{\beta})^2}{\mathrm{Var}(\hat{\beta})}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \frac{(n{-}2)\mathrm{s.e.}(\hat{\beta})^2}{\mathrm{Var}(\hat{\beta})}
+  \end{equation}
   #+end_quote
 
 ** 回帰係数の区間推定
 - 以下の確率変数は自由度 \(n{-}2\) の \(t\) 分布に従う
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \frac{\hat{\beta}-\beta}{\mathrm{s.e.}(\hat{\beta})}
-      =
-      \frac{(\hat{\beta}-\beta)/\sqrt{\mathrm{Var}(\hat{\beta})}}{\sqrt{(n{-}2)\mathrm{s.e.}(\hat{\beta})^{2}/(n{-}2)\mathrm{Var}(\hat{\beta})}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \frac{\hat{\beta}-\beta}{\mathrm{s.e.}(\hat{\beta})}
+    =
+    \frac{(\hat{\beta}-\beta)/\sqrt{\mathrm{Var}(\hat{\beta})}}{\sqrt{(n{-}2)\mathrm{s.e.}(\hat{\beta})^{2}/(n{-}2)\mathrm{Var}(\hat{\beta})}}
+  \end{equation}
   #+end_quote
 - \(\gamma\in(0,1)\) に対する \(\beta\) の \(1-\gamma\) 信頼区間
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \left[
-        \hat{\beta}-t_{1{-}\gamma/2}(n{-}2)\cdot \mathrm{s.e.}(\hat{\beta}),\;
-        \hat{\beta}+t_{1{-}\gamma/2}(n{-}2)\cdot \mathrm{s.e.}(\hat{\beta})
-      \right]  
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \left[
+      \hat{\beta}-t_{1{-}\gamma/2}(n{-}2)\cdot \mathrm{s.e.}(\hat{\beta}),\;
+      \hat{\beta}+t_{1{-}\gamma/2}(n{-}2)\cdot \mathrm{s.e.}(\hat{\beta})
+    \right]  
+  \end{equation}
   #+end_quote
 
 ** R : 区間推定の関数
@@ -477,11 +444,9 @@
 ** 回帰係数の有意性
 - 説明変数 \(X\) が目的変数 \(Y\) を説明・予測するのに本当に役立っているかを検証
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      H_0:\beta=0\qquad\text{vs}\qquad H_1:\beta\neq0
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    H_0:\beta=0\qquad\text{vs}\qquad H_1:\beta\neq0
+  \end{equation}
   #+end_quote
 - \(\beta\) の *有意性の検定*
   #+begin_quote
@@ -494,11 +459,9 @@
 - 帰無仮説 \(H_0\) が正しければ以下の統計量
   は自由度 \(n{-}2\) の \(t\) 分布に従う 
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      t=\frac{\hat{\beta}}{\mathrm{s.e.}(\hat{\beta})}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    t=\frac{\hat{\beta}}{\mathrm{s.e.}(\hat{\beta})}
+  \end{equation}
   #+end_quote
 - 対立仮説 \(H_1\) が正しければ, 
   \(\hat{\beta}\) は0でない値 \(\beta\) に近い値を取ることが期待されるため，
@@ -509,21 +472,17 @@
   #+begin_quote
   有意水準を \(\gamma\in(0,1)\) とし，
   \(\hat{\beta}\) の *\(t\) 値* が以下の場合には帰無仮説を棄却
-  #+begin_src latex
-    \begin{equation}
-      |t| > t_{1-\gamma/2}(n{-}2)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    |t| > t_{1-\gamma/2}(n{-}2)
+  \end{equation}
   #+end_quote
 - \(p\) 値による検定
   #+begin_quote
   以下で定義される \(\hat{\beta}\) の *\(p\) 値* が
   \(\gamma\) 未満の場合に帰無仮説を棄却
-  #+begin_src latex
-    \begin{equation}
-      \text{(\(p\) 値)}=2\int_{|t|}^\infty f(x)dx
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{(\(p\) 値)}=2\int_{|t|}^\infty f(x)dx
+  \end{equation}
   #+end_quote
   # - 回帰における \(t\) 値と \(p\) 値:
   # - 検定統計量の値: \(\hat{\beta}\) の *\(t\) 値*
@@ -576,47 +535,39 @@
 - \(X\) が \(Y\) の変動をどの程度説明できるかを数量化
 - *決定係数* (あるいは *寄与率*)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      R^{2}=
-      \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    R^{2}=
+    \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}
+  \end{equation}
   #+end_quote
 - \(\hat{Y}_{i}\) は
   *あてはめ値* または *予測値* と呼ばれる
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \hat{Y}_{i}=
-      \hat{\alpha}+\hat{\beta}X_{i}\quad(i=1,\dotsc,n).  
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \hat{Y}_{i}=
+    \hat{\alpha}+\hat{\beta}X_{i}\quad(i=1,\dotsc,n).  
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - 以下の等式が成立
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      &\hat{\epsilon}_i
-        =Y_i-\hat{Y}_i\quad (i=1,\dotsc,n)\\
-      &\sum_{i=1}^{n}\hat{\epsilon}_i=0,\\
-      &\frac{1}{n}\sum_{i=1}^nY_i=\bar{Y},\\
-      &\frac{1}{n}\sum_{i=1}^n\hat{Y}_i=\bar{Y}.
-    \end{align}
-  #+end_src
+  \begin{align}
+    &\hat{\epsilon}_i
+      =Y_i-\hat{Y}_i\quad (i=1,\dotsc,n)\\
+    &\sum_{i=1}^{n}\hat{\epsilon}_i=0,\\
+    &\frac{1}{n}\sum_{i=1}^nY_i=\bar{Y},\\
+    &\frac{1}{n}\sum_{i=1}^n\hat{Y}_i=\bar{Y}.
+  \end{align}
   #+end_quote
 
 #+reveal: split
 - 決定係数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      R^{2}=
-      \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    R^{2}=
+    \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}
+  \end{equation}
   #+end_quote
 - \(R^2\) の成分
   - \(R^2\) の分子 : あてはめ値の(標本平均まわりでの)変動
@@ -629,52 +580,44 @@
 - \(R^2\) は以下のように書き直すことも可能
   - 目的変数の観測データとあてはめ値の相関の二乗
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        R^{2}=
-        \left\{
-          \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})(Y_{i}-\bar{Y})}
-          {\sqrt{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}
-            \cdot
-            \sqrt{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}}
-        \right\}^{2}
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      R^{2}=
+      \left\{
+        \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})(Y_{i}-\bar{Y})}
+        {\sqrt{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}
+          \cdot
+          \sqrt{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}}
+      \right\}^{2}
+    \end{equation}
     #+end_quote
   - 説明変数と目的変数の観測データの間の相関の二乗
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        R^{2}=
-        \left\{
-          \frac{\sum_{i=1}^{n}(X_{i}-\bar{X})(Y_{i}-\bar{Y})}
-          {\sqrt{\sum_{i=1}^{n}(X_{i}-\bar{X})^{2}}
-            \cdot
-            \sqrt{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}}
-        \right\}^{2}
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      R^{2}=
+      \left\{
+        \frac{\sum_{i=1}^{n}(X_{i}-\bar{X})(Y_{i}-\bar{Y})}
+        {\sqrt{\sum_{i=1}^{n}(X_{i}-\bar{X})^{2}}
+          \cdot
+          \sqrt{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}}
+      \right\}^{2}
+    \end{equation}
     #+end_quote
 
 ** 自由度調整済み決定係数
 - 不偏分散による \(R^2\) の修正
   - 残差 \(\epsilon_i\) と目的変数 \(Y_i\) の標本分散による表現
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        R^{2}
-        =1-\frac{\frac{1}{n}\sum_{i=1}^{n}\hat{\epsilon}_{i}^{2}}{\frac{1}{n}\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}.
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      R^{2}
+      =1-\frac{\frac{1}{n}\sum_{i=1}^{n}\hat{\epsilon}_{i}^{2}}{\frac{1}{n}\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}.
+    \end{equation}
     #+end_quote
   - 不偏推定量で代替 : *自由度調整済み決定係数* (または寄与率)
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \bar{R}^{2}
-        =1-\frac{\frac{1}{n{-}2}\sum_{i=1}^{n}\hat{\epsilon}_{i}^{2}}{\frac{1}{n-1}\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}.
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      \bar{R}^{2}
+      =1-\frac{\frac{1}{n{-}2}\sum_{i=1}^{n}\hat{\epsilon}_{i}^{2}}{\frac{1}{n-1}\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}.
+    \end{equation}
     #+end_quote
 
 ** R : 決定係数のための関数

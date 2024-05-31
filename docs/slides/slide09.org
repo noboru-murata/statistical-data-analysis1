@@ -3,14 +3,21 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-06-17 12:25:48 mura>
-:REVEAL:
-#+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
+# Time-stamp: <2024-05-31 14:30:08 mura>
+:REVEAL:
+#+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :END:
+
+* COMMENT メモ
+- 前回の確率分布との関係を説明
+  - 重要な確率分布
+    - 統計推測において重要なモデル
+    - 少数の母数で分布の形状を定まる
+    - 特徴付け(生成機構)がわかりやすい
 
 * 講義概要
 - 基本的な記述統計量
@@ -20,19 +27,13 @@
 - "順序"に基づく統計量
 - "頻度"に基づく統計量
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 第9講 練習問題解答例
-#+end_src
-#+begin_src R :exports none
+#+begin_src R :exports none :tangle no
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
-
-* COMMENT メモ
-- 前回の確率分布との関係を説明
-  - 重要な確率分布
-    - 統計推測において重要なモデル
-    - 少数の母数で分布の形状を定まる
-    - 特徴付け(生成機構)がわかりやすい
+#+begin_src R :exports none
+  ### 第9講 サンプルコード
+  library(tidyverse)
+#+end_src
 
 
 * 基礎的な記述統計量
@@ -76,14 +77,12 @@
   #+begin_quote
   推定量がサンプル数
   \(n\to\infty\) のとき確率1で真の値に収束する性質
-  #+begin_src latex
-    \begin{equation}
-      P\left(|\hat\theta-\theta|<\varepsilon\right)
-      \to1\quad
-      (\forall\varepsilon,\;
-      n\to\infty)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    P\left(|\hat\theta-\theta|<\varepsilon\right)
+    \to1\quad
+    (\forall\varepsilon,\;
+    n\to\infty)
+  \end{equation}
   #+end_quote
 - *(強)一致推定量* : 一致性をもつ推定量
   # - 標本平均・標本分散・標本標準偏差は
@@ -97,11 +96,9 @@
   が不偏であるとは,
   \(\hat{\theta}\)
   の平均が真の値 \(\theta\) となる性質
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[\hat{\theta}]=\theta
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[\hat{\theta}]=\theta
+  \end{equation}
   #+end_quote
 - *不偏推定量* : 不偏性をもつ推定量
 
@@ -110,45 +107,37 @@
 ** 平均
 - *平均* (mean)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mu=\mathbb{E}[X]
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mu=\mathbb{E}[X]
+  \end{equation}
   #+end_quote
   - データの代表値を表す記述統計量
 - *標本平均* (sample mean)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \bar{X}
-      =\frac{1}{n}\sum_{i=1}^{n}X_{i}
-      =\frac{X_{1}+\dotsb+X_{n}}{n}
-      % =\frac{X_1+X_2+\cdots+X_n}{n}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \bar{X}
+    =\frac{1}{n}\sum_{i=1}^{n}X_{i}
+    =\frac{X_{1}+\dotsb+X_{n}}{n}
+    % =\frac{X_1+X_2+\cdots+X_n}{n}
+  \end{equation}
   #+end_quote
 
 ** 分散・標準偏差
 - *分散* (variance)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{Var}(X)=\sigma^{2}=\mathbb{E}[(X-\mu)^{2}]
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{Var}(X)=\sigma^{2}=\mathbb{E}[(X-\mu)^{2}]
+  \end{equation}
   #+end_quote
   - データのばらつきを表す記述統計量
 - *標本分散* (sample variance)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      S^{2}
-      =\frac{1}{n}\sum_{i=1}^n(X_{i}-\bar{X})^{2}
-      =\frac{(X_{1}-\bar{X})^{2}+\dotsb+(X_{n}-\bar{X})^{2}}{n}
-      % =\frac{(X_1-\bar{X})^2+(X_2-\bar{X})^2+\cdots+(X_n-\bar{X})^2}{n}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    S^{2}
+    =\frac{1}{n}\sum_{i=1}^n(X_{i}-\bar{X})^{2}
+    =\frac{(X_{1}-\bar{X})^{2}+\dotsb+(X_{n}-\bar{X})^{2}}{n}
+    % =\frac{(X_1-\bar{X})^2+(X_2-\bar{X})^2+\cdots+(X_n-\bar{X})^2}{n}
+  \end{equation}
   #+end_quote
   # - *標本標準偏差* (sample standard deviation):
   #   標本分散の平方根
@@ -156,19 +145,15 @@
 ** 標本平均・分散の不偏性
 - 標本平均は \(\mu\) の *不偏推定量である*
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[\bar{X}]=\mu
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[\bar{X}]=\mu
+  \end{equation}
   #+end_quote
 - 標本分散は \(\sigma^2\) の *不偏推定量ではない*
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[S^2]=\frac{n-1}{n}\sigma^2
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[S^2]=\frac{n-1}{n}\sigma^2
+  \end{equation}
   #+end_quote
   - 標本分散は平均的には真の分散を *過小推定* する
 
@@ -177,11 +162,9 @@
 - バイアス補正 :
   標本分散に \(n/(n-1)\) を乗じたもの
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      s^2=\frac{n}{n-1}S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    s^2=\frac{n}{n-1}S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2
+  \end{equation}
   #+end_quote
   - \(\sigma^2\) の *不偏推定量* となる
     # - 不偏分散の計算: ~var()~
@@ -210,11 +193,9 @@
 - 多次元データの分析のために単位や基準を揃える
 - データ \(X_{1},X_{2},\dotsc,X_{n}\) の *標準化*
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      Z_{i}=\frac{X_i-\bar{X}}{s}\quad(i=1,2,\dotsc,n)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    Z_{i}=\frac{X_i-\bar{X}}{s}\quad(i=1,2,\dotsc,n)
+  \end{equation}
   #+end_quote
   - \(s\) の代わりに \(S\) で割って定義する文献もある
 - 定義から \(Z_{1},Z_{2},\dotsc,Z_{n}\) の
@@ -227,11 +208,9 @@
   - 教育学や心理学では, 平均50, 標準偏差10が好まれる
 - 標本平均50, 標準偏差10に線形変換
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      T_{i}=10Z_{i}+50\quad(i=1,\dotsc,n)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    T_{i}=10Z_{i}+50\quad(i=1,\dotsc,n)
+  \end{equation}
   #+end_quote
 - \(T_{i}\) :
   *偏差値得点* あるいは *Tスコア* 
@@ -362,11 +341,9 @@
   #+begin_quote
   平均 \(\mu\) , 分散 \(\sigma^2\) で
   3次モーメントをもつ確率変数 \(X\) 
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{skewness}=\frac{\mathbb{E}[(X-\mu)^3]}{\sigma^3}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{skewness}=\frac{\mathbb{E}[(X-\mu)^3]}{\sigma^3}
+  \end{equation}
   #+end_quote
 - 左右に対称的な分布の歪度は0 (正規分布の歪度は0)
   - 歪度が正の場合 : 分布の右の裾の方が重い
@@ -379,22 +356,18 @@
 - *尖度* (kurtosis)
   #+begin_quote
   4次のモーメントをもつ確率変数 \(X\)
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}
+  \end{equation}
   #+end_quote
 - *超過尖度* (excess kurtosis) :
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      % \mathrm{excess\ kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}-3
-      \mathrm{excess\ kurtosis}
-      =
-      \mathrm{kurtosis}-3
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    % \mathrm{excess\ kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}-3
+    \mathrm{excess\ kurtosis}
+    =
+    \mathrm{kurtosis}-3
+  \end{equation}
   #+end_quote
   - 正規分布との比較のため正規分布の尖度3を引いた量
   - こちらを単に尖度と呼ぶ文献もあるので注意
@@ -443,19 +416,15 @@
 - 観測データ \(X_{1},X_{2},\dotsc,X_{n}\) による推定
 - *標本歪度* (sample skewness)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{skewness}=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^3}{s^3}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{skewness}=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^3}{s^3}
+  \end{equation}
   #+end_quote
 - *標本尖度* (sample kurtosis)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{kurtosis}=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^4}{s^4}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{kurtosis}=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^4}{s^4}
+  \end{equation}
   #+end_quote
   - 分子の計算は \(1/n\) としているが，別の場合もあるので注意
 
@@ -536,11 +505,9 @@
 - 複数のデータ間の関係を知るための記述統計量
 - *共分散* (covariance) 
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{Cov}(X,Y)=\mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])]
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{Cov}(X,Y)=\mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])]
+  \end{equation}
   #+end_quote
 - 直感的には2種類のデータ間の比例関係の大きさ
 
@@ -548,11 +515,9 @@
 - 観測データ \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) による推定
 - *標本共分散* (sample covariance)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{Cov}(X,Y)=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{n-1}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{Cov}(X,Y)=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{n-1}
+  \end{equation}
   #+end_quote
   - ただし\(\bar{X},\bar{Y}\)は
     \(X_1,X_2,\dotsc,X_N\) および \(Y_1,Y_2,\dotsc,Y_N\) の平均
@@ -561,11 +526,9 @@
 - 複数のデータ間の正規化した記述統計量
 - *相関* (correlation) 
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \rho=\frac{\mathrm{Cov}(X,Y)}{\sqrt{\mathrm{Var}(X)\mathrm{Var}(Y)}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \rho=\frac{\mathrm{Cov}(X,Y)}{\sqrt{\mathrm{Var}(X)\mathrm{Var}(Y)}}
+  \end{equation}
   #+end_quote
 - 相関の値は \(-1\) 以上 \(1\) 以下
   - \(1\) に近いほど正の比例関係が強い
@@ -574,12 +537,10 @@
 - 観測データ \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) による推定
 - *標本相関* (sample correlation)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \rho=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}
-      {\sqrt{\sum_{i=1}^n(X_i-\bar{X})^2}\sqrt{\sum_{i=1}^n(Y_i-\bar{Y})^2}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \rho=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}
+    {\sqrt{\sum_{i=1}^n(X_i-\bar{X})^2}\sqrt{\sum_{i=1}^n(Y_i-\bar{Y})^2}}
+  \end{equation}
   #+end_quote
   - ただし\(\bar{X},\bar{Y}\)は
     \(X_1,X_2,\dotsc,X_N\) および \(Y_1,Y_2,\dotsc,Y_N\) の平均
@@ -641,11 +602,9 @@
 ** 中央値
 - データの順序にもとづく記述統計量
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      X_{(1)}\leq X_{(2)}\leq\cdots\leq X_{(n)}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    X_{(1)}\leq X_{(2)}\leq\cdots\leq X_{(n)}
+  \end{equation}
   #+end_quote
 - *中央値* もしくは *メディアン* (median)
   #+begin_quote
@@ -687,20 +646,16 @@
   #+begin_quote
   \(0<\alpha<1\) に対して，その分布に従う確率変数を \(X\) としたとき，
   不等式
-  #+begin_src latex
-    \begin{equation}
-      P(X\leq x)\geq\alpha
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    P(X\leq x)\geq\alpha
+  \end{equation}
   を満たす実数 \(x\) のうち最小のもの
   #+end_quote
   - そのような実数 \(q_\alpha\) は常に存在し, 以下が成り立つ．
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        P(X\leq q_\alpha)=\alpha
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      P(X\leq q_\alpha)=\alpha
+    \end{equation}
     #+end_quote
 
 #+reveal: split

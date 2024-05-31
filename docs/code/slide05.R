@@ -350,7 +350,7 @@ tw_data |>
                 args = with(tw_data, # 標本平均と標準偏差を計算
                             list(mean = mean(solar),
                                  sd = sd(solar))),
-                color = "blue") + # 色を指定
+                colour = "blue") + # 色を指定
   labs(x = expression(paste("intensity [",MJ/m^2,"]")),
        y = "density", # geom_function で y軸のラベルが書き換えられるため
        title = "Solar Radiation in Tokyo")
@@ -364,7 +364,7 @@ tw_data |>
                 args = with(tw_data, # 標本平均と標準偏差を計算
                             list(mean = mean(solar),
                                  sd = sd(solar))),
-                color = "blue") + # 色を指定
+                colour = "blue") + # 色を指定
   labs(x = expression(paste("intensity [",MJ/m^2,"]")),
        y = "density", # geom_function で y軸のラベルが書き換えられるため
        title = "Solar Radiation in Tokyo")

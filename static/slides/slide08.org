@@ -3,14 +3,16 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-06-09 15:09:30 mura>
-:REVEAL:
-#+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
+# Time-stamp: <2024-05-31 14:26:02 mura>
+:REVEAL:
+#+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :END:
+
+* COMMENT メモ
 
 * 講義概要
 - 一般の確率変数
@@ -21,14 +23,13 @@
   - 一様分布・正規分布
   - ガンマ分布・\(t\) 分布・\(F\) 分布
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 第8講 練習問題解答例
-#+end_src
-#+begin_src R :exports none
+#+begin_src R :exports none :tangle no
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
-
-* COMMENT メモ
+#+begin_src R :exports none
+  ### 第8講 サンプルコード
+  library(tidyverse)
+#+end_src
 
 
 * 一般の確率変数
@@ -39,11 +40,9 @@
 - 確率分布 \(P\) (または単に分布) 
   - 区間 \([a,b]\) \((a\leq b)\) に \(X\) が含まれる確率
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        P(a\leq X\leq b)
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      P(a\leq X\leq b)
+    \end{equation}
     #+end_quote
   - 「確率変数 \(X\) は確率分布 \(P\) に従う」という
   - 現象の理解のためには実現値より確率分布にこそ興味がある
@@ -67,12 +66,10 @@
   \(n\) 個の確率変数 \(X_{1},X_{2},\dotsc,X_n\) が *独立* であるとは，
   \(a_i\leq b_i\) \((i=1,\dots,n)\) なる
   任意の実数 \(a_{1},b_{1},\dots,a_n,b_n\) に対して
-  #+begin_src latex
-    \begin{multline}
-      P(a_{1}\leq X_{1}\leq b_{1},a_{2}\leq X_{2}\leq b_{2},\dots,a_n\leq X_n\leq b_n)\\
-      =P(a_{1}\leq X_{1}\leq b_{1})P(a_{2}\leq X_{2}\leq b_{2})\cdots P(a_n\leq X_n\leq b_n)
-    \end{multline}
-  #+end_src
+  \begin{multline}
+    P(a_{1}\leq X_{1}\leq b_{1},a_{2}\leq X_{2}\leq b_{2},\dots,a_n\leq X_n\leq b_n)\\
+    =P(a_{1}\leq X_{1}\leq b_{1})P(a_{2}\leq X_{2}\leq b_{2})\cdots P(a_n\leq X_n\leq b_n)
+  \end{multline}
   が成り立つことをいう．
   #+end_quote
 
@@ -81,11 +78,9 @@
   #+begin_quote
   \(n\) 個の確率変数 \(X_{1},X_{2},\dotsc,X_n\) が *同分布* であるとは，
   \(a\leq b\) なる任意の実数 \(a,b\) に対して
-  #+begin_src latex
-    \begin{equation}
-      P(a\leq X_{1}\leq b)=P(a\leq X_{2}\leq b)=\cdots=P(a\leq X_n\leq b)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    P(a\leq X_{1}\leq b)=P(a\leq X_{2}\leq b)=\cdots=P(a\leq X_n\leq b)
+  \end{equation}
   が成り立つことをいう．
   #+end_quote
 
@@ -108,11 +103,9 @@
   以下の右辺が定義できる(絶対収束する)とき
   離散型の確率変数 
   \(X\) の *平均* (または *期待値* )を
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[X]=\sum_{x\in\mathcal{X}}xP(X=x)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[X]=\sum_{x\in\mathcal{X}}xP(X=x)
+  \end{equation}
   で定義する．
 
   ただし 
@@ -125,19 +118,15 @@
 #+reveal: split
 - 確率変数の変換 \(\varphi(X)\) の期待値
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[\varphi(X)]=\sum_{x\in\mathcal{X}}\varphi(x)P(X=x)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[\varphi(X)]=\sum_{x\in\mathcal{X}}\varphi(x)P(X=x)
+  \end{equation}
   #+end_quote
 - \(p\) 次の *モーメント* (あるいは *積率* )
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[X^p]=\sum_{x\in\mathcal{X}}x^pP(X=x)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[X^p]=\sum_{x\in\mathcal{X}}x^pP(X=x)
+  \end{equation}
   #+end_quote
   - \(X\) が正整数 \(p\) 次のモーメントをもてば，
     \(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ
@@ -145,13 +134,11 @@
 ** 離散分布の分散
 - 定義
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathrm{Var}(X)
-      =&\mathbb{E}[(X-\mathbb{E}[X])^2]\\
-      =&\sum_{x\in\mathcal{X}}(x-\mathbb{E}[X])^2P(X=x)
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathrm{Var}(X)
+    =&\mathbb{E}[(X-\mathbb{E}[X])^2]\\
+    =&\sum_{x\in\mathcal{X}}(x-\mathbb{E}[X])^2P(X=x)
+  \end{align}
   #+end_quote
   - \(X\) が *2次のモーメントをもつ* ときのみ定義できる
   - 分散の平方根\(\sqrt{\mathrm{Var}(X)}\) を *標準偏差* と呼ぶ
@@ -169,34 +156,28 @@
   を箱(壺)から無作為に取り出す試行
 - 確率質量関数 
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=\frac{1}{n},\quad
-      x\in\{x_{1},\dots,x_n\}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=\frac{1}{n},\quad
+    x\in\{x_{1},\dots,x_n\}
+  \end{equation}
   #+end_quote
 
 ** 離散一様分布の平均と分散
 - 平均
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[X]
-      =\sum_{i=1}^nx_if(x_i)
-      =\frac{1}{n}\sum_{i=1}^nx_i=\bar{x}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[X]
+    =\sum_{i=1}^nx_if(x_i)
+    =\frac{1}{n}\sum_{i=1}^nx_i=\bar{x}
+  \end{equation}
   #+end_quote
 - 分散
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{Var}(X)
-      =\sum_{i=1}^n(x_i-\mathbb{E}[X])^2f(x_i)
-      =\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{Var}(X)
+    =\sum_{i=1}^n(x_i-\mathbb{E}[X])^2f(x_i)
+    =\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2
+  \end{equation}
   #+end_quote
   # - \(X\) を集合 \(\{x_{1},\dots,x_n\}\) 上の
   #   離散一様分布に従う確率変数とする
@@ -223,54 +204,46 @@
   確率 \(p\) で成功する試行を \(n\) 回行った総成功回数
 - 確率質量関数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x},\quad x=0,1,\dots,n
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x},\quad x=0,1,\dots,n
+  \end{equation}
   #+end_quote
   #   - 平均は \(np\) , 分散は \(np(1-p)\) で与えられる
 
 ** 二項分布の平均
 - 平均
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathbb{E}[X]
-      &=\sum_{x=0}^nxf(x)=\sum_{x=0}^nx\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x}\\
-      &=\sum_{x=1}^n\frac{n!}{(x-1)!(n-x)!}p^x(1-p)^{n-x}\\
-      % &=\sum_{x=0}^{n-1}\frac{n!}{x!(n-x-1)!}p^{x+1}(1-p)^{n-x-1}\\
-      &=np\sum_{x=0}^{n-1}\Bigl({n-1\atop x}\Bigr)p^{x}(1-p)^{n-1-x}\\
-      &=np
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathbb{E}[X]
+    &=\sum_{x=0}^nxf(x)=\sum_{x=0}^nx\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x}\\
+    &=\sum_{x=1}^n\frac{n!}{(x-1)!(n-x)!}p^x(1-p)^{n-x}\\
+    % &=\sum_{x=0}^{n-1}\frac{n!}{x!(n-x-1)!}p^{x+1}(1-p)^{n-x-1}\\
+    &=np\sum_{x=0}^{n-1}\Bigl({n-1\atop x}\Bigr)p^{x}(1-p)^{n-1-x}\\
+    &=np
+  \end{align}
   #+end_quote
 
 ** 二項分布の分散
 - 2次モーメント 
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathbb{E}[X^2]
-      &=\sum_{x=0}^nx^2f(x)
-        =\sum_{x=0}^nx(x-1)\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x}+\mathbb{E}[X]\\
-        % &=\sum_{x=2}^n\frac{n!}{(x-2)!(n-x)!}p^x(1-p)^{n-x}+np\\
-        % &=\sum_{x=0}^{n-2}\frac{n!}{x!(n-x-2)!}p^{x+2}(1-p)^{n-x-2}+np\\
-      &=n(n-1)p^2\sum_{x=0}^{n-2}\Bigl({n-2\atop x}\Bigr)p^{x}(1-p)^{n-2-x}+np\\
-      &=n(n-1)p^2+np
-        =(np)^2+np(1-p)
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathbb{E}[X^2]
+    &=\sum_{x=0}^nx^2f(x)
+      =\sum_{x=0}^nx(x-1)\Bigl({n\atop x}\Bigr)p^x(1-p)^{n-x}+\mathbb{E}[X]\\
+      % &=\sum_{x=2}^n\frac{n!}{(x-2)!(n-x)!}p^x(1-p)^{n-x}+np\\
+      % &=\sum_{x=0}^{n-2}\frac{n!}{x!(n-x-2)!}p^{x+2}(1-p)^{n-x-2}+np\\
+    &=n(n-1)p^2\sum_{x=0}^{n-2}\Bigl({n-2\atop x}\Bigr)p^{x}(1-p)^{n-2-x}+np\\
+    &=n(n-1)p^2+np
+      =(np)^2+np(1-p)
+  \end{align}
   #+end_quote
 - 分散 
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{Var}(X)
-      =\mathbb{E}[X^2]-\mathbb{E}[X]^2
-      =np(1-p)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{Var}(X)
+    =\mathbb{E}[X^2]-\mathbb{E}[X]^2
+    =np(1-p)
+  \end{equation}
   #+end_quote
 
 ** 二項分布に従う乱数
@@ -354,50 +327,42 @@
   少数の法則に現れた滅多に起こらない事象の起こる回数の分布
 - 確率質量関数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=\frac{\lambda^x}{x!}e^{-\lambda},\quad x=0,1,\dotsc
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=\frac{\lambda^x}{x!}e^{-\lambda},\quad x=0,1,\dotsc
+  \end{equation}
   #+end_quote
   #   - 平均は \(\lambda\) , 分散は \(\lambda\) で与えられる
 
 ** Poisson 分布の平均
 - 平均
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathbb{E}[X]
-      &=\sum_{x=0}^\infty xf(x)=\sum_{x=0}^\infty x\frac{\lambda^x}{x!}e^{-\lambda}
-        =e^{-\lambda}\sum_{x=1}^\infty\frac{\lambda^x}{(x-1)!}\\
-      &=\lambda e^{-\lambda}\sum_{x=0}^\infty\frac{\lambda^x}{x!}
-        =\lambda
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathbb{E}[X]
+    &=\sum_{x=0}^\infty xf(x)=\sum_{x=0}^\infty x\frac{\lambda^x}{x!}e^{-\lambda}
+      =e^{-\lambda}\sum_{x=1}^\infty\frac{\lambda^x}{(x-1)!}\\
+    &=\lambda e^{-\lambda}\sum_{x=0}^\infty\frac{\lambda^x}{x!}
+      =\lambda
+  \end{align}
   #+end_quote
 
 ** Poisson 分布の分散
 - 2次モーメント
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathbb{E}[X^2]
-      &=\sum_{x=0}^\infty x^2f(x)
-        =\sum_{x=0}^\infty x(x-1)\frac{\lambda^x}{x!}e^{-\lambda}+\mathbb{E}[X]\\
-      &=e^{-\lambda}\sum_{x=2}^\infty\frac{\lambda^x}{(x-2)!}+\lambda
-        =\lambda^2 e^{-\lambda}\sum_{x=0}^\infty\frac{\lambda^x}{x!}+\lambda\\
-      &=\lambda^2+\lambda
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathbb{E}[X^2]
+    &=\sum_{x=0}^\infty x^2f(x)
+      =\sum_{x=0}^\infty x(x-1)\frac{\lambda^x}{x!}e^{-\lambda}+\mathbb{E}[X]\\
+    &=e^{-\lambda}\sum_{x=2}^\infty\frac{\lambda^x}{(x-2)!}+\lambda
+      =\lambda^2 e^{-\lambda}\sum_{x=0}^\infty\frac{\lambda^x}{x!}+\lambda\\
+    &=\lambda^2+\lambda
+  \end{align}
   #+end_quote
 - 分散
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{Var}(X)
-      =\mathbb{E}[X^2]-\mathbb{E}[X]^2=\lambda
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{Var}(X)
+    =\mathbb{E}[X^2]-\mathbb{E}[X]^2=\lambda
+  \end{equation}
   #+end_quote
 
 ** Poisson 分布に従う乱数
@@ -462,53 +427,45 @@
   成功するまでの回数の分布
 - 確率質量関数 
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=p(1-p)^x,\quad x=0,1,\dots
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=p(1-p)^x,\quad x=0,1,\dots
+  \end{equation}
   #+end_quote
 
 ** 幾何分布の平均
 - 平均 
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathbb{E}[X]
-      &=\sum_{x=0}^\infty xf(x)=\sum_{x=0}^\infty xp(1-p)^x
-        =p(1-p)\sum_{x=1}^\infty x(1-p)^{x-1}\\
-      &=-p(1-p)\frac{d}{dp}\sum_{x=1}^\infty(1-p)^x
-        =-p(1-p)\frac{d}{dp}\frac{1-p}{p}\\
-      &=-p(1-p)\cdot\Bigl(-\frac{1}{p^2}\Bigr)
-        =\frac{1-p}{p}
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathbb{E}[X]
+    &=\sum_{x=0}^\infty xf(x)=\sum_{x=0}^\infty xp(1-p)^x
+      =p(1-p)\sum_{x=1}^\infty x(1-p)^{x-1}\\
+    &=-p(1-p)\frac{d}{dp}\sum_{x=1}^\infty(1-p)^x
+      =-p(1-p)\frac{d}{dp}\frac{1-p}{p}\\
+    &=-p(1-p)\cdot\Bigl(-\frac{1}{p^2}\Bigr)
+      =\frac{1-p}{p}
+  \end{align}
   #+end_quote
 
 ** 幾何分布の分散
 - 2次モーメント
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathbb{E}[X^2]
-      &=\sum_{x=0}^\infty x^2f(x)=\sum_{x=0}^\infty x(x-1)p(1-p)^x+\mathbb{E}[X]\\
-      % &=p(1-p)^2\sum_{x=2}^\infty x(x-1)p(1-p)^{x-2}+\frac{1-p}{p}\\
-      % &=p(1-p)^2\frac{d^2}{dp^2}\sum_{x=2}^\infty (1-p)^{x}+\frac{1-p}{p}\\
-      % &=p(1-p)^2\frac{d^2}{dp^2}\frac{(1-p)^2}{p}+\frac{1-p}{p}\\
-      % &=p(1-p)^2\frac{2}{p^3}+\frac{1-p}{p}
-        &=2\Bigl(\frac{1-p}{p}\Bigr)^2+\frac{1-p}{p}
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathbb{E}[X^2]
+    &=\sum_{x=0}^\infty x^2f(x)=\sum_{x=0}^\infty x(x-1)p(1-p)^x+\mathbb{E}[X]\\
+    % &=p(1-p)^2\sum_{x=2}^\infty x(x-1)p(1-p)^{x-2}+\frac{1-p}{p}\\
+    % &=p(1-p)^2\frac{d^2}{dp^2}\sum_{x=2}^\infty (1-p)^{x}+\frac{1-p}{p}\\
+    % &=p(1-p)^2\frac{d^2}{dp^2}\frac{(1-p)^2}{p}+\frac{1-p}{p}\\
+    % &=p(1-p)^2\frac{2}{p^3}+\frac{1-p}{p}
+      &=2\Bigl(\frac{1-p}{p}\Bigr)^2+\frac{1-p}{p}
+  \end{align}
   #+end_quote
 - 分散
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{Var}(X)
-      =\mathbb{E}[X^2]-\mathbb{E}[X]^2
-      =\frac{1-p}{p^2}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{Var}(X)
+    =\mathbb{E}[X^2]-\mathbb{E}[X]^2
+    =\frac{1-p}{p^2}
+  \end{equation}
   #+end_quote
 
 ** 幾何分布に従う乱数
@@ -531,11 +488,9 @@
   - 連続型の確率変数の確率分布
   - 非負の値をとる実数上の関数 \(f\) の積分で表される
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        P(a\leq X\leq b)=\int_{a}^b f(x)dx \quad(a < b)
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      P(a\leq X\leq b)=\int_{a}^b f(x)dx \quad(a < b)
+    \end{equation}
     #+end_quote
   - 関数 \(f\) を *確率密度関数* (または *密度*)と呼ぶ
 
@@ -544,11 +499,9 @@
   積分 \(\int_{-\infty}^\infty xf(x)dx\) が絶対収束するとき
   \(X\) の *平均* (または *期待値*)を
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[X]=\int_{-\infty}^\infty xf(x)dx
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[X]=\int_{-\infty}^\infty xf(x)dx
+  \end{equation}
   #+end_quote
   で定義する
 - 右辺の積分が絶対収束しない場合は
@@ -560,19 +513,15 @@
 #+reveal: split
 - 確率変数の変換 \(\varphi(X)\) の期待値
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[\varphi(X)]=\int_{-\infty}^\infty\varphi(x)f(x)dx
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[\varphi(X)]=\int_{-\infty}^\infty\varphi(x)f(x)dx
+  \end{equation}
   #+end_quote
 - \(p\) 次の *モーメント* (あるいは *積率* )
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[X^p]=\int_{-\infty}^\infty x^pf(x)dx
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[X^p]=\int_{-\infty}^\infty x^pf(x)dx
+  \end{equation}
   #+end_quote
 - \(X\) が正整数 \(p\) 次のモーメントをもてば，
   \(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ
@@ -580,12 +529,10 @@
 ** 連続分布の分散
 - 分散
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathrm{Var}(X)=& \mathbb{E}[(X-\mathbb{E}[X])^2]=\mathbb{E}[X^2]-\mathbb{E}[X]^2\\
-      =&\int_{-\infty}^\infty(x-\mathbb{E}[X])^2f(x)dx
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathrm{Var}(X)=& \mathbb{E}[(X-\mathbb{E}[X])^2]=\mathbb{E}[X^2]-\mathbb{E}[X]^2\\
+    =&\int_{-\infty}^\infty(x-\mathbb{E}[X])^2f(x)dx
+  \end{align}
   #+end_quote
 - \(X\) が *2次のモーメントをもつ* ときのみ定義できる
 - 分散の平方根 \(\sqrt{\mathrm{Var}(X)}\) を *標準偏差* と呼ぶ
@@ -602,55 +549,47 @@
   区間 \((a,b)\) のランダムな値の選択を表す分布
 - 確率密度関数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=
-      \begin{cases}
-        \frac{1}{b-a} & (a < x < b)\\
-        0 & (\text{上記以外のとき})
-      \end{cases}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=
+    \begin{cases}
+      \frac{1}{b-a} & (a < x < b)\\
+      0 & (\text{上記以外のとき})
+    \end{cases}
+  \end{equation}
   #+end_quote
 
 ** 一様分布の平均
 - 平均
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathbb{E}[X]
-      &=\int_{-\infty}^\infty xf(x)dx
-        =\frac{1}{b-a}\int_a^bxdx\\
-      &=\frac{b^2-a^2}{2(b-a)}
-        =\frac{a+b}{2}
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathbb{E}[X]
+    &=\int_{-\infty}^\infty xf(x)dx
+      =\frac{1}{b-a}\int_a^bxdx\\
+    &=\frac{b^2-a^2}{2(b-a)}
+      =\frac{a+b}{2}
+  \end{align}
   #+end_quote
 
 ** 一様分布の分散
 - 2次モーメント
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathbb{E}[X^2]
-      &=\int_{-\infty}^\infty x^2f(x)dx
-        =\frac{1}{b-a}\int_a^bx^2dx\\
-      &=\frac{b^3-a^3}{3(b-a)}
-        =\frac{a^2+ab+b^2}{3}
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathbb{E}[X^2]
+    &=\int_{-\infty}^\infty x^2f(x)dx
+      =\frac{1}{b-a}\int_a^bx^2dx\\
+    &=\frac{b^3-a^3}{3(b-a)}
+      =\frac{a^2+ab+b^2}{3}
+  \end{align}
   #+end_quote
 - 分散
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      \mathrm{Var}(X)
-      &=\mathbb{E}[X^2]-\mathbb{E}[X]^2
-      % =\frac{a^2+ab+b^2}{3}-\frac{a^2+2ab+b^2}{4}\\
-      % &=\frac{a^2-2ab+b^2}{12}
-          =\frac{(b-a)^2}{12}
-    \end{align}
-  #+end_src
+  \begin{align}
+    \mathrm{Var}(X)
+    &=\mathbb{E}[X^2]-\mathbb{E}[X]^2
+    % =\frac{a^2+ab+b^2}{3}-\frac{a^2+2ab+b^2}{4}\\
+    % &=\frac{a^2-2ab+b^2}{12}
+        =\frac{(b-a)^2}{12}
+  \end{align}
   #+end_quote
 
 ** 一様分布に従う乱数
@@ -673,11 +612,9 @@
   (\(\mu\) は実数, \(\sigma\) は正の実数)
 - 確率密度関数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\Bigl(-\frac{(x-\mu)^2}{2\sigma^2}\Bigr)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\Bigl(-\frac{(x-\mu)^2}{2\sigma^2}\Bigr)
+  \end{equation}
   #+end_quote
 - 平均0, 分散1の正規分布を *標準正規分布* と呼ぶ
 - *Gauss分布* と呼ぶこともある
@@ -696,13 +633,11 @@
   - Bernoulli分布は平均 \(p\) , 分散 \(p(1-p)\) である
   - 中心極限定理により
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \frac{\sum_{i=1}^nX_i-np}{\sqrt{np(1-p)}}
-        =\frac{\sqrt{n}(\frac{1}{n}\sum_{i=1}^nX_i-p)}{\sqrt{p(1-p)}}
-        =\frac{Y-np}{\sqrt{np(1-p)}}
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      \frac{\sum_{i=1}^nX_i-np}{\sqrt{np(1-p)}}
+      =\frac{\sqrt{n}(\frac{1}{n}\sum_{i=1}^nX_i-p)}{\sqrt{p(1-p)}}
+      =\frac{Y-np}{\sqrt{np(1-p)}}
+    \end{equation}
     #+end_quote
     の分布は標準正規分布で近似できる
   - \(p\) が非常に小さい場合，
@@ -751,12 +686,10 @@
   - \(U_{1},U_{2}\) を \((0,1)\) 上の
     一様分布に従う独立な確率変数とする．
     このとき
-    #+begin_src latex
-      \begin{align}
-        X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
-        X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
-      \end{align}
-    #+end_src
+    \begin{align}
+      X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
+      X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
+    \end{align}
     とおくと，
     \(X_{1},X_{2}\) は独立かつともに標準正規分布に従う．
     これをグラフに描画して確認せよ. \\
@@ -812,24 +745,20 @@
   (\(\nu > 0\) , \(\alpha > 0\))
 - 確率密度関数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=
-      \begin{cases}
-        \frac{\alpha^\nu }{\Gamma(\nu)}
-        x^{\nu-1}e^{-\alpha x}&(x>0)\\
-        0&(x\leq0)
-      \end{cases}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=
+    \begin{cases}
+      \frac{\alpha^\nu }{\Gamma(\nu)}
+      x^{\nu-1}e^{-\alpha x}&(x>0)\\
+      0&(x\leq0)
+    \end{cases}
+  \end{equation}
   #+end_quote
   ただしガンマ関数 \(\Gamma(\nu)\) は以下で定義される :
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \Gamma(\nu)=\int_0^\infty x^{\nu-1}e^{-x}dx
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \Gamma(\nu)=\int_0^\infty x^{\nu-1}e^{-x}dx
+  \end{equation}
   #+end_quote
 
 ** ガンマ分布の性質
@@ -851,15 +780,13 @@
 - パラメータ \(\lambda\) の指数分布
   \(\mathrm{Exp}(\lambda)\) (\(\lambda > 0\))
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=\Gamma(1,\lambda)=
-      \begin{cases}
-        \lambda e^{-\lambda x}&(x>0)\\
-        0&(x\leq0)
-      \end{cases}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=\Gamma(1,\lambda)=
+    \begin{cases}
+      \lambda e^{-\lambda x}&(x>0)\\
+      0&(x\leq0)
+    \end{cases}
+  \end{equation}
   #+end_quote
 - \(\lambda\) は *レート* と呼ばれることがある
 - 平均，分散はそれぞれ \(\lambda^{-1}\) , \(\lambda^{-2}\) で与えられる
@@ -875,16 +802,14 @@
 - 自由度 \(k\) の \(\chi^2\) 分布 
   \(\chi^2(k)\) (\(k > 0\))
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=\Gamma(k/2,1/2)=
-      \begin{cases}
-        \frac{1}{2^{k/2}\Gamma(k/2)}
-        x^{k/2-1}e^{-x/2}&(x>0)\\
-        0&(x\leq0)
-      \end{cases}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=\Gamma(k/2,1/2)=
+    \begin{cases}
+      \frac{1}{2^{k/2}\Gamma(k/2)}
+      x^{k/2-1}e^{-x/2}&(x>0)\\
+      0&(x\leq0)
+    \end{cases}
+  \end{equation}
   #+end_quote
 
 ** @@latex:@@\(\chi^2\) 分布の特徴付け
@@ -943,35 +868,29 @@
   \(t(\nu)\) (\(\nu > 0\))
 - 確率密度関数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=
-      \frac{1}{\sqrt{\pi \nu}}
-      \frac{\Gamma((\nu+1)/2)}{\Gamma(\nu/2)}
-      \left(1+\frac{x^2}{\nu}\right)^{-(\nu+1)/2}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=
+    \frac{1}{\sqrt{\pi \nu}}
+    \frac{\Gamma((\nu+1)/2)}{\Gamma(\nu/2)}
+    \left(1+\frac{x^2}{\nu}\right)^{-(\nu+1)/2}
+  \end{equation}
   #+end_quote
   - *Student* は \(t\) 分布を導入した統計学者Gossetのペンネーム
 
 ** @@latex:@@\(t\) 分布の平均と分散
 - 平均
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[X]
-      =0 \quad\text{(ただし\(\nu>1\))}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[X]
+    =0 \quad\text{(ただし\(\nu>1\))}
+  \end{equation}
   #+end_quote
 - 分散
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{Var}(X)
-      =\frac{\nu}{\nu-2} \quad\text{(ただし \(\nu>2\))}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{Var}(X)
+    =\frac{\nu}{\nu-2} \quad\text{(ただし \(\nu>2\))}
+  \end{equation}
   #+end_quote
 
 ** @@latex:@@\(t\) 分布の特徴付け 
@@ -980,11 +899,9 @@
   \(Z,Y\) は独立であるとする．
   このとき確率変数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \frac{Z}{\sqrt{Y/k}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \frac{Z}{\sqrt{Y/k}}
+  \end{equation}
   #+end_quote
   は自由度 \(k\) の \(t\) 分布に従う
 
@@ -1011,11 +928,9 @@
     \(Z,Y\) は独立であるとする．
     このとき確率変数
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \frac{Z}{\sqrt{Y/k}}
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      \frac{Z}{\sqrt{Y/k}}
+    \end{equation}
     #+end_quote
     は自由度 \(k\) の \(t\) 分布に従うことを確認しなさい．
 
@@ -1059,48 +974,40 @@
   \(F(\nu_{1},\nu_{2})\) (\(\nu_{1} > 0, \nu_{2} > 0\))
 - 確率密度関数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      f(x)=
-      \begin{cases}
-        \frac{(\nu_{1}/\nu_{2})^{\nu_{1}/2}}{B(\nu_{1}/2,\nu_{2}/2)}
-        \frac{x^{\nu_{1}/2-1}}{(1+\nu_{1}x/\nu_{2})^{(\nu_{1}+\nu_{2})/2}}&(x>0)\\
-        0&(x\leq0)
-      \end{cases}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=
+    \begin{cases}
+      \frac{(\nu_{1}/\nu_{2})^{\nu_{1}/2}}{B(\nu_{1}/2,\nu_{2}/2)}
+      \frac{x^{\nu_{1}/2-1}}{(1+\nu_{1}x/\nu_{2})^{(\nu_{1}+\nu_{2})/2}}&(x>0)\\
+      0&(x\leq0)
+    \end{cases}
+  \end{equation}
   #+end_quote
 
 ** @@latex:@@\(F\) 分布の平均と分散
 - 平均
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathbb{E}[X]
-      =\frac{\nu_{2}}{\nu_{2}-2} \quad \text{(ただし\(\nu_{2}>2\))}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathbb{E}[X]
+    =\frac{\nu_{2}}{\nu_{2}-2} \quad \text{(ただし\(\nu_{2}>2\))}
+  \end{equation}
   #+end_quote
 - 分散
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \mathrm{Var}(X)
-      =\frac{2\nu_{2}^2(\nu_{1}+\nu_{2}-2)}{\nu_{1}(\nu_{2}-2)^2(\nu_{2}-4)}
-      \quad\text{(ただし\(\nu_{2}>4\))}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \mathrm{Var}(X)
+    =\frac{2\nu_{2}^2(\nu_{1}+\nu_{2}-2)}{\nu_{1}(\nu_{2}-2)^2(\nu_{2}-4)}
+    \quad\text{(ただし\(\nu_{2}>4\))}
+  \end{equation}
   #+end_quote
 
 ** @@latex:@@\(F\) 分布の特徴付け
 - \(Y_{1},Y_{2}\) をそれぞれ自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う独立な
   確率変数とする．このとき, 確率変数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
+  \end{equation}
   #+end_quote
   は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従う
 
@@ -1126,11 +1033,9 @@
     自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う
     独立な確率変数とする．
     このとき, 確率変数
-    #+begin_src latex
-      \begin{equation}
-        \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
+    \end{equation}
     は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従うことを確認しなさい．
 
 #+begin_src R :eval no :exports none :tangle yes

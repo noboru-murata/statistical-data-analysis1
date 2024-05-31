@@ -3,14 +3,20 @@
 #+AUTHOR: 村田 昇
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
-# Time-stamp: <2023-06-30 15:40:42 mura>
-:REVEAL:
-#+INCLUDE: "./reveal.js/org/mycourse.org"
 #+STARTUP: hidestars content indent
+# Time-stamp: <2024-05-31 14:45:21 mura>
+:REVEAL:
+#+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
 :END:
+
+* COMMENT メモ
+- 検定に関するMCを充実させたい
+- 正規母集団でなくても使えるが正規分布を仮定することを言う
+- 演習問題を整理するべきか
+- 早稲田版の説明から一部抜粋してもよい (BF問題とか図とか)
 
 * 講義概要
 - 検定
@@ -22,18 +28,13 @@
 - 平均の差の検定
 - 分散の比の検定
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 第11講 練習問題解答例
-#+end_src
-#+begin_src R :exports none
+#+begin_src R :exports none :tangle no
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
-
-* COMMENT メモ
-- 検定に関するMCを充実させたい
-- 正規母集団でなくても使えるが正規分布を仮定することを言う
-- 演習問題を整理するべきか
-- 早稲田版の説明から一部抜粋してもよい (BF問題とか図とか)
+#+begin_src R :exports none
+  ### 第11講 サンプルコード
+  library(tidyverse)
+#+end_src
 
 
 * 検定とは
@@ -152,21 +153,17 @@
 - 検定統計量 \(T\) に対して棄却域 \(R\) を設計
   - *サイズ* : 第一種過誤が *起きる確率*
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \text{(サイズ)}
-        =P(\text{\(T\) が\(R\)に含まれる}|\text{帰無仮説が正しい})
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      \text{(サイズ)}
+      =P(\text{\(T\) が\(R\)に含まれる}|\text{帰無仮説が正しい})
+    \end{equation}
     #+end_quote
   - *検出力* : 第二種過誤が *起きない確率*
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \text{(検出力)}
-        =P(\text{\(T\) が\(R\)に含まれる}|\text{対立仮説が正しい})
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      \text{(検出力)}
+      =P(\text{\(T\) が\(R\)に含まれる}|\text{対立仮説が正しい})
+    \end{equation}
     #+end_quote
 - *有意水準*
   #+begin_quote
@@ -210,14 +207,12 @@
   棄却域 \(R_{\alpha}\) は以下のように設定する
   - *サイズを小さく* (有意水準 \(\alpha\) 以下に) 抑える
   - 可能な限り *検出力を大きく* する
-    #+begin_src latex
-      \begin{align}
-        P(T \in R_{\alpha}|\text{帰無仮説が正しい})
-        &\le\alpha\\
-        P(T \in R_{\alpha}|\text{対立仮説が正しい})
-        &\to\text{最大化}
-      \end{align}
-    #+end_src
+    \begin{align}
+      P(T \in R_{\alpha}|\text{帰無仮説が正しい})
+      &\le\alpha\\
+      P(T \in R_{\alpha}|\text{対立仮説が正しい})
+      &\to\text{最大化}
+    \end{align}
   #+end_quote
 - 対立仮説によって棄却域の形は変わりうる
 
@@ -228,12 +223,10 @@
   #+end_quote
 - *\(p\) 値 (有意確率)* : (検定統計量 \(T\), 棄却域 \(R_{\alpha}\))
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \text{(\(p\) 値)}
-      =\min\{\alpha\in(0,1)|\text{\(T\) が\(R_{\alpha}\)に含まれる}\}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{(\(p\) 値)}
+    =\min\{\alpha\in(0,1)|\text{\(T\) が\(R_{\alpha}\)に含まれる}\}
+  \end{equation}
   #+end_quote
 - \(p\) 値が有意水準未満のときに帰無仮説を棄却する
 
@@ -255,11 +248,9 @@
 ** 1標本データに対する仮定
 - 観測データは独立同分布な確率変数列
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      X_1,X_2,\dotsc,X_n
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    X_1,X_2,\dotsc,X_n
+  \end{equation}
   #+end_quote
   # \(X_1,X_2,\dotsc,X_n\)
 - \(X_{i}\) は平均 \(\mu\), 分散 \(\sigma^2\) の正規分布に従う
@@ -276,11 +267,9 @@
   #+end_quote
   - 帰無仮説と対立仮説
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        H_0:\mu=\mu_0\quad\text{vs}\quad H_1:\mu\neq\mu_0.
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      H_0:\mu=\mu_0\quad\text{vs}\quad H_1:\mu\neq\mu_0.
+    \end{equation}
     #+end_quote
 
 ** 考え方
@@ -289,30 +278,24 @@
 - 平均と分散の推定量を用いて検定統計量を構成
   - 標本平均 (正規分布に従う)
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      \bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
+    \end{equation}
     #+end_quote
   - 不偏分散 (\(\chi^2\) 分布に従う)
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        s^2=\frac{1}{n{-}1}\sum_{i=1}^n(X_i-\bar{X})^2
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      s^2=\frac{1}{n{-}1}\sum_{i=1}^n(X_i-\bar{X})^2
+    \end{equation}
     #+end_quote
 
 #+reveal: split
 - *Studentの \(t\) 検定*
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \text{検定統計量 : }
-      t=\frac{\sqrt{n}(\bar{X}-\mu_0)}{s}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{検定統計量 : }
+    t=\frac{\sqrt{n}(\bar{X}-\mu_0)}{s}
+  \end{equation}
   #+end_quote
   - 帰無分布は自由度 \(n{-}1\) の \(t\) 分布 \\
     (帰無仮説 \(H_0\) のもとでの検定統計量 \(t\) の分布)
@@ -333,14 +316,12 @@
 - 見本空間 : \((-\infty,\infty)\)
 - 母数 : 自由度 \(\nu\)
 - 密度関数 :
-  #+begin_src latex
-    \begin{equation}
-      f(x)=
-      \frac{\Gamma\left(\frac{\nu+1}{2}\right)}
-      {\sqrt{\nu\pi}\;\Gamma\left(\frac{\nu}{2}\right)}
-      \left(1+\frac{x^{2}}{\nu}\right)^{-\frac{1}{2}(\nu+1)}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)=
+    \frac{\Gamma\left(\frac{\nu+1}{2}\right)}
+    {\sqrt{\nu\pi}\;\Gamma\left(\frac{\nu}{2}\right)}
+    \left(1+\frac{x^{2}}{\nu}\right)^{-\frac{1}{2}(\nu+1)}
+  \end{equation}
   - 備考 : 標準正規分布と
     自由度 \(\nu\) の \(\chi^{2}\) 分布
     に従う独立な確率変数の比に関する分布で，
@@ -352,61 +333,51 @@
 - 有意水準を選択 : \(\alpha\in(0,1)\)
 - \(H_0\) の下で以下が成立
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      P(|t|>t_{1{-}\alpha/2}(n{-}1))=\alpha
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    P(|t|>t_{1{-}\alpha/2}(n{-}1))=\alpha
+  \end{equation}
   #+end_quote
   - \(t_{1{-}\alpha/2}(n{-}1)\) :
     自由度 \(n{-}1\) の \(t\) 分布の \(1{-}\alpha/2\) 分位点
 - 第一種過誤の上限が \(\alpha\) の棄却域
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      R_{\alpha}=
-      \left(-\infty,-t_{1{-}\alpha/2}(n{-}1)\right)
-      \cup\left(t_{1{-}\alpha/2}(n{-}1),\infty\right)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    R_{\alpha}=
+    \left(-\infty,-t_{1{-}\alpha/2}(n{-}1)\right)
+    \cup\left(t_{1{-}\alpha/2}(n{-}1),\infty\right)
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - データから検定統計量 \(t\) の値を計算
 - 以下の場合，帰無仮説を棄却
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      |t|>t_{1{-}\alpha/2}(n{-}1),\quad
-      (t\in R_{\alpha})
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    |t|>t_{1{-}\alpha/2}(n{-}1),\quad
+    (t\in R_{\alpha})
+  \end{equation}
   #+end_quote
 
 ** @@latex:@@\(p\) 値を用いる場合
 - \(p\) 値を計算 ( \(f(x)\) : 自由度 \(n{-}1\) の \(t\) 分布の密度)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \text{(\(p\) 値)}
-      =2\int_{|t|}^\infty f(x)dx
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{(\(p\) 値)}
+    =2\int_{|t|}^\infty f(x)dx
+  \end{equation}
   #+end_quote
 - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      |t|>t_{1{-}\alpha/2}(n{-}1)
-      &\Leftrightarrow
-        \int_{-\infty}^{|t|}f(x)dx>
-        \int_{-\infty}^{t_{1{-}\alpha/2}(n{-}1)}f(x)dx=1{-}\alpha/2\\
-      &\Leftrightarrow
-        \int_{|t|}^\infty f(x)dx < \alpha/2
-        \Leftrightarrow
-        2\int_{|t|}^\infty f(x)dx < \alpha
-    \end{align}
-  #+end_src
+  \begin{align}
+    |t|>t_{1{-}\alpha/2}(n{-}1)
+    &\Leftrightarrow
+      \int_{-\infty}^{|t|}f(x)dx>
+      \int_{-\infty}^{t_{1{-}\alpha/2}(n{-}1)}f(x)dx=1{-}\alpha/2\\
+    &\Leftrightarrow
+      \int_{|t|}^\infty f(x)dx < \alpha/2
+      \Leftrightarrow
+      2\int_{|t|}^\infty f(x)dx < \alpha
+  \end{align}
   #+end_quote
   # (棄却域に入ることと \(p\) 値が有意水準未満となることは同義)
 
@@ -483,11 +454,9 @@
   #+end_quote
   - 帰無仮説と対立仮説
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        H_0:\mu=\mu_0\quad\text{vs}\quad H_1:\mu>\mu_0.
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      H_0:\mu=\mu_0\quad\text{vs}\quad H_1:\mu>\mu_0.
+    \end{equation}
     #+end_quote
   - 検定統計量の標本分布
     - 帰無仮説は同一なので検定統計量 \(t\) の帰無分布も同一となる
@@ -498,44 +467,36 @@
 - 有意水準を選択 : \(\alpha\in(0,1)\)
 - \(H_0\) の下で以下が成立
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      P(t>t_{1{-}\alpha}(n{-}1))=\alpha
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    P(t>t_{1{-}\alpha}(n{-}1))=\alpha
+  \end{equation}
   #+end_quote
   - \(t_{1{-}\alpha}(n{-}1)\):
     自由度 \(n{-}1\) の \(t\) 分布の \(1{-}\alpha\) 分位点
 - 第一種過誤の上限が \(\alpha\) の棄却域
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      R_{\alpha}=
-      \left(t_{1{-}\alpha}(n{-}1),\infty\right)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    R_{\alpha}=
+    \left(t_{1{-}\alpha}(n{-}1),\infty\right)
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - データから検定統計量 \(t\) の値を計算
 - 以下の場合，帰無仮説を棄却
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      t>t_{1{-}\alpha}(n{-}1)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    t>t_{1{-}\alpha}(n{-}1)
+  \end{equation}
   #+end_quote
 
 ** @@latex:@@\(p\) 値を用いる場合
 - \(p\) 値を計算 ( \(f(x)\):自由度 \(n{-}1\) の \(t\) 分布の密度)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \text{(\(p\) 値)}=
-      \int_{t}^\infty f(x)dx
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{(\(p\) 値)}=
+    \int_{t}^\infty f(x)dx
+  \end{equation}
   #+end_quote
 - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 
@@ -543,32 +504,26 @@
 - 左片側検定
   - 反対向きの対立仮説 \(\mu < \mu_0\) を考えた検定
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        H_0:\mu=\mu_0\quad\text{vs}\quad H_1:\mu < \mu_0.
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      H_0:\mu=\mu_0\quad\text{vs}\quad H_1:\mu < \mu_0.
+    \end{equation}
     #+end_quote
   - 以下の場合，帰無仮説を棄却
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        t < t_{\alpha}(n{-}1)
-        \quad
-        \text{(自由度 \(n{-}1\) の \(t\) 分布の \(\alpha\) 分位点)}
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      t < t_{\alpha}(n{-}1)
+      \quad
+      \text{(自由度 \(n{-}1\) の \(t\) 分布の \(\alpha\) 分位点)}
+    \end{equation}
     #+end_quote
   #   - \(t_{\alpha}(n{-}1)\):
   #     自由度 \(n{-}1\) の \(t\) 分布の \(\alpha\) 分位点
   - 以下の \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        \text{(\(p\) 値)}
-        =\int_{-\infty}^t f(x)dx
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      \text{(\(p\) 値)}
+      =\int_{-\infty}^t f(x)dx
+    \end{equation}
     #+end_quote
 
 ** 両側検定と片側検定
@@ -685,16 +640,14 @@
 - ある番組の視聴率が2桁に達したかどうか知るために
   \(n\) 人にその番組を観たかどうか確認する．
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      X_{i}=
-      \begin{cases}
-        1,&\text{番組を観た}\\
-        0,&\text{番組を観ていない}
-      \end{cases},\;
-      i=1,2,\dotsc,n
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    X_{i}=
+    \begin{cases}
+      1,&\text{番組を観た}\\
+      0,&\text{番組を観ていない}
+    \end{cases},\;
+    i=1,2,\dotsc,n
+  \end{equation}
   #+end_quote
   これを用いた検定を考えてみよ．
   #+begin_src R :eval no
@@ -744,11 +697,9 @@
   #+end_quote
   - 帰無仮説と対立仮説
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        H_0:\sigma^2=\sigma_0^2\quad\text{vs}\quad H_1:\sigma^2\neq\sigma_0^2
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      H_0:\sigma^2=\sigma_0^2\quad\text{vs}\quad H_1:\sigma^2\neq\sigma_0^2
+    \end{equation}
     #+end_quote
 
 ** 考え方
@@ -757,22 +708,18 @@
 - 分散の推定量の性質を用いて検定統計量を構成
   - 不偏分散 (\(\chi^2\) 分布に従う)
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        s^2=\frac{1}{n{-}1}\sum_{i=1}^n(X_i-\bar{X})^2 
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      s^2=\frac{1}{n{-}1}\sum_{i=1}^n(X_i-\bar{X})^2 
+    \end{equation}
     #+end_quote
 
 #+reveal: split
 - *\(\chi^2\) 検定*
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \text{検定統計量 : }
-      \chi^2=\frac{(n{-}1)s^2}{\sigma_0^2}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{検定統計量 : }
+    \chi^2=\frac{(n{-}1)s^2}{\sigma_0^2}
+  \end{equation}
   #+end_quote
   - 帰無分布は自由度 \(n{-}1\) の \(\chi^2\) 分布
 
@@ -791,13 +738,11 @@
 - 見本空間 : \([0,\infty)\)
 - 母数 : 自由度 \(\nu\)
 - 密度関数 :
-  #+begin_src latex
-    \begin{align}
-      f(x)=&
-      \frac{1}{2^{\nu/2}\Gamma(\frac{\nu}{2})}x^{\nu/2-1}e^{-x/2}\\
-      &\Gamma(z)=\int_0^\infty e^{-t}t^{z-1}dt
-    \end{align}
-  #+end_src
+  \begin{align}
+    f(x)=&
+    \frac{1}{2^{\nu/2}\Gamma(\frac{\nu}{2})}x^{\nu/2-1}e^{-x/2}\\
+    &\Gamma(z)=\int_0^\infty e^{-t}t^{z-1}dt
+  \end{align}
   - 備考 : \(\nu\) 個の標準正規分布に従う確率変数の2乗和の分布で，
     検定に利用される．
 #+end_quote
@@ -807,13 +752,11 @@
 - 有意水準を選択 : \(\alpha\in(0,1)\)
 - \(H_0\) の下で以下が成立
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      P(\chi^2 < \chi^2_{\alpha/2}(n{-}1)
-      \text{ または }\chi^2>\chi^2_{1{-}\alpha/2}(n{-}1))
-      =\alpha
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    P(\chi^2 < \chi^2_{\alpha/2}(n{-}1)
+    \text{ または }\chi^2>\chi^2_{1{-}\alpha/2}(n{-}1))
+    =\alpha
+  \end{equation}
   #+end_quote
   - \(\chi^2_{\alpha/2}(n{-}1)\):
     自由度 \(n{-}1\) の \(\chi^2\) 分布の \(\alpha/2\) 分位点
@@ -821,36 +764,30 @@
     自由度 \(n{-}1\) の \(\chi^2\) 分布の \(1{-}\alpha/2\) 分位点
 - 第一種過誤の上限が \(\alpha\) となる棄却域
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      R_{\alpha}=
-      \left(-\infty,\chi^2_{\alpha/2}(n{-}1)\right)
-      \cup\left(\chi^2_{1{-}\alpha/2}(n{-}1),\infty\right)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    R_{\alpha}=
+    \left(-\infty,\chi^2_{\alpha/2}(n{-}1)\right)
+    \cup\left(\chi^2_{1{-}\alpha/2}(n{-}1),\infty\right)
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - データから検定統計量 \(\chi^2\) の値を計算
 - 以下の場合，帰無仮説を棄却
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \chi^2 < \chi^2_{\alpha/2}(n{-}1)
-      \text{ または }\chi^2>\chi^2_{1{-}\alpha/2}(n{-}1)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \chi^2 < \chi^2_{\alpha/2}(n{-}1)
+    \text{ または }\chi^2>\chi^2_{1{-}\alpha/2}(n{-}1)
+  \end{equation}
   #+end_quote
 
 ** @@latex:@@\(p\) 値を用いる場合
 - \(p\) 値を計算 ( \(f(x)\): 自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \text{(\(p\) 値)}
-      =2\min\left\{\int_0^{\chi^2}f(x)dx,\int_{\chi^2}^\infty f(x)dx\right\}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{(\(p\) 値)}
+    =2\min\left\{\int_0^{\chi^2}f(x)dx,\int_{\chi^2}^\infty f(x)dx\right\}
+  \end{equation}
   #+end_quote
 - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 
@@ -858,12 +795,10 @@
 - 対立仮説が片側 (右側対立仮説) の場合
   - 帰無仮説と対立仮説
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}%\label{two-side}
-        H_0:\sigma^2=\sigma_0^2\quad
-        \text{vs}\quad H_1:\sigma^2>\sigma_0^2
-      \end{equation}
-    #+end_src
+    \begin{equation}%\label{two-side}
+      H_0:\sigma^2=\sigma_0^2\quad
+      \text{vs}\quad H_1:\sigma^2>\sigma_0^2
+    \end{equation}
     #+end_quote
 - 左側対立仮説 \(H_1:\sigma^2 < \sigma_0^2\) も以下の議論は同様
 
@@ -872,22 +807,18 @@
   \(\chi^2_{1{-}\alpha}(n{-}1)\)
 - 以下の場合，帰無仮説を棄却
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \chi^2>\chi^2_{1{-}\alpha}(n{-}1)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \chi^2>\chi^2_{1{-}\alpha}(n{-}1)
+  \end{equation}
   #+end_quote
 
 ** @@latex:@@\(p\) 値を用いる場合
 - \(p\) 値を計算 ( \(f(x)\):自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \text{(\(p\) 値)}
-      =\int_{\chi^2}^\infty f(x)dx
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{(\(p\) 値)}
+    =\int_{\chi^2}^\infty f(x)dx
+  \end{equation}
   #+end_quote
 - \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 
@@ -950,12 +881,10 @@
 ** 2標本データに対する仮定
 - 2種類の観測データ
   #+begin_quote
-  #+begin_src latex
-    \begin{align}
-      &X_1,X_2,\dotsc,X_m\\
-      &Y_1,Y_2,\dotsc,Y_n
-    \end{align}
-  #+end_src
+  \begin{align}
+    &X_1,X_2,\dotsc,X_m\\
+    &Y_1,Y_2,\dotsc,Y_n
+  \end{align}
   #+end_quote
   # - \(X_1,X_2,\dotsc,X_m\)
   # - \(Y_1,Y_2,\dotsc,Y_n\)
@@ -977,11 +906,9 @@
   #+end_quote
   - 帰無仮説と対立仮説
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}%\label{mean-equal}
-        H_0:\mu_1=\mu_2\quad\text{vs}\quad H_1:\mu_1\neq\mu_2
-      \end{equation}
-    #+end_src
+    \begin{equation}%\label{mean-equal}
+      H_0:\mu_1=\mu_2\quad\text{vs}\quad H_1:\mu_1\neq\mu_2
+    \end{equation}
     #+end_quote
 - *Behrens-Fisher問題* 
   - 正確かつ適切な検定を導出することは難しい
@@ -994,12 +921,10 @@
 - \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_m\) の不偏分散 :
   \(s_1^2\),\(s_2^2\)
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      s_1^2=\frac{1}{m{-}1}\sum_{i=1}^m(X_i-\bar{X})^2,\quad
-      s_2^2=\frac{1}{n{-}1}\sum_{i=1}^n(Y_i-\bar{Y})^2.
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    s_1^2=\frac{1}{m{-}1}\sum_{i=1}^m(X_i-\bar{X})^2,\quad
+    s_2^2=\frac{1}{n{-}1}\sum_{i=1}^n(Y_i-\bar{Y})^2.
+  \end{equation}
   #+end_quote
 - 標本平均と不偏分散の性質
   - \(\bar{X}-\bar{Y},s_1^2,s_2^2\) は独立となる
@@ -1013,26 +938,22 @@
 - 確率変数 \(s_1^2/m+s_2^2/n\) の分布を \(c\chi^2_\nu\) の分布で近似
 - \(\chi^2_\nu\) は自由度 \(\nu\) の \(\chi^2\) 分布に従う確率変数
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      c=\frac{\frac{(\sigma_1^2/m)^2}{m{-}1}+
-        \frac{(\sigma_2^2/n)^2}{n{-}1}}{\sigma_1^2/m+\sigma_2^2/n},\quad
-      \nu=\frac{(\sigma_1^2/m+\sigma_2^2/n)^2}{\frac{(\sigma_1^2/m)^2}{m{-}1}+
-        \frac{(\sigma_2^2/n)^2}{n{-}1}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    c=\frac{\frac{(\sigma_1^2/m)^2}{m{-}1}+
+      \frac{(\sigma_2^2/n)^2}{n{-}1}}{\sigma_1^2/m+\sigma_2^2/n},\quad
+    \nu=\frac{(\sigma_1^2/m+\sigma_2^2/n)^2}{\frac{(\sigma_1^2/m)^2}{m{-}1}+
+      \frac{(\sigma_2^2/n)^2}{n{-}1}}
+  \end{equation}
   #+end_quote
   - 平均と分散を合わせる
 
 #+reveal: split
 - 検定統計量の近似
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      t=\frac{\bar{X}-\bar{Y}}{\sqrt{s_1^2/m+s_2^2/n}}
-      \simeq\frac{\bar{X}-\bar{Y}}{\sqrt{c\chi^2_\nu}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    t=\frac{\bar{X}-\bar{Y}}{\sqrt{s_1^2/m+s_2^2/n}}
+    \simeq\frac{\bar{X}-\bar{Y}}{\sqrt{c\chi^2_\nu}}
+  \end{equation}
   #+end_quote
   - \(\bar{X}-\bar{Y},s_1^2/m+s_2^2/n\) は独立
   - \(\bar{X}-\bar{Y},c\chi^2_\nu\) も独立と考える
@@ -1041,25 +962,21 @@
 #+reveal: split
 - データの正規性から以下は標準正規分布に従う
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \frac{(\bar{X}-\bar{Y})-(\mu_1{-}\mu_2)}
-      {\sqrt{\sigma_1^2/m+\sigma_2^2/n}}
-      \sim
-      \mathcal{N}(0,1)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \frac{(\bar{X}-\bar{Y})-(\mu_1{-}\mu_2)}
+    {\sqrt{\sigma_1^2/m+\sigma_2^2/n}}
+    \sim
+    \mathcal{N}(0,1)
+  \end{equation}
   #+end_quote
 - \(H_0\) の下で以下は自由度 \(\nu\) の \(t\) 分布に従う
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      t\simeq
-      \frac{\bar{X}-\bar{Y}}{\sqrt{c\chi^2_\nu}}
-      =\frac{(\bar{X}-\bar{Y})/\sqrt{\sigma_1^2/m+\sigma_2^2/n}}
-      {\sqrt{\frac{c}{\sigma_1^2/m+\sigma_2^2/n}\chi^2_\nu}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    t\simeq
+    \frac{\bar{X}-\bar{Y}}{\sqrt{c\chi^2_\nu}}
+    =\frac{(\bar{X}-\bar{Y})/\sqrt{\sigma_1^2/m+\sigma_2^2/n}}
+    {\sqrt{\frac{c}{\sigma_1^2/m+\sigma_2^2/n}\chi^2_\nu}}
+  \end{equation}
   #+end_quote
   # (\(\frac{c}{\sigma_1^2/m+\sigma_2^2/n}=\nu^{-1}\)に注意)
 
@@ -1070,28 +987,24 @@
   \(\nu\) は未知の分散 \(\sigma_1^2,\sigma_2^2\) を含むので
   不偏推定量 \(s_1^2,s_2^2\) で代用し，
   自由度 \(\hat{\nu}\) は次式を用いる．
-  #+begin_src latex
-    \begin{align}
-      \text{検定統計量 : }
-      &t=\frac{\bar{X}-\bar{Y}}{\sqrt{s_1^2/m+s_2^2/n}}\\
-      \text{自由度 : }
-      &\hat{\nu}
-      =\frac{(s_1^2/m+s_2^2/n)^2}
-      {\frac{(s_1^2/m)^2}{m{-}1}+\frac{(s_2^2/n)^2}{n{-}1}}
-    \end{align}
-  #+end_src
+  \begin{align}
+    \text{検定統計量 : }
+    &t=\frac{\bar{X}-\bar{Y}}{\sqrt{s_1^2/m+s_2^2/n}}\\
+    \text{自由度 : }
+    &\hat{\nu}
+    =\frac{(s_1^2/m+s_2^2/n)^2}
+    {\frac{(s_1^2/m)^2}{m{-}1}+\frac{(s_2^2/n)^2}{n{-}1}}
+  \end{align}
   #+end_quote
 
 ** 棄却域を用いる場合
 - 有意水準を選択 : \(\alpha\in(0,1)\)
 - 棄却域
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \left(-\infty,-t_{1{-}\alpha/2}(\hat{\nu})\right)
-      \cup\left(t_{1{-}\alpha/2}(\hat{\nu}),\infty\right)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \left(-\infty,-t_{1{-}\alpha/2}(\hat{\nu})\right)
+    \cup\left(t_{1{-}\alpha/2}(\hat{\nu}),\infty\right)
+  \end{equation}
   #+end_quote
   - \(t_{1{-}\alpha/2}(\hat{\nu})\) :
     自由度 \(\hat{\nu}\) の \(t\) 分布の \(1{-}\alpha/2\) 分位点
@@ -1100,11 +1013,9 @@
 - 検定統計量 \(t\) の値を計算
 - 以下の場合は帰無仮説を棄却
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      |t|>t_{1{-}\alpha/2}(\hat{\nu})
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    |t|>t_{1{-}\alpha/2}(\hat{\nu})
+  \end{equation}
   #+end_quote
   - /[[color:gray][\(p\) 値の計算や片側対立仮説への対応は前と同様]]/
 
@@ -1145,11 +1056,9 @@
   #+end_quote
   - 帰無仮説と対立仮説
     #+begin_quote
-    #+begin_src latex
-      \begin{equation}
-        H_0:\sigma_1^2=\sigma_2^2\quad\text{vs}\quad H_1:\sigma_1^2\neq\sigma_2^2
-      \end{equation}
-    #+end_src
+    \begin{equation}
+      H_0:\sigma_1^2=\sigma_2^2\quad\text{vs}\quad H_1:\sigma_1^2\neq\sigma_2^2
+    \end{equation}
     #+end_quote
 
 ** 考え方
@@ -1164,12 +1073,10 @@
       は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う
 - *\(F\) 検定*
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      \text{検定統計量 : }
-      F=\frac{s_1^2}{s_2^2}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    \text{検定統計量 : }
+    F=\frac{s_1^2}{s_2^2}
+  \end{equation}
   #+end_quote
   - 帰無分布は自由度 \(m{-}1,n{-}1\) の \(F\) 分布
 
@@ -1193,14 +1100,12 @@
 - 標本空間: \([0,\infty)\)
 - 母数: 自由度 \(\nu_{1},\nu_{2}\)
 - 密度関数:
-  #+begin_src latex
-    \begin{equation}
-      f(x)
-      =
-      \frac{(\nu_{1}/\nu_{2})^{\nu_{1}/2}}{B(\nu_{1}/2,\nu_{2}/2)}
-      \frac{x^{\nu_{1}/2-1}}{(1+\nu_{1}x/\nu_{2})^{(\nu_{1}+\nu_{2})/2}}
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    f(x)
+    =
+    \frac{(\nu_{1}/\nu_{2})^{\nu_{1}/2}}{B(\nu_{1}/2,\nu_{2}/2)}
+    \frac{x^{\nu_{1}/2-1}}{(1+\nu_{1}x/\nu_{2})^{(\nu_{1}+\nu_{2})/2}}
+  \end{equation}
 - 備考 :
   自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う
   独立な確率変数の比の分布で，
@@ -1212,12 +1117,10 @@
 - 有意水準を選択 : \(\alpha\in(0,1)\)
 - \(H_0\) の下では以下が成立
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      P(F < F_{\alpha/2}(m{-}1,n{-}1)
-      \text{ または }F > F_{1{-}\alpha/2}(m{-}1,n{-}1))=\alpha
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    P(F < F_{\alpha/2}(m{-}1,n{-}1)
+    \text{ または }F > F_{1{-}\alpha/2}(m{-}1,n{-}1))=\alpha
+  \end{equation}
   #+end_quote
   - \(F_{\alpha/2}(m{-}1,n{-}1)\):
     自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(\alpha/2\) 分位点
@@ -1225,25 +1128,21 @@
     自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(1{-}\alpha/2\) 分位点
 - 第一種過誤の上限が \(\alpha\) の棄却域
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      R_{\alpha}=
-      \left(-\infty,F_{\alpha/2}(m{-}1,n{-}1)\right)
-      \cup\left(F_{1{-}\alpha/2}(m{-}1,n{-}1),\infty\right)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    R_{\alpha}=
+    \left(-\infty,F_{\alpha/2}(m{-}1,n{-}1)\right)
+    \cup\left(F_{1{-}\alpha/2}(m{-}1,n{-}1),\infty\right)
+  \end{equation}
   #+end_quote
 
 #+reveal: split
 - データから検定統計量 \(F\) の値を計算
 - 以下の場合，帰無仮説を棄却
   #+begin_quote
-  #+begin_src latex
-    \begin{equation}
-      F < F_{\alpha/2}(m{-}1,n{-}1)
-      \text{ または }F>F_{1{-}\alpha/2}(m{-}1,n{-}1)
-    \end{equation}
-  #+end_src
+  \begin{equation}
+    F < F_{\alpha/2}(m{-}1,n{-}1)
+    \text{ または }F>F_{1{-}\alpha/2}(m{-}1,n{-}1)
+  \end{equation}
   #+end_quote
   - /[[color:gray][\(p\) 値の計算や片側対立仮説への対応は前と同様]]/
 
