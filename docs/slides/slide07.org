@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-06-07 15:53:01 mura>
+# Time-stamp: <2024-06-07 16:12:16 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -499,7 +499,7 @@
   - \(Z\) を多数観測し分布(ヒストグラム)を求める
   - \(Z\) の分布と
     標準正規密度 \(\phi(x)\) を比較する
-    - 密度表示は ~hist()~ で ~freq=FALSE~ を指定
+    - 密度表示は関数 ~geom_histogram(aes(y = after_stat(density))~ を指定
     - 標準正規密度 \(\phi(x)\) は関数 ~dnorm()~ で計算可
   # \(\phi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\)
   # \(\sqrt{n}(\bar{X}_n-\mu)/\sigma\) のヒストグラムに
