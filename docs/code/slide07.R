@@ -98,7 +98,7 @@ my_data |>
                fill = "royalblue") + 
   geom_hline(yintercept = mu,   # 真の平均
              colour = "pink",
-             linewidth = 1.1)
+             linewidth = 1.1) +
   labs(x = "n",
        y = expression(bar(X))) 
 #'

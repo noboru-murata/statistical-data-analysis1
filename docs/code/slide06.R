@@ -103,7 +103,7 @@ monty_trial <- function(verbose = FALSE){
 #' 集合を操作する関数 setdiff(), union() を利用することができる
 #' 
 monty_trial <- function(verbose = FALSE){
-  prize <- sample(1:3, size = 1)  # 賞品の置かれた扉
+  prize  <- sample(1:3, size = 1) # 賞品の置かれた扉
   choice <- sample(1:3, size = 1) # 解答者の最初の選択
   if(prize == choice) { # 変えないのが正解の場合
     win <- "stay"
@@ -158,6 +158,29 @@ monty_data <- replicate(mc, monty_trial())
 #' 簡単な集計
 table(monty_data)    # 頻度
 table(monty_data)/mc # 確率(推定値)
+#'
+#' 論理式を使って書くこともできる
+monty_trial <- function(change = FALSE, verbose = FALSE){
+  doors <- LETTERS[1:3]      # ドアの名前 A,B,C 
+  prize <-  sample(doors, 1) # 商品のドア
+  choice <- sample(doors, 1) # 選んだドア
+  monty <-  sample(doors[(doors != prize) & (doors != choice)], 1) # モンティが開いたドア
+  if(change){ # 選択を変えた場合の最後に選んだドア
+    final <- doors[(doors != choice) & (doors != monty)]
+  } else { # 選択を変えない場合
+    final <- choice
+  }
+  if(verbose){ # TRUEの場合
+    return(c(prize=prize,choice=choice,monty=monty,final=final))    
+  } else {
+    return(ifelse(prize == final,"win","loss"))
+  }
+}
+#' 簡単な集計
+table(replicate(mc, # 最初に選んだドアのままの場合
+                monty_trial()))/mc 
+table(replicate(mc, # 選んだドアを変えた場合
+                monty_trial(change = TRUE)))/mc 
 #' ---------------------------------------------------------------------------
 
 #' ---------------------------------------------------------------------------

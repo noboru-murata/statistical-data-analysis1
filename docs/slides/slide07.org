@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-05-29 17:31:59 mura>
+# Time-stamp: <2024-06-07 15:53:01 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -347,7 +347,7 @@
                  fill = "royalblue") + 
     geom_hline(yintercept = mu,   # 真の平均
                colour = "pink",
-               linewidth = 1.1)
+               linewidth = 1.1) +
     labs(x = "n",
          y = expression(bar(X))) 
   #'

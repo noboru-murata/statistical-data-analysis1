@@ -1,16 +1,20 @@
-### 第8講 練習問題解答例
+### 第8講 サンプルコード
+library(tidyverse)
+#' 以下，日本語を用いるため macOS では以下の設定を行う
+if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+  theme_update(text = element_text(family = "HiraginoSans-W4"))
+  update_geom_defaults("text", list(family = theme_get()$text$family))
+  update_geom_defaults("label", list(family = theme_get()$text$family))}
 
-### 離散一様分布で用いた例
+#' @exercise 離散一様分布で用いた例
 
-a <- 1:6 # サンプリング対象の集合をベクトルとして定義
-sample(a, size=20, replace=TRUE) # 離散一様分布(20個)
-
-### 二項分布で用いた例
+#' @exercise 二項分布で用いた例
 
 rbinom(10, size=1, prob=0.2) # Bernoulli分布(10個)
 rbinom(20, size=5, prob=0.6) # 二項分布(20個)
 
-### 練習問題 二項分布
+#' ---------------------------------------------------------------------------
+#' @practice 二項分布
 mc <- 10000 # 実験回数を指定
 n <- 16 
 p <- 0.6
@@ -18,70 +22,86 @@ my_random <- function(){ # Bernolli分布をm個生成して合計
   sum(rbinom(n, size=1, prob=p))}
 my_data <- replicate(mc, my_random())
 my_table <- table(my_data)/mc # 出現確率ごとの表(度数分布表)を作成
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-plot(my_table, type="h", lwd=5, col="royalblue",
-     xlab="値", ylab="確率",
-     main=paste0("二項分布(試行回数", n, ", 成功確率", p, ")"))
-my_range <- min(my_data):max(my_data) # 範囲を取得
-lines(my_range + 0.3, dbinom(my_range, size=n, prob=p),
-      type="h", col="red", lwd=5) # 理論上の出現確率
-legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-       col=c("royalblue", "red"), lwd=5) # 凡例を作成
+tibble(値 = as.numeric(names(my_table)),
+       観測値 = as.numeric(my_table),
+       理論値 = dbinom(値, size = n, prob = p)) |>
+  pivot_longer(!値, values_to = "確率") |>
+  ggplot(aes(x = 値, y = 確率, fill = name)) +
+  geom_bar(stat = "identity",
+         width = 0.8, # 並びがわかりやすいように幅を調整
+         position = "dodge") +
+  labs(fill = NULL, # 凡例のfillの名称(name)を消去
+       title = paste0("二項分布(試行回数", n, ", 成功確率", p, ")")) 
+#' ---------------------------------------------------------------------------
 
-### Poisson 分布で用いた例
+#' @exercise Poisson 分布で用いた例
 
 rpois(15, lambda=1) # 強度1の Poisson 分布(15個)
 rpois(15, lambda=10) # 強度10の Poisson 分布(15個)
 
-### 練習問題 Poisson 分布
+#' ---------------------------------------------------------------------------
+#' @practice Poisson 分布
 mc <- 10000 
 lambda1 <- 5
 lambda2 <- 12
 my_random <- function(){ # 2つの Poisson 分布の和
   rpois(1, lambda=lambda1)+rpois(1, lambda=lambda2)}
 my_data <- replicate(mc, my_random())
-my_table <- table(my_data)/mc 
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-plot(my_table, type="h", lwd=5, col="royalblue",
-     xlab="値", ylab="確率",
-     main=paste0("Poisson 分布(強度", lambda1+lambda2, ")"))
-my_range <- min(my_data):max(my_data) 
-lines(my_range + 0.3,
-      dpois(my_range, lambda=lambda1+lambda2), 
-      type="h", col="red", lwd=5) # 理論上の出現確率
-legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-       col=c("royalblue", "red"), lwd=5)
+my_table <- table(my_data)/mc
+tibble(値 = as.numeric(names(my_table)),
+       観測値 = as.numeric(my_table),
+       理論値 = dpois(値, lambda=lambda1+lambda2)) |>
+  pivot_longer(!値, values_to = "確率") |>
+  ggplot(aes(x = 値, y = 確率, fill = name)) +
+  geom_bar(stat = "identity",
+         width = 0.8, 
+         position = "dodge") +
+  labs(fill = NULL, 
+       title = paste0("Poisson 分布(強度", lambda1+lambda2, ")"))
+#' ---------------------------------------------------------------------------
 
-### 幾何分布で用いた例
+#' @exercise 幾何分布で用いた例
 
 rgeom(15, prob=0.1) # 成功確率0.1の幾何分布(15個)
 
-### 一様分布で用いた例
+#' @exercise 一様分布で用いた例
 
 runif(8) # 区間(0,1)上の一様乱数(8個)
 runif(8,min=-1,max=1) # 区間(-1,1)上の一様乱数(8個)
 
-### 正規分布で用いた例
+#' @exercise 正規分布で用いた例
 
 rnorm(8) # 標準正規乱数(8個)
 rnorm(8,mean=1,sd=2) # 平均1分散4=2^2の正規乱数
 
-### 練習問題 正規分布
+mc <- 10000 # 実験回数を指定
+my_random <- function(){...} # 乱数生成のプログラム
+my_dist <- function(){...} # 必要であれば理論曲線を定義
+#' ただし多くの場合 d"乱数名"で定義されているのでそれらを用いればよい
+my_data <- replicate(mc, my_random()) # Monte-Carlo実験
+tibble(x = my_data) |>
+  ggplot(aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density))) + # 乱数の分布(密度)の表示
+  geom_function(fun = my_dist) # 理論曲線(確率密度)
+
+#' ---------------------------------------------------------------------------
+#' @practice 正規分布
 mc <- 10000 # 実験回数を指定
 my_random <- function(){ # 一方の分布を確認する
   u1 <- runif(1)
   u2 <- runif(1)
   return(sqrt(-2*log(u1))*cos(2*pi*u2))}
 my_data <- replicate(mc, my_random()) # Monte-Carlo実験
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-hist(my_data, freq=FALSE, breaks=40,
-     col="lightblue", border="white", 
-     xlab="x", main=paste0("標準正規分布")) # ヒストグラム(密度表示)
-curve(dnorm(x, mean=0, sd=1), add=TRUE, 
-      col="red", lwd=3) # 理論上の確率密度関数
-legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-       col=c("lightblue", "red"), lwd=3) # 凡例を作成
-## Box-Muller法で作られる2つの確率変数の関係を調べる
+tibble(x = my_data) |>
+  ggplot(aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)), 
+                 bins = 30,                    
+                 fill ="lightblue",          
+                 colour = "white") + 
+  geom_function(fun = dnorm, 
+                colour = "red") +
+  labs(title = "標準正規分布")
+#' Box-Muller法で作られる2つの確率変数の関係を調べる
 boxmuller <- function(){
   u1 <- runif(1)
   u2 <- runif(1)
@@ -90,19 +110,36 @@ boxmuller <- function(){
   return(c(x1,x2))
 }
 x <- replicate(mc, boxmuller()) # 2行xmc列の行列が得られる
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-plot(x[1,],x[2,],xlab="x1",ylab="x2") # 散布図を描く
-## 以下では同じ分布なのでx1,x2はまとめて計算
-mu <- round(mean(x),2)
-sigma <- round(sd(x),2)
-hist(x, freq=FALSE, breaks=40, col="lightblue", border="white",
-     main=paste0("正規分布(平均", mu, ", 分散", sigma^2, ")")) # ヒストグラム(密度表示)
-curve(dnorm(x, mean=mu, sd=sigma), add=TRUE, 
-      col="red", lwd=3) # 理論上の確率密度関数
-legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-       col=c("lightblue", "red"), lwd=3) # 凡例を作成
+#' 散布図を描く
+tibble(x1 = x[1,], x2 = x[2,]) |>
+  ggplot(aes(x = x1, y = x2)) +
+  geom_point(colour = "royalblue")
+#' x1,x2は同じ分布に従う独立な変数なので以下ではまとめて扱う
+#' 個別に扱う場合は x を x[1,] などとすれば良い
+mu <- mean(x)
+sigma <- sd(x)
+tibble(x = as.vector(x)) |>
+  ggplot(aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)), 
+                 bins = 30,                    
+                 fill ="lightblue",          
+                 colour = "white") + 
+  geom_function(fun = dnorm,
+                args = list(mean = mu, sd = sigma),
+                colour = "red") +
+  labs(title = paste0("正規分布(平均", round(mu,2), # 2桁で四捨五入
+                      ", 分散", round(sigma^2,2), ")"))
+#' @notes
+#' 散布図を描くためのデータフレームは以下のようにして作ることもできる
+#' 高次元の場合には関数を利用した方が簡単で確実
+x |> t() |>
+  as_tibble(.name_repair = "minimal") |>
+  magrittr::set_colnames(paste0("x", 1:2)) |>
+  ggplot(aes(x = x1, y = x2)) +
+  geom_point(colour = "royalblue")
+#' ---------------------------------------------------------------------------
 
-### ガンマ分布で用いた例
+#' @exercise ガンマ分布で用いた例
 
 rgamma(8, shape=3, rate=1) # ガンマ分布(8個)
 rgamma(8, shape=1, rate=3) # 異なるパラメタのガンマ分布(8個)
@@ -113,27 +150,46 @@ rexp(8, rate=0.5) # レート0.5の指数分布(8個)
 rchisq(8, df=1) # 自由度1のカイ二乗分布(8個)
 rchisq(8, df=4) # 自由度4のカイ二乗分布(8個)
 
-### 練習問題 カイ二乗分布
+#' ---------------------------------------------------------------------------
+#' @practice カイ二乗分布
 mc <- 10000 # 実験回数を指定
 k <- 8 # 自由度を設定
 my_random <- function(){ 
   sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
 my_data <- replicate(mc, my_random()) # Monte-Carlo実験
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-hist(my_data, freq=FALSE, breaks=25,
-     col="lightblue", border="white", 
-     xlab="x", main=bquote(paste(chi^2,"分布(自由度",.(k),")"))) 
-curve(dchisq(x, k), # 理論曲線(確率密度)
-      add=TRUE, col="red", lwd=3) 
-legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-       col=c("lightblue", "red"), lwd=3)
+tibble(x = my_data) |>
+  ggplot(aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)), 
+                 bins = 30,                    
+                 fill ="lightblue",          
+                 colour = "white") + 
+  geom_function(fun = dchisq,
+                args = list(df = k),
+                colour = "red") +
+  labs(title = bquote(paste(chi^2,"分布 (自由度",.(k),")")))
+#' @notes
+#' 関数 bquote() は関数 expression() と同様な働きをするが
+#' 自由度の k を .(k) で評価して取り込むことができる
+#' 以下と比較してみよう
+tibble(x = my_data) |>
+  ggplot(aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)), 
+                 bins = 30,                    
+                 fill ="lightblue",          
+                 colour = "white") + 
+  geom_function(fun = dchisq,
+                args = list(df = k),
+                colour = "red") +
+  labs(title = expression(paste(chi^2,"分布 (自由度",k,")")))
+#' ---------------------------------------------------------------------------
 
-### t 分布で用いた例
+#' @exercise t 分布で用いた例
 
 rt(8, df=1) # 自由度1のt分布(8個)
 rt(8, df=4) # 自由度4のt分布(8個)
 
-### 練習問題 t分布
+#' ---------------------------------------------------------------------------
+#' @practice t分布
 mc <- 10000 # 実験回数を指定
 k <- 7
 my_random <- function(){ 
@@ -142,30 +198,25 @@ my_random <- function(){
   z <- rnorm(1) # 標準正規乱数
   return(z/sqrt(y/k))}
 my_data <- replicate(mc, my_random()) # Monte-Carlo実験
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-hist(my_data, freq=FALSE, breaks=40,
-     col="lightblue", border="white",  
-     xlab="x", main=bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")")))
-curve(dt(x, df=k), # 確率密度関数(理論)
-      add=TRUE, col="red", lwd=3) 
-legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-       col=c("lightblue", "red"), lwd=3)
-## グラフの上下が切れてしまう場合は ylim で表示を調整することができる
-hist(my_data, freq=FALSE, breaks=40,
-     col="lightblue", border="white",
-     ylim=c(0,0.4), # 自動調整ではなく0.4まで表示する
-     xlab="x", main=bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")")))
-curve(dt(x, df=k), # 確率密度関数(理論)
-      add=TRUE, col="red", lwd=3) 
-legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-       col=c("lightblue", "red"), lwd=3)
+tibble(x = my_data) |>
+  ggplot(aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)), 
+                 bins = 30,                    
+                 fill ="lightblue",          
+                 colour = "white") + 
+  geom_function(fun = dt,
+                args = list(df = k),
+                colour = "red") +
+  labs(title = bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")")))
+#' ---------------------------------------------------------------------------
 
-### F 分布で用いた例
+#' @exercise F 分布で用いた例
 
 rf(10, df1=4, df2=7) # 自由度4,7のF分布(10個)
 rf(10, df1=7, df2=12) # 自由度7,12のF分布(10個)
 
-### 練習問題 F分布
+#' ---------------------------------------------------------------------------
+#' @practice F分布
 mc <- 10000 # 実験回数を指定
 k1 <- 20
 k2 <- 10
@@ -176,27 +227,20 @@ my_random <- function(){
   ## y2 <- sum(rnorm(k2)^2) 
   return((y1/k1)/(y2/k2))}
 my_data <- replicate(mc, my_random()) # Monte-Carlo実験
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-hist(my_data, freq=FALSE, breaks=40,
-     col="lightblue", border="white",
-     xlab="x",
-     main=bquote(paste(frac(Y[1]/k[1],Y[2]/k[2]),
-                       " (",k[1]==.(k1),
-                       ", ",k[2]==.(k2),")"))) 
-curve(df(x, df1=k1, df2=k2), # 確率密度関数(理論)
-      add=TRUE, col="red", lwd=3) 
-legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-       col=c("lightblue", "red"), lwd=3) 
-## グラフの一部に着目したい場合は xlim/ylim で表示を調整することができる
-hist(my_data, freq=FALSE, 
-     col="lightblue", border="white",
-     breaks=80, # ビンの数を多めに指定する
-     xlim=c(0,6), ylim=c(0,0.8), # 表示領域を指定する
-     xlab="x",
-     main=bquote(paste(frac(Y[1]/k[1],Y[2]/k[2]),
-                       " (",k[1]==.(k1),
-                       ", ",k[2]==.(k2),")"))) 
-curve(df(x, df1=k1, df2=k2), # 確率密度関数(理論)
-      add=TRUE, col="red", lwd=3) 
-legend("topright", inset=0.05, legend=c("観測値", "理論値"), 
-       col=c("lightblue", "red"), lwd=3)
+tibble(x = my_data) |>
+  ggplot(aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)), 
+                 bins = 30,                    
+                 fill ="lightblue",          
+                 colour = "white") + 
+  geom_function(fun = df,
+                args = list(df1 = k1, df2 = k2),
+                colour = "red") +
+  labs(title = bquote(paste(frac(Y[1]/k[1],Y[2]/k[2]),
+                            " (",k[1]==.(k1),
+                            ", ",k[2]==.(k2),")")))
+#' @notes
+#' グラフの一部に着目したい場合は xlim/ylim で表示を調整することができる
+last_plot() + # 直前のプロット
+  xlim(0,6) + ylim(0,0.8) # 表示領域を指定する(表示しない部分について警告が出る)
+#' ---------------------------------------------------------------------------
