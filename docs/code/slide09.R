@@ -8,6 +8,7 @@ if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォン�
 
 #' ---------------------------------------------------------------------------
 #' @practice 平均・分散・標準偏差の計算
+#' 
 #' データの読み込み
 tw_data <- read_csv("data/tokyo_weather.csv")
 #'
@@ -38,6 +39,7 @@ tw_data |>
 #' ランダムに選択した36日で推定した場合のばらつきを調べる
 mc <- 5000 # 実験回数を指定
 n <- 36 # ランダムに選択する日数を指定
+#'
 #' 気温の標本平均による例
 my_trial <- function(){ 
   tw_data |>
@@ -84,6 +86,7 @@ my_trial <- function(n){ # 日数を指定してまとめて計算するよう�
 }
 my_data <- # 実験データをデータフレームに直しておく
   replicate(mc, my_trial(n = n)) |> t() |> as_tibble()
+#'
 #' 図示する部分を関数として定義しておく
 my_plot <- function(data,    # データ
                     summary, # データ全体から計算した真値
@@ -101,30 +104,35 @@ my_plot <- function(data,    # データ
     labs(title = paste(item, "の", func, "の推定"))
   print(tmp)
 }
+#'
 #' 全ての組み合わせは for 文で実行可能
 for(item in c("temp","solar","wind")){ # 項目を指定
   for(func in c("mean","var","sd")){   # 関数を指定
     my_plot(my_data, tw_summary, item, func)
   }
 }
+#'
 #' 標準偏差の推定量は偏りがあることが確認できる
 #' 風速の分散の推定量の分布が他と異なり正規分布に近くないので，
-#' サンプル数を増やしてみる
-my_data <- # サンプル数を3倍にしてみる
-  replicate(mc, my_trial(n = 108)) |> t() |> as_tibble()
-my_plot(my_data, tw_summary, "wind", "var")
+#' サンプル数を3倍に増やしてみる
+my_plot(replicate(mc, my_trial(n = 108)) |> t() |> as_tibble()，
+        tw_summary, "wind", "var")
+#'
 #' 推定量の分散がちいさくなるとともに形状が正規分布に近づいたことが確認できる
 #' ---------------------------------------------------------------------------
 
 #' ---------------------------------------------------------------------------
 #' @practice 歪度と超過尖度の計算
+#' 
 library("e1071")
+#'
 #' データの読み込み
 tw_data <- read_csv("data/tokyo_weather.csv")
+#'
 #' 全データによる計算
 tw_data |> 
-   summarise(across(c(temp,solar,wind),
-                    list(skew = skewness, kurt = kurtosis)))
+  summarise(across(c(temp,solar,wind),
+                   list(skew = skewness, kurt = kurtosis)))
 #'
 #' @notes
 #' パッケージの一部の関数しか利用しない場合は
@@ -133,9 +141,9 @@ tw_data |>
 #' ただし，関数内で他の関数に依存する場合は注意する必要がある
 #' 
 tw_data |> 
-   summarise(across(c(temp,solar,wind),
-                    list(skew = e1071::skewness,
-                         kurt = e1071::kurtosis)))
+  summarise(across(c(temp,solar,wind),
+                   list(skew = e1071::skewness,
+                        kurt = e1071::kurtosis)))
 #'
 #' 5の付く日のデータによる計算
 tw_data |>
@@ -170,11 +178,11 @@ for(item in c("temp","solar","wind")){ # 項目を指定
 
 #' ---------------------------------------------------------------------------
 #' @practice 共分散と相関の計算
+#' 
 #' データの読み込み
 tw_data <- read_csv("data/tokyo_weather.csv")
 #'
 #' 共分散・相関行列の計算
-#' 
 tw_cov <-
   tw_data |>
   select(temp,rain,solar,wind,press,humid) |>
@@ -188,7 +196,6 @@ tw_cor == max(tw_cor-diag(diag(tw_cor))) # 対角を除く最大相関 (temp,hum
 abs(tw_cor) == min(abs(tw_cor)) # 最小相関(0に近い) (rain,wind)
 #'
 #' 散布図の描画
-#' 
 tw_data |> # 対象データを全て表示してみる
   select(temp,rain,solar,wind,press,humid) |>
   GGally::ggpairs() # packageを読み込まずに直接指定する
@@ -206,6 +213,7 @@ tw_data |> # 最小相関
 #'
 #' @notes
 #' 数値項目を抽出するのであれば以下のように簡潔に書ける
+#' 
 tw_data |>
   select(where(is.numeric))
 #' ただし不要な項目も含まれるので
@@ -216,21 +224,23 @@ tw_data |>
 
 #' ---------------------------------------------------------------------------
 #' @practice 分位点と最頻値の計算
+#' 
 #' データの読み込み
 tw_data <- read_csv("data/tokyo_weather.csv")
 #'
 #' 気温の分位点
 #' 全データによる計算
-#' 
 (tw_temp_summary <-
    tw_data |>
    pull(temp) |> # 1列のみ抽出してベクトルにする
    summary())
+#'
 #' 5の付く日のデータによる計算
 tw_data |>
   filter(day %in% c(5,15,25)) |>
   pull(temp) |>
   summary()
+#'
 #' ランダムに選択した36日で推定した場合のばらつき
 mc <- 5000 # 実験回数を指定
 my_trial <- function(){
@@ -241,6 +251,7 @@ my_trial <- function(){
 }
 my_data <-
   replicate(mc, my_trial()) |> t() |> as_tibble()
+#'
 #' ヒストグラムの表示
 for(name in names(my_data)){
   name <- sym(name)
@@ -256,6 +267,7 @@ for(name in names(my_data)){
          title = paste("気温の", name, "の推定"))
   print(tmp)
 }
+#'
 #' ヒストグラムの表示 (定義域とビンを揃えて表示する)
 breaks <- # 適切なビンの計算して固定する
   tw_data |> pull(temp) |> pretty(n = 40)
@@ -274,6 +286,7 @@ for(name in names(my_data)){
          title = paste("気温の", name, "の推定"))
   print(tmp)
 }
+#'
 #' 最多風向の最頻値
 (my_table <-
    tw_data |>
@@ -293,11 +306,12 @@ cardinal_directions <- c("N","NNE","NE","ENE",
 tw_data |>
   mutate(wdir = factor(wdir, levels = cardinal_directions)) |>
   group_by(wdir, .drop = FALSE) |> # 0も含めて16方位全て計算する
-  summarize(count = n()) |>
+  summarize(count = n()) |> # 関数 table() だと頻度 0 の項目はないことに注意
   ggplot(aes(x = wdir, y = count)) +
   geom_bar(stat = "identity", fill = alpha("blue", 0.4)) +
   coord_polar(start = 0) # 極座標表示にする
-#' 中心を空洞にするには下駄を履かせればよい
+#'
+#' 中心を空洞にするには負の値で下駄を履かせればよい
 tw_data |>
   mutate(wdir = factor(wdir, levels = cardinal_directions)) |>
   group_by(wdir, .drop = FALSE) |> # 0も含めて16方位全て計算する

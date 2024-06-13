@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-05-31 14:35:45 mura>
+# Time-stamp: <2024-06-13 18:19:39 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -34,6 +34,11 @@
 #+begin_src R :exports none
   ### 第10講 サンプルコード
   library(tidyverse)
+  #' 以下，日本語を用いるため macOS では以下の設定を行う
+  if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+    theme_update(text = element_text(family = "HiraginoSans-W4"))
+    update_geom_defaults("text", list(family = theme_get()$text$family))
+    update_geom_defaults("label", list(family = theme_get()$text$family))}
 #+end_src
 
 
@@ -167,7 +172,7 @@
 - \(\bar{X}\) は \(\mu\) の一様最小分散不偏推定量
 
 
-* 演習
+* 実習
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
@@ -182,56 +187,96 @@
   - 中央値 (median)
   - 最大値と最小値の平均 ((max+min)/2)
 - ヒント : 以下のような関数を作り，Monte-Carlo実験を行えばよい
-  #+begin_src R :eval no
+  #+begin_src R :eval no :tangle no
     my_mean_est <- function(n, min, max){ # 観測データ数
-        x <- runif(n, min=min, max=max) # 一様乱数を生成，範囲は引数から
-        return(c(xbar=mean(x),med=median(x),mid=(max(x)+min(x))/2))
+      x <- runif(n, min=min, max=max) # 一様乱数を生成，範囲は引数から
+      return(c(xbar=mean(x),med=median(x),mid=(max(x)+min(x))/2))
     } # 3つまとめて計算する関数
   #+end_src
   
-#+begin_src R :eval no :exports none :tangle yes
-  ### 練習問題 一様分布の平均の推定
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice 一様分布の平均の推定
+  #' 
   set.seed(1234) # 乱数のシード値の指定
-  ## 平均値の推定を行う関数(標本平均，x1，最大最小)
-  my_mean_est <- function(n, min, max){
-    x <- runif(n, min=min, max=max)
-    return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
+  #'
+  #' 平均値の推定を行う関数(標本平均，中央値，最大最小の平均)
+  estimate_means <- function(n, min, max){
+    x <- runif(n, min = min, max = max)
+    return(c(xbar = mean(x),           # 標本平均
+             med = median(x),          # 中央値
+             mid = (max(x)+min(x))/2)) # 最大最小の平均
   }
-  ## 実験の設定 
-  n <- 10 # 観測データのサンプル数
-  mc <- 10000 # 実験回数
+  #'
+  #' 実験の設定 
+  n <- 10         # 観測データのサンプル数
+  mc <- 10000     # 実験回数
   a <- 0; b <- 50 # 一様乱数の区間
-  my_data <- as.data.frame(t( # mc行 x 3種に変換(転置)
-    replicate(mc, my_mean_est(n, min=a, max=b))
-  ))
-  ## replicate は3行 x mc 列の行列を返すことに注意
-  ## ここでは data.frame として扱うために型を変換している
-  head(my_data) # 実験結果の表示
-  apply(my_data,2,mean) # 推定値の平均 (colMeans(my_data)も可)
-  apply(my_data,2,var)  # 推定値の分散
-  ## もう少し詳しくみてみる
-  summary(my_data) # 四分位点を表示
-  for(i in 1:3) { # それぞれのヒストグラムを書いてみる
-    hist(my_data[,i], breaks=40, 
-         xlim=c(a,b), ylim=c(0,2000), # 同じ大きさの図にする
-         col="pink", border="brown",
-         xlab="est", main=names(my_data)[i])
+  my_data <- 
+    replicate(mc, estimate_means(n, min = a, max = b)) |> # 3 x mc 型行列
+    t() |>      # 転置 mc x 3 型行列
+    as_tibble() # データフレーム化
+  my_data # 実験結果の一部を確認
+  my_data |> # 集計 (各推定値の平均と分散を計算)
+    summarize_all(list(mean = mean, var = var))
+  #'
+  #' @notes
+  #' 関数 summarize_all() は以下と等価
+  #' 
+  my_data |> 
+    summarize(across(everything(),
+                     list(mean = mean, var = var)))
+  #'
+  #' もう少し詳しくみてみる
+  my_data |> summary() # 四分位点を表示 (簡便な方法)
+  my_data |> # データフレームとして取得する方法 (以下は一例)
+    pivot_longer(everything()) |> # long format に変更
+    group_by(name) |> # 推定量ごとに集計
+    summarize(as_tibble_row(quantile(value))) # 計算結果を行に並べる
+  #'
+  #' それぞれのヒストグラムを書いてみる
+  for(name in c("xbar","med","mid")) {
+    name <- sym(name)
+    tmp <-
+      my_data |>
+      ggplot(aes(x = !!name)) +
+      geom_histogram(bins = 40,
+                     fill = "pink",
+                     colour = "brown") +
+      xlim(a,b) + ylim(0,2500) + # 同じ大きさの図にする
+      labs(x = "estimate",
+           title = paste(name, "の分布"))
+    print(tmp)
   }
-  ## 補遺: 違う分布で試してみる 
-  my_mean_est2 <- function(n){
-    x <- rt(n, df=2) # 自由度2のt分布 (裾が重く平均が推定しにくい分布)
-    return(c(xbar=mean(x), med=median(x), mid=(max(x)+min(x))/2))
+  #'
+  #' @notes
+  #' 違う分布で試してみる
+  #' 
+  estimate_means2 <- function(n){
+    x <- rt(n, df = 2) # 自由度2のt分布 (裾が重く平均が推定しにくい分布)
+    return(c(xbar = mean(x), med = median(x), mid = (max(x)+min(x))/2))
   }
-  my_data <- as.data.frame(t(
-    replicate(mc, my_mean_est2(n))))
-  for(i in 1:3) { # それぞれの分布を書いてみる
-    hist(my_data[,i],
-         breaks=40, freq=FALSE, # 密度表示
-         xlim=c(-10,10), # x軸を同じにする
-         col="pink", border="brown",
-         xlab="est", main=names(my_data)[i])
+  my_data2 <- 
+    replicate(mc, estimate_means2(n)) |> t() |> as_tibble()
+  #'
+  #' それぞれの分布を書いてみる
+  for(name in c("xbar","med","mid")) { 
+    name <- sym(name)
+    tmp <-
+      my_data2 |>
+      ggplot(aes(x = !!name)) +
+      geom_histogram(aes(y = after_stat(density)), # 密度表示
+                     bins = 40,
+                     fill = "pink",
+                     colour = "brown") +
+      xlim(-10,10) + # x軸を同じにする
+      labs(x = "estimate",
+           title = paste(name, "の分布"))
+    print(tmp)
   }
-  ## この分布では中央値が良い推定となることがわかる
+  #'
+  #' この分布では中央値が良い推定となることがわかる
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 
@@ -450,65 +495,90 @@
   - 推定した結果をヒストグラムに描き加えて比較しなさい．
 - 自身で収集したデータを用いて，モデル化と最尤推定を試みよ．
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 練習問題 ガンマ分布による風速データのモデル化
-  ## データの取得
-  tw_data <- read.csv("data/tokyo_weather.csv")
-  ## 以下では関数 with を利用しているが，tw_data から風速を取り出しておいても良い
-  
-  ## ヒストグラムの描画
-  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-  with(tw_data, hist(wind, breaks=30, freq=FALSE, # 密度
-                     col="skyblue", border="blue",
-                     main="風速のヒストグラム", xlab="風速 [m/s]", ylab="密度"))
-  
-  ## ガンマ関数による最尤推定
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice ガンマ分布による風速データのモデル化
+  #' 
+  #' データの取得
+  tw_data <- read_csv("data/tokyo_weather.csv")
+  #'
+  #' ヒストグラムの描画
+  tw_data |>
+    ggplot(aes(x = wind)) +
+    geom_histogram(aes(y = after_stat(density)), # 密度表示
+                   bins = 30,
+                   fill = "skyblue",
+                   colour = "slateblue") +
+    labs(x = "風速 [m/s]", y = "密度", title = "風速のヒストグラム")
+  #'
+  #' ガンマ分布の最尤推定量
   library("stats4") # 関数mleを利用
-  ## ガンマ分布の最尤推定量
-  mle.gamma <- function(x, # 観測データ
-                        nu0=1, # nuの初期値
-                        alpha0=1, # alphaの初期値
-                        verbose=FALSE){ # debug用に追加
-      ## 負の対数尤度関数を定義 (最小化を考えるため)
-      ll <- function(nu, alpha) # nuとalphaの関数として定義 
-          suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
-      ## suppressWarnings は定義域外で評価された際の警告を表示させない
-      ## 最尤推定(負の尤度の最小化)
-      est <- mle(minuslogl=ll, # 負の対数尤度関数
-                 start=list(nu=nu0, alpha=alpha0), # 初期値
-                 method="BFGS", # 最適化方法 (選択可能)
-                 nobs=length(x)) # 観測データ数
-      if(verbose) { 
-          return(est) # verbose=TRUEならmleの結果を全て返す
-      } else {
-          return(coef(est)) # 推定値のみ返す
-      }
+  mle.gamma <- function(x,                # 観測データ
+                        nu0 = 1,          # nuの初期値
+                        alpha0 = 1,       # alphaの初期値
+                        verbose = FALSE){ # debug用に追加
+    ## 負の対数尤度関数を定義 (最小化を考えるため)
+    ll <- function(nu, alpha) # nuとalphaの関数として定義 
+      suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
+    ## suppressWarnings は定義域外で評価された際の警告を表示させない
+    ## 最尤推定(負の尤度の最小化)
+    est <- mle(minuslogl=ll, # 負の対数尤度関数
+               start=list(nu=nu0, alpha=alpha0), # 初期値
+               method="BFGS", # 最適化方法 (選択可能)
+               nobs=length(x)) # 観測データ数
+    if(verbose) { 
+      return(est) # verbose=TRUEならmleの結果を全て返す
+    } else {
+      return(coef(est)) # 推定値のみ返す
+    }
   }
-  (theta <- with(tw_data, mle.gamma(wind))) # 最尤推定
-  
-  ## 結果の重ね描き
-  curve(dgamma(x, theta[1], theta[2]), # あてはめたガンマ分布の密度関数
-        add=TRUE, col="orange", lwd=3) 
-  
-  ### 補遺: シミュレーションによる一致性の検証
+  #' 最尤推定の計算
+  (theta <- with(tw_data, mle.gamma(wind))) 
+  #'
+  #' 結果の重ね描き
+  last_plot() +
+    geom_function(fun = dgamma,
+                  args = list(shape = theta[1],
+                              rate = theta[2]),
+                  colour = "orange",
+                  linewidth = 1.2)
+  #'
+  #' @notes
+  #' シミュレーションによる一致性の検証
+  #' 
   set.seed(5678) # 乱数のシード値の指定
   nu <- 5; alpha <- 2 # 真のパラメタ
-  mc <- 2000 # 実験回数 (計算が重いので少なめにしている)
-  for(n in c(10, 100, 300)){ # データ数を変えて実験
-      ## Monte-Carlo実験
-      my_est <- data.frame(t( # 推定値のdata.frame
-          replicate(mc, mle.gamma(rgamma(n, nu, alpha)))
-      ))
-      ## 結果をヒストグラムで表示
-      hist(my_est$nu, breaks=30, col="skyblue1", border="skyblue4",
-           xlim=c(0, 20), main=paste0("n=",n), xlab=expression(nu))
-      abline(h=0, lwd=2, lty="dotted") # x軸 (y=0) を表示
-      abline(v=nu, col="tomato", lwd=2, lty="solid") # nuの真値
-      hist(my_est$alpha, breaks=30, col="seagreen1", border="seagreen4",
-           xlim=c(0, 10), main=paste0("n=",n), xlab=expression(alpha))
-      abline(h=0, lwd=2, lty="dotted")  # x軸 (y=0) を表示
-      abline(v=alpha, col="tomato", lwd=2, lty="solid") # alphaの真値
+  mc <- 1000 # 実験回数 (計算が重いので少なめにしている)
+  for(n in c(10, 50, 100)){ # データ数を変えて実験
+    ## Monte-Carlo実験
+    my_data <- # 推定値のdata.frame
+      replicate(mc, mle.gamma(rgamma(n, nu, alpha))) |>
+      t() |> as_tibble()
+    ## 結果を密度推定で表示
+    tmp <-
+      my_data |>
+      ggplot(aes(x = nu)) + # nu の推定値の分布
+      geom_density(fill = "skyblue1",
+                   colour = "skyblue4") +
+      geom_vline(xintercept = nu, # nu の真値
+                 colour = "tomato",
+                 linewidth = 1.2) +
+      xlim(0,20) +
+      labs(x = expression(nu), title = paste("n =",n))
+    print(tmp)
+    tmp <- 
+      my_data |>
+      ggplot(aes(x = alpha)) + # alpha の推定値の分布
+      geom_density(fill = "seagreen1",
+                   colour = "seagreen4") +
+      geom_vline(xintercept = alpha, # alpha の真値
+                 colour = "tomato",
+                 linewidth = 1.2) +
+      xlim(0,10) +
+      labs(x = expression(alpha), title = paste("n =",n)) 
+    print(tmp)
   }
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 
@@ -660,7 +730,7 @@
 #+reveal: split
 - \(\chi^{2}\) 分布
 #+begin_leftcol
-#+begin_src R :file figs/pdf_chisq.png :exports results :results graphics
+#+begin_src R :file figs/pdf_chisq.png :exports results :results graphics :tangle no
   par(family="HiraginoSans-W4") 
   plot(function(x)dchisq(x,3,ncp=0), -1, 10,
        col=4, lwd=3,
@@ -690,7 +760,7 @@
 #+reveal: split
 - \(t\) 分布
 #+begin_leftcol
-#+begin_src R :file figs/pdf_t.png :exports results :results graphics
+#+begin_src R :file figs/pdf_t.png :exports results :results graphics :tangle no
   par(family="HiraginoSans-W4") 
   plot(function(x)dt(x,df=3,ncp=0), -6, 6,
        col=5, lwd=3, ylim=c(0,0.4),
@@ -906,7 +976,7 @@
   - サンプル数 \(n\) が十分大きい場合に近似的に正しい
 
 
-* 演習
+* 実習
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
@@ -922,53 +992,66 @@
 - 自身で収集したデータで区間推定を試みよ．
 
 #+begin_src R :eval no :exports none :tangle yes
-  ### 練習問題 日射量データの区間推定
-  ## データの取得
-  tw_data <- read.csv("data/tokyo_weather.csv")
-  ## 以下では関数 with を利用しているが，tw_data から日射量を取り出しておいても良い
-  
-  ## 全データによる平均値の計算
-  (mu <- with(tw_data, mean(solar))) # 真値
-  
-  ## 50点による90%信頼区間
+  #' ---------------------------------------------------------------------------
+  #' @practice 日射量データの区間推定
+  #' 
+  #' データの取得
+  tw_data <- read_csv("data/tokyo_weather.csv")
+  #'
+  #' 全データによる平均値の計算
+  (mu <- tw_data |> pull(solar) |> mean()) # 真値
+  #'
+  #' 50点による90%信頼区間
   set.seed(1357) # 乱数のシード値の指定
   n <- 50
   idx <- sample(nrow(tw_data),n) # データの抽出
-  (xbar <- with(tw_data[idx,], mean(solar))) # 標本平均
-  (s <- with(tw_data[idx,], sd(solar))) # 標本標準偏差
+  (xbar <- tw_data |> slice(idx) |> pull(solar) |> mean()) # 標本平均
+  (sigma <- tw_data |> slice(idx) |> pull(solar) |> sd())  # 標本標準偏差
   z95 <- qnorm(0.95) # 標準正規分布の0.95分位点
-  (ci <- c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
-  
-  ## 信頼区間の正答率の評価
+  (ci <- c(L = xbar-z95*sigma/sqrt(n),
+           U = xbar+z95*sigma/sqrt(n))) # 信頼区間
+  #'
+  #' 信頼区間の正答率の評価
   mc <- 100
   my_trial <- function(n){ # nを変えて実験できるように
-      idx <- sample(nrow(tw_data),n)
-      xbar <- with(tw_data[idx,], mean(solar)) # 標本平均
-      s <- with(tw_data[idx,], sd(solar)) # 標本標準偏差
-      return(c(L=xbar-z95*s/sqrt(n),U=xbar+z95*s/sqrt(n))) # 信頼区間
+    idx <- sample(nrow(tw_data),n)
+    xbar <- tw_data |> slice(idx) |> pull(solar) |> mean() # 標本平均
+    sigma <- tw_data |> slice(idx) |> pull(solar) |> sd()  # 標本標準偏差
+    return(c(L = xbar-z95*sigma/sqrt(n),
+             U = xbar+z95*sigma/sqrt(n))) # 信頼区間
   }
-  my_ci <- as.data.frame(t( # confidence intervals
-      replicate(mc,my_trial(n))
-  ))
-  apply(my_ci,1,function(x)(x["L"]<mu & mu<x["U"]))
-  table(apply(my_ci,1,function(x)(x["L"]<mu & mu<x["U"])))
-  
-  ### 補遺: 信頼区間について多数で評価する
+  my_data <- # 信頼区間のMonte-Carlo実験
+    replicate(mc,my_trial(n)) |> t() |> as_tibble() |>
+    mutate(answer = L < mu & mu < U) # 真値が信頼区間に含まれるか
+  my_data |> pull(answer) |> table()
+  #'
+  #' @notes
+  #' 信頼区間について多数で評価する
+  #' 
   mc <- 2000
-  my_ci <- as.data.frame(t(
-      replicate(mc,my_trial(n))
-  ))
-  table(apply(my_ci,1,function(x)(x["L"]<mu & mu<x["U"])))/mc # 確率を見る
-  ### 補遺: グラフを描いてみる
+  my_data <- # 信頼区間のMonte-Carlo実験
+    replicate(mc,my_trial(n)) |> t() |> as_tibble() |>
+    mutate(answer = L < mu & mu < U) # 真値が信頼区間に含まれるか
+  my_data |> pull(answer) |> table()/mc # 確率を見る
+  #'
+  #' @notes
+  #' グラフを描いてみる
+  #' 
   k <- 20 
-  idx <- sample(nrow(my_ci),k) # k個選んで描く
-  plot(x=1:k,type="n",
-       ylim=c(min(my_ci),max(my_ci)),
-       xlab="index", ylab="confidence intervals") # 枠だけ描く
-  abline(h=mu, col="orange", lwd=2)
-  with(my_ci[idx,],
-       arrows(x0=1:k,y0=U,y1=L,code=3,
-              angle=90,length=1/20,col="blue"))
+  idx <- sample(nrow(my_data), k) 
+  my_data |>
+    slice(sample(nrow(my_data), k)) |> # k個ランダムに選んで描く
+    rowid_to_column(var = "index") |>
+    ggplot(aes(x = index)) +
+    geom_errorbar(aes(ymin = L, ymax = U),
+                  colour = "blue",
+                  width = 0.2) +
+    geom_hline(yintercept = mu, # 観測データを全て使った推定値
+               colour = "orange",
+               linewidth = 1.1)
+  #' 日射量の平均の推定における
+  #' 観測データを全て使った推定値(真値に相当)と信頼区間の関係
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 
