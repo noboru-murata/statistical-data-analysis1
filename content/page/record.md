@@ -6,7 +6,7 @@ draft = false
 weight = 1016
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2024-06-07 Fri&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2024-06-18 Tue&gt; </span></span> 更新
 
 講義の進捗に合わせて追加します．
 
@@ -17,7 +17,7 @@ weight = 1016
 -   [第5講 (2024年5月24日)](https://u-tokyo-ac-jp.zoom.us/rec/share/_ZcUZxSkh0AkrnT18wrvMbBFD6qUK9K1PpeeGYfXBpN4KZuvLfg2pSPCRtOsorRv.fLObwwfbTCoxXcnU?startTime=1716537332000)
 -   [第6講 (2024年5月31日)](https://u-tokyo-ac-jp.zoom.us/rec/share/LPw_sSLbW0wDfakPzEIz5Lqoo1AOLjAL4p-yJPg1tdbbzIaIvmBNJDe8ucXkkw4M.pVL-2iP-D2DPCJKt?startTime=1717142139000)
 -   [第7講 (2024年6月7日)](https://u-tokyo-ac-jp.zoom.us/rec/share/IX7SstRnX3kiSayD_-Bd-CUVBCamgq3T6Z1Vt_7mVIbGwZIAD-zT6OTWlvsSQvNG.YrrBZeak3_-SFoiE?startTime=1717746926000)
--   第8講 (2024年6月14日)
+-   [第8講 (2024年6月14日)](https://u-tokyo-ac-jp.zoom.us/rec/share/1dcPajyN_SM09-T8hB-xeHMaKEzQ9GF30Jt6sWyT-iKwLUdmcfU2pDK_PXDPpmm6.qJ5XUo8lmD0cRfog?startTime=1718351731000)
 -   第9講 (2024年6月21日)
 -   第10講 (2024年6月28日)
 -   第11講 (2024年7月5日)
