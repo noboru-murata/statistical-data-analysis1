@@ -93,7 +93,7 @@ my_plot <- function(data,    # データ
                     item,    # 項目名
                     func){  # 集計関数名
   name <- sym(paste(item, func, sep = "_")) # シンボルを作成
-  tmp <- data |>
+  gg <- data |>
     ggplot(aes(x = !!name)) + # シンボルを !! によって unquote
     geom_histogram(aes(y = after_stat(density)), 
                    bins = 30,                    
@@ -102,7 +102,7 @@ my_plot <- function(data,    # データ
     geom_vline(xintercept = summary[[name]],
                colour = "red") +
     labs(title = paste(item, "の", func, "の推定"))
-  print(tmp)
+  print(gg)
 }
 #'
 #' 全ての組み合わせは for 文で実行可能
@@ -161,7 +161,7 @@ tw_summary <- # 前の練習問題の結果を利用
                    list(mean = mean, var = var, sd =sd)))
 for(item in c("temp","solar","wind")){ # 項目を指定
   item <- sym(item)
-  tmp <- tw_data |>
+  gg <- tw_data |>
     ggplot(aes(x = !!item)) + 
     geom_histogram(aes(y = after_stat(density)), 
                    bins = 30,                    
@@ -172,7 +172,7 @@ for(item in c("temp","solar","wind")){ # 項目を指定
                               sd = tw_summary[[paste0(item,"_sd")]]),
                   colour = "red") +
     labs(title = paste(item, "と正規分布の比較"))
-  print(tmp)
+  print(gg)
 }
 #' ---------------------------------------------------------------------------
 
@@ -255,7 +255,7 @@ my_data <-
 #' ヒストグラムの表示
 for(name in names(my_data)){
   name <- sym(name)
-  tmp <- my_data |>
+  gg <- my_data |>
     ggplot(aes(x = !!name)) +
     geom_histogram(aes(y = after_stat(density)),
                    bins = 40,
@@ -265,7 +265,7 @@ for(name in names(my_data)){
                colour = "red") +
     labs(x = "気温",
          title = paste("気温の", name, "の推定"))
-  print(tmp)
+  print(gg)
 }
 #'
 #' ヒストグラムの表示 (定義域とビンを揃えて表示する)
@@ -273,7 +273,7 @@ breaks <- # 適切なビンの計算して固定する
   tw_data |> pull(temp) |> pretty(n = 40)
 for(name in names(my_data)){
   name <- sym(name)
-  tmp <- my_data |>
+  gg <- my_data |>
     ggplot(aes(x = !!name)) +
     geom_histogram(aes(y = after_stat(density)),
                    breaks = breaks, # ビンを固定
@@ -284,7 +284,7 @@ for(name in names(my_data)){
     ylim(0,0.5) + # y軸の表示を適当に固定する
     labs(x = "気温",
          title = paste("気温の", name, "の推定"))
-  print(tmp)
+  print(gg)
 }
 #'
 #' 最多風向の最頻値
