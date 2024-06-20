@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-05-31 14:48:40 mura>
+# Time-stamp: <2024-06-20 17:04:37 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -32,6 +32,11 @@
 #+begin_src R :exports none
   ### 第12講 サンプルコード
   library(tidyverse)
+  #' 以下，日本語を用いるため macOS では以下の設定を行う
+  if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+    theme_update(text = element_text(family = "HiraginoSans-W4"))
+    update_geom_defaults("text", list(family = theme_get()$text$family))
+    update_geom_defaults("label", list(family = theme_get()$text$family))}
 #+end_src
 
 
@@ -313,35 +318,36 @@
   \end{equation}
   #+end_quote
 
-** R : 分散分析の関数
+** 分散分析の計算
 - 基本書式 
-  #+begin_src R :eval no
-    res <- aov(formula, data)
-    ## formula: 式，一元配置の場合は (観測値 ~ 因子)
-    ## data: データフレーム
-    ## 分析の結果を参照する関数がいくつかあるので，多くの場合適当なオブジェクトに代入
+  #+begin_src R :eval no :tangle no
+    aov(formula, data)
+    #' formula: 式，一元配置の場合は (観測値 ~ 因子)
+    #' data: データフレーム
+    #' 分析の結果を参照する関数がいくつかあるので，多くの場合適当なオブジェクトに代入
   #+end_src
 - 分散分析表の表示
-  #+begin_src R :eval no
-    summary(res) # res は上記の分析を保存したオブジェクト
-    anova(res) # summaryと同様な情報を表示，こちらは data.frame になっている
-    model.tables(res, type="means")   # 平均値
-    model.tables(res, type="effects") # 効果
+  #+begin_src R :eval no :tangle no
+    aov(formula, data) |> summary()     # 分析表形式での表示
+    aov(formula, data) |> anova()       # データフレーム(data.frame形式)
+    aov(formula, data) |> broom::tidy() # データフレーム(tibble形式)
+    aov(formula, data) |> model.table(type = "means")   # 平均値
+    aov(formula, data) |> model.table(type = "effects") # 効果(既定値)
   #+end_src
 
-** R : 分散分析の関数 (検定のみ)
+** 分散分析の計算 (検定のみ)
 - 基本書式 
-  #+begin_src R :eval no
+  #+begin_src R :eval no :tangle no
     oneway.test(formula, data, subset, na.action, var.equal = FALSE)
-    ## formula: 式
-    ## data: データフレーム
-    ## subset: subsetの指定
-    ## na.action: 欠損値の扱い
-    ## var.equal: 等分散を仮定する場合は TRUE，標準では Welch の近似が用いられる
+    #' formula: 式
+    #' data: データフレーム
+    #' subset: subsetの指定
+    #' na.action: 欠損値の扱い
+    #' var.equal: 等分散を仮定する場合は TRUE，標準では Welch の近似が用いられる
   #+end_src
 
 
-* 演習
+* 実習
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
@@ -349,12 +355,13 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
+- 一元配置分散分析について確率シミュレーションを行いなさい．
 - 東京の気候データ (~tokyo_weather.csv~) の
   気温の項目について以下の問に答えよ．
   - 曜日ごとの気温の平均と分散を求めよ．
-    #+begin_src R :eval no
-      ## 週日を因子(factor)とするには例えば以下のような項目を加えればよい
-      tw_data <- read.csv("data/tokyo_weather.csv")
+    #+begin_src R :eval no :tangle no
+      #' 週日を因子(factor)とするには例えば以下のような項目を加えればよい
+      tw_data <- read_csv("data/tokyo_weather.csv")
       days <- with(tw_data, # 日付を取り出して整形する
                    as.Date(paste(year,month,day,sep="-"))) 
       wdays <- weekdays(days) # 各日付の曜日を計算
@@ -362,101 +369,151 @@
     #+end_src
   - 曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 分散分析(一元配置)の Monte-Carlo 実験
-  fact <- as.factor(rep(LETTERS[1:3],c(10,8,12))) # 因子
-  alt <- rep(c(1,-1,1),c(10,8,12)) # 対立仮説の例
-  foo <- data.frame( # 帰無仮説が正しい場合
-      obs=rnorm(length(fact),mean=3,sd=2), # 観測値
-      fact=fact) # 因子
-  bar <- data.frame( # 対立仮説が正しい場合
-      obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
-      fact=fact) # 因子
-  library("beeswarm") # boxplot上に散布図を表示するため
-  boxplot(obs ~ fact, data=foo, 
-          col="pink", main="H0 = TRUE")
-  beeswarm(obs ~ fact, data=foo,
-           add=TRUE, col="red")
-  anova(aov(obs ~ fact, data=foo))
-  boxplot(obs ~ fact, data=bar, 
-          col="lightblue", main="H0 = FALSE")
-  beeswarm(obs ~ fact, data=bar,
-           add=TRUE, col="blue")
-  anova(aov(obs ~ fact, data=bar))
-  
-  ## 実験
-  my_trial <- function(h0=TRUE){
-      if(h0) {
-          tmp <- data.frame( # 帰無仮説が正しい場合
-              obs=rnorm(length(fact),mean=3,sd=2), # 観測値
-              fact=fact # 因子
-          )
-      } else {
-          tmp <- data.frame( # 対立仮説が正しい場合
-              obs=rnorm(length(fact),mean=3,sd=2)+alt, # 水準ごとに平均が異なる
-              fact=fact # 因子
-          )
-      }
-      return(anova(aov(obs ~ fact, data=tmp))["fact",c("F value","Pr(>F)"),drop=TRUE])
-      ## p値を返す
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice 分散分析(一元配置)の Monte-Carlo 実験例
+  #'
+  #' A,B,Cの3つの水準をもつデータを考える
+  fact <- as.factor(rep(LETTERS[1:3], c(10,8,12))) # 因子(水準A,B,Cが10,8,12個)
+  toy_data0 <- # 平均が全て等しい場合 (帰無仮説が正しい例)
+    tibble(factor = fact,                                 # 水準
+           value = rnorm(length(fact), mean = 3, sd = 2)) # 観測値
+  #' データの状況を図示する
+  toy_data0 |>
+    ggplot(aes(x = factor, y = value)) +
+    geom_boxplot(fill = "pink") +
+    geom_jitter(colour = "red", width = 0.2) +
+    labs(title = "帰無仮説が正しい場合")
+  #' 
+  alt <- rep(c(1,-1,1), c(10,8,12)) # 水準ごとの平均のずれ(対立仮説の例)
+  toy_data1 <- # 平均が水準ごとに異なる場合(対立仮説が正しい例)
+    tibble(factor = fact,                                       # 水準
+           value = rnorm(length(fact), mean = 3, sd = 2) + alt) # 観測値
+  #' 同様に図示する
+  toy_data1 |>
+    ggplot(aes(x = factor, y = value)) +
+    geom_boxplot(fill = "lightblue") +
+    geom_jitter(colour = "blue", width = 0.2) +
+    labs(title = "帰無仮説が誤りの場合")
+  #'
+  #' 分散分析を行う
+  #' 帰無仮説が正しい場合
+  aov(value ~ factor, data = toy_data0) 
+  aov(value ~ factor, data = toy_data0) |>
+    broom::tidy() # 分散分析表
+  #' 帰無仮説が誤りの場合(対立仮説が正しい場合)
+  aov(value ~ factor, data = toy_data1) 
+  aov(value ~ factor, data = toy_data1) |>
+    broom::tidy() # 分散分析表
+  #'
+  #' @notes
+  #' 関数 aov() のようにデータが第1引数でない場合にパイプ演算子を使うには
+  #' "_" (placeholder) を使って位置を明示すればよい
+  toy_data0 |> aov(value ~ factor, data = _) 
+  toy_data0 |>
+    aov(value ~ factor, data = _) |>
+    broom::tidy()
+  #'
+  #' Monte-Carlo 実験
+  mc_trial <- function(h0 = TRUE){
+    if(h0) { # 帰無仮説が正しい場合
+      tmp <-
+        tibble(factor = fact,
+               value = rnorm(length(fact), mean = 3, sd = 2)) |>
+        aov(value ~ factor, data = _) |> broom::tidy()
+    } else { # 対立仮説が正しい場合
+      tmp <- 
+        tibble(factor = fact, # 水準ごとに平均が異なる
+               value = rnorm(length(fact), mean = 3, sd = 2) + alt) |>
+        aov(value ~ factor, data = _) |> broom::tidy()
+    }
+    #' 分散分析表における factor 行の統計量とp値を返す
+    return(c(statistic = tmp[1,5, drop = TRUE],
+             p.value   = tmp[1,6, drop = TRUE]))
+    #' 以下のように書いても良い
+    #' return(tmp |> select(5:6) |> t() |> _[,1])
   }
-  ## 帰無仮説が正しい場合のF値/p値の分布 (一様分布になる)
-  foo <- replicate(2000,my_trial())
-  hist(unlist(foo["F value",]),
-       xlab="F-value", main="H0 = TRUE")
-  hist(unlist(foo["Pr(>F)",]),
-       xlab="p-value", main="H0 = TRUE")
-  ## 対立仮説が正しい場合のp値の分布 (小さな値に偏る)
-  bar <- replicate(2000,my_trial(h0=FALSE))
-  hist(unlist(bar["F value",]),
-       xlab="F-value", main="H0 = FALSE")
-  hist(unlist(bar["Pr(>F)",]),
-       xlab="p-value", main="H0 = FALSE")
-  ## foo <- data.frame(t(replicate....)) としてもよいが
-  ## data.frame の名前に空白や>が許されず，適宜書き変わるので注意
+  #'
+  #' 帰無仮説が正しい場合のF統計量/p値の分布 (p値は一様分布になる)
+  replicate(2000, mc_trial()) |>
+    t() |> as_tibble() |> pivot_longer(everything()) |> # 描画用に変形
+    ggplot(aes(x = value, fill = name)) +
+    geom_histogram(show.legend = FALSE) +
+    facet_wrap(vars(name), ncol = 2, scales = "free") + # それぞれ個別の座標で描画
+    labs(title = "帰無仮説が正しい場合")
+  #'
+  #' 対立仮説が正しい場合のF統計量/p値の分布 (p値は小さな値に偏る)
+  replicate(2000, mc_trial(h0 = FALSE)) |>
+    t() |> as_tibble() |> pivot_longer(everything()) |> 
+    ggplot(aes(x = value, fill = name)) +
+    geom_histogram(show.legend = FALSE) +
+    facet_wrap(vars(name), ncol = 2, scales = "free") + 
+    labs(title = "帰無仮説が誤りの場合")
+  #' ---------------------------------------------------------------------------
 #+end_src
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 練習問題 一元配置分散分析
-  ## 気候データによる例
-  ## 曜日ごとの気温に差があるか否かを分散分析
-  tw_data <- read.csv("data/tokyo_weather.csv")
-  ## 曜日の情報を付加
-  days <- with(tw_data,
-               as.Date(paste(year,month,day,sep="-"))) # 日付を作成
-  wdays <- weekdays(days) # 各日付の曜日を計算
-  idx <- min(which(wdays=="Sunday")) # 最初の日曜を抽出
-  tw_data <- cbind(tw_data,
-                   weekday=factor(wdays, # 曜日因子を追加
-                                  levels=wdays[0:6+idx])) # 日曜から順に
-  ## 上記は基本関数のみを利用して記述しているが
-  ## 曜日の因子化などは package::lubridate に含まれる関数などを使っても良い
-  ## 箱ひげ図で可視化
-  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-  boxplot(temp ~ weekday, data=tw_data, 
-          col="lavender", main="曜日ごとの気温") 
-  aggregate(temp ~ weekday, data=tw_data, FUN=mean)
-  aggregate(temp ~ weekday, data=tw_data, FUN=var)
-  aggregate(temp ~ weekday, data=tw_data, FUN=sd)
-  ## 曜日ごとの気温差に関する分散分析
-  (my_aov <- aov(temp ~ weekday, data=tw_data)) # aovによる分析
-  summary(my_aov) # 分散分析表の表示(棄却されない)
-  anova(my_aov)["weekday","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
-  model.tables(my_aov, type="means")   # 水準(曜日)ごとの平均値
-  model.tables(my_aov, type="effects") # 水準(曜日)ごとの効果
-  ## 検定のみ実行する場合
-  ## 級内の分散が等しいことを仮定
-  oneway.test(temp ~ weekday, data=tw_data, var.equal=TRUE) 
-  ## 級内の分散が等しいことが仮定できない場合はWelchの近似法による検定が行われる
-  oneway.test(temp ~ weekday, data=tw_data) # 
-
-  ## 参考: 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
-  tw_data$month <- as.factor(tw_data$month) # 月を因子化
-  boxplot(temp ~ month, data=tw_data, 
-          col="lavender", main="月ごとの気温") 
-  (my_aov <- aov(temp ~ month, data=tw_data)) # aovによる分析
-  summary(my_aov) # 分散分析表の表示(棄却される)
-  anova(my_aov)["month","Pr(>F)"] # p値の取得 (行・列の番号で指定してもよい)
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice 一元配置分散分析
+  #'
+  #' 気候データによる例
+  #' 曜日ごとの気温に差があるか否かを分散分析
+  tw_data <- read_csv("data/tokyo_weather.csv") |>
+    mutate(day_of_week = ordered(day_of_week, # 曜日を順序付き因子にする
+                                 levels = wday(1:7, label = TRUE))) 
+  #'
+  #' 曜日ごとの分布を見るとともに平均・分散(標準偏差)を確認する
+  tw_data |>
+    ggplot(aes(x = day_of_week, y = temp)) +
+    geom_boxplot(fill = "lavender") +
+    labs(x = "曜日", y = "気温", title = "曜日ごとの気温の分布") 
+  tw_data |>
+    group_by(day_of_week) |>
+    summarize(across(temp, list(mean = mean,
+                                var = var,
+                                sd = sd)))
+  #'
+  #' 曜日ごとの気温差に関する分散分析
+  aov(temp ~ day_of_week, data = tw_data) # aovによる分析
+  aov(temp ~ day_of_week, data = tw_data) |>
+    summary() # 分散分析表の表示(棄却されない)
+  aov(temp ~ day_of_week, data = tw_data) |>
+    broom::tidy() # 分散分析表のデータフレーム (行・列の番号で必要な情報が取得できる)
+  aov(temp ~ day_of_week, data = tw_data) |>
+    model.tables(type = "means")   # 水準(曜日)ごとの平均値
+  aov(temp ~ day_of_week, data = tw_data) |>
+    model.tables(type = "effects") # 水準(曜日)ごとの効果
+  #'
+  #' 検定のみ実行する場合
+  #' 級内の分散が等しいことを仮定
+  oneway.test(temp ~ day_of_week, data = tw_data, var.equal = TRUE) 
+  #' 級内の分散が等しいことが仮定できない場合はWelchの近似法による検定が行われる
+  oneway.test(temp ~ day_of_week, data = tw_data) # 
+  #'
+  #' @notes
+  #' 月ごとの気温に差があるか否かを分散分析 (棄却されるはず)
+  #' 
+  tw_data <- tw_data |> mutate(month = as_factor(month)) # 月を因子化
+  tw_data |>
+    ggplot(aes(x = month, y = temp)) +
+    geom_boxplot(fill = "lavender") +
+    labs(x = "月", y = "気温", title = "月ごとの気温の分布") 
+  aov(temp ~ month, data = tw_data) |>
+    summary() # 分散分析表の表示(棄却される)
+  #'
+  #' 曜日の因子化などは package::lubridate に含まれる関数が利用できる
+  #' 曜日の文字列を得る方法
+  wday(1:7, label = TRUE) # 省略名
+  wday(1:7, label = TRUE, abbr = FALSE) # 正式名
+  wday(2:8, label = TRUE) # 月曜から始まる文字列を得る場合
+  wday(1:7, label = TRUE, week_start = 1) # 順序を月曜から始める場合
+  #'
+  #' 日付から曜日を得る方法
+  tw_data |>
+    mutate(date = as_date(paste(year,month,day, sep = "-")), # 日付に変換
+           weekday = wday(date, label = TRUE), # 日付から曜日(順序付因子)を追加
+           .before = year) # year列の前に付加
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 
@@ -689,17 +746,17 @@
   \end{equation}
   #+end_quote
 
-** R : 分散分析の関数
+** 分散分析の計算
 - 基本書式 
-  #+begin_src R :eval no
+  #+begin_src R :eval no :tangle no
     aov(formula, data)
-    ## formula: 式，二元配置の場合は (観測値 ~ 因子 + 因子)
-    ## data: データフレーム
+    #' formula: 式，二元配置の場合は (観測値 ~ 因子 + 因子)
+    #' data: データフレーム
   #+end_src
 - 分散分析表なども同様
 
 
-* 演習
+* 実習
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
@@ -717,40 +774,42 @@
   - データを適当な方法で可視化しなさい．
   - それぞれの因子で満足度の平均に違いがあるか
     二元配置の分散分析を用いて検討しなさい．
-  #+begin_src R :eval no
-    ## パッケージのインストールと読み込みは以下のように行うことができる
+  #+begin_src R :eval no :tangle no
+    #' パッケージのインストールと読み込みは以下のように行うことができる
     install.packages("datarium") # インストール
     library("datarium") # 読み込み
   #+end_src
 
-#+begin_src R :eval no :exports none :tangle yes
-  ### 練習問題 二元配置分散分析
-  ## datarium::jobsatisfaction による例
-  ## 性別(gender)と学歴(education_level)による仕事の満足度
-  ## 満足度にそれぞれの因子の効果があるかを検証
-  ## install.packages("datarium") # 検定用のデータが集められている
+#+begin_src R :eval no :exports none
+  #' ---------------------------------------------------------------------------
+  #' @practice 二元配置分散分析
+  #' 
+  #' datarium::jobsatisfaction による例
+  #' 性別(gender)と学歴(education_level)による仕事の満足度
+  #' 満足度にそれぞれの因子の効果があるかを検証
+  #' 
+  #' install.packages("datarium") # 検定用のデータが集められている
   library("datarium") # packageの読み込み
+  #'
+  #' データの内容を確認
   head(jobsatisfaction) # データの一部を見る
   View(jobsatisfaction) # 左上ペインに表を表示する
-  ## boxplotによる視覚化
-  boxplot(score ~ education_level + gender,
-          data=jobsatisfaction,
-          col=rep(c("lightblue","pink"),each=3))
-  ## 比較するために表示を工夫してみる
-  boxplot(score ~ education_level + gender,
-          data=jobsatisfaction,
-          col=rep(c("yellow","palegreen","royalblue"),2),
-          names=c("","male","","","female",""))
-  legend("topleft",inset=0.05,
-         col=c("yellow","palegreen","royalblue"),
-         lwd=3, cex=0.5,
-         legend=c("school","college","university"))
-  ## 二元配置分散分析
-  (my_aov <- aov(score ~ gender + education_level,
-                data=jobsatisfaction))
-  summary(my_aov)
-  model.tables(my_aov, type="means")  
-  model.tables(my_aov, type="effects")
+  #'
+  #' データの視覚化
+  jobsatisfaction |> # 学歴ごとに性別を比較
+    ggplot(aes(x = education_level, y = score, fill = gender)) +
+    geom_boxplot()
+  jobsatisfaction |> # 性別ごとに学歴を比較
+    ggplot(aes(x = gender, y = score, fill = education_level)) +
+    geom_boxplot()
+  #' 二元配置分散分析
+  aov(score ~ gender + education_level, data=jobsatisfaction) |>
+    summary()
+  aov(score ~ gender + education_level, data=jobsatisfaction) |>
+    model.tables(type = "means")  
+  aov(score ~ gender + education_level, data=jobsatisfaction) |>
+    model.tables(type = "effects")
+  #' ---------------------------------------------------------------------------
 #+end_src
 
 

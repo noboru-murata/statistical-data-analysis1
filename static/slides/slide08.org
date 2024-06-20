@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-06-14 13:55:43 mura>
+# Time-stamp: <2024-06-19 17:51:17 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -32,7 +32,7 @@
 #+begin_src R :exports none
   ### 第8講 サンプルコード
   library(tidyverse)
-  #' 以下，日本語を用いるため macOS では以下の設定を行う
+  #' 日本語を用いる場合 macOS では以下の設定を行うと良い
   if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
     theme_update(text = element_text(family = "HiraginoSans-W4"))
     update_geom_defaults("text", list(family = theme_get()$text$family))
@@ -319,7 +319,7 @@
     試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う．
     これをグラフに描画して確認しなさい．
 
-#+begin_src R :eval no :exports none :tangle yes
+#+begin_src R :eval no :exports none
   #' ---------------------------------------------------------------------------
   #' @practice 二項分布
   #' 
@@ -447,7 +447,7 @@
     強度 \(\lambda_{1}+\lambda_{2}\) の Poisson 分布に従う．
     これをグラフに描画して確認しなさい．
 
-#+begin_src R :eval no :exports none :tangle yes
+#+begin_src R :eval no :exports none
   #' ---------------------------------------------------------------------------
   #' @practice Poisson 分布
   #' 
@@ -776,7 +776,7 @@
     これをグラフに描画して確認せよ. \\
     (この変換を Box-Muller 変換と呼ぶ)
 
-#+begin_src R :eval no :exports none :tangle yes
+#+begin_src R :eval no :exports none
   #' ---------------------------------------------------------------------------
   #' @practice 正規分布
   #' 
@@ -1207,7 +1207,7 @@
     \end{equation}
     は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従うことを確認しなさい．
 
-#+begin_src R :eval no :exports none :tangle yes
+#+begin_src R :eval no :exports none
   #' ---------------------------------------------------------------------------
   #' @practice F分布
   #' 
