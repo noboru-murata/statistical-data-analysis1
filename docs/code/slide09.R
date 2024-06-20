@@ -115,7 +115,7 @@ for(item in c("temp","solar","wind")){ # 項目を指定
 #' 標準偏差の推定量は偏りがあることが確認できる
 #' 風速の分散の推定量の分布が他と異なり正規分布に近くないので，
 #' サンプル数を3倍に増やしてみる
-my_plot(replicate(mc, my_trial(n = 108)) |> t() |> as_tibble()，
+my_plot(replicate(mc, my_trial(n = 108)) |> t() |> as_tibble(), 
         tw_summary, "wind", "var")
 #'
 #' 推定量の分散がちいさくなるとともに形状が正規分布に近づいたことが確認できる

@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-06-19 17:50:07 mura>
+# Time-stamp: <2024-06-20 17:10:47 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -365,7 +365,7 @@
   #' 標準偏差の推定量は偏りがあることが確認できる
   #' 風速の分散の推定量の分布が他と異なり正規分布に近くないので，
   #' サンプル数を3倍に増やしてみる
-  my_plot(replicate(mc, my_trial(n = 108)) |> t() |> as_tibble()，
+  my_plot(replicate(mc, my_trial(n = 108)) |> t() |> as_tibble(), 
           tw_summary, "wind", "var")
   #'
   #' 推定量の分散がちいさくなるとともに形状が正規分布に近づいたことが確認できる
