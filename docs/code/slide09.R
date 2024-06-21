@@ -43,7 +43,7 @@ n <- 36 # ランダムに選択する日数を指定
 #' 気温の標本平均による例
 my_trial <- function(){ 
   tw_data |>
-    slice(sample(nrow(tw_data), n)) |>
+    slice_sample(n = n) |> # ランダムにn行抽出
     summarise(mean = mean(temp)) |>
     as.numeric() # tibble形式ではなく単なる数値として返す
 }
@@ -79,7 +79,7 @@ tibble(平均気温の推定値 = xbars) |>
 my_trial <- function(n){ # 日数を指定してまとめて計算するように変更する
   tmp <- # 計算結果を一時保存
     tw_data |>
-    slice(sample(nrow(tw_data), n)) |>
+    slice_sample(n = n) |>
     summarise(across(c(temp,solar,wind),
                      list(mean = mean, var = var, sd =sd)))
   return(t(tmp)[,1,drop = TRUE]) # データフレームではなくベクトルとして返す
@@ -264,7 +264,7 @@ for(name in names(my_data)){
     geom_vline(xintercept = tw_temp_summary[[name]],
                colour = "red") +
     labs(x = "気温",
-         title = paste("気温の", name, "の推定"))
+         title = paste("気温の", name, "の推定のばらつき"))
   print(gg)
 }
 #'
@@ -283,7 +283,21 @@ for(name in names(my_data)){
                colour = "red") +
     ylim(0,0.5) + # y軸の表示を適当に固定する
     labs(x = "気温",
-         title = paste("気温の", name, "の推定"))
+         title = paste("気温の", name, "の推定のばらつき"))
+  print(gg)
+}
+#'
+#' 密度推定を用いても良い
+for(name in names(my_data)){
+  name <- sym(name)
+  gg <- my_data |>
+    ggplot(aes(x = !!name)) +
+    geom_density(fill = "lightblue",
+                 colour = "blue") +
+    geom_vline(xintercept = tw_temp_summary[[name]],
+               colour = "red") +
+    labs(x = "気温",
+         title = paste("気温の", name, "の推定のばらつき"))
   print(gg)
 }
 #'

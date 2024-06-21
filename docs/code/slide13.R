@@ -1,51 +1,99 @@
-### 第13講 練習問題解答例
+### 第13講 サンプルコード
+library(tidyverse)
+#' 日本語を用いる場合 macOS では以下の設定を行うと良い
+if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+  theme_update(text = element_text(family = "HiraginoSans-W4"))
+  update_geom_defaults("text", list(family = theme_get()$text$family))
+  update_geom_defaults("label", list(family = theme_get()$text$family))}
 
-### 回帰分析の Monte-Carlo 実験
-## 人工データによる回帰モデルの推定
-alpha <- 2
-beta <- 3
-n <- 20
-sigma <- 0.3
-x <- runif(n)
-epsilon <- rnorm(n,sd=sigma)
+lm(formula, data, subset, na.action, ...)
+## formula: 式 (目的変数 ~ 説明変数)
+## data: データフレーム
+## subset: 対象とする部分データ
+## na.action: 欠損値の扱い
+## ...: 他のオプション．詳細は help(lm) を参照
+
+#' ---------------------------------------------------------------------------
+#' @practice 回帰分析の Monte-Carlo 実験の例
+#'
+#' 人工データによる回帰モデルの推定
+#' 以下のモデルのパラメタは適当に変更せよ
+alpha <- 2    # 切片
+beta  <- 3    # 回帰係数
+n <- 20       # データ数
+sigma <- 0.5  # 誤差の標準偏差
+#' データの生成
+x <- runif(n, min = -1, max = 1) # 説明変数 (区間[-1,1]を想定)
+epsilon <- rnorm(n, sd = sigma)  # 誤差 (正規分布)
 y <- alpha + beta * x + epsilon
-plot(x,y, type="p")
-my_data <- data.frame(x=x,y=y)
-est <- lm(y ~ x, data=my_data)
-summary(est)
-abline(coef=c(alpha,beta),col="red")
-abline(reg=est,col="blue")
-
-## 実験
-my_trial <- function(){
-  epsilon <- rnorm(n,sd=sigma)
+#' データの視覚化
+toy_data <- tibble(x = x, y = y)
+gg <-
+  toy_data |>
+  ggplot(aes(x = x, y = y)) +
+  geom_point(colour = "forestgreen")
+print(gg)
+#' 回帰式の推定
+toy_lm <- lm(y ~ x, data = toy_data)
+#' base R での情報の表示 
+toy_lm |> summary() # さまざまな情報がlist形式
+coef(toy_lm)        # 推定された係数
+#' tidyverse での情報の表示 (tibble形式)
+toy_lm |> broom::tidy()    # 推定された係数の情報
+toy_lm |> broom::glance()  # 推定に関するさまざまな情報
+toy_lm |> broom::augment() # 推定に用いられたデータの情報
+#' 推定結果の視覚化
+gg +
+  geom_abline(intercept = alpha,
+              slope = beta,
+              colour = "red") + # 真の回帰式
+  geom_abline(intercept = coef(toy_lm)[1],
+              slope = coef(toy_lm)[2],
+              colour = "blue")  # 推定された回帰式
+#'
+#' Monte-Carlo 実験
+mc_trial <- function(){
+  epsilon <- rnorm(n, sd = sigma)
   y <- alpha + beta * x + epsilon # 説明変数は固定しておく
-  est <- lm(y ~ x) 
+  est <- lm(y ~ x) # データフレームにせずに直接 x,y を渡す
+  ## データフレームにする場合は以下のようにすればよい
+  ## lm(y ~ x, data = tibble(x = x, y = y))
   return(coef(est))
 }
-foo <- replicate(2000,my_trial())
-## 推定値の分布
-if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
-hist(foo[1,],
-     breaks=30, freq=FALSE,
-     col="pink",
-     xlab=expression(hat(alpha)), main="切片の分布")
-abline(v=alpha,col="orange",lwd=2)
-hist(foo[2,],
-     breaks=30, freq=FALSE,
-     col="palegreen",
-     xlab=expression(hat(beta)), main="傾きの分布")
-abline(v=beta,col="darkgreen",lwd=2)
+mc_data <- # 実験結果をデータフレームに変換
+  replicate(2000, mc_trial()) |> t() |> as_tibble()
+#'
+#' 推定値の分布を視覚化
+mc_data |> # 切片
+  ggplot(aes(x = `(Intercept)`)) +
+  geom_density(fill = "pink") +
+  geom_vline(xintercept = alpha, colour = "orange") +
+  labs(x = expression(hat(alpha)), title = "切片の分布")
+mc_data |> # 傾き
+  ggplot(aes(x = x)) +
+  geom_density(fill = "palegreen") +
+  geom_vline(xintercept = beta, colour = "darkgreen") +
+  labs(x = expression(hat(beta)), title = "傾きの分布")
+#'
+#' 推定された回帰式のばらつきの表示
+mc_data |>
+  slice_sample(n = 20) |> # Monte-Carlo 実験から20個ランダムに選択
+  rowid_to_column() |>    # 番号列(rowid)を作成
+  ggplot() +
+  geom_abline(aes(intercept = `(Intercept)`,
+                  slope = x,
+                  colour = as_factor(rowid)), # 色を変える
+              show.legend = FALSE) + # 凡例は表示しない
+  geom_abline(intercept = alpha,
+              slope = beta,
+              linewidth = 1.2) + # 真の回帰式(太め)
+  xlim(-1,1) + ylim(alpha-beta*1.1, alpha+beta*1.1) + # 描画範囲の指定
+  labs(title = "推定された回帰式のばらつき")
+#' 同じ生成モデルでも，生成されたデータによって推定結果がばらつくことがわかる
+#' ---------------------------------------------------------------------------
 
-## 推定された回帰式のばらつきの表示
-plot(x,y, type="n",
-     main="推定された回帰式のばらつき") # 表示するための適当な領域を指定
-for(i in seq(1,ncol(foo),by=10)) { # 推定された回帰式を間引いて表示
-  abline(coef=foo[,i],col="gray90")
-}
-abline(coef=c(alpha,beta),col="red")
-## 同じ生成モデルでも，生成されたデータによって推定結果がばらつくことがわかる
-
+#' ---------------------------------------------------------------------------
+#' @practice 
 ### 練習問題 回帰モデルの点推定
 ## 気候データによる例
 tw_data <- read.csv("data/tokyo_weather.csv")
@@ -82,7 +130,23 @@ points(formula(my_model2),
      pch=20, col="orange")
 abline(reg=my_model2,
        col="red", lwd=2)
+#' ---------------------------------------------------------------------------
 
+confint(object, parm, level = 0.95, ...)
+## object: 関数 lm で推定したモデル
+## parm: 区間推定をするパラメタ．指定しなければ全て
+## level: 信頼係数
+## ...: 他のオプション．詳細は help(confint) を参照
+
+predict(object, newdata, interval="confidence", level=0.95,..)
+## object: 関数 lm で推定したモデル
+## newdata: 予測値を計算する説明変数
+## interval: 信頼区間 "confidence" (既定値は "none")
+## level: 信頼係数 (既定値は0.95)
+## ...: 他のオプション．詳細は help(predict.lm) を参照
+
+#' ---------------------------------------------------------------------------
+#' @practice 
 ### 練習問題 回帰モデルの区間推定
 ## 気候データによる例
 ## 前問で構成したモデルを用いる
@@ -109,7 +173,13 @@ y <- predict(my_model2,
              interval="confidence", level=0.95)
 matlines(x, y, lwd=2,
          lty=c(1,4,4), col=c("red","pink","pink"))
+#' ---------------------------------------------------------------------------
 
+summary(object)
+## object: 関数 lm で推定したモデル
+
+#' ---------------------------------------------------------------------------
+#' @practice 
 ### 練習問題 回帰モデルの係数の検定
 ## 気候データによる例
 ## 前問で構成したモデルを用いる
@@ -126,7 +196,13 @@ coef(summary(my_model2)) # 関数coefでも可
 coef(summary(my_model2))["solar",c("t value","Pr(>|t|)")]
 coef(my_model2) # 推定された係数のみ取り出す場合
 coef(summary(my_model2))[,"Estimate"] # 上と同じ
+#' ---------------------------------------------------------------------------
 
+summary(object)
+## object: 関数 lm で推定したモデル
+
+#' ---------------------------------------------------------------------------
+#' @practice 
 ### 練習問題 決定係数による回帰モデルの検討
 ## 気候データによる例
 ## 前問で構成したモデルを用いる
@@ -162,7 +238,9 @@ abline(reg=my_model4, col="red", lwd=2)
 summary(my_model4)
 ## 夏場は雨が降ると気温が下がる傾向が有意にあることが読み取れる
 ## 決定係数が低いのはそもそも気温のばらつきが大きいことに起因すると考えられる
+#' ---------------------------------------------------------------------------
 
+#' ---------------------------------------------------------------------------
 ### 補遺
 ### ggplot2 を用いた線形回帰分析(単回帰)の例
 ### - Brain and Body Weights for 28 Species
@@ -284,3 +362,4 @@ autoplot(model, colour="royalblue",
          smooth.colour="gray50", smooth.linetype="dashed",
          ad.colour="blue",
          label.size=3, label.n=5, label.colour="red")
+#' ---------------------------------------------------------------------------
