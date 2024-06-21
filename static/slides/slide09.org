@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-06-20 17:10:47 mura>
+# Time-stamp: <2024-06-21 15:45:01 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -20,6 +20,9 @@
     - 特徴付け(生成機構)がわかりやすい
 
 * 講義概要
+:PROPERTIES:
+:ID:       65CA9765-C5EC-4DB1-AF31-F260DB854F2E
+:END:
 - 基本的な記述統計量
 - "モーメント"に基づく記述統計量
   - 歪度と尖度
@@ -61,7 +64,7 @@
 - 真の値と観測データによる推定値には差 *(誤差)* がある 
 
 ** 独立同分布性
-- 統計解析における重要な仮定とその帰結 :
+- 統計解析における重要な仮定とその帰結
   - 確率変数 \(X_{1},X_{2},\dotsc,X_{n}\) が *同分布* \\
     共通の平均 \(\mu\) および分散 \(\sigma^2\) を考えることができる \\
     (適切な次数のモーメントの存在を仮定)
@@ -94,7 +97,7 @@
   #   平均・分散・標準偏差の一致推定量
 
 ** 推定量の不偏性
-- サンプル数が小さい場合の推定量の良さに関する性質の1つ
+- サンプル数が小さい場合の推定量の "良さ" に関する性質の1つ
 - *不偏性* (unbiasedness) 
   #+begin_quote
   推定量 \(\hat{\theta}\)
@@ -238,6 +241,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       B63DE1BA-57AF-473B-A8F2-9FF160762C35
 :END:
 - 東京の気候データ (~tokyo_weather.csv~) の中の
   #+begin_quote
@@ -293,7 +297,7 @@
   #' 気温の標本平均による例
   my_trial <- function(){ 
     tw_data |>
-      slice(sample(nrow(tw_data), n)) |>
+      slice_sample(n = n) |> # ランダムにn行抽出
       summarise(mean = mean(temp)) |>
       as.numeric() # tibble形式ではなく単なる数値として返す
   }
@@ -329,7 +333,7 @@
   my_trial <- function(n){ # 日数を指定してまとめて計算するように変更する
     tmp <- # 計算結果を一時保存
       tw_data |>
-      slice(sample(nrow(tw_data), n)) |>
+      slice_sample(n = n) |>
       summarise(across(c(temp,solar,wind),
                        list(mean = mean, var = var, sd =sd)))
     return(t(tmp)[,1,drop = TRUE]) # データフレームではなくベクトルとして返す
@@ -501,6 +505,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       3B308760-C0D3-4D19-ADCB-4AD1BE6511B0
 :END:
 - 東京の気候データ (~tokyo_weather.csv~) の中の
   #+begin_quote
@@ -637,6 +642,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       45328F7B-1505-44DA-90FC-3BE48313EF6F
 :END:
 - 東京の気候データ (~tokyo_weather.csv~) の中の
   #+begin_quote
@@ -774,10 +780,9 @@
     qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
     #' p: 分位点 (100p%)
     #' mean, sd: 正規分布の特性を決めるoption
-    #' lower.tail: TRUE なら P(X<x) を計算
-    #'             FALSE なら逆
-    #' log.p: 出力を対数とするか否か (値が小さい場合に利用)
-    
+    #' lower.tail: TRUE なら P(X<x) を計算．FALSE なら逆
+    #' log.p: 確率を対数とするか否か (値が小さい場合に利用)
+    #'
     #' xxx分布の場合は以下の形式
     qxxx(p, "分布の特性を決める option の指定") 
   #+end_src
@@ -835,6 +840,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       AF539B4D-B4BE-4A00-A9D8-64C21C2781BE
 :END:
 - 東京の気候データ (~tokyo_weather.csv~) の中の
   #+begin_quote
@@ -890,7 +896,7 @@
       geom_vline(xintercept = tw_temp_summary[[name]],
                  colour = "red") +
       labs(x = "気温",
-           title = paste("気温の", name, "の推定"))
+           title = paste("気温の", name, "の推定のばらつき"))
     print(gg)
   }
   #'
@@ -909,7 +915,21 @@
                  colour = "red") +
       ylim(0,0.5) + # y軸の表示を適当に固定する
       labs(x = "気温",
-           title = paste("気温の", name, "の推定"))
+           title = paste("気温の", name, "の推定のばらつき"))
+    print(gg)
+  }
+  #'
+  #' 密度推定を用いても良い
+  for(name in names(my_data)){
+    name <- sym(name)
+    gg <- my_data |>
+      ggplot(aes(x = !!name)) +
+      geom_density(fill = "lightblue",
+                   colour = "blue") +
+      geom_vline(xintercept = tw_temp_summary[[name]],
+                 colour = "red") +
+      labs(x = "気温",
+           title = paste("気温の", name, "の推定のばらつき"))
     print(gg)
   }
   #'
