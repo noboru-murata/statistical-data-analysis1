@@ -46,8 +46,8 @@
 
 </section>
 <section>
-<section id="slide-orge971648">
-<h2 id="orge971648">講義概要</h2>
+<section id="slide-orgc6aa69e">
+<h2 id="orgc6aa69e">講義概要</h2>
 <ul>
 <li>回帰分析</li>
 <li>回帰係数の推定
@@ -68,13 +68,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgd841f1c">
-<h2 id="orgd841f1c">回帰分析</h2>
-<div class="outline-text-2" id="text-orgd841f1c">
+<section id="slide-org2a81efe">
+<h2 id="org2a81efe">回帰分析</h2>
+<div class="outline-text-2" id="text-org2a81efe">
 </div>
 </section>
-<section id="slide-org4686a6f">
-<h3 id="org4686a6f">回帰分析</h3>
+<section id="slide-org31a1628">
+<h3 id="org31a1628">回帰分析</h3>
 <ul>
 <li>データのある変量をその他の変量を用いて説明・予測するモデル
 (<b>回帰モデル</b>)を構築するための分析法</li>
@@ -98,15 +98,15 @@
 </section>
 <section>
 
-<div id="org15beb23" class="figure">
+<div id="org2cd5fde" class="figure">
 <p><img src="figs/r-brainbody.png" alt="r-brainbody.png" height="100%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>脳の重さと体重の関係</p>
 </div>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org37edc0f">
-<h3 id="org37edc0f">回帰モデル</h3>
+<section id="slide-org94e3dc2">
+<h3 id="org94e3dc2">回帰モデル</h3>
 <ul>
 <li>説明変数 : \(X\)</li>
 <li>目的変数 : \(Y\)</li>
@@ -138,13 +138,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org8a9f188">
-<h2 id="org8a9f188">回帰係数の点推定</h2>
-<div class="outline-text-2" id="text-org8a9f188">
+<section id="slide-org5822115">
+<h2 id="org5822115">回帰係数の点推定</h2>
+<div class="outline-text-2" id="text-org5822115">
 </div>
 </section>
-<section id="slide-org7f6f853">
-<h3 id="org7f6f853">回帰係数の点推定</h3>
+<section id="slide-orgf771257">
+<h3 id="orgf771257">回帰係数の点推定</h3>
 <ul>
 <li><p>
 \(n\) 個の説明変数と目的変数の組 \((X,Y)\) を観測
@@ -177,8 +177,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org54a696f">
-<h3 id="org54a696f">分析における仮定</h3>
+<section id="slide-orgaedc3b1">
+<h3 id="orgaedc3b1">分析における仮定</h3>
 <ul>
 <li>説明変数 \(X_1,\dotsc,X_n\) は確率変数ではなく <b>確定値</b></li>
 <li>説明変数は一定値ではない <br />
@@ -190,8 +190,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org98193ab">
-<h3 id="org98193ab">最小二乗法</h3>
+<section id="slide-orgdaa5f11">
+<h3 id="orgdaa5f11">最小二乗法</h3>
 <ul>
 <li><p>
 係数 \(\alpha,\beta\) の回帰式で説明できない
@@ -283,20 +283,20 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgee8db10">
-<h3 id="orgee8db10">R : 回帰分析の関数</h3>
+<section id="slide-orge73d6c1">
+<h3 id="orge73d6c1">回帰分析の計算</h3>
 <ul>
 <li><p>
-関数 <code>lm()</code> : 線形モデルを当てはめる
+関数 <code>stats::lm()</code> : 線形モデルを当てはめる
 </p>
 <div class="org-src-container">
 
 <pre><code class="R" >lm(formula, data, subset, na.action, ...)
-## formula: 式 (目的変数 ~ 説明変数)
-## data: データフレーム
-## subset: 対象とする部分データ
-## na.action: 欠損値の扱い
-## ...: 他のオプション．詳細は help(lm) を参照
+#' formula: 式 (目的変数 ~ 説明変数)
+#' data: データフレーム
+#' subset: 対象とする部分データ
+#' na.action: 欠損値の扱い
+#' ...: 他のオプション．詳細は '?lm' を参照
 </code></pre>
 </div></li>
 
@@ -305,12 +305,12 @@
 </section>
 </section>
 <section>
-<section id="slide-org074eb84" data-background="#fef4f4">
-<h2 id="org074eb84">演習</h2>
+<section id="slide-orga0803d3" data-background="#fef4f4">
+<h2 id="orga0803d3">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3723edd" data-background="#fef4f4">
-<h3 id="org3723edd">練習問題</h3>
+<section id="slide-org9f09f8d" data-background="#fef4f4">
+<h3 id="org9f09f8d">練習問題</h3>
 <ul>
 <li>東京の気象データを用いて，
 必要であれば適当な期間を抽出し，
@@ -321,13 +321,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org2f1e518">
-<h2 id="org2f1e518">回帰係数の区間推定</h2>
-<div class="outline-text-2" id="text-org2f1e518">
+<section id="slide-org4657a24">
+<h2 id="org4657a24">回帰係数の区間推定</h2>
+<div class="outline-text-2" id="text-org4657a24">
 </div>
 </section>
-<section id="slide-orgc120f61">
-<h3 id="orgc120f61">誤差項に関する仮定</h3>
+<section id="slide-org6887351">
+<h3 id="org6887351">誤差項に関する仮定</h3>
 <ul>
 <li>\(\epsilon_i\) は正規分布に従う</li>
 <li>上の仮定より
@@ -351,8 +351,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org95170be">
-<h3 id="org95170be">誤差分散の推定</h3>
+<section id="slide-org38a7b6c">
+<h3 id="org38a7b6c">誤差分散の推定</h3>
 <ul>
 <li>一般に \(\sigma^2\) は <b>既知でない</b> ためデータから推定
 <ul>
@@ -433,8 +433,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9ac3dbe">
-<h3 id="org9ac3dbe">回帰係数の性質</h3>
+<section id="slide-org463fd06">
+<h3 id="org463fd06">回帰係数の性質</h3>
 <ul>
 <li><p>
 \(\hat{\alpha},\hat{\beta}\) の分散の推定量 (資料; Gauss-Markovの定理)
@@ -470,8 +470,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfc4052c">
-<h3 id="orgfc4052c">回帰係数の区間推定</h3>
+<section id="slide-org665107b">
+<h3 id="org665107b">回帰係数の区間推定</h3>
 <ul>
 <li><p>
 以下の確率変数は自由度 \(n{-}2\) の \(t\) 分布に従う
@@ -504,8 +504,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6fdf287">
-<h3 id="org6fdf287">R : 区間推定の関数</h3>
+<section id="slide-org0261832">
+<h3 id="org0261832">区間推定の計算</h3>
 <ul>
 <li><p>
 関数 <code>confint()</code> : 係数の信頼区間を求める
@@ -513,23 +513,65 @@
 <div class="org-src-container">
 
 <pre><code class="R" >confint(object, parm, level = 0.95, ...)
-## object: 関数 lm で推定したモデル
-## parm: 区間推定をするパラメタ．指定しなければ全て
-## level: 信頼係数
-## ...: 他のオプション．詳細は help(confint) を参照
+#' object: 関数 lm で推定したモデル
+#' parm: 区間推定をするパラメタ．指定しなければ全て
+#' level: 信頼係数
+#' ...: 他のオプション．詳細は '?confint' を参照
 </code></pre>
 </div></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+<ul>
 <li><p>
 関数 <code>predict()</code> : 予測値の信頼区間を求める
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >predict(object, newdata, interval="confidence", level=0.95,..)
-## object: 関数 lm で推定したモデル
-## newdata: 予測値を計算する説明変数
-## interval: 信頼区間 "confidence" (既定値は "none")
-## level: 信頼係数 (既定値は0.95)
-## ...: 他のオプション．詳細は help(predict.lm) を参照
+<pre><code class="R" >predict(object, newdata, se.fit = FALSE, scale = NULL, df = Inf,
+    interval = c("none", "confidence", "prediction"),
+    level = 0.95, type = c("response", "terms"),
+    terms = NULL, na.action = na.pass,
+    pred.var = res.var/weights, weights = 1,
+    rankdeficient = c("warnif", "simple", "non-estim", "NA", "NAwarn"),
+    tol = 1e-6, verbose = FALSE,
+    ...)
+#' object: 関数 lm で推定したモデル
+#' newdata: 予測値を計算する説明変数
+#' interval: 何も付けない(none)・信頼区間(confidence)・予測区間(prediction)
+#' level: 信頼係数 (既定値は0.95)
+#' ...: 他のオプション．詳細は '?predict.lm' を参照
+</code></pre>
+</div></li>
+
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+<ul>
+<li><p>
+関数 <code>broom::augment()</code> によるデータの情報 (tidyverse)
+</p>
+<div class="org-src-container">
+
+<pre><code class="R" >augment(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  se_fit = FALSE,
+  interval = c("none", "confidence", "prediction"),
+  conf.level = 0.95,
+  ...
+)
+#' x: 関数 lm で推定したモデル
+#' newdata: data と異なる説明変数であてはめ・予測を行う
+#' se_fit: 標準誤差を付けるか否か
+#' interval: 信頼区間(confidence)・予測区間(prediction)を付ける
+#' 詳細は '?broom::augment.lm' を参照
 </code></pre>
 </div></li>
 
@@ -538,12 +580,12 @@
 </section>
 </section>
 <section>
-<section id="slide-org118d277" data-background="#fef4f4">
-<h2 id="org118d277">演習</h2>
+<section id="slide-org44adfa6" data-background="#fef4f4">
+<h2 id="org44adfa6">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfd08083" data-background="#fef4f4">
-<h3 id="orgfd08083">練習問題</h3>
+<section id="slide-org2adfc5f" data-background="#fef4f4">
+<h3 id="org2adfc5f">練習問題</h3>
 <ul>
 <li>前問で作成した回帰モデルについて
 区間推定を行いなさい．</li>
@@ -553,13 +595,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org96d989f">
-<h2 id="org96d989f">回帰係数の有意性検定</h2>
-<div class="outline-text-2" id="text-org96d989f">
+<section id="slide-org58f9deb">
+<h2 id="org58f9deb">回帰係数の有意性検定</h2>
+<div class="outline-text-2" id="text-org58f9deb">
 </div>
 </section>
-<section id="slide-org3c7c7c4">
-<h3 id="org3c7c7c4">回帰係数の有意性</h3>
+<section id="slide-orgf87347a">
+<h3 id="orgf87347a">回帰係数の有意性</h3>
 <ul>
 <li><p>
 説明変数 \(X\) が目的変数 \(Y\) を説明・予測するのに本当に役立っているかを検証
@@ -585,8 +627,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1c1541e">
-<h3 id="org1c1541e">回帰係数の有意性検定</h3>
+<section id="slide-org40682f2">
+<h3 id="org40682f2">回帰係数の有意性検定</h3>
 <ul>
 <li><p>
 帰無仮説 \(H_0\) が正しければ以下の統計量
@@ -644,36 +686,64 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7170da7">
-<h3 id="org7170da7">R : 係数の検定のための関数</h3>
+<section id="slide-org9094c16">
+<h3 id="org9094c16">係数の検定</h3>
 <ul>
 <li><p>
-関数 <code>summary()</code> : 推定されたモデルの情報を引き出す
+関数 <code>stat::summary()</code> : 情報の要約 (base R)
 </p>
 <div class="org-src-container">
 
 <pre><code class="R" >summary(object)
-## object: 関数 lm で推定したモデル
+#' object: 関数 lm() で推定したモデル
+#' 関数の出力 (リスト名 $"名前" で参照可能)
+#' coefficients : 係数とt統計量
+#' fstatistics : F統計量 (モデルの評価)
+#' 詳細は '?summary.lm' を参照
 </code></pre>
 </div></li>
-<li>出力 (リスト名 $&ldquo;名前&rdquo; で参照可能)
-<ul>
-<li><code>coefficients</code> : 係数と \(t\) 値</li>
-<li><code>fstatistics</code> : \(F\) 値 (モデルの評価)</li>
 
-</ul></li>
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+<ul>
+<li><p>
+関数 <code>broom::tidy()</code> : 回帰係数の情報 (tidyverse)
+</p>
+<div class="org-src-container">
+
+<pre><code class="R" >tidy(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+#' x: 関数 lm() で推定したモデル
+#' conf.int: 信頼区間を付けるか否か
+#' conf.level: 信頼係数
+#' 詳細は '?broom::tidy.lm' を参照
+</code></pre>
+</div></li>
+<li><p>
+関数 <code>broom::glance()</code> : モデルの統計情報 (tidyverse)
+</p>
+<div class="org-src-container">
+
+<pre><code class="R" >glance(x, ...)
+#' x: 関数 lm() で推定したモデル
+#' F統計量は statistic/p.value の列
+#' 詳細は '?broom::glance.lm' を参照
+</code></pre>
+</div></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org8f9d260" data-background="#fef4f4">
-<h2 id="org8f9d260">演習</h2>
+<section id="slide-org603ec6b" data-background="#fef4f4">
+<h2 id="org603ec6b">実習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7e23c56" data-background="#fef4f4">
-<h3 id="org7e23c56">練習問題</h3>
+<section id="slide-org59795b5" data-background="#fef4f4">
+<h3 id="org59795b5">練習問題</h3>
 <ul>
 <li>前問で作成した回帰モデルについて
 係数の検定を行いなさい．</li>
@@ -683,13 +753,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgba3dbbd">
-<h2 id="orgba3dbbd">決定係数</h2>
-<div class="outline-text-2" id="text-orgba3dbbd">
+<section id="slide-orgffd96bc">
+<h2 id="orgffd96bc">決定係数</h2>
+<div class="outline-text-2" id="text-orgffd96bc">
 </div>
 </section>
-<section id="slide-org0531eaf">
-<h3 id="org0531eaf">決定係数</h3>
+<section id="slide-orga5fbfce">
+<h3 id="orga5fbfce">決定係数</h3>
 <ul>
 <li>\(X\) が \(Y\) の変動をどの程度説明できるかを数量化</li>
 <li><p>
@@ -774,8 +844,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3d79ad5">
-<h3 id="org3d79ad5">決定係数の別表現</h3>
+<section id="slide-org41f7c0b">
+<h3 id="org41f7c0b">決定係数の別表現</h3>
 <ul>
 <li>\(R^2\) は以下のように書き直すことも可能
 <ul>
@@ -819,8 +889,8 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org90845be">
-<h3 id="org90845be">自由度調整済み決定係数</h3>
+<section id="slide-org5b147ad">
+<h3 id="org5b147ad">自由度調整済み決定係数</h3>
 <ul>
 <li>不偏分散による \(R^2\) の修正
 <ul>
@@ -854,36 +924,64 @@
 </ul>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7d099ec">
-<h3 id="org7d099ec">R : 決定係数のための関数</h3>
+<section id="slide-org076b520">
+<h3 id="org076b520">決定係数の計算</h3>
 <ul>
 <li><p>
-関数 <code>summary()</code> : 推定されたモデルの情報を引き出す
+関数 <code>stat::summary()</code> : 情報の要約 (base R)
 </p>
 <div class="org-src-container">
 
 <pre><code class="R" >summary(object)
-## object: 関数 lm で推定したモデル
+#' object: 関数 lm() で推定したモデル
+#' 関数の出力 (リスト名 $"名前" で参照可能)
+#' r.squareds : 決定係数
+#' adj.r.squareds : 自由度調整済み決定係数
+#' 詳細は '?summary.lm' を参照
 </code></pre>
 </div></li>
-<li>出力 (リスト名 $&ldquo;名前&rdquo; で参照可能)
-<ul>
-<li><code>r.squareds</code> : 決定係数</li>
-<li><code>adj.r.squareds</code> : 自由度調整済み決定係数</li>
 
-</ul></li>
+</ul>
+
+<div class="slide-footer"><br></div>
+</section>
+<section>
+<ul>
+<li><p>
+関数 <code>broom::tidy()</code> : 回帰係数の情報 (tidyverse)
+</p>
+<div class="org-src-container">
+
+<pre><code class="R" >tidy(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+#' x: 関数 lm() で推定したモデル
+#' conf.int: 信頼区間を付けるか否か
+#' conf.level: 信頼係数
+#' 詳細は '?broom::tidy.lm' を参照
+</code></pre>
+</div></li>
+<li><p>
+関数 <code>broom::glance()</code> : モデルの統計情報 (tidyverse)
+</p>
+<div class="org-src-container">
+
+<pre><code class="R" >glance(x, ...)
+#' x: 関数 lm() で推定したモデル
+#' F統計量は statistic/p.value の列
+#' 詳細は '?broom::glance.lm' を参照
+</code></pre>
+</div></li>
 
 </ul>
 <div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org75c7eb2" data-background="#fef4f4">
-<h2 id="org75c7eb2">演習</h2>
+<section id="slide-org15f2fb2" data-background="#fef4f4">
+<h2 id="org15f2fb2">演習</h2>
 <div class="slide-footer"><br></div>
 </section>
-<section id="slide-org39f5327" data-background="#fef4f4">
-<h3 id="org39f5327">練習問題</h3>
+<section id="slide-orga442274" data-background="#fef4f4">
+<h3 id="orga442274">練習問題</h3>
 <ul>
 <li>前問で作成した回帰モデルについて
 決定係数を確認しなさい．</li>

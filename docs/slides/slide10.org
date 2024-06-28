@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-06-19 17:51:43 mura>
+# Time-stamp: <2024-06-28 14:55:57 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -19,6 +19,9 @@
 - 一般的な枠組みにして，あとで具体例を当て嵌めるか
 
 * 講義概要
+:PROPERTIES:
+:ID:       52C3D56D-F49F-4617-AA8B-9C3A4937DD18
+:END:
 - 点推定
   - 不偏推定量
   - Cramér-Raoの不等式
@@ -179,6 +182,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       47576F93-BEC2-46CD-8F33-DC572E9BCBD0
 :END:
 - \(X\) を一様乱数に従う確率変数とし，
   平均値の推定量として以下を考える．
@@ -188,7 +192,7 @@
   - 最大値と最小値の平均 ((max+min)/2)
 - ヒント : 以下のような関数を作り，Monte-Carlo実験を行えばよい
   #+begin_src R :eval no :tangle no
-    my_mean_est <- function(n, min, max){ # 観測データ数
+    estimate_means <- function(n, min, max){ # 観測データ数
       x <- runif(n, min=min, max=max) # 一様乱数を生成，範囲は引数から
       return(c(xbar=mean(x),med=median(x),mid=(max(x)+min(x))/2))
     } # 3つまとめて計算する関数
@@ -217,12 +221,6 @@
     t() |>      # 転置 mc x 3 型行列
     as_tibble() # データフレーム化
   mc_data # 実験結果の一部を確認
-  mc_data |> # 集計 (各推定値の平均と分散を計算)
-    summarize_all(list(mean = mean, var = var))
-  #'
-  #' @notes
-  #' 関数 summarize_all() は以下と等価
-  #' 
   mc_data |> 
     summarize(across(everything(),
                      list(mean = mean, var = var)))
@@ -366,7 +364,7 @@
     =\sum_{i=1}^n\log f_{\boldsymbol{\theta}}(X_i).
   \end{equation}
   #+end_quote
-  - 対数関数は狭義増加
+  - 対数関数は狭義単調増加
   - \(\ell(\boldsymbol{\theta})\) の最大化と \(L(\boldsymbol{\theta})\) の最大化は同義
   - 扱い易い和の形なのでこちらを用いることが多い
   - 大数の法則を用いて対数尤度関数の収束が議論できる
@@ -398,6 +396,12 @@
 
 ** 例 : Poisson 分布の最尤推定
 - \(\mathcal{L}\) をパラメタ \(\lambda>0\) のPoisson分布でモデル化
+  - 確率質量関数
+    #+begin_quote
+    \begin{equation}
+      f(x)=\frac{\lambda^x}{x!}e^{-\lambda},\quad x=0,1,\dotsc
+    \end{equation}
+    #+end_quote
   - 対数尤度関数 (未知パラメタ : \(\lambda\) )
     #+begin_quote
     \begin{equation}
@@ -426,6 +430,16 @@
 
 ** 例 : 指数分布の最尤推定
 - \(\mathcal{L}\) をパラメタ \(\lambda>0\) の指数分布でモデル化
+  - 確率密度関数
+    #+begin_quote
+    \begin{equation}
+      f(x)=
+      \begin{cases}
+        \lambda e^{-\lambda x}&(x>0)\\
+        0&(x\leq0)
+      \end{cases}
+    \end{equation}
+    #+end_quote
   - 対数尤度関数 (未知パラメタ : \(\lambda\) )
     #+begin_quote
     \begin{equation}
@@ -453,6 +467,26 @@
 
 ** 例 : ガンマ分布の最尤推定
 - \(\mathcal{L}\) をパラメタ \(\nu,\alpha>0\) のガンマ分布でモデル化
+  - 確率密度関数
+    #+begin_quote
+    \begin{equation}
+      f(x)=
+      \begin{cases}
+        \frac{\alpha^\nu }{\Gamma(\nu)}
+        x^{\nu-1}e^{-\alpha x}&(x>0)\\
+        0&(x\leq0)
+      \end{cases}
+    \end{equation}
+    #+end_quote
+    ただしガンマ関数 \(\Gamma(\nu)\) は以下で定義される
+    #+begin_quote
+    \begin{equation}
+      \Gamma(\nu)=\int_0^\infty x^{\nu-1}e^{-x}dx
+    \end{equation}
+    #+end_quote
+
+#+reveal: split
+- (ガンマ分布のつづき)
   - 対数尤度関数 (未知パラメタ : \(\nu,\alpha\) )
     #+begin_quote
     \begin{align}
@@ -465,20 +499,20 @@
 
 #+reveal: split
 - [[color:green][Rでの計算例]] (ガンマ分布の最尤推定量)
-  #+begin_src R :eval no
+  #+begin_src R :eval no :tangle no
     library("stats4") # 関数mleを利用するため
-    ## 数値最適化のためには尤度関数を最初に評価する初期値が必要
+    #' 数値最適化のためには尤度関数を最初に評価する初期値が必要
     mle.gamma <- function(x, # 観測データ
-                          nu0=1, alpha0=1){ # nu, alphaの初期値
+                          nu0 = 1, alpha0 = 1){ # nu, alphaの初期値
         ## 負の対数尤度関数を定義 (最小化を考えるため)
         ll <- function(nu, alpha) # nuとalphaの関数として定義 
-            suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
+            suppressWarnings(-sum(dgamma(x, nu, alpha, log = TRUE)))
         ## suppressWarnings は定義域外で評価された際の警告を表示させない
         ## 最尤推定(負の尤度の最小化)
-        est <- mle(minuslogl=ll, # 負の対数尤度関数
-                   start=list(nu=nu0, alpha=alpha0), # 初期値
-                   method="BFGS", # 最適化方法 (選択可能)
-                   nobs=length(x)) # 観測データ数
+        est <- mle(minuslogl = ll,   # 負の対数尤度関数
+                   start = list(nu = nu0, alpha = alpha0), # 初期値
+                   method = "BFGS",  # 最適化方法 (選択可能)
+                   nobs = length(x)) # 観測データ数
         return(coef(est)) # 推定値のみ返す
     }
   #+end_src
@@ -499,6 +533,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       EECBBD76-2C41-4796-B7CD-67CB63168C14
 :END:
 - 東京都の気候データ (~tokyo_weather.csv~) の
   風速 (~wind~) の項目について以下の問に答えよ．
@@ -534,13 +569,13 @@
                         verbose = FALSE){ # debug用に追加
     ## 負の対数尤度関数を定義 (最小化を考えるため)
     ll <- function(nu, alpha) # nuとalphaの関数として定義 
-      suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
+      suppressWarnings(-sum(dgamma(x, nu, alpha, log = TRUE)))
     ## suppressWarnings は定義域外で評価された際の警告を表示させない
     ## 最尤推定(負の尤度の最小化)
-    est <- mle(minuslogl=ll, # 負の対数尤度関数
-               start=list(nu=nu0, alpha=alpha0), # 初期値
-               method="BFGS", # 最適化方法 (選択可能)
-               nobs=length(x)) # 観測データ数
+    est <- mle(minuslogl = ll,   # 負の対数尤度関数
+               start = list(nu = nu0, alpha = alpha0), # 初期値
+               method = "BFGS",  # 最適化方法 (選択可能)
+               nobs = length(x)) # 観測データ数
     if(verbose) { 
       return(est) # verbose=TRUEならmleの結果を全て返す
     } else {
@@ -696,6 +731,34 @@
   #+end_quote
 
 #+reveal: split
+#+begin_src R :file figs/z_quantile.png :exports results :results graphics :tangle no
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
+  plot(function(x)dnorm(x,mean=0,sd=1), -4, 4,
+       col="blue", lwd=2, ann=FALSE, axes=FALSE)
+  abline(h=0, col=gray(0.9))
+  box()
+  d <- 0.02
+  z <- rbind(c(-4, qnorm(0.9)))
+
+  for (i in 1:nrow(z)) {
+      x <- seq(z[i,1], z[i,2], length=40)
+      xx <- c(x, z[i,2], z[i,1])
+      yy <- c(dnorm(x), rep(0,2))
+      polygon(xx, yy,
+              border="pink", col=adjustcolor("pink",alpha=0.75))
+      lines(c(z[i,2], z[i,2]), c(dnorm(z[i,2])+d, -d),
+            col="red", lty="solid", lwd=2)
+  }
+  axis(1, at=c(z[,2]), 
+       lab=c(expression(z[alpha])))
+  title(main="標準正規分布", xlab="分位点", ylab="密度")
+#+end_src
+#+NAME: fig:z_quantile
+#+ATTR_HTML: :height 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/z_quantile.png]]
+  
+#+reveal: split
 - 標準化した確率変数の確率
   #+begin_quote
   \(z_{1{-}\alpha/2}\) を標準正規分布の
@@ -706,6 +769,40 @@
   \end{equation}
   #+end_quote
   - 区間の外側(正負両側にある)の確率が\(\alpha\)となる
+
+#+reveal: split
+#+begin_src R :file figs/z_conf.png :exports results :results graphics :tangle no
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
+  plot(function(x)dnorm(x,mean=0,sd=1), -4, 4,
+       col="blue", lwd=2, ann=FALSE, axes=FALSE)
+  abline(h=0, col=gray(0.9))
+  box()
+  d <- 0.02
+  z <- rbind(c(qnorm(0.025), -4), c(qnorm(0.975), 4))
+
+  x <- seq(z[1,1], z[2,1], length=40)
+  xx <- c(x, z[2,1], z[1,1])
+  yy <- c(dnorm(x), rep(0,2))
+  polygon(xx, yy,
+          border="pink", col=adjustcolor("pink",alpha=0.75))
+  for (i in 1:nrow(z)) {
+      ## x <- seq(z[i,1], z[i,2], length=20)
+      ## xx <- c(x, z[i,2], z[i,1])
+      ## yy <- c(dnorm(x), rep(0,2))
+      ## polygon(xx, yy,
+      ##         border="pink", col=adjustcolor("pink",alpha=0.75))
+      lines(
+        c(z[i,1], z[i,1]), c(dnorm(z[i,1])+d, -d),
+            col="red", lty="solid", lwd=2)
+  }
+  axis(1, at=c(z[,1]), 
+       lab=c(expression(-z[1-alpha/2],z[1-alpha/2])))
+  title(main="標準正規分布", xlab="信頼区間の分位点", ylab="密度")
+#+end_src
+#+NAME: fig:z_conf
+#+ATTR_HTML: :height 100%
+#+ATTR_LATEX: :width 0.6\linewidth
+[[file:figs/z_conf.png]]
     
 #+reveal: split
 - 信頼区間の構成
@@ -998,6 +1095,7 @@
 ** 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
+:ID:       A3C584AA-FC49-4D79-A843-294754AB9777
 :END:
 - 東京都の気候データ (~tokyo_weather.csv~) の
   日射量 (~solar~) の項目について以下の問に答えよ．
@@ -1026,9 +1124,16 @@
   (ci <- c(L = xbar-z95*sigma/sqrt(n),
            U = xbar+z95*sigma/sqrt(n))) # 信頼区間
   #'
+  #' @notes
+  #' 平均と標準偏差については以下のようにしてまとめて計算してもよい
+  #'
+  tw_data |>
+    slice_sample(n = n) |> # ランダムにn個取り出す
+    summarize(across(solar, list(mean = mean, sd = sd))) 
+  #'
   #' 信頼区間の正答率の評価
   mc <- 100
-  my_trial <- function(n){ # nを変えて実験できるように
+  mc_trial <- function(n){ # nを変えて実験できるように
     idx <- sample(nrow(tw_data),n)
     xbar <- tw_data |> slice(idx) |> pull(solar) |> mean() # 標本平均
     sigma <- tw_data |> slice(idx) |> pull(solar) |> sd()  # 標本標準偏差
@@ -1036,7 +1141,7 @@
              U = xbar+z95*sigma/sqrt(n))) # 信頼区間
   }
   mc_data <- # 信頼区間のMonte-Carlo実験
-    replicate(mc, my_trial(n)) |> t() |> as_tibble() |>
+    replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
     mutate(answer = L < mu & mu < U) # 真値が信頼区間に含まれるか
   mc_data |> pull(answer) |> table()
   #'
@@ -1045,7 +1150,7 @@
   #' 
   mc <- 2000
   mc_data <- # 信頼区間のMonte-Carlo実験
-    replicate(mc, my_trial(n)) |> t() |> as_tibble() |>
+    replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
     mutate(answer = L < mu & mu < U) # 真値が信頼区間に含まれるか
   mc_data |> pull(answer) |> table()/mc # 確率を見る
   #'
@@ -1053,9 +1158,8 @@
   #' グラフを描いてみる
   #' 
   k <- 20 
-  idx <- sample(nrow(mc_data), k) 
   mc_data |>
-    slice(sample(nrow(mc_data), k)) |> # k個ランダムに選んで描く
+    slice_sample(n = k) |> # k個ランダムに選んで描く
     rowid_to_column(var = "index") |>
     ggplot(aes(x = index)) +
     geom_errorbar(aes(ymin = L, ymax = U),

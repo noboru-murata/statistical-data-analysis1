@@ -28,12 +28,6 @@ mc_data <-
   t() |>      # 転置 mc x 3 型行列
   as_tibble() # データフレーム化
 mc_data # 実験結果の一部を確認
-mc_data |> # 集計 (各推定値の平均と分散を計算)
-  summarize_all(list(mean = mean, var = var))
-#'
-#' @notes
-#' 関数 summarize_all() は以下と等価
-#' 
 mc_data |> 
   summarize(across(everything(),
                    list(mean = mean, var = var)))
@@ -104,22 +98,6 @@ tibble(x = rep(1:ncols, nrows),
   geom_text(aes(label = cols), size = 2) # 色名を記入
 #' ---------------------------------------------------------------------------
 
-library("stats4") # 関数mleを利用するため
-## 数値最適化のためには尤度関数を最初に評価する初期値が必要
-mle.gamma <- function(x, # 観測データ
-                      nu0=1, alpha0=1){ # nu, alphaの初期値
-    ## 負の対数尤度関数を定義 (最小化を考えるため)
-    ll <- function(nu, alpha) # nuとalphaの関数として定義 
-        suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
-    ## suppressWarnings は定義域外で評価された際の警告を表示させない
-    ## 最尤推定(負の尤度の最小化)
-    est <- mle(minuslogl=ll, # 負の対数尤度関数
-               start=list(nu=nu0, alpha=alpha0), # 初期値
-               method="BFGS", # 最適化方法 (選択可能)
-               nobs=length(x)) # 観測データ数
-    return(coef(est)) # 推定値のみ返す
-}
-
 #' ---------------------------------------------------------------------------
 #' @practice ガンマ分布による風速データのモデル化
 #' 
@@ -143,13 +121,13 @@ mle.gamma <- function(x,                # 観測データ
                       verbose = FALSE){ # debug用に追加
   ## 負の対数尤度関数を定義 (最小化を考えるため)
   ll <- function(nu, alpha) # nuとalphaの関数として定義 
-    suppressWarnings(-sum(dgamma(x, nu, alpha, log=TRUE)))
+    suppressWarnings(-sum(dgamma(x, nu, alpha, log = TRUE)))
   ## suppressWarnings は定義域外で評価された際の警告を表示させない
   ## 最尤推定(負の尤度の最小化)
-  est <- mle(minuslogl=ll, # 負の対数尤度関数
-             start=list(nu=nu0, alpha=alpha0), # 初期値
-             method="BFGS", # 最適化方法 (選択可能)
-             nobs=length(x)) # 観測データ数
+  est <- mle(minuslogl = ll,   # 負の対数尤度関数
+             start = list(nu = nu0, alpha = alpha0), # 初期値
+             method = "BFGS",  # 最適化方法 (選択可能)
+             nobs = length(x)) # 観測データ数
   if(verbose) { 
     return(est) # verbose=TRUEならmleの結果を全て返す
   } else {
@@ -223,9 +201,16 @@ z95 <- qnorm(0.95) # 標準正規分布の0.95分位点
 (ci <- c(L = xbar-z95*sigma/sqrt(n),
          U = xbar+z95*sigma/sqrt(n))) # 信頼区間
 #'
+#' @notes
+#' 平均と標準偏差については以下のようにしてまとめて計算してもよい
+#'
+tw_data |>
+  slice_sample(n = n) |> # ランダムにn個取り出す
+  summarize(across(solar, list(mean = mean, sd = sd))) 
+#'
 #' 信頼区間の正答率の評価
 mc <- 100
-my_trial <- function(n){ # nを変えて実験できるように
+mc_trial <- function(n){ # nを変えて実験できるように
   idx <- sample(nrow(tw_data),n)
   xbar <- tw_data |> slice(idx) |> pull(solar) |> mean() # 標本平均
   sigma <- tw_data |> slice(idx) |> pull(solar) |> sd()  # 標本標準偏差
@@ -233,7 +218,7 @@ my_trial <- function(n){ # nを変えて実験できるように
            U = xbar+z95*sigma/sqrt(n))) # 信頼区間
 }
 mc_data <- # 信頼区間のMonte-Carlo実験
-  replicate(mc, my_trial(n)) |> t() |> as_tibble() |>
+  replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
   mutate(answer = L < mu & mu < U) # 真値が信頼区間に含まれるか
 mc_data |> pull(answer) |> table()
 #'
@@ -242,7 +227,7 @@ mc_data |> pull(answer) |> table()
 #' 
 mc <- 2000
 mc_data <- # 信頼区間のMonte-Carlo実験
-  replicate(mc, my_trial(n)) |> t() |> as_tibble() |>
+  replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
   mutate(answer = L < mu & mu < U) # 真値が信頼区間に含まれるか
 mc_data |> pull(answer) |> table()/mc # 確率を見る
 #'
@@ -250,9 +235,8 @@ mc_data |> pull(answer) |> table()/mc # 確率を見る
 #' グラフを描いてみる
 #' 
 k <- 20 
-idx <- sample(nrow(mc_data), k) 
 mc_data |>
-  slice(sample(nrow(mc_data), k)) |> # k個ランダムに選んで描く
+  slice_sample(n = k) |> # k個ランダムに選んで描く
   rowid_to_column(var = "index") |>
   ggplot(aes(x = index)) +
   geom_errorbar(aes(ymin = L, ymax = U),

@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-06-19 16:02:24 mura>
+# Time-stamp: <2024-06-28 14:16:00 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -400,6 +400,7 @@
 #+reveal: split
 #+begin_leftcol
 #+begin_src R :file figs/cr_two.png :exports results :results graphics :tangle no
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
   plot(function(x)dnorm(x,mean=0,sd=1), -4, 4,
        col="blue", lwd=2, ann=FALSE, axes=FALSE)
   abline(h=0, col=gray(0.9))
@@ -408,8 +409,8 @@
   z <- rbind(c(qnorm(0.025), -4), c(qnorm(0.975), 4))
   
   for (i in 1:nrow(z)) {
-      x <- seq(min(z[i,]), max(z[i,]), 0.1)
-      xx <- c(x,max(z[i,]), min(z[i,]))
+      x <- seq(z[i,1], z[i,2], length=20)
+      xx <- c(x, z[i,2], z[i,1])
       yy <- c(dnorm(x), rep(0,2))
       lines(c(z[i,1], z[i,1]), c(dnorm(z[i,1])+d, -d),
             col="red", lty="solid", lwd=2)
@@ -417,7 +418,7 @@
   }
   axis(1, at=c(z[,1]), 
        lab=c(expression(-Q[1-alpha/2],Q[1-alpha/2])))
-  title(main="two side", xlab="test statistics", ylab="density")
+  title(main="両側検定", xlab="検定統計量", ylab="密度")
 #+end_src
 #+NAME: fig:cr_two
 #+ATTR_HTML: :width 100%
@@ -426,6 +427,7 @@
 #+end_leftcol
 #+begin_rightcol
 #+begin_src R :file figs/cr_one.png :exports results :results graphics :tangle no
+  if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
   plot(function(x)dnorm(x,mean=0,sd=1), -4, 4,
        col="blue", lwd=2, ann=FALSE, axes=FALSE)
   abline(h=0, col=gray(0.9))
@@ -441,7 +443,7 @@
     polygon(xx, yy, col="pink")
   }
   axis(1, at=c(z[,1]), lab=c(expression(Q[1-alpha])))
-  title(main="one side", xlab="test statistics", ylab="density")
+  title(main="片側検定", xlab="検定統計量", ylab="密度")
 #+end_src
 #+NAME: fig:cr_one
 #+ATTR_HTML: :width 100%

@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-06-19 17:51:17 mura>
+# Time-stamp: <2024-06-28 14:05:49 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -892,7 +892,7 @@
   - 確率密度関数は ~dgamma()~ で計算できる
 
 ** 指数分布の確率密度関数
-- パラメータ \(\lambda\) の指数分布
+- パラメタ \(\lambda\) の指数分布
   \(\mathrm{Exp}(\lambda)\) (\(\lambda > 0\))
   #+begin_quote
   \begin{equation}
