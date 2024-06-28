@@ -220,7 +220,13 @@ mc_trial <- function(n){ # nを変えて実験できるように
 mc_data <- # 信頼区間のMonte-Carlo実験
   replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
   mutate(answer = L < mu & mu < U) # 真値が信頼区間に含まれるか
-mc_data |> pull(answer) |> table()
+mc_data |> select(answer) |> table()
+#'
+#' @notes
+#' 関数select()の代わりに関数pull()を利用しても良い
+#' 列名の扱いが異なる(selectは表示されるがpullは表示されない)
+#' 
+mc_data |> pull(answer) |> table() 
 #'
 #' @notes
 #' 信頼区間について多数で評価する
@@ -229,7 +235,7 @@ mc <- 2000
 mc_data <- # 信頼区間のMonte-Carlo実験
   replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
   mutate(answer = L < mu & mu < U) # 真値が信頼区間に含まれるか
-mc_data |> pull(answer) |> table()/mc # 確率を見る
+mc_data |> select(answer) |> table()/mc # 確率を見る
 #'
 #' @notes
 #' グラフを描いてみる
