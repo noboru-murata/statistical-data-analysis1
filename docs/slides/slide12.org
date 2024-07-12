@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-06-21 13:49:24 mura>
+# Time-stamp: <2024-07-12 14:30:31 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -628,12 +628,12 @@
 #+reveal: split
 - 変動の分解
   #+begin_quote
-  \begin{multline}
+  \begin{align}
     \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }ab-1}
-    =\underbrace{\text{(行間変動) }SS_A}_{\text{自由度 }a-1}\\
-    +\underbrace{\text{(列間変動) }SS_B}_{\text{自由度 }b-1}
+    =&\underbrace{\text{(行間変動) }SS_A}_{\text{自由度 }a-1}\\
+    &+\underbrace{\text{(列間変動) }SS_B}_{\text{自由度 }b-1}
     +\underbrace{\text{(誤差変動) }SS_E}_{\text{自由度 }(a-1)(b-1)}
-  \end{multline}
+  \end{align}
   #+end_quote
 - 帰無仮説 \(H_0\) が正しい場合
   - 変動 \(SS_A,SS_E\) はともに観測誤差のみが原因で生じる
@@ -643,12 +643,12 @@
 #+reveal: split
 - 変動の分解
   #+begin_quote
-  \begin{multline}
+  \begin{align}
     \underbrace{\text{(全変動) }SS_T}_{\text{自由度 }ab-1}
-    =\underbrace{\text{(行間変動) }SS_A}_{\text{自由度 }a-1}\\
-    +\underbrace{\text{(列間変動) }SS_B}_{\text{自由度 }b-1}
+    =&\underbrace{\text{(行間変動) }SS_A}_{\text{自由度 }a-1}\\
+    &+\underbrace{\text{(列間変動) }SS_B}_{\text{自由度 }b-1}
     +\underbrace{\text{(誤差変動) }SS_E}_{\text{自由度 }(a-1)(b-1)}
-  \end{multline}
+  \end{align}
   #+end_quote
 - 対立仮説 \(H_1\) が正しい場合
   - 因子 \(A\) 内の水準間での効果 \(\alpha_1,\dotsc,\alpha_a\) の差に影響される
