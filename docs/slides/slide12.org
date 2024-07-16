@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-07-12 14:30:31 mura>
+# Time-stamp: <2024-07-16 13:25:56 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -361,11 +361,14 @@
   - 曜日ごとの気温の平均と分散を求めよ．
     #+begin_src R :eval no :tangle no
       #' 週日を因子(factor)とするには例えば以下のような項目を加えればよい
-      tw_data <- read_csv("data/tokyo_weather.csv")
-      days <- with(tw_data, # 日付を取り出して整形する
-                   as.Date(paste(year,month,day,sep="-"))) 
-      wdays <- weekdays(days) # 各日付の曜日を計算
-      tw_data <- cbind(tw_data, weekday=as.factor(wdays)) # 曜日因子を追加
+      tw_data <- read_csv("data/tokyo_weather.csv") |>
+        mutate(day_of_week = ordered(day_of_week, # 曜日を順序付き因子にする
+                                     levels = wday(1:7, label = TRUE))) 
+      #' 関数 wday() の出力は使用言語に依存するので，強制的に英語にするには locale を指定して
+      #' wday(..., locale = "en_US") とすれば良い
+      #' 省略形を用いない場合は abbr を指定する．以下はドイツ語の例
+      #' wday(1:7, label = TRUE, abbr = FALSE, locale = "de_DE")
+      #' 利用可能なlocale(言語)を調べるには stringi::stri_locale_list() を用いる
     #+end_src
   - 曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．
 
