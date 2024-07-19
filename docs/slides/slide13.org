@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-07-19 14:37:15 mura>
+# Time-stamp: <2024-07-19 14:49:45 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -221,6 +221,8 @@
 :reveal_background: #fef4f4
 :ID:       397952AC-8297-4F74-8FD4-839E16D4A65C
 :END:
+- 回帰分析におけるモデルの推定量の精度に関する
+  確率シミュレーションを考えなさい．
 - 東京の気象データを用いて，
   必要であれば適当な期間を抽出し，
   日射量から気温を説明する回帰モデルを構成しなさい．
