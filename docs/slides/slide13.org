@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-06-26 12:59:05 mura>
+# Time-stamp: <2024-07-19 14:37:15 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -439,7 +439,7 @@
   \begin{align}
     &\mathbb{E}[\hat{\alpha}]=\alpha,
     &&\mathbb{E}[\hat{\beta}]=\beta,\\
-    &\mathrm{Var}(\hat{\alpha})=\frac{\sigma^2\sum_{i=1}^{n}X_i^2}{n_{i=1}^{n}(X_i-\bar{X})^2},
+    &\mathrm{Var}(\hat{\alpha})=\frac{\sigma^2\sum_{i=1}^{n}X_i^2}{n\sum_{i=1}^{n}(X_i-\bar{X})^2},
     &&\mathrm{Var}(\hat{\beta})=\frac{\sigma^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}
   \end{align}
   #+end_quote
