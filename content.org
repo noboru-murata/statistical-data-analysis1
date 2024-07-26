@@ -285,7 +285,7 @@
 :EXPORT_FILE_NAME: record
 :EXPORT_DATE: <2022-04-08 Fri>
 :END:
-<2024-07-16 Tue> 更新
+<2024-07-26 Fri> 更新
 
 講義の進捗に合わせて追加します．
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/UDiG9s_v8UbZwoDISJEmsf-R3J7zM3ADoy9qaNPhNapvuRktF3N1sq2nn4QxzQw9.ulecTtdKmS8TWuoZ?startTime=1712304155000][第1講 (2024年4月5日)]]
