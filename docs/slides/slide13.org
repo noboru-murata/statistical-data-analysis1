@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-07-19 14:49:45 mura>
+# Time-stamp: <2024-07-26 12:00:18 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/org/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -208,7 +208,7 @@
     #' data: データフレーム
     #' subset: 対象とする部分データ
     #' na.action: 欠損値の扱い
-    #' ...: 他のオプション．詳細は '?lm' を参照
+    #' ...: 他のオプション．詳細は '?stats::lm' を参照
   #+end_src
 
   
@@ -1047,7 +1047,7 @@
   #' 以下 "Animals" で参照可能
   #' 
   #' データの内容を確認
-  help(Animals)  # 内容の詳細を表示 
+  help(Animals, package = "MASS")  # 内容の詳細を表示 
   print(Animals) # データの表示
   #'
   #' データのプロット (normal plot)

@@ -422,7 +422,7 @@ data(Animals, package = "MASS")
 #' 以下 "Animals" で参照可能
 #' 
 #' データの内容を確認
-help(Animals)  # 内容の詳細を表示 
+help(Animals, package = "MASS")  # 内容の詳細を表示 
 print(Animals) # データの表示
 #'
 #' データのプロット (normal plot)
