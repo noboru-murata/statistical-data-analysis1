@@ -1,6 +1,6 @@
 # Local IspellDict: en
 
-#+SPDX-FileCopyrightText: 2018-2022 Jens Lechtenbörger
+#+SPDX-FileCopyrightText: 2018-2022,2024 Jens Lechtenbörger
 #+SPDX-License-Identifier: CC-BY-SA-4.0
 
 # This file is not meant to be exported to HTML directly but to be
@@ -12,12 +12,12 @@ Presentations are generated with
 and make use of the HTML presentation framework
 [[https://revealjs.com/][reveal.js]].
 
-- Key bindings and navigation
-  - Press “?” to see key bindings of reveal.js
+- Icons, keys, navigation
+  - Newer presentations (starting end of 2023) contain icons (“custom
+    controls”) at lower left with direct access of selected
+    presentation features
   - In general, “n” and “p” move to next and previous slide; mouse
     wheel works as well
-  - Up/down (swiping, arrows) move within sections,
-    left/right jump between sections (type “o” to see what is where)
   - Type slide’s number followed by Enter to jump to that slide
   - Browser history (may need /two/ attempts to work)
   - Zoom with Ctrl-Mouse or Alt-Mouse
@@ -46,33 +46,38 @@ and make use of the HTML presentation framework
   - Presentations can be downloaded from build pipelines of
     source projects as self-contained zip archives
     - Extract contents and open local HTML file(s) in browser
-    - E.g., for a course on Operating Systems, go to
-      [[https://gitlab.com/oer/OS/-/pipelines][its pipelines page]],
-      click on download icon of most recent pipeline
+    - Depending on the presentation and its features, you may see
+      [[https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp][cross-origin request security settings]]
+      errors.  Then, start a local web browser for the directory of
+      your presentation, e.g.: ~python -m SimpleHTTPServer~ or
+      ~php -S localhost:8000~
   - Alternatively, clone source repository and build presentations locally
-- Audio
-  - If audio is embedded, [[https://en.wikipedia.org/wiki/Ogg][the free Ogg format]] is used
-    - Based on student feedback, playback does /not/ start
-      automatically (but since August 2021 you can use URL parameter
-      ~audio-autoplay~ to change this preference)
-      - See [[https://github.com/rajgoel/reveal.js-plugins/tree/master/audio-slideshow#user-content-compatibility-and-known-issues][compatibility and known issues of the underlying audio plugin]]
-      - [[https://www.mozilla.org/en-US/firefox/][Firefox]],
-        seems to work everywhere
-    - Audio controls are shown at bottom left (use right-click for
-      more controls such as Play Speed)
-      - Set the playback speed for the entire presentation with URL
-        parameter ~audio-speed~, e.g., ~audio-speed=2.0~ for double
-        speed (parameter added in June 2022)
+- Audio with
+  [[https://github.com/rajgoel/reveal.js-plugins/tree/master/audio-slideshow][audio slideshow plugin]]
+  - Depending on the presentation, playback may or may not start
+    automatically
     - To toggle audio, type “a” (or “+” for older presentations)
+  - Audio controls are shown at bottom left (use right-click for
+    more functionality such as speed control)
+  - Newer presentations (starting 2024) add URL parameters
+    - ~audio-autoplay~ either to turn autoplay on or
+      ~audio-autoplay=false~ to turn it off
+    - ~audio-speed~, e.g., ~audio-speed=2.0~ for double speed
+    - ~audio-advance~ to control whether to go to next slide when
+      audio ends; use ~audio-advance=-1~ to turn this off,
+      ~audio-advance=1000~ to advance after 1000 ms
+    - E.g., this URL does not advance and plays at higher speed:
+      https://oer.gitlab.io/oer-courses/it-systems/03-Boolean-Logic-I.html?audio-advance=-1&audio-speed=1.5
 - Notes
-  - Slides contain additional notes as plain text if you see the
-    folder icon
+  - Slides contain additional notes if you see the folder icon
     [[./reveal.js/dist/theme/folder_inbox.png]]
-    - Press “v” to open the “courseware view” or click on that icon or
-      press “s” to see the “speaker notes view”
-      - For the speaker notes view you need to allow pop-ups
-      - If the pop-up window does not work, you may need to press “s”
-        twice or close the pop-up window once
+    - Several options to make notes visible
+      - Press comment icon of custom controls (if present)
+      - Press “v” to open the “courseware view”
+      - Click on folder icon or press “s” to see the “speaker notes view”
+        - For the speaker notes view you need to allow pop-ups
+        - If the pop-up window does not work, you may need to press “s”
+          twice or close the pop-up window once
   - If the slide contains audio, the notes are a transcript of the
     audio’s text
 - Links

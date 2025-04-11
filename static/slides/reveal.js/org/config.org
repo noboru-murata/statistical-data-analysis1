@@ -1,6 +1,6 @@
 # -*- eval: (visual-line-mode) -*-
 
-# SPDX-FileCopyrightText: 2017-2022 Jens Lechtenbörger
+# SPDX-FileCopyrightText: 2017-2024 Jens Lechtenbörger
 # SPDX-License-Identifier: CC-BY-SA-4.0
 
 # Neither generate table of contents nor section numbers
@@ -72,10 +72,14 @@
 #+LATEX_HEADER: \newenvironment{rightcol70}{\begin{minipage}{.69\textwidth}}{\end{minipage}}
 #+LATEX_HEADER: \usepackage{textcomp} % For € in Unicode
 #+LATEX_HEADER: \usepackage{newunicodechar}
+#+LATEX_HEADER: \newunicodechar{≠}{$\neq$}
+#+LATEX_HEADER: \newunicodechar{≤}{$\leq$}
+#+LATEX_HEADER: \newunicodechar{≥}{$\geq$}
 #+LATEX_HEADER: \newunicodechar{≈}{$\approx$}
 #+LATEX_HEADER: \newunicodechar{⋮}{\vdots}
 #+LATEX_HEADER: \newunicodechar{→}{$\to$}
 #+LATEX_HEADER: \newunicodechar{ }{~}
+#+LATEX_HEADER: \newunicodechar{μ}{$\mu$}
 #+LATEX_HEADER: \usepackage{xcolor}
 #+LATEX_HEADER: \definecolor{darkred}{rgb}{0.3, 0.0, 0.0}
 #+LATEX_HEADER: \definecolor{darkgreen}{rgb}{0.0, 0.3, 0.1}
@@ -118,23 +122,25 @@
 #
 # First, revealimg() for horizontally centered images, caption
 # underneath, license text rotated to the right.
-# Macro revealimg() expects up to six arguments, a filename for a
-# file with meta-data about an image and up to five optional
-# arguments: a caption, the maximum height of image in HTML, e.g.,
-# 50rh, a list of CSS classes (space separated, containing "figure"),
-# an attribute specifying whether
-# - a long (default/nil),
-# - a short (t; in this case `oer-reveal--short-license-template' is
-#   used, which by default just produces "Figure under <license>",
-#   where "Figure" is hyperlinked to its source and "<license>" should
-#   typically be a  permissive license that does not require further
-#   attribution such as CC0 or Public Domain), or
-# - no license (none)
-# should be used (arguments are documented for function
-# oer-reveal--export-attribution-helper), and a list of space
-# separated additional attributes to assign to the figure’s div
-# element.
-# Note the above unit "rv" for an image’s max-height, added in version
+# Macro revealimg() expects up to six arguments:
+# 1. Filename for a file with meta-data about an image
+# In addition, up to five optional arguments:
+# 2. Caption
+# 3. Maximum height of image in HTML, e.g., 50rh
+# 4. List of CSS classes (space separated, containing "figure")
+# 5. Specification whether
+#    - a long (default/nil),
+#    - a short (t; in this case `oer-reveal--short-license-template' is
+#      used, which by default just produces "Figure under <license>",
+#      where "Figure" is hyperlinked to its source and "<license>" should
+#      typically be a  permissive license that does not require further
+#      attribution such as CC0 or Public Domain), or
+#    - no license (none)
+#    should be used (arguments are documented for function
+#    oer-reveal--export-attribution-helper)
+# 6. List of space separated additional attributes to assign to the
+#    figure’s div element.
+# Note the above unit "rh" for an image’s max-height, added in version
 # 3.10.0 of oer-reveal.  Previously, "vh" was recommended here, but
 # that does not work properly with scaling of reveal.js when the
 # screen’s resolution is larger than the slide height with reveal.js
@@ -173,7 +179,7 @@
 #+MACRO: reveallicense (eval (oer-reveal-export-attribution $1 nil $2 $3 $4 $5 $6))
 
 # Finally, revealgrid creates an image grid.
-# Its six or seven arguments are as follows:
+# Its six to eight arguments are as follows:
 # 1. Unique grid number (e.g., starting from one)
 # 2. File with names of images to position on the grid
 # 3. Height of the grid as percentage of the height of the slide
@@ -184,6 +190,7 @@
 #    https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
 #    With this macro, the grid areas *must* be named ga1, ga2, ...
 # 7. Optional indicator whether the grid as a whole (value grid) or individual
-#    grid images (value t) should be fragmented (appear one after the other).
+#    grid images (value t) should be fragmented (appear one after the other)
+# 8. Optional license spefication (see argument 5 of revealimg above)
 # This macro uses oer-reveal-export-image-grid in oer-reveal.el.
-#+MACRO: revealgrid (eval (oer-reveal-export-image-grid $1 $2 $3 $4 $5 $6 $7))
+#+MACRO: revealgrid (eval (oer-reveal-export-image-grid $1 $2 $3 $4 $5 $6 $7 $8))

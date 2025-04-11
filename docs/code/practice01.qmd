@@ -1,0 +1,65 @@
+---
+title: "統計データ解析I"
+subtitle: "第1講 実習"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 基本的な操作
+
+### 問題
+
+以下の計算を行う R Script/Quarto を作成し保存しなさい．
+
+-   $123\times456-789$
+-   $(2^{2^5}+1)\div641$
+-   $\sin^2(\pi/3)+\cos^2(\pi/3)$
+-   適当な数学関数を用いた計算
+
+## パッケージの操作
+
+### 問題
+
+パッケージを導入して，含まれている関数について調べなさい．
+
+-   `e1071` をインストールする
+-   関数 kurtosis (尖度) を調べる
+-   関数 kurtosis を呼び出す
+
+パッケージ群の導入を行いなさい．
+
+-   `tidyverse` をインストールする
+
+## データフレームの取り扱い
+
+### 問題
+
+以下に指定する操作を行いなさい．
+
+-   次の表に対応するデータフレームを作成しなさい
+
+    | name  | math | phys | chem | bio |
+    |:------|-----:|-----:|-----:|----:|
+    | Alice |   90 |   25 |   65 |  70 |
+    | Bob   |   80 |   50 |  100 |  50 |
+    | Carol |   70 |   75 |   70 |  30 |
+    | Dave  |   60 |  100 |   40 |  80 |
+    | Eve   |   50 |   80 |   75 | 100 |
+
+-   データフレームの要素の選択を試みなさい

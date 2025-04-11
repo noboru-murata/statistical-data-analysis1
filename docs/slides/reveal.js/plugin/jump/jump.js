@@ -1,8 +1,8 @@
 'use strict';
 
-var jumpToSlide= "";
+var jumpToSlide = "";
 
-var getSlideIndex= function(slideNumber) {
+var getSlideIndex = function(slideNumber) {
 	// The number of past slides
 	var pastCount = 0;
 
@@ -32,38 +32,48 @@ var getSlideIndex= function(slideNumber) {
 	return [horizontalIndex, verticalIndex];
 };
 
-var keyHandle= function(event) {
+var keyHandle = function(event) {
 	var isSpecialKey = event.shiftKey || event.ctrlKey || event.altKey || event.metaKey;
 	var isNumberKey = event.key >= "0" && event.key <= "9";
 	var isDashKey = event.key === "-";
 
+	var isEnterKey = event.key === "Enter";
+	var isJumpToSlideEmpty = jumpToSlide === "";
+
+	var isShiftKey = event.shiftKey;
+
 	if (isNumberKey || isDashKey && !isSpecialKey) {
 		jumpToSlide += event.key;
-	} else {
-		var isEnterKey = event.key === "Enter";
-		var isJumpToSlideEmpty = jumpToSlide === "";
+	} else if (isEnterKey && !isJumpToSlideEmpty) {
+		// horizontal and vertical slides are separated by a dash
+		jumpToSlide = jumpToSlide.split("-");
+		jumpToSlide[0] = isNaN(jumpToSlide[0]) ? 0 : parseInt(jumpToSlide[0]) - 1;
+		jumpToSlide[1] = isNaN(jumpToSlide[1]) ? 0 : parseInt(jumpToSlide[1]) - 1;
 
-		if (isEnterKey && !isJumpToSlideEmpty) {
-			// horizontal and vertical slides are separated by a dash
-			jumpToSlide = jumpToSlide.split("-");
-			jumpToSlide[0] = isNaN(jumpToSlide[0]) ? 0 : parseInt(jumpToSlide[0]) - 1;
-			jumpToSlide[1] = isNaN(jumpToSlide[1]) ? 0 : parseInt(jumpToSlide[1]) - 1;
+		var isFlat = (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.indexOf('c') !== -1 : false;
+		if (isFlat) {
+			jumpToSlide[1] = 0;
 
-			var isFlat = (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.indexOf('c') !== -1 : false;
-			if (isFlat) {
-				jumpToSlide[1] = 0;
+			jumpToSlide = getSlideIndex(jumpToSlide[0]);
+		}
 
-				jumpToSlide = getSlideIndex(jumpToSlide[0]);
-			}
+		// jump to the specified slide
+		Reveal.slide(jumpToSlide[0], jumpToSlide[1]);
 
-			// jump to the specified slide
-			Reveal.slide(jumpToSlide[0], jumpToSlide[1]);
+		// disable event processing, say, if control is active
+		event.preventDefault();
 
-			// disable event processing, say, if control is active
-			event.preventDefault();
+		// reset jumpToSlide variable
+		jumpToSlide = "";
 
-			// reset jumpToSlide variable
-			jumpToSlide = "";
+	} else if (isShiftKey) {
+		var isPageUpKey = event.key === "PageUp";
+		var isPageDownKey = event.key === "PageDown";
+
+		if (isPageUpKey) {
+			Reveal.slide(Reveal.getIndices().h, 0);
+		} else if (isPageDownKey) {
+			Reveal.slide(Reveal.getIndices().h, Number.MAX_SAFE_INTEGER);
 		}
 	}
 };

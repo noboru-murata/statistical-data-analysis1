@@ -1,5 +1,5 @@
 /**
- * SPDX-FileCopyrightText: 2017-2021 Jens Lechtenbörger
+ * SPDX-FileCopyrightText: 2017-2021, 2023 Jens Lechtenbörger
  *
  * SPDX-License-Identifier: LicenseRef-MIT-JL
  *
@@ -40,6 +40,11 @@ div.quizArea, div.quizResults {
   display: inline-block;
   width: 100%; }
 
+.reveal .uni-logo {
+  float: left;
+  width: 298px;
+  height: 80px; }
+
 .reveal .wwu-logo {
   float: left;
   width: 296px;
@@ -60,7 +65,8 @@ div.quizArea, div.quizResults {
  * OTHER
  *********************************************/
 .reveal .course-title {
-  margin: 80px 0px 10px 0px; }
+  margin: 50px 0px 10px 0px;
+  }
 
 .reveal .course-subtitle p {
   font-size: .6em;
@@ -69,7 +75,7 @@ div.quizArea, div.quizResults {
 
 .reveal .course-context p {
   line-height: 1.2;
-  margin: 50px 0;
+  margin: 40px 0px 30px 0px;
   }
 
 .reveal .course-group {

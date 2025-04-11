@@ -2,116 +2,116 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on 統計データ解析I</title>
-    <link>https://noboru-murata.github.io/statistical-data-analysis1/page/</link>
+    <link>http://localhost:1313/statistical-data-analysis1/page/</link>
     <description>Recent content in Pages on 統計データ解析I</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 31 Mar 2023 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://noboru-murata.github.io/statistical-data-analysis1/page/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/statistical-data-analysis1/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>第1講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture01/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture01/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture01/</guid>
-      <description>&amp;lt;2024-04-02 Tue&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture01/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2025-04-11 Fri&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide01.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide01.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide01.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;付録&#34;&gt;付録&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;実習用 &lt;a href=&#34;https://raw.githubusercontent.com/noboru-murata/statistical-data-analysis1/refs/heads/master/docs/code/practice01.qmd&#34;&gt;Quarto&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;解答例 &lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/sample-code01.html&#34;&gt;HTML&lt;/a&gt; &lt;a href=&#34;https://raw.githubusercontent.com/noboru-murata/statistical-data-analysis1/refs/heads/master/docs/code/sample-code01.qmd&#34;&gt;Quarto&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第2講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture02/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture02/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture02/</guid>
-      <description>&amp;lt;2024-04-24 Wed&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture02/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-04-24 Wed&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide02.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide02.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide02.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide02.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第3講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture03/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture03/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture03/</guid>
-      <description>&amp;lt;2024-04-12 Fri&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture03/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-04-12 Fri&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide03.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide03.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide03.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide03.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第4講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture04/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture04/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture04/</guid>
-      <description>&amp;lt;2024-04-24 Wed&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript 練習用データ jpdata </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture04/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-04-24 Wed&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide04.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide04.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide04.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide04.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;練習用データ&#34;&gt;練習用データ&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/zips/jpdata.zip&#34;&gt;jpdata&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第5講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture05/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture05/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture05/</guid>
-      <description>&amp;lt;2024-05-25 Sat&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript 練習用データ tokyo </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture05/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-05-25 Sat&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide05.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide05.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide05.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide05.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;練習用データ&#34;&gt;練習用データ&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/zips/tokyo.zip&#34;&gt;tokyo&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第6講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture06/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture06/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture06/</guid>
-      <description>&amp;lt;2024-05-10 Fri&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript 確率シミュレーションの例 </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture06/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-05-10 Fri&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide06.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide06.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide06.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide06.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/noboru-murata/epidemic-model&#34;&gt;確率シミュレーションの例&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第7講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture07/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture07/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture07/</guid>
-      <description>&amp;lt;2024-05-29 Wed&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture07/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-05-29 Wed&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide07.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide07.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide07.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide07.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第8講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture08/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture08/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture08/</guid>
-      <description>&amp;lt;2024-06-14 Fri&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture08/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-06-14 Fri&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide08.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide08.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide08.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide08.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第9講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture09/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture09/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture09/</guid>
-      <description>&amp;lt;2024-06-14 Fri&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture09/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-06-14 Fri&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide09.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide09.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide09.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide09.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第10講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture10/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture10/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture10/</guid>
-      <description>&amp;lt;2024-06-14 Fri&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture10/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-06-14 Fri&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide10.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide10.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide10.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide10.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第11講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture11/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture11/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture11/</guid>
-      <description>&amp;lt;2024-06-19 Wed&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture11/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-06-19 Wed&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide11.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide11.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide11.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide11.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第12講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture12/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture12/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture12/</guid>
-      <description>&amp;lt;2024-06-20 Thu&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture12/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-06-20 Thu&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide12.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide12.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide12.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide12.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>第13講</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture13/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/lecture13/</link>
       <pubDate>Sat, 03 Apr 2021 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/lecture13/</guid>
-      <description>&amp;lt;2024-07-19 Fri&amp;gt; 更新&#xA;スライド full size ハンドアウト PDF file 解答例 RScript </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/lecture13/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-07-26 Fri&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide13.html&#34;&#xA;&#x9;  style=&#34;position:absolute;width:100%;height:100%;top:0;&#34;&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;          allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;http://localhost:1313/statistical-data-analysis1/slides/slide13.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide13.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;解答例&#34;&gt;解答例&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/code/slide13.R&#34;&gt;RScript&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>講義資料</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/notes/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/notes/</link>
       <pubDate>Fri, 31 Mar 2023 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/notes/</guid>
-      <description>&amp;lt;2023-03-31 Fri&amp;gt; 更新&#xA;以下は統計データ解析 I・II の講義資料(随時更新)です．&#xA;R の基礎編 (PDF) (Rscript/Dataset) 確率と統計編 (PDF) (Rscript/Dataset) 多変量解析編 (PDF) (Rscript/Dataset) 特に統計データ解析Iでは「Rの基礎」と「確率と統計」を用います．&#xA;秋期に開講する統計データ解析IIの資料は こちら にあります．</description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/notes/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2023-03-31 Fri&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;p&gt;以下は統計データ解析 I・II の講義資料(随時更新)です．&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;R の基礎編 &lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/note1.pdf&#34;&gt;(PDF)&lt;/a&gt; &lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/zips/script1.zip&#34;&gt;(Rscript/Dataset)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;確率と統計編 &lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/note2.pdf&#34;&gt;(PDF)&lt;/a&gt; &lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/zips/script2.zip&#34;&gt;(Rscript/Dataset)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;多変量解析編 &lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/note3.pdf&#34;&gt;(PDF)&lt;/a&gt; &lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/zips/script3.zip&#34;&gt;(Rscript/Dataset)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;特に統計データ解析Iでは「Rの基礎」と「確率と統計」を用います．&lt;/p&gt;&#xA;&lt;p&gt;秋期に開講する統計データ解析IIの資料は&#xA;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis2/&#34;&gt;こちら&lt;/a&gt;&#xA;にあります．&lt;/p&gt;</description>
     </item>
     <item>
       <title>動画記録</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/page/record/</link>
+      <link>http://localhost:1313/statistical-data-analysis1/page/record/</link>
       <pubDate>Fri, 08 Apr 2022 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/page/record/</guid>
-      <description>&amp;lt;2024-07-26 Fri&amp;gt; 更新&#xA;講義の進捗に合わせて追加します．&#xA;第1講 (2024年4月5日) 第2講 (2024年4月19日) 第3講 (2024年4月26日) 第4講 (2024年5月10日) 第5講 (2024年5月24日) 第6講 (2024年5月31日) 第7講 (2024年6月7日) 第8講 (2024年6月14日) 第9講 (2024年6月21日) 第10講 (2024年6月28日) 第11講 (2024年7月5日) 第12講 (2024年7月12日) 第13講 (2024年7月19日) 以下は2023年度の記録&#xA;第1講 (2023年4月7日) 第2講 (2023年4月14日) 第3講 (2023年4月21日) 第4講 (2023年4月28日) 第5講 (2023年5月19日) (plotの説明の最初の30分ほどが欠落しています) 第6講 (2023年5月26日) 第7講 (2023年6月2日) 第8講 (2023年6月9日) 第9講 (2023年6月16日) 第10講 (2023年6月23日) 第11講 (2023年6月30日) 第12講 (2023年7月7日) 第13講 (2023年7月14日) </description>
+      <guid>http://localhost:1313/statistical-data-analysis1/page/record/</guid>
+      <description>&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2024-07-26 Fri&amp;gt; &lt;/span&gt;&lt;/span&gt; 更新&lt;/p&gt;&#xA;&lt;p&gt;講義の進捗に合わせて追加します．&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;(参考) 2024年度の記録&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/UDiG9s_v8UbZwoDISJEmsf-R3J7zM3ADoy9qaNPhNapvuRktF3N1sq2nn4QxzQw9.ulecTtdKmS8TWuoZ?startTime=1712304155000&#34;&gt;第1講 (2024年4月5日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/CSFEIlbsqmdfxWn-GOpaO1pveX36j8cUp33zd8mOp9KHiMg7gAkIGIF8jdc7RhcI.ACPnds7I_dMfcur3?startTime=1713513700000&#34;&gt;第2講 (2024年4月19日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/D2pwvcjNhnwAT2RijqxjAp8TrRU-d8Ym2A8dSDxo7m2ACPi97WRKtmuXJOohHYLq.mi-5XOfTjRLEXtWf?startTime=1714118474000&#34;&gt;第3講 (2024年4月26日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/DibD3uS9nJUaVGyApkJytQjJKWgOcA0WEyOyhNEMFJ1g-XbdS5-vB0Md_x36eafD.QnCAGFOAR5a9-jRf?startTime=1715327728000&#34;&gt;第4講 (2024年5月10日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/_ZcUZxSkh0AkrnT18wrvMbBFD6qUK9K1PpeeGYfXBpN4KZuvLfg2pSPCRtOsorRv.fLObwwfbTCoxXcnU?startTime=1716537332000&#34;&gt;第5講 (2024年5月24日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/LPw_sSLbW0wDfakPzEIz5Lqoo1AOLjAL4p-yJPg1tdbbzIaIvmBNJDe8ucXkkw4M.pVL-2iP-D2DPCJKt?startTime=1717142139000&#34;&gt;第6講 (2024年5月31日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/IX7SstRnX3kiSayD_-Bd-CUVBCamgq3T6Z1Vt_7mVIbGwZIAD-zT6OTWlvsSQvNG.YrrBZeak3_-SFoiE?startTime=1717746926000&#34;&gt;第7講 (2024年6月7日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/1dcPajyN_SM09-T8hB-xeHMaKEzQ9GF30Jt6sWyT-iKwLUdmcfU2pDK_PXDPpmm6.qJ5XUo8lmD0cRfog?startTime=1718351731000&#34;&gt;第8講 (2024年6月14日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/G9CJgHyif2FfO7laAG3XtNmaG-bhcV6L_hCriaCCj1XI2h5jCcPf_KkeCo89BKD_.56vzNUV6v7WHhZ7W?startTime=1718956530000&#34;&gt;第9講 (2024年6月21日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/WQhP4AwsTd_sPZEQgjpvWeMY1SOqe_g8rQAHOr7rk3iEvLeATAS7O6aZPdg63zeH.87b9A3qtQLvc2idB?startTime=1719561327000&#34;&gt;第10講 (2024年6月28日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/zCEsVZdPwsrF8lH_N1ASOSXcQjsRU_PDfTFuD5hV-jHjgm0k0tPdwHBg32EKwov9.bexEJHxpiA4TXS4D?startTime=1720166136000&#34;&gt;第11講 (2024年7月5日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/jIyL9WdpdrdDix0OgVT_Lz32uSvhW4GoniWwThao-GOKBjiMIz0zyREi04UBRdKU.64r4DsquMlESmk5z?startTime=1720770926000&#34;&gt;第12講 (2024年7月12日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://u-tokyo-ac-jp.zoom.us/rec/share/nQxgCEQAxD-SKNzFZEsRg559-tdzwiFd-2b0LqZxC_fdXXmeOR0Pl7sboTK36Ly2.Z2lTsMwvaanvQ1sr?startTime=1721375745000&#34;&gt;第13講 (2024年7月19日)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
   </channel>
 </rss>

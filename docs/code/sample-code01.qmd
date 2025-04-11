@@ -1,0 +1,134 @@
+---
+title: "統計データ解析I"
+subtitle: "第1講 サンプルコード"
+date: "`r Sys.Date()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 基本的な操作
+
+### 問題
+
+以下の計算を行う R Script/Quarto を作成し保存しなさい．
+
+-   $123\times456-789$
+-   $(2^{2^5}+1)\div641$
+-   $\sin^2(\pi/3)+\cos^2(\pi/3)$
+-   適当な数学関数を用いた計算
+
+### 解答例
+
+新規ファイルを作成し，以下をエディタで実行する． Quarto の場合は `chunk` を作成して，その中に記述する必要がある．
+
+```{r}
+123 * 456 - 789
+(2^2^5 + 1) / 641         # 羃乗の優先順位に注意
+sin(pi/3)^2 + cos(pi/3)^2
+log(exp(2)+1)             # 適当な数学関数の例．好きな計算を実行する
+```
+
+::: callout-tip
+コンソールで実行した場合は `History` タブから実行したコマンドを選択し， ファイルにコピーすることができる．
+:::
+
+## パッケージの操作
+
+### 問題
+
+パッケージを導入して，含まれている関数について調べなさい．
+
+-   `e1071` をインストールする
+-   関数 `kurtosis()` (尖度) を調べる
+-   関数 `kurtosis()` を呼び出す
+
+パッケージ群の導入を行いなさい．
+
+-   `tidyverse` をインストールする
+
+### 解答例
+
+パッケージのインストールはRStudioのUIを用いることを推奨する．
+
+-   Package タブから `e1071`/`tidyverse` をインストール
+
+コンソールからインストールする場合は以下を実行すれば良い．
+
+-   `install.packages("e1071")`
+-   `install.packages("tidyverse")`
+
+利用するには関数 `library()` を用いて読み込む．
+
+```{r}
+library(e1071) # パッケージの読み込み
+help(kurtosis) # 関数を調べる
+kurtosis(Nile) # 関数を用いる
+```
+
+::: callout-note
+`datasets::Nile` は起動時に自動的に読み込まれるデータセットの一つ． `help(Nile)` でデータの概要を知ることができる． また `plot(Nile)` で簡単な視覚化ができる．
+:::
+
+## データフレームの操作
+
+### 問題
+
+以下に指定する操作を行いなさい．
+
+-   次の表に対応するデータフレームを作成しなさい
+
+    | name  | math | phys | chem | bio |
+    |:------|-----:|-----:|-----:|----:|
+    | Alice |   90 |   25 |   65 |  70 |
+    | Bob   |   80 |   50 |  100 |  50 |
+    | Carol |   70 |   75 |   70 |  30 |
+    | Dave  |   60 |  100 |   40 |  80 |
+    | Eve   |   50 |   80 |   75 | 100 |
+
+-   データフレームの要素の選択を試みなさい
+
+### 解答例
+
+各項目が同じ長さのベクトルを並べて作成すればよい．
+
+```{r}
+library(tidyverse) # 関数 tibble() を利用するためにパッケージを読み込む
+foo <- tibble( # 変数名は自由に決めてよい
+    name = c("Alice", "Bob", "Carol", "Dave", "Eve"),
+    math = c(90, 80, 70, 60, 50),
+    phys = c(25, 50, 75,100, 80),
+    chem = c(65,100, 70, 40, 75),
+    bio  = c(70, 50, 30, 80,100))
+print(foo) # 中身を表示
+```
+
+例えば以下のような操作を行うことができる．
+
+```{r}
+foo[2,3]      # 特定の要素を数値で参照する
+foo[2,"phys"] # 列を名前で参照する (上記と同じ結果)
+foo[3,]       # 特定の行を表示 (データフレームになる)
+foo["bio"]    # 特定の列を表示 (データフレームになる)
+foo[,"bio"]   # 上記と同じ結果
+foo[["bio"]]  # ベクトルとして取り出す (リストとしての処理)
+foo$bio       # 上記と同じ結果
+```
+
+::: callout-warning
+上記のように同じ要素を選択してもデータ構造が異なる場合があるので注意する．
+:::

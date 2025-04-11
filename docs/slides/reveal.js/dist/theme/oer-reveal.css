@@ -1,6 +1,6 @@
 /**
  * SPDX-FileCopyrightText: 2014-2016 Hakim El Hattab
- * SPDX-FileCopyrightText: 2017-2021 Jens Lechtenbörger
+ * SPDX-FileCopyrightText: 2017-2021,2023-2024 Jens Lechtenbörger
  *
  * SPDX-License-Identifier: LicenseRef-MIT-HEH-JL
  *
@@ -20,6 +20,11 @@ html.print-pdf li.question { display: list-item; }
 html.print-pdf div.quizArea { box-shadow: none; font-size: 18px; }
 html.print-pdf li.question div.questionCount { display: none; }
 html.print-pdf li.question a.checkAnswer { display: none; }
+
+/* Hide some GUI elements. */
+html.print-pdf .reveal aside.notes { background: none; }
+html.print-pdf #customcontrols { display: none; }
+html.print-pdf div.audio-controls { display: none; }
 
 /*********************************************
  * GLOBAL STYLES
@@ -222,8 +227,8 @@ body {
 
 /* Center by default.
  * Right padding is to make space for the rotated license text
- * (if present). */
-.reveal .imgcontainer, .reveal figure, .reveal div.figure, .reveal svg {
+ * (if present), but not for buttons. */
+.reveal .imgcontainer, .reveal figure, .reveal div.figure, .reveal :not(button) svg {
   position: relative;
   padding-right: 4vw;
   text-align: center; }
@@ -377,8 +382,8 @@ div.ribbon-legalese a {
   max-width: 90%;
   max-height: 25ex; }
 
-/* center videos */
-.reveal video {
+/* center iframes and videos */
+.reveal iframe, video {
   display: block;
   margin: 1ex auto; }
 
@@ -402,11 +407,16 @@ div.ribbon-legalese a {
 .reveal em {
   font-style: italic; }
 
+/* Ensure default padding for indented lists.
+   https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text/Styling_lists */
 .reveal ol,
 .reveal dl,
 .reveal ul {
   text-align: left;
-  margin: 0; }
+  margin: 0;
+  padding-left: 40px; }
+.coursemod__course-view ul, ol {
+  padding-left: 40px; }
 
 .reveal ol {
   list-style-type: decimal; }
@@ -608,7 +618,7 @@ div.ribbon-legalese a {
   margin: 0;
   padding-right: 0;
   background: none;
-  content: " 🛈"; }
+  content: " ⓘ"; }
 .reveal a[href].beyondlink:not(.hiddenlink):after {
   margin: 0;
   padding-right: 0;
@@ -672,3 +682,30 @@ div.ribbon-legalese a {
   -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+/*********************************************
+ * Changes for Custom Controls plugin:
+ * - Position and size with relative units
+ * - Make show/hide button always visible
+ * - Set height of (embedded) icons to 3vh/1em
+ * - Positioning and sizing aligns reasonably
+ *   well with TOC progress footer
+ *********************************************/
+#customcontrols:not(#dummy) {
+  left: 10px;
+  bottom: 1vh; }
+
+#customcontrols:not(#dummy) > ul {
+  left: 40px;
+  bottom: 1vh; }
+
+#customcontrols:not(#dummy) ul > li {
+  margin: 0px 1px;
+  padding: 0px 1px; }
+
+#customcontrols:not(#dummy) > button {
+  display: inline; }
+
+#customcontrols button img {
+  max-height: 1em;
+  height: 3vh; }

@@ -698,6 +698,7 @@
             // Bind "start" button
             $quizStarter.on('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
 
                 if (!this.disabled && !$(this).hasClass('disabled')) {
                     plugin.method.startQuiz.apply (null, [{callback: plugin.config.animationCallbacks.startQuiz}]);
@@ -707,30 +708,35 @@
             // Bind "try again" button
             $(_element + ' ' + _tryAgainBtn).on('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 plugin.method.resetQuiz(this, {callback: plugin.config.animationCallbacks.resetQuiz});
             });
 
             // Bind "next slide" button
             $(_element + ' ' + _nextSlideBtn).on('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 plugin.method.leaveQuiz();
             });
 
             // Bind "check answer" buttons
             $(_element + ' ' + _checkAnswerBtn).on('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 plugin.method.checkAnswer(this, {callback: plugin.config.animationCallbacks.checkAnswer});
             });
 
             // Bind "back" buttons
             $(_element + ' ' + _prevQuestionBtn).on('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 plugin.method.backToQuestion(this, {callback: plugin.config.animationCallbacks.backToQuestion});
             });
 
             // Bind "next" buttons
             $(_element + ' ' + _nextQuestionBtn).on('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 plugin.method.nextQuestion(this, {callback: plugin.config.animationCallbacks.nextQuestion});
             });
 

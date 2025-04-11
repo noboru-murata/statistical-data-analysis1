@@ -1,5 +1,5 @@
 /**
- * SPDX-FileCopyrightText: 2017-2019, 2021 Jens Lechtenbörger
+ * SPDX-FileCopyrightText: 2017-2019, 2021, 2023 Jens Lechtenbörger
  *
  * SPDX-License-Identifier: LicenseRef-MIT-JL
  *
@@ -61,6 +61,16 @@
 .reveal .top-logos {
   display: inline-block;
   width: 100%; }
+
+.reveal .uni-logo {
+  float: left;
+  width: 298px;
+  height: 80px; }
+
+.reveal .uni-logo-contact {
+  float: left;
+  width: 355px;
+  height: 95px; }
 
 .reveal .wwu-logo {
   float: left;

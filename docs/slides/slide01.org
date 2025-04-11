@@ -4,9 +4,9 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2024-05-24 12:31:50 mura>
+# Time-stamp: <2025-04-11 15:50:58 mura>
 :REVEAL:
-#+SETUPFILE: "./reveal.js/org/mycourse.org"
+#+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
@@ -88,9 +88,8 @@
   https://education.rstudio.com/learn/beginner/
 - posit Cloud の自習コース \\
   [[https://posit.cloud/learn/recipes/]]
-- Data Camp のR入門コース \\
-  [[https://onboarding.datacamp.com/]]
-
+- Kaggle の R言語入門コース \\
+  [[https://www.kaggle.com/code/rtatman/getting-started-in-r-first-steps][https://www.kaggle.com/code/rtatman/getting-started-in-r-first-steps]]
   
     
 * COMMENT (参考) R および RStudio の導入方法
@@ -149,8 +148,7 @@
 - R言語で記述されたコマンドを入力
   - 例えば以下のような計算を行うことができる
     #+begin_src R :eval no :tangle no
-      #' 一般的な数式を入力すれば計算機として使える
-      #' "#" 以降はコメントとして無視される
+      #' 一般的な数式を入力すれば計算機として使える．"#" 以降はコメントとして無視される
       1 + 2 + 3 + 4 # 空白は無視される
       sin(pi/3) / cos(pi/3) # tan(pi/3) になるはず
     #+end_src
@@ -171,9 +169,9 @@
   - ファイル(の一部)を実行
   - ファイルを保存
 - 同一ファイル内でプログラムと文書の記述も可能
+  - *Quarto* (本講義でも利用)
   - R Markdown
-  - Quarto
-  (本講義では扱わない)
+
 
 ** ヘルプ (右下ペイン)
 - 各関数の詳細を記述したヘルプが参照可能
@@ -330,7 +328,7 @@
     #' @exercise コンソール上での計算
   #+end_src
   #+begin_src R
-    #' 与えられた式の計算をコンソール上で実行してみよう
+    #' 与えられた式の計算をコンソール上で実行する
     #' 1 x 2 + 3^2 の計算
     1 * 2 + 3^2
     #' sin(2π) の計算
@@ -353,7 +351,7 @@
 ** エディタから実行する
 - 新規ファイルの作成 (以下のいずれか)
   - 左上の *+* から
-    *R Script* を選択
+    *R Script* (または *Quarto*) を選択
   - *File* から
     *New File* を選択，
     更に *R Script* を選択
@@ -429,16 +427,16 @@
   - $\sin^2(\pi/3)+\cos^2(\pi/3)$
   - 適当な数学関数を試す
 
-** R Script ファイルを保存する
+** ファイルを保存する
 - 以下のいずれかで保存することができる
   - 左上のディスクのマークをクリック
   - *File* から 
     *Save* を選択 (Ctrl/Command+S)
 - ファイル作成に関する注意
   - 保存する時にファイル名の入力が求められる
-  - 拡張子は通常
-    *.R* または
-    *.r* を利用する
+    - *R Script* の拡張子は通常
+      *.R* または *.r* を利用
+    - *Quarto* の拡張子は *.qmd* を利用
   - *#* 以降の文字列は実行されないのでコメントとして有用
 
 ** COMMENT ファイルの保存
@@ -478,10 +476,10 @@
 :ID:       352F50B2-453D-4ED2-8C0C-ED2E64E334D0
 :END:
 基本的な操作に慣れよう
-- 以下の計算を行う R Script を作成し保存しなさい
-  - $123\times456-789$
-  - $(2^{2^5}+1)\div641$
-  - $\sin^2(\pi/3)+\cos^2(\pi/3)$
+- 以下の計算を行う R Script/Quarto を作成し保存しなさい
+  - \(123\times456-789\)
+  - \((2^{2^5}+1)\div641\)
+  - \(\sin^2(\pi/3)+\cos^2(\pi/3)\)
   - 適当な数学関数を用いた計算
 
 #+begin_src R :eval no :exports none
@@ -774,13 +772,12 @@
 :reveal_background: #fef4f4
 :ID:       4CFD7C92-5054-4948-9B8D-25CCFC8823E9
 :END:
-- パッケージを導入して
-  含まれている関数について調べてみよう
-  - package 'e1071' をインストールする
-  - 関数 kurtosis (尖度) を調べる
-  - 関数 kurtosis を呼び出す
-- パッケージ群を導入してみよう
-  - package 'tidyverse' をインストールする
+- パッケージを導入して，含まれている関数について調べなさい
+  - ~e1071~ をインストールする
+  - 関数 ~kurtosis()~ (尖度) を調べる
+  - 関数 ~kurtosis()~ を呼び出す
+- パッケージ群の導入を行いなさい
+  - ~tidyverse~ をインストールする
   
 # *swir* パッケージを導入して
 # 関数 ~swirl()~ を実行してみよう
@@ -837,11 +834,11 @@
 - スカラーは長さ1のベクトルとして扱われる
 - [[color:green][ベクトルの例]]
   #+begin_quote
-  数値 (実数や複素数)
+  数値 : 実数や複素数
   | 10.8 | 11.6 | 13.0 | 11.4 | ... |
-  文字列 (' や " で囲まれた文字．"foo"，"bar"など)
+  文字列 : '' や "" で囲まれた文字．"foo"，"bar"など
   | "this" | "that"   | "apple" | "orange" | ... |
-  論理値 ( ~TRUE~ , ~FALSE~ )
+  論理値 : ~TRUE~ , ~FALSE~ 
   | ~TRUE~ | ~TRUE~ | ~FALSE~ | ~TRUE~ | ... |
   #+end_quote
 
@@ -1315,7 +1312,7 @@
 - ベクトル・行列・リストの操作
 - ベクトルと行列のさまざまな計算
 
-
+   
 * Footnotes
 * COMMENT ローカル変数
 # Local Variables:
