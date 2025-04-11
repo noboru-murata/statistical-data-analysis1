@@ -11,22 +11,21 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
-
-<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
-
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
 
-<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
-<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-state="no-toc-progress">
+<section id="sec-title-slide">
 <!-- This is an HTML template for the title slide. -->
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
@@ -46,25 +45,24 @@
 
 </section>
 <section>
-<section id="slide-orgb09b101">
-<h2 id="orgb09b101">講義概要</h2>
+<section id="slide-orgf636fc8">
+<h2 id="orgf636fc8">講義概要</h2>
 <ul>
 <li>R言語のデータ構造</li>
 <li>ベクトル・行列・リストの操作</li>
 <li>ベクトルと行列のさまざまな計算</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org1836ebb">
-<h2 id="org1836ebb">R言語のデータ構造</h2>
-<div class="outline-text-2" id="text-org1836ebb">
+<section id="slide-org9b46382">
+<h2 id="org9b46382">R言語のデータ構造</h2>
+<div class="outline-text-2" id="text-org9b46382">
 </div>
 </section>
-<section id="slide-orgf969a27">
-<h3 id="orgf969a27">基本的なデータ構造</h3>
+<section id="slide-org9266b08">
+<h3 id="org9266b08">基本的なデータ構造</h3>
 <ul>
 <li>下記は基本的なもので標準環境で利用できる
 <ul>
@@ -83,22 +81,21 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org8e489c2">
-<h2 id="org8e489c2">ベクトル</h2>
-<div class="outline-text-2" id="text-org8e489c2">
+<section id="slide-org473a792">
+<h2 id="org473a792">ベクトル</h2>
+<div class="outline-text-2" id="text-org473a792">
 </div>
 </section>
-<section id="slide-orgd7abdb4">
-<h3 id="orgd7abdb4">ベクトルとは</h3>
+<section id="slide-orgc0dde0d">
+<h3 id="orgc0dde0d">ベクトルとは</h3>
 <ul>
 <li>同じデータ型の値 (スカラー値) の集合
 <ul>
 <li>数値 (実数や複素数)</li>
-<li>文字列 (&rsquo;や&ldquo;で囲まれた文字．&rdquo;foo&ldquo;，&rdquo;bar&ldquo;など)</li>
+<li>文字列 (&rsquo;や&ldquo;で囲まれた文字．&rdquo;foo&ldquo;，&rdquo;bar"など)</li>
 <li>論理値 ( <code>TRUE</code> , <code>FALSE</code> )</li>
 
 </ul></li>
@@ -106,21 +103,20 @@
 <li>スカラーは長さ1のベクトルとして扱われる</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge664b6a">
-<h3 id="orge664b6a">ベクトルの生成</h3>
+<section id="slide-orgf01165d">
+<h3 id="orgf01165d">ベクトルの生成</h3>
 <ul>
 <li><p>
 数値や文字列の要素からなるベクトルの生成
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >(x &lt;- c("Alice","Bob","Cathy","David")) # 文字列のベクトル
-(y &lt;- c(1,-2, 3,-4, 5)) # 数値のベクトル
-(z &lt;- c("apple","berry","cat","dog","elephant")) # 文字列のベクトル
-#' 外側の () は代入した結果の表示．print() と同義
-</code></pre>
+<pre class="src src-R">(x <span style="color: #60aa00;">&lt;-</span> c(<span style="color: #d08928;">"Alice"</span>,<span style="color: #d08928;">"Bob"</span>,<span style="color: #d08928;">"Cathy"</span>,<span style="color: #d08928;">"David"</span>)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25991;&#23383;&#21015;&#12398;&#12505;&#12463;&#12488;&#12523;</span>
+(y <span style="color: #60aa00;">&lt;-</span> c(1,-2, 3,-4, 5)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25968;&#20516;&#12398;&#12505;&#12463;&#12488;&#12523;</span>
+(z <span style="color: #60aa00;">&lt;-</span> c(<span style="color: #d08928;">"apple"</span>,<span style="color: #d08928;">"berry"</span>,<span style="color: #d08928;">"cat"</span>,<span style="color: #d08928;">"dog"</span>,<span style="color: #d08928;">"elephant"</span>)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25991;&#23383;&#21015;&#12398;&#12505;&#12463;&#12488;&#12523;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#22806;&#20596;&#12398; () &#12399;&#20195;&#20837;&#12375;&#12383;&#32080;&#26524;&#12398;&#34920;&#31034;&#65294;print() &#12392;&#21516;&#32681;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -131,7 +127,6 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -141,12 +136,12 @@
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >a &lt;- 8; b &lt;- 15 # 変数 a,b に値を代入．複数コマンドは ; で区切る
-a:b # a &lt; b の場合は1ずつ増加する系列が作成される
-a &lt;- 29.5; b &lt;- 24
-a:b # 逆の場合は1ずつ減少する系列が作成される
-29.5:24 # 直接数値を書いてもよい
-</code></pre>
+<pre class="src src-R">a <span style="color: #60aa00;">&lt;-</span> 8; b <span style="color: #60aa00;">&lt;-</span> 15 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22793;&#25968; a,b &#12395;&#20516;&#12434;&#20195;&#20837;&#65294;&#35079;&#25968;&#12467;&#12510;&#12531;&#12489;&#12399; ; &#12391;&#21306;&#20999;&#12427;</span>
+a:b <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">a &lt; b &#12398;&#22580;&#21512;&#12399;1&#12378;&#12388;&#22679;&#21152;&#12377;&#12427;&#31995;&#21015;&#12364;&#20316;&#25104;&#12373;&#12428;&#12427;</span>
+a <span style="color: #60aa00;">&lt;-</span> 29.5; b <span style="color: #60aa00;">&lt;-</span> 24
+a:b <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#36870;&#12398;&#22580;&#21512;&#12399;1&#12378;&#12388;&#28187;&#23569;&#12377;&#12427;&#31995;&#21015;&#12364;&#20316;&#25104;&#12373;&#12428;&#12427;</span>
+29.5:24 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#30452;&#25509;&#25968;&#20516;&#12434;&#26360;&#12356;&#12390;&#12418;&#12424;&#12356;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -161,9 +156,9 @@ a:b # 逆の場合は1ずつ減少する系列が作成される
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >a &lt;- 1; b &lt;- 16; c &lt;- 2 # 変数 a,b,c に値を代入
-seq(a, b, by = c) # 明示する場合は seq(from = a, to = b, by = c)
-</code></pre>
+<pre class="src src-R">a <span style="color: #60aa00;">&lt;-</span> 1; b <span style="color: #60aa00;">&lt;-</span> 16; c <span style="color: #60aa00;">&lt;-</span> 2 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22793;&#25968; a,b,c &#12395;&#20516;&#12434;&#20195;&#20837;</span>
+seq(a, b, by = c) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26126;&#31034;&#12377;&#12427;&#22580;&#21512;&#12399; seq(from = a, to = b, by = c)</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -171,18 +166,17 @@ seq(a, b, by = c) # 明示する場合は seq(from = a, to = b, by = c)
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc278eac">
-<h3 id="orgc278eac">ベクトルの操作</h3>
+<section id="slide-org15d8ff8">
+<h3 id="org15d8ff8">ベクトルの操作</h3>
 <ul>
 <li><p>
 ベクトルの長さの取得 (関数 <code>length()</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >length(x) # 最後の要素を参照する場合などに利用できる    
-</code></pre>
+<pre class="src src-R">length(x) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#24460;&#12398;&#35201;&#32032;&#12434;&#21442;&#29031;&#12377;&#12427;&#22580;&#21512;&#12394;&#12393;&#12395;&#21033;&#29992;&#12391;&#12365;&#12427;    </span>
+</pre>
 </div>
 
 <pre class="example">
@@ -194,9 +188,9 @@ seq(a, b, by = c) # 明示する場合は seq(from = a, to = b, by = c)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >x[3] # xの第3要素 (ベクトルの添え字は1から始まる)
-y[c(1,3,4)] # 複数の要素 = c(y[1], y[3], y[4])
-</code></pre>
+<pre class="src src-R">x[3] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">x&#12398;&#31532;3&#35201;&#32032; (&#12505;&#12463;&#12488;&#12523;&#12398;&#28155;&#12360;&#23383;&#12399;1&#12363;&#12425;&#22987;&#12414;&#12427;)</span>
+y[c(1,3,4)] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35079;&#25968;&#12398;&#35201;&#32032; = c(y[1], y[3], y[4])</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -206,7 +200,6 @@ y[c(1,3,4)] # 複数の要素 = c(y[1], y[3], y[4])
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -215,8 +208,8 @@ y[c(1,3,4)] # 複数の要素 = c(y[1], y[3], y[4])
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >rev(x)
-</code></pre>
+<pre class="src src-R">rev(x)
+</pre>
 </div>
 
 <pre class="example">
@@ -228,20 +221,19 @@ y[c(1,3,4)] # 複数の要素 = c(y[1], y[3], y[4])
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >c(x, z) # 同じデータ型のものは単純に結合される
-c(x, y) # 異なるデータ型のものは結合できないので自動的に書き換えられる
-</code></pre>
+<pre class="src src-R">c(x, z) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#12376;&#12487;&#12540;&#12479;&#22411;&#12398;&#12418;&#12398;&#12399;&#21336;&#32020;&#12395;&#32080;&#21512;&#12373;&#12428;&#12427;</span>
+c(x, y) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#30064;&#12394;&#12427;&#12487;&#12540;&#12479;&#22411;&#12398;&#12418;&#12398;&#12399;&#32080;&#21512;&#12391;&#12365;&#12394;&#12356;&#12398;&#12391;&#33258;&#21205;&#30340;&#12395;&#26360;&#12365;&#25563;&#12360;&#12425;&#12428;&#12427;</span>
+</pre>
 </div>
 
 <pre class="example">
-[1] "Alice"    "Bob"      "Cathy"    "David"    "apple"    "berry"    "cat"     
-[8] "dog"      "elephant"
+[1] "Alice"    "Bob"      "Cathy"    "David"    "apple"    "berry"   
+[7] "cat"      "dog"      "elephant"
 [1] "Alice" "Bob"   "Cathy" "David" "1"     "-2"    "3"     "-4"    "5"
 </pre></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -250,11 +242,11 @@ c(x, y) # 異なるデータ型のものは結合できないので自動的に�
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >rep(y, 3) # 長さは length(y) * 3
-rep(y, times = 3) # 単純に繰り返す．上記と同様
-rep(y, each = 3)  # 各要素を繰り返す
-rep(y, length.out = 12)  # 繰り返した結果の長さを指定する
-</code></pre>
+<pre class="src src-R">rep(y, 3) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#38263;&#12373;&#12399; length(y) * 3</span>
+rep(y, times = 3) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21336;&#32020;&#12395;&#32368;&#12426;&#36820;&#12377;&#65294;&#19978;&#35352;&#12392;&#21516;&#27096;</span>
+rep(y, each = 3)  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21508;&#35201;&#32032;&#12434;&#32368;&#12426;&#36820;&#12377;</span>
+rep(y, length.out = 12)  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#32368;&#12426;&#36820;&#12375;&#12383;&#32080;&#26524;&#12398;&#38263;&#12373;&#12434;&#25351;&#23450;&#12377;&#12427;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -265,16 +257,14 @@ rep(y, length.out = 12)  # 繰り返した結果の長さを指定する
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org4279461" data-background="#fef4f4">
-<h2 id="org4279461">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orgd80d5a9" data-background="#fef4f4">
+<h2 id="orgd80d5a9">実習</h2>
 </section>
-<section id="slide-org5ff220b" data-background="#fef4f4">
-<h3 id="org5ff220b">練習問題</h3>
+<section id="slide-org0f6a3f1" data-background="#fef4f4">
+<h3 id="org0f6a3f1">練習問題</h3>
 <ul>
 <li>以下に示すベクトルを作成してみよう
 <ul>
@@ -292,17 +282,16 @@ rep(y, length.out = 12)  # 繰り返した結果の長さを指定する
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org91e3118">
-<h2 id="org91e3118">行列</h2>
-<div class="outline-text-2" id="text-org91e3118">
+<section id="slide-orgab8432a">
+<h2 id="orgab8432a">行列</h2>
+<div class="outline-text-2" id="text-orgab8432a">
 </div>
 </section>
-<section id="slide-org2132486">
-<h3 id="org2132486">行列とは</h3>
+<section id="slide-orgd797410">
+<h3 id="orgd797410">行列とは</h3>
 <ul>
 <li>スカラー値を2次元状(縦横)に並べたもの
 <ul>
@@ -314,10 +303,9 @@ rep(y, length.out = 12)  # 繰り返した結果の長さを指定する
 <li>データフレームは行列を拡張したもの</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbde091b">
-<h3 id="orgbde091b">行列の生成</h3>
+<section id="slide-org94cd26d">
+<h3 id="org94cd26d">行列の生成</h3>
 <ul>
 <li><p>
 すべての要素が <code>a</code> である \(m\times n\) 型行列の生成 <br />
@@ -325,9 +313,9 @@ rep(y, length.out = 12)  # 繰り返した結果の長さを指定する
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >a &lt;- 2; m &lt;- 3; n &lt;- 4 # 変数 a,m,n に値を代入
-matrix(a, m, n) # 明示する場合は matrix(data = a, nrow = m, ncol = n)
-</code></pre>
+<pre class="src src-R">a <span style="color: #60aa00;">&lt;-</span> 2; m <span style="color: #60aa00;">&lt;-</span> 3; n <span style="color: #60aa00;">&lt;-</span> 4 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22793;&#25968; a,m,n &#12395;&#20516;&#12434;&#20195;&#20837;</span>
+matrix(a, m, n) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26126;&#31034;&#12377;&#12427;&#22580;&#21512;&#12399; matrix(data = a, nrow = m, ncol = n)</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -339,7 +327,6 @@ matrix(a, m, n) # 明示する場合は matrix(data = a, nrow = m, ncol = n)
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -349,9 +336,9 @@ matrix(a, m, n) # 明示する場合は matrix(data = a, nrow = m, ncol = n)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >a &lt;- 2:13 # 変数 a に値を代入 (m*n = 12 文字用意)
-(A &lt;- matrix(a, m, n)) # 並び順を変えるには matrix(a,m,n,byrow = TRUE)
-</code></pre>
+<pre class="src src-R">a <span style="color: #60aa00;">&lt;-</span> 2:13 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22793;&#25968; a &#12395;&#20516;&#12434;&#20195;&#20837; (m*n = 12 &#25991;&#23383;&#29992;&#24847;)</span>
+(A <span style="color: #60aa00;">&lt;-</span> matrix(a, m, n)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20006;&#12403;&#38918;&#12434;&#22793;&#12360;&#12427;&#12395;&#12399; matrix(a,m,n,byrow = TRUE)</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -365,8 +352,8 @@ matrix(a, m, n) # 明示する場合は matrix(data = a, nrow = m, ncol = n)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >as.vector(A) # matrix の逆変換にあたる
-</code></pre>
+<pre class="src src-R">as.vector(A) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">matrix &#12398;&#36870;&#22793;&#25563;&#12395;&#12354;&#12383;&#12427;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -375,7 +362,6 @@ matrix(a, m, n) # 明示する場合は matrix(data = a, nrow = m, ncol = n)
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -385,10 +371,10 @@ matrix(a, m, n) # 明示する場合は matrix(data = a, nrow = m, ncol = n)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >a &lt;- 4:7; b &lt;- 10:7; c &lt;- c(2,4,8,16) # 変数 a,b,c に値を代入
-rbind(a, b, c) # 行ベクトルとして結合 (row vector bind)
-cbind(a, b, c) # 列ベクトルとして結合 (column vector bind)
-</code></pre>
+<pre class="src src-R">a <span style="color: #60aa00;">&lt;-</span> 4:7; b <span style="color: #60aa00;">&lt;-</span> 10:7; c <span style="color: #60aa00;">&lt;-</span> c(2,4,8,16) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22793;&#25968; a,b,c &#12395;&#20516;&#12434;&#20195;&#20837;</span>
+rbind(a, b, c) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34892;&#12505;&#12463;&#12488;&#12523;&#12392;&#12375;&#12390;&#32080;&#21512; (row vector bind)</span>
+cbind(a, b, c) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21015;&#12505;&#12463;&#12488;&#12523;&#12392;&#12375;&#12390;&#32080;&#21512; (column vector bind)</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -404,22 +390,21 @@ a  b  c
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbcc8561">
-<h3 id="orgbcc8561">行列の操作</h3>
+<section id="slide-orge710999">
+<h3 id="orge710999">行列の操作</h3>
 <ul>
 <li><p>
 行列のサイズの取得 (関数 <code>dim()</code> とその仲間)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >dim(A) # 関数の返値は長さ2のベクトル (行数,列数) となることに注意
-nrow(A) # 行数
-ncol(A) # 列数
-dim(A)[1] # nrow(A) と同値
-dim(A)[2] # ncol(A) と同値
-</code></pre>
+<pre class="src src-R">dim(A) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#38306;&#25968;&#12398;&#36820;&#20516;&#12399;&#38263;&#12373;2&#12398;&#12505;&#12463;&#12488;&#12523; (&#34892;&#25968;,&#21015;&#25968;) &#12392;&#12394;&#12427;&#12371;&#12392;&#12395;&#27880;&#24847;</span>
+nrow(A) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34892;&#25968;</span>
+ncol(A) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21015;&#25968;</span>
+dim(A)[1] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">nrow(A) &#12392;&#21516;&#20516;</span>
+dim(A)[2] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">ncol(A) &#12392;&#21516;&#20516;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -432,7 +417,6 @@ dim(A)[2] # ncol(A) と同値
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -441,12 +425,12 @@ dim(A)[2] # ncol(A) と同値
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >A[3,4] # (3,4)成分
-A[3, ] # 第3行のベクトル
-A[ ,4] # 第4列のベクトル
-A[c(1,3),] # 1,3行からなる部分行列．2x4型行列になる
-A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列になる
-</code></pre>
+<pre class="src src-R">A[3,4] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">(3,4)&#25104;&#20998;</span>
+A[3, ] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#31532;3&#34892;&#12398;&#12505;&#12463;&#12488;&#12523;</span>
+A[ ,4] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#31532;4&#21015;&#12398;&#12505;&#12463;&#12488;&#12523;</span>
+A[c(1,3),] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1,3&#34892;&#12363;&#12425;&#12394;&#12427;&#37096;&#20998;&#34892;&#21015;&#65294;2x4&#22411;&#34892;&#21015;&#12395;&#12394;&#12427;</span>
+A[c(1,3),2:4] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1,3&#34892;&#12392;&#65292;2,3,4&#21015;&#12363;&#12425;&#12394;&#12427;&#37096;&#20998;&#34892;&#21015;&#65294;2x3&#22411;&#34892;&#21015;&#12395;&#12394;&#12427;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -462,10 +446,9 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列に�
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org37d6890">
-<h3 id="org37d6890">行列の操作に関する補足</h3>
+<section id="slide-orgc60f122">
+<h3 id="orgc60f122">行列の操作に関する補足</h3>
 <ul>
 <li>関数 <code>cbind()/rbind()</code> は行数・列数が等しい行列も横・縦に結合できる</li>
 <li>行列の高次元版として配列(array)が用意されている</li>
@@ -473,16 +456,14 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列に�
 <li><span style="color:gray;">これらの機能は講義の中で使いながら説明する</span></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org376a20d" data-background="#fef4f4">
-<h2 id="org376a20d">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org254cc13" data-background="#fef4f4">
+<h2 id="org254cc13">実習</h2>
 </section>
-<section id="slide-org1d7b5a6" data-background="#fef4f4">
-<h3 id="org1d7b5a6">練習問題</h3>
+<section id="slide-orgf5f7b5a" data-background="#fef4f4">
+<h3 id="orgf5f7b5a">練習問題</h3>
 <ul>
 <li><p>
 以下に示す行列を作成してみよう
@@ -506,17 +487,16 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列に�
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org7f3cbf7">
-<h2 id="org7f3cbf7">その他のデータ構造</h2>
-<div class="outline-text-2" id="text-org7f3cbf7">
+<section id="slide-org9427e79">
+<h2 id="org9427e79">その他のデータ構造</h2>
+<div class="outline-text-2" id="text-org9427e79">
 </div>
 </section>
-<section id="slide-org8a8f627">
-<h3 id="org8a8f627">リストとは</h3>
+<section id="slide-org2dd67e9">
+<h3 id="org2dd67e9">リストとは</h3>
 <ul>
 <li>異なる構造のオブジェクトを1つにまとめたもの
 <ul>
@@ -532,18 +512,17 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列に�
 <li>データフレームはリストの特殊なもの</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb843ac2">
-<h3 id="orgb843ac2">リストの生成と操作</h3>
+<section id="slide-org4cb8257">
+<h3 id="org4cb8257">リストの生成と操作</h3>
 <ul>
 <li><p>
 リストの生成 (関数 <code>list()</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >(L &lt;- list(x,y)) # x,yを要素とするリスト
-</code></pre>
+<pre class="src src-R">(L <span style="color: #60aa00;">&lt;-</span> list(x,y)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">x,y&#12434;&#35201;&#32032;&#12392;&#12377;&#12427;&#12522;&#12473;&#12488;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -559,8 +538,8 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列に�
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >L[[1]] # リストの第1要素
-</code></pre>
+<pre class="src src-R">L[[1]] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12522;&#12473;&#12488;&#12398;&#31532;1&#35201;&#32032;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -569,7 +548,6 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列に�
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -578,9 +556,9 @@ A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列に�
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 方法1 (作成時に名前を付与)
-(L1 &lt;- list(first=x, second=y))
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#26041;&#27861;1 (&#20316;&#25104;&#26178;&#12395;&#21517;&#21069;&#12434;&#20184;&#19982;)</span>
+(L1 <span style="color: #60aa00;">&lt;-</span> list(first=x, second=y))
+</pre>
 </div>
 
 <pre class="example">
@@ -594,11 +572,11 @@ $second
 
 <div class="org-src-container">
 
-<pre><code class="R" >#' 方法2 (作成後に名前を変更)
-L2 &lt;- list(x,y) 
-names(L2) &lt;- c("1st","2nd")
-L2 # リストを表示
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#26041;&#27861;2 (&#20316;&#25104;&#24460;&#12395;&#21517;&#21069;&#12434;&#22793;&#26356;)</span>
+L2 <span style="color: #60aa00;">&lt;-</span> list(x,y) 
+names(L2) <span style="color: #60aa00;">&lt;-</span> c(<span style="color: #d08928;">"1st"</span>,<span style="color: #d08928;">"2nd"</span>)
+L2 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12522;&#12473;&#12488;&#12434;&#34920;&#31034;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -611,7 +589,6 @@ $`2nd`
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -620,10 +597,10 @@ $`2nd`
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 方法1 (リストの名前で参照)
-L1[["first"]]
-L2[["2nd"]] 
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#26041;&#27861;1 (&#12522;&#12473;&#12488;&#12398;&#21517;&#21069;&#12391;&#21442;&#29031;)</span>
+L1[[<span style="color: #d08928;">"first"</span>]]
+L2[[<span style="color: #d08928;">"2nd"</span>]] 
+</pre>
 </div>
 
 <pre class="example">
@@ -634,10 +611,10 @@ L2[["2nd"]]
 
 <div class="org-src-container">
 
-<pre><code class="R" >#' 方法2 (記号$を用いる場合は""は不要なことに注意)
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#26041;&#27861;2 (&#35352;&#21495;$&#12434;&#29992;&#12356;&#12427;&#22580;&#21512;&#12399;""&#12399;&#19981;&#35201;&#12394;&#12371;&#12392;&#12395;&#27880;&#24847;)</span>
 L1$first      
-L2$`2nd` # 数字で始まる文字列は``を用いる必要がある
-</code></pre>
+L2$`2nd` <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25968;&#23383;&#12391;&#22987;&#12414;&#12427;&#25991;&#23383;&#21015;&#12399;``&#12434;&#29992;&#12356;&#12427;&#24517;&#35201;&#12364;&#12354;&#12427;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -646,10 +623,9 @@ L2$`2nd` # 数字で始まる文字列は``を用いる必要がある
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org21dbe79">
-<h3 id="org21dbe79">データフレームとは</h3>
+<section id="slide-orga3fdecf">
+<h3 id="orga3fdecf">データフレームとは</h3>
 <ul>
 <li>長さの等しいベクトルを束ねたリスト</li>
 <li>複数の属性を持つ実データに則したデータ構造</li>
@@ -660,41 +636,39 @@ L2$`2nd` # 数字で始まる文字列は``を用いる必要がある
 行列と同様にして各変数を取得できる</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org193ce4c">
-<h3 id="org193ce4c">データフレームの生成</h3>
+<section id="slide-org649c7fb">
+<h3 id="org649c7fb">データフレームの生成</h3>
 <ul>
 <li><p>
 データフレームの生成 (関数 <code>data.frame()</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 前回の練習問題
-library(tibble)
-(foo &lt;-
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#21069;&#22238;&#12398;&#32244;&#32722;&#21839;&#38988;</span>
+<span style="color: #60aa00;">library</span>(tibble)
+(foo <span style="color: #60aa00;">&lt;-</span>
    tibble(
-     name = c("Alice", "Bob", "Carol", "Dave", "Eve"),
+     name = c(<span style="color: #d08928;">"Alice"</span>, <span style="color: #d08928;">"Bob"</span>, <span style="color: #d08928;">"Carol"</span>, <span style="color: #d08928;">"Dave"</span>, <span style="color: #d08928;">"Eve"</span>),
      math = c(90, 80, 70, 60, 50),
      phys = c(25, 50, 75,100, 80),
      chem = c(65,100, 70, 40, 75),
      bio  = c(70, 50, 30, 80,100)))
-</code></pre>
+</pre>
 </div></li>
 <li><span style="color:gray;">操作については別の回に詳細に説明する</span></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orga8b5943">
-<h2 id="orga8b5943">ベクトルの計算</h2>
-<div class="outline-text-2" id="text-orga8b5943">
+<section id="slide-org9501c29">
+<h2 id="org9501c29">ベクトルの計算</h2>
+<div class="outline-text-2" id="text-org9501c29">
 </div>
 </section>
-<section id="slide-org985373c">
-<h3 id="org985373c">ベクトルの表記</h3>
+<section id="slide-org40aa23d">
+<h3 id="org40aa23d">ベクトルの表記</h3>
 <ul>
 <li><p>
 ベクトルは太字，要素は下付き添字で表す
@@ -725,15 +699,14 @@ Rの書式 (関数 <code>c()</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >a &lt;- c(a1,a2,...,ak) # k次元ベクトルの作成 (擬似コード)
-</code></pre>
+<pre class="src src-R">a <span style="color: #60aa00;">&lt;-</span> c(a1,a2,...,ak) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">k&#27425;&#20803;&#12505;&#12463;&#12488;&#12523;&#12398;&#20316;&#25104; (&#25836;&#20284;&#12467;&#12540;&#12489;)</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3bae2bb">
-<h3 id="org3bae2bb">ベクトルの加法</h3>
+<section id="slide-orgf621b33">
+<h3 id="orgf621b33">ベクトルの加法</h3>
 <ul>
 <li><p>
 <b>同じ長さのベクトル</b> の和および差
@@ -763,16 +736,15 @@ Rの書式 (演算子 <code>+,-</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >a + b # 同じ長さのベクトル a,b の和．同じ長さのベクトルが返る
-a - b # ベクトルの差
-</code></pre>
+<pre class="src src-R">a + b <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#12376;&#38263;&#12373;&#12398;&#12505;&#12463;&#12488;&#12523; a,b &#12398;&#21644;&#65294;&#21516;&#12376;&#38263;&#12373;&#12398;&#12505;&#12463;&#12488;&#12523;&#12364;&#36820;&#12427;</span>
+a - b <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12505;&#12463;&#12488;&#12523;&#12398;&#24046;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org96d3107">
-<h3 id="org96d3107">ベクトルの乗法</h3>
+<section id="slide-org05599f4">
+<h3 id="org05599f4">ベクトルの乗法</h3>
 <ul>
 <li><p>
 <b>同じ長さの2つのベクトル</b> の乗法
@@ -788,10 +760,9 @@ a - b # ベクトルの差
 <li>データ解析ではどちらも良く用いられる</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcd72245">
-<h3 id="orgcd72245">Hadamard 積</h3>
+<section id="slide-org541027a">
+<h3 id="org541027a">Hadamard 積</h3>
 <ul>
 <li><p>
 <b>同じ長さのベクトル</b> の成分ごとの積
@@ -817,16 +788,15 @@ Rの書式 (演算子 <code>*,/</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >a * b # ベクトルの成分ごとの積．同じ長さのベクトルが返る
-a / b # 成分ごとの商も計算可
-</code></pre>
+<pre class="src src-R">a * b <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12505;&#12463;&#12488;&#12523;&#12398;&#25104;&#20998;&#12372;&#12392;&#12398;&#31309;&#65294;&#21516;&#12376;&#38263;&#12373;&#12398;&#12505;&#12463;&#12488;&#12523;&#12364;&#36820;&#12427;</span>
+a / b <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25104;&#20998;&#12372;&#12392;&#12398;&#21830;&#12418;&#35336;&#31639;&#21487;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgae8d05a">
-<h3 id="orgae8d05a">内積</h3>
+<section id="slide-orgdd2179c">
+<h3 id="orgdd2179c">内積</h3>
 <ul>
 <li><p>
 <b>同じ長さのベクトル</b> の内積
@@ -846,22 +816,21 @@ Rの書式 (演算子 <code>%*%</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >a %*% b # ベクトルの内積．1x1型の行列が返る
-</code></pre>
+<pre class="src src-R">a <span style="color: #60aa00;">%*%</span> b <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12505;&#12463;&#12488;&#12523;&#12398;&#20869;&#31309;&#65294;1x1&#22411;&#12398;&#34892;&#21015;&#12364;&#36820;&#12427;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org549e0cf">
-<h2 id="org549e0cf">行列の計算</h2>
-<div class="outline-text-2" id="text-org549e0cf">
+<section id="slide-org4996bea">
+<h2 id="org4996bea">行列の計算</h2>
+<div class="outline-text-2" id="text-org4996bea">
 </div>
 </section>
-<section id="slide-org052fae5">
-<h3 id="org052fae5">行列の表記</h3>
+<section id="slide-org98c333d">
+<h3 id="org98c333d">行列の表記</h3>
 <ul>
 <li><p>
 行列は大文字，要素は下付き添字で表す
@@ -903,15 +872,14 @@ Rの書式 (関数 <code>matrix()</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >A &lt;- matrix(c(a11,a21,...,amn), m, n) # m x n 型行列の作成 (擬似コード)
-</code></pre>
+<pre class="src src-R">A <span style="color: #60aa00;">&lt;-</span> matrix(c(a11,a21,...,amn), m, n) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">m x n &#22411;&#34892;&#21015;&#12398;&#20316;&#25104; (&#25836;&#20284;&#12467;&#12540;&#12489;)</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8349f98">
-<h3 id="org8349f98">行列の加法</h3>
+<section id="slide-org6978d74">
+<h3 id="org6978d74">行列の加法</h3>
 <ul>
 <li><p>
 <b>同じ大きさの行列</b> の和および差
@@ -933,16 +901,15 @@ Rの書式
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >A + B # 同じサイズの行列の和．同じサイズの行列が返る
-A - B # 行列の差
-</code></pre>
+<pre class="src src-R">A + B <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#12376;&#12469;&#12452;&#12474;&#12398;&#34892;&#21015;&#12398;&#21644;&#65294;&#21516;&#12376;&#12469;&#12452;&#12474;&#12398;&#34892;&#21015;&#12364;&#36820;&#12427;</span>
+A - B <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34892;&#21015;&#12398;&#24046;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7e41e68">
-<h3 id="org7e41e68">行列の乗法</h3>
+<section id="slide-org0d98b71">
+<h3 id="org0d98b71">行列の乗法</h3>
 <ul>
 <li><p>
 2つの行列の乗法
@@ -958,10 +925,9 @@ A - B # 行列の差
 <li>データ解析ではどちらも良く用いられる</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9500969">
-<h3 id="org9500969">Hadamard 積</h3>
+<section id="slide-orged30c05">
+<h3 id="orged30c05">Hadamard 積</h3>
 <ul>
 <li><p>
 <b>同じ大きさの行列</b> の成分ごとの積
@@ -979,16 +945,15 @@ Rの書式 (演算子 <code>*,/</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >A * B # 行列の成分ごとの積．同じサイズの行列が返る
-A / B # 成分ごとの商も計算可
-</code></pre>
+<pre class="src src-R">A * B <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34892;&#21015;&#12398;&#25104;&#20998;&#12372;&#12392;&#12398;&#31309;&#65294;&#21516;&#12376;&#12469;&#12452;&#12474;&#12398;&#34892;&#21015;&#12364;&#36820;&#12427;</span>
+A / B <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25104;&#20998;&#12372;&#12392;&#12398;&#21830;&#12418;&#35336;&#31639;&#21487;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5afcd38">
-<h3 id="org5afcd38">行列の積</h3>
+<section id="slide-org9494537">
+<h3 id="org9494537">行列の積</h3>
 <ul>
 <li><p>
 <b>\(n\times m\) 型行列 \(A\) と \(m\times l\) 型行列 \(B\)</b> の積
@@ -1007,15 +972,14 @@ Rの書式 (演算子 <code>%*%</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >A %*% B # 行列の積．n x l 型行列が返る
-</code></pre>
+<pre class="src src-R">A <span style="color: #60aa00;">%*%</span> B <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34892;&#21015;&#12398;&#31309;&#65294;n x l &#22411;&#34892;&#21015;&#12364;&#36820;&#12427;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6dd1a74">
-<h3 id="org6dd1a74">行列式</h3>
+<section id="slide-orgca27c0f">
+<h3 id="orgca27c0f">行列式</h3>
 <ul>
 <li><p>
 <b>\(n\) 次正方行列</b> \(A\) の行列式
@@ -1037,15 +1001,14 @@ Rの書式 (関数 <code>det()</code>)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >det(A) # 行列式 
-</code></pre>
+<pre class="src src-R">det(A) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34892;&#21015;&#24335; </span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfdd0aae">
-<h3 id="orgfdd0aae">トレース</h3>
+<section id="slide-org2051c09">
+<h3 id="org2051c09">トレース</h3>
 <ul>
 <li><p>
 <b>\(n\) 次正方行列</b> \(A\) のトレース(対角成分の総和)
@@ -1063,8 +1026,8 @@ Rの書式 (関数は用意されていないので以下を利用)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >sum(diag(A)) # 行列のトレース
-</code></pre>
+<pre class="src src-R">sum(diag(A)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34892;&#21015;&#12398;&#12488;&#12524;&#12540;&#12473;</span>
+</pre>
 </div>
 <ul>
 <li>関数 <code>diag()</code> : 行列の対角成分を取り出す <br />
@@ -1074,16 +1037,14 @@ Rの書式 (関数は用意されていないので以下を利用)
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org30bd490" data-background="#fef4f4">
-<h2 id="org30bd490">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org00e82dd" data-background="#fef4f4">
+<h2 id="org00e82dd">実習</h2>
 </section>
-<section id="slide-orgb935b95">
-<h3 id="orgb935b95">例題</h3>
+<section id="slide-orgfe6b3c9">
+<h3 id="orgfe6b3c9">例題</h3>
 <ul>
 <li><p>
 適当な2次正方行列 \(A\) で
@@ -1104,7 +1065,6 @@ Hamilton-Cayley の定理
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1113,11 +1073,11 @@ Hamilton-Cayley の定理
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 行列を作成 (好きに設定してよい)
-(A &lt;- matrix(1:4,2,2) - diag(rep(3,2)))
-#' 左辺を計算 (丸め誤差の範囲で0になる)
-A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#34892;&#21015;&#12434;&#20316;&#25104; (&#22909;&#12365;&#12395;&#35373;&#23450;&#12375;&#12390;&#12424;&#12356;)</span>
+(A <span style="color: #60aa00;">&lt;-</span> matrix(1:4,2,2) - diag(rep(3,2)))
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#24038;&#36794;&#12434;&#35336;&#31639; (&#20024;&#12417;&#35492;&#24046;&#12398;&#31684;&#22258;&#12391;0&#12395;&#12394;&#12427;)</span>
+A <span style="color: #60aa00;">%*%</span> A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
+</pre>
 </div>
 
 <pre class="example">
@@ -1130,10 +1090,9 @@ A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org75e7c85" data-background="#fef4f4">
-<h3 id="org75e7c85">練習問題</h3>
+<section id="slide-org8a005e5" data-background="#fef4f4">
+<h3 id="org8a005e5">練習問題</h3>
 <ul>
 <li>1から10の2乗値からなるベクトルを作成せよ</li>
 <li>1から10までの和を計算せよ</li>
@@ -1156,17 +1115,16 @@ A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org2d6af6f">
-<h2 id="org2d6af6f">ベクトルと行列の計算</h2>
-<div class="outline-text-2" id="text-org2d6af6f">
+<section id="slide-orgb513e05">
+<h2 id="orgb513e05">ベクトルと行列の計算</h2>
+<div class="outline-text-2" id="text-orgb513e05">
 </div>
 </section>
-<section id="slide-org8611bdf">
-<h3 id="org8611bdf">ベクトルと行列の乗法</h3>
+<section id="slide-orgcbbd1ad">
+<h3 id="orgcbbd1ad">ベクトルと行列の乗法</h3>
 <ul>
 <li><p>
 演算子 <code>%*%</code> を用いて計算する
@@ -1179,9 +1137,9 @@ A %*% A - sum(diag(A)) * A + det(A) * diag(rep(1,2))
 </ul>
 <div class="org-src-container">
 
-<pre><code class="R" >A &lt;- matrix(1:4, 2, 2); b &lt;- c(5,6) # 行列とベクトルを作成
-A %*% b # 行列 x ベクトル = 列ベクトル
-</code></pre>
+<pre class="src src-R">A <span style="color: #60aa00;">&lt;-</span> matrix(1:4, 2, 2); b <span style="color: #60aa00;">&lt;-</span> c(5,6) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34892;&#21015;&#12392;&#12505;&#12463;&#12488;&#12523;&#12434;&#20316;&#25104;</span>
+A <span style="color: #60aa00;">%*%</span> b <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34892;&#21015; x &#12505;&#12463;&#12488;&#12523; = &#21015;&#12505;&#12463;&#12488;&#12523;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -1193,8 +1151,8 @@ A %*% b # 行列 x ベクトル = 列ベクトル
 
 <div class="org-src-container">
 
-<pre><code class="R" >b %*% A # ベクトル x 行列 = 行ベクトル
-</code></pre>
+<pre class="src src-R">b <span style="color: #60aa00;">%*%</span> A <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12505;&#12463;&#12488;&#12523; x &#34892;&#21015; = &#34892;&#12505;&#12463;&#12488;&#12523;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -1203,10 +1161,9 @@ A %*% b # 行列 x ベクトル = 列ベクトル
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org90063a8">
-<h3 id="org90063a8">連立1次方程式の解法</h3>
+<section id="slide-org609760a">
+<h3 id="org609760a">連立1次方程式の解法</h3>
 <ul>
 <li><p>
 連立1次方程式
@@ -1232,8 +1189,8 @@ A %*% b # 行列 x ベクトル = 列ベクトル
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >x &lt;- solve(A, b) 
-</code></pre>
+<pre class="src src-R">x <span style="color: #60aa00;">&lt;-</span> solve(A, b) 
+</pre>
 </div>
 <ul>
 <li>ベクトル \(\boldsymbol{b}\) の代わりに行列も扱える</li>
@@ -1241,10 +1198,9 @@ A %*% b # 行列 x ベクトル = 列ベクトル
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9c3b332">
-<h3 id="org9c3b332">逆行列</h3>
+<section id="slide-org2ce75e3">
+<h3 id="org2ce75e3">逆行列</h3>
 <ul>
 <li><p>
 正則な \(n\) 次正方行列 \(A\) の逆行列 \(A^{-1}\)
@@ -1271,9 +1227,9 @@ A %*% b # 行列 x ベクトル = 列ベクトル
 </blockquote>
 <div class="org-src-container">
 
-<pre><code class="R" >solve(A,B) # AX=B の解Xを求める
-solve(A) # 逆行列 (Bが単位行列の場合省略できる)
-</code></pre>
+<pre class="src src-R">solve(A,B) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">AX=B &#12398;&#35299;X&#12434;&#27714;&#12417;&#12427;</span>
+solve(A) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#36870;&#34892;&#21015; (B&#12364;&#21336;&#20301;&#34892;&#21015;&#12398;&#22580;&#21512;&#30465;&#30053;&#12391;&#12365;&#12427;)</span>
+</pre>
 </div>
 <ul>
 <li>他にもいくつか方法は用意されている</li>
@@ -1281,10 +1237,9 @@ solve(A) # 逆行列 (Bが単位行列の場合省略できる)
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org0b6343a">
-<h3 id="org0b6343a">関数の適用</h3>
+<section id="slide-org06e3c91">
+<h3 id="org06e3c91">関数の適用</h3>
 <ul>
 <li>ベクトルや行列に関数( \(\sin,\exp,\dots\) など)を適用すると
 成分ごとに計算した結果が返される</li>
@@ -1307,22 +1262,20 @@ solve(A) # 逆行列 (Bが単位行列の場合省略できる)
 </blockquote>
 <div class="org-src-container">
 
-<pre><code class="R" >sin(a) # 成分ごとに計算される．sin(a)[i]=sin(a[i])
-sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
-</code></pre>
+<pre class="src src-R">sin(a) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25104;&#20998;&#12372;&#12392;&#12395;&#35336;&#31639;&#12373;&#12428;&#12427;&#65294;sin(a)[i]=sin(a[i])</span>
+sin(A) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25104;&#20998;&#12372;&#12392;&#12395;&#35336;&#31639;&#12373;&#12428;&#12427;&#65294;sin(A)[i,j]=sin(A[i,j])</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org3ced4a2" data-background="#fef4f4">
-<h2 id="org3ced4a2">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org4c0f804" data-background="#fef4f4">
+<h2 id="org4c0f804">実習</h2>
 </section>
-<section id="slide-org74e1aa5">
-<h3 id="org74e1aa5">例題</h3>
+<section id="slide-org91274a3">
+<h3 id="org91274a3">例題</h3>
 <ul>
 <li><p>
 適当な3次正方行列 \(A\) と3次元ベクトル \(\boldsymbol{b}\) を作成して
@@ -1339,7 +1292,6 @@ sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1348,30 +1300,30 @@ sin(A) # 成分ごとに計算される．sin(A)[i,j]=sin(A[i,j])
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >(A &lt;- matrix(rnorm(9), 3, 3) + diag(rep(1, 3))) # 行列とベクトルを作成
-#' rnorm(9) は正規乱数を9つ作成する(後の講義で詳しく説明)
-(b &lt;- 1:3)
-</code></pre>
+<pre class="src src-R">(A <span style="color: #60aa00;">&lt;-</span> matrix(rnorm(9), 3, 3) + diag(rep(1, 3))) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34892;&#21015;&#12392;&#12505;&#12463;&#12488;&#12523;&#12434;&#20316;&#25104;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> rnorm(9) &#12399;&#27491;&#35215;&#20081;&#25968;&#12434;9&#12388;&#20316;&#25104;&#12377;&#12427;(&#24460;&#12398;&#35611;&#32681;&#12391;&#35443;&#12375;&#12367;&#35500;&#26126;)</span>
+(b <span style="color: #60aa00;">&lt;-</span> 1:3)
+</pre>
 </div>
 
 <pre class="example">
-           [,1]        [,2]       [,3]
-[1,]  0.6429563  1.40193984 -0.4057059
-[2,]  1.2608802  0.58336097 -0.4595474
-[3,] -1.0615962 -0.03945595  1.2033202
+          [,1]      [,2]       [,3]
+[1,] 0.6195396 1.1504401 -0.4066585
+[2,] 1.0220718 0.9600388  1.0254051
+[3,] 0.4585697 1.9038018  0.2741894
 [1] 1 2 3
 </pre>
 
 
 <div class="org-src-container">
 
-<pre><code class="R" >(x &lt;- solve(A, b)) # 解を計算
-A %*% x # 結果の確認(b になるはず)
-</code></pre>
+<pre class="src src-R">(x <span style="color: #60aa00;">&lt;-</span> solve(A, b)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35299;&#12434;&#35336;&#31639;</span>
+A <span style="color: #60aa00;">%*%</span> x <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#32080;&#26524;&#12398;&#30906;&#35469;(b &#12395;&#12394;&#12427;&#12399;&#12378;)</span>
+</pre>
 </div>
 
 <pre class="example">
-[1] 3.1435966 0.8032596 5.2927920
+[1] -0.5847107  1.5624745  1.0703870
 [,1]
 [1,]    1
 [2,]    2
@@ -1379,10 +1331,9 @@ A %*% x # 結果の確認(b になるはず)
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org79836d8" data-background="#fef4f4">
-<h3 id="org79836d8">練習問題</h3>
+<section id="slide-orgd72b2fc" data-background="#fef4f4">
+<h3 id="orgd72b2fc">練習問題</h3>
 <ul>
 <li>1から10の2乗値からなるベクトルを作成せよ</li>
 <li><p>
@@ -1391,8 +1342,8 @@ A %*% x # 結果の確認(b になるはず)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >A %*% b + b %*% A   
-</code></pre>
+<pre class="src src-R">A <span style="color: #60aa00;">%*%</span> b + b <span style="color: #60aa00;">%*%</span> A   
+</pre>
 </div>
 <p>
 何故そうなるか理由を考えよ
@@ -1400,12 +1351,11 @@ A %*% x # 結果の確認(b になるはず)
 <li>2次元ベクトルを回転行列で変換しても長さが変わらないことを確かめよ</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org0d46127">
-<h2 id="org0d46127">次回の予定</h2>
+<section id="slide-orgc8c5c2d">
+<h2 id="orgc8c5c2d">次回の予定</h2>
 <ul>
 <li>R言語における関数</li>
 <li>引数の扱い方 (引数名・順序・既定値)</li>
@@ -1413,14 +1363,16 @@ A %*% x # 結果の確認(b になるはず)
 <li>制御構造 (条件分岐・繰り返し)</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script src="./reveal.js/plugin/menu/menu.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
@@ -1441,16 +1393,15 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
+showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
+spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
-{ src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
-{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
+]
 
 });
 </script>

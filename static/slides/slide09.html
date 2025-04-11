@@ -11,22 +11,21 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
-
-<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
-
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
 
-<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
-<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-state="no-toc-progress">
+<section id="sec-title-slide">
 <!-- This is an HTML template for the title slide. -->
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
@@ -46,8 +45,8 @@
 
 </section>
 <section>
-<section id="slide-orge0b9310">
-<h2 id="orge0b9310">講義概要</h2>
+<section id="slide-org390da12">
+<h2 id="org390da12">講義概要</h2>
 <ul>
 <li>基本的な記述統計量</li>
 <li>&ldquo;モーメント&rdquo;に基づく記述統計量
@@ -60,17 +59,16 @@
 <li>&ldquo;頻度&rdquo;に基づく統計量</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgdbf3b73">
-<h2 id="orgdbf3b73">基礎的な記述統計量</h2>
-<div class="outline-text-2" id="text-orgdbf3b73">
+<section id="slide-org3940aa1">
+<h2 id="org3940aa1">基礎的な記述統計量</h2>
+<div class="outline-text-2" id="text-org3940aa1">
 </div>
 </section>
-<section id="slide-org0b76723">
-<h3 id="org0b76723">記述統計量とは</h3>
+<section id="slide-orgdb3d490">
+<h3 id="orgdb3d490">記述統計量とは</h3>
 <ul>
 <li><b>記述統計量</b> : (または要約統計量・基本統計量)
 <ul>
@@ -88,10 +86,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org75b5572">
-<h3 id="org75b5572">記述統計量の推定</h3>
+<section id="slide-org7ae29f8">
+<h3 id="org7ae29f8">記述統計量の推定</h3>
 <ul>
 <li>記述統計量は背後の確率分布(集団全体)で決まる量</li>
 <li>一般に確率分布は未知</li>
@@ -101,10 +98,9 @@
 <li>真の値と観測データによる推定値には差 <b>(誤差)</b> がある</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge21fde2">
-<h3 id="orge21fde2">独立同分布性</h3>
+<section id="slide-orgc6334fe">
+<h3 id="orgc6334fe">独立同分布性</h3>
 <ul>
 <li>統計解析における重要な仮定とその帰結
 <ul>
@@ -119,10 +115,9 @@
 <li>データは <b>偏っていない</b> ことを仮定している</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org90b5f82">
-<h3 id="org90b5f82">推定量の一致性</h3>
+<section id="slide-orgf3e764e">
+<h3 id="orgf3e764e">推定量の一致性</h3>
 <ul>
 <li>サンプル数が大きい場合に &ldquo;合理的な&rdquo; 推定量となる根拠の1つ</li>
 <li><p>
@@ -146,10 +141,9 @@
 <li><b>(強)一致推定量</b> : 一致性をもつ推定量</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1531ec2">
-<h3 id="org1531ec2">推定量の不偏性</h3>
+<section id="slide-org1715e71">
+<h3 id="org1715e71">推定量の不偏性</h3>
 <ul>
 <li>サンプル数が小さい場合の推定量の &ldquo;良さ&rdquo; に関する性質の1つ</li>
 <li><p>
@@ -172,17 +166,16 @@
 <li><b>不偏推定量</b> : 不偏性をもつ推定量</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org13fbd42">
-<h2 id="org13fbd42">&ldquo;モーメント&rdquo;に基づく記述統計量</h2>
-<div class="outline-text-2" id="text-org13fbd42">
+<section id="slide-org7adc004">
+<h2 id="org7adc004">&ldquo;モーメント&rdquo;に基づく記述統計量</h2>
+<div class="outline-text-2" id="text-org7adc004">
 </div>
 </section>
-<section id="slide-org1da8a8c">
-<h3 id="org1da8a8c">平均</h3>
+<section id="slide-org426884c">
+<h3 id="org426884c">平均</h3>
 <ul>
 <li><p>
 <b>平均</b> (mean)
@@ -215,10 +208,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6f506ce">
-<h3 id="org6f506ce">分散・標準偏差</h3>
+<section id="slide-orga8ec0b1">
+<h3 id="orga8ec0b1">分散・標準偏差</h3>
 <ul>
 <li><p>
 <b>分散</b> (variance)
@@ -251,10 +243,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc6c0d81">
-<h3 id="orgc6c0d81">標本平均・分散の不偏性</h3>
+<section id="slide-orgac431c2">
+<h3 id="orgac431c2">標本平均・分散の不偏性</h3>
 <ul>
 <li><p>
 標本平均は \(\mu\) の <b>不偏推定量である</b>
@@ -284,10 +275,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbea4772">
-<h3 id="orgbea4772">不偏分散</h3>
+<section id="slide-orgdee78fb">
+<h3 id="orgdee78fb">不偏分散</h3>
 <ul>
 <li>不偏性を担保した分散の推定量</li>
 <li><p>
@@ -308,40 +298,37 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9d96a1f">
-<h3 id="org9d96a1f">標本標準偏差</h3>
+<section id="slide-org3a3dad1">
+<h3 id="org3a3dad1">標本標準偏差</h3>
 <ul>
 <li><b>標本標準偏差</b> (sample standard deviation) : <br />
 通常は不偏分散の平方根 \(s\) を指す</li>
 <li>一般に \(s\) は標準偏差 \(\sigma\) の <b>不偏推定量ではない</b></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge8c1d31">
-<h3 id="orge8c1d31">R : 平均・分散・標準偏差の計算</h3>
+<section id="slide-orga93090a">
+<h3 id="orga93090a">R : 平均・分散・標準偏差の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >mean(x, trim = 0, na.rm = FALSE) # 標本平均
-var(x, na.rm = FALSE) # 不偏分散
-sd(x, na.rm = FALSE) # 標本標準偏差
-#' x: ベクトル，データフレームなど
-#' na.rm: 欠損値を取り除くか否か
-#' 計算方法については help("mean"), help("var"), help("sd") を参照
-</code></pre>
+<pre class="src src-R">mean(x, trim = 0, na.rm = <span style="color: #00aa80;">FALSE</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27161;&#26412;&#24179;&#22343;</span>
+var(x, na.rm = <span style="color: #00aa80;">FALSE</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19981;&#20559;&#20998;&#25955;</span>
+sd(x, na.rm = <span style="color: #00aa80;">FALSE</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27161;&#26412;&#27161;&#28310;&#20559;&#24046;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x: &#12505;&#12463;&#12488;&#12523;&#65292;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12394;&#12393;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> na.rm: &#27424;&#25613;&#20516;&#12434;&#21462;&#12426;&#38500;&#12367;&#12363;&#21542;&#12363;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35336;&#31639;&#26041;&#27861;&#12395;&#12388;&#12356;&#12390;&#12399; help("mean"), help("var"), help("sd") &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org098e656">
-<h3 id="org098e656">標準化</h3>
+<section id="slide-org99039e0">
+<h3 id="org99039e0">標準化</h3>
 <ul>
 <li>多次元データの分析のために単位や基準を揃える</li>
 <li><p>
@@ -364,10 +351,9 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 <li>\(Z_{i}\) : <b>標準得点</b> あるいは <b>Zスコア</b></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgf4546df">
-<h3 id="orgf4546df">偏差値</h3>
+<section id="slide-org32a246e">
+<h3 id="org32a246e">偏差値</h3>
 <ul>
 <li>別の基準での標準化
 <ul>
@@ -389,35 +375,32 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 <b>偏差値得点</b> あるいは <b>Tスコア</b></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org088a72b">
-<h3 id="org088a72b">R : 標準化の計算</h3>
+<section id="slide-orgdbd8b26">
+<h3 id="orgdbd8b26">R : 標準化の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >scale(x, center = TRUE, scale = TRUE) # 標準化
-#' x: ベクトル，データフレームなど．データフレームの場合は列ごとに標準化
-#' center: 中心化(平均0)する (TRUE) か否 (FALSE) か
-#' scale: 正規化(分散1)する (TRUE) か否 (FALSE) か
-10 * scale(x) + 50 # 偏差値得点への変換
-</code></pre>
+<pre class="src src-R">scale(x, center = <span style="color: #00aa80;">TRUE</span>, scale = <span style="color: #00aa80;">TRUE</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27161;&#28310;&#21270;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x: &#12505;&#12463;&#12488;&#12523;&#65292;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12394;&#12393;&#65294;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12398;&#22580;&#21512;&#12399;&#21015;&#12372;&#12392;&#12395;&#27161;&#28310;&#21270;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> center: &#20013;&#24515;&#21270;(&#24179;&#22343;0)&#12377;&#12427; (TRUE) &#12363;&#21542; (FALSE) &#12363;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> scale: &#27491;&#35215;&#21270;(&#20998;&#25955;1)&#12377;&#12427; (TRUE) &#12363;&#21542; (FALSE) &#12363;</span>
+10 * scale(x) + 50 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20559;&#24046;&#20516;&#24471;&#28857;&#12408;&#12398;&#22793;&#25563;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org7b578d9" data-background="#fef4f4">
-<h2 id="org7b578d9">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orgf5a3be1" data-background="#fef4f4">
+<h2 id="orgf5a3be1">実習</h2>
 </section>
-<section id="slide-orgce1028b" data-background="#fef4f4">
-<h3 id="orgce1028b">練習問題</h3>
+<section id="slide-org83da0d9" data-background="#fef4f4">
+<h3 id="org83da0d9">練習問題</h3>
 <ul>
 <li><p>
 東京の気候データ (<code>tokyo_weather.csv</code>) の中の
@@ -443,17 +426,16 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org586331b">
-<h2 id="org586331b">歪度と尖度</h2>
-<div class="outline-text-2" id="text-org586331b">
+<section id="slide-orgf7f6fb7">
+<h2 id="orgf7f6fb7">歪度と尖度</h2>
+<div class="outline-text-2" id="text-orgf7f6fb7">
 </div>
 </section>
-<section id="slide-org04f7405">
-<h3 id="org04f7405">歪度と尖度</h3>
+<section id="slide-org52fa4a1">
+<h3 id="org52fa4a1">歪度と尖度</h3>
 <ul>
 <li>正規分布からのずれを調べるための統計量</li>
 <li>正規分布の特徴 
@@ -466,10 +448,9 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 <li>現実には正規分布では捉えきれない特徴をもつデータも多い</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org460e64a">
-<h3 id="org460e64a">歪度</h3>
+<section id="slide-org7c5bd47">
+<h3 id="org7c5bd47">歪度</h3>
 <ul>
 <li>分布の非対称性を表す統計量</li>
 <li><p>
@@ -500,10 +481,9 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org708a57e">
-<h3 id="org708a57e">尖度</h3>
+<section id="slide-org6495a07">
+<h3 id="org6495a07">尖度</h3>
 <ul>
 <li>平均の周囲の分布の尖り具合を表す統計量</li>
 <li><p>
@@ -541,10 +521,9 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org27834ac">
-<h3 id="org27834ac">超過尖度</h3>
+<section id="slide-org1121bf5">
+<h3 id="org1121bf5">超過尖度</h3>
 <ul>
 <li>正規分布と比較して
 <ul>
@@ -571,29 +550,27 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
-<div class="leftcol" id="org65a45ae">
+<div class="leftcol" id="org3382cdc">
 
-<div id="org74d802e" class="figure">
+<div id="orgbf2c3f5" class="figure">
 <p><img src="figs/sk_tdist.png" alt="sk_tdist.png" width="100%" />
 </p>
 </div>
 
 </div>
-<div class="rightcol" id="orgb8305df">
+<div class="rightcol" id="org47677c1">
 
-<div id="org75cce39" class="figure">
+<div id="org5a843c5" class="figure">
 <p><img src="figs/sk_gamma.png" alt="sk_gamma.png" width="100%" />
 </p>
 </div>
 
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfb659a8">
-<h3 id="orgfb659a8">標本歪度と標本尖度</h3>
+<section id="slide-orgb8d6bfd">
+<h3 id="orgb8d6bfd">標本歪度と標本尖度</h3>
 <ul>
 <li>観測データ \(X_{1},X_{2},\dotsc,X_{n}\) による推定</li>
 <li><p>
@@ -624,10 +601,9 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgae204c6">
-<h3 id="orgae204c6">R : 歪度と尖度の計算</h3>
+<section id="slide-org085cb25">
+<h3 id="org085cb25">R : 歪度と尖度の計算</h3>
 <ul>
 <li><p>
 歪度・尖度を計算する関数はRの標準機能にはないので
@@ -645,26 +621,24 @@ sd(x, na.rm = FALSE) # 標本標準偏差
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >library("e1071") # package::e1071 の読み込み．必要なら install する
-skewness(x, na.rm = FALSE, type = 3) # 標本歪度
-kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
-#' x: ベクトル，データフレームなど
-#' na.rm: 欠損値を取り除くか否か
-#' type: 計算法の指定(通常は既定値でよい)
-</code></pre>
+<pre class="src src-R"><span style="color: #60aa00;">library</span>(<span style="color: #d08928;">"e1071"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">package::e1071 &#12398;&#35501;&#12415;&#36796;&#12415;&#65294;&#24517;&#35201;&#12394;&#12425; install &#12377;&#12427;</span>
+skewness(x, na.rm = <span style="color: #00aa80;">FALSE</span>, type = 3) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27161;&#26412;&#27498;&#24230;</span>
+kurtosis(x, na.rm = <span style="color: #00aa80;">FALSE</span>, type = 3) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27161;&#26412;&#36229;&#36942;&#23574;&#24230; (&#23574;&#24230;&#12391;&#12399;&#12394;&#12356;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x: &#12505;&#12463;&#12488;&#12523;&#65292;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12394;&#12393;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> na.rm: &#27424;&#25613;&#20516;&#12434;&#21462;&#12426;&#38500;&#12367;&#12363;&#21542;&#12363;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> type: &#35336;&#31639;&#27861;&#12398;&#25351;&#23450;(&#36890;&#24120;&#12399;&#26082;&#23450;&#20516;&#12391;&#12424;&#12356;)</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org0500693" data-background="#fef4f4">
-<h2 id="org0500693">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orga12ec89" data-background="#fef4f4">
+<h2 id="orga12ec89">実習</h2>
 </section>
-<section id="slide-orgfdd429b" data-background="#fef4f4">
-<h3 id="orgfdd429b">練習問題</h3>
+<section id="slide-org589b2e1" data-background="#fef4f4">
+<h3 id="org589b2e1">練習問題</h3>
 <ul>
 <li><p>
 東京の気候データ (<code>tokyo_weather.csv</code>) の中の
@@ -688,17 +662,16 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgaf0c1b2">
-<h2 id="orgaf0c1b2">相関と共分散</h2>
-<div class="outline-text-2" id="text-orgaf0c1b2">
+<section id="slide-org8589789">
+<h2 id="org8589789">相関と共分散</h2>
+<div class="outline-text-2" id="text-org8589789">
 </div>
 </section>
-<section id="slide-orgba8d078">
-<h3 id="orgba8d078">共分散</h3>
+<section id="slide-org122416c">
+<h3 id="org122416c">共分散</h3>
 <ul>
 <li>複数のデータ間の関係を知るための記述統計量</li>
 <li><p>
@@ -715,10 +688,9 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 <li>直感的には2種類のデータ間の比例関係の大きさ</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgef24949">
-<h3 id="orgef24949">標本共分散</h3>
+<section id="slide-orgc83b925">
+<h3 id="orgc83b925">標本共分散</h3>
 <ul>
 <li>観測データ \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) による推定</li>
 <li><p>
@@ -739,10 +711,9 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbf9cf92">
-<h3 id="orgbf9cf92">相関</h3>
+<section id="slide-org4f37126">
+<h3 id="org4f37126">相関</h3>
 <ul>
 <li>複数のデータ間の正規化した記述統計量</li>
 <li><p>
@@ -764,10 +735,9 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org98d0261">
-<h3 id="org98d0261">標本相関</h3>
+<section id="slide-org1031222">
+<h3 id="org1031222">標本相関</h3>
 <ul>
 <li>観測データ \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) による推定</li>
 <li><p>
@@ -789,37 +759,34 @@ kurtosis(x, na.rm = FALSE, type = 3) # 標本超過尖度 (尖度ではない)
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3ae0b24">
-<h3 id="org3ae0b24">R : 相関と共分散の計算</h3>
+<section id="slide-org1055a67">
+<h3 id="org1055a67">R : 相関と共分散の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >cov(x, y = NULL, use = "everything", 
-    method = c("pearson", "kendall", "spearman")) # 共分散
-cor(x, y = NULL, use = "everything", 
-    method = c("pearson", "kendall", "spearman")) # 相関
-#' x,y: ベクトル，データフレームなど (データフレームの時は列間の関係を計算)
-#' use: 欠損値などの扱いに関する指定
-#' method: 計算法の指定(通常は既定値 pearson でよい)
-</code></pre>
+<pre class="src src-R">cov(x, y = <span style="color: #00aa80;">NULL</span>, use = <span style="color: #d08928;">"everything"</span>, 
+    method = c(<span style="color: #d08928;">"pearson"</span>, <span style="color: #d08928;">"kendall"</span>, <span style="color: #d08928;">"spearman"</span>)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20849;&#20998;&#25955;</span>
+cor(x, y = <span style="color: #00aa80;">NULL</span>, use = <span style="color: #d08928;">"everything"</span>, 
+    method = c(<span style="color: #d08928;">"pearson"</span>, <span style="color: #d08928;">"kendall"</span>, <span style="color: #d08928;">"spearman"</span>)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#30456;&#38306;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x,y: &#12505;&#12463;&#12488;&#12523;&#65292;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12394;&#12393; (&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12398;&#26178;&#12399;&#21015;&#38291;&#12398;&#38306;&#20418;&#12434;&#35336;&#31639;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> use: &#27424;&#25613;&#20516;&#12394;&#12393;&#12398;&#25201;&#12356;&#12395;&#38306;&#12377;&#12427;&#25351;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> method: &#35336;&#31639;&#27861;&#12398;&#25351;&#23450;(&#36890;&#24120;&#12399;&#26082;&#23450;&#20516; pearson &#12391;&#12424;&#12356;)</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org3bede89" data-background="#fef4f4">
-<h2 id="org3bede89">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org0022bef" data-background="#fef4f4">
+<h2 id="org0022bef">実習</h2>
 </section>
-<section id="slide-orgc81abc5" data-background="#fef4f4">
-<h3 id="orgc81abc5">練習問題</h3>
+<section id="slide-org9641341" data-background="#fef4f4">
+<h3 id="org9641341">練習問題</h3>
 <ul>
 <li><p>
 東京の気候データ (<code>tokyo_weather.csv</code>) の中の
@@ -842,17 +809,16 @@ cor(x, y = NULL, use = "everything",
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org57cc5fe">
-<h2 id="org57cc5fe">&ldquo;順序&rdquo;に基づく統計量</h2>
-<div class="outline-text-2" id="text-org57cc5fe">
+<section id="slide-org666df74">
+<h2 id="org666df74">&ldquo;順序&rdquo;に基づく統計量</h2>
+<div class="outline-text-2" id="text-org666df74">
 </div>
 </section>
-<section id="slide-org0a2a4c6">
-<h3 id="org0a2a4c6">中央値</h3>
+<section id="slide-orga142c10">
+<h3 id="orga142c10">中央値</h3>
 <ul>
 <li><p>
 データの順序にもとづく記述統計量
@@ -882,10 +848,9 @@ cor(x, y = NULL, use = "everything",
 <li>データ中の <b>外れ値</b> (異常な値)の影響を受けにくい</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1aa2f40">
-<h3 id="org1aa2f40">分位点</h3>
+<section id="slide-org0b05c0b">
+<h3 id="org0b05c0b">分位点</h3>
 <ul>
 <li>メディアンの一般化</li>
 <li><p>
@@ -905,33 +870,31 @@ cor(x, y = NULL, use = "everything",
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org580171d">
-<h3 id="org580171d">中央値・分位点の計算</h3>
+<section id="slide-org21cbd00">
+<h3 id="org21cbd00">中央値・分位点の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >median(x, na.rm = FALSE) # 中央値
-quantile(x, probs = seq(0, 1, 0.25), na.rm = FALSE,
-         names = TRUE, type = 7) # 分位点
-summary(x) # 最大，最小，四分位点，平均を計算する
-#' x: ベクトル
-#' na.rm: 欠損値を取り除くか否か
-#' probs: 計算する分位点の値
-#' names: 出力に関する指定，多数の分位点を計算する場合は FALSE とした方がよい
-#' type: 計算法の指定(help(quantile) を参照)
-</code></pre>
+<pre class="src src-R">median(x, na.rm = <span style="color: #00aa80;">FALSE</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20013;&#22830;&#20516;</span>
+quantile(x, probs = seq(0, 1, 0.25), na.rm = <span style="color: #00aa80;">FALSE</span>,
+         names = <span style="color: #00aa80;">TRUE</span>, type = 7) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20998;&#20301;&#28857;</span>
+summary(x) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#22823;&#65292;&#26368;&#23567;&#65292;&#22235;&#20998;&#20301;&#28857;&#65292;&#24179;&#22343;&#12434;&#35336;&#31639;&#12377;&#12427;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x: &#12505;&#12463;&#12488;&#12523;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> na.rm: &#27424;&#25613;&#20516;&#12434;&#21462;&#12426;&#38500;&#12367;&#12363;&#21542;&#12363;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> probs: &#35336;&#31639;&#12377;&#12427;&#20998;&#20301;&#28857;&#12398;&#20516;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> names: &#20986;&#21147;&#12395;&#38306;&#12377;&#12427;&#25351;&#23450;&#65292;&#22810;&#25968;&#12398;&#20998;&#20301;&#28857;&#12434;&#35336;&#31639;&#12377;&#12427;&#22580;&#21512;&#12399; FALSE &#12392;&#12375;&#12383;&#26041;&#12364;&#12424;&#12356;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> type: &#35336;&#31639;&#27861;&#12398;&#25351;&#23450;(help(quantile) &#12434;&#21442;&#29031;)</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcf2705f">
-<h3 id="orgcf2705f">連続分布の分位点</h3>
+<section id="slide-orgd47f151">
+<h3 id="orgd47f151">連続分布の分位点</h3>
 <ul>
 <li>分位点は推定や検定において重要な役割を果たす</li>
 <li><p>
@@ -969,7 +932,6 @@ summary(x) # 最大，最小，四分位点，平均を計算する
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -986,33 +948,31 @@ summary(x) # 最大，最小，四分位点，平均を計算する
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org518f0f0">
-<h3 id="org518f0f0">分布の分位点の計算</h3>
+<section id="slide-orgd7a6e9e">
+<h3 id="orgd7a6e9e">分布の分位点の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 以下は正規分布での計算例
-qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
-#' p: 分位点 (100p%)
-#' mean, sd: 正規分布の特性を決めるoption
-#' lower.tail: TRUE なら P(X&lt;x) を計算．FALSE なら逆
-#' log.p: 確率を対数とするか否か (値が小さい場合に利用)
-#'
-#' xxx分布の場合は以下の形式
-qxxx(p, "分布の特性を決める option の指定") 
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#20197;&#19979;&#12399;&#27491;&#35215;&#20998;&#24067;&#12391;&#12398;&#35336;&#31639;&#20363;</span>
+qnorm(p, mean = 0, sd = 1, lower.tail = <span style="color: #00aa80;">TRUE</span>, log.p = <span style="color: #00aa80;">FALSE</span>)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> p: &#20998;&#20301;&#28857; (100p%)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> mean, sd: &#27491;&#35215;&#20998;&#24067;&#12398;&#29305;&#24615;&#12434;&#27770;&#12417;&#12427;option</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> lower.tail: TRUE &#12394;&#12425; P(X&lt;x) &#12434;&#35336;&#31639;&#65294;FALSE &#12394;&#12425;&#36870;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> log.p: &#30906;&#29575;&#12434;&#23550;&#25968;&#12392;&#12377;&#12427;&#12363;&#21542;&#12363; (&#20516;&#12364;&#23567;&#12373;&#12356;&#22580;&#21512;&#12395;&#21033;&#29992;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> xxx&#20998;&#24067;&#12398;&#22580;&#21512;&#12399;&#20197;&#19979;&#12398;&#24418;&#24335;</span>
+qxxx(p, <span style="color: #d08928;">"&#20998;&#24067;&#12398;&#29305;&#24615;&#12434;&#27770;&#12417;&#12427; option &#12398;&#25351;&#23450;"</span>) 
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org347b544">
-<h3 id="org347b544">ばらつきの指標</h3>
+<section id="slide-org9d7a162">
+<h3 id="org9d7a162">ばらつきの指標</h3>
 <ul>
 <li>分位点を利用したデータのばらつきの指標</li>
 <li><p>
@@ -1042,42 +1002,40 @@ qxxx(p, "分布の特性を決める option の指定")
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org59ce8e5">
-<h3 id="org59ce8e5">ばらつきの指標の計算</h3>
+<section id="slide-org43dc005">
+<h3 id="org43dc005">ばらつきの指標の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 範囲
-range(..., na.rm = FALSE, finite = FALSE)
-#' 四分位範囲
-IQR(x, na.rm = FALSE, type = 7)
-#' 中央絶対偏差
-mad(x, center = median(x), constant = 1.4826, na.rm = FALSE,
-    low = FALSE, high = FALSE)
-#' ...: データ (複数渡すことができる)
-#' x: 数値ベクトル
-#' na.rm: 欠損(NA)の削除 (既定値は削除しない)
-#' constant: madの補正値 (既定値は正規分布を仮定して標準偏差に換算)
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#31684;&#22258;</span>
+range(..., na.rm = <span style="color: #00aa80;">FALSE</span>, finite = <span style="color: #00aa80;">FALSE</span>)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#22235;&#20998;&#20301;&#31684;&#22258;</span>
+IQR(x, na.rm = <span style="color: #00aa80;">FALSE</span>, type = 7)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#20013;&#22830;&#32118;&#23550;&#20559;&#24046;</span>
+mad(x, center = median(x), constant = 1.4826, na.rm = <span style="color: #00aa80;">FALSE</span>,
+    low = <span style="color: #00aa80;">FALSE</span>, high = <span style="color: #00aa80;">FALSE</span>)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#12487;&#12540;&#12479; (&#35079;&#25968;&#28193;&#12377;&#12371;&#12392;&#12364;&#12391;&#12365;&#12427;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x: &#25968;&#20516;&#12505;&#12463;&#12488;&#12523;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> na.rm: &#27424;&#25613;(NA)&#12398;&#21066;&#38500; (&#26082;&#23450;&#20516;&#12399;&#21066;&#38500;&#12375;&#12394;&#12356;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> constant: mad&#12398;&#35036;&#27491;&#20516; (&#26082;&#23450;&#20516;&#12399;&#27491;&#35215;&#20998;&#24067;&#12434;&#20206;&#23450;&#12375;&#12390;&#27161;&#28310;&#20559;&#24046;&#12395;&#25563;&#31639;)</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org5c009b1">
-<h2 id="org5c009b1">&ldquo;頻度&rdquo;に基づく統計量</h2>
-<div class="outline-text-2" id="text-org5c009b1">
+<section id="slide-org639ac34">
+<h2 id="org639ac34">&ldquo;頻度&rdquo;に基づく統計量</h2>
+<div class="outline-text-2" id="text-org639ac34">
 </div>
 </section>
-<section id="slide-org0783e33">
-<h3 id="org0783e33">頻度に基づく統計量</h3>
+<section id="slide-orgb78a53e">
+<h3 id="orgb78a53e">頻度に基づく統計量</h3>
 <ul>
 <li><p>
 <b>最頻値</b> もしくは <b>モード</b> (mode)
@@ -1098,16 +1056,14 @@ mad(x, center = median(x), constant = 1.4826, na.rm = FALSE,
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org5f6e369" data-background="#fef4f4">
-<h2 id="org5f6e369">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orgeac9242" data-background="#fef4f4">
+<h2 id="orgeac9242">実習</h2>
 </section>
-<section id="slide-org6bcbaa1" data-background="#fef4f4">
-<h3 id="org6bcbaa1">練習問題</h3>
+<section id="slide-orgef9693c" data-background="#fef4f4">
+<h3 id="orgef9693c">練習問題</h3>
 <ul>
 <li><p>
 東京の気候データ (<code>tokyo_weather.csv</code>) の中の
@@ -1130,12 +1086,11 @@ mad(x, center = median(x), constant = 1.4826, na.rm = FALSE,
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org93b129e">
-<h2 id="org93b129e">次回の予定</h2>
+<section id="slide-org7559143">
+<h2 id="org7559143">次回の予定</h2>
 <ul>
 <li>点推定
 <ul>
@@ -1153,14 +1108,16 @@ mad(x, center = median(x), constant = 1.4826, na.rm = FALSE,
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script src="./reveal.js/plugin/menu/menu.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
@@ -1181,16 +1138,15 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
+showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
+spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
-{ src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
-{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
+]
 
 });
 </script>

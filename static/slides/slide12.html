@@ -11,22 +11,21 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
-
-<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
-
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
 
-<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
-<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-state="no-toc-progress">
+<section id="sec-title-slide">
 <!-- This is an HTML template for the title slide. -->
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
@@ -46,8 +45,8 @@
 
 </section>
 <section>
-<section id="slide-org46135ec">
-<h2 id="org46135ec">講義概要</h2>
+<section id="slide-org2ccb76e">
+<h2 id="org2ccb76e">講義概要</h2>
 <ul>
 <li>分散分析とは</li>
 <li>一元配置
@@ -64,17 +63,16 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org7a37dec">
-<h2 id="org7a37dec">分散分析とは</h2>
-<div class="outline-text-2" id="text-org7a37dec">
+<section id="slide-org0f2ed90">
+<h2 id="org0f2ed90">分散分析とは</h2>
+<div class="outline-text-2" id="text-org0f2ed90">
 </div>
 </section>
-<section id="slide-orgb00e81c">
-<h3 id="orgb00e81c">分散分析</h3>
+<section id="slide-orgaf8b3cd">
+<h3 id="orgaf8b3cd">分散分析</h3>
 <ul>
 <li>平均の差の検定 <br />
 <b>2つのグループ間</b> で平均の差があるか否か</li>
@@ -92,10 +90,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org909e7db">
-<h3 id="org909e7db">基本的な考え方</h3>
+<section id="slide-orgc711130">
+<h3 id="orgc711130">基本的な考え方</h3>
 <ul>
 <li>データの変動 (<b>分散</b>) =不確定性 を分解 
 <ul>
@@ -112,17 +109,16 @@
 <li>分散分析は <b>&ldquo;データの変動の分析&rdquo;</b></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org2da6f82">
-<h2 id="org2da6f82">分散の比の検定 (再掲)</h2>
-<div class="outline-text-2" id="text-org2da6f82">
+<section id="slide-org351c80b">
+<h2 id="org351c80b">分散の比の検定 (再掲)</h2>
+<div class="outline-text-2" id="text-org351c80b">
 </div>
 </section>
-<section id="slide-org5b68913">
-<h3 id="org5b68913">分散の比の検定</h3>
+<section id="slide-org0af7c13">
+<h3 id="org0af7c13">分散の比の検定</h3>
 <ul>
 <li><p>
 2種類のデータの分散が等しいか否かを検定する
@@ -137,10 +133,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org843d9ac">
-<h3 id="org843d9ac">考え方</h3>
+<section id="slide-orgf257c2f">
+<h3 id="orgf257c2f">考え方</h3>
 <ul>
 <li>\(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
 の不偏分散: \(s_1^2\), \(s_2^2\)
@@ -180,10 +175,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5c48e47">
-<h3 id="org5c48e47">両側検定の棄却域</h3>
+<section id="slide-org8bb6f2f">
+<h3 id="org8bb6f2f">両側検定の棄却域</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
@@ -223,7 +217,6 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -243,17 +236,16 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgc87f453">
-<h2 id="orgc87f453">一元配置</h2>
-<div class="outline-text-2" id="text-orgc87f453">
+<section id="slide-orgbd30572">
+<h2 id="orgbd30572">一元配置</h2>
+<div class="outline-text-2" id="text-orgbd30572">
 </div>
 </section>
-<section id="slide-org5595841">
-<h3 id="org5595841">一元配置の問題設定</h3>
+<section id="slide-org01e0b53">
+<h3 id="org01e0b53">一元配置の問題設定</h3>
 <ul>
 <li>グループ分けが1種類 : \(p\) グループ
 \(A_1,A_2,\dotsc,A_p\)</li>
@@ -280,10 +272,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbff6262">
-<h3 id="orgbff6262">一元配置のモデル</h3>
+<section id="slide-org222f578">
+<h3 id="org222f578">一元配置のモデル</h3>
 <ul>
 <li>分散分析の用語
 <ul>
@@ -310,10 +301,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4a7c526">
-<h3 id="org4a7c526">一元配置の検定</h3>
+<section id="slide-org1edd7a4">
+<h3 id="org1edd7a4">一元配置の検定</h3>
 <ul>
 <li><p>
 検定問題
@@ -341,10 +331,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc193d94">
-<h3 id="orgc193d94">分析の考え方</h3>
+<section id="slide-orgcd70ccc">
+<h3 id="orgcd70ccc">分析の考え方</h3>
 <ul>
 <li>データの変動から因子間での変動と観測誤差の変動を抽出して比較</li>
 <li><p>
@@ -365,7 +354,6 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -394,7 +382,6 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -422,7 +409,6 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -447,10 +433,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org980f001">
-<h3 id="org980f001">一元配置の検定</h3>
+<section id="slide-org84e0107">
+<h3 id="org84e0107">一元配置の検定</h3>
 <ul>
 <li><p>
 検定統計量
@@ -474,10 +459,9 @@
 <li>対立仮説の下 \(F\) は大きな値をとるので右片側検定</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfbeaa43">
-<h3 id="orgfbeaa43">棄却域を用いる場合</h3>
+<section id="slide-org0f3c9ca">
+<h3 id="org0f3c9ca">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li>自由度 \(p{-}1,n{-}p\) の \(F\) 分布
@@ -511,7 +495,6 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -529,10 +512,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgab1c1df">
-<h3 id="orgab1c1df">\(p\) 値を用いる場合</h3>
+<section id="slide-org78fb8d7">
+<h3 id="org78fb8d7">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 \(p\) 値を計算 (右片側検定の場合の計算方法)
@@ -552,10 +534,9 @@
 <li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgf5727b2">
-<h3 id="orgf5727b2">分散分析表 (一元配置の場合)</h3>
+<section id="slide-org9244f8e">
+<h3 id="org9244f8e">分散分析表 (一元配置の場合)</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -622,10 +603,9 @@
 <li>\(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の確率密度</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgde16b8a">
-<h3 id="orgde16b8a">モデルの別表現</h3>
+<section id="slide-org0b6f59b">
+<h3 id="org0b6f59b">モデルの別表現</h3>
 <ul>
 <li>各水準の平均値の相対効果による定式化
 <ul>
@@ -659,66 +639,62 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2baedf5">
-<h3 id="org2baedf5">分散分析の計算</h3>
+<section id="slide-org443b3a7">
+<h3 id="org443b3a7">分散分析の計算</h3>
 <ul>
 <li><p>
 基本書式 
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >aov(formula, data)
-#' formula: 式，一元配置の場合は (観測値 ~ 因子)
-#' data: データフレーム
-#' 分析の結果を参照する関数がいくつかあるので，多くの場合適当なオブジェクトに代入
-</code></pre>
+<pre class="src src-R">aov(formula, data)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> formula: &#24335;&#65292;&#19968;&#20803;&#37197;&#32622;&#12398;&#22580;&#21512;&#12399; (&#35251;&#28204;&#20516; ~ &#22240;&#23376;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#20998;&#26512;&#12398;&#32080;&#26524;&#12434;&#21442;&#29031;&#12377;&#12427;&#38306;&#25968;&#12364;&#12356;&#12367;&#12388;&#12363;&#12354;&#12427;&#12398;&#12391;&#65292;&#22810;&#12367;&#12398;&#22580;&#21512;&#36969;&#24403;&#12394;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12395;&#20195;&#20837;</span>
+</pre>
 </div></li>
 <li><p>
 分散分析表の表示
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >aov(formula, data) |&gt; summary()     # 分析表形式での表示
-aov(formula, data) |&gt; anova()       # データフレーム(data.frame形式)
-aov(formula, data) |&gt; broom::tidy() # データフレーム(tibble形式)
-aov(formula, data) |&gt; model.table(type = "means")   # 平均値
-aov(formula, data) |&gt; model.table(type = "effects") # 効果(既定値)
-</code></pre>
+<pre class="src src-R">aov(formula, data) |&gt; summary()     <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20998;&#26512;&#34920;&#24418;&#24335;&#12391;&#12398;&#34920;&#31034;</span>
+aov(formula, data) |&gt; anova()       <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;(data.frame&#24418;&#24335;)</span>
+aov(formula, data) |&gt; broom::tidy() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;(tibble&#24418;&#24335;)</span>
+aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"means"</span>)   <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24179;&#22343;&#20516;</span>
+aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effects"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21177;&#26524;(&#26082;&#23450;&#20516;)</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8d24e53">
-<h3 id="org8d24e53">分散分析の計算 (検定のみ)</h3>
+<section id="slide-org0424f95">
+<h3 id="org0424f95">分散分析の計算 (検定のみ)</h3>
 <ul>
 <li><p>
 基本書式 
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >oneway.test(formula, data, subset, na.action, var.equal = FALSE)
-#' formula: 式
-#' data: データフレーム
-#' subset: subsetの指定
-#' na.action: 欠損値の扱い
-#' var.equal: 等分散を仮定する場合は TRUE，標準では Welch の近似が用いられる
-</code></pre>
+<pre class="src src-R">oneway.test(formula, data, subset, na.action, var.equal = <span style="color: #00aa80;">FALSE</span>)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> formula: &#24335;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> subset: subset&#12398;&#25351;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> na.action: &#27424;&#25613;&#20516;&#12398;&#25201;&#12356;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> var.equal: &#31561;&#20998;&#25955;&#12434;&#20206;&#23450;&#12377;&#12427;&#22580;&#21512;&#12399; TRUE&#65292;&#27161;&#28310;&#12391;&#12399; Welch &#12398;&#36817;&#20284;&#12364;&#29992;&#12356;&#12425;&#12428;&#12427;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org6612e18" data-background="#fef4f4">
-<h2 id="org6612e18">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org57a094d" data-background="#fef4f4">
+<h2 id="org57a094d">実習</h2>
 </section>
-<section id="slide-org9a356c2" data-background="#fef4f4">
-<h3 id="org9a356c2">練習問題</h3>
+<section id="slide-org3da649e" data-background="#fef4f4">
+<h3 id="org3da649e">練習問題</h3>
 <ul>
 <li>一元配置分散分析について確率シミュレーションを行いなさい．</li>
 <li>東京の気候データ (<code>tokyo_weather.csv</code>) の
@@ -729,33 +705,32 @@ aov(formula, data) |&gt; model.table(type = "effects") # 効果(既定値)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 週日を因子(factor)とするには例えば以下のような項目を加えればよい
-tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
-  mutate(day_of_week = ordered(day_of_week, # 曜日を順序付き因子にする
-                               levels = wday(1:7, label = TRUE))) 
-#' 関数 wday() の出力は使用言語に依存するので，強制的に英語にするには locale を指定して
-#' wday(..., locale = "en_US") とすれば良い
-#' 省略形を用いない場合は abbr を指定する．以下はドイツ語の例
-#' wday(1:7, label = TRUE, abbr = FALSE, locale = "de_DE")
-#' 利用可能なlocale(言語)を調べるには stringi::stri_locale_list() を用いる
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#36913;&#26085;&#12434;&#22240;&#23376;(factor)&#12392;&#12377;&#12427;&#12395;&#12399;&#20363;&#12360;&#12400;&#20197;&#19979;&#12398;&#12424;&#12358;&#12394;&#38917;&#30446;&#12434;&#21152;&#12360;&#12428;&#12400;&#12424;&#12356;</span>
+tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: #d08928;">"data/tokyo_weather.csv"</span>) |&gt;
+  mutate(day_of_week = ordered(day_of_week, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26332;&#26085;&#12434;&#38918;&#24207;&#20184;&#12365;&#22240;&#23376;&#12395;&#12377;&#12427;</span>
+                               levels = wday(1:7, label = <span style="color: #00aa80;">TRUE</span>))) 
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; wday() &#12398;&#20986;&#21147;&#12399;&#20351;&#29992;&#35328;&#35486;&#12395;&#20381;&#23384;&#12377;&#12427;&#12398;&#12391;&#65292;&#24375;&#21046;&#30340;&#12395;&#33521;&#35486;&#12395;&#12377;&#12427;&#12395;&#12399; locale &#12434;&#25351;&#23450;&#12375;&#12390;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> wday(..., locale = "en_US") &#12392;&#12377;&#12428;&#12400;&#33391;&#12356;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#30465;&#30053;&#24418;&#12434;&#29992;&#12356;&#12394;&#12356;&#22580;&#21512;&#12399; abbr &#12434;&#25351;&#23450;&#12377;&#12427;&#65294;&#20197;&#19979;&#12399;&#12489;&#12452;&#12484;&#35486;&#12398;&#20363;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> wday(1:7, label = TRUE, abbr = FALSE, locale = "de_DE")</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#21033;&#29992;&#21487;&#33021;&#12394;locale(&#35328;&#35486;)&#12434;&#35519;&#12409;&#12427;&#12395;&#12399; stringi::stri_locale_list() &#12434;&#29992;&#12356;&#12427;</span>
+</pre>
 </div></li>
 <li>曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．</li>
 
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org4ceced8">
-<h2 id="org4ceced8">二元配置</h2>
-<div class="outline-text-2" id="text-org4ceced8">
+<section id="slide-org947e945">
+<h2 id="org947e945">二元配置</h2>
+<div class="outline-text-2" id="text-org947e945">
 </div>
 </section>
-<section id="slide-org584c08b">
-<h3 id="org584c08b">二元配置の問題</h3>
+<section id="slide-org2a5a193">
+<h3 id="org2a5a193">二元配置の問題</h3>
 <ul>
 <li>因子が2種類ある場合
 <ul>
@@ -780,10 +755,9 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc127110">
-<h3 id="orgc127110">二元配置のモデル</h3>
+<section id="slide-org451b3fd">
+<h3 id="org451b3fd">二元配置のモデル</h3>
 <ul>
 <li>2種類の因子 \(A, B\)
 <ul>
@@ -814,10 +788,9 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbf3d8d7">
-<h3 id="orgbf3d8d7">二元配置の例</h3>
+<section id="slide-org935dee3">
+<h3 id="org935dee3">二元配置の例</h3>
 <ul>
 <li><span style="color:green;">複数の薬の治験の問題</span>
 <ul>
@@ -838,10 +811,9 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1e10a03">
-<h3 id="org1e10a03">二元配置の検定</h3>
+<section id="slide-orge5de71b">
+<h3 id="orge5de71b">二元配置の検定</h3>
 <ul>
 <li><p>
 検定問題
@@ -873,10 +845,9 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge4f1ab0">
-<h3 id="orge4f1ab0">分析の考え方</h3>
+<section id="slide-org7947579">
+<h3 id="org7947579">分析の考え方</h3>
 <ul>
 <li>データの変動から因子間での変動と観測誤差の変動を抽出して比較</li>
 <li><p>
@@ -900,7 +871,6 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -931,7 +901,6 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -960,7 +929,6 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -988,7 +956,6 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1014,10 +981,9 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4f17a85">
-<h3 id="org4f17a85">二元配置の検定</h3>
+<section id="slide-org8fd1d22">
+<h3 id="org8fd1d22">二元配置の検定</h3>
 <ul>
 <li><p>
 検定統計量
@@ -1041,10 +1007,9 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 <li>対立仮説の下 \(F_A\) は大きな値をとるので右片側検定</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3c12d62">
-<h3 id="org3c12d62">棄却域を用いる場合</h3>
+<section id="slide-org6db3bfa">
+<h3 id="org6db3bfa">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準 : \(\alpha\in(0,1)\)</li>
 <li>自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布
@@ -1078,7 +1043,6 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1096,10 +1060,9 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3b885c9">
-<h3 id="org3b885c9">\(p\) 値を用いる場合</h3>
+<section id="slide-orgf782f76">
+<h3 id="orgf782f76">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 \(p\) 値を計算 (右片側検定の場合の計算方法)
@@ -1119,10 +1082,9 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 <li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgbe29058">
-<h3 id="orgbe29058">分散分析表 (二元配置の場合)</h3>
+<section id="slide-org3a2293b">
+<h3 id="org3a2293b">分散分析表 (二元配置の場合)</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1183,10 +1145,9 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 <li>\(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1ee93a0">
-<h3 id="org1ee93a0">モデルの別表現</h3>
+<section id="slide-orgd897cee">
+<h3 id="orgd897cee">モデルの別表現</h3>
 <p>
 相対効果による定式化
 </p>
@@ -1222,7 +1183,6 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1239,34 +1199,31 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org433d344">
-<h3 id="org433d344">分散分析の計算</h3>
+<section id="slide-orgea88b6c">
+<h3 id="orgea88b6c">分散分析の計算</h3>
 <ul>
 <li><p>
 基本書式 
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >aov(formula, data)
-#' formula: 式，二元配置の場合は (観測値 ~ 因子 + 因子)
-#' data: データフレーム
-</code></pre>
+<pre class="src src-R">aov(formula, data)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> formula: &#24335;&#65292;&#20108;&#20803;&#37197;&#32622;&#12398;&#22580;&#21512;&#12399; (&#35251;&#28204;&#20516; ~ &#22240;&#23376; + &#22240;&#23376;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+</pre>
 </div></li>
 <li>分散分析表なども同様</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgfadf4e0" data-background="#fef4f4">
-<h2 id="orgfadf4e0">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orgbba105f" data-background="#fef4f4">
+<h2 id="orgbba105f">実習</h2>
 </section>
-<section id="slide-orgabf5849" data-background="#fef4f4">
-<h3 id="orgabf5849">練習問題</h3>
+<section id="slide-org6074ee4" data-background="#fef4f4">
+<h3 id="org6074ee4">練習問題</h3>
 <ul>
 <li><p>
 <code>package::datarium</code> に含まれている
@@ -1287,19 +1244,18 @@ tw_data &lt;- read_csv("data/tokyo_weather.csv") |&gt;
 </ul>
 <div class="org-src-container">
 
-<pre><code class="R" >#' パッケージのインストールと読み込みは以下のように行うことができる
-install.packages("datarium") # インストール
-library("datarium") # 読み込み
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#12497;&#12483;&#12465;&#12540;&#12472;&#12398;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;&#12392;&#35501;&#12415;&#36796;&#12415;&#12399;&#20197;&#19979;&#12398;&#12424;&#12358;&#12395;&#34892;&#12358;&#12371;&#12392;&#12364;&#12391;&#12365;&#12427;</span>
+install.packages(<span style="color: #d08928;">"datarium"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;</span>
+<span style="color: #60aa00;">library</span>(<span style="color: #d08928;">"datarium"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35501;&#12415;&#36796;&#12415;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org9a98bfa">
-<h2 id="org9a98bfa">次回の予定</h2>
+<section id="slide-org42f1f90">
+<h2 id="org42f1f90">次回の予定</h2>
 <ul>
 <li>回帰分析</li>
 <li>回帰係数の推定
@@ -1316,14 +1272,16 @@ library("datarium") # 読み込み
 <li>決定係数</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script src="./reveal.js/plugin/menu/menu.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
@@ -1344,16 +1302,15 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
+showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
+spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
-{ src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
-{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
+]
 
 });
 </script>

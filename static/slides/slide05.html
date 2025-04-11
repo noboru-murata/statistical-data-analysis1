@@ -11,21 +11,20 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
-
-<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
-
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
 
-<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
-<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-state="no-toc-progress">
+<section id="sec-title-slide">
 <!-- This is an HTML template for the title slide. -->
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
@@ -45,8 +44,8 @@
 
 </section>
 <section>
-<section id="slide-org407322d">
-<h2 id="org407322d">講義の内容</h2>
+<section id="slide-orgfb3ef23">
+<h2 id="orgfb3ef23">講義の内容</h2>
 <ul>
 <li>可視化の重要性</li>
 <li>基本的な描画</li>
@@ -55,17 +54,16 @@
 <li>多次元データの視覚化</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org54e75dd">
-<h2 id="org54e75dd">可視化の重要性</h2>
-<div class="outline-text-2" id="text-org54e75dd">
+<section id="slide-org62db603">
+<h2 id="org62db603">可視化の重要性</h2>
+<div class="outline-text-2" id="text-org62db603">
 </div>
 </section>
-<section id="slide-org2dd9448">
-<h3 id="org2dd9448">データの可視化</h3>
+<section id="slide-org8682211">
+<h3 id="org8682211">データの可視化</h3>
 <ul>
 <li>データ全体の特徴や傾向を把握するための直感的で効果的な方法</li>
 <li>R言語には極めて多彩な作図機能が用意されている
@@ -79,10 +77,9 @@
 図中の文字の大きさなどを指定することができる</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfce463b">
-<h3 id="orgfce463b">tidyverse パッケージ</h3>
+<section id="slide-org521a149">
+<h3 id="org521a149">tidyverse パッケージ</h3>
 <ul>
 <li>データ操作とグラフィクスの拡張 (再掲)
 <ul>
@@ -99,12 +96,12 @@
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 最初に一度だけ以下のいずれかを実行しておく
-#'  - Package タブから tidyverse をインストール
-#'  - コンソール上で次のコマンドを実行 'install.packages("tidyverse")'
-#' tidyverse パッケージの読み込み
-library(tidyverse)
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#26368;&#21021;&#12395;&#19968;&#24230;&#12384;&#12369;&#20197;&#19979;&#12398;&#12356;&#12378;&#12428;&#12363;&#12434;&#23455;&#34892;&#12375;&#12390;&#12362;&#12367;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;">  - Package &#12479;&#12502;&#12363;&#12425; tidyverse &#12434;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;">  - &#12467;&#12531;&#12477;&#12540;&#12523;&#19978;&#12391;&#27425;&#12398;&#12467;&#12510;&#12531;&#12489;&#12434;&#23455;&#34892; 'install.packages("tidyverse")'</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> tidyverse &#12497;&#12483;&#12465;&#12540;&#12472;&#12398;&#35501;&#12415;&#36796;&#12415;</span>
+<span style="color: #60aa00;">library</span>(tidyverse)
+</pre>
 </div></li>
 
 </ul>
@@ -114,10 +111,9 @@ library(tidyverse)
 <li>グラフィクスの拡張である <code>ggplot2</code> を利用</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgaebd3bc">
-<h3 id="orgaebd3bc">サンプルデータの説明</h3>
+<section id="slide-orgaf1631c">
+<h3 id="orgaf1631c">サンプルデータの説明</h3>
 <ul>
 <li><p>
 <code>jpdata[1-3].csv</code> (再掲)
@@ -147,10 +143,10 @@ library(tidyverse)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >jp_data &lt;- read_csv(file = "data/jpdata1.csv")
-jp_item &lt;- read_csv(file = "data/jpdata2.csv")
-jp_area &lt;- read_csv(file = "data/jpdata3.csv")
-</code></pre>
+<pre class="src src-R">jp_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata1.csv"</span>)
+jp_item <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata2.csv"</span>)
+jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata3.csv"</span>)
+</pre>
 </div>
 <ul>
 <li>変数名は自由に付けてよい</li>
@@ -161,7 +157,6 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -188,15 +183,14 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data &lt;- read_csv(file = "data/tokyo_weather.csv")
-</code></pre>
+<pre class="src src-R">tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/tokyo_weather.csv"</span>)
+</pre>
 </div></li>
 
 </ul></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -217,81 +211,78 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tc_data &lt;- read_csv(file="data/tokyo_covid19_2021.csv")
-</code></pre>
+<pre class="src src-R">tc_data <span style="color: #60aa00;">&lt;-</span> read_csv(file=<span style="color: #d08928;">"data/tokyo_covid19_2021.csv"</span>)
+</pre>
 </div></li>
 
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org861cf7c">
-<h2 id="org861cf7c">描画の基礎</h2>
-<div class="outline-text-2" id="text-org861cf7c">
+<section id="slide-orgedd49b2">
+<h2 id="orgedd49b2">描画の基礎</h2>
+<div class="outline-text-2" id="text-orgedd49b2">
 </div>
 </section>
-<section id="slide-org582c512">
-<h3 id="org582c512">描画の初期化</h3>
+<section id="slide-org0abb9c1">
+<h3 id="org0abb9c1">描画の初期化</h3>
 <ul>
 <li><p>
 <code>package::ggplot2</code> ではさまざまな作図関数を演算子 <code>+</code> で追加しながら描画する
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >初期化のための関数 + 
-  作図のための関数 + ... +
-  装飾のための関数 + ... # 関数が生成するオブジェクトに変更分を随時追加する
-</code></pre>
+<pre class="src src-R">&#21021;&#26399;&#21270;&#12398;&#12383;&#12417;&#12398;&#38306;&#25968; + 
+  &#20316;&#22259;&#12398;&#12383;&#12417;&#12398;&#38306;&#25968; + ... +
+  &#35013;&#39166;&#12398;&#12383;&#12417;&#12398;&#38306;&#25968; + ... <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#38306;&#25968;&#12364;&#29983;&#25104;&#12377;&#12427;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12395;&#22793;&#26356;&#20998;&#12434;&#38543;&#26178;&#36861;&#21152;&#12377;&#12427;</span>
+</pre>
 </div></li>
 <li><p>
 関数 <code>ggplot2::ggplot()</code> : 初期化
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >ggplot(data = NULL, mapping = aes(), ..., environment = parent.frame())
-#' data: データフレーム
-#' mapping: 描画の基本となる"審美的マップ"(xy軸，色，形，塗り潰しなど)の設定
-#' environment: 互換性のための変数(廃止)
-#' 詳細は '?ggplot2::ggplot' を参照
-</code></pre>
+<pre class="src src-R">ggplot(data = <span style="color: #00aa80;">NULL</span>, mapping = aes(), ..., environment = parent.frame())
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> mapping: &#25551;&#30011;&#12398;&#22522;&#26412;&#12392;&#12394;&#12427;"&#23529;&#32654;&#30340;&#12510;&#12483;&#12503;"(xy&#36600;&#65292;&#33394;&#65292;&#24418;&#65292;&#22615;&#12426;&#28528;&#12375;&#12394;&#12393;)&#12398;&#35373;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> environment: &#20114;&#25563;&#24615;&#12398;&#12383;&#12417;&#12398;&#22793;&#25968;(&#24259;&#27490;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?ggplot2::ggplot' &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgf8c67f3">
-<h3 id="orgf8c67f3">折線グラフ</h3>
+<section id="slide-org05cfa1c">
+<h3 id="org05cfa1c">折線グラフ</h3>
 <ul>
 <li><p>
 関数 <code>ggplot2::geom_line()</code> : 線の描画
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >geom_line(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
+<pre class="src src-R">geom_line(
+  mapping = <span style="color: #00aa80;">NULL</span>,
+  data = <span style="color: #00aa80;">NULL</span>,
+  stat = <span style="color: #d08928;">"identity"</span>,
+  position = <span style="color: #d08928;">"identity"</span>,
   ...,
-  na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TRUE
+  na.rm = <span style="color: #00aa80;">FALSE</span>, orientation = <span style="color: #00aa80;">NA</span>, show.legend = <span style="color: #00aa80;">NA</span>, inherit.aes = <span style="color: #00aa80;">TRUE</span>
 )
-#' mapping: "審美的"マップの設定
-#' data: データフレーム
-#' stat: 統計的な処理の指定
-#' position: 描画位置の調整
-#' ...: その他の描画オプション
-#' na.rm: NA(欠損値)の削除(既定値は削除しない)
-#' show.legend: 凡例の表示(既定値は表示)
-#' 詳細は '?ggplot2::geom_line' を参照
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> mapping: "&#23529;&#32654;&#30340;"&#12510;&#12483;&#12503;&#12398;&#35373;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> stat: &#32113;&#35336;&#30340;&#12394;&#20966;&#29702;&#12398;&#25351;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> position: &#25551;&#30011;&#20301;&#32622;&#12398;&#35519;&#25972;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#12381;&#12398;&#20182;&#12398;&#25551;&#30011;&#12458;&#12503;&#12471;&#12519;&#12531;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> na.rm: NA(&#27424;&#25613;&#20516;)&#12398;&#21066;&#38500;(&#26082;&#23450;&#20516;&#12399;&#21066;&#38500;&#12375;&#12394;&#12356;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> show.legend: &#20961;&#20363;&#12398;&#34920;&#31034;(&#26082;&#23450;&#20516;&#12399;&#34920;&#31034;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?ggplot2::geom_line' &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -300,47 +291,46 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt; filter(month == 5) |&gt; # 5月を抽出
-  ggplot(aes(x = day)) + # day をx軸に指定
-  geom_line(aes(y = temp), colour = "blue") + # 気温を青
-  geom_line(aes(y = solar), colour = "red") + # 日射量を赤
-  labs(y = "temp.(blue) / solar rad.(red)") # y軸のラベルを変更 
-</code></pre>
+<pre class="src src-R">tw_data |&gt; filter(month == 5) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">5&#26376;&#12434;&#25277;&#20986;</span>
+  ggplot(aes(x = day)) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">day &#12434;x&#36600;&#12395;&#25351;&#23450;</span>
+  geom_line(aes(y = temp), colour = <span style="color: #d08928;">"blue"</span>) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27671;&#28201;&#12434;&#38738;</span>
+  geom_line(aes(y = solar), colour = <span style="color: #d08928;">"red"</span>) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26085;&#23556;&#37327;&#12434;&#36196;</span>
+  labs(y = <span style="color: #d08928;">"temp.(blue) / solar rad.(red)"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">y&#36600;&#12398;&#12521;&#12505;&#12523;&#12434;&#22793;&#26356; </span>
+</pre>
 </div>
 
 
-<div id="org1e54086" class="figure">
+<div id="org60d8076" class="figure">
 <p><img src="figs/05-geomline-geomline.png" alt="05-geomline-geomline.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2f6f3bc">
-<h3 id="org2f6f3bc">データフレームの形の変更</h3>
+<section id="slide-orgbe587eb">
+<h3 id="orgbe587eb">データフレームの形の変更</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::pivot_longer()</code> : 列の集約
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >pivot_longer(
+<pre class="src src-R">pivot_longer(
   data,
   cols,
   ...,
-  cols_vary = "fastest",
-  names_to = "name", names_prefix = NULL, names_sep = NULL, names_pattern = NULL,
-  names_ptypes = NULL, names_transform = NULL, names_repair = "check_unique",
-  values_to = "value", values_drop_na = FALSE, values_ptypes = NULL,
-  values_transform = NULL
+  cols_vary = <span style="color: #d08928;">"fastest"</span>,
+  names_to = <span style="color: #d08928;">"name"</span>, names_prefix = <span style="color: #00aa80;">NULL</span>, names_sep = <span style="color: #00aa80;">NULL</span>, names_pattern = <span style="color: #00aa80;">NULL</span>,
+  names_ptypes = <span style="color: #00aa80;">NULL</span>, names_transform = <span style="color: #00aa80;">NULL</span>, names_repair = <span style="color: #d08928;">"check_unique"</span>,
+  values_to = <span style="color: #d08928;">"value"</span>, values_drop_na = <span style="color: #00aa80;">FALSE</span>, values_ptypes = <span style="color: #00aa80;">NULL</span>,
+  values_transform = <span style="color: #00aa80;">NULL</span>
 )
-#' data: データフレーム
-#' cols: 操作の対象とする列(列の番号，名前，名前に関する条件式など)
-#' names_to: 対象の列名をラベルとする新しい列の名前(既定値は"name")
-#' values_to: 対象の列の値を保存する新しい列の名前(既定値は"value")
-#' 詳細は '?dplyr::pivot_longer' を参照
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> cols: &#25805;&#20316;&#12398;&#23550;&#35937;&#12392;&#12377;&#12427;&#21015;(&#21015;&#12398;&#30058;&#21495;&#65292;&#21517;&#21069;&#65292;&#21517;&#21069;&#12395;&#38306;&#12377;&#12427;&#26465;&#20214;&#24335;&#12394;&#12393;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> names_to: &#23550;&#35937;&#12398;&#21015;&#21517;&#12434;&#12521;&#12505;&#12523;&#12392;&#12377;&#12427;&#26032;&#12375;&#12356;&#21015;&#12398;&#21517;&#21069;(&#26082;&#23450;&#20516;&#12399;"name")</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> values_to: &#23550;&#35937;&#12398;&#21015;&#12398;&#20516;&#12434;&#20445;&#23384;&#12377;&#12427;&#26032;&#12375;&#12356;&#21015;&#12398;&#21517;&#21069;(&#26082;&#23450;&#20516;&#12399;"value")</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?dplyr::pivot_longer' &#12434;&#21442;&#29031;</span>
+</pre>
 </div>
 <ul>
 <li>列ごとのグラフを視覚化する際に多用する</li>
@@ -349,7 +339,6 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -358,23 +347,22 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt; filter(month == 5) |&gt;
-  pivot_longer(cols = c(temp, solar)) |&gt; # 集約する列を指定
+<pre class="src src-R">tw_data |&gt; filter(month == 5) |&gt;
+  pivot_longer(cols = c(temp, solar)) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#38598;&#32004;&#12377;&#12427;&#21015;&#12434;&#25351;&#23450;</span>
   ggplot(aes(x = day, y = value, colour = name)) + 
-  geom_line() + # index ごとに定義されたカラーパレットの異なる色が用いられる
-  labs(title = "Weather in May")
-</code></pre>
+  geom_line() + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">index &#12372;&#12392;&#12395;&#23450;&#32681;&#12373;&#12428;&#12383;&#12459;&#12521;&#12540;&#12497;&#12524;&#12483;&#12488;&#12398;&#30064;&#12394;&#12427;&#33394;&#12364;&#29992;&#12356;&#12425;&#12428;&#12427;</span>
+  labs(title = <span style="color: #d08928;">"Weather in May"</span>)
+</pre>
 </div>
 
 
-<div id="orgf93a9d2" class="figure">
+<div id="orgb329917" class="figure">
 <p><img src="figs/05-geomline.png" alt="05-geomline.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -383,26 +371,25 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt; filter(month == 5) |&gt; 
+<pre class="src src-R">tw_data |&gt; filter(month == 5) |&gt; 
   pivot_longer(c(temp, solar)) |&gt; 
   ggplot(aes(x = day, y = value, colour = name)) +
-  geom_line(show.legend  =  FALSE) + # 凡例は不要なので消す
-  labs(title = "Weather in May") +
-  facet_grid(rows = vars(name)) # name ごとに行に並べる (rowsは省略可)
-</code></pre>
+  geom_line(show.legend  =  <span style="color: #00aa80;">FALSE</span>) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20961;&#20363;&#12399;&#19981;&#35201;&#12394;&#12398;&#12391;&#28040;&#12377;</span>
+  labs(title = <span style="color: #d08928;">"Weather in May"</span>) +
+  facet_grid(rows = vars(name)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">name &#12372;&#12392;&#12395;&#34892;&#12395;&#20006;&#12409;&#12427; (rows&#12399;&#30465;&#30053;&#21487;)</span>
+</pre>
 </div>
 
 
-<div id="orgf894c34" class="figure">
+<div id="orgb659116" class="figure">
 <p><img src="figs/05-geomline-facetgrid.png" alt="05-geomline-facetgrid.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2c88850">
-<h3 id="org2c88850">図の保存</h3>
+<section id="slide-orge492e05">
+<h3 id="orge492e05">図の保存</h3>
 <ul>
 <li>RStudioの機能を使う (少数の場合はこちらが簡便)
 <ul>
@@ -416,32 +403,30 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >ggsave(
+<pre class="src src-R">ggsave(
   filename,
   plot = last_plot(),
-  device = NULL,
-  path = NULL, scale = 1, width = NA, height = NA,
-  units = c("in", "cm", "mm", "px"), dpi = 300, limitsize = TRUE, bg = NULL,
+  device = <span style="color: #00aa80;">NULL</span>,
+  path = <span style="color: #00aa80;">NULL</span>, scale = 1, width = <span style="color: #00aa80;">NA</span>, height = <span style="color: #00aa80;">NA</span>,
+  units = c(<span style="color: #d08928;">"in"</span>, <span style="color: #d08928;">"cm"</span>, <span style="color: #d08928;">"mm"</span>, <span style="color: #d08928;">"px"</span>), dpi = 300, limitsize = <span style="color: #00aa80;">TRUE</span>, bg = <span style="color: #00aa80;">NULL</span>,
   ...
 )
-#' filename: ファイル名
-#' plot: 保存する描画オブジェクト
-#' device: 保存する形式("pdf","jpeg","png"など)
-#' 詳細は"?ggplot2::ggsave"を参照
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> filename: &#12501;&#12449;&#12452;&#12523;&#21517;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> plot: &#20445;&#23384;&#12377;&#12427;&#25551;&#30011;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> device: &#20445;&#23384;&#12377;&#12427;&#24418;&#24335;("pdf","jpeg","png"&#12394;&#12393;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399;"?ggplot2::ggsave"&#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org3ad2fac" data-background="#fef4f4">
-<h2 id="org3ad2fac">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orgacac0e2" data-background="#fef4f4">
+<h2 id="orgacac0e2">実習</h2>
 </section>
-<section id="slide-org82eb892" data-background="#fef4f4">
-<h3 id="org82eb892">練習問題</h3>
+<section id="slide-orgd755f55" data-background="#fef4f4">
+<h3 id="orgd755f55">練習問題</h3>
 <ul>
 <li><code>tokyo_weather.csv</code> (東京都の気候データ)
 を用いて以下の問に答えよ
@@ -454,53 +439,51 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
-tw_data &lt;- read_csv(file = "data/tokyo_weather.csv")
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> CSV&#12501;&#12449;&#12452;&#12523;&#12399;&#20316;&#26989;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12398;&#19979;&#12398; data &#12469;&#12502;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12395;&#12354;&#12427;&#12392;&#12377;&#12427;</span>
+tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/tokyo_weather.csv"</span>)
+</pre>
 </div></li>
 
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org0d46525">
-<h2 id="org0d46525">散布図の描画</h2>
-<div class="outline-text-2" id="text-org0d46525">
+<section id="slide-org928e184">
+<h2 id="org928e184">散布図の描画</h2>
+<div class="outline-text-2" id="text-org928e184">
 </div>
 </section>
-<section id="slide-org3e31a6b">
-<h3 id="org3e31a6b">散布図</h3>
+<section id="slide-org5881ce2">
+<h3 id="org5881ce2">散布図</h3>
 <ul>
 <li><p>
 関数 <code>ggplot2::geom_point()</code> : 点の描画
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >geom_point(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
+<pre class="src src-R">geom_point(
+  mapping = <span style="color: #00aa80;">NULL</span>,
+  data = <span style="color: #00aa80;">NULL</span>,
+  stat = <span style="color: #d08928;">"identity"</span>,
+  position = <span style="color: #d08928;">"identity"</span>,
   ...,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE
+  na.rm = <span style="color: #00aa80;">FALSE</span>, show.legend = <span style="color: #00aa80;">NA</span>, inherit.aes = <span style="color: #00aa80;">TRUE</span>
 )
-#' mapping: 審美的マップの設定
-#' data: データフレーム
-#' stat: 統計的な処理の指定
-#' position: 描画位置の調整
-#' ...: その他の描画オプション
-#' na.rm: NA(欠損値)の削除(既定値は削除しない)
-#' show.legend: 凡例の表示(既定値は表示)
-#' 詳細は '?ggplot2::geom_point' を参照
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> mapping: &#23529;&#32654;&#30340;&#12510;&#12483;&#12503;&#12398;&#35373;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> stat: &#32113;&#35336;&#30340;&#12394;&#20966;&#29702;&#12398;&#25351;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> position: &#25551;&#30011;&#20301;&#32622;&#12398;&#35519;&#25972;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#12381;&#12398;&#20182;&#12398;&#25551;&#30011;&#12458;&#12503;&#12471;&#12519;&#12531;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> na.rm: NA(&#27424;&#25613;&#20516;)&#12398;&#21066;&#38500;(&#26082;&#23450;&#20516;&#12399;&#21066;&#38500;&#12375;&#12394;&#12356;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> show.legend: &#20961;&#20363;&#12398;&#34920;&#31034;(&#26082;&#23450;&#20516;&#12399;&#34920;&#31034;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?ggplot2::geom_point' &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -509,22 +492,21 @@ tw_data &lt;- read_csv(file = "data/tokyo_weather.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt; filter(month %in% 7:9) |&gt; # 7月-9月を抽出
-  ggplot(aes(x = solar, y = temp)) + # x軸を日射量，y軸を気温に設定
-  geom_point(colour = "blue", shape = 19) + # 色と形を指定(点の形は '?points' を参照)
-  labs(x = "solar radiation", y = "temperature") # 軸の名前を指定
-</code></pre>
+<pre class="src src-R">tw_data |&gt; filter(month <span style="color: #60aa00;">%in%</span> 7:9) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">7&#26376;-9&#26376;&#12434;&#25277;&#20986;</span>
+  ggplot(aes(x = solar, y = temp)) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">x&#36600;&#12434;&#26085;&#23556;&#37327;&#65292;y&#36600;&#12434;&#27671;&#28201;&#12395;&#35373;&#23450;</span>
+  geom_point(colour = <span style="color: #d08928;">"blue"</span>, shape = 19) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#33394;&#12392;&#24418;&#12434;&#25351;&#23450;(&#28857;&#12398;&#24418;&#12399; '?points' &#12434;&#21442;&#29031;)</span>
+  labs(x = <span style="color: #d08928;">"solar radiation"</span>, y = <span style="color: #d08928;">"temperature"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#36600;&#12398;&#21517;&#21069;&#12434;&#25351;&#23450;</span>
+</pre>
 </div>
 
 
-<div id="orgb3d78ea" class="figure">
+<div id="orgd18475c" class="figure">
 <p><img src="figs/05-geompoint.png" alt="05-geompoint.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -533,22 +515,21 @@ tw_data &lt;- read_csv(file = "data/tokyo_weather.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt; filter(month %in% 7:9) |&gt; 
-  ggplot(aes(x = solar, y = temp, size = humid)) + # 湿度を点の大きさで表示
-  geom_point(colour = "blue", shape = 19) + 
-  labs(x = "solar radiation", y = "temperature")
-</code></pre>
+<pre class="src src-R">tw_data |&gt; filter(month <span style="color: #60aa00;">%in%</span> 7:9) |&gt; 
+  ggplot(aes(x = solar, y = temp, size = humid)) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#28287;&#24230;&#12434;&#28857;&#12398;&#22823;&#12365;&#12373;&#12391;&#34920;&#31034;</span>
+  geom_point(colour = <span style="color: #d08928;">"blue"</span>, shape = 19) + 
+  labs(x = <span style="color: #d08928;">"solar radiation"</span>, y = <span style="color: #d08928;">"temperature"</span>)
+</pre>
 </div>
 
 
-<div id="orge2f9610" class="figure">
+<div id="org0e92652" class="figure">
 <p><img src="figs/05-geompoint-size.png" alt="05-geompoint-size.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -557,25 +538,24 @@ tw_data &lt;- read_csv(file = "data/tokyo_weather.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt; filter(month %in% 7:9) |&gt; 
+<pre class="src src-R">tw_data |&gt; filter(month <span style="color: #60aa00;">%in%</span> 7:9) |&gt; 
   ggplot(aes(x = solar, y = temp, size = humid)) + 
-  geom_point(colour = "blue", shape = 19) + 
-  labs(x = "solar radiation", y = "temperature") +
-  scale_x_log10() + scale_y_log10() # x軸，y軸を対数表示
-</code></pre>
+  geom_point(colour = <span style="color: #d08928;">"blue"</span>, shape = 19) + 
+  labs(x = <span style="color: #d08928;">"solar radiation"</span>, y = <span style="color: #d08928;">"temperature"</span>) +
+  scale_x_log10() + scale_y_log10() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">x&#36600;&#65292;y&#36600;&#12434;&#23550;&#25968;&#34920;&#31034;</span>
+</pre>
 </div>
 
 
-<div id="org4f50c2b" class="figure">
+<div id="orgde228ce" class="figure">
 <p><img src="figs/05-geompoint-scalelog.png" alt="05-geompoint-scalelog.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5d10c15">
-<h3 id="org5d10c15">散布図行列</h3>
+<section id="slide-orgf9f922f">
+<h3 id="orgf9f922f">散布図行列</h3>
 <ul>
 <li>複数の散布図を行列状に配置したもの</li>
 <li><p>
@@ -583,31 +563,30 @@ tw_data &lt;- read_csv(file = "data/tokyo_weather.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 必要であれば 'install.packages("GGally")' を実行
-library(GGally) # パッケージのロード
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#24517;&#35201;&#12391;&#12354;&#12428;&#12400; 'install.packages("GGally")' &#12434;&#23455;&#34892;</span>
+<span style="color: #60aa00;">library</span>(GGally) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12497;&#12483;&#12465;&#12540;&#12472;&#12398;&#12525;&#12540;&#12489;</span>
 ggpairs(
-  data, mapping = NULL,
+  data, mapping = <span style="color: #00aa80;">NULL</span>,
   columns = 1:ncol(data),
-  upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
-  lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
-  diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
+  upper = list(continuous = <span style="color: #d08928;">"cor"</span>, combo = <span style="color: #d08928;">"box_no_facet"</span>, discrete = <span style="color: #d08928;">"count"</span>, na = <span style="color: #d08928;">"na"</span>),
+  lower = list(continuous = <span style="color: #d08928;">"points"</span>, combo = <span style="color: #d08928;">"facethist"</span>, discrete = <span style="color: #d08928;">"facetbar"</span>, na = <span style="color: #d08928;">"na"</span>),
+  diag = list(continuous = <span style="color: #d08928;">"densityDiag"</span>, discrete = <span style="color: #d08928;">"barDiag"</span>, na = <span style="color: #d08928;">"naDiag"</span>),
   ...,
-  axisLabels = c("show", "internal", "none"),
+  axisLabels = c(<span style="color: #d08928;">"show"</span>, <span style="color: #d08928;">"internal"</span>, <span style="color: #d08928;">"none"</span>),
   columnLabels = colnames(data[columns]),
-  legend = NULL
+  legend = <span style="color: #00aa80;">NULL</span>
 )
-#' columns: 表示するデータフレームの列を指定
-#' upper/lower/diag: 行列の上三角・下三角・対角の表示内容を設定
-#' axisLabels: 各グラフの軸名の扱い方を指定
-#' columnLabels: 表示する列のラベルを設定(既定値はデータフレームの列名)
-#' legend: 凡例の設定(どの成分を使うか指定)
-#' 詳細は '?GGally::ggpairs' を参照
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> columns: &#34920;&#31034;&#12377;&#12427;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12398;&#21015;&#12434;&#25351;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> upper/lower/diag: &#34892;&#21015;&#12398;&#19978;&#19977;&#35282;&#12539;&#19979;&#19977;&#35282;&#12539;&#23550;&#35282;&#12398;&#34920;&#31034;&#20869;&#23481;&#12434;&#35373;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> axisLabels: &#21508;&#12464;&#12521;&#12501;&#12398;&#36600;&#21517;&#12398;&#25201;&#12356;&#26041;&#12434;&#25351;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> columnLabels: &#34920;&#31034;&#12377;&#12427;&#21015;&#12398;&#12521;&#12505;&#12523;&#12434;&#35373;&#23450;(&#26082;&#23450;&#20516;&#12399;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12398;&#21015;&#21517;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> legend: &#20961;&#20363;&#12398;&#35373;&#23450;(&#12393;&#12398;&#25104;&#20998;&#12434;&#20351;&#12358;&#12363;&#25351;&#23450;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?GGally::ggpairs' &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -616,21 +595,20 @@ ggpairs(
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt; filter(month %in% 7:9) |&gt; 
-  select(temp, solar, humid) |&gt; # 必要な列を選択
-  ggpairs() # 標準の散布図行列 (上三角は相関，対角は密度，下三角は散布図)
-</code></pre>
+<pre class="src src-R">tw_data |&gt; filter(month <span style="color: #60aa00;">%in%</span> 7:9) |&gt; 
+  select(temp, solar, humid) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24517;&#35201;&#12394;&#21015;&#12434;&#36984;&#25246;</span>
+  ggpairs() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27161;&#28310;&#12398;&#25955;&#24067;&#22259;&#34892;&#21015; (&#19978;&#19977;&#35282;&#12399;&#30456;&#38306;&#65292;&#23550;&#35282;&#12399;&#23494;&#24230;&#65292;&#19979;&#19977;&#35282;&#12399;&#25955;&#24067;&#22259;)</span>
+</pre>
 </div>
 
 
-<div id="org8f548a4" class="figure">
+<div id="org956243d" class="figure">
 <p><img src="figs/05-ggpairs.png" alt="05-ggpairs.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -639,26 +617,25 @@ ggpairs(
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt; filter(month %in% 7:9) |&gt; select(month, temp, solar, humid) |&gt;
-  mutate(month = as_factor(month)) |&gt; # 月を因子化(ラベルとして扱う)
-  ggpairs(columns = 2:4, legend = c(1,1), # 表示する列．凡例の雛型
-          aes(colour = month), # 月ごとに色づける
-          diag = list(continuous = "barDiag")) + # 対角をヒストグラム
-  theme(legend.position = "top") # 凡例(上で指定した1行1列の凡例)の位置
-</code></pre>
+<pre class="src src-R">tw_data |&gt; filter(month <span style="color: #60aa00;">%in%</span> 7:9) |&gt; select(month, temp, solar, humid) |&gt;
+  mutate(month = as_factor(month)) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26376;&#12434;&#22240;&#23376;&#21270;(&#12521;&#12505;&#12523;&#12392;&#12375;&#12390;&#25201;&#12358;)</span>
+  ggpairs(columns = 2:4, legend = c(1,1), <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#34920;&#31034;&#12377;&#12427;&#21015;&#65294;&#20961;&#20363;&#12398;&#38619;&#22411;</span>
+          aes(colour = month), <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26376;&#12372;&#12392;&#12395;&#33394;&#12389;&#12369;&#12427;</span>
+          diag = list(continuous = <span style="color: #d08928;">"barDiag"</span>)) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#23550;&#35282;&#12434;&#12498;&#12473;&#12488;&#12464;&#12521;&#12512;</span>
+  theme(legend.position = <span style="color: #d08928;">"top"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20961;&#20363;(&#19978;&#12391;&#25351;&#23450;&#12375;&#12383;1&#34892;1&#21015;&#12398;&#20961;&#20363;)&#12398;&#20301;&#32622;</span>
+</pre>
 </div>
 
 
-<div id="orga053912" class="figure">
+<div id="org94be931" class="figure">
 <p><img src="figs/05-ggpairs-quarter.png" alt="05-ggpairs-quarter.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org1919813">
-<h3 id="org1919813">対話型のグラフ</h3>
+<section id="slide-org2c5d56a">
+<h3 id="org2c5d56a">対話型のグラフ</h3>
 <ul>
 <li><code>ggplot2</code> で描画したグラフは
 対話型 (interactive) のグラフに変換することができる</li>
@@ -667,17 +644,16 @@ ggpairs(
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 最初に一度だけ以下のいずれかを実行しておく
-#'  - Package タブから plotly をインストール
-#'  - コンソール上で次のコマンドを実行 'install.packages("plotly")'
-#' plotly パッケージの読み込み
-library(plotly)
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#26368;&#21021;&#12395;&#19968;&#24230;&#12384;&#12369;&#20197;&#19979;&#12398;&#12356;&#12378;&#12428;&#12363;&#12434;&#23455;&#34892;&#12375;&#12390;&#12362;&#12367;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;">  - Package &#12479;&#12502;&#12363;&#12425; plotly &#12434;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;">  - &#12467;&#12531;&#12477;&#12540;&#12523;&#19978;&#12391;&#27425;&#12398;&#12467;&#12510;&#12531;&#12489;&#12434;&#23455;&#34892; 'install.packages("plotly")'</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> plotly &#12497;&#12483;&#12465;&#12540;&#12472;&#12398;&#35501;&#12415;&#36796;&#12415;</span>
+<span style="color: #60aa00;">library</span>(plotly)
+</pre>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -686,21 +662,20 @@ library(plotly)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >ggplotly(
+<pre class="src src-R">ggplotly(
   p = ggplot2::last_plot(),
-  width = NULL, height = NULL, tooltip = "all", dynamicTicks = FALSE,
-  layerData = 1, originalData = TRUE, source = "A",
+  width = <span style="color: #00aa80;">NULL</span>, height = <span style="color: #00aa80;">NULL</span>, tooltip = <span style="color: #d08928;">"all"</span>, dynamicTicks = <span style="color: #00aa80;">FALSE</span>,
+  layerData = 1, originalData = <span style="color: #00aa80;">TRUE</span>, source = <span style="color: #d08928;">"A"</span>,
   ...
 )
-#' p: ggplot オブジェクト
-#' 詳細は '?plotly::ggplotly' を参照
-#' https://plotly.com/ggplot2/
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> p: ggplot &#12458;&#12502;&#12472;&#12455;&#12463;&#12488;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?plotly::ggplotly' &#12434;&#21442;&#29031;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> https://plotly.com/ggplot2/</span>
+</pre>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -709,32 +684,31 @@ library(plotly)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 5月の気温と日射量の例
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> 5&#26376;&#12398;&#27671;&#28201;&#12392;&#26085;&#23556;&#37327;&#12398;&#20363;</span>
 tw_data |&gt; filter(month == 5) |&gt; select(day, temp, solar) |&gt;
-  pivot_longer(!day, names_to = "index") |&gt; 
+  pivot_longer(!day, names_to = <span style="color: #d08928;">"index"</span>) |&gt; 
   ggplot(aes(x = day, y = value, colour = index)) +
-  geom_line() + labs(title = "Weather in May")
-ggplotly() # 最後に描いた ggplot オブジェクトを変換して 右下 Viewer タブに表示
-</code></pre>
+  geom_line() + labs(title = <span style="color: #d08928;">"Weather in May"</span>)
+ggplotly() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#24460;&#12395;&#25551;&#12356;&#12383; ggplot &#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12434;&#22793;&#25563;&#12375;&#12390; &#21491;&#19979; Viewer &#12479;&#12502;&#12395;&#34920;&#31034;</span>
+</pre>
 </div>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 夏季の日射量と温度と湿度の例
-bar &lt;- # ggplot オブジェクトを保存
-  tw_data |&gt; filter(month %in% 7:9) |&gt; 
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#22799;&#23395;&#12398;&#26085;&#23556;&#37327;&#12392;&#28201;&#24230;&#12392;&#28287;&#24230;&#12398;&#20363;</span>
+bar <span style="color: #60aa00;">&lt;-</span> <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">ggplot &#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12434;&#20445;&#23384;</span>
+  tw_data |&gt; filter(month <span style="color: #60aa00;">%in%</span> 7:9) |&gt; 
   ggplot(aes(x = solar, y = temp, size = humid,
-             text = paste0("date: ", month, "/", day))) + # 日付を付加
-  geom_point(colour = "blue", shape = 19) + 
-  labs(x = "solar radiation", y = "temperature")
-ggplotly(bar) # 保存した ggplot オブジェクトを変換
-</code></pre>
+             text = paste0(<span style="color: #d08928;">"date: "</span>, month, <span style="color: #d08928;">"/"</span>, day))) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26085;&#20184;&#12434;&#20184;&#21152;</span>
+  geom_point(colour = <span style="color: #d08928;">"blue"</span>, shape = 19) + 
+  labs(x = <span style="color: #d08928;">"solar radiation"</span>, y = <span style="color: #d08928;">"temperature"</span>)
+ggplotly(bar) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20445;&#23384;&#12375;&#12383; ggplot &#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12434;&#22793;&#25563;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgede51ed">
-<h3 id="orgede51ed">日本語に関する注意 (主にmacOS)</h3>
+<section id="slide-org9af3d8f">
+<h3 id="org9af3d8f">日本語に関する注意 (主にmacOS)</h3>
 <ul>
 <li>日本語を含む図で文字化けが起こる場合がある</li>
 <li><p>
@@ -742,13 +716,13 @@ ggplotly(bar) # 保存した ggplot オブジェクトを変換
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >if(Sys.info()["sysname"] == "Darwin") { # macOS か調べる
-  #' OS標準のヒラギノフォントを指定する場合
-  theme_update(text = element_text(family = "HiraginoSans-W4"))
-  #' gome_text/geom_label内で用いられる日本語フォントの指定
-  update_geom_defaults("text", list(family = theme_get()$text$family))
-  update_geom_defaults("label", list(family = theme_get()$text$family))}
-</code></pre>
+<pre class="src src-R"><span style="color: #6c9ef8;">if</span>(Sys.info()[<span style="color: #d08928;">"sysname"</span>] == <span style="color: #d08928;">"Darwin"</span>) { <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">macOS &#12363;&#35519;&#12409;&#12427;</span>
+  <span style="color: #808080; font-style: italic;">#</span><span style="color: #808080; font-style: italic;">' OS&#27161;&#28310;&#12398;&#12498;&#12521;&#12462;&#12494;&#12501;&#12457;&#12531;&#12488;&#12434;&#25351;&#23450;&#12377;&#12427;&#22580;&#21512;</span>
+  theme_update(text = element_text(family = <span style="color: #d08928;">"HiraginoSans-W4"</span>))
+  <span style="color: #808080; font-style: italic;">#</span><span style="color: #808080; font-style: italic;">' gome_text/geom_label&#20869;&#12391;&#29992;&#12356;&#12425;&#12428;&#12427;&#26085;&#26412;&#35486;&#12501;&#12457;&#12531;&#12488;&#12398;&#25351;&#23450;</span>
+  update_geom_defaults(<span style="color: #d08928;">"text"</span>, list(family = theme_get()$text$family))
+  update_geom_defaults(<span style="color: #d08928;">"label"</span>, list(family = theme_get()$text$family))}
+</pre>
 </div>
 <ul>
 <li>以下のサイトなども参考になる <br />
@@ -757,16 +731,14 @@ ggplotly(bar) # 保存した ggplot オブジェクトを変換
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgff83f3b" data-background="#fef4f4">
-<h2 id="orgff83f3b">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org64a2412" data-background="#fef4f4">
+<h2 id="org64a2412">実習</h2>
 </section>
-<section id="slide-org0112d4e" data-background="#fef4f4">
-<h3 id="org0112d4e">練習問題</h3>
+<section id="slide-orgdf97e34" data-background="#fef4f4">
+<h3 id="orgdf97e34">練習問題</h3>
 <ul>
 <li><code>jpdata1/3.csv</code> (前回配布のデータ)を用いて以下の問に答えよ．
 <ul>
@@ -778,26 +750,25 @@ ggplotly(bar) # 保存した ggplot オブジェクトを変換
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
-jp_data &lt;- read_csv(file = "data/jpdata1.csv")
-jp_area &lt;- read_csv(file = "data/jpdata3.csv")
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> CSV&#12501;&#12449;&#12452;&#12523;&#12399;&#20316;&#26989;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12398;&#19979;&#12398; data &#12469;&#12502;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12395;&#12354;&#12427;&#12392;&#12377;&#12427;</span>
+jp_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata1.csv"</span>)
+jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata3.csv"</span>)
+</pre>
 </div></li>
 
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org9aeb920">
-<h2 id="org9aeb920">さまざまなグラフ</h2>
-<div class="outline-text-2" id="text-org9aeb920">
+<section id="slide-org4bf8472">
+<h2 id="org4bf8472">さまざまなグラフ</h2>
+<div class="outline-text-2" id="text-org4bf8472">
 </div>
 </section>
-<section id="slide-orgd4dc1fa">
-<h3 id="orgd4dc1fa">ヒストグラム</h3>
+<section id="slide-org6d78855">
+<h3 id="org6d78855">ヒストグラム</h3>
 <ul>
 <li>データの値の範囲をいくつかの区間に分割し，
 各区間に含まれるデータの個数を棒グラフにした図
@@ -811,22 +782,21 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >geom_histogram(
-  mapping = NULL, data = NULL, stat = "bin", position = "stack",
+<pre class="src src-R">geom_histogram(
+  mapping = <span style="color: #00aa80;">NULL</span>, data = <span style="color: #00aa80;">NULL</span>, stat = <span style="color: #d08928;">"bin"</span>, position = <span style="color: #d08928;">"stack"</span>,
   ...,
-  binwidth = NULL,
-  bins = NULL,
-  na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TREU
+  binwidth = <span style="color: #00aa80;">NULL</span>,
+  bins = <span style="color: #00aa80;">NULL</span>,
+  na.rm = <span style="color: #00aa80;">FALSE</span>, orientation = <span style="color: #00aa80;">NA</span>, show.legend = <span style="color: #00aa80;">NA</span>, inherit.aes = TREU
 )
-#' binwidth: ヒストグラムのビンの幅を指定
-#' bins: ヒストグラムのビンの数を指定
-#' 詳細は '?ggplot2::geom_histogram' を参照
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> binwidth: &#12498;&#12473;&#12488;&#12464;&#12521;&#12512;&#12398;&#12499;&#12531;&#12398;&#24133;&#12434;&#25351;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> bins: &#12498;&#12473;&#12488;&#12464;&#12521;&#12512;&#12398;&#12499;&#12531;&#12398;&#25968;&#12434;&#25351;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?ggplot2::geom_histogram' &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -835,25 +805,24 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt;
-  ggplot(aes(x = solar)) + # 分布を描画する列を指定
-  geom_histogram(bins = 30, fill = "pink", colour = "red") +
-  labs(x = expression(MJ/m^2), # 数式の表示は '?plotmath' を参照
-       title = "Solar Radiation in Tokyo")
-</code></pre>
+<pre class="src src-R">tw_data |&gt;
+  ggplot(aes(x = solar)) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20998;&#24067;&#12434;&#25551;&#30011;&#12377;&#12427;&#21015;&#12434;&#25351;&#23450;</span>
+  geom_histogram(bins = 30, fill = <span style="color: #d08928;">"pink"</span>, colour = <span style="color: #d08928;">"red"</span>) +
+  labs(x = expression(MJ/m^2), <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25968;&#24335;&#12398;&#34920;&#31034;&#12399; '?plotmath' &#12434;&#21442;&#29031;</span>
+       title = <span style="color: #d08928;">"Solar Radiation in Tokyo"</span>)
+</pre>
 </div>
 
 
-<div id="orgc822175" class="figure">
+<div id="org5817758" class="figure">
 <p><img src="figs/05-geomhistogram.png" alt="05-geomhistogram.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgdb1cbec">
-<h3 id="orgdb1cbec">密度</h3>
+<section id="slide-orge16ef3c">
+<h3 id="orge16ef3c">密度</h3>
 <ul>
 <li>データからカーネル法で確率密度を推定した図
 <ul>
@@ -866,22 +835,21 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >geom_density(
-  mapping = NULL, data = NULL, stat = "density", position = "identity",
+<pre class="src src-R">geom_density(
+  mapping = <span style="color: #00aa80;">NULL</span>, data = <span style="color: #00aa80;">NULL</span>, stat = <span style="color: #d08928;">"density"</span>, position = <span style="color: #d08928;">"identity"</span>,
   ...,
-  na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TRUE,
-  outline.type = "upper"
+  na.rm = <span style="color: #00aa80;">FALSE</span>, orientation = <span style="color: #00aa80;">NA</span>, show.legend = <span style="color: #00aa80;">NA</span>, inherit.aes = <span style="color: #00aa80;">TRUE</span>,
+  outline.type = <span style="color: #d08928;">"upper"</span>
 )
-#' 詳細は '?ggplot2::geom_density' を参照
-#' カーネルの幅や関数については '?stat::density' を参照
-#' bw: カーネルの幅の計算方法 "nrd0", "ucv" など
-#' kernel: カーネル関数 "gaussian", "epanechnikov" など
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?ggplot2::geom_density' &#12434;&#21442;&#29031;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#12459;&#12540;&#12493;&#12523;&#12398;&#24133;&#12420;&#38306;&#25968;&#12395;&#12388;&#12356;&#12390;&#12399; '?stat::density' &#12434;&#21442;&#29031;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> bw: &#12459;&#12540;&#12493;&#12523;&#12398;&#24133;&#12398;&#35336;&#31639;&#26041;&#27861; "nrd0", "ucv" &#12394;&#12393;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> kernel: &#12459;&#12540;&#12493;&#12523;&#38306;&#25968; "gaussian", "epanechnikov" &#12394;&#12393;</span>
+</pre>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -890,25 +858,24 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt;
+<pre class="src src-R">tw_data |&gt;
   ggplot(aes(x = solar)) + 
-  geom_density(fill = "pink", colour = "red") + 
+  geom_density(fill = <span style="color: #d08928;">"pink"</span>, colour = <span style="color: #d08928;">"red"</span>) + 
   labs(x = expression(MJ/m^2), 
-       title = "Solar Radiation in Tokyo")
-</code></pre>
+       title = <span style="color: #d08928;">"Solar Radiation in Tokyo"</span>)
+</pre>
 </div>
 
 
-<div id="orgd8045af" class="figure">
+<div id="orgd9557ea" class="figure">
 <p><img src="figs/05-geomdensity.png" alt="05-geomdensity.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5bb6f11">
-<h3 id="org5bb6f11">箱ひげ図</h3>
+<section id="slide-org8e7d729">
+<h3 id="org8e7d729">箱ひげ図</h3>
 <ul>
 <li>データの散らばり具合を考察するための図
 <ul>
@@ -923,24 +890,23 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >geom_boxplot(
-  mapping = NULL, data = NULL, stat = "boxplot", position = "dodge2",
+<pre class="src src-R">geom_boxplot(
+  mapping = <span style="color: #00aa80;">NULL</span>, data = <span style="color: #00aa80;">NULL</span>, stat = <span style="color: #d08928;">"boxplot"</span>, position = <span style="color: #d08928;">"dodge2"</span>,
   ...,
-  outlier.colour = NULL, outlier.color = NULL, outlier.fill = NULL,
-  outlier.shape = 19, outlier.size = 1.5, outlier.stroke = 0.5, outlier.alpha = NULL,
-  notch = FALSE, notchwidth = 0.5, varwidth = FALSE,
-  na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TRUE
+  outlier.colour = <span style="color: #00aa80;">NULL</span>, outlier.color = <span style="color: #00aa80;">NULL</span>, outlier.fill = <span style="color: #00aa80;">NULL</span>,
+  outlier.shape = 19, outlier.size = 1.5, outlier.stroke = 0.5, outlier.alpha = <span style="color: #00aa80;">NULL</span>,
+  notch = <span style="color: #00aa80;">FALSE</span>, notchwidth = 0.5, varwidth = <span style="color: #00aa80;">FALSE</span>,
+  na.rm = <span style="color: #00aa80;">FALSE</span>, orientation = <span style="color: #00aa80;">NA</span>, show.legend = <span style="color: #00aa80;">NA</span>, inherit.aes = <span style="color: #00aa80;">TRUE</span>
 )
-#' ourlier.*: 外れ値の描画方法の指定
-#' notch*: ボックスの切れ込みの設定
-#' varwidth: ボックスの幅でデータ数を表示
-#' 詳細は '?ggplot2::geom_boxplot' を参照
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ourlier.*: &#22806;&#12428;&#20516;&#12398;&#25551;&#30011;&#26041;&#27861;&#12398;&#25351;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> notch*: &#12508;&#12483;&#12463;&#12473;&#12398;&#20999;&#12428;&#36796;&#12415;&#12398;&#35373;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> varwidth: &#12508;&#12483;&#12463;&#12473;&#12398;&#24133;&#12391;&#12487;&#12540;&#12479;&#25968;&#12434;&#34920;&#31034;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?ggplot2::geom_boxplot' &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -949,25 +915,24 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt;
-  mutate(month = as_factor(month)) |&gt; # 月を因子(ラベル)化
-  ggplot(aes(x = month, y = solar)) + # 月毎に集計する
-  geom_boxplot(fill = "orange") + # 塗り潰しの色を指定
-  labs(title = "Solar Radiation in Tokyo")
-</code></pre>
+<pre class="src src-R">tw_data |&gt;
+  mutate(month = as_factor(month)) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26376;&#12434;&#22240;&#23376;(&#12521;&#12505;&#12523;)&#21270;</span>
+  ggplot(aes(x = month, y = solar)) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26376;&#27598;&#12395;&#38598;&#35336;&#12377;&#12427;</span>
+  geom_boxplot(fill = <span style="color: #d08928;">"orange"</span>) + <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22615;&#12426;&#28528;&#12375;&#12398;&#33394;&#12434;&#25351;&#23450;</span>
+  labs(title = <span style="color: #d08928;">"Solar Radiation in Tokyo"</span>)
+</pre>
 </div>
 
 
-<div id="orgd6561a7" class="figure">
+<div id="org81d24bd" class="figure">
 <p><img src="figs/05-geomboxplot.png" alt="05-geomboxplot.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7f30ebd">
-<h3 id="org7f30ebd">棒グラフ</h3>
+<section id="slide-orge1efdbb">
+<h3 id="orge1efdbb">棒グラフ</h3>
 <ul>
 <li><p>
 項目ごとの量を並べて表示した図
@@ -984,22 +949,21 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </ul>
 <div class="org-src-container">
 
-<pre><code class="R" >geom_bar(
-  mapping = NULL, data = NULL, stat = "count", position = "stack",
+<pre class="src src-R">geom_bar(
+  mapping = <span style="color: #00aa80;">NULL</span>, data = <span style="color: #00aa80;">NULL</span>, stat = <span style="color: #d08928;">"count"</span>, position = <span style="color: #d08928;">"stack"</span>,
   ...,
   just = 0.5,
-  width = NULL,
-  na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TRUE
+  width = <span style="color: #00aa80;">NULL</span>,
+  na.rm = <span style="color: #00aa80;">FALSE</span>, orientation = <span style="color: #00aa80;">NA</span>, show.legend = <span style="color: #00aa80;">NA</span>, inherit.aes = <span style="color: #00aa80;">TRUE</span>
 )
-#' just: 目盛と棒の位置の調整(既定値は真中)
-#' width: 棒の幅の調整(既定値は目盛の間隔の90%)
-#' 詳細は '?ggplot2::geom_bar' を参照
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> just: &#30446;&#30427;&#12392;&#26834;&#12398;&#20301;&#32622;&#12398;&#35519;&#25972;(&#26082;&#23450;&#20516;&#12399;&#30495;&#20013;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> width: &#26834;&#12398;&#24133;&#12398;&#35519;&#25972;(&#26082;&#23450;&#20516;&#12399;&#30446;&#30427;&#12398;&#38291;&#38548;&#12398;90%)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?ggplot2::geom_bar' &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1008,33 +972,31 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data |&gt; 
+<pre class="src src-R">tw_data |&gt; 
   mutate(month = as_factor(month)) |&gt; group_by(month) |&gt;
-  summarize(across(c(solar, rain, wind), mean)) |&gt; # 月ごとに集計
-  pivot_longer(!month) |&gt; # long format に変更
+  summarize(across(c(solar, rain, wind), mean)) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26376;&#12372;&#12392;&#12395;&#38598;&#35336;</span>
+  pivot_longer(!month) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">long format &#12395;&#22793;&#26356;</span>
   ggplot(aes(x = name, y = value, fill = month)) +
-  geom_bar(stat = "identity", position = "dodge", na.rm = TRUE) +
-  theme(legend.position = "top") + guides(fill = guide_legend(nrow = 2))
-</code></pre>
+  geom_bar(stat = <span style="color: #d08928;">"identity"</span>, position = <span style="color: #d08928;">"dodge"</span>, na.rm = <span style="color: #00aa80;">TRUE</span>) +
+  theme(legend.position = <span style="color: #d08928;">"top"</span>) + guides(fill = guide_legend(nrow = 2))
+</pre>
 </div>
 
 
-<div id="org33a651f" class="figure">
+<div id="org9c08b02" class="figure">
 <p><img src="figs/05-geombar.png" alt="05-geombar.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgc7bf54a" data-background="#fef4f4">
-<h2 id="orgc7bf54a">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org71c446c" data-background="#fef4f4">
+<h2 id="org71c446c">実習</h2>
 </section>
-<section id="slide-org8f3c9e8" data-background="#fef4f4">
-<h3 id="org8f3c9e8">練習問題</h3>
+<section id="slide-org2f6a6f6" data-background="#fef4f4">
+<h3 id="org2f6a6f6">練習問題</h3>
 <ul>
 <li><code>tokyo_covid19_2021.csv</code> (東京都の新型コロナの動向データ)
 を用いて以下の問に答えよ
@@ -1047,34 +1009,35 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' CSVファイルは作業ディレクトリの下の data サブディレクトリにあるとする
-tc_data &lt;- read_csv(file="data/tokyo_covid19_2021.csv")
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> CSV&#12501;&#12449;&#12452;&#12523;&#12399;&#20316;&#26989;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12398;&#19979;&#12398; data &#12469;&#12502;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12395;&#12354;&#12427;&#12392;&#12377;&#12427;</span>
+tc_data <span style="color: #60aa00;">&lt;-</span> read_csv(file=<span style="color: #d08928;">"data/tokyo_covid19_2021.csv"</span>)
+</pre>
 </div></li>
 
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org9718a46">
-<h2 id="org9718a46">次回の予定</h2>
+<section id="slide-orge9e7464">
+<h2 id="orge9e7464">次回の予定</h2>
 <ul>
 <li>計算機による数値実験</li>
 <li>乱数とは</li>
 <li>乱数を用いた数値実験</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script src="./reveal.js/plugin/menu/menu.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
@@ -1095,16 +1058,15 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
+showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
+spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
-{ src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
-{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
+]
 
 });
 </script>

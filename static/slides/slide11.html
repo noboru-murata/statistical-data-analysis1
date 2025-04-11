@@ -11,22 +11,21 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
-
-<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
-
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
 
-<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
-<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-state="no-toc-progress">
+<section id="sec-title-slide">
 <!-- This is an HTML template for the title slide. -->
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
@@ -46,8 +45,8 @@
 
 </section>
 <section>
-<section id="slide-org3f950fe">
-<h2 id="org3f950fe">講義概要</h2>
+<section id="slide-orgac97785">
+<h2 id="orgac97785">講義概要</h2>
 <ul>
 <li>検定
 <ul>
@@ -62,17 +61,16 @@
 <li>分散の比の検定</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgb269fe7">
-<h2 id="orgb269fe7">検定とは</h2>
-<div class="outline-text-2" id="text-orgb269fe7">
+<section id="slide-org8495b3b">
+<h2 id="org8495b3b">検定とは</h2>
+<div class="outline-text-2" id="text-org8495b3b">
 </div>
 </section>
-<section id="slide-orgc9124f8">
-<h3 id="orgc9124f8">統計的仮説検定</h3>
+<section id="slide-org8149412">
+<h3 id="org8149412">統計的仮説検定</h3>
 <ul>
 <li>ある現象・母集団に対して仮定された仮説の真偽を
 データに基づいて統計的に検証する方法</li>
@@ -89,10 +87,9 @@
 母集団の分布に対して何らかの <b>仮説</b> を考えるところ</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4d2cd74">
-<h3 id="org4d2cd74">検定の基本的手続き</h3>
+<section id="slide-org858f6b6">
+<h3 id="org858f6b6">検定の基本的手続き</h3>
 <ol>
 <li><b>仮説</b> を立てる</li>
 <li>仮説のもとで <b>検定統計量</b> が従う標本分布を調べる</li>
@@ -102,10 +99,9 @@
 得られるかどうかを判断する</li>
 
 </ol>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcc56d0f">
-<h3 id="orgcc56d0f">検定における仮説</h3>
+<section id="slide-org4b52512">
+<h3 id="org4b52512">検定における仮説</h3>
 <ul>
 <li><p>
 <b>帰無仮説</b>
@@ -132,10 +128,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org944886a">
-<h3 id="org944886a">帰無仮説と対立仮説</h3>
+<section id="slide-orge4c8b9b">
+<h3 id="orge4c8b9b">帰無仮説と対立仮説</h3>
 <ul>
 <li><span style="color:green;">薬の治験の例</span> (単純な場合)
 <ul>
@@ -151,10 +146,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org74112ff">
-<h3 id="org74112ff">検定の用語</h3>
+<section id="slide-orgca14a40">
+<h3 id="orgca14a40">検定の用語</h3>
 <ul>
 <li><p>
 <b>帰無分布</b>
@@ -187,29 +181,26 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 
-<div id="orgae731c3" class="figure">
+<div id="orgdbe1646" class="figure">
 <p><img src="figs/test1.png" alt="test1.png" height="100%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>検定の考え方</p>
 </div>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 
-<div id="orgfd825f1" class="figure">
+<div id="org37afc63" class="figure">
 <p><img src="figs/test2.png" alt="test2.png" height="100%" />
 </p>
 <p><span class="figure-number">Figure 2: </span>棄却と受容</p>
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge80702e">
-<h3 id="orge80702e">検定の設計指針</h3>
+<section id="slide-org3310e34">
+<h3 id="org3310e34">検定の設計指針</h3>
 <ul>
 <li>検定統計量 \(T\) に対して棄却域 \(R\) を設計
 <ul>
@@ -250,19 +241,17 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 
-<div id="org9313ecd" class="figure">
+<div id="org66104df" class="figure">
 <p><img src="figs/test3.png" alt="test3.png" height="100%" />
 </p>
 <p><span class="figure-number">Figure 3: </span>検定の設計</p>
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org511d353">
-<h3 id="org511d353">棄却域の決め方</h3>
+<section id="slide-orgfba7e59">
+<h3 id="orgfba7e59">棄却域の決め方</h3>
 <ul>
 <li><p>
 検定を構成する場合の一般的な戦略
@@ -291,10 +280,9 @@
 <li>対立仮説によって棄却域の形は変わりうる</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2d34346">
-<h3 id="org2d34346">\(p\) 値 (有意確率)</h3>
+<section id="slide-org8ab4650">
+<h3 id="org8ab4650">\(p\) 値 (有意確率)</h3>
 <ul>
 <li><p>
 帰無分布における検定統計量の評価
@@ -319,10 +307,9 @@
 <li>\(p\) 値が有意水準未満のときに帰無仮説を棄却する</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc467142">
-<h3 id="orgc467142">検定に関する注意</h3>
+<section id="slide-org639f57c">
+<h3 id="org639f57c">検定に関する注意</h3>
 <ul>
 <li><p>
 帰無仮説の受容の意味
@@ -347,17 +334,16 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org8e99626">
-<h2 id="org8e99626">1標本正規母集団</h2>
-<div class="outline-text-2" id="text-org8e99626">
+<section id="slide-orgc56d21a">
+<h2 id="orgc56d21a">1標本正規母集団</h2>
+<div class="outline-text-2" id="text-orgc56d21a">
 </div>
 </section>
-<section id="slide-orgf5d2f0d">
-<h3 id="orgf5d2f0d">1標本データに対する仮定</h3>
+<section id="slide-org4c80895">
+<h3 id="org4c80895">1標本データに対する仮定</h3>
 <ul>
 <li><p>
 観測データは独立同分布な確率変数列
@@ -374,17 +360,16 @@
 <li>以下では平均 \(\mu\) および分散 \(\sigma^2\) に対する検定を説明</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org357bb42">
-<h2 id="org357bb42">平均の検定</h2>
-<div class="outline-text-2" id="text-org357bb42">
+<section id="slide-orgb943537">
+<h2 id="orgb943537">平均の検定</h2>
+<div class="outline-text-2" id="text-orgb943537">
 </div>
 </section>
-<section id="slide-org7a7f92c">
-<h3 id="org7a7f92c">平均の検定</h3>
+<section id="slide-org0b9db6b">
+<h3 id="org0b9db6b">平均の検定</h3>
 <ul>
 <li><p>
 両側検定
@@ -412,10 +397,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org43af47b">
-<h3 id="org43af47b">考え方</h3>
+<section id="slide-org5766c17">
+<h3 id="org5766c17">考え方</h3>
 <ul>
 <li>標本平均 \(\bar{X}\) (推定量) が
 帰無仮説のもとでの真の平均 \(\mu_0\) とどの程度離れているかを検証</li>
@@ -448,7 +432,6 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -474,23 +457,22 @@
 
 
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
 <li>\(t\) 分布</li>
 
 </ul>
-<div class="leftcol" id="orgc973715">
+<div class="leftcol" id="org2d6356c">
 
-<div id="org874c5d7" class="figure">
+<div id="org34f99d2" class="figure">
 <p><img src="figs/pdf_t.png" alt="pdf_t.png" width="100%" />
 </p>
 <p><span class="figure-number">Figure 4: </span>\(t\) 分布 (自由度\(3\))</p>
 </div>
 
 </div>
-<div class="rightcol" id="org13f8c50">
+<div class="rightcol" id="orgd065cee">
 <blockquote>
 <ul>
 <li>見本空間 : \((-\infty,\infty)\)</li>
@@ -519,10 +501,9 @@
 </blockquote>
 
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcd5803e">
-<h3 id="orgcd5803e">棄却域を用いる場合</h3>
+<section id="slide-org120788c">
+<h3 id="org120788c">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
@@ -557,7 +538,6 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -576,10 +556,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9271fb4">
-<h3 id="org9271fb4">\(p\) 値を用いる場合</h3>
+<section id="slide-org9beefc0">
+<h3 id="org9beefc0">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 \(p\) 値を計算 ( \(f(x)\) : 自由度 \(n{-}1\) の \(t\) 分布の密度)
@@ -613,10 +592,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org49237d2">
-<h3 id="org49237d2">対立仮説の違い</h3>
+<section id="slide-orgc3ccf61">
+<h3 id="orgc3ccf61">対立仮説の違い</h3>
 <ul>
 <li><p>
 <span style="color:green;">薬の治験例</span>
@@ -637,29 +615,27 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
-<div class="leftcol" id="org66b8d7e">
+<div class="leftcol" id="org950e6ec">
 
-<div id="orga2afba7" class="figure">
+<div id="org1ec7c4e" class="figure">
 <p><img src="figs/cr_two.png" alt="cr_two.png" width="100%" />
 </p>
 </div>
 
 </div>
-<div class="rightcol" id="org5fc1e89">
+<div class="rightcol" id="orgda7d4f2">
 
-<div id="org8c61282" class="figure">
+<div id="orgcd2f5d3" class="figure">
 <p><img src="figs/cr_one.png" alt="cr_one.png" width="100%" />
 </p>
 </div>
 
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb4a0c4b">
-<h3 id="orgb4a0c4b">平均の検定</h3>
+<section id="slide-org1ca0c01">
+<h3 id="org1ca0c01">平均の検定</h3>
 <ul>
 <li><p>
 右片側検定
@@ -694,10 +670,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org98eac61">
-<h3 id="org98eac61">棄却域を用いる場合</h3>
+<section id="slide-org011ff97">
+<h3 id="org011ff97">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
@@ -731,7 +706,6 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -749,10 +723,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8338f3d">
-<h3 id="org8338f3d">\(p\) 値を用いる場合</h3>
+<section id="slide-orgf336f68">
+<h3 id="orgf336f68">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 \(p\) 値を計算 ( \(f(x)\):自由度 \(n{-}1\) の \(t\) 分布の密度)
@@ -769,10 +742,9 @@
 <li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org9b8ffe8">
-<h3 id="org9b8ffe8">平均の検定</h3>
+<section id="slide-orge8f50ad">
+<h3 id="orge8f50ad">平均の検定</h3>
 <ul>
 <li><p>
 左片側検定
@@ -822,10 +794,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgc10b161">
-<h3 id="orgc10b161">両側検定と片側検定</h3>
+<section id="slide-org7066e7d">
+<h3 id="org7066e7d">両側検定と片側検定</h3>
 <ul>
 <li>棄却域の形による分類
 <ul>
@@ -862,7 +833,6 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -876,57 +846,53 @@
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
-<div class="leftcol" id="orgfc89f83">
+<div class="leftcol" id="org0b42fe5">
 
-<div id="org7a9a4df" class="figure">
+<div id="org072825d" class="figure">
 <p><img src="figs/cr_two.png" alt="cr_two.png" width="100%" />
 </p>
 </div>
 
 </div>
-<div class="rightcol" id="orgec07f77">
+<div class="rightcol" id="org03aec1e">
 
-<div id="orgde71ed7" class="figure">
+<div id="orgca58a35" class="figure">
 <p><img src="figs/cr_one.png" alt="cr_one.png" width="100%" />
 </p>
 </div>
 
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgee45ce5">
-<h3 id="orgee45ce5">\(t\) 検定の関数</h3>
+<section id="slide-org63a6dfb">
+<h3 id="org63a6dfb">\(t\) 検定の関数</h3>
 <ul>
 <li><p>
 使い方
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >t.test(x, # 1標本の場合
-       alternative = c("two.sided", "less", "greater"),
+<pre class="src src-R">t.test(x, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#27161;&#26412;&#12398;&#22580;&#21512;</span>
+       alternative = c(<span style="color: #d08928;">"two.sided"</span>, <span style="color: #d08928;">"less"</span>, <span style="color: #d08928;">"greater"</span>),
        mu = 0, conf.level = 0.95, ...)
-#' x : ベクトル． 
-#' alternative: 対立仮説 (両側，左片側，右片側)
-#' mu: 検定対象の平均値
-#' conf.level: 信頼区間の水準 (点推定・区間推定も行ってくれる)
-#' ...: 他のオプション．詳細は help(t.test) を参照
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x : &#12505;&#12463;&#12488;&#12523;&#65294; </span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> alternative: &#23550;&#31435;&#20206;&#35500; (&#20001;&#20596;&#65292;&#24038;&#29255;&#20596;&#65292;&#21491;&#29255;&#20596;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> mu: &#26908;&#23450;&#23550;&#35937;&#12398;&#24179;&#22343;&#20516;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> conf.level: &#20449;&#38972;&#21306;&#38291;&#12398;&#27700;&#28310; (&#28857;&#25512;&#23450;&#12539;&#21306;&#38291;&#25512;&#23450;&#12418;&#34892;&#12387;&#12390;&#12367;&#12428;&#12427;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#20182;&#12398;&#12458;&#12503;&#12471;&#12519;&#12531;&#65294;&#35443;&#32048;&#12399; help(t.test) &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orge3e245f" data-background="#fef4f4">
-<h2 id="orge3e245f">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org3d0827e" data-background="#fef4f4">
+<h2 id="org3d0827e">実習</h2>
 </section>
-<section id="slide-orgc398150" data-background="#fef4f4">
-<h3 id="orgc398150">練習問題</h3>
+<section id="slide-org603ffaf" data-background="#fef4f4">
+<h3 id="org603ffaf">練習問題</h3>
 <ul>
 <li><p>
 適当な正規乱数を用いてMonte-Carlo実験を考案し，
@@ -934,21 +900,20 @@
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 例えば適当な数値を指定して以下のような実験を行えばよい
-mc_trial &lt;- function(n){ 
-  result &lt;- t.test(rnorm(n,mean = mu0,sd = sd0), mu = mu0)
-  return(result$p.value)}
-mc_data &lt;- replicate(mc, mc_trial(n))
-table(mc_data &lt; alpha)/mc # alpha以下のデータの数を調べる
-#' 上記はp値の性質を調べる場合であるが，t統計量についても同様に調べることができる
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#20363;&#12360;&#12400;&#36969;&#24403;&#12394;&#25968;&#20516;&#12434;&#25351;&#23450;&#12375;&#12390;&#20197;&#19979;&#12398;&#12424;&#12358;&#12394;&#23455;&#39443;&#12434;&#34892;&#12360;&#12400;&#12424;&#12356;</span>
+<span style="color: #b77fdb; font-weight: bold;">mc_trial</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(n){ 
+  result <span style="color: #60aa00;">&lt;-</span> t.test(rnorm(n,mean = mu0,sd = sd0), mu = mu0)
+  <span style="color: #6c9ef8;">return</span>(result$p.value)}
+mc_data <span style="color: #60aa00;">&lt;-</span> replicate(mc, mc_trial(n))
+table(mc_data &lt; alpha)/mc <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">alpha&#20197;&#19979;&#12398;&#12487;&#12540;&#12479;&#12398;&#25968;&#12434;&#35519;&#12409;&#12427;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#19978;&#35352;&#12399;p&#20516;&#12398;&#24615;&#36074;&#12434;&#35519;&#12409;&#12427;&#22580;&#21512;&#12391;&#12354;&#12427;&#12364;&#65292;t&#32113;&#35336;&#37327;&#12395;&#12388;&#12356;&#12390;&#12418;&#21516;&#27096;&#12395;&#35519;&#12409;&#12427;&#12371;&#12392;&#12364;&#12391;&#12365;&#12427;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org820089b" data-background="#fef4f4">
-<h3 id="org820089b">練習問題</h3>
+<section id="slide-orgf3bf5d5" data-background="#fef4f4">
+<h3 id="orgf3bf5d5">練習問題</h3>
 <ul>
 <li><p>
 ある番組の視聴率が2桁に達したかどうか知るために
@@ -972,10 +937,10 @@ table(mc_data &lt; alpha)/mc # alpha以下のデータの数を調べる
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' Xの生成は例えば mu1 を真の視聴率として以下のようにすればよい
-x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
-#' n 人分の視聴結果 {1,0} のベクトルが得られる
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> X&#12398;&#29983;&#25104;&#12399;&#20363;&#12360;&#12400; mu1 &#12434;&#30495;&#12398;&#35222;&#32884;&#29575;&#12392;&#12375;&#12390;&#20197;&#19979;&#12398;&#12424;&#12358;&#12395;&#12377;&#12428;&#12400;&#12424;&#12356;</span>
+x <span style="color: #60aa00;">&lt;-</span> sample(0:1, n, replace = <span style="color: #00aa80;">TRUE</span>, prob = c(1-mu1,mu1))
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> n &#20154;&#20998;&#12398;&#35222;&#32884;&#32080;&#26524; {1,0} &#12398;&#12505;&#12463;&#12488;&#12523;&#12364;&#24471;&#12425;&#12428;&#12427;</span>
+</pre>
 </div>
 <ul>
 <li>ヒント : \(X\) は正規分布には従わないが，
@@ -985,17 +950,16 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgafca647">
-<h2 id="orgafca647">分散の検定</h2>
-<div class="outline-text-2" id="text-orgafca647">
+<section id="slide-org07afe36">
+<h2 id="org07afe36">分散の検定</h2>
+<div class="outline-text-2" id="text-org07afe36">
 </div>
 </section>
-<section id="slide-org09b260b">
-<h3 id="org09b260b">分散の検定</h3>
+<section id="slide-org41ebe3b">
+<h3 id="org41ebe3b">分散の検定</h3>
 <ul>
 <li><p>
 両側検定
@@ -1023,10 +987,9 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb546a4d">
-<h3 id="orgb546a4d">考え方</h3>
+<section id="slide-orgf960726">
+<h3 id="orgf960726">考え方</h3>
 <ul>
 <li>不偏分散 \(s^2\) が
 真の分散 \(\sigma_{0}^{2}\) とどの程度離れているかを検証</li>
@@ -1048,7 +1011,6 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1072,23 +1034,22 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 </ul>
 
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
 <li>\(\chi^{2}\) 分布</li>
 
 </ul>
-<div class="leftcol" id="orga9f8353">
+<div class="leftcol" id="org4b3363c">
 
-<div id="org6e7d190" class="figure">
+<div id="org3471799" class="figure">
 <p><img src="figs/pdf_chisq.png" alt="pdf_chisq.png" width="100%" />
 </p>
 <p><span class="figure-number">Figure 5: </span>\(\chi^{2}\) 分布 (自由度\(3\))</p>
 </div>
 
 </div>
-<div class="rightcol" id="orgf3bfeaa">
+<div class="rightcol" id="org44fa871">
 <blockquote>
 <ul>
 <li>見本空間 : \([0,\infty)\)</li>
@@ -1114,10 +1075,9 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 </blockquote>
 
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3712e04">
-<h3 id="org3712e04">棄却域を用いる場合</h3>
+<section id="slide-org003c8c5">
+<h3 id="org003c8c5">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
@@ -1156,7 +1116,6 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1175,10 +1134,9 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4653783">
-<h3 id="org4653783">\(p\) 値を用いる場合</h3>
+<section id="slide-org0224860">
+<h3 id="org0224860">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 \(p\) 値を計算 ( \(f(x)\): 自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
@@ -1195,10 +1153,9 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 <li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org102c0d8">
-<h3 id="org102c0d8">片側検定</h3>
+<section id="slide-org3fe3183">
+<h3 id="org3fe3183">片側検定</h3>
 <ul>
 <li>対立仮説が片側 (右側対立仮説) の場合
 <ul>
@@ -1219,10 +1176,9 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 <li>左側対立仮説 \(H_1:\sigma^2 < \sigma_0^2\) も以下の議論は同様</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org03b1cda">
-<h3 id="org03b1cda">棄却域を用いる場合</h3>
+<section id="slide-org981c7d4">
+<h3 id="org981c7d4">棄却域を用いる場合</h3>
 <ul>
 <li>自由度 \(n{-}1\) の \(\chi^2\) 分布の \(1{-}\alpha\) 分位点 :
 \(\chi^2_{1{-}\alpha}(n{-}1)\)</li>
@@ -1239,10 +1195,9 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga4484d5">
-<h3 id="orga4484d5">\(p\) 値を用いる場合</h3>
+<section id="slide-orgc617898">
+<h3 id="orgc617898">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 \(p\) 値を計算 ( \(f(x)\):自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
@@ -1259,10 +1214,9 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 <li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfd5fbb9">
-<h3 id="orgfd5fbb9">\(\chi^2\) 検定の計算</h3>
+<section id="slide-orgf4b3467">
+<h3 id="orgf4b3467">\(\chi^2\) 検定の計算</h3>
 <ul>
 <li>関数 <code>chisq.test</code> はあるが目的が違うので注意 (適合度検定・独立性検定)</li>
 <li><p>
@@ -1270,26 +1224,24 @@ x &lt;- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >x # 観測データ
-sigma0 # 帰無仮説で用いる標準偏差
-n &lt;- length(x) # データ数
-chi2 &lt;- (n-1)*var(x)/sigma0^2 # 検定統計量を計算する
-p0 &lt;- pchisq(chi2, df=n-1)
-2*min(p0, 1-p0) # p値 (両側検定の場合)
-</code></pre>
+<pre class="src src-R">x <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35251;&#28204;&#12487;&#12540;&#12479;</span>
+sigma0 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24112;&#28961;&#20206;&#35500;&#12391;&#29992;&#12356;&#12427;&#27161;&#28310;&#20559;&#24046;</span>
+n <span style="color: #60aa00;">&lt;-</span> length(x) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#25968;</span>
+chi2 <span style="color: #60aa00;">&lt;-</span> (n-1)*var(x)/sigma0^2 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26908;&#23450;&#32113;&#35336;&#37327;&#12434;&#35336;&#31639;&#12377;&#12427;</span>
+p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
+2*min(p0, 1-p0) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">p&#20516; (&#20001;&#20596;&#26908;&#23450;&#12398;&#22580;&#21512;)</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org1af7ff3" data-background="#fef4f4">
-<h2 id="org1af7ff3">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org3e8ea72" data-background="#fef4f4">
+<h2 id="org3e8ea72">実習</h2>
 </section>
-<section id="slide-org81381a7" data-background="#fef4f4">
-<h3 id="org81381a7">練習問題</h3>
+<section id="slide-org8386eed" data-background="#fef4f4">
+<h3 id="org8386eed">練習問題</h3>
 <ul>
 <li><p>
 東京の気象データの気温の項目を用いて，
@@ -1298,27 +1250,26 @@ p0 &lt;- pchisq(chi2, df=n-1)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >tw_data &lt;- read_csv("data/tokyo_weather.csv") 
-#' 月毎の気温の分散は以下で計算できる
+<pre class="src src-R">tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: #d08928;">"data/tokyo_weather.csv"</span>) 
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#26376;&#27598;&#12398;&#27671;&#28201;&#12398;&#20998;&#25955;&#12399;&#20197;&#19979;&#12391;&#35336;&#31639;&#12391;&#12365;&#12427;</span>
 tw_data |&gt; group_by(month) |&gt; summarize(var(temp))
-#' この平均値は以下のように計算される
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#12371;&#12398;&#24179;&#22343;&#20516;&#12399;&#20197;&#19979;&#12398;&#12424;&#12358;&#12395;&#35336;&#31639;&#12373;&#12428;&#12427;</span>
 tw_data |&gt; group_by(month) |&gt;
   summarize(var(temp)) |&gt; pull(`var(temp)`) |&gt; mean()
-</code></pre>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org19c5ac9">
-<h2 id="org19c5ac9">2標本正規母集団</h2>
-<div class="outline-text-2" id="text-org19c5ac9">
+<section id="slide-orgf4e11d8">
+<h2 id="orgf4e11d8">2標本正規母集団</h2>
+<div class="outline-text-2" id="text-orgf4e11d8">
 </div>
 </section>
-<section id="slide-org68198dd">
-<h3 id="org68198dd">2標本データに対する仮定</h3>
+<section id="slide-org4ca3dd4">
+<h3 id="org4ca3dd4">2標本データに対する仮定</h3>
 <ul>
 <li><p>
 2種類の観測データ
@@ -1345,17 +1296,16 @@ tw_data |&gt; group_by(month) |&gt;
 <li>両者の平均や分散が一致するかどうかを検定する</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org7ac229b">
-<h2 id="org7ac229b">平均の差の検定</h2>
-<div class="outline-text-2" id="text-org7ac229b">
+<section id="slide-org7d09022">
+<h2 id="org7d09022">平均の差の検定</h2>
+<div class="outline-text-2" id="text-org7d09022">
 </div>
 </section>
-<section id="slide-org8d415ed">
-<h3 id="org8d415ed">平均の差の検定</h3>
+<section id="slide-org33d094b">
+<h3 id="org33d094b">平均の差の検定</h3>
 <ul>
 <li><p>
 両側検定
@@ -1393,10 +1343,9 @@ tw_data |&gt; group_by(month) |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3e00ba7">
-<h3 id="org3e00ba7">考え方</h3>
+<section id="slide-orgd40fe55">
+<h3 id="orgd40fe55">考え方</h3>
 <ul>
 <li><p>
 \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_m\) の不偏分散 :
@@ -1422,10 +1371,9 @@ tw_data |&gt; group_by(month) |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org0eca74d">
-<h3 id="org0eca74d">Welchの近似法</h3>
+<section id="slide-org74047ba">
+<h3 id="org74047ba">Welchの近似法</h3>
 <ul>
 <li><b>詳細は資料を参照</b></li>
 <li>確率変数 \(s_1^2/m+s_2^2/n\) の分布を \(c\chi^2_\nu\) の分布で近似</li>
@@ -1450,7 +1398,6 @@ tw_data |&gt; group_by(month) |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1475,7 +1422,6 @@ tw_data |&gt; group_by(month) |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1510,7 +1456,6 @@ tw_data |&gt; group_by(month) |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1538,10 +1483,9 @@ tw_data |&gt; group_by(month) |&gt;
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org8ed934f">
-<h3 id="org8ed934f">棄却域を用いる場合</h3>
+<section id="slide-orge4956f7">
+<h3 id="orge4956f7">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
@@ -1564,7 +1508,6 @@ tw_data |&gt; group_by(month) |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1586,10 +1529,9 @@ tw_data |&gt; group_by(month) |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org313ac09">
-<h3 id="org313ac09">対応がある場合の平均の差の検定</h3>
+<section id="slide-orgec91e49">
+<h3 id="orgec91e49">対応がある場合の平均の差の検定</h3>
 <ul>
 <li>対応がある観測データの平均の差の検定では
 2種類のデータ間の自然な対応を考慮することがある</li>
@@ -1613,56 +1555,52 @@ tw_data |&gt; group_by(month) |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org807db4f">
-<h3 id="org807db4f">\(t\) 検定の計算</h3>
+<section id="slide-org9426c63">
+<h3 id="org9426c63">\(t\) 検定の計算</h3>
 <ul>
 <li><p>
 使い方
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >t.test(x, y = NULL, # 2標本の場合
-       alternative = c("two.sided", "less", "greater"),
-       mu = 0, paired = FALSE, var.equal = FALSE,
+<pre class="src src-R">t.test(x, y = <span style="color: #00aa80;">NULL</span>, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">2&#27161;&#26412;&#12398;&#22580;&#21512;</span>
+       alternative = c(<span style="color: #d08928;">"two.sided"</span>, <span style="color: #d08928;">"less"</span>, <span style="color: #d08928;">"greater"</span>),
+       mu = 0, paired = <span style="color: #00aa80;">FALSE</span>, var.equal = <span style="color: #00aa80;">FALSE</span>,
        conf.level = 0.95, ...)
-#' x,y: ベクトル．2標本の場合はyを指定する
-#' alternative: 対立仮説 (両側，左片側，右片側)
-#' mu: 検定対象の平均値
-#' paired: 対応ありの場合は TRUE
-#' var.equal: 2標本の分散を同じとして良い場合は TRUE
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x,y: &#12505;&#12463;&#12488;&#12523;&#65294;2&#27161;&#26412;&#12398;&#22580;&#21512;&#12399;y&#12434;&#25351;&#23450;&#12377;&#12427;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> alternative: &#23550;&#31435;&#20206;&#35500; (&#20001;&#20596;&#65292;&#24038;&#29255;&#20596;&#65292;&#21491;&#29255;&#20596;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> mu: &#26908;&#23450;&#23550;&#35937;&#12398;&#24179;&#22343;&#20516;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> paired: &#23550;&#24540;&#12354;&#12426;&#12398;&#22580;&#21512;&#12399; TRUE</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> var.equal: 2&#27161;&#26412;&#12398;&#20998;&#25955;&#12434;&#21516;&#12376;&#12392;&#12375;&#12390;&#33391;&#12356;&#22580;&#21512;&#12399; TRUE</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org8f53323" data-background="#fef4f4">
-<h2 id="org8f53323">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orgaf329fb" data-background="#fef4f4">
+<h2 id="orgaf329fb">実習</h2>
 </section>
-<section id="slide-org6381bda" data-background="#fef4f4">
-<h3 id="org6381bda">練習問題</h3>
+<section id="slide-org47d5d6d" data-background="#fef4f4">
+<h3 id="org47d5d6d">練習問題</h3>
 <ul>
 <li>東京の気象データの気温の項目を用いて，
 7月と8月の気温の平均が同じかどうか検定しなさい．</li>
 <li>他の項目や自身の集めたデータでも試してみよ．</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgd31c277">
-<h2 id="orgd31c277">分散の比の検定</h2>
-<div class="outline-text-2" id="text-orgd31c277">
+<section id="slide-orga56ebd0">
+<h2 id="orga56ebd0">分散の比の検定</h2>
+<div class="outline-text-2" id="text-orga56ebd0">
 </div>
 </section>
-<section id="slide-org26f05b3">
-<h3 id="org26f05b3">分散の比の検定</h3>
+<section id="slide-org83b7dc5">
+<h3 id="org83b7dc5">分散の比の検定</h3>
 <ul>
 <li><p>
 両側検定
@@ -1688,10 +1626,9 @@ tw_data |&gt; group_by(month) |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org54f8382">
-<h3 id="org54f8382">考え方</h3>
+<section id="slide-org707392b">
+<h3 id="org707392b">考え方</h3>
 <ul>
 <li>\(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
 の不偏分散: \(s_1^2\), \(s_2^2\)
@@ -1726,23 +1663,22 @@ tw_data |&gt; group_by(month) |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
 <li>\(F\) 分布</li>
 
 </ul>
-<div class="leftcol" id="orgcb7566d">
+<div class="leftcol" id="orgd333bf2">
 
-<div id="orge415694" class="figure">
+<div id="org53b54d4" class="figure">
 <p><img src="figs/pdf_f.png" alt="pdf_f.png" width="100%" />
 </p>
 <p><span class="figure-number">Figure 6: </span>\(F\) 分布 (自由度\(3,5\))</p>
 </div>
 
 </div>
-<div class="rightcol" id="org2a32227">
+<div class="rightcol" id="orgc97d9e4">
 <blockquote>
 <ul>
 <li>標本空間: \([0,\infty)\)</li>
@@ -1768,10 +1704,9 @@ tw_data |&gt; group_by(month) |&gt;
 </blockquote>
 
 </div>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org6c3cb52">
-<h3 id="org6c3cb52">棄却域を用いる場合</h3>
+<section id="slide-org3d2cd95">
+<h3 id="org3d2cd95">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
@@ -1809,7 +1744,6 @@ tw_data |&gt; group_by(month) |&gt;
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -1832,49 +1766,45 @@ tw_data |&gt; group_by(month) |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgba71315">
-<h3 id="orgba71315">\(F\) 検定の計算</h3>
+<section id="slide-orgef57975">
+<h3 id="orgef57975">\(F\) 検定の計算</h3>
 <ul>
 <li><p>
 使い方
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >var.test(x, y, ratio = 1,
-         alternative = c("two.sided", "less", "greater"),
+<pre class="src src-R">var.test(x, y, ratio = 1,
+         alternative = c(<span style="color: #d08928;">"two.sided"</span>, <span style="color: #d08928;">"less"</span>, <span style="color: #d08928;">"greater"</span>),
          conf.level = 0.95, ...)
-#' x,y: ベクトル． 
-#' ratio: 検定する比率(1は同じかどうか)
-#' alternative: 対立仮説 (両側，左片側，右片側)
-#' conf.level: 信頼区間の水準 (点推定・区間推定も行ってくれる)
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x,y: &#12505;&#12463;&#12488;&#12523;&#65294; </span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ratio: &#26908;&#23450;&#12377;&#12427;&#27604;&#29575;(1&#12399;&#21516;&#12376;&#12363;&#12393;&#12358;&#12363;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> alternative: &#23550;&#31435;&#20206;&#35500; (&#20001;&#20596;&#65292;&#24038;&#29255;&#20596;&#65292;&#21491;&#29255;&#20596;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> conf.level: &#20449;&#38972;&#21306;&#38291;&#12398;&#27700;&#28310; (&#28857;&#25512;&#23450;&#12539;&#21306;&#38291;&#25512;&#23450;&#12418;&#34892;&#12387;&#12390;&#12367;&#12428;&#12427;)</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org56628e4" data-background="#fef4f4">
-<h2 id="org56628e4">演習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org06df40d" data-background="#fef4f4">
+<h2 id="org06df40d">演習</h2>
 </section>
-<section id="slide-org6991e2c" data-background="#fef4f4">
-<h3 id="org6991e2c">練習問題</h3>
+<section id="slide-org7d7c15b" data-background="#fef4f4">
+<h3 id="org7d7c15b">練習問題</h3>
 <ul>
 <li>東京の気象データの気温の項目を用いて，
 3月と6月の気温の分散が同じかどうか検定しなさい．</li>
 <li>他の項目や自身の集めたデータでも試してみよ．</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org355fd84">
-<h2 id="org355fd84">次回の予定</h2>
+<section id="slide-org3c31216">
+<h2 id="org3c31216">次回の予定</h2>
 <ul>
 <li>分散分析とは</li>
 <li>一元配置
@@ -1891,14 +1821,16 @@ tw_data |&gt; group_by(month) |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script src="./reveal.js/plugin/menu/menu.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
@@ -1919,16 +1851,15 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
+showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
+spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
-{ src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
-{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
+]
 
 });
 </script>

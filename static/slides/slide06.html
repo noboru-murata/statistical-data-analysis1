@@ -11,22 +11,21 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
-
-<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
-
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
 
-<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
-<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-state="no-toc-progress">
+<section id="sec-title-slide">
 <!-- This is an HTML template for the title slide. -->
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
@@ -46,25 +45,24 @@
 
 </section>
 <section>
-<section id="slide-org6959853">
-<h2 id="org6959853">講義の内容</h2>
+<section id="slide-org6bece12">
+<h2 id="org6bece12">講義の内容</h2>
 <ul>
 <li>計算機による数値実験</li>
 <li>乱数とは</li>
 <li>乱数を用いた数値実験</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org2d8b58c">
-<h2 id="org2d8b58c">計算機による数値実験</h2>
-<div class="outline-text-2" id="text-org2d8b58c">
+<section id="slide-org612d65a">
+<h2 id="org612d65a">計算機による数値実験</h2>
+<div class="outline-text-2" id="text-org612d65a">
 </div>
 </section>
-<section id="slide-org5199393">
-<h3 id="org5199393">データ解析の枠組</h3>
+<section id="slide-orgbc5ba5d">
+<h3 id="orgbc5ba5d">データ解析の枠組</h3>
 <ul>
 <li>分析の目的
 <ul>
@@ -89,10 +87,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4df637c">
-<h3 id="org4df637c">データのもつべき性質</h3>
+<section id="slide-org6fd591c">
+<h3 id="org6fd591c">データのもつべき性質</h3>
 <ul>
 <li>偏った一部のデータから全体の性質の推測は困難
 <ul>
@@ -118,10 +115,9 @@
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd1cb56e">
-<h3 id="orgd1cb56e">理論解析と数値実験</h3>
+<section id="slide-org63da93b">
+<h3 id="org63da93b">理論解析と数値実験</h3>
 <ul>
 <li><p>
 <b>データ収集の問題</b> 
@@ -147,17 +143,16 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org486fc98">
-<h2 id="org486fc98">乱数とは</h2>
-<div class="outline-text-2" id="text-org486fc98">
+<section id="slide-orgc761898">
+<h2 id="orgc761898">乱数とは</h2>
+<div class="outline-text-2" id="text-orgc761898">
 </div>
 </section>
-<section id="slide-org9731eee">
-<h3 id="org9731eee">擬似乱数</h3>
+<section id="slide-org061c059">
+<h3 id="org061c059">擬似乱数</h3>
 <ul>
 <li>コンピューターで生成された数列
 <ul>
@@ -175,10 +170,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org016e739">
-<h3 id="org016e739">基本的な乱数</h3>
+<section id="slide-org8aa7150">
+<h3 id="org8aa7150">基本的な乱数</h3>
 <ul>
 <li><b>ランダムサンプリング</b> (無作為抽出)
 <ul>
@@ -200,10 +194,9 @@
 <li><i><span style="color:orange;">これ以外にも種々の乱数が存在</span></i></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3df3c30">
-<h3 id="org3df3c30">乱数を発生する関数</h3>
+<section id="slide-orga6f367b">
+<h3 id="orga6f367b">乱数を発生する関数</h3>
 <ul>
 <li>Rには様々な確率分布に従う乱数が実装されている
 <ul>
@@ -215,25 +208,24 @@
 <li>これ以外は次回以降で取り上げる</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org84b09bd">
-<h3 id="org84b09bd">関数の利用例</h3>
+<section id="slide-org94f635d">
+<h3 id="org94f635d">関数の利用例</h3>
 <ul>
 <li><p>
 <span style="color:green;">関数 <code>sample()</code> の使い方</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 関数 sample() の使い方
-x &lt;- 1:10 # サンプリング対象の集合をベクトルとして定義
-set.seed(123) # 乱数のシード値(任意に決めてよい)を指定
-sample(x, 5)  # xから5つの要素を重複なしでランダムに抽出
-sample(x, length(x)) # xの要素のランダムな並べ替えとなる
-sample(x, 5, replace=TRUE) # xから5つの要素を重複ありでランダムに抽出
-sample(1:6, 10, replace=TRUE) # サイコロを10回振る実験の再現
-sample(1:6, 10, prob=6:1, replace=TRUE) # 出る目の確率に偏りがある場合
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; sample() &#12398;&#20351;&#12356;&#26041;</span>
+x <span style="color: #60aa00;">&lt;-</span> 1:10 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12469;&#12531;&#12503;&#12522;&#12531;&#12464;&#23550;&#35937;&#12398;&#38598;&#21512;&#12434;&#12505;&#12463;&#12488;&#12523;&#12392;&#12375;&#12390;&#23450;&#32681;</span>
+set.seed(123) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20081;&#25968;&#12398;&#12471;&#12540;&#12489;&#20516;(&#20219;&#24847;&#12395;&#27770;&#12417;&#12390;&#12424;&#12356;)&#12434;&#25351;&#23450;</span>
+sample(x, 5)  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">x&#12363;&#12425;5&#12388;&#12398;&#35201;&#32032;&#12434;&#37325;&#35079;&#12394;&#12375;&#12391;&#12521;&#12531;&#12480;&#12512;&#12395;&#25277;&#20986;</span>
+sample(x, length(x)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">x&#12398;&#35201;&#32032;&#12398;&#12521;&#12531;&#12480;&#12512;&#12394;&#20006;&#12409;&#26367;&#12360;&#12392;&#12394;&#12427;</span>
+sample(x, 5, replace=<span style="color: #00aa80;">TRUE</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">x&#12363;&#12425;5&#12388;&#12398;&#35201;&#32032;&#12434;&#37325;&#35079;&#12354;&#12426;&#12391;&#12521;&#12531;&#12480;&#12512;&#12395;&#25277;&#20986;</span>
+sample(1:6, 10, replace=<span style="color: #00aa80;">TRUE</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12469;&#12452;&#12467;&#12525;&#12434;10&#22238;&#25391;&#12427;&#23455;&#39443;&#12398;&#20877;&#29694;</span>
+sample(1:6, 10, prob=6:1, replace=<span style="color: #00aa80;">TRUE</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20986;&#12427;&#30446;&#12398;&#30906;&#29575;&#12395;&#20559;&#12426;&#12364;&#12354;&#12427;&#22580;&#21512;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -246,7 +238,6 @@ sample(1:6, 10, prob=6:1, replace=TRUE) # 出る目の確率に偏りがある�
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -255,13 +246,13 @@ sample(1:6, 10, prob=6:1, replace=TRUE) # 出る目の確率に偏りがある�
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 関数 rbinom() の使い方
-rbinom(10, size=4, prob=0.5) # 確率0.5に対する次数4の二項乱数を10個発生
-rbinom(20, size=4, prob=0.2) # 個数を20, 確率を0.2に変更
-#' 関数 runif() の使い方
-runif(5, min=-1, max=2) # 区間(-1,2)上の一様乱数を5個発生
-runif(5) # 指定しない場合は区間(0,1)が既定値
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; rbinom() &#12398;&#20351;&#12356;&#26041;</span>
+rbinom(10, size=4, prob=0.5) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#30906;&#29575;0.5&#12395;&#23550;&#12377;&#12427;&#27425;&#25968;4&#12398;&#20108;&#38917;&#20081;&#25968;&#12434;10&#20491;&#30330;&#29983;</span>
+rbinom(20, size=4, prob=0.2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20491;&#25968;&#12434;20, &#30906;&#29575;&#12434;0.2&#12395;&#22793;&#26356;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; runif() &#12398;&#20351;&#12356;&#26041;</span>
+runif(5, min=-1, max=2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21306;&#38291;(-1,2)&#19978;&#12398;&#19968;&#27096;&#20081;&#25968;&#12434;5&#20491;&#30330;&#29983;</span>
+runif(5) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25351;&#23450;&#12375;&#12394;&#12356;&#22580;&#21512;&#12399;&#21306;&#38291;(0,1)&#12364;&#26082;&#23450;&#20516;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -273,7 +264,6 @@ runif(5) # 指定しない場合は区間(0,1)が既定値
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -282,14 +272,14 @@ runif(5) # 指定しない場合は区間(0,1)が既定値
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 関数 set.seed() の使い方
-set.seed(1) # 乱数のシード値をseed=1で指定
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; set.seed() &#12398;&#20351;&#12356;&#26041;</span>
+set.seed(1) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20081;&#25968;&#12398;&#12471;&#12540;&#12489;&#20516;&#12434;seed=1&#12391;&#25351;&#23450;</span>
 runif(5) 
-set.seed(2) # 乱数のシード値をseed=2で指定
-runif(5)    # seed=1の場合と異なる系列が観測される
-set.seed(1) # 乱数のシード値をseed=1で指定
-runif(5)    # 初めのseed=1の場合と同じ系列が再現される
-</code></pre>
+set.seed(2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20081;&#25968;&#12398;&#12471;&#12540;&#12489;&#20516;&#12434;seed=2&#12391;&#25351;&#23450;</span>
+runif(5)    <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">seed=1&#12398;&#22580;&#21512;&#12392;&#30064;&#12394;&#12427;&#31995;&#21015;&#12364;&#35251;&#28204;&#12373;&#12428;&#12427;</span>
+set.seed(1) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20081;&#25968;&#12398;&#12471;&#12540;&#12489;&#20516;&#12434;seed=1&#12391;&#25351;&#23450;</span>
+runif(5)    <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21021;&#12417;&#12398;seed=1&#12398;&#22580;&#21512;&#12392;&#21516;&#12376;&#31995;&#21015;&#12364;&#20877;&#29694;&#12373;&#12428;&#12427;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -299,17 +289,16 @@ runif(5)    # 初めのseed=1の場合と同じ系列が再現される
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org6537749">
-<h2 id="org6537749">乱数を用いた数値実験</h2>
-<div class="outline-text-2" id="text-org6537749">
+<section id="slide-org746b8c8">
+<h2 id="org746b8c8">乱数を用いた数値実験</h2>
+<div class="outline-text-2" id="text-org746b8c8">
 </div>
 </section>
-<section id="slide-org99dc72f">
-<h3 id="org99dc72f">確率シミュレーション</h3>
+<section id="slide-orgbdc6c92">
+<h3 id="orgbdc6c92">確率シミュレーション</h3>
 <ul>
 <li>確率的現象の理解
 <ul>
@@ -336,10 +325,9 @@ runif(5)    # 初めのseed=1の場合と同じ系列が再現される
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge90eff3">
-<h3 id="orge90eff3">繰り返し実験の関数</h3>
+<section id="slide-orgac9acfe">
+<h3 id="orgac9acfe">繰り返し実験の関数</h3>
 <ul>
 <li>同じ手続きを指定した回数繰り返して評価</li>
 <li><p>
@@ -347,37 +335,36 @@ runif(5)    # 初めのseed=1の場合と同じ系列が再現される
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >replicate(n, expr, simplify = "array")
-#' n: 繰り返し回数 
-#' expr: 評価する手続き(関数を定義) (1回の実験に相当)
-#' simplify: 出力の形式を指定
-</code></pre>
+<pre class="src src-R">replicate(n, expr, simplify = <span style="color: #d08928;">"array"</span>)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> n: &#32368;&#12426;&#36820;&#12375;&#22238;&#25968; </span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> expr: &#35413;&#20385;&#12377;&#12427;&#25163;&#32154;&#12365;(&#38306;&#25968;&#12434;&#23450;&#32681;) (1&#22238;&#12398;&#23455;&#39443;&#12395;&#30456;&#24403;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> simplify: &#20986;&#21147;&#12398;&#24418;&#24335;&#12434;&#25351;&#23450;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3d83a76">
-<h3 id="org3d83a76">数値実験の例</h3>
+<section id="slide-orgdb83cdb">
+<h3 id="orgdb83cdb">数値実験の例</h3>
 <ul>
 <li><p>
 <span style="color:green;">2つのサイコロを振る試行</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 2つのサイコロを振る試行の数値実験
-#' 試行(1回の実験)を行う関数を用意する
-my_trial &lt;- function(){ # この問題では引数は不要
-  dice &lt;- sample(1:6, 2, replace=TRUE) # 2個のサイコロを振る
-  return(dice)
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> 2&#12388;&#12398;&#12469;&#12452;&#12467;&#12525;&#12434;&#25391;&#12427;&#35430;&#34892;&#12398;&#25968;&#20516;&#23455;&#39443;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35430;&#34892;(1&#22238;&#12398;&#23455;&#39443;)&#12434;&#34892;&#12358;&#38306;&#25968;&#12434;&#29992;&#24847;&#12377;&#12427;</span>
+<span style="color: #b77fdb; font-weight: bold;">my_trial</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(){ <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12371;&#12398;&#21839;&#38988;&#12391;&#12399;&#24341;&#25968;&#12399;&#19981;&#35201;</span>
+  dice <span style="color: #60aa00;">&lt;-</span> sample(1:6, 2, replace=<span style="color: #00aa80;">TRUE</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">2&#20491;&#12398;&#12469;&#12452;&#12467;&#12525;&#12434;&#25391;&#12427;</span>
+  <span style="color: #6c9ef8;">return</span>(dice)
 }
-#' 乱数のシード値を指定
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#20081;&#25968;&#12398;&#12471;&#12540;&#12489;&#20516;&#12434;&#25351;&#23450;</span>
 set.seed(20240524)
-#' 確率シミュレーションを実行
-my_data &lt;- replicate(10, # 10回実験
-                     my_trial()) # 実行する関数を指定
-print(my_data) # 実験結果は行列(配列)として保存されている
-</code></pre>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#30906;&#29575;&#12471;&#12511;&#12517;&#12524;&#12540;&#12471;&#12519;&#12531;&#12434;&#23455;&#34892;</span>
+my_data <span style="color: #60aa00;">&lt;-</span> replicate(10, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">10&#22238;&#23455;&#39443;</span>
+                     my_trial()) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#23455;&#34892;&#12377;&#12427;&#38306;&#25968;&#12434;&#25351;&#23450;</span>
+print(my_data) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#23455;&#39443;&#32080;&#26524;&#12399;&#34892;&#21015;(&#37197;&#21015;)&#12392;&#12375;&#12390;&#20445;&#23384;&#12373;&#12428;&#12390;&#12356;&#12427;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -387,16 +374,14 @@ print(my_data) # 実験結果は行列(配列)として保存されている
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orga1dff14" data-background="#fef4f4">
-<h2 id="orga1dff14">演習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org6e93129" data-background="#fef4f4">
+<h2 id="org6e93129">演習</h2>
 </section>
-<section id="slide-orgde387fc" data-background="#fef4f4">
-<h3 id="orgde387fc">練習問題</h3>
+<section id="slide-org19e2ce3" data-background="#fef4f4">
+<h3 id="org19e2ce3">練習問題</h3>
 <ul>
 <li><p>
 以下のようなコイン投げの賭けを考える
@@ -411,17 +396,16 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 </p></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgf3cfbbc">
-<h2 id="orgf3cfbbc">確率シミュレーションの例</h2>
-<div class="outline-text-2" id="text-orgf3cfbbc">
+<section id="slide-orgc5d296f">
+<h2 id="orgc5d296f">確率シミュレーションの例</h2>
+<div class="outline-text-2" id="text-orgc5d296f">
 </div>
 </section>
-<section id="slide-org0588de2">
-<h3 id="org0588de2">Monty Hall 問題</h3>
+<section id="slide-orgd9e8bb1">
+<h3 id="orgd9e8bb1">Monty Hall 問題</h3>
 <ul>
 <li><p>
 問題
@@ -446,10 +430,9 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org77e824a">
-<h3 id="org77e824a">Buffon の針</h3>
+<section id="slide-org6b5763c">
+<h3 id="org6b5763c">Buffon の針</h3>
 <ul>
 <li><p>
 問題
@@ -469,10 +452,9 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgeb658ba">
-<h3 id="orgeb658ba">秘書問題 (最適停止問題)</h3>
+<section id="slide-org45ed0d9">
+<h3 id="org45ed0d9">秘書問題 (最適停止問題)</h3>
 <ul>
 <li><p>
 問題
@@ -498,12 +480,11 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 </blockquote></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgd0d7486">
-<h2 id="orgd0d7486">次回の予定</h2>
+<section id="slide-orgd044c87">
+<h2 id="orgd044c87">次回の予定</h2>
 <ul>
 <li>独立な確率変数の性質</li>
 <li>大数の法則</li>
@@ -511,14 +492,16 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 <li>少数の法則</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script src="./reveal.js/plugin/menu/menu.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
@@ -539,16 +522,15 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
+showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
+spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
-{ src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
-{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
+]
 
 });
 </script>

@@ -11,21 +11,20 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
-
-<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
-
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
 
-<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
-<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-state="no-toc-progress">
+<section id="sec-title-slide">
 <!-- This is an HTML template for the title slide. -->
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
@@ -45,25 +44,24 @@
 
 </section>
 <section>
-<section id="slide-org3abcd9a">
-<h2 id="org3abcd9a">講義概要</h2>
+<section id="slide-orge0f0306">
+<h2 id="orge0f0306">講義概要</h2>
 <ul>
 <li>データフレームの操作</li>
 <li>ファイルの取り扱い</li>
 <li>データの集計</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org96e40eb">
-<h2 id="org96e40eb">データフレームの操作</h2>
-<div class="outline-text-2" id="text-org96e40eb">
+<section id="slide-org768b102">
+<h2 id="org768b102">データフレームの操作</h2>
+<div class="outline-text-2" id="text-org768b102">
 </div>
 </section>
-<section id="slide-org3f525bd">
-<h3 id="org3f525bd">データ構造</h3>
+<section id="slide-org0a64485">
+<h3 id="org0a64485">データ構造</h3>
 <ul>
 <li>Rに用意されている基本的なデータ構造
 <ul>
@@ -80,10 +78,9 @@
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org88f19a4">
-<h3 id="org88f19a4">データフレーム</h3>
+<section id="slide-org4fa4576">
+<h3 id="org4fa4576">データフレーム</h3>
 <ul>
 <li>複数の個体について，いくつかの属性を集計した表
 <ul>
@@ -159,10 +156,9 @@
 <li>(特殊な) <b>行列</b> でもあり <b>リスト</b> でもある</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org5d9013b">
-<h3 id="org5d9013b">tidyverse パッケージ</h3>
+<section id="slide-orgc03c743">
+<h3 id="orgc03c743">tidyverse パッケージ</h3>
 <ul>
 <li>データ操作とグラフィクスの拡張 (再掲)
 <ul>
@@ -179,20 +175,19 @@
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 最初に一度だけ以下のいずれかを実行しておく
-#'  - Package タブから tidyverse をインストール
-#'  - コンソール上で次のコマンドを実行 'install.packages("tidyverse")'
-#' tidyverse パッケージの読み込み
-library(tidyverse)
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#26368;&#21021;&#12395;&#19968;&#24230;&#12384;&#12369;&#20197;&#19979;&#12398;&#12356;&#12378;&#12428;&#12363;&#12434;&#23455;&#34892;&#12375;&#12390;&#12362;&#12367;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;">  - Package &#12479;&#12502;&#12363;&#12425; tidyverse &#12434;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;">  - &#12467;&#12531;&#12477;&#12540;&#12523;&#19978;&#12391;&#27425;&#12398;&#12467;&#12510;&#12531;&#12489;&#12434;&#23455;&#34892; 'install.packages("tidyverse")'</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> tidyverse &#12497;&#12483;&#12465;&#12540;&#12472;&#12398;&#35501;&#12415;&#36796;&#12415;</span>
+<span style="color: #60aa00;">library</span>(tidyverse)
+</pre>
 </div></li>
 <li>データフレームの拡張である <code>tibble</code> を利用</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge6f507c">
-<h3 id="orge6f507c">データ例</h3>
+<section id="slide-org1223eab">
+<h3 id="org1223eab">データ例</h3>
 <ul>
 <li><p>
 <b><code>datasets::airquality</code></b>
@@ -227,7 +222,6 @@ A data frame with 153 observations on 6 variables.
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -236,22 +230,21 @@ A data frame with 153 observations on 6 variables.
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >aq_tbl &lt;- as_tibble(airquality) # tibble 形式へ変換
-aq_df &lt;- airquality # 比較のため data.frame を別名で定義 (コピー)
-aq_tbl # 最初の10行のみ表示される
-aq_df  # 全てのデータが表示される
-print(aq_tbl, n = 15)  # 最初の15行が表示される．'?tibble::print.tbl' を参照
-print(aq_tbl, n = Inf) # 全て表示
-head(aq_df, n = 10)    # 最初の10行が表示される．tibbleでも同様
-tail(aq_df, n = 10)    # 最後の10行が表示される．tibbleでも同様
-</code></pre>
+<pre class="src src-R">aq_tbl <span style="color: #60aa00;">&lt;-</span> as_tibble(airquality) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">tibble &#24418;&#24335;&#12408;&#22793;&#25563;</span>
+aq_df <span style="color: #60aa00;">&lt;-</span> airquality <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27604;&#36611;&#12398;&#12383;&#12417; data.frame &#12434;&#21029;&#21517;&#12391;&#23450;&#32681; (&#12467;&#12500;&#12540;)</span>
+aq_tbl <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#21021;&#12398;10&#34892;&#12398;&#12415;&#34920;&#31034;&#12373;&#12428;&#12427;</span>
+aq_df  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20840;&#12390;&#12398;&#12487;&#12540;&#12479;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;</span>
+print(aq_tbl, n = 15)  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#21021;&#12398;15&#34892;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;&#65294;'?tibble::print.tbl' &#12434;&#21442;&#29031;</span>
+print(aq_tbl, n = <span style="color: #00aa80;">Inf</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20840;&#12390;&#34920;&#31034;</span>
+head(aq_df, n = 10)    <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#21021;&#12398;10&#34892;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;&#65294;tibble&#12391;&#12418;&#21516;&#27096;</span>
+tail(aq_df, n = 10)    <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#24460;&#12398;10&#34892;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;&#65294;tibble&#12391;&#12418;&#21516;&#27096;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org68b489a">
-<h3 id="org68b489a">項目の抽出</h3>
+<section id="slide-orgb766a86">
+<h3 id="orgb766a86">項目の抽出</h3>
 <ul>
 <li><p>
 添字の番号(行と列)を指定
@@ -269,14 +262,14 @@ tail(aq_df, n = 10)    # 最後の10行が表示される．tibbleでも同様
 </ul>
 <div class="org-src-container">
 
-<pre><code class="R" >aq_tbl[1,2] # 1行2列の要素を選択
-aq_tbl[-seq(2, nrow(aq_tbl), by = 2),] # 偶数行を除外
-aq_tbl[,c(TRUE,FALSE,TRUE,TRUE,FALSE,TRUE)] # 1,3,4,6列を選択
-aq_tbl["Ozone"] # Ozone列を選択．aq_tbl[,"Ozone"] でも同様
-aq_tbl[c("Ozone","Wind")] # 複数列の選択も同様
-aq_tbl[["Ozone"]] # リストとして扱い1列を選択するとベクトルになる
-aq_tbl$Ozone      # 同上
-</code></pre>
+<pre class="src src-R">aq_tbl[1,2] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#34892;2&#21015;&#12398;&#35201;&#32032;&#12434;&#36984;&#25246;</span>
+aq_tbl[-seq(2, nrow(aq_tbl), by = 2),] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20598;&#25968;&#34892;&#12434;&#38500;&#22806;</span>
+aq_tbl[,c(<span style="color: #00aa80;">TRUE</span>,<span style="color: #00aa80;">FALSE</span>,<span style="color: #00aa80;">TRUE</span>,<span style="color: #00aa80;">TRUE</span>,<span style="color: #00aa80;">FALSE</span>,<span style="color: #00aa80;">TRUE</span>)] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1,3,4,6&#21015;&#12434;&#36984;&#25246;</span>
+aq_tbl[<span style="color: #d08928;">"Ozone"</span>] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">Ozone&#21015;&#12434;&#36984;&#25246;&#65294;aq_tbl[,"Ozone"] &#12391;&#12418;&#21516;&#27096;</span>
+aq_tbl[c(<span style="color: #d08928;">"Ozone"</span>,<span style="color: #d08928;">"Wind"</span>)] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35079;&#25968;&#21015;&#12398;&#36984;&#25246;&#12418;&#21516;&#27096;</span>
+aq_tbl[[<span style="color: #d08928;">"Ozone"</span>]] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12522;&#12473;&#12488;&#12392;&#12375;&#12390;&#25201;&#12356;1&#21015;&#12434;&#36984;&#25246;&#12377;&#12427;&#12392;&#12505;&#12463;&#12488;&#12523;&#12395;&#12394;&#12427;</span>
+aq_tbl$Ozone      <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
+</pre>
 </div></li>
 <li><b>欠損値 <code>NA</code></b> の扱いは状況依存なので注意
 <ul>
@@ -285,97 +278,94 @@ aq_tbl$Ozone      # 同上
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2270aa2">
-<h3 id="org2270aa2">行の選択 (素朴な方法)</h3>
+<section id="slide-org0a39ec8">
+<h3 id="org0a39ec8">行の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 行番号による指定
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 行番号のベクトルで指定して抽出
-aq_tbl[20:30,] # 20-30行を抽出
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#34892;&#30058;&#21495;&#12398;&#12505;&#12463;&#12488;&#12523;&#12391;&#25351;&#23450;&#12375;&#12390;&#25277;&#20986;</span>
+aq_tbl[20:30,] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">20-30&#34892;&#12434;&#25277;&#20986;</span>
+</pre>
 </div></li>
 <li><p>
 条件の指定
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 条件の指定の仕方
-aq_tbl[1:15,]$Ozone &gt; 100 # 条件に合致する行はTRUE (NAは欠損値)
-aq_tbl[1:15,]$Ozone &gt; 100 &amp; aq_tbl[1:15,]$Wind &lt;= 5 # 条件のAND
-with(aq_tbl[1:15,], Ozone &gt; 100 &amp; Wind &lt;= 5) # 上と同じ(短い書き方)
-with(aq_tbl[1:60,], Ozone &gt; 100 | Wind &lt;= 5) # 条件のOR
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#26465;&#20214;&#12398;&#25351;&#23450;&#12398;&#20181;&#26041;</span>
+aq_tbl[1:15,]$Ozone &gt; 100 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26465;&#20214;&#12395;&#21512;&#33268;&#12377;&#12427;&#34892;&#12399;TRUE (NA&#12399;&#27424;&#25613;&#20516;)</span>
+aq_tbl[1:15,]$Ozone &gt; 100 &amp; aq_tbl[1:15,]$Wind &lt;= 5 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26465;&#20214;&#12398;AND</span>
+with(aq_tbl[1:15,], Ozone &gt; 100 &amp; Wind &lt;= 5) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#12376;(&#30701;&#12356;&#26360;&#12365;&#26041;)</span>
+with(aq_tbl[1:60,], Ozone &gt; 100 | Wind &lt;= 5) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26465;&#20214;&#12398;OR</span>
+</pre>
 </div></li>
 <li><p>
 条件に合致する行の抽出
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 関数 which() でTRUEとなる行番号を抽出して指定
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; which() &#12391;TRUE&#12392;&#12394;&#12427;&#34892;&#30058;&#21495;&#12434;&#25277;&#20986;&#12375;&#12390;&#25351;&#23450;</span>
 which(with(aq_tbl, Ozone&gt;100 &amp; Wind&lt;=5)) 
 aq_tbl[which(with(aq_tbl, Ozone&gt;100 &amp; Wind&lt;=5)), ] 
-</code></pre>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgad54b6e">
-<h3 id="orgad54b6e">列の選択 (素朴な方法)</h3>
+<section id="slide-org573ec50">
+<h3 id="org573ec50">列の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 列番号による指定
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 列番号のベクトルで指定して抽出
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#21015;&#30058;&#21495;&#12398;&#12505;&#12463;&#12488;&#12523;&#12391;&#25351;&#23450;&#12375;&#12390;&#25277;&#20986;</span>
 aq_tbl[which(with(aq_tbl, Ozone&gt;100 &amp; Wind &lt;= 5)), c(1,5,6)] 
-</code></pre>
+</pre>
 </div></li>
 <li><p>
 列名による指定
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 複数の列の場合
-aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)), c("Month","Day")] 
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35079;&#25968;&#12398;&#21015;&#12398;&#22580;&#21512;</span>
+aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)), c(<span style="color: #d08928;">"Month"</span>,<span style="color: #d08928;">"Day"</span>)] 
+</pre>
 </div></li>
 <li><p>
 列名による指定 (1つの場合)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 1つの列の場合はリストの操作として取り出せるが，ベクトルとなることに注意
-aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),]$Month  # ベクトル
-aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),][["Month"]] # 同上
-aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),"Month"] # データフレーム
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> 1&#12388;&#12398;&#21015;&#12398;&#22580;&#21512;&#12399;&#12522;&#12473;&#12488;&#12398;&#25805;&#20316;&#12392;&#12375;&#12390;&#21462;&#12426;&#20986;&#12379;&#12427;&#12364;&#65292;&#12505;&#12463;&#12488;&#12523;&#12392;&#12394;&#12427;&#12371;&#12392;&#12395;&#27880;&#24847;</span>
+aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),]$Month  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12505;&#12463;&#12488;&#12523;</span>
+aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),][[<span style="color: #d08928;">"Month"</span>]] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
+aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color: #d08928;">"Month"</span>] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org86b4434">
-<h3 id="org86b4434">行の選択</h3>
+<section id="slide-orgdf54bb5">
+<h3 id="orgdf54bb5">行の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::filter()</code> : 条件を指定して行を選択
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >filter(.data, ..., .by = NULL, .preserve = FALSE)
-#' .data: データフレーム 
-#' ...: 行に関する条件
-#' .by: グループ化を指定(実験的な実装)
-#' .preserve: グループ化を維持するか指定(実験的な実装)
-#' 詳細は '?dplyr::filter' を参照
-</code></pre>
+<pre class="src src-R">filter(.data, ..., .by = <span style="color: #00aa80;">NULL</span>, .preserve = <span style="color: #00aa80;">FALSE</span>)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> .data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512; </span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#34892;&#12395;&#38306;&#12377;&#12427;&#26465;&#20214;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> .by: &#12464;&#12523;&#12540;&#12503;&#21270;&#12434;&#25351;&#23450;(&#23455;&#39443;&#30340;&#12394;&#23455;&#35013;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> .preserve: &#12464;&#12523;&#12540;&#12503;&#21270;&#12434;&#32173;&#25345;&#12377;&#12427;&#12363;&#25351;&#23450;(&#23455;&#39443;&#30340;&#12394;&#23455;&#35013;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?dplyr::filter' &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 <li>行に関する条件指定には以下を用いることができる
 <ul>
@@ -386,21 +376,20 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),"Month"] # デー�
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgb15f9db">
-<h3 id="orgb15f9db">列の選択</h3>
+<section id="slide-orgaf956cf">
+<h3 id="orgaf956cf">列の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::select()</code> : 条件を指定して列を選択
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >select(.data, ...)
-#' .data: データフレーム 
-#' ...: 列に関する条件(列の番号，名前，名前に関する条件式を利用する)
-#' 詳細は '?dplyr::select' を参照
-</code></pre>
+<pre class="src src-R">select(.data, ...)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> .data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512; </span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#21015;&#12395;&#38306;&#12377;&#12427;&#26465;&#20214;(&#21015;&#12398;&#30058;&#21495;&#65292;&#21517;&#21069;&#65292;&#21517;&#21069;&#12395;&#38306;&#12377;&#12427;&#26465;&#20214;&#24335;&#12434;&#21033;&#29992;&#12377;&#12427;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?dplyr::select' &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 <li>条件指定には例えば以下のような方法がある
 <ul>
@@ -412,10 +401,9 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),"Month"] # デー�
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orge3b66bf">
-<h3 id="orge3b66bf">パイプ演算子</h3>
+<section id="slide-orga90058d">
+<h3 id="orga90058d">パイプ演算子</h3>
 <ul>
 <li>処理を順次結合する演算子 (いくつか定義がある)
 <ul>
@@ -428,27 +416,25 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),"Month"] # デー�
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 素朴の方法の例は以下のように書ける
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32032;&#26420;&#12398;&#26041;&#27861;&#12398;&#20363;&#12399;&#20197;&#19979;&#12398;&#12424;&#12358;&#12395;&#26360;&#12369;&#12427;</span>
 aq_tbl |&gt; filter(Ozone &gt; 100 &amp; Wind &lt;= 5) |&gt; select(1,5,6)
 aq_tbl |&gt; filter(Ozone &gt; 100 &amp; Wind &lt;= 5) |&gt; select(Month,Day)
-#' Ozoneに欠測(NA)がなく, かつDayが5か10のデータのWindからDayまでの列を抽出
-aq_tbl |&gt; filter(!is.na(Ozone) &amp; Day %in% c(5,10)) |&gt; select(Wind:Day)
-#' Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> Ozone&#12395;&#27424;&#28204;(NA)&#12364;&#12394;&#12367;, &#12363;&#12388;Day&#12364;5&#12363;10&#12398;&#12487;&#12540;&#12479;&#12398;Wind&#12363;&#12425;Day&#12414;&#12391;&#12398;&#21015;&#12434;&#25277;&#20986;</span>
+aq_tbl |&gt; filter(!is.na(Ozone) &amp; Day <span style="color: #60aa00;">%in%</span> c(5,10)) |&gt; select(Wind:Day)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> Ozone&#12364;120&#20197;&#19978;&#12363;&#65292;&#12414;&#12383;&#12399;Wind&#12364;3&#20197;&#19979;&#12398;Temp&#20197;&#22806;&#12398;&#21015;&#12434;&#25277;&#20986;</span>
 aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
-</code></pre>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org13c2106" data-background="#fef4f4">
-<h2 id="org13c2106">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orgb7e2c99" data-background="#fef4f4">
+<h2 id="orgb7e2c99">実習</h2>
 </section>
-<section id="slide-org7853f98" data-background="#fef4f4">
-<h3 id="org7853f98">練習問題</h3>
+<section id="slide-org5cb5cba" data-background="#fef4f4">
+<h3 id="org5cb5cba">練習問題</h3>
 <ul>
 <li><code>datasets::airquality</code> に対して
 以下の条件を満たすデータを取り出しなさい．
@@ -462,17 +448,16 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org4093ea7">
-<h2 id="org4093ea7">ファイルの取り扱い</h2>
-<div class="outline-text-2" id="text-org4093ea7">
+<section id="slide-org3984942">
+<h2 id="org3984942">ファイルの取り扱い</h2>
+<div class="outline-text-2" id="text-org3984942">
 </div>
 </section>
-<section id="slide-orgbdc81cf">
-<h3 id="orgbdc81cf">データファイルの読み書き</h3>
+<section id="slide-org97e0e2c">
+<h3 id="org97e0e2c">データファイルの読み書き</h3>
 <ul>
 <li>実際の解析においては以下の操作が必要
 <ul>
@@ -490,10 +475,9 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 <li>データフレームを対象とした扱いを整理する</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgfbff61a">
-<h3 id="orgfbff61a">作業ディレクトリ</h3>
+<section id="slide-orgd475ccb">
+<h3 id="orgd475ccb">作業ディレクトリ</h3>
 <ul>
 <li>Rの処理は <b>作業ディレクトリ</b> で実行される
 <ul>
@@ -522,18 +506,17 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 <li>プロジェクトでは適切に設定される</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org3806282">
-<h3 id="org3806282">作業ディレクトリの操作</h3>
+<section id="slide-org198dc88">
+<h3 id="org198dc88">作業ディレクトリの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::getwd()</code> : 作業ディレクトリの確認
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >getwd() # 環境によって実行結果は異なる
-</code></pre>
+<pre class="src src-R">getwd() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#29872;&#22659;&#12395;&#12424;&#12387;&#12390;&#23455;&#34892;&#32080;&#26524;&#12399;&#30064;&#12394;&#12427;</span>
+</pre>
 </div>
 <ul>
 <li>作業ディレクトリはコンソールのタブにも表示されている</li>
@@ -544,8 +527,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >setwd("~/Documents") # ホームディレクトリ下の「書類」フォルダに移動
-</code></pre>
+<pre class="src src-R"><span style="color: #60aa00;">setwd</span>(<span style="color: #d08928;">"~/Documents"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12507;&#12540;&#12512;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#19979;&#12398;&#12300;&#26360;&#39006;&#12301;&#12501;&#12457;&#12523;&#12480;&#12395;&#31227;&#21205;</span>
+</pre>
 </div>
 <ul>
 <li>環境によって指定の仕方は異なる</li>
@@ -553,29 +536,28 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2464275">
-<h3 id="org2464275">CSV ファイルの操作</h3>
+<section id="slide-orgc5eeffd">
+<h3 id="orgc5eeffd">CSV ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>readr::write_csv()</code> : ファイルの書き出し
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >write_csv(x,         # データフレーム
-          file, ...) # ファイル名
-#' 細かなオプションについては '?readr::write_csv' を参照
-</code></pre>
+<pre class="src src-R">write_csv(x,         <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+          file, ...) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#21517;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32048;&#12363;&#12394;&#12458;&#12503;&#12471;&#12519;&#12531;&#12395;&#12388;&#12356;&#12390;&#12399; '?readr::write_csv' &#12434;&#21442;&#29031;</span>
+</pre>
 </div></li>
 <li><p>
 関数 <code>readr::read_csv()</code> : ファイルの読み込み
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >read_csv(file, ...) # ファイル名
-#' 細かなオプションについては '?readr::read_csv' を参照
-</code></pre>
+<pre class="src src-R">read_csv(file, ...) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#21517;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32048;&#12363;&#12394;&#12458;&#12503;&#12471;&#12519;&#12531;&#12395;&#12388;&#12356;&#12390;&#12399; '?readr::read_csv' &#12434;&#21442;&#29031;</span>
+</pre>
 </div>
 <ul>
 <li><code>tibble</code> クラスとして読み込まれる</li>
@@ -584,7 +566,6 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -593,44 +574,43 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 関数 write_csv() の使い方 (CSVファイルの操作)
-my_data &lt;- # データフレームの整理
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; write_csv() &#12398;&#20351;&#12356;&#26041; (CSV&#12501;&#12449;&#12452;&#12523;&#12398;&#25805;&#20316;)</span>
+my_data <span style="color: #60aa00;">&lt;-</span> <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12398;&#25972;&#29702;</span>
   aq_tbl |&gt; 
-  filter(Ozone &gt; 80) |&gt; # Ozone が80を越える日を抽出
-  select(!Temp)          # 温度は除く
-dim(my_data) # データフレームの大きさを確認
-#' 作業ディレクトリの中に data というフォルダを用意しておく
-write_csv(my_data, # 保存するデータフレーム
-          file = "data/my_data.csv") # (場所と)ファイル名
-</code></pre>
+  filter(Ozone &gt; 80) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">Ozone &#12364;80&#12434;&#36234;&#12360;&#12427;&#26085;&#12434;&#25277;&#20986;</span>
+  select(!Temp)          <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#28201;&#24230;&#12399;&#38500;&#12367;</span>
+dim(my_data) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12398;&#22823;&#12365;&#12373;&#12434;&#30906;&#35469;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#20316;&#26989;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12398;&#20013;&#12395; data &#12392;&#12356;&#12358;&#12501;&#12457;&#12523;&#12480;&#12434;&#29992;&#24847;&#12375;&#12390;&#12362;&#12367;</span>
+write_csv(my_data, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20445;&#23384;&#12377;&#12427;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+          file = <span style="color: #d08928;">"data/my_data.csv"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">(&#22580;&#25152;&#12392;)&#12501;&#12449;&#12452;&#12523;&#21517;</span>
+</pre>
 </div></li>
 <li><p>
 <span style="color:green;">読み込みの例</span> 
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 関数 read_csv() の使い方 (CSVファイルの操作)
-new_data &lt;- read_csv(file = "data/my_data.csv") # 前の例のファイル
-dim(new_data) # 正しく読み込めたか大きさを確認
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; read_csv() &#12398;&#20351;&#12356;&#26041; (CSV&#12501;&#12449;&#12452;&#12523;&#12398;&#25805;&#20316;)</span>
+new_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/my_data.csv"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21069;&#12398;&#20363;&#12398;&#12501;&#12449;&#12452;&#12523;</span>
+dim(new_data) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12367;&#35501;&#12415;&#36796;&#12417;&#12383;&#12363;&#22823;&#12365;&#12373;&#12434;&#30906;&#35469;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga45e969">
-<h3 id="orga45e969">RData ファイルの操作</h3>
+<section id="slide-orgaf7f2ee">
+<h3 id="orgaf7f2ee">RData ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::save()</code> : ファイルの書き出し
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >save(..., # 保存するオブジェクト (複数可，データフレーム以外も可)
-     list = character(), # 保存するオブジェクトの名前(文字列)でも指定可能
-     file = stop("'file' must be specified"), ...) # ファイル名
-#' 細かなオプションについては '?base::save' を参照
-</code></pre>
+<pre class="src src-R">save(..., <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20445;&#23384;&#12377;&#12427;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488; (&#35079;&#25968;&#21487;&#65292;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#20197;&#22806;&#12418;&#21487;)</span>
+     list = character(), <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20445;&#23384;&#12377;&#12427;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12398;&#21517;&#21069;(&#25991;&#23383;&#21015;)&#12391;&#12418;&#25351;&#23450;&#21487;&#33021;</span>
+     file = <span style="color: #6c9ef8;">stop</span>(<span style="color: #d08928;">"'file' must be specified"</span>), ...) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#21517;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32048;&#12363;&#12394;&#12458;&#12503;&#12471;&#12519;&#12531;&#12395;&#12388;&#12356;&#12390;&#12399; '?base::save' &#12434;&#21442;&#29031;</span>
+</pre>
 </div>
 <ul>
 <li><b>複数</b> のオブジェクトをまとめて保存することができる</li>
@@ -641,9 +621,9 @@ dim(new_data) # 正しく読み込めたか大きさを確認
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >load(file, ...) # ファイル名
-#' 細かなオプションについては '?base::load' を参照
-</code></pre>
+<pre class="src src-R"><span style="color: #60aa00;">load</span>(file, ...) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#21517;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32048;&#12363;&#12394;&#12458;&#12503;&#12471;&#12519;&#12531;&#12395;&#12388;&#12356;&#12390;&#12399; '?base::load' &#12434;&#21442;&#29031;</span>
+</pre>
 </div>
 <ul>
 <li>同じ名前のオブジェクトがあると上書きするので注意</li>
@@ -652,7 +632,6 @@ dim(new_data) # 正しく読み込めたか大きさを確認
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -661,38 +640,36 @@ dim(new_data) # 正しく読み込めたか大きさを確認
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 関数 save() の使い方 (RDataファイルの操作)
-my_data_1 &lt;- aq_tbl |&gt; filter(Temp &gt; 90) |&gt; select(!Ozone)
-my_data_2 &lt;- aq_tbl |&gt; filter(Temp &lt; 60) |&gt; select(!Ozone)
-dim(my_data_1); dim(my_data_2) # 大きさを確認
-save(my_data_1, my_data_2, # 保存するオブジェクトを列挙
-     file = "data/my_data.rdata") # ファイル名
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; save() &#12398;&#20351;&#12356;&#26041; (RData&#12501;&#12449;&#12452;&#12523;&#12398;&#25805;&#20316;)</span>
+my_data_1 <span style="color: #60aa00;">&lt;-</span> aq_tbl |&gt; filter(Temp &gt; 90) |&gt; select(!Ozone)
+my_data_2 <span style="color: #60aa00;">&lt;-</span> aq_tbl |&gt; filter(Temp &lt; 60) |&gt; select(!Ozone)
+dim(my_data_1); dim(my_data_2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22823;&#12365;&#12373;&#12434;&#30906;&#35469;</span>
+save(my_data_1, my_data_2, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20445;&#23384;&#12377;&#12427;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12434;&#21015;&#25369;</span>
+     file = <span style="color: #d08928;">"data/my_data.rdata"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#21517;</span>
+</pre>
 </div></li>
 <li><p>
 <span style="color:green;">読み込みの例</span> 
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 関数 load() の使い方 (RDataファイルの操作)
-my_data_1 &lt;- aq_tbl |&gt; filter(Ozone &gt; 160) # 新たに作成
-load(file = "data/my_data.rdata") # ファイル名
-my_data_1 # saveしたときの名前で読み込まれ上書きされる
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; load() &#12398;&#20351;&#12356;&#26041; (RData&#12501;&#12449;&#12452;&#12523;&#12398;&#25805;&#20316;)</span>
+my_data_1 <span style="color: #60aa00;">&lt;-</span> aq_tbl |&gt; filter(Ozone &gt; 160) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26032;&#12383;&#12395;&#20316;&#25104;</span>
+<span style="color: #60aa00;">load</span>(file = <span style="color: #d08928;">"data/my_data.rdata"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#21517;</span>
+my_data_1 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">save&#12375;&#12383;&#12392;&#12365;&#12398;&#21517;&#21069;&#12391;&#35501;&#12415;&#36796;&#12414;&#12428;&#19978;&#26360;&#12365;&#12373;&#12428;&#12427;</span>
 my_data_2 
-</code></pre>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org323fedf" data-background="#fef4f4">
-<h2 id="org323fedf">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org2ab4a8e" data-background="#fef4f4">
+<h2 id="org2ab4a8e">実習</h2>
 </section>
-<section id="slide-orgd225074" data-background="#fef4f4">
-<h3 id="orgd225074">練習問題</h3>
+<section id="slide-org8a3ad38" data-background="#fef4f4">
+<h3 id="org8a3ad38">練習問題</h3>
 <ul>
 <li><p>
 以下のデータを読み込んで操作してみよう
@@ -717,35 +694,34 @@ my_data_2
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >jp_data &lt;- read_csv(file = "data/jpdata1.csv")
-jp_item &lt;- read_csv(file = "data/jpdata2.csv")
-jp_area &lt;- read_csv(file = "data/jpdata3.csv")
-</code></pre>
+<pre class="src src-R">jp_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata1.csv"</span>)
+jp_item <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata2.csv"</span>)
+jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata3.csv"</span>)
+</pre>
 </div></li>
 <li><p>
 日本語に問題がある場合は英語版を読み込む
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >jp_data_en &lt;- read_csv(file = "data/jpdata1-en.csv")
-jp_area_en &lt;- read_csv(file = "data/jpdata3-en.csv")
-</code></pre>
+<pre class="src src-R">jp_data_en <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata1-en.csv"</span>)
+jp_area_en <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata3-en.csv"</span>)
+</pre>
 </div></li>
 
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org609c761">
-<h2 id="org609c761">データの集計</h2>
-<div class="outline-text-2" id="text-org609c761">
+<section id="slide-org952773d">
+<h2 id="org952773d">データの集計</h2>
+<div class="outline-text-2" id="text-org952773d">
 </div>
 </section>
-<section id="slide-orgec52479">
-<h3 id="orgec52479">統計量の計算</h3>
+<section id="slide-org33fe607">
+<h3 id="org33fe607">統計量の計算</h3>
 <ul>
 <li>データを集約した値 = 統計量
 <ul>
@@ -760,29 +736,28 @@ jp_area_en &lt;- read_csv(file = "data/jpdata3-en.csv")
 <li>これ以外にも沢山あるので調べてみよう</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org7352ffe">
-<h3 id="org7352ffe">集約のための関数の使い方</h3>
+<section id="slide-orgeb77355">
+<h3 id="orgeb77355">集約のための関数の使い方</h3>
 <ul>
 <li><p>
 <span style="color:green;">データの集計の例</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 練習問題のデータを用いる
-sum(jp_data$人口)        # 全国の総人口 (列名でベクトルを選択)
-sum(jp_data[,"人口"])     # 1列のデータフレームとして計算
-jp_data |&gt; select(人口) |&gt; sum() # 同上
-mean(jp_data[,5])       # 1列のデータフレームではエラーになる
-mean(jp_data[[5]])      # ベクトルとして抜き出す必要がある
-median(jp_data[[5]])    # 面積の中央値 (リストとして列を選択)
-jp_data |&gt; select(5) |&gt; median() # データフレームなので動かない
-min(jp_data["若年"])     # 若年人口の最小値 (列名で選択)
-jp_data |&gt; select("若年") |&gt; min() # 同上
-with(jp_data, max(老人)) # 老年人口の最大値 (関数 with() を利用)
-jp_data |&gt; select("老人") |&gt; max() # 同上
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32244;&#32722;&#21839;&#38988;&#12398;&#12487;&#12540;&#12479;&#12434;&#29992;&#12356;&#12427;</span>
+sum(jp_data$&#20154;&#21475;)        <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20840;&#22269;&#12398;&#32207;&#20154;&#21475; (&#21015;&#21517;&#12391;&#12505;&#12463;&#12488;&#12523;&#12434;&#36984;&#25246;)</span>
+sum(jp_data[,<span style="color: #d08928;">"&#20154;&#21475;"</span>])     <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#21015;&#12398;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12392;&#12375;&#12390;&#35336;&#31639;</span>
+jp_data |&gt; select(&#20154;&#21475;) |&gt; sum() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
+mean(jp_data[,5])       <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#21015;&#12398;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12391;&#12399;&#12456;&#12521;&#12540;&#12395;&#12394;&#12427;</span>
+mean(jp_data[[5]])      <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12505;&#12463;&#12488;&#12523;&#12392;&#12375;&#12390;&#25244;&#12365;&#20986;&#12377;&#24517;&#35201;&#12364;&#12354;&#12427;</span>
+median(jp_data[[5]])    <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#38754;&#31309;&#12398;&#20013;&#22830;&#20516; (&#12522;&#12473;&#12488;&#12392;&#12375;&#12390;&#21015;&#12434;&#36984;&#25246;)</span>
+jp_data |&gt; select(5) |&gt; median() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12394;&#12398;&#12391;&#21205;&#12363;&#12394;&#12356;</span>
+min(jp_data[<span style="color: #d08928;">"&#33509;&#24180;"</span>])     <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#33509;&#24180;&#20154;&#21475;&#12398;&#26368;&#23567;&#20516; (&#21015;&#21517;&#12391;&#36984;&#25246;)</span>
+jp_data |&gt; select(<span style="color: #d08928;">"&#33509;&#24180;"</span>) |&gt; min() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
+with(jp_data, max(&#32769;&#20154;)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#32769;&#24180;&#20154;&#21475;&#12398;&#26368;&#22823;&#20516; (&#38306;&#25968; with() &#12434;&#21033;&#29992;)</span>
+jp_data |&gt; select(<span style="color: #d08928;">"&#32769;&#20154;"</span>) |&gt; max() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
+</pre>
 </div>
 <ul>
 <li>ベクトルでないと正しく動かない関数 (<code>mean</code>, <code>median</code>) もあるので注意</li>
@@ -790,79 +765,75 @@ jp_data |&gt; select("老人") |&gt; max() # 同上
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgf59abd5">
-<h3 id="orgf59abd5">列ごとの集約</h3>
+<section id="slide-org533573f">
+<h3 id="org533573f">列ごとの集約</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::summarise()</code> : 列ごとに計算する
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >summarise(.data, ..., .by = NULL, .groups = NULL)
-#' .data: データフレーム
-#' ...: 求めたい統計量を計算するための処理を記述
-#' .by: グループ化を指定(実験的な実装)
-#' .groups: グループ化の結果を指定(実験的な実装)
-</code></pre>
+<pre class="src src-R">summarise(.data, ..., .by = <span style="color: #00aa80;">NULL</span>, .groups = <span style="color: #00aa80;">NULL</span>)
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> .data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#27714;&#12417;&#12383;&#12356;&#32113;&#35336;&#37327;&#12434;&#35336;&#31639;&#12377;&#12427;&#12383;&#12417;&#12398;&#20966;&#29702;&#12434;&#35352;&#36848;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> .by: &#12464;&#12523;&#12540;&#12503;&#21270;&#12434;&#25351;&#23450;(&#23455;&#39443;&#30340;&#12394;&#23455;&#35013;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> .groups: &#12464;&#12523;&#12540;&#12503;&#21270;&#12398;&#32080;&#26524;&#12434;&#25351;&#23450;(&#23455;&#39443;&#30340;&#12394;&#23455;&#35013;)</span>
+</pre>
 </div></li>
 <li><p>
 <span style="color:green;">集計値の算出</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 練習問題のデータを用いた例
-jp_data |&gt; summarise(平均失業率 = mean(失業), 件数 = n()) # 失業の列の平均
-jp_data |&gt; summarise(across(婚姻:失業, median)) # 婚姻から失業の列の中央値
-jp_data |&gt; summarise(across(!県名, max)) # 県名の列以外の最大値
-jp_data |&gt; summarise(across(where(is.double), min)) # 数値列の最小値
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32244;&#32722;&#21839;&#38988;&#12398;&#12487;&#12540;&#12479;&#12434;&#29992;&#12356;&#12383;&#20363;</span>
+jp_data |&gt; summarise(&#24179;&#22343;&#22833;&#26989;&#29575; = mean(&#22833;&#26989;), &#20214;&#25968; = n()) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22833;&#26989;&#12398;&#21015;&#12398;&#24179;&#22343;</span>
+jp_data |&gt; summarise(across(&#23130;&#23035;:&#22833;&#26989;, median)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#23130;&#23035;&#12363;&#12425;&#22833;&#26989;&#12398;&#21015;&#12398;&#20013;&#22830;&#20516;</span>
+jp_data |&gt; summarise(across(!&#30476;&#21517;, max)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#30476;&#21517;&#12398;&#21015;&#20197;&#22806;&#12398;&#26368;&#22823;&#20516;</span>
+jp_data |&gt; summarise(across(where(is.double), min)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25968;&#20516;&#21015;&#12398;&#26368;&#23567;&#20516;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4ad949f">
-<h3 id="org4ad949f">グループごとの操作</h3>
+<section id="slide-org826df08">
+<h3 id="org826df08">グループごとの操作</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::group_by()</code> : グループ化を行う
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >group_by(.data, ..., .add = FALSE, .drop = group_by_drop_default(.data))
-#' .data: データフレーム
-#' ...: グループ化を行う項目を含む列や条件を記述
-#' .add: グループ化の上書きを制御(既定値FALSEは上書き)
-#' .drop: グループ化に関与しない因子の扱い方
-</code></pre>
+<pre class="src src-R">group_by(.data, ..., .add = <span style="color: #00aa80;">FALSE</span>, .drop = group_by_drop_default(.data))
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> .data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#12464;&#12523;&#12540;&#12503;&#21270;&#12434;&#34892;&#12358;&#38917;&#30446;&#12434;&#21547;&#12416;&#21015;&#12420;&#26465;&#20214;&#12434;&#35352;&#36848;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> .add: &#12464;&#12523;&#12540;&#12503;&#21270;&#12398;&#19978;&#26360;&#12365;&#12434;&#21046;&#24481;(&#26082;&#23450;&#20516;FALSE&#12399;&#19978;&#26360;&#12365;)</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> .drop: &#12464;&#12523;&#12540;&#12503;&#21270;&#12395;&#38306;&#19982;&#12375;&#12394;&#12356;&#22240;&#23376;&#12398;&#25201;&#12356;&#26041;</span>
+</pre>
 </div></li>
 <li><p>
 <span style="color:green;">グループごとに集計</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 練習問題のデータを用いた例
-#' 地方ごとに人口から面積の列の合計を計算する
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32244;&#32722;&#21839;&#38988;&#12398;&#12487;&#12540;&#12479;&#12434;&#29992;&#12356;&#12383;&#20363;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#22320;&#26041;&#12372;&#12392;&#12395;&#20154;&#21475;&#12363;&#12425;&#38754;&#31309;&#12398;&#21015;&#12398;&#21512;&#35336;&#12434;&#35336;&#31639;&#12377;&#12427;</span>
 jp_data |&gt;
-  mutate(地方 = as_factor(jp_area[["地方"]])) |&gt; # 地方の情報を付加
-  group_by(地方) |&gt; # 地方ごとにグループ化
-  summarize((across(人口:面積, sum))) # グループごとに集計
-</code></pre>
+  mutate(&#22320;&#26041; = as_factor(jp_area[[<span style="color: #d08928;">"&#22320;&#26041;"</span>]])) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22320;&#26041;&#12398;&#24773;&#22577;&#12434;&#20184;&#21152;</span>
+  group_by(&#22320;&#26041;) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22320;&#26041;&#12372;&#12392;&#12395;&#12464;&#12523;&#12540;&#12503;&#21270;</span>
+  summarize((across(&#20154;&#21475;:&#38754;&#31309;, sum))) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12464;&#12523;&#12540;&#12503;&#12372;&#12392;&#12395;&#38598;&#35336;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgbf9c183" data-background="#fef4f4">
-<h2 id="orgbf9c183">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org4a9e6fb" data-background="#fef4f4">
+<h2 id="org4a9e6fb">実習</h2>
 </section>
-<section id="slide-org96173af" data-background="#fef4f4">
-<h3 id="org96173af">練習問題</h3>
+<section id="slide-orgf8e1514" data-background="#fef4f4">
+<h3 id="orgf8e1514">練習問題</h3>
 <ul>
 <li>サンプルデータ (<code>jpdata</code>) の整理をしてみよう．
 <ul>
@@ -884,12 +855,11 @@ jp_data |&gt;
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orged7a052">
-<h2 id="orged7a052">次回の予定</h2>
+<section id="slide-org91f336c">
+<h2 id="org91f336c">次回の予定</h2>
 <ul>
 <li>可視化の重要性</li>
 <li>基本的な描画</li>
@@ -898,14 +868,16 @@ jp_data |&gt;
 <li>多次元データの視覚化</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script src="./reveal.js/plugin/menu/menu.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
@@ -926,16 +898,15 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
+showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
+spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
-{ src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
-{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
+]
 
 });
 </script>

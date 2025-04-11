@@ -11,22 +11,21 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/oer-reveal.css" id="theme"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
-
-<link rel="stylesheet" href="./reveal.js/dist/theme/toc-style.css"/>
-
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/accessibility/helper.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
 
-<link rel="stylesheet" href="./reveal.js/dist/theme/mycourse.css"/>
-<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-state="no-toc-progress">
+<section id="sec-title-slide">
 <!-- This is an HTML template for the title slide. -->
 <!-- Embed logos as necessary. -->
 <!-- <a class="nooutlink" href="url"><img class="state-background your-logo-class" src="whatever.png" alt="Whatever" /></a> -->
@@ -46,8 +45,8 @@
 
 </section>
 <section>
-<section id="slide-org0ffddd3">
-<h2 id="org0ffddd3">講義概要</h2>
+<section id="slide-org9b83d80">
+<h2 id="org9b83d80">講義概要</h2>
 <ul>
 <li>R言語における関数</li>
 <li>引数の扱い方 (引数名・順序・既定値)</li>
@@ -55,16 +54,14 @@
 <li>制御構造 (条件分岐・繰り返し)</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org51e3405">
-<h2 id="org51e3405">R言語における関数</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orgdf17f4c">
+<h2 id="orgdf17f4c">R言語における関数</h2>
 </section>
-<section id="slide-orgd12bfc6">
-<h3 id="orgd12bfc6">関数 (復習)</h3>
+<section id="slide-org6014136">
+<h3 id="org6014136">関数 (復習)</h3>
 <ul>
 <li>関数の取り扱いは一般的な計算機言語とほぼ同様</li>
 <li>関数は引数とその値を指定して実行</li>
@@ -74,48 +71,46 @@
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >f(arg1 = value1, arg2 = value2) # 擬似コード
-#' arg1, arg2 は引数の名前，value1, value2 は引数に渡す値を表す
-f(value1, value2) # 上と同値．順序に注意
-</code></pre>
+<pre class="src src-R">f(arg1 = value1, arg2 = value2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25836;&#20284;&#12467;&#12540;&#12489;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> arg1, arg2 &#12399;&#24341;&#25968;&#12398;&#21517;&#21069;&#65292;value1, value2 &#12399;&#24341;&#25968;&#12395;&#28193;&#12377;&#20516;&#12434;&#34920;&#12377;</span>
+f(value1, value2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#20516;&#65294;&#38918;&#24207;&#12395;&#27880;&#24847;</span>
+</pre>
 </div></li>
 <li>引数がない場合もある</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org2c26a17">
-<h3 id="org2c26a17">関数の実行例</h3>
+<section id="slide-org1e308d4">
+<h3 id="org1e308d4">関数の実行例</h3>
 <ul>
 <li><p>
 <span style="color:green;">正弦関数の計算</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >sin(x = pi/2) # "引数名 = 値" で指定 
-sin(pi/2) # 上と同値 (引数と値の関係が明かなら引数名は省略可能)
-</code></pre>
+<pre class="src src-R">sin(x = pi/2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">"&#24341;&#25968;&#21517; = &#20516;" &#12391;&#25351;&#23450; </span>
+sin(pi/2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#20516; (&#24341;&#25968;&#12392;&#20516;&#12398;&#38306;&#20418;&#12364;&#26126;&#12363;&#12394;&#12425;&#24341;&#25968;&#21517;&#12399;&#30465;&#30053;&#21487;&#33021;)</span>
+</pre>
 </div></li>
 <li><p>
 <span style="color:green;">対数関数の計算</span> 
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >help(log) # ヘルプを表示して使い方を確認する
-x &lt;- 16; b &lt;- 2 # xやbに適当な数値を代入する．1行で複数の処理を行う場合は ; を用いて並べる
-log(x = x, base = b) # 底をbとする対数
-log(x, b) # 上と同値
-log(base = b, x = x) # 上と同値
-log(b, x) # 上と異なる (=log(x = b, base = x))
-log(x) # 自然対数 (既定値による計算 =log(x, base = exp(1)))
-</code></pre>
+<pre class="src src-R">help(log) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12504;&#12523;&#12503;&#12434;&#34920;&#31034;&#12375;&#12390;&#20351;&#12356;&#26041;&#12434;&#30906;&#35469;&#12377;&#12427;</span>
+x <span style="color: #60aa00;">&lt;-</span> 16; b <span style="color: #60aa00;">&lt;-</span> 2 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">x&#12420;b&#12395;&#36969;&#24403;&#12394;&#25968;&#20516;&#12434;&#20195;&#20837;&#12377;&#12427;&#65294;1&#34892;&#12391;&#35079;&#25968;&#12398;&#20966;&#29702;&#12434;&#34892;&#12358;&#22580;&#21512;&#12399; ; &#12434;&#29992;&#12356;&#12390;&#20006;&#12409;&#12427;</span>
+log(x = x, base = b) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24213;&#12434;b&#12392;&#12377;&#12427;&#23550;&#25968;</span>
+log(x, b) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#20516;</span>
+log(base = b, x = x) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#20516;</span>
+log(b, x) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#30064;&#12394;&#12427; (=log(x = b, base = x))</span>
+log(x) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#33258;&#28982;&#23550;&#25968; (&#26082;&#23450;&#20516;&#12395;&#12424;&#12427;&#35336;&#31639; =log(x, base = exp(1)))</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org713c67a">
-<h3 id="org713c67a">引数と返値</h3>
+<section id="slide-org1b51c6d">
+<h3 id="org1b51c6d">引数と返値</h3>
 <ul>
 <li>ヘルプにより関数の引数および返値を確認できる
 <ul>
@@ -129,71 +124,67 @@ log(x) # 自然対数 (既定値による計算 =log(x, base = exp(1)))
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 正規乱数を生成する関数
-help(rnorm) # Help タブから指定しても良い
-#' ヒストグラムを表示する関数
-?hist # help(hist) と同値
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#27491;&#35215;&#20081;&#25968;&#12434;&#29983;&#25104;&#12377;&#12427;&#38306;&#25968;</span>
+help(rnorm) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">Help &#12479;&#12502;&#12363;&#12425;&#25351;&#23450;&#12375;&#12390;&#12418;&#33391;&#12356;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#12498;&#12473;&#12488;&#12464;&#12521;&#12512;&#12434;&#34920;&#31034;&#12377;&#12427;&#38306;&#25968;</span>
+?hist <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">help(hist) &#12392;&#21516;&#20516;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd64a964">
-<h3 id="orgd64a964">既定値を持つ関数の実行例 (1/2)</h3>
+<section id="slide-org959f920">
+<h3 id="org959f920">既定値を持つ関数の実行例 (1/2)</h3>
 <ul>
 <li><p>
 <span style="color:green;">正規乱数の生成</span> 
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >rnorm(5) # 平均0 分散1 の正規乱数を5個生成
-rnorm(5, mean = 10) # 平均10 分散1 の正規乱数を5個生成
-rnorm(sd = 0.1, n = 5) # 平均0 分散0.01 の正規乱数を5個生成
-rnorm(n = 5, mean = 2, sd = 2) # 平均2 分散4 の正規乱数を5個生成
-</code></pre>
+<pre class="src src-R">rnorm(5) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24179;&#22343;0 &#20998;&#25955;1 &#12398;&#27491;&#35215;&#20081;&#25968;&#12434;5&#20491;&#29983;&#25104;</span>
+rnorm(5, mean = 10) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24179;&#22343;10 &#20998;&#25955;1 &#12398;&#27491;&#35215;&#20081;&#25968;&#12434;5&#20491;&#29983;&#25104;</span>
+rnorm(sd = 0.1, n = 5) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24179;&#22343;0 &#20998;&#25955;0.01 &#12398;&#27491;&#35215;&#20081;&#25968;&#12434;5&#20491;&#29983;&#25104;</span>
+rnorm(n = 5, mean = 2, sd = 2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24179;&#22343;2 &#20998;&#25955;4 &#12398;&#27491;&#35215;&#20081;&#25968;&#12434;5&#20491;&#29983;&#25104;</span>
+</pre>
 </div>
 
 <pre class="example">
-[1]  0.7987612  0.4284254 -0.7624699 -0.1197531 -1.0761344
-[1] 10.38788 10.53880 11.08746 10.18092 11.45359
-[1] -0.066675654 -0.135083640  0.008429749  0.005835604 -0.181368959
-[1] -0.7958739  3.6377440  6.5379324  1.3335692  2.3699861
+[1]  0.6649633 -0.6512622  1.1532188 -0.6692962 -1.0033647
+[1] 10.425935 10.355327 11.210261  8.652895  9.955703
+[1] -0.104365389  0.005089714 -0.186644901  0.037613879  0.019709784
+[1] 1.1453795 5.0746946 1.2349134 4.9771802 0.4217371
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org0e6c633">
-<h3 id="org0e6c633">既定値を持つ関数の実行例 (2/2)</h3>
+<section id="slide-orgb69fb7a">
+<h3 id="orgb69fb7a">既定値を持つ関数の実行例 (2/2)</h3>
 <ul>
 <li><p>
 <span style="color:green;">ヒストグラムの表示</span> 
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >foo &lt;- rnorm(n = 10000, mean = 50, sd = 10) # 平均50 標準偏差10 の正規乱数
-hist(foo) # データ以外全て既定値で表示
-hist(foo, # 既定値のいくつかを変更する
-     breaks = 30, # ビンを30程度に調整する
-     col = "lightgreen", # 色の指定
-     main = "mathematics", # タイトルの指定
-     xlab = "score") # x軸ラベルの指定
-#' Plots タブで描画結果を確認
-</code></pre>
+<pre class="src src-R">foo <span style="color: #60aa00;">&lt;-</span> rnorm(n = 10000, mean = 50, sd = 10) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24179;&#22343;50 &#27161;&#28310;&#20559;&#24046;10 &#12398;&#27491;&#35215;&#20081;&#25968;</span>
+hist(foo) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#20197;&#22806;&#20840;&#12390;&#26082;&#23450;&#20516;&#12391;&#34920;&#31034;</span>
+hist(foo, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26082;&#23450;&#20516;&#12398;&#12356;&#12367;&#12388;&#12363;&#12434;&#22793;&#26356;&#12377;&#12427;</span>
+     breaks = 30, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12499;&#12531;&#12434;30&#31243;&#24230;&#12395;&#35519;&#25972;&#12377;&#12427;</span>
+     col = <span style="color: #d08928;">"lightgreen"</span>, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#33394;&#12398;&#25351;&#23450;</span>
+     main = <span style="color: #d08928;">"mathematics"</span>, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12479;&#12452;&#12488;&#12523;&#12398;&#25351;&#23450;</span>
+     xlab = <span style="color: #d08928;">"score"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">x&#36600;&#12521;&#12505;&#12523;&#12398;&#25351;&#23450;</span>
+<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> Plots &#12479;&#12502;&#12391;&#25551;&#30011;&#32080;&#26524;&#12434;&#30906;&#35469;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgcff91b4" data-background="#fef4f4">
-<h2 id="orgcff91b4">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orge1ed162" data-background="#fef4f4">
+<h2 id="orge1ed162">実習</h2>
 </section>
-<section id="slide-org4af9d3f" data-background="#fef4f4">
-<h3 id="org4af9d3f">練習問題</h3>
+<section id="slide-org074588f" data-background="#fef4f4">
+<h3 id="org074588f">練習問題</h3>
 <ul>
 <li>ヘルプ機能 (Help タブの検索窓, 関数 <code>help(),?</code>)
 を用いて関数 <code>sample()</code> を調べてみよう</li>
@@ -211,16 +202,14 @@ hist(foo, # 既定値のいくつかを変更する
 <li>1から6をランダムに並べ替えてみよう</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orge7b9a83">
-<h2 id="orge7b9a83">関数の定義</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orgc0bd028">
+<h2 id="orgc0bd028">関数の定義</h2>
 </section>
-<section id="slide-orgd857af9">
-<h3 id="orgd857af9">自作関数</h3>
+<section id="slide-orgb12e80d">
+<h3 id="orgb12e80d">自作関数</h3>
 <ul>
 <li>他の言語と同様にRでも関数を定義できる</li>
 <li><p>
@@ -228,35 +217,34 @@ hist(foo, # 既定値のいくつかを変更する
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >#' 関数 function() 記法 (擬似コード)
-関数名 &lt;- function(引数){ # 計算ブロックの開始
-  #' このブロック内に必要な手続きを記述する．複数行に渡って構わない
-  return(返値) # 計算結果を明示的に示す
-} # ブロックの終了
-</code></pre>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; function() &#35352;&#27861; (&#25836;&#20284;&#12467;&#12540;&#12489;)</span>
+<span style="color: #b77fdb; font-weight: bold;">&#38306;&#25968;&#21517;</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(&#24341;&#25968;){ <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35336;&#31639;&#12502;&#12525;&#12483;&#12463;&#12398;&#38283;&#22987;</span>
+  <span style="color: #808080; font-style: italic;">#</span><span style="color: #808080; font-style: italic;">' &#12371;&#12398;&#12502;&#12525;&#12483;&#12463;&#20869;&#12395;&#24517;&#35201;&#12394;&#25163;&#32154;&#12365;&#12434;&#35352;&#36848;&#12377;&#12427;&#65294;&#35079;&#25968;&#34892;&#12395;&#28193;&#12387;&#12390;&#27083;&#12431;&#12394;&#12356;</span>
+  <span style="color: #6c9ef8;">return</span>(&#36820;&#20516;) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35336;&#31639;&#32080;&#26524;&#12434;&#26126;&#31034;&#30340;&#12395;&#31034;&#12377;</span>
+} <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12502;&#12525;&#12483;&#12463;&#12398;&#32066;&#20102;</span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgd841e42">
-<h3 id="orgd841e42">自作関数の例 (1/2)</h3>
+<section id="slide-org3289d73">
+<h3 id="org3289d73">自作関数の例 (1/2)</h3>
 <ul>
 <li><p>
 <span style="color:green;">半径 r から球の体積と表面積を求める関数</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >foo &lt;- function(r){
-  volume &lt;- (4/3) * pi * r^3 # 球の体積
-  surface &lt;- 4 * pi * r^2     # 球の表面積
-  out &lt;- c(volume, surface) # 返り値のベクトルを作る
-  names(out) &lt;- c("volume", "surface_area") # 返り値の要素に名前を付ける
-  return(out) # 値を返す
+<pre class="src src-R"><span style="color: #b77fdb; font-weight: bold;">foo</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(r){
+  volume <span style="color: #60aa00;">&lt;-</span> (4/3) * pi * r^3 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#29699;&#12398;&#20307;&#31309;</span>
+  surface <span style="color: #60aa00;">&lt;-</span> 4 * pi * r^2     <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#29699;&#12398;&#34920;&#38754;&#31309;</span>
+  out <span style="color: #60aa00;">&lt;-</span> c(volume, surface) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#36820;&#12426;&#20516;&#12398;&#12505;&#12463;&#12488;&#12523;&#12434;&#20316;&#12427;</span>
+  names(out) <span style="color: #60aa00;">&lt;-</span> c(<span style="color: #d08928;">"volume"</span>, <span style="color: #d08928;">"surface_area"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#36820;&#12426;&#20516;&#12398;&#35201;&#32032;&#12395;&#21517;&#21069;&#12434;&#20184;&#12369;&#12427;</span>
+  <span style="color: #6c9ef8;">return</span>(out) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20516;&#12434;&#36820;&#12377;</span>
 }
-foo(r = 2) # 実行
+foo(r = 2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#23455;&#34892;</span>
 foo(3) 
-</code></pre>
+</pre>
 </div>
 
 <pre class="example">
@@ -267,25 +255,24 @@ volume surface_area
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org4e5e917">
-<h3 id="org4e5e917">自作関数の例 (2/2)</h3>
+<section id="slide-orgf564640">
+<h3 id="orgf564640">自作関数の例 (2/2)</h3>
 <ul>
 <li><p>
 <span style="color:green;">初項 a 公比 r の等比数列の最初のn項 (既定値は5)</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >bar &lt;- function(a, r, n = 5){
-  out &lt;- a*r^(1:n-1) # 1:n-1 と 1:(n-1) は異なるので注意
-  return(out) # 値を返す
+<pre class="src src-R"><span style="color: #b77fdb; font-weight: bold;">bar</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(a, r, n = 5){
+  out <span style="color: #60aa00;">&lt;-</span> a*r^(1:n-1) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1:n-1 &#12392; 1:(n-1) &#12399;&#30064;&#12394;&#12427;&#12398;&#12391;&#27880;&#24847;</span>
+  <span style="color: #6c9ef8;">return</span>(out) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20516;&#12434;&#36820;&#12377;</span>
 }
-bar(1, 2) # 初項1 公比2 の最初の5項
-bar(1, 2, 10) # 初項1 公比2 の最初の10項
-bar(n = 10, 1, 2) # 変数名を指定すると引数の位置を変えることができる
-bar(r = 0.5, n = 10, a = 512) # 同上
-</code></pre>
+bar(1, 2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21021;&#38917;1 &#20844;&#27604;2 &#12398;&#26368;&#21021;&#12398;5&#38917;</span>
+bar(1, 2, 10) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21021;&#38917;1 &#20844;&#27604;2 &#12398;&#26368;&#21021;&#12398;10&#38917;</span>
+bar(n = 10, 1, 2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22793;&#25968;&#21517;&#12434;&#25351;&#23450;&#12377;&#12427;&#12392;&#24341;&#25968;&#12398;&#20301;&#32622;&#12434;&#22793;&#12360;&#12427;&#12371;&#12392;&#12364;&#12391;&#12365;&#12427;</span>
+bar(r = 0.5, n = 10, a = 512) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -296,16 +283,14 @@ bar(r = 0.5, n = 10, a = 512) # 同上
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org689bdeb" data-background="#fef4f4">
-<h2 id="org689bdeb">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org1d5b2ed" data-background="#fef4f4">
+<h2 id="org1d5b2ed">実習</h2>
 </section>
-<section id="slide-org32759fa">
-<h3 id="org32759fa">例題</h3>
+<section id="slide-orgfe22bca">
+<h3 id="orgfe22bca">例題</h3>
 <ul>
 <li>三角形の3辺の長さ \(x,y,z\) を与えると
 面積 \(S\) を計算する関数を作成せよ．
@@ -330,7 +315,6 @@ bar(r = 0.5, n = 10, a = 512) # 同上
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -339,15 +323,15 @@ bar(r = 0.5, n = 10, a = 512) # 同上
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >my_heron &lt;- function(x, y, z){
-  #' 関数名は上書きされるので独特の名前にするのがお薦め
-  s &lt;- (x+y+z)/2 # 補助変数 s の計算
-  S &lt;- sqrt(s*(s-x)*(s-y)*(s-z)) # ヘロンの公式による面積の計算
-  return(S) # 面積を返す
+<pre class="src src-R"><span style="color: #b77fdb; font-weight: bold;">my_heron</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(x, y, z){
+  <span style="color: #808080; font-style: italic;">#</span><span style="color: #808080; font-style: italic;">' &#38306;&#25968;&#21517;&#12399;&#19978;&#26360;&#12365;&#12373;&#12428;&#12427;&#12398;&#12391;&#29420;&#29305;&#12398;&#21517;&#21069;&#12395;&#12377;&#12427;&#12398;&#12364;&#12362;&#34214;&#12417;</span>
+  s <span style="color: #60aa00;">&lt;-</span> (x+y+z)/2 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35036;&#21161;&#22793;&#25968; s &#12398;&#35336;&#31639;</span>
+  S <span style="color: #60aa00;">&lt;-</span> sqrt(s*(s-x)*(s-y)*(s-z)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12504;&#12525;&#12531;&#12398;&#20844;&#24335;&#12395;&#12424;&#12427;&#38754;&#31309;&#12398;&#35336;&#31639;</span>
+  <span style="color: #6c9ef8;">return</span>(S) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#38754;&#31309;&#12434;&#36820;&#12377;</span>
 }
-my_heron(3, 4, 5) # よく知られた直角三角形を使って計算結果を確認する
+my_heron(3, 4, 5) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12424;&#12367;&#30693;&#12425;&#12428;&#12383;&#30452;&#35282;&#19977;&#35282;&#24418;&#12434;&#20351;&#12387;&#12390;&#35336;&#31639;&#32080;&#26524;&#12434;&#30906;&#35469;&#12377;&#12427;</span>
 my_heron(12, 13, 5) 
-</code></pre>
+</pre>
 </div>
 
 <pre class="example">
@@ -356,10 +340,9 @@ my_heron(12, 13, 5)
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org85e7327" data-background="#fef4f4">
-<h3 id="org85e7327">練習問題</h3>
+<section id="slide-org9707cd8" data-background="#fef4f4">
+<h3 id="org9707cd8">練習問題</h3>
 <ul>
 <li>1から整数 \(n\) までの和を求める関数を作成せよ
 <ul>
@@ -374,16 +357,14 @@ my_heron(12, 13, 5)
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-org818209a">
-<h2 id="org818209a">制御構造</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-orge4a6aaf">
+<h2 id="orge4a6aaf">制御構造</h2>
 </section>
-<section id="slide-org437b203">
-<h3 id="org437b203">制御文</h3>
+<section id="slide-org55b2575">
+<h3 id="org55b2575">制御文</h3>
 <ul>
 <li>最適化や数値計算などを行うためには，
 条件分岐や繰り返しを行うための仕組みが必要となる</li>
@@ -401,48 +382,46 @@ R言語を含む多くの計算機言語では
 </p></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org79e28e8">
-<h3 id="org79e28e8"><code>if</code> 文</h3>
+<section id="slide-org6492494">
+<h3 id="org6492494"><code>if</code> 文</h3>
 <ul>
 <li><p>
 条件Aが <b>真</b> のとき処理Xを実行する
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >if(条件A) {処理X} # 括弧内は複数行に渡ってよい
-</code></pre>
+<pre class="src src-R"><span style="color: #6c9ef8;">if</span>(&#26465;&#20214;A) {&#20966;&#29702;X} <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25324;&#24359;&#20869;&#12399;&#35079;&#25968;&#34892;&#12395;&#28193;&#12387;&#12390;&#12424;&#12356;</span>
+</pre>
 </div></li>
 <li><p>
 上記の <code>if</code> 文に条件Aが <b>偽</b> のとき処理Yを実行することを追加する
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >if(条件A) {処理X} else {処理Y} # 複数行で記述する場合は改行位置に注意   
-</code></pre>
+<pre class="src src-R"><span style="color: #6c9ef8;">if</span>(&#26465;&#20214;A) {&#20966;&#29702;X} <span style="color: #6c9ef8;">else</span> {&#20966;&#29702;Y} <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35079;&#25968;&#34892;&#12391;&#35352;&#36848;&#12377;&#12427;&#22580;&#21512;&#12399;&#25913;&#34892;&#20301;&#32622;&#12395;&#27880;&#24847;   </span>
+</pre>
 </div></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org42b0286">
-<h3 id="org42b0286"><code>if</code> 文の例</h3>
+<section id="slide-orgee60cd0">
+<h3 id="orgee60cd0"><code>if</code> 文の例</h3>
 <ul>
 <li><p>
 <span style="color:green;">今日の日付が19で割り切れるか?</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >today &lt;- 20240426 # 今日の日付
-if(today %% 19 == 0) {# %% は余りを計算
-  print("割り切れます．商は以下の値です．") 
-  print(today %/% 19) # 商を表示
-} else { # {}で囲まれたブロックが1つのまとまった処理に対応する
-  print("割り切れません．余りは以下の値です．")
-  print(today %% 19) # 余りを表示
+<pre class="src src-R">today <span style="color: #60aa00;">&lt;-</span> 20240426 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20170;&#26085;&#12398;&#26085;&#20184;</span>
+<span style="color: #6c9ef8;">if</span>(today %% 19 == 0) {<span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">%% &#12399;&#20313;&#12426;&#12434;&#35336;&#31639;</span>
+  print(<span style="color: #d08928;">"&#21106;&#12426;&#20999;&#12428;&#12414;&#12377;&#65294;&#21830;&#12399;&#20197;&#19979;&#12398;&#20516;&#12391;&#12377;&#65294;"</span>) 
+  print(today <span style="color: #60aa00;">%/%</span> 19) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21830;&#12434;&#34920;&#31034;</span>
+} <span style="color: #6c9ef8;">else</span> { <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">{}&#12391;&#22258;&#12414;&#12428;&#12383;&#12502;&#12525;&#12483;&#12463;&#12364;1&#12388;&#12398;&#12414;&#12392;&#12414;&#12387;&#12383;&#20966;&#29702;&#12395;&#23550;&#24540;&#12377;&#12427;</span>
+  print(<span style="color: #d08928;">"&#21106;&#12426;&#20999;&#12428;&#12414;&#12379;&#12435;&#65294;&#20313;&#12426;&#12399;&#20197;&#19979;&#12398;&#20516;&#12391;&#12377;&#65294;"</span>)
+  print(today %% 19) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20313;&#12426;&#12434;&#34920;&#31034;</span>
 } 
-</code></pre>
+</pre>
 </div>
 
 <pre class="example">
@@ -451,10 +430,9 @@ if(today %% 19 == 0) {# %% は余りを計算
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org23fe965">
-<h3 id="org23fe965"><code>for</code> 文</h3>
+<section id="slide-org47a2cc1">
+<h3 id="org47a2cc1"><code>for</code> 文</h3>
 <ul>
 <li><p>
 ベクトル <code>V</code> の要素を <b>順に</b> 変数 <code>i</code> に代入して
@@ -462,32 +440,31 @@ if(today %% 19 == 0) {# %% は余りを計算
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >for(i in V) {処理X} # V の要素はどんなデータ型でも良い
-</code></pre>
+<pre class="src src-R"><span style="color: #6c9ef8;">for</span>(i <span style="color: #6c9ef8;">in</span> V) {&#20966;&#29702;X} <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">V &#12398;&#35201;&#32032;&#12399;&#12393;&#12435;&#12394;&#12487;&#12540;&#12479;&#22411;&#12391;&#12418;&#33391;&#12356;</span>
+</pre>
 </div></li>
 <li>処理Xは変数 <code>i</code> によって実行内容が変わってよい</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgcc766cf">
-<h3 id="orgcc766cf"><code>for</code> 文の例</h3>
+<section id="slide-org00b3d97">
+<h3 id="org00b3d97"><code>for</code> 文の例</h3>
 <ul>
 <li><p>
 <span style="color:green;">アルファベットの20,15,11,25,15番目を表示</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >print(LETTERS) # LETTERS ベクトルの内容を表示
-for(i in c(20,15,11,25,15)) {
-  print(LETTERS[i]) # 順番に表示
+<pre class="src src-R">print(LETTERS) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">LETTERS &#12505;&#12463;&#12488;&#12523;&#12398;&#20869;&#23481;&#12434;&#34920;&#31034;</span>
+<span style="color: #6c9ef8;">for</span>(i <span style="color: #6c9ef8;">in</span> c(20,15,11,25,15)) {
+  print(LETTERS[i]) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#38918;&#30058;&#12395;&#34920;&#31034;</span>
 }
-</code></pre>
+</pre>
 </div>
 
 <pre class="example">
- [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q"
-[18] "R" "S" "T" "U" "V" "W" "X" "Y" "Z"
+ [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R"
+[19] "S" "T" "U" "V" "W" "X" "Y" "Z"
 [1] "T"
 [1] "O"
 [1] "K"
@@ -496,45 +473,43 @@ for(i in c(20,15,11,25,15)) {
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-org36f4a01">
-<h3 id="org36f4a01"><code>while</code> 文</h3>
+<section id="slide-org7a0b357">
+<h3 id="org7a0b357"><code>while</code> 文</h3>
 <ul>
 <li><p>
 条件Aが <b>真</b> である限り処理Xを繰り返す
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >while(条件A) {処理X}
-</code></pre>
+<pre class="src src-R"><span style="color: #6c9ef8;">while</span>(&#26465;&#20214;A) {&#20966;&#29702;X}
+</pre>
 </div></li>
 <li>処理Xは繰り返し必要な実行内容を記述し，
 終了するときに条件Aが満たされなくなるように書く</li>
 <li>参考 : <code>repeat</code> 文というものもあるので調べてみよ</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orgaee1b4f">
-<h3 id="orgaee1b4f"><code>while</code> 文の例</h3>
+<section id="slide-org3a1a3ba">
+<h3 id="org3a1a3ba"><code>while</code> 文の例</h3>
 <ul>
 <li><p>
 <span style="color:green;">素因数分解する</span>
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >(n &lt;- 2*11*17*31) # 分解の対象．今日の日付や my_fact(5) なども試してみよ
-p &lt;- 2 # 最初に調べる数
-while(n != 1){ # 商(for文の中で計算している)が1になるまで計算する
-  if(n%%p == 0) { # 余りが0か確認
-    print(p) # 割り切った数を表示
-    n &lt;- n/p # 商を計算して分解の対象を更新
-  } else {
-    p &lt;- p+1 # 割り切れない場合は次の数を調べる
-  } # 更新される p は素数とは限らないのに上手く動く理由を考えてみよう
+<pre class="src src-R">(n <span style="color: #60aa00;">&lt;-</span> 2*11*17*31) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20998;&#35299;&#12398;&#23550;&#35937;&#65294;&#20170;&#26085;&#12398;&#26085;&#20184;&#12420; my_fact(5) &#12394;&#12393;&#12418;&#35430;&#12375;&#12390;&#12415;&#12424;</span>
+p <span style="color: #60aa00;">&lt;-</span> 2 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#21021;&#12395;&#35519;&#12409;&#12427;&#25968;</span>
+<span style="color: #6c9ef8;">while</span>(n != 1){ <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21830;(for&#25991;&#12398;&#20013;&#12391;&#35336;&#31639;&#12375;&#12390;&#12356;&#12427;)&#12364;1&#12395;&#12394;&#12427;&#12414;&#12391;&#35336;&#31639;&#12377;&#12427;</span>
+  <span style="color: #6c9ef8;">if</span>(n%%p == 0) { <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20313;&#12426;&#12364;0&#12363;&#30906;&#35469;</span>
+    print(p) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21106;&#12426;&#20999;&#12387;&#12383;&#25968;&#12434;&#34920;&#31034;</span>
+    n <span style="color: #60aa00;">&lt;-</span> n/p <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21830;&#12434;&#35336;&#31639;&#12375;&#12390;&#20998;&#35299;&#12398;&#23550;&#35937;&#12434;&#26356;&#26032;</span>
+  } <span style="color: #6c9ef8;">else</span> {
+    p <span style="color: #60aa00;">&lt;-</span> p+1 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21106;&#12426;&#20999;&#12428;&#12394;&#12356;&#22580;&#21512;&#12399;&#27425;&#12398;&#25968;&#12434;&#35519;&#12409;&#12427;</span>
+  } <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26356;&#26032;&#12373;&#12428;&#12427; p &#12399;&#32032;&#25968;&#12392;&#12399;&#38480;&#12425;&#12394;&#12356;&#12398;&#12395;&#19978;&#25163;&#12367;&#21205;&#12367;&#29702;&#30001;&#12434;&#32771;&#12360;&#12390;&#12415;&#12424;&#12358;</span>
 }
-</code></pre>
+</pre>
 </div>
 
 <pre class="example">
@@ -546,23 +521,20 @@ while(n != 1){ # 商(for文の中で計算している)が1になるまで計算
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orgccafe33" data-background="#fef4f4">
-<h2 id="orgccafe33">実習</h2>
-<div class="slide-footer"><br></div>
+<section id="slide-org0cb6d8e" data-background="#fef4f4">
+<h2 id="org0cb6d8e">実習</h2>
 </section>
-<section id="slide-org2ca1294">
-<h3 id="org2ca1294">例題</h3>
+<section id="slide-orgc287315">
+<h3 id="orgc287315">例題</h3>
 <ul>
 <li>制御構造を利用して非負の整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ．
 ただし，関数 <code>prod()</code> を用いないこと．</li>
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -571,19 +543,19 @@ while(n != 1){ # 商(for文の中で計算している)が1になるまで計算
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >my_fact1 &lt;- function(n){
-  val &lt;- 1 # 初期値の代入
-  for(i in 1:n){ # 1からnまで順に掛ける
-    val &lt;- val*i
+<pre class="src src-R"><span style="color: #b77fdb; font-weight: bold;">my_fact1</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(n){
+  val <span style="color: #60aa00;">&lt;-</span> 1 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21021;&#26399;&#20516;&#12398;&#20195;&#20837;</span>
+  <span style="color: #6c9ef8;">for</span>(i <span style="color: #6c9ef8;">in</span> 1:n){ <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#12363;&#12425;n&#12414;&#12391;&#38918;&#12395;&#25499;&#12369;&#12427;</span>
+    val <span style="color: #60aa00;">&lt;-</span> val*i
   }
-  return(val) # 計算結果を返す
+  <span style="color: #6c9ef8;">return</span>(val) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35336;&#31639;&#32080;&#26524;&#12434;&#36820;&#12377;</span>
 }
-my_fact1(4) # 正しい
-my_fact1(3) # 正しい
-my_fact1(2) # 正しい
-my_fact1(1) # 正しい
-my_fact1(0) # 間違い (0!=1)
-</code></pre>
+my_fact1(4) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact1(3) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact1(2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact1(1) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact1(0) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#38291;&#36949;&#12356; (0!=1)</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -596,7 +568,6 @@ my_fact1(0) # 間違い (0!=1)
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -605,21 +576,21 @@ my_fact1(0) # 間違い (0!=1)
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >my_fact2 &lt;- function(n){
-  if(n==0){ # n=0 か確認して分岐する
-    return(1)
-  } else {
-    val &lt;- 1
-    for(i in 1:n){ val &lt;- val*i }
-    return(val)
+<pre class="src src-R"><span style="color: #b77fdb; font-weight: bold;">my_fact2</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(n){
+  <span style="color: #6c9ef8;">if</span>(n==0){ <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">n=0 &#12363;&#30906;&#35469;&#12375;&#12390;&#20998;&#23696;&#12377;&#12427;</span>
+    <span style="color: #6c9ef8;">return</span>(1)
+  } <span style="color: #6c9ef8;">else</span> {
+    val <span style="color: #60aa00;">&lt;-</span> 1
+    <span style="color: #6c9ef8;">for</span>(i <span style="color: #6c9ef8;">in</span> 1:n){ val <span style="color: #60aa00;">&lt;-</span> val*i }
+    <span style="color: #6c9ef8;">return</span>(val)
   }
 }
-my_fact2(4) # 正しい
-my_fact2(3) # 正しい
-my_fact2(2) # 正しい
-my_fact2(1) # 正しい
-my_fact2(0) # 正しい
-</code></pre>
+my_fact2(4) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact2(3) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact2(2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact2(1) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact2(0) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -632,7 +603,6 @@ my_fact2(0) # 正しい
 
 </ul>
 
-<div class="slide-footer"><br></div>
 </section>
 <section>
 <ul>
@@ -641,20 +611,20 @@ my_fact2(0) # 正しい
 </p>
 <div class="org-src-container">
 
-<pre><code class="R" >my_fact3 &lt;- function(n){
-  val &lt;- 1 # 初期値の代入
-  while(n&gt;0){ # nから1まで順に掛ける．nが0なら計算しない
-    val &lt;- val*n
-    n &lt;- n-1
+<pre class="src src-R"><span style="color: #b77fdb; font-weight: bold;">my_fact3</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(n){
+  val <span style="color: #60aa00;">&lt;-</span> 1 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21021;&#26399;&#20516;&#12398;&#20195;&#20837;</span>
+  <span style="color: #6c9ef8;">while</span>(n&gt;0){ <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">n&#12363;&#12425;1&#12414;&#12391;&#38918;&#12395;&#25499;&#12369;&#12427;&#65294;n&#12364;0&#12394;&#12425;&#35336;&#31639;&#12375;&#12394;&#12356;</span>
+    val <span style="color: #60aa00;">&lt;-</span> val*n
+    n <span style="color: #60aa00;">&lt;-</span> n-1
   }
-  return(val)
+  <span style="color: #6c9ef8;">return</span>(val)
 }
-my_fact3(4) # 正しい
-my_fact3(3) # 正しい
-my_fact3(2) # 正しい
-my_fact3(1) # 正しい
-my_fact3(0) # 正しい
-</code></pre>
+my_fact3(4) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact3(3) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact3(2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact3(1) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+my_fact3(0) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27491;&#12375;&#12356;</span>
+</pre>
 </div>
 
 <pre class="example">
@@ -666,10 +636,9 @@ my_fact3(0) # 正しい
 </pre></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
-<section id="slide-orga935cd8" data-background="#fef4f4">
-<h3 id="orga935cd8">練習問題</h3>
+<section id="slide-org3d48764" data-background="#fef4f4">
+<h3 id="org3d48764">練習問題</h3>
 <ul>
 <li>整数 \(n\) の Fibonacci 数を求める関数を作成せよ
 <ul>
@@ -696,26 +665,27 @@ Fibonacci 数は以下の漸化式で計算される
 </ul></li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </section>
 </section>
 <section>
-<section id="slide-orga142e93">
-<h2 id="orga142e93">次回の予定</h2>
+<section id="slide-orgb8550be">
+<h2 id="orgb8550be">次回の予定</h2>
 <ul>
 <li>データフレームの操作</li>
 <li>ファイルの取り扱い</li>
 <li>データの集計</li>
 
 </ul>
-<div class="slide-footer"><br></div>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+<script src="./reveal.js/plugin/menu/menu.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
@@ -736,16 +706,15 @@ overview: true,
 
 transition: 'fade',
 transitionSpeed: 'default',
-spotlight: { size: 90, initialPresentationMode: false }, chalkboard: { toggleChalkboardButton: { left: '80px' }, toggleNotesButton: { left: '130px'}}, keyboard: { 69: function() { RevealChalkboard.toggleNotesCanvas() }, 87: function() { RevealChalkboard.toggleChalkboard() }, 67: function() { RevealChalkboard.clear() }, 82: function() { RevealChalkboard.reset() }, 68: function() { RevealChalkboard.download() }, 88: function() { RevealChalkboard.colorNext() }, 89: function() { RevealChalkboard.colorPrev() }, 84: function() { RevealSpotlight.toggleSpotlight() }, 81: function() { RevealSpotlight.togglePresentationMode()}},
+showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
+spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
-{ src: './reveal.js/plugin/menu/menu.js'},
-{ src: './reveal.js/plugin/chalkboard/chalkboard.js'},
-{ src: './reveal.js/plugin/spotlight/spotlight.js'}]
+]
 
 });
 </script>
