@@ -1,0 +1,108 @@
+---
+title: "統計データ解析I"
+subtitle: "第2講 実習"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+```
+
+## ベクトルの操作
+
+### 問題
+
+以下に示すベクトルを作成しなさい．
+
+- 1から10までの自然数のベクトル
+- 1以上30以下の奇数を昇順に並べたベクトル
+- すべての要素が1からなる長さ10のベクトル
+
+作成したベクトルを操作しなさい．
+
+- ベクトルの長さを求める
+- 3番目の要素を取り出す
+- 最後の要素を取り出す
+
+## 行列の操作
+
+### 問題
+
+以下に示す行列を作成しなさい．
+
+$$
+  \begin{equation}
+    M = 
+    \begin{pmatrix}
+      1  & 2  & 3  \\
+      4  & 5  & 6 
+    \end{pmatrix}
+  \end{equation}
+$$
+
+行列を操作しなさい．
+
+- 2行2列成分を取り出す
+- 転置行列を作成する
+- 行名をつける
+
+
+## ベクトルと行列の計算
+
+### 問題
+
+以下の問いに答えなさい．
+
+- 1から10の2乗値からなるベクトルを作成せよ．
+- 1から10までの和を計算せよ．
+- 行列を用いて九九の表を作成せよ．
+- 30度の回転行列を2回乗ずると60度の回転行列となることを確認せよ．
+  $$
+  \begin{equation}
+    \text{(回転行列)}
+    =
+    \begin{pmatrix}
+      \cos(\theta)&-\sin(\theta)\\
+      \sin(\theta)& \cos(\theta)
+    \end{pmatrix}
+  \end{equation}
+  $$
+
+### 問題
+
+以下の問いに答えなさい．
+
+- 1から10の2乗値からなるベクトルを作成せよ．
+- 例題の $A$ と $\boldsymbol{b}$ を用いて
+  以下を計算するとエラーになる．
+  ``` r
+    A %*% b + b %*% A   
+  ```
+  何故そうなるか理由を考えよ．
+- 2次元ベクトルを回転行列で変換しても長さが変わらないことを確かめよ．
