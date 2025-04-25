@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:51:02 mura>
+# Time-stamp: <2025-04-25 15:11:23 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -818,7 +818,7 @@
     A %*% b + b %*% A   
   #+end_src
   何故そうなるか理由を考えよ
-- 2次元ベクトルを回転行列で変換しても長さが変わらないことを確かめよ
+- 適当な2次元ベクトルを用いて，2次元ベクトルが回転行列で変換しても長さが変わらないことを確かめよ．
  
 #+begin_src R :eval no :exports none
   #' ---------------------------------------------------------------------------

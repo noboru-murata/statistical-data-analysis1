@@ -60,7 +60,7 @@
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide02" >}}
 ** ハンドアウト
 - [[github:pdfs/slide02.pdf][PDF file]]
-** 解答例
+** 付録
 - 実習用 [[githubraw:code/practice02.qmd][Quarto]]
 - 解答例 [[github:code/sample-code02.html][HTML]] [[githubraw:code/sample-code02.qmd][Quarto]] 
 
@@ -69,13 +69,14 @@
 :EXPORT_FILE_NAME: lecture03
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2024-04-12 Fri> 更新
+<2025-04-25 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide03" >}}
 ** ハンドアウト
 - [[github:pdfs/slide03.pdf][PDF file]]
-** 解答例
-- [[github:code/slide03.R][RScript]]
+** 付録
+- 実習用 [[githubraw:code/practice03.qmd][Quarto]]
+- 解答例 [[github:code/sample-code03.html][HTML]] [[githubraw:code/sample-code03.qmd][Quarto]] 
 
 * 第4講
 :PROPERTIES:

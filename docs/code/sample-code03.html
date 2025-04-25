@@ -3144,25 +3144,22 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#ベクトルの操作" id="toc-ベクトルの操作" class="nav-link active" data-scroll-target="#ベクトルの操作">ベクトルの操作</a>
+  <li><a href="#準備" id="toc-準備" class="nav-link active" data-scroll-target="#準備">準備</a></li>
+  <li><a href="#関数の使い方" id="toc-関数の使い方" class="nav-link" data-scroll-target="#関数の使い方">関数の使い方</a>
   <ul class="collapse">
   <li><a href="#問題" id="toc-問題" class="nav-link" data-scroll-target="#問題">問題</a></li>
   <li><a href="#解答例" id="toc-解答例" class="nav-link" data-scroll-target="#解答例">解答例</a></li>
   </ul></li>
-  <li><a href="#行列の操作" id="toc-行列の操作" class="nav-link" data-scroll-target="#行列の操作">行列の操作</a>
+  <li><a href="#自作関数の定義" id="toc-自作関数の定義" class="nav-link" data-scroll-target="#自作関数の定義">自作関数の定義</a>
   <ul class="collapse">
   <li><a href="#問題-1" id="toc-問題-1" class="nav-link" data-scroll-target="#問題-1">問題</a></li>
-  </ul></li>
   <li><a href="#解答例-1" id="toc-解答例-1" class="nav-link" data-scroll-target="#解答例-1">解答例</a></li>
-  <li><a href="#ベクトルと行列の計算" id="toc-ベクトルと行列の計算" class="nav-link" data-scroll-target="#ベクトルと行列の計算">ベクトルと行列の計算</a>
+  </ul></li>
+  <li><a href="#制御構造" id="toc-制御構造" class="nav-link" data-scroll-target="#制御構造">制御構造</a>
   <ul class="collapse">
   <li><a href="#問題-2" id="toc-問題-2" class="nav-link" data-scroll-target="#問題-2">問題</a></li>
+  <li><a href="#解答例-2" id="toc-解答例-2" class="nav-link" data-scroll-target="#解答例-2">解答例</a></li>
   </ul></li>
-  <li><a href="#解答例-2" id="toc-解答例-2" class="nav-link" data-scroll-target="#解答例-2">解答例</a>
-  <ul class="collapse">
-  <li><a href="#問題-3" id="toc-問題-3" class="nav-link" data-scroll-target="#問題-3">問題</a></li>
-  </ul></li>
-  <li><a href="#解答例-3" id="toc-解答例-3" class="nav-link" data-scroll-target="#解答例-3">解答例</a></li>
   </ul>
 </nav>
 </div>
@@ -3171,7 +3168,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">統計データ解析I</h1>
-<p class="subtitle lead">第2講 サンプルコード</p>
+<p class="subtitle lead">第3講 実習</p>
 </div>
 
 
@@ -3194,410 +3191,169 @@ window.Quarto = {
 </header>
 
 
-<section id="ベクトルの操作" class="level2">
-<h2 class="anchored" data-anchor-id="ベクトルの操作">ベクトルの操作</h2>
+<section id="準備" class="level2">
+<h2 class="anchored" data-anchor-id="準備">準備</h2>
+<p>以下で利用する共通パッケージを読み込む．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(conflicted)  <span class="co"># 関数名の衝突を警告</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(    <span class="co"># 優先的に使う関数を指定</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">lag</span>(),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="関数の使い方" class="level2">
+<h2 class="anchored" data-anchor-id="関数の使い方">関数の使い方</h2>
 <section id="問題" class="level3">
 <h3 class="anchored" data-anchor-id="問題">問題</h3>
-<p>以下に示すベクトルを作成しなさい．</p>
+<p>以下の問に答えなさい．</p>
 <ul>
-<li>1から10までの自然数のベクトル</li>
-<li>1以上30以下の奇数を昇順に並べたベクトル</li>
-<li>すべての要素が1からなる長さ10のベクトル</li>
-</ul>
-<p>作成したベクトルを操作しなさい．</p>
-<ul>
-<li>ベクトルの長さを求める．</li>
-<li>3番目の要素を取り出す．</li>
-<li>最後の要素を取り出す．</li>
-</ul>
-</section>
-<section id="解答例" class="level3">
-<h3 class="anchored" data-anchor-id="解答例">解答例</h3>
-<p>1から10までの自然数のベクトルを作成する．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(foo <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="co"># () は表示．&quot;foo &lt;- 1:10; print(foo)&quot; と等価</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-</div>
-</div>
-<p>1以上30以下の奇数を昇順に並べたベクトルを作成する．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(bar <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">30</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="co"># 変数名を含めた丁寧な書き方</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29</code></pre>
-</div>
-</div>
-<p>すべての要素が1からなる長さ10のベクトルを作成する．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(baz <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">10</span>)) <span class="co"># 関数rep_len() を用いても良い</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 1 1 1 1 1 1 1 1 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span>, <span class="at">len =</span> <span class="dv">10</span>)                 <span class="co"># 変数名は見分けられれば短くてもOK</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 1 1 1 1 1 1 1 1 1</code></pre>
-</div>
-</div>
-<p>ベクトルの長さを求める．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(foo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
-</div>
-</div>
-<p>3番目の要素を取り出す．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bar[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
-</div>
-</div>
-<p>最後の要素を取り出す．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>bar[<span class="fu">length</span>(bar)] <span class="co"># 長さを用いて最後の要素番号を指定すれば良い</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 29</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(bar, <span class="at">n =</span> <span class="dv">1</span>) <span class="co"># 関数tail() を用いる方法もある</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 29</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
+<li><p>ヘルプ機能 (Help タブの検索窓, または関数 <code>help(),?</code>) を用いて関数 <code>sample()</code> を調べなさい．</p></li>
+<li><p>サイコロを <span class="math inline">1</span> 回振る試行を模擬せよ．</p></li>
+<li><p>サイコロを <span class="math inline">10</span> 回振る試行を模擬せよ．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>関数 rep() や関数 seq() には高速化された派生型がいくつかあるので調べてみよ．</p>
+<p>引数 <code>replace</code> を調べなさい．</p>
+</div>
+</div></li>
+<li><p><span class="math inline">1</span> が出易いサイコロを作りなさい．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>引数 <code>prob</code> を調べなさい．</p>
+</div>
+</div></li>
+<li><p><span class="math inline">1</span> から <span class="math inline">6</span> をランダムに並べ替えよ．</p></li>
+</ul>
+</section>
+<section id="解答例" class="level3">
+<h3 class="anchored" data-anchor-id="解答例">解答例</h3>
+<p>関数 <code>sample()</code> を調べる．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>サイコロを1回振る試行を模擬する．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="co"># x = 見本点(標本点)の集合，size = 試行回数</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>サイコロを10回振る試行を模擬する．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>)                 <span class="co"># 復元しないのでエラーになる</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in sample.int(length(x), size, replace, prob): cannot take a sample larger than the population when &#39;replace = FALSE&#39;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 6 1 3 3 2 5 4 1 5</code></pre>
+</div>
+</div>
+<p><span class="math inline">1</span> が他の目の <span class="math inline">3</span> 倍出易いサイコロを作る．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">10</span>,               <span class="co"># 引数名(x, size)を省略</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">replace =</span> <span class="cn">TRUE</span>,        <span class="co"># 復元抽出を行う</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">prob =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>))) <span class="co"># =c(3,1,1,1,1,1) 各見本点の確率(重みづけ) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 4 5 4 4 1 4 1 1 4</code></pre>
+</div>
+</div>
+<p><span class="math inline">1</span> から <span class="math inline">6</span> をランダムに並べ替える．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">6</span>) <span class="co"># 既定値では復元抽出しないので並べ替えになる</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 2 5 3 1 6</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="行列の操作" class="level2">
-<h2 class="anchored" data-anchor-id="行列の操作">行列の操作</h2>
+<section id="自作関数の定義" class="level2">
+<h2 class="anchored" data-anchor-id="自作関数の定義">自作関数の定義</h2>
 <section id="問題-1" class="level3">
 <h3 class="anchored" data-anchor-id="問題-1">問題</h3>
-<p>以下に示す行列を作成しなさい．</p>
-<p><span class="math display">
-  \begin{equation}
-    M =
-    \begin{pmatrix}
-      1  &amp; 2  &amp; 3  \\
-      4  &amp; 5  &amp; 6
-    \end{pmatrix}
-  \end{equation}
-</span></p>
-<p>行列を操作しなさい．</p>
+<p>以下の問に答えなさい．</p>
 <ul>
-<li>2行2列成分を取り出す．</li>
-<li>転置行列を作成する．</li>
-<li>行名をつける．</li>
+<li><p><span class="math inline">1</span> から整数 <span class="math inline">n</span> までの和を求める関数を作成せよ．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>関数 <code>sum()</code> を調べなさい． 等差数列の和を利用してもよい．</p>
+</div>
+</div></li>
+<li><p>整数 <span class="math inline">n</span> の階乗 <span class="math inline">n!</span> を求める関数を作成せよ</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>関数 <code>prod()</code> を調べなさい．</p>
+</div>
+</div></li>
 </ul>
 </section>
-</section>
-<section id="解答例-1" class="level2">
-<h2 class="anchored" data-anchor-id="解答例-1">解答例</h2>
-<p>行列を作成する．</p>
+<section id="解答例-1" class="level3">
+<h3 class="anchored" data-anchor-id="解答例-1">解答例</h3>
+<p>和 (summation) を計算する関数を定義する．</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3]
-[1,]    1    2    3
-[2,]    4    5    6</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>(M2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>))                <span class="co"># cbind を使って作ることもできる</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3]
-[1,]    1    2    3
-[2,]    4    5    6</code></pre>
-</div>
-</div>
-<p>2行2列成分を取り出す．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">2</span>,<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
-</div>
-</div>
-<p>転置行列を作成する．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">2</span>)  <span class="co"># 愚直に作成し直す</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]    1    4
-[2,]    2    5
-[3,]    3    6</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(M)               <span class="co"># 関数t()を調べてみよ</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]    1    4
-[2,]    2    5
-[3,]    3    6</code></pre>
-</div>
-</div>
-<p>行名をつける．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(M) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;first&quot;</span>,<span class="st">&quot;second&quot;</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>M                                  <span class="co"># print(M) と同義</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       [,1] [,2] [,3]
-first     1    2    3
-second    4    5    6</code></pre>
-</div>
-</div>
-<p>列名をつけることもできる．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(M2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;alpha&quot;</span>,<span class="st">&quot;beta&quot;</span>,<span class="st">&quot;gamma&quot;</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>M2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     alpha beta gamma
-[1,]     1    2     3
-[2,]     4    5     6</code></pre>
-</div>
-</div>
-</section>
-<section id="ベクトルと行列の計算" class="level2">
-<h2 class="anchored" data-anchor-id="ベクトルと行列の計算">ベクトルと行列の計算</h2>
-<section id="問題-2" class="level3">
-<h3 class="anchored" data-anchor-id="問題-2">問題</h3>
-<p>以下の問いに答えなさい．</p>
-<ul>
-<li>1から10の2乗値からなるベクトルを作成せよ．</li>
-<li>1から10までの和を計算せよ．</li>
-<li>行列を用いて九九の表を作成せよ．</li>
-<li>30度の回転行列を2回乗ずると60度の回転行列となることを確認せよ． <span class="math display">
-\begin{equation}
-  \text{(回転行列)}
-  =
-  \begin{pmatrix}
-    \cos(\theta)&amp;-\sin(\theta)\\
-    \sin(\theta)&amp; \cos(\theta)
-  \end{pmatrix}
-\end{equation}
-</span></li>
-</ul>
-</section>
-</section>
-<section id="解答例-2" class="level2">
-<h2 class="anchored" data-anchor-id="解答例-2">解答例</h2>
-<p>1から10までの2乗値からなるベクトルを作成する．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>        <span class="co"># 1から10までのベクトル</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># Hadamard積を利用する</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
-</div>
-</div>
-<p>1から10までの和を計算する．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%*%</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>) <span class="co"># (1,2,...,10)と(1,1,...,1)の内積</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1]
-[1,]   55</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)           <span class="co"># 関数sum()はベクトルの成分の合計を計算することもできる</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(n){</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span>n) <span class="co"># 1からnまでの整数を生成して和を求める</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(out)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sum</span>(<span class="dv">10</span>)          <span class="co"># 1から10までの和を確認する</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 55</code></pre>
 </div>
 </div>
-<p>九九の表を作成する．</p>
+<p>以下のように定義することもできる．</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">9</span>), <span class="dv">9</span>, <span class="dv">9</span>) <span class="co"># 行ごとに1から9を並べる</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>my_sum2 <span class="ot">&lt;-</span> <span class="cf">function</span>(n){</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> n<span class="sc">*</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span> <span class="co"># 等差数列の和を利用した場合</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(out)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sum2</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
- [1,]    1    1    1    1    1    1    1    1    1
- [2,]    2    2    2    2    2    2    2    2    2
- [3,]    3    3    3    3    3    3    3    3    3
- [4,]    4    4    4    4    4    4    4    4    4
- [5,]    5    5    5    5    5    5    5    5    5
- [6,]    6    6    6    6    6    6    6    6    6
- [7,]    7    7    7    7    7    7    7    7    7
- [8,]    8    8    8    8    8    8    8    8    8
- [9,]    9    9    9    9    9    9    9    9    9</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">9</span>), <span class="dv">9</span>, <span class="dv">9</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="co"># 列ごとに1から9を並べる</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
- [1,]    1    2    3    4    5    6    7    8    9
- [2,]    1    2    3    4    5    6    7    8    9
- [3,]    1    2    3    4    5    6    7    8    9
- [4,]    1    2    3    4    5    6    7    8    9
- [5,]    1    2    3    4    5    6    7    8    9
- [6,]    1    2    3    4    5    6    7    8    9
- [7,]    1    2    3    4    5    6    7    8    9
- [8,]    1    2    3    4    5    6    7    8    9
- [9,]    1    2    3    4    5    6    7    8    9</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">9</span>), <span class="dv">9</span>, <span class="dv">9</span>) <span class="sc">*</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">9</span>), <span class="dv">9</span>, <span class="dv">9</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
- [1,]    1    2    3    4    5    6    7    8    9
- [2,]    2    4    6    8   10   12   14   16   18
- [3,]    3    6    9   12   15   18   21   24   27
- [4,]    4    8   12   16   20   24   28   32   36
- [5,]    5   10   15   20   25   30   35   40   45
- [6,]    6   12   18   24   30   36   42   48   54
- [7,]    7   14   21   28   35   42   49   56   63
- [8,]    8   16   24   32   40   48   56   64   72
- [9,]    9   18   27   36   45   54   63   72   81</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; 行列とその転置を利用してもよい</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>(M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">9</span>), <span class="dv">9</span>, <span class="dv">9</span>)) <span class="co"># 9x9型行列の積による方法</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
- [1,]    1    1    1    1    1    1    1    1    1
- [2,]    2    2    2    2    2    2    2    2    2
- [3,]    3    3    3    3    3    3    3    3    3
- [4,]    4    4    4    4    4    4    4    4    4
- [5,]    5    5    5    5    5    5    5    5    5
- [6,]    6    6    6    6    6    6    6    6    6
- [7,]    7    7    7    7    7    7    7    7    7
- [8,]    8    8    8    8    8    8    8    8    8
- [9,]    9    9    9    9    9    9    9    9    9</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>M <span class="sc">*</span> <span class="fu">t</span>(M) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
- [1,]    1    2    3    4    5    6    7    8    9
- [2,]    2    4    6    8   10   12   14   16   18
- [3,]    3    6    9   12   15   18   21   24   27
- [4,]    4    8   12   16   20   24   28   32   36
- [5,]    5   10   15   20   25   30   35   40   45
- [6,]    6   12   18   24   30   36   42   48   54
- [7,]    7   14   21   28   35   42   49   56   63
- [8,]    8   16   24   32   40   48   56   64   72
- [9,]    9   18   27   36   45   54   63   72   81</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>(M9 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">1</span>))          <span class="co"># 9x1型行列の積による別の方法</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      [,1]
- [1,]    1
- [2,]    2
- [3,]    3
- [4,]    4
- [5,]    5
- [6,]    6
- [7,]    7
- [8,]    8
- [9,]    9</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>M9 <span class="sc">%*%</span> <span class="fu">t</span>(M9) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
- [1,]    1    2    3    4    5    6    7    8    9
- [2,]    2    4    6    8   10   12   14   16   18
- [3,]    3    6    9   12   15   18   21   24   27
- [4,]    4    8   12   16   20   24   28   32   36
- [5,]    5   10   15   20   25   30   35   40   45
- [6,]    6   12   18   24   30   36   42   48   54
- [7,]    7   14   21   28   35   42   49   56   63
- [8,]    8   16   24   32   40   48   56   64   72
- [9,]    9   18   27   36   45   54   63   72   81</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>(V9 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>); V9 <span class="sc">%o%</span> V9           <span class="co"># 講義の範囲外の方法 (%o% はベクトルの積の一つ)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3 4 5 6 7 8 9</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
- [1,]    1    2    3    4    5    6    7    8    9
- [2,]    2    4    6    8   10   12   14   16   18
- [3,]    3    6    9   12   15   18   21   24   27
- [4,]    4    8   12   16   20   24   28   32   36
- [5,]    5   10   15   20   25   30   35   40   45
- [6,]    6   12   18   24   30   36   42   48   54
- [7,]    7   14   21   28   35   42   49   56   63
- [8,]    8   16   24   32   40   48   56   64   72
- [9,]    9   18   27   36   45   54   63   72   81</code></pre>
+<pre><code>[1] 55</code></pre>
 </div>
 </div>
-<p>30度の回転行列の2乗は60度の回転行列であることを確かめる．</p>
+<p>階乗 (factorial) を計算する関数を定義する．</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> pi<span class="sc">/</span><span class="dv">6</span>  <span class="co"># 30度のラジアン値</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>(R30 <span class="ot">&lt;-</span>        <span class="co"># 30度の回転行列</span></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">cos</span>(theta),<span class="sc">-</span><span class="fu">sin</span>(theta),</span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">sin</span>(theta), <span class="fu">cos</span>(theta)), <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>my_fact <span class="ot">&lt;-</span> <span class="cf">function</span>(n){</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">prod</span>(<span class="dv">1</span><span class="sc">:</span>n) <span class="co"># 1からnまでの整数を生成して積を求める</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(out)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">my_fact</span>(<span class="dv">5</span>)           <span class="co"># 5!で確認する</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          [,1]       [,2]
-[1,] 0.8660254 -0.5000000
-[2,] 0.5000000  0.8660254</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>(R60 <span class="ot">&lt;-</span>        <span class="co"># 60度の回転行列</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>theta),<span class="sc">-</span><span class="fu">sin</span>(<span class="dv">2</span><span class="sc">*</span>theta),</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">sin</span>(<span class="dv">2</span><span class="sc">*</span>theta), <span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>theta)), <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          [,1]       [,2]
-[1,] 0.5000000 -0.8660254
-[2,] 0.8660254  0.5000000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>R30 <span class="sc">%*%</span> R30    <span class="co"># 30度の回転行列の2乗を表示</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          [,1]       [,2]
-[1,] 0.5000000 -0.8660254
-[2,] 0.8660254  0.5000000</code></pre>
-</div>
-</div>
-<section id="問題-3" class="level3">
-<h3 class="anchored" data-anchor-id="問題-3">問題</h3>
-<p>以下の問いに答えなさい．</p>
-<ul>
-<li><p>1から10の2乗値からなるベクトルを作成せよ．</p></li>
-<li><p>例題の <span class="math inline">A</span> と <span class="math inline">\boldsymbol{b}</span> を用いて 以下を計算するとエラーになる．</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>  A <span class="sc">%*%</span> b <span class="sc">+</span> b <span class="sc">%*%</span> A   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>何故そうなるか理由を考えよ．</p></li>
-<li><p>適当な2次元ベクトルを用いて，2次元ベクトルが回転行列で変換しても長さが変わらないことを確かめよ．</p></li>
-</ul>
-</section>
-</section>
-<section id="解答例-3" class="level2">
-<h2 class="anchored" data-anchor-id="解答例-3">解答例</h2>
-<p>1から10までの2乗値からなるベクトルを作成する．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span> <span class="co"># ^2も関数として成分ごとに計算される</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
-</div>
-</div>
-<p>例題と同様に <span class="math inline">A</span> と <span class="math inline">\boldsymbol{b}</span> を作成する．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>(A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">9</span>), <span class="dv">3</span>, <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">diag</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          [,1]      [,2]        [,3]
-[1,] 1.2944115 0.8964453 -0.34020354
-[2,] 0.6400273 1.1305498 -0.08463192
-[3,] 1.0028176 1.4576977  0.50870264</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>(b <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3</code></pre>
-</div>
-</div>
-<p>エラーになる理由を考察する．</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> b           <span class="co"># 列ベクトル (3x1型行列)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         [,1]
-[1,] 2.066691
-[2,] 2.647231
-[3,] 5.444321</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>b <span class="sc">%*%</span> A           <span class="co"># 行ベクトル (1x3型行列)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         [,1]     [,2]     [,3]
-[1,] 5.582919 7.530638 1.016641</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> b <span class="sc">+</span> b <span class="sc">%*%</span> A <span class="co"># 異なる次元(大きさ)の行列は足し算できない</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in A %*% b + b %*% A: non-conformable arrays</code></pre>
+<pre><code>[1] 120</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -3610,56 +3366,149 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>計算途中でエラーが生じても，出力を停めないようにするには 以下の chunk option を指定すれば良い(ソースコードを参照)．</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<p>回転してもベクトルの長さが変わらないことを確認する．</p>
+<p>関数内でオブジェクトに代入せずに直接 return() に渡すこともできる．</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; 回転行列とベクトルを作成する (好きに設定してよい)</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">3</span> <span class="co"># 120度のラジアン値</span></span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>(R <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">cos</span>(theta),<span class="sc">-</span><span class="fu">sin</span>(theta),</span>
-<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">sin</span>(theta), <span class="fu">cos</span>(theta)), <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(n){<span class="fu">return</span>(<span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span>n))}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>また return() を省略すると，関数内の最後の計算結果が返値となるので，</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(n){<span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span>n)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>としても同じ結果となる．このような短縮した表記は無名関数の定義などで活用される．</p>
+</div>
+</div>
+</section>
+</section>
+<section id="制御構造" class="level2">
+<h2 class="anchored" data-anchor-id="制御構造">制御構造</h2>
+<section id="問題-2" class="level3">
+<h3 class="anchored" data-anchor-id="問題-2">問題</h3>
+<p>以下の問に答えなさい．</p>
+<ul>
+<li><p>整数 <span class="math inline">n</span> の Fibonacci 数を求める関数を作成せよ．</p>
+<ul>
+<li>Fibonacci 数は以下の漸化式で計算される． <span class="math display">
+\begin{align}
+  F_{0}&amp;=0\\
+  F_{1}&amp;=1\\
+  F_{n}&amp;=F_{n-1}+F_{n-2}
+\end{align}
+</span></li>
+</ul></li>
+<li><p>行列 <span class="math inline">X</span> が与えられたとき，各列の平均を計算する関数を作成せよ．</p></li>
+<li><p>前問で <span class="math inline">X</span> がベクトルの場合にはその平均を計算するように修正せよ．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>関数 <code>is.vector()</code> が利用できる．</p>
+</div>
+</div></li>
+</ul>
+</section>
+<section id="解答例-2" class="level3">
+<h3 class="anchored" data-anchor-id="解答例-2">解答例</h3>
+<p>Fibonacci 数を返す関数を定義する．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>my_fibo <span class="ot">&lt;-</span> <span class="cf">function</span>(n){</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    f0 <span class="ot">&lt;-</span> <span class="dv">0</span>           <span class="co"># 第0項の設定</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    f1 <span class="ot">&lt;-</span> <span class="dv">1</span>           <span class="co"># 第1項の設定</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(n<span class="sc">&lt;</span><span class="dv">0</span>) {</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">&quot;計算できません&quot;</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(<span class="cn">NA</span>)    <span class="co"># 欠損値を返す</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(n<span class="sc">==</span><span class="dv">0</span>) {        <span class="co"># n=0の場合</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(f0)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(n<span class="sc">==</span><span class="dv">1</span>) {        <span class="co"># n=1の場合</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(f1)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>n) {   <span class="co"># n&gt;=2の場合</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>        fn <span class="ot">&lt;-</span> f1 <span class="sc">+</span> f0 <span class="co"># fn = fn-1 + fn-2 の計算</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        f0 <span class="ot">&lt;-</span> f1      <span class="co"># fn-2 の値の更新 (f0が覚えておく)</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        f1 <span class="ot">&lt;-</span> fn      <span class="co"># fn-1 の値の更新 (f1が覚えておく)</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(fn)        <span class="co"># 計算結果を返す</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Fibonacci 数を <span class="math inline">n</span> 項目まで計算する． <span class="math inline">n</span> が小さい場合には以下のように愚直に行えばよい．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">my_fibo</span>(<span class="dv">1</span>),<span class="fu">my_fibo</span>(<span class="dv">2</span>),<span class="fu">my_fibo</span>(<span class="dv">3</span>),<span class="fu">my_fibo</span>(<span class="dv">4</span>),<span class="fu">my_fibo</span>(<span class="dv">5</span>),<span class="fu">my_fibo</span>(<span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           [,1]       [,2]
-[1,] -0.5000000 -0.8660254
-[2,]  0.8660254 -0.5000000</code></pre>
+<pre><code>[1] 1 1 2 3 5 8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>(x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>同じ関数に複数の値を代入する方法はいくつか用意されているので， <span class="math inline">n</span> が大きい場合には例えば以下のように行えばよい．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, my_fibo) <span class="co"># sapplyを調べてみよ</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2</code></pre>
+<pre><code> [1]      1      1      2      3      5      8     13     21     34     55
+[11]     89    144    233    377    610    987   1597   2584   4181   6765
+[21]  10946  17711  28657  46368  75025 121393 196418 317811 514229 832040</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>(y <span class="ot">&lt;-</span> R <span class="sc">%*%</span> x) <span class="co"># xを回転してyを作成 (結果は行列になるので扱いに注意が必要)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>行列の列ごとの平均を計算する関数を定義する．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>my_col_ave <span class="ot">&lt;-</span> <span class="cf">function</span>(X) {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    ave <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="at">length =</span> <span class="fu">ncol</span>(X))  <span class="co"># 平均を記録するベクトルを用意</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(X)){             <span class="co"># 列ごとに計算</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        ave[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(X[,i])<span class="sc">/</span><span class="fu">nrow</span>(X) <span class="co"># 平均の定義に従って計算</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        <span class="do">## ave[i] &lt;- mean(X[,i])     # 平均を計算する関数を用いても良い</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(ave)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>(A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>))   <span class="co"># 適当な行列を定義する</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           [,1]
-[1,] -2.2320508
-[2,] -0.1339746</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    2    3    4
+[2,]    5    6    7    8
+[3,]    9   10   11   12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; 長さを確認する</span></span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%*%</span> x                       <span class="co"># xの長さの2乗はベクトルの内積で計算できる</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_col_ave</span>(A)                        <span class="co"># 正しい答えを返す</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1]
-[1,]    5</code></pre>
+<pre><code>[1] 5 6 7 8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.vector</span>(y) <span class="sc">%*%</span> <span class="fu">as.vector</span>(y) <span class="co"># yの長さの2乗 (ベクトルに変換して計算)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>想定しない型を入力してみる．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>(x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)   <span class="co"># 適当なベクトルを定義する</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1]
-[1,]    5</code></pre>
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(y) <span class="sc">%*%</span> y                    <span class="co"># 行列の積として計算することもできる</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_col_ave</span>(x) <span class="co"># うまく動かない</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in 1:ncol(X): argument of length 0</code></pre>
+</div>
+</div>
+<p>ベクトルと行列を扱えるように修正する．</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>my_col_ave <span class="ot">&lt;-</span> <span class="cf">function</span>(X){ </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">is.vector</span>(X)){  <span class="co"># ベクトルとそれ以外の場合分け</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>        ave <span class="ot">&lt;-</span> <span class="fu">mean</span>(X) <span class="co"># ベクトルならば平均を計算</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {           <span class="co"># ベクトル以外は行列と想定して計算</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>        ave <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="at">length=</span><span class="fu">ncol</span>(X))</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(X)){</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>            ave[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(X[,i])</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(ave)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="fu">my_col_ave</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1]
-[1,]    5</code></pre>
+<pre><code>[1] 5 6 7 8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(y<span class="sc">*</span>y)                      <span class="co"># 行列の要素積を計算して全ての成分の和を計算</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_col_ave</span>(x)          <span class="co"># いずれも正しい答えを返す</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(y<span class="sc">^</span><span class="dv">2</span>)                      <span class="co"># 上記は各成分の2乗和として計算することも可能(xも同様)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
+<pre><code>[1] 6.5</code></pre>
 </div>
 </div>
+</section>
 </section>
 
 </main>
