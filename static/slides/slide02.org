@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-25 15:11:23 mura>
+# Time-stamp: <2025-04-26 15:40:51 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -29,7 +29,7 @@
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
 #+begin_src R :exports none
-  ### 第2講 サンプルコード
+  ### 第2講 資料の例題
 #+end_src
 
 
@@ -143,7 +143,7 @@
   - 3番目の要素を取り出す
   - 最後の要素を取り出す
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice ベクトルの操作
   #' 
@@ -273,7 +273,7 @@
   - 転置行列を作成する
   - 行名をつける
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 行列の操作
   #' 行列の作成
@@ -655,7 +655,7 @@
   \end{equation}
   #+end_quote
  
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice ベクトルおよび行列の計算
   #' 
@@ -820,7 +820,7 @@
   何故そうなるか理由を考えよ
 - 適当な2次元ベクトルを用いて，2次元ベクトルが回転行列で変換しても長さが変わらないことを確かめよ．
  
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice ベクトルと行列の計算
   #' 

@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:51:17 mura>
+# Time-stamp: <2025-04-26 15:43:04 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -28,7 +28,7 @@
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
 #+begin_src R :exports none
-  ### 第3講 サンプルコード
+  ### 第3講 資料の例題
 #+end_src
   
 
@@ -134,7 +134,7 @@
   - 引数 ~prob~ を調べよ
 - 1から6をランダムに並べ替えてみよう 
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 関数の使い方
   #'
@@ -251,7 +251,7 @@
 - 整数 \(n\) の階乗 \(n!\) を求める関数を作成せよ
   - 関数 ~prod()~ を調べよ (~help(prod)~)
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 自作関数の定義
   #'
@@ -500,7 +500,7 @@
 - 前問で \(X\) がベクトルの場合にはその平均を計算するように修正せよ 
   - 関数 ~is.vector()~ が利用できる
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 制御構造
   #'

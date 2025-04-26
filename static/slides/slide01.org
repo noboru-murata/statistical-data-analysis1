@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 15:50:58 mura>
+# Time-stamp: <2025-04-26 15:39:39 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -33,15 +33,13 @@
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
 #+begin_src R :exports none
-  ### 第1講 サンプルコード
+  ### 第1講 資料の例題
   #' 
-  #' このファイルには資料の中の例題や演習問題の解答例があります
+  #' このファイルには資料の中で示された例題のコードがあります
   #' コメント行は "#'" で開始され，RStudio では緑(既定値)で表示されます
   #' コメント内の "@..." は
-  #'   @exercise 例題 (スライドの説明と並行して実習)
-  #'   @practice 演習 (時間を取って各自で実習)
-  #'   @notes 注意 (講義の補足説明)
-  #'   @appendix 補遺 (講義では扱い切れなかった付加的な事柄)
+  #'   @exercise 例題 (スライド内にも説明がある)
+  #'   @notes 注意 (注意事項および補足説明)
   #' のタグで，RStudio では青(既定値)でハイライトされます
   #'
 #+end_src
@@ -147,7 +145,7 @@
 ** コンソール (左下ペイン)
 - R言語で記述されたコマンドを入力
   - 例えば以下のような計算を行うことができる
-    #+begin_src R :eval no :tangle no
+    #+begin_src R :eval no :tangle yes
       #' 一般的な数式を入力すれば計算機として使える．"#" 以降はコメントとして無視される
       1 + 2 + 3 + 4 # 空白は無視される
       sin(pi/3) / cos(pi/3) # tan(pi/3) になるはず
@@ -453,14 +451,14 @@
 
 ** COMMENT ファイルの実行
 - [[color:green][コンソールからの実行]]
-  #+begin_src R :exports code
+  #+begin_src R :exports code :tangle no
   source("ファイル名")
   source("ファイル名",echo=TRUE) # エコーあり
   #+end_src
   - "ファイルのある場所(ディレクトリ)"も含めて指定する
   - ファイル名のみだと作業ディレクトリにあるとみなされる
 - [[color:green][作業ディレクトリの確認]]
-  #+begin_src R :exports code
+  #+begin_src R :exports code :tangle no
     getwd()
   #+end_src
   コンソール上部にも記載されている
@@ -482,7 +480,7 @@
   - \(\sin^2(\pi/3)+\cos^2(\pi/3)\)
   - 適当な数学関数を用いた計算
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice Rの基本的な操作
   #' 
@@ -539,7 +537,7 @@
 - [[color:green][対数関数の計算]]
   #+begin_src R :eval no
     #' 対数関数(引数が2つ)の計算例
-    #' 以下は擬似コード．a, b を適当な数値に置き換えて実行しなさい
+    a <- 3; b <- 5 # a, b は適当な数値に置き換えて実行しなさい
     log(a, b) # 底を b とする a の対数 
     log(x = a, base = b) #上と同値
     log(base = b, x = a) #上と同値(引数名があれば順序は自由に変えられる)
@@ -781,7 +779,7 @@
   
 # *swir* パッケージを導入して
 # 関数 ~swirl()~ を実行してみよう
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice パッケージの操作
   #' 
@@ -1000,7 +998,7 @@
   |-------+------+------+------+-----|
 - データフレームの要素の選択を試みなさい
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice データフレームの操作
   #' 

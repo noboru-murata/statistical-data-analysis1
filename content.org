@@ -49,7 +49,8 @@
 ** 付録
 - 実習用 [[githubraw:code/practice01.qmd][Quarto]]
 - 解答例 [[github:code/sample-code01.html][HTML]] [[githubraw:code/sample-code01.qmd][Quarto]] 
-
+- 資料の例題 [[github:code/slide01.R][RScript]]
+   
 * 第2講
 :PROPERTIES:
 :EXPORT_FILE_NAME: lecture02
@@ -63,6 +64,7 @@
 ** 付録
 - 実習用 [[githubraw:code/practice02.qmd][Quarto]]
 - 解答例 [[github:code/sample-code02.html][HTML]] [[githubraw:code/sample-code02.qmd][Quarto]] 
+- 資料の例題 [[github:code/slide02.R][RScript]]
 
 * 第3講
 :PROPERTIES:
@@ -77,6 +79,7 @@
 ** 付録
 - 実習用 [[githubraw:code/practice03.qmd][Quarto]]
 - 解答例 [[github:code/sample-code03.html][HTML]] [[githubraw:code/sample-code03.qmd][Quarto]] 
+- 資料の例題 [[github:code/slide03.R][RScript]]
 
 * 第4講
 :PROPERTIES:

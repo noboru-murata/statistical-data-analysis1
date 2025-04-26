@@ -32,22 +32,6 @@ hist(foo, # 既定値のいくつかを変更する
      xlab = "score") # x軸ラベルの指定
 #' Plots タブで描画結果を確認
 
-#' ---------------------------------------------------------------------------
-#' @practice 関数の使い方
-#'
-#' sample を調べる
-help(sample)
-#' サイコロを1回振る試行
-sample(x = 1:6, size = 1)
-#' サイコロを10回振る試行
-sample(x = 1:6, size = 10) # エラーになる
-sample(x = 1:6, size = 10, replace = TRUE)
-#' 1が他の目の3倍出易いサイコロ
-sample(1:6, 10, replace = TRUE, prob = c(3, rep(1,5))) # 引数の一部を省略
-#' 1から6をランダムに並べ替える
-sample(1:6, 6) # 既定値ではreplaceしない(復元抽出しない)ので並べ替えになる
-#' ---------------------------------------------------------------------------
-
 #' @exercise 関数の定義
 
 foo <- function(r){
@@ -79,29 +63,6 @@ my_heron <- function(x, y, z){
 }
 my_heron(3, 4, 5) # よく知られた直角三角形を使って計算結果を確認する
 my_heron(12, 13, 5)
-
-#' ---------------------------------------------------------------------------
-#' @practice 自作関数の定義
-#'
-#' 和 (summation) を計算する関数
-my_sum <- function(n){
-  out <- sum(1:n) # 1からnまでの整数を生成して和を求める
-  return(out)
-}
-my_sum(10) # 1から10までの和は?
-#' 別解
-my_sum2 <- function(n){
-  out <- n*(n+1)/2 # 等差数列の和を利用した場合
-  return(out)
-}
-my_sum2(10)
-#' 階乗 (factorial) を計算する関数
-my_fact <- function(n){
-  out <- prod(1:n) # 1からnまでの整数を生成して積を求める
-  return(out)
-}
-my_fact(5) # 5! は?
-#' ---------------------------------------------------------------------------
 
 #' @exercise 制御構造
 
@@ -186,62 +147,3 @@ my_fact4 <- function(n){
   return(n * my_fact4(n-1))
 }
 sapply(-2:5, my_fact4) # -2から5を my_fact4 で計算した結果を返す
-
-#' ---------------------------------------------------------------------------
-#' @practice 制御構造
-#'
-#' Fibonacci 数を返す関数
-my_fibo <- function(n){
-  f0 <- 0 # 第0項の設定
-  f1 <- 1 # 第1項の設定
-  if(n<0) {
-    print("計算できません")
-    return(NA) # 欠損値を返す
-  }
-  if(n==0) { # n=0の場合
-    return(f0)
-  }
-  if(n==1) { # n=1の場合
-    return(f1)
-  }
-  for(i in 2:n) { # n>=2の場合
-    fn <- f1 + f0 # fn = fn-1 + fn-2 の計算
-    f0 <- f1 # fn-2 の値の更新 (f0が覚えておく)
-    f1 <- fn # fn-1 の値の更新 (f1が覚えておく)
-  }
-  return(fn) # 計算結果を返す
-}
-#' Fibonacci 数を6項目まで計算
-c(my_fibo(1),my_fibo(2),my_fibo(3),my_fibo(4),my_fibo(5),my_fibo(6))
-#' 同じ関数に別の値を入れて計算する方法はいくつか用意されている
-sapply(1:30, my_fibo)
-#'
-#' 行列の列の平均を計算する関数
-my_col_ave <- function(X) {
-  ave <- rep(0, length = ncol(X)) # 平均を記録するベクトルを用意
-  for(i in 1:ncol(X)){ # 列ごとに計算
-    ave[i] <- sum(X[,i])/nrow(X) # 平均の定義に従って計算
-    ## ave[i] <- mean(X[,i]) # 平均を計算する関数を用いても良い
-  }
-  return(ave)
-}
-(A <- matrix(1:12,3,4,byrow=TRUE))
-my_col_ave(A) # 正しい答えを返す
-(x <- 1:12)
-my_col_ave(x) # うまく動かない
-#'
-#' ベクトルと行列を扱えるように修正
-my_col_ave <- function(X){ 
-  if(is.vector(X)){ # ベクトルとそれ以外の場合分け
-    ave <- mean(X)
-  } else { # ベクトル以外は行列と想定して計算
-    ave <- rep(0,length=ncol(X))
-    for(i in 1:ncol(X)){
-      ave[i] <- mean(X[,i])
-    }
-  }
-  return(ave)
-}
-my_col_ave(A)
-my_col_ave(x) # 正しい答えを返す
-#' ---------------------------------------------------------------------------
