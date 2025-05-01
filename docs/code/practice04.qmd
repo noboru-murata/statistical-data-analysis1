@@ -1,0 +1,97 @@
+---
+title: "統計データ解析I"
+subtitle: "第4講 実習"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+```
+
+## データフレームの操作
+
+### 問題
+
+`datasets::airquality` に対して以下の条件を満たすデータを取り出しなさい．
+
+-   7月のオゾン濃度 (`Ozone`)
+
+-   風速 (`Wind`) が時速10マイル以上で，かつ気温 (`Temp`) が華氏80度以上の日のデータ
+
+-   オゾン (`Ozone`) も日射量 (`Solar.R`) も欠測 (`NA`) でないデータの月 (`Month`) と日 (`Day`)
+
+## データの読み込みと操作
+
+### 問題
+
+サンプルデータ (`jpdata`) を読み込んで操作しなさい．
+
+::: callout-note
+<https://www.e-stat.go.jp> より取得したデータ (文字コード : utf8)
+
+-   jpdata1.csv : 県別の対象データ
+-   jpdata2.csv : 対象データの内容説明
+-   jpdata3.csv : 県と地域の対応関係
+
+(地域から探す / 全県を選択 / 項目を選択してダウンロード)
+:::
+
+-   作業ディレクトリ内にサブディレクトリ `data` を作成し，その中に置いて読み込む．
+
+    ```{r}
+    #| eval: false
+    jp_data <- read_csv(file = "data/jpdata1.csv")
+    jp_item <- read_csv(file = "data/jpdata2.csv")
+    jp_area <- read_csv(file = "data/jpdata3.csv")
+    ```
+
+    日本語に問題がある場合は英語版を読み込む．
+
+    ```{r}
+    #| eval: false
+    jp_data_en <- read_csv(file = "data/jpdata1-en.csv")
+    jp_area_en <- read_csv(file = "data/jpdata3-en.csv")
+    ```
+
+## データの集計
+
+### 問題
+
+以下の指示に従ってサンプルデータ (`jpdata`) を整理しなさい．
+
+-   県別の人口密度を求めよ．
+
+-   地方別の人口密度を求めよ．
+
+    ::: callout-warning
+    県ごとに人口が異なるので単純に人口密度を平均してはいけない．
+    :::
+
+-   地方別の1000人当たりの婚姻・離婚数を概算せよ． なお，データの記述では「人口1000人当たり」とあるが，この「人口」とは若年層は婚姻不可として除いた「婚姻可能な人口1000人当たり」と考えて計算しなさい．

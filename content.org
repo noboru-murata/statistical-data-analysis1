@@ -91,25 +91,27 @@
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide04" >}}
 ** ハンドアウト
 - [[github:pdfs/slide04.pdf][PDF file]]
-** 解答例
-- [[github:code/slide04.R][RScript]]
-** 練習用データ
-- [[github:zips/jpdata.zip][jpdata]]
+** 付録
+- 実習用 [[githubraw:code/practice04.qmd][Quarto]]
+- 解答例 [[github:code/sample-code04.html][HTML]] [[githubraw:code/sample-code04.qmd][Quarto]] 
+- 資料の例題 [[github:code/slide04.R][RScript]]
+- 練習用データ [[github:zips/jpdata.zip][jpdata]]
 
 * 第5講
 :PROPERTIES:
 :EXPORT_FILE_NAME: lecture05
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2024-05-25 Sat> 更新
+<2025-05-01 Thu> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide05" >}}
 ** ハンドアウト
 - [[github:pdfs/slide05.pdf][PDF file]]
-** 解答例
-- [[github:code/slide05.R][RScript]]
-** 練習用データ
-- [[github:zips/tokyo.zip][tokyo]] 
+** 付録
+- 実習用 [[githubraw:code/practice05.qmd][Quarto]]
+- 解答例 [[github:code/sample-code05.html][HTML]] [[githubraw:code/sample-code05.qmd][Quarto]] 
+- 資料の例題 [[github:code/slide05.R][RScript]]
+- 練習用データ [[github:zips/tokyo.zip][tokyo]] 
 
 * 第6講
 :PROPERTIES:

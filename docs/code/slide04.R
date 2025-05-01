@@ -1,4 +1,4 @@
-### 第4講 サンプルコード
+### 第4講 資料の例題
 
 #' @exercise データフレームの操作
 
@@ -58,27 +58,6 @@ aq_tbl |> filter(Ozone > 100 & Wind <= 5) |> select(Month,Day)
 aq_tbl |> filter(!is.na(Ozone) & Day %in% c(5,10)) |> select(Wind:Day)
 #' Ozoneが120以上か，またはWindが3以下のTemp以外の列を抽出
 aq_tbl |> filter(Ozone > 120 | Wind <= 3) |> select(!Temp)
-
-#' ---------------------------------------------------------------------------
-#' @practice データフレームの操作
-#'
-#' 7月のオゾン濃度
-aq_tbl |>
-  filter(Month == 7) |> # Month %in% 7 などとしても良い
-  select(Ozone)
-#'
-#' 風速時速10マイル以上かつ気温が華氏80度以上
-aq_tbl |>
-  filter(Wind >= 10 & Temp >= 80)
-#' 
-## 日射量が欠測でないデータの月と日
-aq_tbl |>
-  filter(!is.na(Ozone) & !is.na(Solar.R)) |>
-  select(Month,Day) # 書いた順に並ぶ
-aq_tbl |>
-  filter(!is.na(Ozone) & !is.na(Solar.R)) |>
-  select(Month:Day) # もともと並んでいるので c(Month,Day) と同じ
-#' ---------------------------------------------------------------------------
 
 #' @exercise ファイルの取り扱い
 

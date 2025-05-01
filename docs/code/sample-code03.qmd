@@ -1,6 +1,6 @@
 ---
 title: "統計データ解析I"
-subtitle: "第3講 実習"
+subtitle: "第3講 サンプルコード"
 date: "`r Sys.time()`"
 format:
     html: 

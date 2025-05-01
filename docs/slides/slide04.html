@@ -44,8 +44,8 @@
 
 </section>
 <section>
-<section id="slide-orge0f0306">
-<h2 id="orge0f0306">講義概要</h2>
+<section id="slide-orgfb68a38">
+<h2 id="orgfb68a38">講義概要</h2>
 <ul>
 <li>データフレームの操作</li>
 <li>ファイルの取り扱い</li>
@@ -55,13 +55,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org768b102">
-<h2 id="org768b102">データフレームの操作</h2>
-<div class="outline-text-2" id="text-org768b102">
+<section id="slide-orge1ac957">
+<h2 id="orge1ac957">データフレームの操作</h2>
+<div class="outline-text-2" id="text-orge1ac957">
 </div>
 </section>
-<section id="slide-org0a64485">
-<h3 id="org0a64485">データ構造</h3>
+<section id="slide-org80e7181">
+<h3 id="org80e7181">データ構造</h3>
 <ul>
 <li>Rに用意されている基本的なデータ構造
 <ul>
@@ -79,8 +79,8 @@
 
 </ul>
 </section>
-<section id="slide-org4fa4576">
-<h3 id="org4fa4576">データフレーム</h3>
+<section id="slide-orgcb19739">
+<h3 id="orgcb19739">データフレーム</h3>
 <ul>
 <li>複数の個体について，いくつかの属性を集計した表
 <ul>
@@ -157,8 +157,8 @@
 
 </ul>
 </section>
-<section id="slide-orgc03c743">
-<h3 id="orgc03c743">tidyverse パッケージ</h3>
+<section id="slide-org13f5379">
+<h3 id="org13f5379">tidyverse パッケージ</h3>
 <ul>
 <li>データ操作とグラフィクスの拡張 (再掲)
 <ul>
@@ -186,8 +186,8 @@
 
 </ul>
 </section>
-<section id="slide-org1223eab">
-<h3 id="org1223eab">データ例</h3>
+<section id="slide-orgc34bc0a">
+<h3 id="orgc34bc0a">データ例</h3>
 <ul>
 <li><p>
 <b><code>datasets::airquality</code></b>
@@ -243,8 +243,8 @@ tail(aq_df, n = 10)    <span style="color: #808080; font-style: italic;"># </spa
 
 </ul>
 </section>
-<section id="slide-orgb766a86">
-<h3 id="orgb766a86">項目の抽出</h3>
+<section id="slide-org10ab2b7">
+<h3 id="org10ab2b7">項目の抽出</h3>
 <ul>
 <li><p>
 添字の番号(行と列)を指定
@@ -279,8 +279,8 @@ aq_tbl$Ozone      <span style="color: #808080; font-style: italic;"># </span><sp
 
 </ul>
 </section>
-<section id="slide-org0a39ec8">
-<h3 id="org0a39ec8">行の選択 (素朴な方法)</h3>
+<section id="slide-orge98275a">
+<h3 id="orge98275a">行の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 行番号による指定
@@ -316,8 +316,8 @@ aq_tbl[which(with(aq_tbl, Ozone&gt;100 &amp; Wind&lt;=5)), ]
 
 </ul>
 </section>
-<section id="slide-org573ec50">
-<h3 id="org573ec50">列の選択 (素朴な方法)</h3>
+<section id="slide-orgcdaced6">
+<h3 id="orgcdaced6">列の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 列番号による指定
@@ -351,8 +351,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color
 
 </ul>
 </section>
-<section id="slide-orgdf54bb5">
-<h3 id="orgdf54bb5">行の選択</h3>
+<section id="slide-org2af1c31">
+<h3 id="org2af1c31">行の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::filter()</code> : 条件を指定して行を選択
@@ -377,8 +377,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color
 
 </ul>
 </section>
-<section id="slide-orgaf956cf">
-<h3 id="orgaf956cf">列の選択</h3>
+<section id="slide-org7fea145">
+<h3 id="org7fea145">列の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::select()</code> : 条件を指定して列を選択
@@ -402,8 +402,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color
 
 </ul>
 </section>
-<section id="slide-orga90058d">
-<h3 id="orga90058d">パイプ演算子</h3>
+<section id="slide-orgf444355">
+<h3 id="orgf444355">パイプ演算子</h3>
 <ul>
 <li>処理を順次結合する演算子 (いくつか定義がある)
 <ul>
@@ -430,11 +430,11 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 </section>
 </section>
 <section>
-<section id="slide-orgb7e2c99" data-background="#fef4f4">
-<h2 id="orgb7e2c99">実習</h2>
+<section id="slide-org15ba739" data-background="#fef4f4">
+<h2 id="org15ba739">実習</h2>
 </section>
-<section id="slide-org5cb5cba" data-background="#fef4f4">
-<h3 id="org5cb5cba">練習問題</h3>
+<section id="slide-org803a32e" data-background="#fef4f4">
+<h3 id="org803a32e">練習問題</h3>
 <ul>
 <li><code>datasets::airquality</code> に対して
 以下の条件を満たすデータを取り出しなさい．
@@ -451,13 +451,13 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 </section>
 </section>
 <section>
-<section id="slide-org3984942">
-<h2 id="org3984942">ファイルの取り扱い</h2>
-<div class="outline-text-2" id="text-org3984942">
+<section id="slide-org138ca8f">
+<h2 id="org138ca8f">ファイルの取り扱い</h2>
+<div class="outline-text-2" id="text-org138ca8f">
 </div>
 </section>
-<section id="slide-org97e0e2c">
-<h3 id="org97e0e2c">データファイルの読み書き</h3>
+<section id="slide-orgb518e5c">
+<h3 id="orgb518e5c">データファイルの読み書き</h3>
 <ul>
 <li>実際の解析においては以下の操作が必要
 <ul>
@@ -476,8 +476,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 
 </ul>
 </section>
-<section id="slide-orgd475ccb">
-<h3 id="orgd475ccb">作業ディレクトリ</h3>
+<section id="slide-org373c290">
+<h3 id="org373c290">作業ディレクトリ</h3>
 <ul>
 <li>Rの処理は <b>作業ディレクトリ</b> で実行される
 <ul>
@@ -507,8 +507,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 
 </ul>
 </section>
-<section id="slide-org198dc88">
-<h3 id="org198dc88">作業ディレクトリの操作</h3>
+<section id="slide-org060cfd0">
+<h3 id="org060cfd0">作業ディレクトリの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::getwd()</code> : 作業ディレクトリの確認
@@ -537,8 +537,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 
 </ul>
 </section>
-<section id="slide-orgc5eeffd">
-<h3 id="orgc5eeffd">CSV ファイルの操作</h3>
+<section id="slide-orgfec4f48">
+<h3 id="orgfec4f48">CSV ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>readr::write_csv()</code> : ファイルの書き出し
@@ -598,8 +598,8 @@ dim(new_data) <span style="color: #808080; font-style: italic;"># </span><span s
 
 </ul>
 </section>
-<section id="slide-orgaf7f2ee">
-<h3 id="orgaf7f2ee">RData ファイルの操作</h3>
+<section id="slide-org3d4bf12">
+<h3 id="org3d4bf12">RData ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::save()</code> : ファイルの書き出し
@@ -665,11 +665,11 @@ my_data_2
 </section>
 </section>
 <section>
-<section id="slide-org2ab4a8e" data-background="#fef4f4">
-<h2 id="org2ab4a8e">実習</h2>
+<section id="slide-org07e6e44" data-background="#fef4f4">
+<h2 id="org07e6e44">実習</h2>
 </section>
-<section id="slide-org8a3ad38" data-background="#fef4f4">
-<h3 id="org8a3ad38">練習問題</h3>
+<section id="slide-org2089c06" data-background="#fef4f4">
+<h3 id="org2089c06">練習問題</h3>
 <ul>
 <li><p>
 以下のデータを読み込んで操作してみよう
@@ -715,13 +715,13 @@ jp_area_en <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span styl
 </section>
 </section>
 <section>
-<section id="slide-org952773d">
-<h2 id="org952773d">データの集計</h2>
-<div class="outline-text-2" id="text-org952773d">
+<section id="slide-orgc826492">
+<h2 id="orgc826492">データの集計</h2>
+<div class="outline-text-2" id="text-orgc826492">
 </div>
 </section>
-<section id="slide-org33fe607">
-<h3 id="org33fe607">統計量の計算</h3>
+<section id="slide-org367c339">
+<h3 id="org367c339">統計量の計算</h3>
 <ul>
 <li>データを集約した値 = 統計量
 <ul>
@@ -737,8 +737,8 @@ jp_area_en <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span styl
 
 </ul>
 </section>
-<section id="slide-orgeb77355">
-<h3 id="orgeb77355">集約のための関数の使い方</h3>
+<section id="slide-org73e8a2f">
+<h3 id="org73e8a2f">集約のための関数の使い方</h3>
 <ul>
 <li><p>
 <span style="color:green;">データの集計の例</span>
@@ -766,8 +766,8 @@ jp_data |&gt; select(<span style="color: #d08928;">"&#32769;&#20154;"</span>) |&
 
 </ul>
 </section>
-<section id="slide-org533573f">
-<h3 id="org533573f">列ごとの集約</h3>
+<section id="slide-org184b8cb">
+<h3 id="org184b8cb">列ごとの集約</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::summarise()</code> : 列ごとに計算する
@@ -796,8 +796,8 @@ jp_data |&gt; summarise(across(where(is.double), min)) <span style="color: #8080
 
 </ul>
 </section>
-<section id="slide-org826df08">
-<h3 id="org826df08">グループごとの操作</h3>
+<section id="slide-orge9788d8">
+<h3 id="orge9788d8">グループごとの操作</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::group_by()</code> : グループ化を行う
@@ -829,11 +829,11 @@ jp_data |&gt;
 </section>
 </section>
 <section>
-<section id="slide-org4a9e6fb" data-background="#fef4f4">
-<h2 id="org4a9e6fb">実習</h2>
+<section id="slide-org23f7801" data-background="#fef4f4">
+<h2 id="org23f7801">実習</h2>
 </section>
-<section id="slide-orgf8e1514" data-background="#fef4f4">
-<h3 id="orgf8e1514">練習問題</h3>
+<section id="slide-org86f3279" data-background="#fef4f4">
+<h3 id="org86f3279">練習問題</h3>
 <ul>
 <li>サンプルデータ (<code>jpdata</code>) の整理をしてみよう．
 <ul>
@@ -858,8 +858,8 @@ jp_data |&gt;
 </section>
 </section>
 <section>
-<section id="slide-org91f336c">
-<h2 id="org91f336c">次回の予定</h2>
+<section id="slide-org781d20c">
+<h2 id="org781d20c">次回の予定</h2>
 <ul>
 <li>可視化の重要性</li>
 <li>基本的な描画</li>

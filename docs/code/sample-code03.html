@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-04-25">
+<meta name="dcterms.date" content="2025-04-26">
 
 <title>統計データ解析I</title>
 <style>
@@ -3168,7 +3168,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">統計データ解析I</h1>
-<p class="subtitle lead">第3講 実習</p>
+<p class="subtitle lead">第3講 サンプルコード</p>
 </div>
 
 
@@ -3179,7 +3179,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 25, 2025</p>
+      <p class="date">April 26, 2025</p>
     </div>
   </div>
   
@@ -3253,7 +3253,7 @@ Tip
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="co"># x = 見本点(標本点)の集合，size = 試行回数</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
+<pre><code>[1] 2</code></pre>
 </div>
 </div>
 <p>サイコロを10回振る試行を模擬する．</p>
@@ -3264,7 +3264,7 @@ Tip
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 6 1 3 3 2 5 4 1 5</code></pre>
+<pre><code> [1] 6 3 4 1 5 6 4 6 2 4</code></pre>
 </div>
 </div>
 <p><span class="math inline">1</span> が他の目の <span class="math inline">3</span> 倍出易いサイコロを作る．</p>
@@ -3273,14 +3273,14 @@ Tip
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">replace =</span> <span class="cn">TRUE</span>,        <span class="co"># 復元抽出を行う</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">prob =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>))) <span class="co"># =c(3,1,1,1,1,1) 各見本点の確率(重みづけ) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 4 5 4 4 1 4 1 1 4</code></pre>
+<pre><code> [1] 1 1 5 1 3 1 2 1 1 1</code></pre>
 </div>
 </div>
 <p><span class="math inline">1</span> から <span class="math inline">6</span> をランダムに並べ替える．</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">6</span>) <span class="co"># 既定値では復元抽出しないので並べ替えになる</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4 2 5 3 1 6</code></pre>
+<pre><code>[1] 5 2 6 3 1 4</code></pre>
 </div>
 </div>
 </section>

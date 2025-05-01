@@ -1,0 +1,399 @@
+---
+title: "統計データ解析I"
+subtitle: "第5講 サンプルコード"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+```
+
+## 基本的なグラフの描画
+
+### 問題
+
+東京都の気候データ `tokyo_weather.csv` を用いて以下の問に答えよ．
+
+-   6月の気温と湿度の折線グラフを描け．
+
+-   1年間の気温と湿度の折線グラフを描け．
+
+-   各月の平均気温と湿度の折線グラフを描け．
+
+::: callout-note
+CSVファイルが作業ディレクトリの下のサブディレクトリ 'data' にあるとすれば， 以下のようして読み込むことができる．
+
+```{r}
+#| eval: false
+tw_data <- read_csv(file = "data/tokyo_weather.csv")
+```
+:::
+
+### 解答例
+
+データの読み込みを行う．
+
+```{r}
+tw_data <- read_csv(file = "data/tokyo_weather.csv")
+```
+
+6月の気温と湿度の折線グラフを同じグラフに描く．
+
+```{r}
+tw_data |>
+    filter(month == 6) |>                            # 6月を選択
+    select(day, temp, humid) |>                      # 必要な列を選択
+    pivot_longer(!day) |>                            # long format に変換
+    ggplot(aes(x = day, y = value, colour = name)) + # 審美的属性を指定
+    geom_line()                                      # 折線グラフの描画
+```
+
+物理的に異なる量なので `facet` を分ける．
+
+```{r}
+tw_data |>
+    filter(month == 6) |> 
+    select(day, temp, humid) |> 
+    pivot_longer(!day, names_to = "index") |>         # 列名を "index" に変更
+    ggplot(aes(x = day, y = value, colour = index)) + # こちらも "index"
+    geom_line() +                                     # 凡例も "index" になっている
+    facet_grid(rows = vars(index))                    # index ごとに facet を行に並べる
+```
+
+値域が異なるので `facet` ごとにy軸を調整する．
+
+```{r}
+tw_data |>
+    filter(month == 6) |> 
+    select(day, temp, humid) |> 
+    pivot_longer(!day, names_to = "index") |> 
+    ggplot(aes(x = day, y = value, colour = index)) +
+    geom_line() +
+    facet_grid(rows = vars(index), scales = "free_y") # y軸を個別に自動調整
+```
+
+不要な凡例の削除とタイトルの追加する．
+
+```{r}
+tw_data |>
+    filter(month == 6) |> 
+    select(day, temp, humid) |> 
+    pivot_longer(!day, names_to = "index") |> 
+    ggplot(aes(x = day, y = value, colour = index)) +
+    geom_line(show.legend = FALSE) +                    # 凡例の削除
+    facet_grid(rows = vars(index), scales = "free_y") +
+    labs(title = "Weather in June")                     # タイトルの追加
+```
+
+関数 `select()` を使わなくても同様な作図は可能である．
+
+```{r}
+tw_data |>
+    filter(month == 6) |> 
+    pivot_longer(cols = c(temp, humid)) |> # 集約する列を指定(余計な列も存在)
+    ggplot(aes(x = day, y = value, colour = name)) +
+    geom_line(show.legend = FALSE) + 
+    facet_grid(rows = vars(name), scales = "free_y") +
+    labs(title = "Weather in June") 
+```
+
+1年間の気温と湿度の折線グラフを描く．
+
+```{r}
+tw_data |>
+    select(temp, humid) |>          # 必要な列を抽出
+    rowid_to_column(var = "day") |> # 行番号を ID として新たに列 day を作る
+    pivot_longer(!day) |> 
+    ggplot(aes(x = day, y = value, colour = name)) +
+    geom_line(show.legend = FALSE) +
+    facet_grid(rows = vars(name), scales = "free_y") +
+    labs(title = "Weather in Tokyo") 
+```
+
+x軸として日付を用いる．
+
+```{r}
+tw_data |>
+    mutate(date = as_date(paste(year, month, day, sep = "-"))) |> # 日付を追加
+    select(date, temp, humid) |>                                  # 必要な列を抽出
+    pivot_longer(!date) |> 
+    ggplot(aes(x = date, y = value, colour = name)) +
+    geom_line(show.legend = FALSE) +
+    facet_grid(rows = vars(name), scales = "free_y") +
+    labs(title = "Weather in Tokyo") 
+```
+
+各月の平均気温と湿度の折線グラフを描く．
+
+```{r}
+tw_data |>
+    group_by(month) |>                         # 月毎にまとめる
+    summarize(across(c(temp, humid), mean)) |> # 目的の指標を集計
+    pivot_longer(!month) |> 
+    ggplot(aes(x = month, y = value, colour = name)) +
+    geom_line(show.legend = FALSE) +
+    facet_grid(vars(name), scales = "free_y") +
+    labs(title = "Weather in Tokyo") 
+```
+
+x軸の目盛を指定する．
+
+```{r}
+tw_data |>
+    group_by(month) |> 
+    summarize(across(c(temp, humid), mean)) |>
+    pivot_longer(!month) |> 
+    ggplot(aes(x = month, y = value, colour = name)) +
+    geom_line(show.legend = FALSE) +
+    facet_grid(vars(name), scales = "free_y") +
+    scale_x_continuous(breaks = 1:12) + # 1:12 の目盛を描く
+    labs(title = "Weather in Tokyo") 
+```
+
+## 散布図の描画
+
+### 問題
+
+前回配布のデータ `jpdata1/3.csv` を用いて以下の問に答えよ．
+
+-   人口1000人あたりの婚姻・離婚数の散布図を描け．
+
+-   地方別に異なる点の形状を用いた散布図を描け．
+
+-   それ以外にも様々な散布図を描画してみよう．
+
+::: callout-note
+CSVファイルが作業ディレクトリの下のサブディレクトリ 'data' にあるとすれば， 以下のようして読み込むことができる．
+
+```{r}
+#| eval: false
+jp_data <- read_csv(file = "data/jpdata1.csv")
+jp_area <- read_csv(file = "data/jpdata3.csv")
+```
+:::
+
+### 解答例
+
+データの読み込みを行う．
+
+```{r}
+jp_data <- read_csv(file = "data/jpdata1.csv")
+jp_area <- read_csv(file = "data/jpdata3.csv")
+```
+
+::: callout-warning
+日本語を用いる場合は macOS ではフォントの指定が必要となる． 例えば以下のようにすればよい．
+
+```{r}
+if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+    theme_update(text = element_text(family = "HiraginoSans-W4"))
+    update_geom_defaults("text", list(family = theme_get()$text$family))
+    update_geom_defaults("label", list(family = theme_get()$text$family))}
+```
+:::
+
+単純な散布図を描く．
+
+```{r}
+jp_data |>                           # データフレームを指定
+    ggplot(aes(x = 婚姻, y = 離婚)) + # xy軸を設定
+    geom_point(colour = "blue",      # 表示する色
+               shape = 19)           # 表示する形．'?graphics::points' を参照
+```
+
+軸やタイトルを変更する．
+
+```{r}
+jp_data |> 
+    ggplot(aes(x = 婚姻, y = 離婚)) + 
+    geom_point(colour = "blue", 
+               shape = 19) +    
+    labs(x = "1000人あたりの婚姻数",      # x軸のラベル
+         y = "1000人あたりの離婚数",      # y軸のラベル
+         title = "婚姻数と離婚数の散布図") # タイトル
+```
+
+県名を追加する．
+
+```{r}
+jp_data |> 
+    ggplot(aes(x = 婚姻, y = 離婚)) + 
+    geom_point(colour = "blue",
+               shape = 19) + 
+    geom_text(aes(label = 県名), # ラベルとして県名を指定
+              size = 3,         # サイズは適宜調整
+              vjust = -1) +     # ラベルに位置(縦)の調整  
+    labs(x = "1000人あたりの婚姻数",
+         y = "1000人あたりの離婚数",
+         title = "婚姻数と離婚数の散布図")
+```
+
+地方ごとに色と点の形を変える．
+
+```{r}
+jp_data |> 
+    mutate(地方 = as_factor(jp_area[["地方"]])) |> # 地方区分を追加
+    ggplot(aes(x = 婚姻, y = 離婚)) + 
+    geom_point(aes(colour = 地方,                 # 地方ごとに色を変える
+                   shape = 地方)) +               # 地方ごとに形を変える
+    geom_text(aes(label = 県名), 
+              size = 2,
+              vjust = -1) +
+    labs(x = "1000人あたりの婚姻数",
+         y = "1000人あたりの離婚数",
+         title = "婚姻数と離婚数の散布図")
+```
+
+::: callout-tip
+`shape` 属性は6種類までが推奨されている． そのままでは表示されないが，手動で設定すれば表示される．
+
+```{r}
+ggplot2::last_plot() +               # 最後に描いたグラフオブジェクトに追加
+    scale_shape_manual(values = 1:8) # 形は '?points' を参照
+```
+:::
+
+::: callout-tip
+図中に入れる文字を自動的に調整するパッケージもある． 重なりが多いところはラベルを削除するので注意が必要である．
+
+```{r}
+library(ggrepel)
+if(Sys.info()["sysname"] == "Darwin") { # maxOS のための日本語フォントの設定
+    update_geom_defaults("text_repel", list(family = theme_get()$text$family))
+    update_geom_defaults("label_repel", list(family = theme_get()$text$family))}
+jp_data |> 
+    mutate(地方 = as_factor(jp_area[["地方"]])) |>
+    ggplot(aes(x = 婚姻, y = 離婚)) + 
+    geom_point(aes(colour = 地方,
+                   shape = 地方)) +
+    geom_text_repel(aes(label = 県名), # geom_text の拡張
+                    size = 2) +       # サイズは適宜調整 
+    labs(x = "1000人あたりの婚姻数",
+         y = "1000人あたりの離婚数",
+         title = "婚姻数と離婚数の散布図")
+#' 上記と同様に shape については警告が出る
+ggplot2::last_plot() + 
+    scale_shape_manual(values = LETTERS) # 文字を指定することもできる
+```
+:::
+
+## いろいろなグラフの描画
+
+### 問題
+
+東京都の新型コロナの動向データ `tokyo_covid19_2021.csv` を用いて以下の問に答えよ．
+
+-   陽性者数と陽性率の推移の折線グラフを描け．
+
+-   月ごとの総検査実施件数の推移の棒グラフを描け．
+
+-   曜日ごとの総検査実施件数の箱ひげ図を描け．
+
+::: callout-note
+CSVファイルが作業ディレクトリの下のサブディレクトリ 'data' にあるとすれば， 以下のようして読み込むことができる．
+
+```{r}
+#| eval: false
+tc_data <- read_csv(file="data/tokyo_covid19_2021.csv")
+```
+:::
+
+### 解答例
+
+データの読み込みを行う．
+
+```{r}
+tc_data <- read_csv(file = "data/tokyo_covid19_2021.csv") |>
+    rename(年月日 = ...1) # CSVファイルの1列目の名前が空白なので定義しておく
+```
+
+陽性患者数の推移の折れ線グラフを描く．
+
+```{r}
+tc_data |>
+    ggplot(aes(x = 年月日, y = 陽性者数)) +
+    geom_line(colour = "red") +
+    labs(title = "陽性患者数の推移")
+```
+
+陽性率の推移の折れ線グラフを描く．
+
+```{r}
+tc_data |>
+    mutate(陽性率 = 陽性者数/総検査実施件数) |>
+    ggplot(aes(x = 年月日, y = 陽性率)) +
+    geom_line(colour = "blue") +
+    labs(title = "陽性率の推移")
+```
+
+両者を同時に表示する．
+
+```{r}
+tc_data |>
+    mutate(陽性率 = 陽性者数/総検査実施件数) |>
+    pivot_longer(c(陽性者数,陽性率)) |>
+    ggplot(aes(x = 年月日, y = value, colour = name)) +
+    geom_line(show.legend = FALSE) +
+    facet_grid(rows = vars(name), scales = "free_y") +
+    labs(title = "陽性者数・陽性率の推移")
+```
+
+月ごとの検査実施件数の推移の棒グラフを描く．
+
+```{r}
+tc_data |> 
+    mutate(月 = as_factor(月)) |> group_by(月) |>
+    summarize(検査実施件数合計 = sum(総検査実施件数)) |>
+    ggplot(aes(x = 月, y = 検査実施件数合計)) +
+    geom_bar(stat = "identity", position = "dodge",
+             colour = "blue", fill = "lightblue") +
+    labs(title = "月ごとの検査実施人数の推移")
+```
+
+曜日ごとの検査実施件数の分布の箱ひげ図を描く．
+
+```{r}
+tc_data |> 
+    ggplot(aes(x = 曜日, y = 総検査実施件数)) +
+    geom_boxplot(colour = "blue", fill = "lightblue") +
+    labs(title = "曜日ごとの検査実施件数の分布")
+```
+
+曜日を順序付きの因子に変換してグラフの表示順を制御する．
+
+```{r}
+tc_data |> 
+    mutate(曜日 = factor(曜日, # levels で順序を指定．labels で名称を変更
+                         levels=c("日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"), 
+                         labels=c("日曜","月曜","火曜","水曜","木曜","金曜","土曜"))) |>
+    ggplot(aes(x = 曜日, y = 総検査実施件数)) +
+    geom_boxplot(colour = "blue", fill = "lightblue") +
+    labs(title = "曜日ごとの検査実施件数の分布")
+```

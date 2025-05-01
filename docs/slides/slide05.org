@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:51:54 mura>
+# Time-stamp: <2025-05-01 18:11:31 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -383,7 +383,7 @@
       tw_data <- read_csv(file = "data/tokyo_weather.csv")
     #+end_src
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 基本的なグラフの描画
   #' 
@@ -727,7 +727,7 @@
       jp_area <- read_csv(file = "data/jpdata3.csv")
     #+end_src
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 散布図の描画
   #' 
@@ -1174,7 +1174,7 @@
       tc_data <- read_csv(file="data/tokyo_covid19_2021.csv")
     #+end_src
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice いろいろなグラフの描画
   #' 東京都の感染動向データによる例

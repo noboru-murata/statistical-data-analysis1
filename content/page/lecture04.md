@@ -19,11 +19,9 @@ weight = 1005
 -   [PDF file](https://noboru-murata.github.io/statistical-data-analysis1/pdfs/slide04.pdf)
 
 
-## 解答例 {#解答例}
+## 付録 {#付録}
 
--   [RScript](https://noboru-murata.github.io/statistical-data-analysis1/code/slide04.R)
-
-
-## 練習用データ {#練習用データ}
-
--   [jpdata](https://noboru-murata.github.io/statistical-data-analysis1/zips/jpdata.zip)
+-   実習用 [Quarto](https://raw.githubusercontent.com/noboru-murata/statistical-data-analysis1/refs/heads/master/docs/code/practice04.qmd)
+-   解答例 [HTML](https://noboru-murata.github.io/statistical-data-analysis1/code/sample-code04.html) [Quarto](https://raw.githubusercontent.com/noboru-murata/statistical-data-analysis1/refs/heads/master/docs/code/sample-code04.qmd)
+-   資料の例題 [RScript](https://noboru-murata.github.io/statistical-data-analysis1/code/slide04.R)
+-   練習用データ [jpdata](https://noboru-murata.github.io/statistical-data-analysis1/zips/jpdata.zip)

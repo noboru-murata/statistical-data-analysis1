@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:51:32 mura>
+# Time-stamp: <2025-04-26 16:05:43 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -24,7 +24,7 @@
   setwd("~/Desktop/lectures/u-tokyo/spring/course")
 #+end_src
 #+begin_src R :exports none
-  ### 第4講 サンプルコード
+  ### 第4講 資料の例題
 #+end_src
     
 
@@ -364,7 +364,7 @@
   - オゾン (~Ozone~) も日射量 (~Solar.R~) も
     欠測 (~NA~) でないデータの月 (~Month~) と日 (~Day~)
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice データフレームの操作
   #'
