@@ -1,6 +1,6 @@
 ---
 title: "統計データ解析I"
-subtitle: "第1講 サンプルコード"
+subtitle: "第1講 練習問題 解答例"
 date: "`r Sys.Date()`"
 format:
     html: 

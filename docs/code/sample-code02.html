@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-04-25">
+<meta name="dcterms.date" content="2025-05-02">
 
 <title>統計データ解析I</title>
 <style>
@@ -3171,7 +3171,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">統計データ解析I</h1>
-<p class="subtitle lead">第2講 サンプルコード</p>
+<p class="subtitle lead">第2講 練習問題 解答例</p>
 </div>
 
 
@@ -3182,7 +3182,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 25, 2025</p>
+      <p class="date">May 2, 2025</p>
     </div>
   </div>
   
@@ -3571,10 +3571,10 @@ second    4    5    6</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>(A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">9</span>), <span class="dv">3</span>, <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">diag</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          [,1]      [,2]        [,3]
-[1,] 1.2944115 0.8964453 -0.34020354
-[2,] 0.6400273 1.1305498 -0.08463192
-[3,] 1.0028176 1.4576977  0.50870264</code></pre>
+<pre><code>          [,1]       [,2]       [,3]
+[1,] 1.3427048 -1.7451122  0.4922914
+[2,] 0.9404094  2.0504569 -1.9309730
+[3,] 0.2064814 -0.0352665  1.6297042</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>(b <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3585,15 +3585,15 @@ second    4    5    6</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> b           <span class="co"># 列ベクトル (3x1型行列)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>         [,1]
-[1,] 2.066691
-[2,] 2.647231
-[3,] 5.444321</code></pre>
+<pre><code>           [,1]
+[1,] -0.6706453
+[2,] -0.7515957
+[3,]  5.0250610</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>b <span class="sc">%*%</span> A           <span class="co"># 行ベクトル (1x3型行列)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         [,1]     [,2]     [,3]
-[1,] 5.582919 7.530638 1.016641</code></pre>
+[1,] 3.842968 2.250002 1.519458</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> b <span class="sc">+</span> b <span class="sc">%*%</span> A <span class="co"># 異なる次元(大きさ)の行列は足し算できない</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
