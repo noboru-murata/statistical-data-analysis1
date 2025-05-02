@@ -21,20 +21,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-## 準備
-
-以下で利用する共通パッケージを読み込む．
-
-```{r}
-library(conflicted)  # 関数名の衝突を警告
-conflicts_prefer(    # 優先的に使う関数を指定
-    dplyr::filter(),
-    dplyr::select(),
-    dplyr::lag(),
-    )
-library(tidyverse)
-```
-
 ## 関数の使い方
 
 ### 問題

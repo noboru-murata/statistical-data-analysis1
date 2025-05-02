@@ -1,6 +1,6 @@
 ---
 title: "統計データ解析I"
-subtitle: "第3講 サンプルコード"
+subtitle: "第3講 練習問題 解答例"
 date: "`r Sys.time()`"
 format:
     html: 
@@ -20,20 +20,6 @@ editor: visual
 editor_options: 
   chunk_output_type: console
 ---
-
-## 準備
-
-以下で利用する共通パッケージを読み込む．
-
-```{r}
-library(conflicted)  # 関数名の衝突を警告
-conflicts_prefer(    # 優先的に使う関数を指定
-    dplyr::filter(),
-    dplyr::select(),
-    dplyr::lag(),
-    )
-library(tidyverse)
-```
 
 ## 関数の使い方
 
