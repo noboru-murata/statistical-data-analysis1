@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-26 15:40:51 mura>
+# Time-stamp: <2025-05-02 15:23:18 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -64,8 +64,8 @@
     #' @exercise ベクトルの生成
   #+end_src
   #+begin_src R
-    (x <- c("Alice","Bob","Cathy","David")) # 文字列のベクトル
-    (y <- c(1,-2, 3,-4, 5)) # 数値のベクトル
+    (x <- c("Alice","Bob","Cathy","David"))          # 文字列のベクトル
+    (y <- c(1,-2, 3,-4, 5))                          # 数値のベクトル
     (z <- c("apple","berry","cat","dog","elephant")) # 文字列のベクトル
     #' 外側の () は代入した結果の表示．print() と同義
   #+end_src
@@ -74,17 +74,17 @@
 - ~a~ から ~b~ まで
   1ずつ変化するベクトル (演算子 ~:~)
   #+begin_src R
-    a <- 8; b <- 15 # 変数 a,b に値を代入．複数コマンドは ; で区切る
-    a:b # a < b の場合は1ずつ増加する系列が作成される
+    a <- 8; b <- 15    # 変数 a,b に値を代入．複数コマンドは ; で区切る
+    a:b                # a < b の場合は1ずつ増加する系列が作成される
     a <- 29.5; b <- 24
-    a:b # 逆の場合は1ずつ減少する系列が作成される
-    29.5:24 # 直接数値を書いてもよい
+    a:b                # 逆の場合は1ずつ減少する系列が作成される
+    29.5:24            # 直接数値を書いてもよい
   #+end_src
 - ~a~ から ~b~ まで
   ~c~ ずつ変化するベクトル (関数 ~seq()~)
   #+begin_src R
     a <- 1; b <- 16; c <- 2 # 変数 a,b,c に値を代入
-    seq(a, b, by = c) # 明示する場合は seq(from = a, to = b, by = c)
+    seq(a, b, by = c)       # 明示する場合は seq(from = a, to = b, by = c)
   #+end_src
  
 ** ベクトルの操作
@@ -100,7 +100,7 @@
   #+end_src
 - ベクトルの要素の取得 (演算子 ~[]~)
   #+begin_src R
-    x[3] # xの第3要素 (ベクトルの添え字は1から始まる)
+    x[3]        # xの第3要素 (ベクトルの添え字は1から始まる)
     y[c(1,3,4)] # 複数の要素 = c(y[1], y[3], y[4])
   #+end_src
   
@@ -118,10 +118,10 @@
 #+reveal: split 
 - ベクトルの繰り返し (関数 ~rep()~)
   #+begin_src R
-    rep(y, 3) # 長さは length(y) * 3
-    rep(y, times = 3) # 単純に繰り返す．上記と同様
-    rep(y, each = 3)  # 各要素を繰り返す
-    rep(y, length.out = 12)  # 繰り返した結果の長さを指定する
+    rep(y, 3)               # 長さは length(y) * 3
+    rep(y, times = 3)       # 単純に繰り返す．上記と同様
+    rep(y, each = 3)        # 各要素を繰り返す
+    rep(y, length.out = 12) # 繰り返した結果の長さを指定する
   #+end_src
 
   
@@ -187,14 +187,14 @@
   #+end_src
   #+begin_src R
     a <- 2; m <- 3; n <- 4 # 変数 a,m,n に値を代入
-    matrix(a, m, n) # 明示する場合は matrix(data = a, nrow = m, ncol = n)
+    matrix(a, m, n)        # 明示する場合は matrix(data = a, nrow = m, ncol = n)
   #+end_src
   
 #+reveal: split
 - 長さ \(mn\) のベクトル ~a~ を \(m\times n\) 型行列に変換 \\
   (関数 ~matrix()~)
   #+begin_src R
-    a <- 2:13 # 変数 a に値を代入 (m*n = 12 文字用意)
+    a <- 2:13              # 変数 a に値を代入 (m*n = 12 文字用意)
     (A <- matrix(a, m, n)) # 並び順を変えるには matrix(a,m,n,byrow = TRUE)
   #+end_src
   # - 関数 ~dim()~ によるベクトルから行列への変換:
@@ -225,9 +225,9 @@
     #' @exercise 行列の操作
   #+end_src
   #+begin_src R
-    dim(A) # 関数の返値は長さ2のベクトル (行数,列数) となることに注意
-    nrow(A) # 行数
-    ncol(A) # 列数
+    dim(A)    # 関数の返値は長さ2のベクトル (行数,列数) となることに注意
+    nrow(A)   # 行数
+    ncol(A)   # 列数
     dim(A)[1] # nrow(A) と同値
     dim(A)[2] # ncol(A) と同値
   #+end_src
@@ -235,10 +235,10 @@
 #+reveal: split
 - 行列の成分の取得 (演算子 ~[]~)
   #+begin_src R
-    A[3,4] # (3,4)成分
-    A[3, ] # 第3行のベクトル
-    A[ ,4] # 第4列のベクトル
-    A[c(1,3),] # 1,3行からなる部分行列．2x4型行列になる
+    A[3,4]        # (3,4)成分
+    A[3, ]        # 第3行のベクトル
+    A[ ,4]        # 第4列のベクトル
+    A[c(1,3),]    # 1,3行からなる部分行列．2x4型行列になる
     A[c(1,3),2:4] # 1,3行と，2,3,4列からなる部分行列．2x3型行列になる
   #+end_src
   # ベクトルの場合と同様に，
@@ -704,10 +704,10 @@
   #+end_src
   #+begin_src R
     A <- matrix(1:4, 2, 2); b <- c(5,6) # 行列とベクトルを作成
-    A %*% b # 行列 x ベクトル = 列ベクトル
+    A %*% b                             # 行列 x ベクトル = 列ベクトル
   #+end_src
   #+begin_src R
-    b %*% A # ベクトル x 行列 = 行ベクトル
+    b %*% A                             # ベクトル x 行列 = 行ベクトル
   #+end_src
 
 ** 連立1次方程式の解法
@@ -750,7 +750,7 @@
   #+end_quote
   #+begin_src R :eval no
     solve(A,B) # AX=B の解Xを求める
-    solve(A) # 逆行列 (Bが単位行列の場合省略できる)
+    solve(A)   # 逆行列 (Bが単位行列の場合省略できる)
   #+end_src
   - 他にもいくつか方法は用意されている
 
@@ -803,7 +803,7 @@
   #+end_src
   #+begin_src R
     (x <- solve(A, b)) # 解を計算
-    A %*% x # 結果の確認(b になるはず)
+    A %*% x            # 結果の確認(b になるはず)
   #+end_src
 
 ** 練習問題
