@@ -6,13 +6,13 @@ draft = false
 weight = 1016
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2025-04-26 Sat&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2025-05-03 Sat&gt; </span></span> 更新
 
 講義の進捗に合わせて追加します．
 
 -   第1講 (2025年4月18日) 録画ミスのため後日公開します
 -   [第2講 (2025年4月25日)](https://u-tokyo-ac-jp.zoom.us/rec/share/4edaolc-CHjYchUMCIvVf1ERnz_KDm4fwM9F0DeT-SxgmfjN-Q-n9GHTG359n3J_.t6gLw_qAcayfle7I?startTime=1745567484000)
--   第3講 (2025年5月2日)
+-   [第3講 (2025年5月2日)](https://u-tokyo-ac-jp.zoom.us/rec/share/t_dAHK0lubppPvUOkUok8jeIJSVc8tkAOPZpoxFe3H399UxBu_O3POeduGcITfsO.nexvgDQJ0kOR0kis?startTime=1746172571000)
 -   第4講 (2025年5月9日)
 -   第5講 (2025年5月16日)
 -   第6講 (2025年5月30日)
