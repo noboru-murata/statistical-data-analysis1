@@ -44,8 +44,8 @@
 
 </section>
 <section>
-<section id="slide-orgfc375bb">
-<h2 id="orgfc375bb">講義の内容</h2>
+<section id="slide-org83c7bf5">
+<h2 id="org83c7bf5">講義の内容</h2>
 <ul>
 <li>可視化の重要性</li>
 <li>基本的な描画</li>
@@ -57,13 +57,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org10be0ff">
-<h2 id="org10be0ff">可視化の重要性</h2>
-<div class="outline-text-2" id="text-org10be0ff">
+<section id="slide-org6479dc4">
+<h2 id="org6479dc4">可視化の重要性</h2>
+<div class="outline-text-2" id="text-org6479dc4">
 </div>
 </section>
-<section id="slide-org43e03c3">
-<h3 id="org43e03c3">データの可視化</h3>
+<section id="slide-orgca0e066">
+<h3 id="orgca0e066">データの可視化</h3>
 <ul>
 <li>データ全体の特徴や傾向を把握するための直感的で効果的な方法</li>
 <li>R言語には極めて多彩な作図機能が用意されている
@@ -78,8 +78,8 @@
 
 </ul>
 </section>
-<section id="slide-org854ab8e">
-<h3 id="org854ab8e">tidyverse パッケージ</h3>
+<section id="slide-orgb9ced6f">
+<h3 id="orgb9ced6f">tidyverse パッケージ</h3>
 <ul>
 <li>データ操作とグラフィクスの拡張 (再掲)
 <ul>
@@ -112,8 +112,8 @@
 
 </ul>
 </section>
-<section id="slide-org87f0b85">
-<h3 id="org87f0b85">サンプルデータの説明</h3>
+<section id="slide-org2bd3dc6">
+<h3 id="org2bd3dc6">サンプルデータの説明</h3>
 <ul>
 <li><p>
 <code>jpdata[1-3].csv</code> (再掲)
@@ -199,7 +199,7 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </p>
 <blockquote>
 <ul>
-<li><a href="https://stopcovid19.metro.tokyo.lg.jp">https://stopcovid19.metro.tokyo.lg.jp</a> (東京都)</li>
+<li><a href="https://www.hokeniryo.metro.tokyo.lg.jp/kansen/info/corona/corona_portal">https://www.hokeniryo.metro.tokyo.lg.jp/kansen/info/corona/corona_portal</a> (東京都)</li>
 <li>データ項目
 陽性者数, 総検査実施件数, 発熱等相談件数</li>
 
@@ -221,13 +221,13 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </section>
 </section>
 <section>
-<section id="slide-org840b054">
-<h2 id="org840b054">描画の基礎</h2>
-<div class="outline-text-2" id="text-org840b054">
+<section id="slide-org53976db">
+<h2 id="org53976db">描画の基礎</h2>
+<div class="outline-text-2" id="text-org53976db">
 </div>
 </section>
-<section id="slide-org0cb4993">
-<h3 id="org0cb4993">描画の初期化</h3>
+<section id="slide-org6abbe89">
+<h3 id="org6abbe89">描画の初期化</h3>
 <ul>
 <li><p>
 <code>package::ggplot2</code> ではさまざまな作図関数を演算子 <code>+</code> で追加しながら描画する
@@ -254,8 +254,8 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 
 </ul>
 </section>
-<section id="slide-orgf942c19">
-<h3 id="orgf942c19">折線グラフ</h3>
+<section id="slide-org66fdd86">
+<h3 id="org66fdd86">折線グラフ</h3>
 <ul>
 <li><p>
 関数 <code>ggplot2::geom_line()</code> : 線の描画
@@ -300,15 +300,15 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </div>
 
 
-<div id="org1c8c4f1" class="figure">
+<div id="orga0f302a" class="figure">
 <p><img src="figs/05-geomline-geomline.png" alt="05-geomline-geomline.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org698aef0">
-<h3 id="org698aef0">データフレームの形の変更</h3>
+<section id="slide-orga3ef5f3">
+<h3 id="orga3ef5f3">データフレームの形の変更</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::pivot_longer()</code> : 列の集約
@@ -356,7 +356,7 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </div>
 
 
-<div id="org2dab200" class="figure">
+<div id="orgde78876" class="figure">
 <p><img src="figs/05-geomline.png" alt="05-geomline.png" width="50%" />
 </p>
 </div></li>
@@ -381,15 +381,15 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </div>
 
 
-<div id="org0b45c3a" class="figure">
+<div id="org904718f" class="figure">
 <p><img src="figs/05-geomline-facetgrid.png" alt="05-geomline-facetgrid.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org987f02f">
-<h3 id="org987f02f">図の保存</h3>
+<section id="slide-orgb3e9df1">
+<h3 id="orgb3e9df1">図の保存</h3>
 <ul>
 <li>RStudioの機能を使う (少数の場合はこちらが簡便)
 <ul>
@@ -422,11 +422,11 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </section>
 </section>
 <section>
-<section id="slide-orga0a756d" data-background="#fef4f4">
-<h2 id="orga0a756d">実習</h2>
+<section id="slide-org5ab3771" data-background="#fef4f4">
+<h2 id="org5ab3771">実習</h2>
 </section>
-<section id="slide-org19db12c" data-background="#fef4f4">
-<h3 id="org19db12c">練習問題</h3>
+<section id="slide-org04691e5" data-background="#fef4f4">
+<h3 id="org04691e5">練習問題</h3>
 <ul>
 <li><code>tokyo_weather.csv</code> (東京都の気候データ)
 を用いて以下の問に答えよ
@@ -450,13 +450,13 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </section>
 </section>
 <section>
-<section id="slide-org939f5ed">
-<h2 id="org939f5ed">散布図の描画</h2>
-<div class="outline-text-2" id="text-org939f5ed">
+<section id="slide-org39ea852">
+<h2 id="org39ea852">散布図の描画</h2>
+<div class="outline-text-2" id="text-org39ea852">
 </div>
 </section>
-<section id="slide-orgc465dd9">
-<h3 id="orgc465dd9">散布図</h3>
+<section id="slide-orgf6bb107">
+<h3 id="orgf6bb107">散布図</h3>
 <ul>
 <li><p>
 関数 <code>ggplot2::geom_point()</code> : 点の描画
@@ -500,7 +500,7 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </div>
 
 
-<div id="orgbd452b5" class="figure">
+<div id="org01c7a19" class="figure">
 <p><img src="figs/05-geompoint.png" alt="05-geompoint.png" width="50%" />
 </p>
 </div></li>
@@ -523,7 +523,7 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </div>
 
 
-<div id="org497f8e7" class="figure">
+<div id="org3bf998c" class="figure">
 <p><img src="figs/05-geompoint-size.png" alt="05-geompoint-size.png" width="50%" />
 </p>
 </div></li>
@@ -547,15 +547,15 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </div>
 
 
-<div id="orge1485f1" class="figure">
+<div id="orge1fce95" class="figure">
 <p><img src="figs/05-geompoint-scalelog.png" alt="05-geompoint-scalelog.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org6eb2e47">
-<h3 id="org6eb2e47">散布図行列</h3>
+<section id="slide-org8db58ca">
+<h3 id="org8db58ca">散布図行列</h3>
 <ul>
 <li>複数の散布図を行列状に配置したもの</li>
 <li><p>
@@ -602,7 +602,7 @@ ggpairs(
 </div>
 
 
-<div id="org1020fd5" class="figure">
+<div id="org3ab96b0" class="figure">
 <p><img src="figs/05-ggpairs.png" alt="05-ggpairs.png" width="50%" />
 </p>
 </div></li>
@@ -627,15 +627,15 @@ ggpairs(
 </div>
 
 
-<div id="orgd161467" class="figure">
+<div id="org0dc85ba" class="figure">
 <p><img src="figs/05-ggpairs-quarter.png" alt="05-ggpairs-quarter.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org00b361e">
-<h3 id="org00b361e">対話型のグラフ</h3>
+<section id="slide-org55625b6">
+<h3 id="org55625b6">対話型のグラフ</h3>
 <ul>
 <li><code>ggplot2</code> で描画したグラフは
 対話型 (interactive) のグラフに変換することができる</li>
@@ -707,8 +707,8 @@ ggplotly(bar) <span style="color: #808080; font-style: italic;"># </span><span s
 
 </ul>
 </section>
-<section id="slide-org54ab477">
-<h3 id="org54ab477">日本語に関する注意 (主にmacOS)</h3>
+<section id="slide-org1e29590">
+<h3 id="org1e29590">日本語に関する注意 (主にmacOS)</h3>
 <ul>
 <li>日本語を含む図で文字化けが起こる場合がある</li>
 <li><p>
@@ -726,7 +726,7 @@ ggplotly(bar) <span style="color: #808080; font-style: italic;"># </span><span s
 </div>
 <ul>
 <li>以下のサイトなども参考になる <br />
-<a href="https://oku.edu.mie-u.ac.jp/~okumura/stat/font.html">https://oku.edu.mie-u.ac.jp/~okumura/stat/font.html</a></li>
+<a href="https://okumuralab.org/~okumura/stat/font.html">https://okumuralab.org/~okumura/stat/font.html</a></li>
 
 </ul></li>
 
@@ -734,11 +734,11 @@ ggplotly(bar) <span style="color: #808080; font-style: italic;"># </span><span s
 </section>
 </section>
 <section>
-<section id="slide-orgef47e88" data-background="#fef4f4">
-<h2 id="orgef47e88">実習</h2>
+<section id="slide-org6450e57" data-background="#fef4f4">
+<h2 id="org6450e57">実習</h2>
 </section>
-<section id="slide-org89758a2" data-background="#fef4f4">
-<h3 id="org89758a2">練習問題</h3>
+<section id="slide-org48979ec" data-background="#fef4f4">
+<h3 id="org48979ec">練習問題</h3>
 <ul>
 <li><code>jpdata1/3.csv</code> (前回配布のデータ)を用いて以下の問に答えよ．
 <ul>
@@ -762,13 +762,13 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </section>
 </section>
 <section>
-<section id="slide-org8709693">
-<h2 id="org8709693">さまざまなグラフ</h2>
-<div class="outline-text-2" id="text-org8709693">
+<section id="slide-org6b84212">
+<h2 id="org6b84212">さまざまなグラフ</h2>
+<div class="outline-text-2" id="text-org6b84212">
 </div>
 </section>
-<section id="slide-org01f0ad1">
-<h3 id="org01f0ad1">ヒストグラム</h3>
+<section id="slide-org8e4c20e">
+<h3 id="org8e4c20e">ヒストグラム</h3>
 <ul>
 <li>データの値の範囲をいくつかの区間に分割し，
 各区間に含まれるデータの個数を棒グラフにした図
@@ -814,15 +814,15 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </div>
 
 
-<div id="orgcb38ebb" class="figure">
+<div id="org3ab54a7" class="figure">
 <p><img src="figs/05-geomhistogram.png" alt="05-geomhistogram.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-orgce77bfb">
-<h3 id="orgce77bfb">密度</h3>
+<section id="slide-orgd1ca57a">
+<h3 id="orgd1ca57a">密度</h3>
 <ul>
 <li>データからカーネル法で確率密度を推定した図
 <ul>
@@ -867,15 +867,15 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </div>
 
 
-<div id="orgb625d27" class="figure">
+<div id="orge2c20b9" class="figure">
 <p><img src="figs/05-geomdensity.png" alt="05-geomdensity.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-orgf273835">
-<h3 id="orgf273835">箱ひげ図</h3>
+<section id="slide-org505f045">
+<h3 id="org505f045">箱ひげ図</h3>
 <ul>
 <li>データの散らばり具合を考察するための図
 <ul>
@@ -924,15 +924,15 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </div>
 
 
-<div id="org0f89220" class="figure">
+<div id="orgbcc0083" class="figure">
 <p><img src="figs/05-geomboxplot.png" alt="05-geomboxplot.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org43b55b1">
-<h3 id="org43b55b1">棒グラフ</h3>
+<section id="slide-orgd2dad16">
+<h3 id="orgd2dad16">棒グラフ</h3>
 <ul>
 <li><p>
 項目ごとの量を並べて表示した図
@@ -983,7 +983,7 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </div>
 
 
-<div id="orgc57f184" class="figure">
+<div id="org45b9ca5" class="figure">
 <p><img src="figs/05-geombar.png" alt="05-geombar.png" width="50%" />
 </p>
 </div></li>
@@ -992,11 +992,11 @@ jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="
 </section>
 </section>
 <section>
-<section id="slide-org7f6b322" data-background="#fef4f4">
-<h2 id="org7f6b322">実習</h2>
+<section id="slide-orgbb70094" data-background="#fef4f4">
+<h2 id="orgbb70094">実習</h2>
 </section>
-<section id="slide-org5f9f7cf" data-background="#fef4f4">
-<h3 id="org5f9f7cf">練習問題</h3>
+<section id="slide-orgd53ef47" data-background="#fef4f4">
+<h3 id="orgd53ef47">練習問題</h3>
 <ul>
 <li><code>tokyo_covid19_2021.csv</code> (東京都の新型コロナの動向データ)
 を用いて以下の問に答えよ
@@ -1020,8 +1020,8 @@ tc_data <span style="color: #60aa00;">&lt;-</span> read_csv(file=<span style="co
 </section>
 </section>
 <section>
-<section id="slide-org13f83a8">
-<h2 id="org13f83a8">次回の予定</h2>
+<section id="slide-orga75e636">
+<h2 id="orga75e636">次回の予定</h2>
 <ul>
 <li>計算機による数値実験</li>
 <li>乱数とは</li>

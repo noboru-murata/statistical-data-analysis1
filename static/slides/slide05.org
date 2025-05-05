@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-05-01 18:11:31 mura>
+# Time-stamp: <2025-05-05 14:31:47 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -118,7 +118,7 @@
 #+reveal: split
 - ~tokyo_covid19_2021.csv~ (~tokyo.zip~ の中)
   #+begin_quote
-  - [[https://stopcovid19.metro.tokyo.lg.jp]] (東京都)
+  - https://www.hokeniryo.metro.tokyo.lg.jp/kansen/info/corona/corona_portal (東京都)
   - データ項目
     陽性者数, 総検査実施件数, 発熱等相談件数
   #+end_quote
@@ -704,7 +704,8 @@
       update_geom_defaults("label", list(family = theme_get()$text$family))}
   #+end_src
   - 以下のサイトなども参考になる \\
-    https://oku.edu.mie-u.ac.jp/~okumura/stat/font.html
+     https://okumuralab.org/~okumura/stat/font.html
+#    https://oku.edu.mie-u.ac.jp/~okumura/stat/font.html
 
 
 * 実習
