@@ -118,13 +118,15 @@
 :EXPORT_FILE_NAME: lecture06
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2024-05-10 Fri> 更新
+<2025-05-09 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide06" >}}
 ** ハンドアウト
 - [[github:pdfs/slide06.pdf][PDF file]]
-** 解答例
-- [[github:code/slide06.R][RScript]]
+** 付録
+- 実習用 [[githubraw:code/practice06.qmd][Quarto]]
+- 解答例 [[github:code/sample-code06.html][HTML]] [[githubraw:code/sample-code06.qmd][Quarto]] 
+- 資料の例題 [[github:code/slide06.R][RScript]]
 - [[https://github.com/noboru-murata/epidemic-model][確率シミュレーションの例]]
 
 * 第7講
@@ -294,13 +296,13 @@
 :EXPORT_FILE_NAME: record
 :EXPORT_DATE: <2022-04-08 Fri>
 :END:
-<2025-05-03 Sat> 更新
+<2025-05-09 Fri> 更新
 
 講義の進捗に合わせて追加します．
 - 第1講 (2025年4月18日) 録画ミスのため後日公開します
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/4edaolc-CHjYchUMCIvVf1ERnz_KDm4fwM9F0DeT-SxgmfjN-Q-n9GHTG359n3J_.t6gLw_qAcayfle7I?startTime=1745567484000][第2講 (2025年4月25日)]]
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/t_dAHK0lubppPvUOkUok8jeIJSVc8tkAOPZpoxFe3H399UxBu_O3POeduGcITfsO.nexvgDQJ0kOR0kis?startTime=1746172571000][第3講 (2025年5月2日)]]
-- 第4講 (2025年5月9日)
+- [[https://u-tokyo-ac-jp.zoom.us/rec/share/zMrv4ICNIcZwgDI5j4A1yf87IJVrncV8Eb1qQlzwko-jiNalFDtLBqyA1GBqaGlx.T9SBvUD2nASoS4sX?startTime=1746777355000][第4講 (2025年5月9日)]]
 - 第5講 (2025年5月16日)
 - 第6講 (2025年5月30日)
 - 第7講 (2025年6月6日)

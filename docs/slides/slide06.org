@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:52:13 mura>
+# Time-stamp: <2025-05-09 16:20:07 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -208,7 +208,7 @@
   #+end_quote
   この賭けの勝率を求めるための確率シミュレーションを行いなさい
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice コイン投げの賭け
   #'
@@ -245,6 +245,98 @@
      
 
 * 確率シミュレーションの例
+** Buffon の針
+:PROPERTIES:
+:ID:       C51D1052-6784-42AD-B54D-A55C06FC9F92
+:END:
+- 問題
+  #+begin_quote
+  2次元平面上に等間隔 \(d\) で平行線が引いてある．
+  長さ \(l\) の針を
+  この平面上にランダムに落としたとき，
+  平行線と交わる確率はいくつか？
+  ただし \(l\leq d\) とする．
+  #+end_quote
+  - 針の位置(例えば中心)と平行線となす角度が適当な範囲でランダムに選ばれると考えればよい
+
+#+begin_src R :eval no :exports none :tangle no
+  #' ---------------------------------------------------------------------------
+  #' @practice Buffonの針
+  #'
+  #' 針を投げる試行を定義する
+  #' 試行の周期性から1本の線の回りで問題を考えれば良い
+  #' 針の中心位置 x (-d/2<x<d/2) と向き theta (0<theta<2π) をランダムに生成
+  #' 針の先と尾の座標の符号が異なれば位置0の線と交わっていると判断できる
+  #' 
+  buffon_trial <- function(d, l, verbose = FALSE){ # dとlを指定
+    x <- runif(1, min = -d/2, max = d/2) # 位置
+    theta <- runif(1, min = 0, max = 2*pi) # 角度
+    cross <- FALSE # 交わったかどうかを示す変数
+    if((x+l*cos(theta)/2)*(x-l*cos(theta)/2) < 0){
+      cross <- TRUE # 交わった場合に書き換え
+    }
+    if(verbose == TRUE){ # 位置と角度も返す
+      return(c(x = x, theta = theta,       # ベクトルで返すので
+               cross = as.numeric(cross))) # データ型を揃える
+    } else { # 交わったかどうかだけ返す
+      return(cross) # 論理値のまま返す
+    }
+  }
+  #'
+  #' 試行を行ってみる
+  d <- 10
+  l <- 7
+  buffon_trial(d, l)
+  buffon_trial(d, l)
+  #'
+  #' 詳細な情報を表示する場合 (絵を描くときに用いる)
+  buffon_trial(d, l, verbose = TRUE)
+  buffon_trial(d, l, verbose = TRUE)
+  #'
+  #' 絵にしてみる
+  mc <- 10
+  replicate(mc, buffon_trial(d, l, verbose = TRUE)) |>
+    t() |> # 配列を転置
+    as_tibble() |> # tibble に変換
+    mutate( # 図に必要な情報を加える
+      y = runif(mc, min = -(d+l)/2, max = (d+l)/2), # 中心のy座標をランダムに生成
+      x1 = x-l/2*cos(theta), 
+      x2 = x+l/2*cos(theta),
+      y1 = y-l/2*sin(theta),
+      y2 = y+l/2*sin(theta),
+      cross = as.logical(cross)) |> # 交わり表すラベル(論理値)
+    ggplot() + 
+    geom_vline(xintercept = c(-d,0,d)) + # 縦棒を描く
+    geom_segment(aes(x = x1, y = y1,       # 始点
+                     xend = x2, yend = y2, # 終点
+                     colour = cross)) +    # 交わりを表示
+    labs(x = "x", y = "y") +
+    coord_fixed() # 座標軸の比を1に固定
+  #'
+  #' xとthetaの関係を図にしてみる
+  mc <- 3000
+  replicate(mc, buffon_trial(d, l, verbose = TRUE)) |>
+    t() |> 
+    as_tibble() |> 
+    mutate( # 図に必要な情報を加える
+      cross = as.logical(cross)) |> # 交わり表すラベル(論理値)
+    ggplot(aes(x = x, y = theta, colour = cross)) + 
+    geom_vline(xintercept = c(-d/2,d/2)) + # 境界を描く
+    geom_hline(yintercept = c(0,2*pi)) +   # 横線を描く
+    geom_point() + labs(y = expression(theta)) 
+  #' 
+  #' 大規模な確率シミュレーション
+  mc <- 100000 # 回数を設定 
+  buffon_data <- replicate(mc, buffon_trial(d, l)) 
+  #'
+  #' 簡単な集計
+  table(buffon_data)      # 頻度 (TRUEが針の交わった回数)
+  table(buffon_data)/mc   # 確率(推定値)
+  print((2*l)/(pi*d)) # 針の交わる確率 (理論値)
+  2*l/d/(table(buffon_data)/mc)["TRUE"] # π の推定値
+  #' ---------------------------------------------------------------------------
+#+end_src
+
 ** Monty Hall 問題
 :PROPERTIES:
 :ID:       5C7C5647-F4CD-4C51-98AF-2F77112E95E2
@@ -263,7 +355,7 @@
   参加者はドアを変更すべきだろうか？
   #+end_quote
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice Monty Hole 問題
   #' 
@@ -378,98 +470,6 @@
   #' ---------------------------------------------------------------------------
 #+end_src
 
-** Buffon の針
-:PROPERTIES:
-:ID:       C51D1052-6784-42AD-B54D-A55C06FC9F92
-:END:
-- 問題
-  #+begin_quote
-  2次元平面上に等間隔 \(d\) で平行線が引いてある．
-  長さ \(l\) の針を
-  この平面上にランダムに落としたとき，
-  平行線と交わる確率はいくつか？
-  ただし \(l\leq d\) とする．
-  #+end_quote
-  - 針の位置(例えば中心)と平行線となす角度が適当な範囲でランダムに選ばれると考えればよい
-
-#+begin_src R :eval no :exports none
-  #' ---------------------------------------------------------------------------
-  #' @practice Buffonの針
-  #'
-  #' 針を投げる試行を定義する
-  #' 試行の周期性から1本の線の回りで問題を考えれば良い
-  #' 針の中心位置 x (-d/2<x<d/2) と向き theta (0<theta<2π) をランダムに生成
-  #' 針の先と尾の座標の符号が異なれば位置0の線と交わっていると判断できる
-  #' 
-  buffon_trial <- function(d, l, verbose = FALSE){ # dとlを指定
-    x <- runif(1, min = -d/2, max = d/2) # 位置
-    theta <- runif(1, min = 0, max = 2*pi) # 角度
-    cross <- FALSE # 交わったかどうかを示す変数
-    if((x+l*cos(theta)/2)*(x-l*cos(theta)/2) < 0){
-      cross <- TRUE # 交わった場合に書き換え
-    }
-    if(verbose == TRUE){ # 位置と角度も返す
-      return(c(x = x, theta = theta,       # ベクトルで返すので
-               cross = as.numeric(cross))) # データ型を揃える
-    } else { # 交わったかどうかだけ返す
-      return(cross) # 論理値のまま返す
-    }
-  }
-  #'
-  #' 試行を行ってみる
-  d <- 10
-  l <- 7
-  buffon_trial(d, l)
-  buffon_trial(d, l)
-  #'
-  #' 詳細な情報を表示する場合 (絵を描くときに用いる)
-  buffon_trial(d, l, verbose = TRUE)
-  buffon_trial(d, l, verbose = TRUE)
-  #'
-  #' 絵にしてみる
-  mc <- 10
-  replicate(mc, buffon_trial(d, l, verbose = TRUE)) |>
-    t() |> # 配列を転置
-    as_tibble() |> # tibble に変換
-    mutate( # 図に必要な情報を加える
-      y = runif(mc, min = -(d+l)/2, max = (d+l)/2), # 中心のy座標をランダムに生成
-      x1 = x-l/2*cos(theta), 
-      x2 = x+l/2*cos(theta),
-      y1 = y-l/2*sin(theta),
-      y2 = y+l/2*sin(theta),
-      cross = as.logical(cross)) |> # 交わり表すラベル(論理値)
-    ggplot() + 
-    geom_vline(xintercept = c(-d,0,d)) + # 縦棒を描く
-    geom_segment(aes(x = x1, y = y1,       # 始点
-                     xend = x2, yend = y2, # 終点
-                     colour = cross)) +    # 交わりを表示
-    labs(x = "x", y = "y") +
-    coord_fixed() # 座標軸の比を1に固定
-  #'
-  #' xとthetaの関係を図にしてみる
-  mc <- 3000
-  replicate(mc, buffon_trial(d, l, verbose = TRUE)) |>
-    t() |> 
-    as_tibble() |> 
-    mutate( # 図に必要な情報を加える
-      cross = as.logical(cross)) |> # 交わり表すラベル(論理値)
-    ggplot(aes(x = x, y = theta, colour = cross)) + 
-    geom_vline(xintercept = c(-d/2,d/2)) + # 境界を描く
-    geom_hline(yintercept = c(0,2*pi)) +   # 横線を描く
-    geom_point() + labs(y = expression(theta)) 
-  #' 
-  #' 大規模な確率シミュレーション
-  mc <- 100000 # 回数を設定 
-  buffon_data <- replicate(mc, buffon_trial(d, l)) 
-  #'
-  #' 簡単な集計
-  table(buffon_data)      # 頻度 (TRUEが針の交わった回数)
-  table(buffon_data)/mc   # 確率(推定値)
-  print((2*l)/(pi*d)) # 針の交わる確率 (理論値)
-  2*l/d/(table(buffon_data)/mc)["TRUE"] # π の推定値
-  #' ---------------------------------------------------------------------------
-#+end_src
-
 ** 秘書問題 (最適停止問題)
 :PROPERTIES:
 :ID:       0DBFD3FC-78DC-4F06-86C6-C158412C5527
@@ -488,7 +488,7 @@
   という戦略を取るとき，最適な \(r\) はいくつだろうか?
   #+end_quote
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 秘書問題
   #' 

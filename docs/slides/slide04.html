@@ -44,8 +44,8 @@
 
 </section>
 <section>
-<section id="slide-orgfb68a38">
-<h2 id="orgfb68a38">講義概要</h2>
+<section id="slide-org3dc1f46">
+<h2 id="org3dc1f46">講義概要</h2>
 <ul>
 <li>データフレームの操作</li>
 <li>ファイルの取り扱い</li>
@@ -55,13 +55,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orge1ac957">
-<h2 id="orge1ac957">データフレームの操作</h2>
-<div class="outline-text-2" id="text-orge1ac957">
+<section id="slide-org1c952f3">
+<h2 id="org1c952f3">データフレームの操作</h2>
+<div class="outline-text-2" id="text-org1c952f3">
 </div>
 </section>
-<section id="slide-org80e7181">
-<h3 id="org80e7181">データ構造</h3>
+<section id="slide-orgd6f2c68">
+<h3 id="orgd6f2c68">データ構造</h3>
 <ul>
 <li>Rに用意されている基本的なデータ構造
 <ul>
@@ -79,8 +79,8 @@
 
 </ul>
 </section>
-<section id="slide-orgcb19739">
-<h3 id="orgcb19739">データフレーム</h3>
+<section id="slide-org9b88a1c">
+<h3 id="org9b88a1c">データフレーム</h3>
 <ul>
 <li>複数の個体について，いくつかの属性を集計した表
 <ul>
@@ -157,8 +157,8 @@
 
 </ul>
 </section>
-<section id="slide-org13f5379">
-<h3 id="org13f5379">tidyverse パッケージ</h3>
+<section id="slide-orgb2146bb">
+<h3 id="orgb2146bb">tidyverse パッケージ</h3>
 <ul>
 <li>データ操作とグラフィクスの拡張 (再掲)
 <ul>
@@ -186,8 +186,8 @@
 
 </ul>
 </section>
-<section id="slide-orgc34bc0a">
-<h3 id="orgc34bc0a">データ例</h3>
+<section id="slide-orgf7cf258">
+<h3 id="orgf7cf258">データ例</h3>
 <ul>
 <li><p>
 <b><code>datasets::airquality</code></b>
@@ -231,20 +231,20 @@ A data frame with 153 observations on 6 variables.
 <div class="org-src-container">
 
 <pre class="src src-R">aq_tbl <span style="color: #60aa00;">&lt;-</span> as_tibble(airquality) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">tibble &#24418;&#24335;&#12408;&#22793;&#25563;</span>
-aq_df <span style="color: #60aa00;">&lt;-</span> airquality <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27604;&#36611;&#12398;&#12383;&#12417; data.frame &#12434;&#21029;&#21517;&#12391;&#23450;&#32681; (&#12467;&#12500;&#12540;)</span>
-aq_tbl <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#21021;&#12398;10&#34892;&#12398;&#12415;&#34920;&#31034;&#12373;&#12428;&#12427;</span>
-aq_df  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20840;&#12390;&#12398;&#12487;&#12540;&#12479;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;</span>
-print(aq_tbl, n = 15)  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#21021;&#12398;15&#34892;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;&#65294;'?tibble::print.tbl' &#12434;&#21442;&#29031;</span>
-print(aq_tbl, n = <span style="color: #00aa80;">Inf</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20840;&#12390;&#34920;&#31034;</span>
-head(aq_df, n = 10)    <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#21021;&#12398;10&#34892;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;&#65294;tibble&#12391;&#12418;&#21516;&#27096;</span>
-tail(aq_df, n = 10)    <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#24460;&#12398;10&#34892;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;&#65294;tibble&#12391;&#12418;&#21516;&#27096;</span>
+aq_df <span style="color: #60aa00;">&lt;-</span> airquality             <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27604;&#36611;&#12398;&#12383;&#12417; data.frame &#12434;&#21029;&#21517;&#12391;&#23450;&#32681; (&#12467;&#12500;&#12540;)</span>
+aq_tbl                          <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#21021;&#12398;10&#34892;&#12398;&#12415;&#34920;&#31034;&#12373;&#12428;&#12427;</span>
+aq_df                           <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20840;&#12390;&#12398;&#12487;&#12540;&#12479;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;</span>
+print(aq_tbl, n = 15)           <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#21021;&#12398;15&#34892;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;&#65294;'?tibble::print.tbl' &#12434;&#21442;&#29031;</span>
+print(aq_tbl, n = <span style="color: #00aa80;">Inf</span>)          <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20840;&#12390;&#34920;&#31034;</span>
+head(aq_df, n = 10)             <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#21021;&#12398;10&#34892;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;&#65294;tibble&#12391;&#12418;&#21516;&#27096;</span>
+tail(aq_df, n = 10)             <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#24460;&#12398;10&#34892;&#12364;&#34920;&#31034;&#12373;&#12428;&#12427;&#65294;tibble&#12391;&#12418;&#21516;&#27096;</span>
 </pre>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org10ab2b7">
-<h3 id="org10ab2b7">項目の抽出</h3>
+<section id="slide-orgcc9385f">
+<h3 id="orgcc9385f">項目の抽出</h3>
 <ul>
 <li><p>
 添字の番号(行と列)を指定
@@ -262,13 +262,13 @@ tail(aq_df, n = 10)    <span style="color: #808080; font-style: italic;"># </spa
 </ul>
 <div class="org-src-container">
 
-<pre class="src src-R">aq_tbl[1,2] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#34892;2&#21015;&#12398;&#35201;&#32032;&#12434;&#36984;&#25246;</span>
-aq_tbl[-seq(2, nrow(aq_tbl), by = 2),] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20598;&#25968;&#34892;&#12434;&#38500;&#22806;</span>
+<pre class="src src-R">aq_tbl[1,2]                                 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#34892;2&#21015;&#12398;&#35201;&#32032;&#12434;&#36984;&#25246;</span>
+aq_tbl[-seq(2, nrow(aq_tbl), by = 2),]      <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20598;&#25968;&#34892;&#12434;&#38500;&#22806;</span>
 aq_tbl[,c(<span style="color: #00aa80;">TRUE</span>,<span style="color: #00aa80;">FALSE</span>,<span style="color: #00aa80;">TRUE</span>,<span style="color: #00aa80;">TRUE</span>,<span style="color: #00aa80;">FALSE</span>,<span style="color: #00aa80;">TRUE</span>)] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1,3,4,6&#21015;&#12434;&#36984;&#25246;</span>
-aq_tbl[<span style="color: #d08928;">"Ozone"</span>] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">Ozone&#21015;&#12434;&#36984;&#25246;&#65294;aq_tbl[,"Ozone"] &#12391;&#12418;&#21516;&#27096;</span>
-aq_tbl[c(<span style="color: #d08928;">"Ozone"</span>,<span style="color: #d08928;">"Wind"</span>)] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35079;&#25968;&#21015;&#12398;&#36984;&#25246;&#12418;&#21516;&#27096;</span>
-aq_tbl[[<span style="color: #d08928;">"Ozone"</span>]] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12522;&#12473;&#12488;&#12392;&#12375;&#12390;&#25201;&#12356;1&#21015;&#12434;&#36984;&#25246;&#12377;&#12427;&#12392;&#12505;&#12463;&#12488;&#12523;&#12395;&#12394;&#12427;</span>
-aq_tbl$Ozone      <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
+aq_tbl[<span style="color: #d08928;">"Ozone"</span>]                             <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">Ozone&#21015;&#12434;&#36984;&#25246;&#65294;aq_tbl[,"Ozone"] &#12391;&#12418;&#21516;&#27096;</span>
+aq_tbl[c(<span style="color: #d08928;">"Ozone"</span>,<span style="color: #d08928;">"Wind"</span>)]                   <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35079;&#25968;&#21015;&#12398;&#36984;&#25246;&#12418;&#21516;&#27096;</span>
+aq_tbl[[<span style="color: #d08928;">"Ozone"</span>]]                           <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12522;&#12473;&#12488;&#12392;&#12375;&#12390;&#25201;&#12356;1&#21015;&#12434;&#36984;&#25246;&#12377;&#12427;&#12392;&#12505;&#12463;&#12488;&#12523;&#12395;&#12394;&#12427;</span>
+aq_tbl$Ozone                                <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
 </pre>
 </div></li>
 <li><b>欠損値 <code>NA</code></b> の扱いは状況依存なので注意
@@ -279,8 +279,8 @@ aq_tbl$Ozone      <span style="color: #808080; font-style: italic;"># </span><sp
 
 </ul>
 </section>
-<section id="slide-orge98275a">
-<h3 id="orge98275a">行の選択 (素朴な方法)</h3>
+<section id="slide-org975f1a4">
+<h3 id="org975f1a4">行の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 行番号による指定
@@ -299,8 +299,8 @@ aq_tbl[20:30,] <span style="color: #808080; font-style: italic;"># </span><span 
 <pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#26465;&#20214;&#12398;&#25351;&#23450;&#12398;&#20181;&#26041;</span>
 aq_tbl[1:15,]$Ozone &gt; 100 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26465;&#20214;&#12395;&#21512;&#33268;&#12377;&#12427;&#34892;&#12399;TRUE (NA&#12399;&#27424;&#25613;&#20516;)</span>
 aq_tbl[1:15,]$Ozone &gt; 100 &amp; aq_tbl[1:15,]$Wind &lt;= 5 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26465;&#20214;&#12398;AND</span>
-with(aq_tbl[1:15,], Ozone &gt; 100 &amp; Wind &lt;= 5) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#12376;(&#30701;&#12356;&#26360;&#12365;&#26041;)</span>
-with(aq_tbl[1:60,], Ozone &gt; 100 | Wind &lt;= 5) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26465;&#20214;&#12398;OR</span>
+with(aq_tbl[1:15,], Ozone &gt; 100 &amp; Wind &lt;= 5)        <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#12376;(&#30701;&#12356;&#26360;&#12365;&#26041;)</span>
+with(aq_tbl[1:60,], Ozone &gt; 100 | Wind &lt;= 5)        <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26465;&#20214;&#12398;OR</span>
 </pre>
 </div></li>
 <li><p>
@@ -309,15 +309,15 @@ with(aq_tbl[1:60,], Ozone &gt; 100 | Wind &lt;= 5) <span style="color: #808080; 
 <div class="org-src-container">
 
 <pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; which() &#12391;TRUE&#12392;&#12394;&#12427;&#34892;&#30058;&#21495;&#12434;&#25277;&#20986;&#12375;&#12390;&#25351;&#23450;</span>
-which(with(aq_tbl, Ozone&gt;100 &amp; Wind&lt;=5)) 
+which(with(aq_tbl, Ozone&gt;100 &amp; Wind&lt;=5)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">FALSE&#12362;&#12424;&#12403;NA&#12399;&#38500;&#21435;&#12373;&#12428;&#12427;</span>
 aq_tbl[which(with(aq_tbl, Ozone&gt;100 &amp; Wind&lt;=5)), ] 
 </pre>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-orgcdaced6">
-<h3 id="orgcdaced6">列の選択 (素朴な方法)</h3>
+<section id="slide-org6b63d6f">
+<h3 id="org6b63d6f">列の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 列番号による指定
@@ -343,16 +343,16 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)), c(<span style="co
 <div class="org-src-container">
 
 <pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> 1&#12388;&#12398;&#21015;&#12398;&#22580;&#21512;&#12399;&#12522;&#12473;&#12488;&#12398;&#25805;&#20316;&#12392;&#12375;&#12390;&#21462;&#12426;&#20986;&#12379;&#12427;&#12364;&#65292;&#12505;&#12463;&#12488;&#12523;&#12392;&#12394;&#12427;&#12371;&#12392;&#12395;&#27880;&#24847;</span>
-aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),]$Month  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12505;&#12463;&#12488;&#12523;</span>
+aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),]$Month      <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12505;&#12463;&#12488;&#12523;</span>
 aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),][[<span style="color: #d08928;">"Month"</span>]] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
-aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color: #d08928;">"Month"</span>] <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color: #d08928;">"Month"</span>]     <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
 </pre>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org2af1c31">
-<h3 id="org2af1c31">行の選択</h3>
+<section id="slide-org5598b98">
+<h3 id="org5598b98">行の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::filter()</code> : 条件を指定して行を選択
@@ -377,8 +377,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color
 
 </ul>
 </section>
-<section id="slide-org7fea145">
-<h3 id="org7fea145">列の選択</h3>
+<section id="slide-org2272db8">
+<h3 id="org2272db8">列の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::select()</code> : 条件を指定して列を選択
@@ -402,8 +402,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color
 
 </ul>
 </section>
-<section id="slide-orgf444355">
-<h3 id="orgf444355">パイプ演算子</h3>
+<section id="slide-org6d949c1">
+<h3 id="org6d949c1">パイプ演算子</h3>
 <ul>
 <li>処理を順次結合する演算子 (いくつか定義がある)
 <ul>
@@ -416,7 +416,7 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32032;&#26420;&#12398;&#26041;&#27861;&#12398;&#20363;&#12399;&#20197;&#19979;&#12398;&#12424;&#12358;&#12395;&#26360;&#12369;&#12427;</span>
+<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32032;&#26420;&#12394;&#26041;&#27861;&#12398;&#20363;&#12399;&#20197;&#19979;&#12398;&#12424;&#12358;&#12395;&#26360;&#12369;&#12427;</span>
 aq_tbl |&gt; filter(Ozone &gt; 100 &amp; Wind &lt;= 5) |&gt; select(1,5,6)
 aq_tbl |&gt; filter(Ozone &gt; 100 &amp; Wind &lt;= 5) |&gt; select(Month,Day)
 <span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> Ozone&#12395;&#27424;&#28204;(NA)&#12364;&#12394;&#12367;, &#12363;&#12388;Day&#12364;5&#12363;10&#12398;&#12487;&#12540;&#12479;&#12398;Wind&#12363;&#12425;Day&#12414;&#12391;&#12398;&#21015;&#12434;&#25277;&#20986;</span>
@@ -430,11 +430,11 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 </section>
 </section>
 <section>
-<section id="slide-org15ba739" data-background="#fef4f4">
-<h2 id="org15ba739">実習</h2>
+<section id="slide-org5e746f0" data-background="#fef4f4">
+<h2 id="org5e746f0">実習</h2>
 </section>
-<section id="slide-org803a32e" data-background="#fef4f4">
-<h3 id="org803a32e">練習問題</h3>
+<section id="slide-org96b6e34" data-background="#fef4f4">
+<h3 id="org96b6e34">練習問題</h3>
 <ul>
 <li><code>datasets::airquality</code> に対して
 以下の条件を満たすデータを取り出しなさい．
@@ -451,13 +451,13 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 </section>
 </section>
 <section>
-<section id="slide-org138ca8f">
-<h2 id="org138ca8f">ファイルの取り扱い</h2>
-<div class="outline-text-2" id="text-org138ca8f">
+<section id="slide-org188bd9b">
+<h2 id="org188bd9b">ファイルの取り扱い</h2>
+<div class="outline-text-2" id="text-org188bd9b">
 </div>
 </section>
-<section id="slide-orgb518e5c">
-<h3 id="orgb518e5c">データファイルの読み書き</h3>
+<section id="slide-org0918ba5">
+<h3 id="org0918ba5">データファイルの読み書き</h3>
 <ul>
 <li>実際の解析においては以下の操作が必要
 <ul>
@@ -476,8 +476,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 
 </ul>
 </section>
-<section id="slide-org373c290">
-<h3 id="org373c290">作業ディレクトリ</h3>
+<section id="slide-orgb204175">
+<h3 id="orgb204175">作業ディレクトリ</h3>
 <ul>
 <li>Rの処理は <b>作業ディレクトリ</b> で実行される
 <ul>
@@ -507,8 +507,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 
 </ul>
 </section>
-<section id="slide-org060cfd0">
-<h3 id="org060cfd0">作業ディレクトリの操作</h3>
+<section id="slide-org694a2ca">
+<h3 id="org694a2ca">作業ディレクトリの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::getwd()</code> : 作業ディレクトリの確認
@@ -537,8 +537,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 
 </ul>
 </section>
-<section id="slide-orgfec4f48">
-<h3 id="orgfec4f48">CSV ファイルの操作</h3>
+<section id="slide-org12c6ff1">
+<h3 id="org12c6ff1">CSV ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>readr::write_csv()</code> : ファイルの書き出し
@@ -575,13 +575,13 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 <div class="org-src-container">
 
 <pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; write_csv() &#12398;&#20351;&#12356;&#26041; (CSV&#12501;&#12449;&#12452;&#12523;&#12398;&#25805;&#20316;)</span>
-my_data <span style="color: #60aa00;">&lt;-</span> <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12398;&#25972;&#29702;</span>
+my_data <span style="color: #60aa00;">&lt;-</span>              <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12398;&#25972;&#29702;</span>
   aq_tbl |&gt; 
   filter(Ozone &gt; 80) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">Ozone &#12364;80&#12434;&#36234;&#12360;&#12427;&#26085;&#12434;&#25277;&#20986;</span>
-  select(!Temp)          <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#28201;&#24230;&#12399;&#38500;&#12367;</span>
+  select(!Temp)         <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#28201;&#24230;&#12399;&#38500;&#12367;</span>
 dim(my_data) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12398;&#22823;&#12365;&#12373;&#12434;&#30906;&#35469;</span>
 <span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#20316;&#26989;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12398;&#20013;&#12395; data &#12392;&#12356;&#12358;&#12501;&#12457;&#12523;&#12480;&#12434;&#29992;&#24847;&#12375;&#12390;&#12362;&#12367;</span>
-write_csv(my_data, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20445;&#23384;&#12377;&#12427;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
+write_csv(my_data,      <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20445;&#23384;&#12377;&#12427;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
           file = <span style="color: #d08928;">"data/my_data.csv"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">(&#22580;&#25152;&#12392;)&#12501;&#12449;&#12452;&#12523;&#21517;</span>
 </pre>
 </div></li>
@@ -598,8 +598,8 @@ dim(new_data) <span style="color: #808080; font-style: italic;"># </span><span s
 
 </ul>
 </section>
-<section id="slide-org3d4bf12">
-<h3 id="org3d4bf12">RData ファイルの操作</h3>
+<section id="slide-orgca634ce">
+<h3 id="orgca634ce">RData ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::save()</code> : ファイルの書き出し
@@ -643,8 +643,8 @@ dim(new_data) <span style="color: #808080; font-style: italic;"># </span><span s
 <pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; save() &#12398;&#20351;&#12356;&#26041; (RData&#12501;&#12449;&#12452;&#12523;&#12398;&#25805;&#20316;)</span>
 my_data_1 <span style="color: #60aa00;">&lt;-</span> aq_tbl |&gt; filter(Temp &gt; 90) |&gt; select(!Ozone)
 my_data_2 <span style="color: #60aa00;">&lt;-</span> aq_tbl |&gt; filter(Temp &lt; 60) |&gt; select(!Ozone)
-dim(my_data_1); dim(my_data_2) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22823;&#12365;&#12373;&#12434;&#30906;&#35469;</span>
-save(my_data_1, my_data_2, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20445;&#23384;&#12377;&#12427;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12434;&#21015;&#25369;</span>
+dim(my_data_1); dim(my_data_2)    <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22823;&#12365;&#12373;&#12434;&#30906;&#35469;</span>
+save(my_data_1, my_data_2,        <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20445;&#23384;&#12377;&#12427;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12434;&#21015;&#25369;</span>
      file = <span style="color: #d08928;">"data/my_data.rdata"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#21517;</span>
 </pre>
 </div></li>
@@ -655,7 +655,7 @@ save(my_data_1, my_data_2, <span style="color: #808080; font-style: italic;"># <
 
 <pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; load() &#12398;&#20351;&#12356;&#26041; (RData&#12501;&#12449;&#12452;&#12523;&#12398;&#25805;&#20316;)</span>
 my_data_1 <span style="color: #60aa00;">&lt;-</span> aq_tbl |&gt; filter(Ozone &gt; 160) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26032;&#12383;&#12395;&#20316;&#25104;</span>
-<span style="color: #60aa00;">load</span>(file = <span style="color: #d08928;">"data/my_data.rdata"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#21517;</span>
+<span style="color: #60aa00;">load</span>(file = <span style="color: #d08928;">"data/my_data.rdata"</span>)          <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#21517;</span>
 my_data_1 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">save&#12375;&#12383;&#12392;&#12365;&#12398;&#21517;&#21069;&#12391;&#35501;&#12415;&#36796;&#12414;&#12428;&#19978;&#26360;&#12365;&#12373;&#12428;&#12427;</span>
 my_data_2 
 </pre>
@@ -665,11 +665,11 @@ my_data_2
 </section>
 </section>
 <section>
-<section id="slide-org07e6e44" data-background="#fef4f4">
-<h2 id="org07e6e44">実習</h2>
+<section id="slide-orgebc37c9" data-background="#fef4f4">
+<h2 id="orgebc37c9">実習</h2>
 </section>
-<section id="slide-org2089c06" data-background="#fef4f4">
-<h3 id="org2089c06">練習問題</h3>
+<section id="slide-org0367b30" data-background="#fef4f4">
+<h3 id="org0367b30">練習問題</h3>
 <ul>
 <li><p>
 以下のデータを読み込んで操作してみよう
@@ -715,13 +715,13 @@ jp_area_en <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span styl
 </section>
 </section>
 <section>
-<section id="slide-orgc826492">
-<h2 id="orgc826492">データの集計</h2>
-<div class="outline-text-2" id="text-orgc826492">
+<section id="slide-org0b197c8">
+<h2 id="org0b197c8">データの集計</h2>
+<div class="outline-text-2" id="text-org0b197c8">
 </div>
 </section>
-<section id="slide-org367c339">
-<h3 id="org367c339">統計量の計算</h3>
+<section id="slide-org4da7433">
+<h3 id="org4da7433">統計量の計算</h3>
 <ul>
 <li>データを集約した値 = 統計量
 <ul>
@@ -737,8 +737,8 @@ jp_area_en <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span styl
 
 </ul>
 </section>
-<section id="slide-org73e8a2f">
-<h3 id="org73e8a2f">集約のための関数の使い方</h3>
+<section id="slide-org6fd2190">
+<h3 id="org6fd2190">集約のための関数の使い方</h3>
 <ul>
 <li><p>
 <span style="color:green;">データの集計の例</span>
@@ -746,28 +746,28 @@ jp_area_en <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span styl
 <div class="org-src-container">
 
 <pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32244;&#32722;&#21839;&#38988;&#12398;&#12487;&#12540;&#12479;&#12434;&#29992;&#12356;&#12427;</span>
-sum(jp_data$&#20154;&#21475;)        <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20840;&#22269;&#12398;&#32207;&#20154;&#21475; (&#21015;&#21517;&#12391;&#12505;&#12463;&#12488;&#12523;&#12434;&#36984;&#25246;)</span>
-sum(jp_data[,<span style="color: #d08928;">"&#20154;&#21475;"</span>])     <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#21015;&#12398;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12392;&#12375;&#12390;&#35336;&#31639;</span>
-jp_data |&gt; select(&#20154;&#21475;) |&gt; sum() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
-mean(jp_data[,5])       <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#21015;&#12398;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12391;&#12399;&#12456;&#12521;&#12540;&#12395;&#12394;&#12427;</span>
-mean(jp_data[[5]])      <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12505;&#12463;&#12488;&#12523;&#12392;&#12375;&#12390;&#25244;&#12365;&#20986;&#12377;&#24517;&#35201;&#12364;&#12354;&#12427;</span>
-median(jp_data[[5]])    <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#38754;&#31309;&#12398;&#20013;&#22830;&#20516; (&#12522;&#12473;&#12488;&#12392;&#12375;&#12390;&#21015;&#12434;&#36984;&#25246;)</span>
-jp_data |&gt; select(5) |&gt; median() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12394;&#12398;&#12391;&#21205;&#12363;&#12394;&#12356;</span>
-min(jp_data[<span style="color: #d08928;">"&#33509;&#24180;"</span>])     <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#33509;&#24180;&#20154;&#21475;&#12398;&#26368;&#23567;&#20516; (&#21015;&#21517;&#12391;&#36984;&#25246;)</span>
+sum(jp_data$&#20154;&#21475;)                  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20840;&#22269;&#12398;&#32207;&#20154;&#21475; (&#21015;&#21517;&#12391;&#12505;&#12463;&#12488;&#12523;&#12434;&#36984;&#25246;)</span>
+sum(jp_data[,<span style="color: #d08928;">"&#20154;&#21475;"</span>])              <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#21015;&#12398;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12392;&#12375;&#12390;&#35336;&#31639;</span>
+jp_data |&gt; select(&#20154;&#21475;) |&gt; sum()   <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
+mean(jp_data[,5])                  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#21015;&#12398;&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12391;&#12399;&#12456;&#12521;&#12540;&#12395;&#12394;&#12427;</span>
+mean(jp_data[[5]])                 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12505;&#12463;&#12488;&#12523;&#12392;&#12375;&#12390;&#25244;&#12365;&#20986;&#12377;&#24517;&#35201;&#12364;&#12354;&#12427;</span>
+median(jp_data[[5]])               <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#38754;&#31309;&#12398;&#20013;&#22830;&#20516; (&#12522;&#12473;&#12488;&#12392;&#12375;&#12390;&#21015;&#12434;&#36984;&#25246;)</span>
+jp_data |&gt; select(5) |&gt; median()   <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;&#12394;&#12398;&#12391;&#21205;&#12363;&#12394;&#12356;</span>
+min(jp_data[<span style="color: #d08928;">"&#33509;&#24180;"</span>])               <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#33509;&#24180;&#20154;&#21475;&#12398;&#26368;&#23567;&#20516; (&#21015;&#21517;&#12391;&#36984;&#25246;)</span>
 jp_data |&gt; select(<span style="color: #d08928;">"&#33509;&#24180;"</span>) |&gt; min() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
-with(jp_data, max(&#32769;&#20154;)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#32769;&#24180;&#20154;&#21475;&#12398;&#26368;&#22823;&#20516; (&#38306;&#25968; with() &#12434;&#21033;&#29992;)</span>
+with(jp_data, max(&#32769;&#20154;))           <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#32769;&#24180;&#20154;&#21475;&#12398;&#26368;&#22823;&#20516; (&#38306;&#25968; with() &#12434;&#21033;&#29992;)</span>
 jp_data |&gt; select(<span style="color: #d08928;">"&#32769;&#20154;"</span>) |&gt; max() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21516;&#19978;</span>
 </pre>
 </div>
 <ul>
-<li>ベクトルでないと正しく動かない関数 (<code>mean</code>, <code>median</code>) もあるので注意</li>
+<li>ベクトルでないと正しく動かない関数 (<code>mean()</code>, <code>median()</code> など) もあるので注意</li>
 
 </ul></li>
 
 </ul>
 </section>
-<section id="slide-org184b8cb">
-<h3 id="org184b8cb">列ごとの集約</h3>
+<section id="slide-org4016668">
+<h3 id="org4016668">列ごとの集約</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::summarise()</code> : 列ごとに計算する
@@ -788,16 +788,16 @@ jp_data |&gt; select(<span style="color: #d08928;">"&#32769;&#20154;"</span>) |&
 
 <pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#32244;&#32722;&#21839;&#38988;&#12398;&#12487;&#12540;&#12479;&#12434;&#29992;&#12356;&#12383;&#20363;</span>
 jp_data |&gt; summarise(&#24179;&#22343;&#22833;&#26989;&#29575; = mean(&#22833;&#26989;), &#20214;&#25968; = n()) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22833;&#26989;&#12398;&#21015;&#12398;&#24179;&#22343;</span>
-jp_data |&gt; summarise(across(&#23130;&#23035;:&#22833;&#26989;, median)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#23130;&#23035;&#12363;&#12425;&#22833;&#26989;&#12398;&#21015;&#12398;&#20013;&#22830;&#20516;</span>
-jp_data |&gt; summarise(across(!&#30476;&#21517;, max)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#30476;&#21517;&#12398;&#21015;&#20197;&#22806;&#12398;&#26368;&#22823;&#20516;</span>
-jp_data |&gt; summarise(across(where(is.double), min)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25968;&#20516;&#21015;&#12398;&#26368;&#23567;&#20516;</span>
+jp_data |&gt; summarise(across(&#23130;&#23035;:&#22833;&#26989;, median))           <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#23130;&#23035;&#12363;&#12425;&#22833;&#26989;&#12398;&#21015;&#12398;&#20013;&#22830;&#20516;</span>
+jp_data |&gt; summarise(across(!&#30476;&#21517;, max))                  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#30476;&#21517;&#12398;&#21015;&#20197;&#22806;&#12398;&#26368;&#22823;&#20516;</span>
+jp_data |&gt; summarise(across(where(is.double), min))       <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25968;&#20516;&#21015;&#12398;&#26368;&#23567;&#20516;</span>
 </pre>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-orge9788d8">
-<h3 id="orge9788d8">グループごとの操作</h3>
+<section id="slide-orgf3b8bbb">
+<h3 id="orgf3b8bbb">グループごとの操作</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::group_by()</code> : グループ化を行う
@@ -820,8 +820,8 @@ jp_data |&gt; summarise(across(where(is.double), min)) <span style="color: #8080
 <span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#22320;&#26041;&#12372;&#12392;&#12395;&#20154;&#21475;&#12363;&#12425;&#38754;&#31309;&#12398;&#21015;&#12398;&#21512;&#35336;&#12434;&#35336;&#31639;&#12377;&#12427;</span>
 jp_data |&gt;
   mutate(&#22320;&#26041; = as_factor(jp_area[[<span style="color: #d08928;">"&#22320;&#26041;"</span>]])) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22320;&#26041;&#12398;&#24773;&#22577;&#12434;&#20184;&#21152;</span>
-  group_by(&#22320;&#26041;) |&gt; <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22320;&#26041;&#12372;&#12392;&#12395;&#12464;&#12523;&#12540;&#12503;&#21270;</span>
-  summarize((across(&#20154;&#21475;:&#38754;&#31309;, sum))) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12464;&#12523;&#12540;&#12503;&#12372;&#12392;&#12395;&#38598;&#35336;</span>
+  group_by(&#22320;&#26041;) |&gt;                              <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#22320;&#26041;&#12372;&#12392;&#12395;&#12464;&#12523;&#12540;&#12503;&#21270;</span>
+  summarize((across(&#20154;&#21475;:&#38754;&#31309;, sum)))            <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12464;&#12523;&#12540;&#12503;&#12372;&#12392;&#12395;&#38598;&#35336;</span>
 </pre>
 </div></li>
 
@@ -829,11 +829,11 @@ jp_data |&gt;
 </section>
 </section>
 <section>
-<section id="slide-org23f7801" data-background="#fef4f4">
-<h2 id="org23f7801">実習</h2>
+<section id="slide-orgebf7820" data-background="#fef4f4">
+<h2 id="orgebf7820">実習</h2>
 </section>
-<section id="slide-org86f3279" data-background="#fef4f4">
-<h3 id="org86f3279">練習問題</h3>
+<section id="slide-org3bbdc03" data-background="#fef4f4">
+<h3 id="org3bbdc03">練習問題</h3>
 <ul>
 <li>サンプルデータ (<code>jpdata</code>) の整理をしてみよう．
 <ul>
@@ -858,8 +858,8 @@ jp_data |&gt;
 </section>
 </section>
 <section>
-<section id="slide-org781d20c">
-<h2 id="org781d20c">次回の予定</h2>
+<section id="slide-orgfe32da2">
+<h2 id="orgfe32da2">次回の予定</h2>
 <ul>
 <li>可視化の重要性</li>
 <li>基本的な描画</li>
