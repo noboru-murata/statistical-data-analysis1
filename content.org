@@ -134,13 +134,15 @@
 :EXPORT_FILE_NAME: lecture07
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2024-05-29 Wed> 更新
+<2025-05-30 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide07" >}}
 ** ハンドアウト
 - [[github:pdfs/slide07.pdf][PDF file]]
-** 解答例
-- [[github:code/slide07.R][RScript]]
+** 付録
+- 実習用 [[githubraw:code/practice07.qmd][Quarto]]
+- 解答例 [[github:code/sample-code07.html][HTML]] [[githubraw:code/sample-code07.qmd][Quarto]] 
+- 資料の例題 [[github:code/slide07.R][RScript]]
 
 * 第8講
 :PROPERTIES:
