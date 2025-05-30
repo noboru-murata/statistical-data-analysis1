@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:52:35 mura>
+# Time-stamp: <2025-05-30 13:38:20 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -263,7 +263,7 @@
   #   行っても大数の法則が成立することを確認しなさい．
   # - サンプル数の増減によって精度がどの程度変わるか観察しなさい．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 大数の法則
   #' 
@@ -518,7 +518,7 @@
   #   中心極限定理が成立することを確認しなさい．
   # - サンプル数の増減によって精度がどの程度変わるか観察しなさい．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 中心極限定理
   set.seed(232323)    # 乱数のシード値の指定
@@ -667,7 +667,7 @@
     において観測される不良品数の分布を確認しなさい．
   - 母数 \(n,p\) の違いによって結果がどのように変わるか観察しなさい．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 少数の法則
   set.seed(343434) # 乱数のシード値の指定
@@ -737,6 +737,7 @@
   #' 中心極限定理がここでも成り立っていることがわかる
   #' ---------------------------------------------------------------------------
 #+end_src
+
 
 * 補遺
 ** 重複対数の法則

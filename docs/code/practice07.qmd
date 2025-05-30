@@ -1,0 +1,66 @@
+---
+title: "統計データ解析I"
+subtitle: "第7講 練習問題"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+```
+
+## 大数の法則
+
+### 問題
+
+大数の法則の数値実験を行いなさい．
+
+-   歪んだサイコロを例として， n回サイコロを振って標本平均(期待値)を求めたとき， nの値に応じて真の値と標本平均がどのくらい異なるか調べなさい．
+
+-   nの値ごとに多数回実験を行い， 標本平均の分布がnの値とともにどのように変化するか調べなさい．
+
+## 中心極限定理
+
+### 問題
+
+中心極限定理の数値実験を行いなさい．
+
+-   歪んだサイコロを例として， n回サイコロを振って標本平均(期待値)を求めたとき， nが大きければ正規化した値は標準正規分布に従うことを確認しなさい．
+
+-   確率(歪み具合)が異なっても， 上記の性質は変わらないことを確認しなさい．
+
+## 少数の法則
+
+### 問題
+
+少数の法則の数値実験を行いなさい．
+
+-   1日の総生産量 $n$ が 5000， 不良品の発生確率 $p$ が 0.002 である工場を例として， 2年間の操業 (週5日x50週間) において観測される不良品数の分布を確認しなさい．
+
+-   母数 $n,p$ の違いによって結果がどのように変わるか観察しなさい．
