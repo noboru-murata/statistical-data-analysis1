@@ -6,7 +6,7 @@ draft = false
 weight = 1016
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2025-05-23 Fri&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2025-06-02 Mon&gt; </span></span> 更新
 
 講義の進捗に合わせて追加します．
 
@@ -15,7 +15,7 @@ weight = 1016
 -   [第3講 (2025年5月2日)](https://u-tokyo-ac-jp.zoom.us/rec/share/t_dAHK0lubppPvUOkUok8jeIJSVc8tkAOPZpoxFe3H399UxBu_O3POeduGcITfsO.nexvgDQJ0kOR0kis?startTime=1746172571000)
 -   [第4講 (2025年5月9日)](https://u-tokyo-ac-jp.zoom.us/rec/share/zMrv4ICNIcZwgDI5j4A1yf87IJVrncV8Eb1qQlzwko-jiNalFDtLBqyA1GBqaGlx.T9SBvUD2nASoS4sX?startTime=1746777355000)
 -   [第5講 (2025年5月16日)](https://u-tokyo-ac-jp.zoom.us/rec/share/50HTZG9iuZ3OjMHLt1645wOYJxAIS9tNHtdeYasIsj7UhPDcDjgaH5pdkkoahlu0.0Oss5qr21uTPfm0P?startTime=1747382128000)
--   第6講 (2025年5月30日)
+-   [第6講 (2025年5月30日)](https://u-tokyo-ac-jp.zoom.us/rec/share/RvfnzQPoKKZ6cmfVyWMP7trwy0lHYrWh9jE0Z-20Amou8b-4StmkGx-8lSpjTC_b.wQ-_4jCtNA0wk4Ef?startTime=1748591970000)
 -   第7講 (2025年6月6日)
 -   第8講 (2025年6月13日)
 -   第9講 (2025年6月20日)
