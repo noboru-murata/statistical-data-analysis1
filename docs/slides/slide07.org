@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-05-30 13:38:20 mura>
+# Time-stamp: <2025-06-04 10:17:57 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -653,7 +653,7 @@
   - \(S_n\) の分布を
     強度 \(\lambda=pn\) の Poisson 分布と比較する
     - 確率 \(p\) サイズ \(n\) の二項乱数 ~rbinom()~ が利用可能
-    - Poissson 分布の確率値は関数 ~dpois()~ で計算可能
+    - Poisson 分布の確率値は関数 ~dpois()~ で計算可能
 
 ** 練習問題
 :PROPERTIES:
@@ -663,7 +663,7 @@
 - 少数の法則の数値実験を行いなさい．
   - 1日の総生産量 (\(n\)) が 5000，
     不良品の発生確率 (\(p\)) が 0.002 である工場を例として，
-    2年間の操業(週5日x50週間)
+    2年間の操業(週5日x100週間)
     において観測される不良品数の分布を確認しなさい．
   - 母数 \(n,p\) の違いによって結果がどのように変わるか観察しなさい．
 
