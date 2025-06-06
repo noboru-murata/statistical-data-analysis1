@@ -1,0 +1,105 @@
+---
+title: "統計データ解析I"
+subtitle: "第8講 練習問題"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+```
+
+## 二項分布
+
+### 問題
+
+二項分布に関して以下を考察せよ．
+
+-   平均と分散の計算を確認しなさい．
+
+-   $X_{1},\dotsc,X_n$ を成功確率 $p$ の Bernoulli 分布に従う独立同分布な確率変数列とする． このとき $\sum_{i=1}^nX_i$ の分布は，試行回数 $n$ , 成功確率 $p$ の二項分布に従う．これをグラフに描画して確認しなさい．
+
+## Poisson 分布
+
+### 問題
+
+Poisson 分布に関して以下を考察せよ．
+
+-   平均と分散の計算を確認しなさい．
+
+-   $X,Y$ を独立な2つの確率変数とし，それぞれ強度 $\lambda_{1},\lambda_{2}$ の Poisson 分布に従うとする． このとき, 和 $X+Y$ の分布は強度 $\lambda_{1}+\lambda_{2}$ の Poisson 分布に従う． これをグラフに描画して確認しなさい．
+
+## 正規分布
+
+### 問題
+
+正規分布に関して以下を考察せよ．
+
+-   $U_{1},U_{2}$ を $(0,1)$ 上の一様分布に従う独立な確率変数とする． このとき $$
+      \begin{align}
+        X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
+        X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
+      \end{align}
+    $$ とおくと， $X_{1},X_{2}$ は独立かつともに標準正規分布に従う． これをグラフに描画して確認せよ.
+
+    ::: callout-note
+    この変換を Box-Muller 変換と呼ぶ．
+    :::
+
+## $\chi^2$ 分布
+
+### 問題
+
+$\chi^2$ 分布に関して以下を考察せよ．
+
+-   標準正規分布に従う $k$ 個の独立な確率変数の二乗和は自由度 $k$ の $\chi^2$ 分布に従うことを確認しなさい．
+
+## $t$ 分布
+
+### 問題
+
+$t$ 分布に関して以下を考察せよ．
+
+-   $Z$ を標準正規分布に従う確率変数，$Y$ を自由度 $k$ の $\chi^2$ 分布に従う確率変数とし，$Z,Y$ は独立であるとする． このとき確率変数 $$
+      \begin{equation}
+        \frac{Z}{\sqrt{Y/k}}
+      \end{equation}
+    $$ は自由度 $k$ の $t$ 分布に従うことを確認しなさい．
+
+## $F$ 分布
+
+### 問題
+
+$F$ 分布に関して以下を考察せよ．
+
+-   $Y_{1},Y_{2}$ をそれぞれ自由度 $k_{1},k_{2}$ の $\chi^2$ 分布に従う独立な確率変数とする． このとき, 確率変数 $$
+     \begin{equation}
+       \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
+     \end{equation}
+    $$ は自由度 $k_{1},k_{2}$ の $F$ 分布に従うことを確認しなさい．

@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:52:54 mura>
+# Time-stamp: <2025-06-06 15:30:09 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -319,7 +319,7 @@
     試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う．
     これをグラフに描画して確認しなさい．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 二項分布
   #' 
@@ -447,7 +447,7 @@
     強度 \(\lambda_{1}+\lambda_{2}\) の Poisson 分布に従う．
     これをグラフに描画して確認しなさい．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice Poisson 分布
   #' 
@@ -776,7 +776,7 @@
     これをグラフに描画して確認せよ. \\
     (この変換を Box-Muller 変換と呼ぶ)
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 正規分布
   #' 
@@ -978,7 +978,7 @@
     二乗和は自由度 \(k\) の \(\chi^2\) 分布に従うことを
     確認しなさい．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice カイ二乗分布
   #' 
@@ -1100,7 +1100,7 @@
     #+end_quote
     は自由度 \(k\) の \(t\) 分布に従うことを確認しなさい．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice t分布
   #' 
@@ -1207,7 +1207,7 @@
     \end{equation}
     は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従うことを確認しなさい．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice F分布
   #' 
