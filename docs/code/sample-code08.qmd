@@ -260,6 +260,50 @@ $\chi^2$ 分布に関して以下を考察せよ．
 
 ### 解答例
 
+試行を模擬する関数を定義する．
+
+```{r}
+k <- 8 # 自由度を設定
+my_random <- function(){ 
+    sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
+```
+
+確率シミュレーションを行い，視覚化する．
+
+```{r}
+mc <- 10000 # 実験回数を指定
+my_data <- replicate(mc, my_random()) # 注で使うので保存しておく
+my_data |>
+    as_tibble_col() |>
+    ggplot(aes(x = value)) +
+    geom_histogram(aes(y = after_stat(density)), 
+                   bins = 30,                    
+                   fill ="lightblue",          
+                   colour = "white") + 
+    geom_function(fun = dchisq,
+                  args = list(df = k),
+                  colour = "red") +
+    labs(title = bquote(paste(chi^2,"分布 (自由度",.(k),")")))
+```
+
+::: callout-note
+関数 bquote() は関数 expression() と同様な働きをするが，自由度の k を .(k) で評価して取り込むことができる． 以下と表示を比較してみよう．
+
+```{r}
+my_data |>
+    as_tibble_col() |>
+    ggplot(aes(x = value)) +
+    geom_histogram(aes(y = after_stat(density)), 
+                   bins = 30,                    
+                   fill ="lightblue",          
+                   colour = "white") + 
+    geom_function(fun = dchisq,
+                  args = list(df = k),
+                  colour = "red") +
+    labs(title = expression(paste(chi^2,"分布 (自由度",k,")"))) # この行だけ違う
+```
+:::
+
 ## $t$ 分布
 
 ### 問題
@@ -372,3 +416,5 @@ last_plot() +               # 直前のプロット
     xlim(0,6) + ylim(0,0.9) # 表示領域を指定する(表示しない部分について警告が出る)
 ```
 :::
+
+:::::

@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-06-04 10:17:57 mura>
+# Time-stamp: <2025-06-06 18:51:34 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -782,7 +782,7 @@
   - Poisson 分布・幾何分布
 - 連続分布
   - 一様分布・正規分布
-  - ガンマ分布・\(t\)-分布・\(F\)-分布
+  - ガンマ分布・\(t\) 分布・\(F\) 分布
 
 
 * Footnotes
