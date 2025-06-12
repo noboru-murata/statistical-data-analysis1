@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:53:12 mura>
+# Time-stamp: <2025-06-12 22:02:30 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -259,7 +259,7 @@
   - ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，
     推定量のばらつきを確認せよ．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 平均・分散・標準偏差の計算
   #' 
@@ -519,7 +519,7 @@
   - それぞれの値から正規分布から逸脱していると思われる項目はいずれか考察せよ．
   - 各データのヒストグラムを描き，データから計算される平均と分散を持つ正規分布と比較せよ．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 歪度と超過尖度の計算
   #' 
@@ -655,7 +655,7 @@
   - 相関の高い項目の組(絶対値が大きい)，および相関の低い項目の組(0に近い)を求めよ．
   - その項目同士の散布図を描け．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 共分散と相関の計算
   #' 
@@ -853,7 +853,7 @@
   - ランダムに選んだ36日分のデータで気温の四分位点がどのくらいばらつくか確認せよ．
   - 風向の最頻値を求めよ．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 分位点と最頻値の計算
   #' 

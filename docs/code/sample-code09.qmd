@@ -1,0 +1,526 @@
+---
+title: "統計データ解析I"
+subtitle: "第9講 練習問題 解答例"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+#' 日本語を用いるので macOS ではフォントの設定を行う
+if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+    theme_update(text = element_text(family = "HiraginoSans-W4"))
+    update_geom_defaults("text", list(family = theme_get()$text$family))
+    update_geom_defaults("label", list(family = theme_get()$text$family))}
+```
+
+## 平均・分散・標準偏差の計算
+
+### 問題
+
+東京の気候データ (`tokyo_weather.csv`) の中の
+
+-   気温 (`temp`) ，
+-   日射量 (`solar`) ，
+-   風速 (`wind`)
+
+の項目について以下の問に答えよ．
+
+-   全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数365)
+
+-   毎月5日のデータのみを用いて各項目の平均・分散・標準偏差を求めよ．(データ数12)
+
+-   5の付く日(各月の5,15,25)のデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数36)
+
+-   ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，推定量のばらつきを確認せよ．
+
+::: callout-note
+データの読み込みは以下のようにすればよい．
+
+```{r}
+#| eval: false
+tw_data <- read.csv("data/tokyo_weather.csv") # 読み込み方の例
+```
+:::
+
+### 解答例
+
+データの読み込みを行う．
+
+```{r}
+tw_data <- read_csv("data/tokyo_weather.csv")
+```
+
+全データを用いて，それぞれの統計量を計算する．
+
+```{r}
+tw_data |>
+    summarise(across(c(temp,solar,wind), mean))
+tw_data |>
+    summarise(across(c(temp,solar,wind), var))
+tw_data |>
+    summarise(across(c(temp,solar,wind), sd))
+```
+
+まとめて計算するには以下のようにすれば良い．
+
+```{r}
+(tw_summary <- # 後で参照するために保存しておく
+     tw_data |> 
+     summarise(across(c(temp,solar,wind),
+                      list(mean = mean, var = var, sd =sd))))
+```
+
+データの部分集合，例えば毎月5日のデータによる計算は以下のようになる．
+
+```{r}
+tw_data |>
+    filter(day == 5) |>
+    summarise(across(c(temp,solar,wind),
+                     list(mean = mean, var = var, sd =sd)))
+```
+
+5の付く日のデータによる計算は以下のようになる．
+
+```{r}
+tw_data |>
+    filter(day %in% c(5,15,25)) |>
+    summarise(across(c(temp,solar,wind),
+                     list(mean = mean, var = var, sd =sd)))
+```
+
+ランダムに選択した36日で推定した場合のばらつきを調べる．
+
+```{r}
+mc <- 5000 # 実験回数を指定
+n <- 36 # ランダムに選択する日数を指定
+#' 気温の標本平均による例
+my_trial <- function(){ 
+    tw_data |>
+        slice_sample(n = n) |> # ランダムにn行抽出
+        summarise(mean = mean(temp)) |>
+        as.numeric() # tibble形式ではなく単なる数値として返す
+}
+xbars <- replicate(mc, my_trial())
+tibble(平均気温の推定値 = xbars) |>
+    ggplot(aes(x = 平均気温の推定値)) +
+    geom_histogram(aes(y = after_stat(density)), 
+                   bins = 30,                    
+                   fill ="lightblue",          
+                   colour = "blue") + 
+    geom_vline(xintercept = tw_summary[["temp_mean"]], # 全体の平均
+               colour = "red") 
+```
+
+::: callout-note
+上記の例では保存しておいた平均の値を参照しているが， geom_vline の中で計算し直すこともできる．
+
+```{r}
+tibble(平均気温の推定値 = xbars) |>
+    ggplot(aes(x = 平均気温の推定値)) +
+    geom_histogram(aes(y = after_stat(density)), 
+                   bins = 30,                    
+                   fill ="lightblue",          
+                   colour = "blue") + 
+    geom_vline(xintercept = tw_data |> 
+                   summarise(mean(temp)) |>
+                   as.numeric(), # tibble形式を数値に変換
+               colour = "red") 
+```
+:::
+
+::: callout-note
+例えば以下のようにすれば，項目および統計量を総当たりで調べることができる．
+
+```{r}
+my_trial <- function(n){ # 日数を指定してまとめて計算するように変更する
+    tmp <- # 計算結果を一時保存
+        tw_data |>
+        slice_sample(n = n) |>
+        summarise(across(c(temp,solar,wind),
+                         list(mean = mean, var = var, sd =sd)))
+    return(t(tmp)[,1,drop = TRUE]) # データフレームではなくベクトルとして返す
+}
+my_data <- # 実験データをデータフレームに直しておく
+    replicate(mc, my_trial(n = n)) |> t() |> as_tibble()
+#' 図示する部分を関数として定義しておく
+my_plot <- function(data,    # データ
+                    summary, # データ全体から計算した真値
+                    item,    # 項目名
+                    func){  # 集計関数名
+    name <- sym(paste(item, func, sep = "_")) # シンボルを作成
+    gg <- data |>
+        ggplot(aes(x = !!name)) + # シンボルを !! によって unquote
+        geom_histogram(aes(y = after_stat(density)), 
+                       bins = 30,                    
+                       fill ="lightblue",          
+                       colour = "blue") + 
+        geom_vline(xintercept = summary[[name]],
+                   colour = "red") +
+        labs(title = paste(item, "の", func, "の推定"))
+    print(gg)
+}
+#' 全ての組み合わせは for 文で実行可能
+for(item in c("temp","solar","wind")){ # 項目を指定
+    for(func in c("mean","var","sd")){   # 関数を指定
+        my_plot(my_data, tw_summary, item, func)
+    }
+}
+```
+
+いずれの変数においても標準偏差の推定量は若干の偏りがあることが確認できる． 風速の分散の推定量の分布が他と異なり正規分布に近くないので，サンプル数を3倍に増やしてみる．
+
+```{r}
+my_plot(replicate(mc, my_trial(n = 108)) |> t() |> as_tibble(), 
+        tw_summary, "wind", "var")
+```
+
+推定量の分散が小さくなるとともに形状が正規分布に近づいたことが確認できる．
+:::
+
+## 歪度と超過尖度の計算
+
+### 問題
+
+東京の気候データ (`tokyo_weather.csv`) の中の
+
+-   気温 (`temp`) ，
+-   日射量 (`solar`) ，
+-   風速 (`wind`)
+
+の項目について以下の問に答えよ．
+
+-   全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数365)
+
+-   5のつく日のデータのみを用いて各項目の歪度と超過尖度を求めよ．(データ数36)
+
+-   それぞれの値から正規分布から逸脱していると思われる項目はいずれか考察せよ．
+
+-   各データのヒストグラムを描き，データから計算される平均と分散を持つ正規分布と比較せよ．
+
+### 解答例
+
+歪度と超過尖度を計算するためのパッケージを読み込む．
+
+```{r}
+library("e1071")
+```
+
+全データによる計算は以下のようにすれば良い．
+
+```{r}
+tw_data |> 
+    summarise(across(c(temp,solar,wind),
+                     list(skew = skewness, kurt = kurtosis)))
+```
+
+::: callout-note
+パッケージの一部の関数しか利用しない場合は， 関数 `library()` でパッケージを読み込まなくても， パッケージ名とともに関数を指定することで利用することができる． ただし，関数内で他の関数に依存する場合は注意する必要がある．
+
+```{r}
+tw_data |> 
+    summarise(across(c(temp,solar,wind),
+                     list(skew = e1071::skewness,
+                          kurt = e1071::kurtosis)))
+```
+:::
+
+前問と同様に，5の付く日のデータによる計算は以下のようになる．
+
+```{r}
+tw_data |>
+    filter(day %in% c(5,15,25)) |>
+    summarise(across(c(temp,solar,wind),
+                     list(skew = skewness, kurt = kurtosis)))
+```
+
+::: callout-note
+歪度や尖度は3次・4次の計算なので，少数のデータでは計算結果が不安定になりやすいので， データ数については注意する必要がある．
+:::
+
+各データのヒストグラムと正規分布を比較すると以下のようになる．
+
+```{r}
+tw_summary <- # 前の練習問題の結果を利用 
+    tw_data |> 
+    summarise(across(c(temp,solar,wind),
+                     list(mean = mean, var = var, sd =sd)))
+for(item in c("temp","solar","wind")){ # 項目を指定
+    item <- sym(item)
+    gg <- tw_data |>
+        ggplot(aes(x = !!item)) + 
+        geom_histogram(aes(y = after_stat(density)), 
+                       bins = 30,                    
+                       fill ="lightblue",          
+                       colour = "blue") + 
+        geom_function(fun = dnorm,
+                      args = list(mean = tw_summary[[paste0(item,"_mean")]],
+                                  sd = tw_summary[[paste0(item,"_sd")]]),
+                      colour = "red") +
+        labs(title = paste(item, "と正規分布の比較"))
+    print(gg)
+}
+```
+
+## 共分散と相関の計算
+
+### 問題
+
+東京の気候データ (`tokyo_weather.csv`) の中の
+
+-   気温 (`temp`)
+-   降水量 (`rain`)
+-   日射量 (`solar`)
+-   風速 (`wind`)
+-   気圧 (`press`)
+-   湿度 (`humid`)
+
+の項目(いずれも数値データ)について以下の問に答えよ．
+
+-   それぞれの項目間の共分散，および相関を求めよ．
+
+-   相関の高い項目の組(絶対値が大きい)，および相関の低い項目の組(0に近い)を求めよ．
+
+-   その項目同士の散布図を描け．
+
+### 解答例
+
+共分散および相関行列の計算を行う．
+
+```{r}
+tw_cov <-
+    tw_data |>
+    select(temp,rain,solar,wind,press,humid) |>
+    cov()
+tw_cor <-
+    tw_data |>
+    select(temp,rain,solar,wind,press,humid) |>
+    cor()
+```
+
+特徴的な2変数間の関係を調べてみる．
+
+```{r}
+tw_cor == min(tw_cor) # 負の最大相関 (temp,press)
+tw_cor == max(tw_cor-diag(diag(tw_cor))) # 対角を除く最大相関 (temp,humid)
+abs(tw_cor) == min(abs(tw_cor)) # 最小相関(0に近い) (rain,wind)
+```
+
+散布図を描画する．
+
+```{r}
+tw_data |> # 対象データを全て表示してみる
+    select(temp,rain,solar,wind,press,humid) |>
+    GGally::ggpairs() # packageを読み込まずに直接指定する
+tw_data |> # columnsを指定すれば関数selectを使わなくてもよい
+    GGally::ggpairs(columns = c("temp","rain","solar","wind","press","humid"))
+tw_data |> # 月ごとに色を変えることもできる
+    GGally::ggpairs(columns = c("temp","rain","solar","wind","press","humid"),
+                    lower = list(mapping = aes(colour = as_factor(month))))
+tw_data |> # 負の最大相関
+    GGally::ggpairs(columns = c("temp","press"))
+tw_data |> # 最大相関
+    GGally::ggpairs(columns = c("temp","humid"))
+tw_data |> # 最小相関
+    GGally::ggpairs(columns = c("rain","wind"))
+```
+
+::: callout-note
+数値項目を抽出するのであれば以下のように簡潔に書ける．
+
+```{r}
+tw_data |>
+    select(where(is.numeric))
+
+```
+
+ただし不要な項目も含まれるので，別途以下のような工夫は必要となる．
+
+```{r}
+tw_data |>
+    select(where(is.numeric) & !year:day & !c(snow,cloud))
+```
+:::
+
+## 分位点と最頻値の計算
+
+### 問題
+
+東京の気候データ (`tokyo_weather.csv`) の中の
+
+-   気温 (`temp`; 数値データ)
+-   最多風向 (`wdir`; ラベルデータ)
+
+を用いて 以下の問に答えよ．
+
+-   全てのデータを用いて気温の四分位点を求めよ．(データ数365)
+
+-   5の付く日(各月の5,15,25)の気温の四分位点を求めよ．(データ数36)
+
+-   ランダムに選んだ36日分のデータで気温の四分位点がどのくらいばらつくか確認せよ．
+
+-   風向の最頻値を求めよ．
+
+### 解答例
+
+データの読み込みを行う
+
+```{r}
+tw_data <- read_csv("data/tokyo_weather.csv")
+```
+
+気温の分位点を求める． 全データによる計算は以下のようになる．
+
+```{r}
+(tw_temp_summary <-
+     tw_data |>
+     pull(temp) |> # 1列のみ抽出してベクトルにする
+     summary())
+```
+
+データの部分集合による計算(例えば5の付く日のデータ)は以下のようにすればよい．
+
+```{r}
+tw_data |>
+    filter(day %in% c(5,15,25)) |>
+    pull(temp) |>
+    summary()
+```
+
+ランダムに選択した36日で推定した場合のばらつきを調べる．
+
+```{r}
+mc <- 5000 # 実験回数を指定
+my_trial <- function(){
+    tw_data |>
+        slice(sample(nrow(tw_data),36)) |> # 重複なしで36行選ぶ
+        pull(temp) |>
+        summary()
+}
+my_data <-
+    replicate(mc, my_trial()) |> t() |> as_tibble()
+#' ヒストグラムの表示
+for(name in names(my_data)){
+    name <- sym(name)
+    gg <- my_data |>
+        ggplot(aes(x = !!name)) +
+        geom_histogram(aes(y = after_stat(density)),
+                       bins = 40,
+                       fill = "lightblue",
+                       colour = "blue") +
+        geom_vline(xintercept = tw_temp_summary[[name]],
+                   colour = "red") +
+        labs(x = "気温",
+             title = paste("気温の", name, "の推定のばらつき"))
+    print(gg)
+}
+```
+
+以下のようにすれば定義域とビンを揃えて表示することができる．
+
+```{r}
+breaks <- # 適切なビンの計算して固定する
+    tw_data |> pull(temp) |> pretty(n = 40)
+for(name in names(my_data)){
+    name <- sym(name)
+    gg <- my_data |>
+        ggplot(aes(x = !!name)) +
+        geom_histogram(aes(y = after_stat(density)),
+                       breaks = breaks, # ビンを固定
+                       fill = "lightblue",
+                       colour = "blue") +
+        geom_vline(xintercept = tw_temp_summary[[name]],
+                   colour = "red") +
+        ylim(0,0.5) + # y軸の表示を適当に固定する
+        labs(x = "気温",
+             title = paste("気温の", name, "の推定のばらつき"))
+    print(gg)
+}
+```
+
+表示には密度推定を用いても良い．
+
+```{r}
+for(name in names(my_data)){
+    name <- sym(name)
+    gg <- my_data |>
+        ggplot(aes(x = !!name)) +
+        geom_density(fill = "lightblue",
+                     colour = "blue") +
+        geom_vline(xintercept = tw_temp_summary[[name]],
+                   colour = "red") +
+        labs(x = "気温",
+             title = paste("気温の", name, "の推定のばらつき"))
+    print(gg)
+}
+```
+
+最多風向の最頻値を調べる．
+
+```{r}
+(my_table <-
+     tw_data |>
+     pull(wdir) |>
+     table()) # 頻度表
+max(my_table) # 最大値 
+which.max(my_table) # 最頻値の表の位置
+names(which.max(my_table)) # 最頻値の項目名
+```
+
+::: callout-note
+例えば以下のようにすれば16方位の頻度をグラフ化することができる．
+
+```{r}
+cardinal_directions <- c("N","NNE","NE","ENE",
+                         "E","ESE","SE","SSE",
+                         "S","SSW","SW","WSW",
+                         "W","WNW","NW","NNW")
+tw_data |>
+    mutate(wdir = factor(wdir, levels = cardinal_directions)) |>
+    group_by(wdir, .drop = FALSE) |> # 0も含めて16方位全て計算する
+    summarize(count = n()) |> # 関数 table() だと頻度 0 の項目はないことに注意
+    ggplot(aes(x = wdir, y = count)) +
+    geom_bar(stat = "identity", fill = alpha("blue", 0.4)) +
+    coord_polar(start = 0) # 極座標表示にする
+```
+
+中心を空洞にするには負の値で下駄を履かせればよい．
+
+```{r}
+tw_data |>
+    mutate(wdir = factor(wdir, levels = cardinal_directions)) |>
+    group_by(wdir, .drop = FALSE) |> # 0も含めて16方位全て計算する
+    summarize(count = n()) |>
+    ggplot(aes(x = wdir, y = count)) +
+    geom_bar(stat = "identity", fill = alpha("blue", 0.4)) +
+    ylim(-40,80) + # 負の側を表示範囲に加える
+    coord_polar(start = -pi/16) + # 北を真上に配置
+    labs(x = NULL, y = NULL, title = "風向きの頻度") # 不要なラベルを削除
+```
+:::
