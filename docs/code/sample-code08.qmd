@@ -46,7 +46,7 @@ if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォン�
 
 二項分布に関して以下を考察せよ．
 
--   平均と分散の計算を確認しなさい．
+-   平均と分散の理論計算を確認しなさい．
 
 -   $X_{1},\dotsc,X_n$ を成功確率 $p$ の Bernoulli 分布に従う独立同分布な確率変数列とする． このとき $\sum_{i=1}^nX_i$ の分布は，試行回数 $n$ , 成功確率 $p$ の二項分布に従う．これをグラフに描画して確認しなさい．
 
@@ -71,15 +71,32 @@ my_data <- replicate(mc, my_random())
 出現値ごとの度数分布表，および正規化した確率表を表示する．
 
 ```{r}
-my_data |> table()                 # base::table による頻度
+my_data |> table()                 # base::table による頻度表の作成
 my_data |> table() |> prop.table() # 確率値に変換
 ```
 
-グラフを利用して視覚化する．
+`tibble`形式のデータフレームを作成するには関数 `dplyr::count()` を利用して例えば以下のようにすればよい．
+
+```{r}
+my_data |>
+    as_tibble_col() |> # ベクトルから1列のtibbleを作成．列名の既定値は value
+    count(value)       # value 列の頻度を集計する
+```
+
+棒グラフを利用して頻度表を視覚化する．
 
 ```{r}
 my_data |> as_tibble_col() |>
-    count(value) |>                                    # 頻度を計算
+    count(value) |>
+    ggplot(aes(x = value, y = n)) +
+    geom_bar(stat = "identity") # 最も単純な表示
+```
+
+理論値(確率)は関数 `dbinom()` で計算できるので，組み合わせて横並びに表示する．
+
+```{r}
+my_data |> as_tibble_col() |>
+    count(value) |>
     set_names(c("値","観測値")) |>                      # 列名を変更
     mutate(観測値 = 観測値/sum(観測値),                  # 確率に変換
            理論値 = dbinom(値, size = n, prob = p)) |> # 理論値を追加
@@ -104,7 +121,7 @@ tibble(値 = as.integer(names(my_table)), # 列名は文字列なので整数値
        理論値 = dbinom(値, size = n, prob = p))
 ```
 
-`package::janitor` を利用する場合
+`package::janitor` を利用する場合．
 
 ```{r}
 library(janitor)
@@ -121,7 +138,7 @@ my_data |> as_tibble_col() |>
 
 Poisson 分布に関して以下を考察せよ．
 
--   平均と分散の計算を確認しなさい．
+-   平均と分散の理論計算を確認しなさい．
 
 -   $X,Y$ を独立な2つの確率変数とし，それぞれ強度 $\lambda_{1},\lambda_{2}$ の Poisson 分布に従うとする． このとき, 和 $X+Y$ の分布は強度 $\lambda_{1}+\lambda_{2}$ の Poisson 分布に従う． これをグラフに描画して確認しなさい．
 
@@ -166,7 +183,7 @@ my_data |> as_tibble_col() |>
         X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
         X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
       \end{align}
-    $$ とおくと， $X_{1},X_{2}$ は独立かつともに標準正規分布に従う． これをグラフに描画して確認せよ.
+    $$ とおくと， $X_{1},X_{2}$ は独立かつともに標準正規分布に従う． これをグラフに描画して確認しなさい．
 
     ::: callout-note
     この変換を Box-Muller 変換と呼ぶ．
@@ -183,14 +200,25 @@ my_random <- function(){ # 一方の分布を確認する
     return(sqrt(-2*log(u1))*cos(2*pi*u2))}
 ```
 
-確率シミュレーションを行い，視覚化する．
+確率シミュレーションを行い，ヒストグラムを用いて視覚化する．
 
 ```{r}
 mc <- 10000 # 実験回数を指定
 replicate(mc, my_random()) |> # 確率シミュレーション
     as_tibble_col() |>        # 既定値では列名は value
     ggplot(aes(x = value)) +
-    geom_histogram(aes(y = after_stat(density)), 
+    geom_histogram(bins = 30, # 既定値では頻度で表示される
+                   fill ="blue",          
+                   colour = "white")
+```
+
+理論値は関数 `stats::dnorm()` で計算できるので， 関数 `ggplot2::geom_funciton()` を用いて重ね描きする．
+
+```{r}
+replicate(mc, my_random()) |> 
+    as_tibble_col() |>        
+    ggplot(aes(x = value)) +
+    geom_histogram(aes(y = after_stat(density)), # 確率で表示
                    bins = 30,                    
                    fill ="lightblue",          
                    colour = "white") + 
