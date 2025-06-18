@@ -164,28 +164,30 @@
 :EXPORT_FILE_NAME: lecture09
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-06-12 Thu> 更新
+<2025-06-17 Tue> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide09" >}}
 ** ハンドアウト
 - [[github:pdfs/slide09.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice09.qmd][Quarto]]
-- 解答例 [[github:code/sample-code09.html][HTML]] [[githubraw:code/sample-code09.qmd][Quarto]] 
-- 資料の例題 [[github:code/slide09.R][RScript]]
+- 解答例 [[github:code/sample-code09.html][HTML]] [[githubraw:code/sample-code09.qmd][Quarto]]
+# - 資料の例題 [[github:code/slide09.R][RScript]] # このスライドにはない
 
 * 第10講
 :PROPERTIES:
 :EXPORT_FILE_NAME: lecture10
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2024-06-14 Fri> 更新
+<2025-06-17 Tue> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide10" >}}
 ** ハンドアウト
 - [[github:pdfs/slide10.pdf][PDF file]]
-** 解答例
-- [[github:code/slide10.R][RScript]]
+** 付録
+- 実習用 [[githubraw:code/practice10.qmd][Quarto]]
+- 解答例 [[github:code/sample-code10.html][HTML]] [[githubraw:code/sample-code10.qmd][Quarto]]
+# - 資料の例題 [[github:code/slide10.R][RScript]] # このスライドにはない
 
 * 第11講
 :PROPERTIES:
