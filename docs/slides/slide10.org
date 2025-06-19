@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:53:26 mura>
+# Time-stamp: <2025-06-19 18:01:40 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -96,7 +96,7 @@
       \mathbb{E}[\hat{\theta}]=\theta
     \end{equation}
     #+end_quote
-  - \(\hat{\theta}\) が \(\theta\) の(強)一致推定量
+  - \(\hat{\theta}\) が \(\theta\) の一致推定量
     #+begin_quote
     \begin{equation}
       \text{\(\hat{\theta}\) が \(\theta\) に収束する確率が1}\quad (n\to\infty)
@@ -198,7 +198,7 @@
     } # 3つまとめて計算する関数
   #+end_src
   
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 一様分布の平均の推定
   #' 
@@ -545,7 +545,7 @@
   - 推定した結果をヒストグラムに描き加えて比較しなさい．
 - 自身で収集したデータを用いて，モデル化と最尤推定を試みよ．
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice ガンマ分布による風速データのモデル化
   #' 
@@ -1104,7 +1104,7 @@
   - 上記の推定を100回繰り返した際，真の値(全データによる平均値)が信頼区間に何回含まれるか確認しなさい．
 - 自身で収集したデータで区間推定を試みよ．
 
-#+begin_src R :eval no :exports none :tangle yes
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 日射量データの区間推定
   #' 

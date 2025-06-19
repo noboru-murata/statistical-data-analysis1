@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-06-12 22:02:30 mura>
+# Time-stamp: <2025-06-19 18:00:07 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -81,7 +81,7 @@
 
 ** 推定量の一致性
 - サンプル数が大きい場合に "合理的な" 推定量となる根拠の1つ
-- *(強)一致性* (consistency) 
+- *一致性* (consistency) 
   #+begin_quote
   推定量がサンプル数
   \(n\to\infty\) のとき確率1で真の値に収束する性質
@@ -92,7 +92,7 @@
     n\to\infty)
   \end{equation}
   #+end_quote
-- *(強)一致推定量* : 一致性をもつ推定量
+- *一致推定量* : 一致性をもつ推定量
   # - 標本平均・標本分散・標本標準偏差は
   #   平均・分散・標準偏差の一致推定量
 

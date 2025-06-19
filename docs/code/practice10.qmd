@@ -1,0 +1,93 @@
+---
+title: "統計データ解析I"
+subtitle: "第10講 練習問題"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+#' 日本語を用いるので macOS ではフォントの設定を行う
+if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+    theme_update(text = element_text(family = "HiraginoSans-W4"))
+    update_geom_defaults("text", list(family = theme_get()$text$family))
+    update_geom_defaults("label", list(family = theme_get()$text$family))}
+```
+
+## 一様分布の平均の推定
+
+### 問題
+
+$X$ を一様乱数に従う確率変数とし，平均値の推定量として以下を考える． それぞれの推定量の分散を比較しなさい．
+
+-   標本平均 (mean)
+-   中央値 (median)
+-   最大値と最小値の平均 ((max+min)/2)
+
+::: callout-note
+#### ヒント
+
+以下のような関数を作り，Monte-Carlo実験を行えばよい．
+
+```{r}
+#| eval: false
+estimate_means <- function(n, min, max){ # 観測データ数
+    x <- runif(n, min=min, max=max) # 一様乱数を生成，範囲は引数から
+    return(c(xbar=mean(x),med=median(x),mid=(max(x)+min(x))/2))
+} # 3つまとめて計算する関数
+```
+:::
+
+## ガンマ分布による風速データのモデル化
+
+### 問題
+
+東京都の気候データ (`tokyo_weather.csv`) の風速 (`wind`) の項目について以下の問に答えよ．
+
+-   全データを用いてヒストグラム(密度)を作成しなさい．
+-   ガンマ分布でモデル化して最尤推定を行いなさい．
+-   推定した結果をヒストグラムに描き加えて比較しなさい．
+
+::: callout-note
+自身で収集したデータを用いて，モデル化と最尤推定を試みよ．
+:::
+
+## 日射量データの区間推定
+
+### 問題
+
+東京都の気候データ (`tokyo_weather.csv`) の日射量 (`solar`) の項目について以下の問に答えよ．
+
+-   全データによる平均値を計算しなさい．
+-   ランダムに抽出した50点を用いて，平均値の0.9(90%)信頼区間を求めなさい．
+-   上記の推定を100回繰り返した際，真の値(全データによる平均値)が信頼区間に何回含まれるか確認しなさい．
+
+::: callout-note
+自身で収集したデータで区間推定を試みよ．
+:::
