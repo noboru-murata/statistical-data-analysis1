@@ -1,0 +1,424 @@
+---
+title: "統計データ解析I"
+subtitle: "第11講 練習問題"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+#' 日本語を用いるので macOS ではフォントの設定を行う
+if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+    theme_update(text = element_text(family = "HiraginoSans-W4"))
+    update_geom_defaults("text", list(family = theme_get()$text$family))
+    update_geom_defaults("label", list(family = theme_get()$text$family))}
+```
+
+## $t$ 検定の確率シミュレーション
+
+### 問題
+
+適当な正規乱数を用いて確率シミュレーションを考案し，$t$ 検定の過誤について調べなさい．
+
+::: callout-note
+#### ヒント
+
+例えば適当な数値を指定して以下のような実験を行えばよい．
+
+```{r}
+#| eval: false
+mc_trial <- function(n){ 
+    result <- t.test(rnorm(n,mean = mu0,sd = sd0), mu = mu0)
+    return(result$p.value)}
+mc_data <- replicate(mc, mc_trial(n))
+table(mc_data < alpha)/mc # alpha以下のデータの数(比率)を調べる
+```
+
+上記はp値の性質を調べる場合であるが，t統計量についても同様に調べることができる．
+:::
+
+### 解答例
+
+検定統計量の分布を調べるための実験の設定を行う．
+
+```{r}
+n <- 10
+mu0 <- 5
+sd0 <- 3
+mc <- 10000
+alpha <- 0.05
+mc_trial <- function(n){ 
+    result <- t.test(rnorm(n, mean = mu0, sd = sd0), mu = mu0)
+    return(result$statistic)} # 検定統計量を取り出す
+```
+
+検定統計量の分布を視覚化する．
+
+```{r}
+mc_data <- replicate(mc, mc_trial(n)) |> as_tibble()
+mc_data |>
+    ggplot(aes(x = value)) +
+    geom_histogram(aes(y = after_stat(density)), # 密度表示
+                   bins = 40,
+                   fill = "lightgreen",
+                   colour = "seagreen") +
+    geom_function(fun = dnorm,
+                  colour = "red",
+                  linewidth = 1.2) +
+    geom_function(fun = dt,
+                  args = list(df = n-1),
+                  colour = "blue",
+                  linewidth = 1.2) +
+    labs(x = "t統計量", title = "検定統計量の分布")
+```
+
+自由度 $n-1$ の $t$ 分布が良く当て嵌まることが確認できる．
+
+$p$ 値の分布を見るには以下のようにすればよい．
+
+```{r}
+mc_trial <- function(n){ 
+    result <- t.test(rnorm(n, mean = mu0, sd = sd0), mu = mu0)
+    return(result$p.value)} # p値を取り出す
+mc_data <- replicate(mc, mc_trial(n)) |> as_tibble()
+mc_data |>
+    ggplot(aes(x = value)) +
+    geom_histogram(fill = "plum",
+                   colour = "orchid") +
+    labs(x = "p値", title = "p値の分布")
+table(mc_data < alpha)/mc # alpha以下の結果の数を調べる = サイズ
+```
+
+$p$ 値は一様に分布し，有意水準と第一種の過誤の関係が確認できる．
+
+一方，帰無仮説が成り立たない場合の p 値の分布は以下のようになる．
+
+```{r}
+mc_trial <- function(n){ 
+    result <- t.test(rnorm(n, mean = mu0+1, sd = sd0), mu = mu0)
+    return(result$p.value)} # p値を取り出す
+replicate(mc, mc_trial(n)) |>
+    as_tibble() |>
+    ggplot(aes(x = value)) +
+    geom_histogram(fill = "khaki",
+                   colour = "tan") +
+    labs(x = "p値", title = "帰無仮説が成り立たない場合")
+```
+
+$p$ 値は一様に分布しなくなることが確認できる．
+
+::: callout-note
+たとえば以下のようにすると関数 t.test() で計算される量をまとめて取り出すことができる． まとめて計算できるが，計算が若干重い．
+
+```{r}
+mc_trial <- function(n){ 
+    t.test(rnorm(n, mean = mu0, sd = sd0), mu = mu0) |>
+        broom::tidy() |> # tidyverse のパッケージ．様々なオブジェクトを tibble 形式に変換
+        select(where(is.numeric)) |> # 数値のみ取り出す
+        unlist() # 名前付の数値ベクトルに変換
+}
+mc <- 2000
+replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
+    pivot_longer(c(statistic.t, p.value)) |>
+    ggplot(aes(x = value, fill = name)) +
+    geom_histogram(show.legend = FALSE) +
+    facet_wrap(vars(name), ncol = 2, scales = "free") # 横に並べる
+```
+:::
+
+## 視聴率の検定
+
+### 問題
+
+ある番組の視聴率が2桁に達したかどうか知るために，n人にその番組を観たかどうか確認する． 確率変数 $$
+  \begin{equation}
+    X_{i}=
+    \begin{cases}
+      1,&\text{番組を観た}\\
+      0,&\text{番組を観ていない}
+    \end{cases},\;
+    i=1,2,\dotsc,n
+  \end{equation}
+$$ を定義して，これを用いた検定を考えてみよ．
+
+::: callout-note
+#### ヒント
+
+$X$ の生成は例えば `mu1` を真の視聴率として以下のようにすればよい
+
+```{r}
+#| eval: false
+x <- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
+```
+
+n人分の視聴結果 {1,0} のベクトルが得られる．
+
+$X$ は正規分布には従わないが， $n$ が大きければ標本平均 $\bar{X}$ は正規分布で十分良く近似できることを利用して良い．
+:::
+
+### 解答例
+
+$X$ は正規分布ではないが，$n$ が十分大きい場合には 区間推定と同様に正規分布(自由度の大きな $t$ 分布)で近似される．
+
+```{r}
+n <- 600
+mu0 <- 0.1 # 越えたい視聴率
+mu1 <- 0.11 # 真の視聴率(11%)
+x <- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
+table(x)
+t.test(x,mu = mu0, alternative = "greater")
+```
+
+上記の設定で確率シミュレーションを行う．
+
+```{r}
+mc <- 10000
+alpha <- 0.05 # 自由に設定せよ
+mc_trial <- function(n){ 
+    x <- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
+    result <- t.test(x, mu = mu0, alternative = "greater")
+    return(result$p.value)}
+mc_data <- replicate(mc, mc_trial(n)) |> as_tibble()
+mc_data |>
+    ggplot(aes(x = value)) +
+    geom_histogram(fill = "plum",
+                   colour = "orchid") +
+    labs(x = "p値", title = paste0("p値の分布 (n=",n,")"))
+table(mc_data < alpha)/mc # alpha以下のデータの数を調べる=検出力
+```
+
+$n$ を変えて実験してみる．
+
+```{r}
+n <- 5000
+mc_data <- replicate(mc, mc_trial(n)) |> as_tibble()
+mc_data |>
+    ggplot(aes(x = value)) +
+    geom_histogram(fill = "plum",
+                   colour = "orchid") +
+    labs(x = "p値", title = paste0("p値の分布 (n=",n,")"))
+table(mc_data < alpha)/mc # alpha以下のデータの数を調べる=検出力
+```
+
+## 気温の分散の検定
+
+### 問題
+
+東京の気象データの気温の項目を用いて， 6月の気温の分散が， 月毎に計算した気温の分散の平均値より大きいかどうか検定せよ．
+
+::: callout-note
+#### ヒント
+
+```{r}
+#| eval: false
+#' データの読み込みを行う
+tw_data <- read_csv("data/tokyo_weather.csv") 
+#' 月毎の気温の分散は以下で計算できる
+tw_data |> group_by(month) |> summarize(var(temp))
+#' この平均値は以下のように計算される
+tw_data |> group_by(month) |>
+    summarize(var(temp)) |> pull(`var(temp)`) |> mean()
+```
+:::
+
+### 解答例
+
+データの読み込みを行う．
+
+```{r}
+tw_data <- read_csv("data/tokyo_weather.csv") |>
+    mutate(month = as_factor(month)) # 月毎の表示のために因子化しておく
+```
+
+月毎の分布を確認する．
+
+```{r}
+tw_data |> 
+    ggplot(aes(x = month, y = temp)) + 
+    geom_boxplot(fill = "lightblue", colour = "blue") +
+    labs(x = "月", y = "気温", title = "東京の気温の分布")
+```
+
+月毎の分散を計算する．
+
+```{r}
+tw_data |> group_by(month) |> summarize(var(temp)) |>
+    ggplot(aes(x = month, # 
+               y = `var(temp)`)) +
+    geom_bar(stat = "identity", fill = "royalblue") +
+    labs(x = "月", y = "気温の分散", title = "東京の気温のばらつき")
+```
+
+::: callout-note
+関数 `summarize()` は列名を指定しなければ計算内容に\`\`を付けて列名とする． これは "()" が特殊な文字(関数の引数を表す)のためである． このような指定が面倒であれば列名を指定すればよい．
+
+```{r}
+tw_data |> group_by(month) |> summarize(var = var(temp)) |>
+    ggplot(aes(x = month, y = var)) +
+    geom_bar(stat = "identity", fill = "skyblue") +
+    labs(x = "月", y = "気温の分散", title = "東京の気温のばらつき")
+```
+:::
+
+検定統計量の計算を行う．
+
+```{r}
+v0 <- tw_data |> group_by(month) |>
+    summarize(var(temp)) |> pull(`var(temp)`) |> mean()
+x <- tw_data |> filter(month == 6) |> pull(temp) # 6月の気温のベクトル
+(n <- length(x)) # データ数
+(chi2 <- (n-1)*var(x)/v0) # 検定統計量
+p0 <- pchisq(chi2, df=n-1)
+(p <- 2*min(p0,1-p0))
+```
+
+分散が小さな8月を検定してみる.
+
+```{r}
+x <- tw_data |> filter(month == 8) |> pull(temp) # 8月の気温のベクトル
+(n <- length(x)) # データ数
+(chi2 <- (n-1)*var(x)/v0) # 検定統計量
+p0 <- pchisq(chi2, df=n-1)
+(p <- 2*min(p0,1-p0))
+```
+
+## 平均の差の検定
+
+### 問題
+
+東京の気象データの気温の項目を用いて， 7月と8月の気温の平均が同じかどうか検定しなさい．
+
+::: callout-note
+他の項目や自身の集めたデータでも試してみよ．
+:::
+
+### 解答例
+
+7月と8月の平均気温を比較する．
+
+```{r}
+tw_data |>
+    filter(month %in% c(7,8)) |> # 月を限定
+    ggplot(aes(x = month, y = temp)) +
+    geom_boxplot(fill = "pink") +
+    geom_jitter(colour = "red", width = 0.2) + # データを重ねて表示
+    labs(x = "月", y = "気温", title = "気温の比較")
+```
+
+ばらつき方は大きく異なるが平均気温はばらつきの範囲内の違いのように見える．
+
+7月と8月の平均気温の差を検定する．
+
+```{r}
+x <- tw_data |> filter(month == 7) |> pull(temp)
+y <- tw_data |> filter(month == 8) |> pull(temp)
+t.test(x,y)
+```
+
+2月と12月でも試してみる．
+
+```{r}
+tw_data |>
+    filter(month %in% c(2,12)) |> 
+    ggplot(aes(x = month, y = temp)) +
+    geom_boxplot(fill = "lightblue") + # 色を変える
+    geom_jitter(colour = "blue", width = 0.2) +
+    labs(x = "月", y = "気温", title = "気温の比較")
+```
+
+平均気温の差はばらつきと同程度のように見える．
+
+```{r}
+x <- tw_data |> filter(month == 2) |> pull(temp)
+y <- tw_data |> filter(month == 12) |> pull(temp)
+t.test(x,y)
+```
+
+::: callout-note
+分布を視覚的に捉えるためには 関数 `geom_jitter()` 以外にもさまざまなパッケージが利用できる． 例えば以下のようなものがある．
+
+```{r}
+library(see)
+tw_data |>
+    filter(month %in% 6:9) |>
+    ggplot(aes(x = month, y = temp, fill = month)) +
+    geom_violindot(fill_dots = "grey") +
+    labs(x = "月", y = "気温", title = "気温の比較")
+```
+:::
+
+## 分散の比の検定
+
+### 問題
+
+東京の気象データの気温の項目を用いて， 3月と6月の気温の分散が同じかどうか検定しなさい．
+
+::: callout-note
+他の項目や自身の集めたデータでも試してみよ．
+:::
+
+### 解答例
+
+3月と6月の気温の分散を比較する．
+
+```{r}
+tw_data |>
+    filter(month %in% c(3,6)) |> 
+    ggplot(aes(x = month, y = temp)) +
+    geom_boxplot(fill = "lightgreen") + # 色を変える
+    geom_jitter(colour = "seagreen", width = 0.2) +
+    labs(x = "月", y = "気温", title = "気温の比較")
+```
+
+平均気温は大きく異なるがばらつきは同等のように見える．
+
+```{r}
+x <- tw_data |> filter(month == 3) |> pull(temp)
+y <- tw_data |> filter(month == 6) |> pull(temp)
+var.test(x,y)
+```
+
+3月と11月でも試してみる．
+
+```{r}
+tw_data |>
+    filter(month %in% c(3,11)) |> 
+    ggplot(aes(x = month, y = temp)) +
+    geom_boxplot(fill = "lightgreen") + # 色を変える
+    geom_jitter(colour = "seagreen", width = 0.2) +
+    labs(x = "月", y = "気温", title = "気温の比較")
+```
+
+平均気温は似通っているがばらつきは異なるように見える．
+
+```{r}
+x <- tw_data |> filter(month == 3) |> pull(temp)
+y <- tw_data |> filter(month == 11) |> pull(temp)
+var.test(x,y)
+```

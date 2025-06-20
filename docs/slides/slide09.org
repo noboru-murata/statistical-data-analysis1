@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-06-19 18:00:07 mura>
+# Time-stamp: <2025-06-20 16:05:03 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -190,11 +190,11 @@
 - 基本的な使い方
   #+begin_src R :eval no :tangle no
     mean(x, trim = 0, na.rm = FALSE) # 標本平均
-    var(x, na.rm = FALSE) # 不偏分散
-    sd(x, na.rm = FALSE) # 標本標準偏差
+    var(x, na.rm = FALSE)            # 不偏分散
+    sd(x, na.rm = FALSE)             # 標本標準偏差
     #' x: ベクトル，データフレームなど
     #' na.rm: 欠損値を取り除くか否か
-    #' 計算方法については help("mean"), help("var"), help("sd") を参照
+    #' 計算方法については ?mean, ?var, ?sd を参照
   #+end_src
 
 ** 標準化
@@ -229,7 +229,7 @@
     scale(x, center = TRUE, scale = TRUE) # 標準化
     #' x: ベクトル，データフレームなど．データフレームの場合は列ごとに標準化
     #' center: 中心化(平均0)する (TRUE) か否 (FALSE) か
-    #' scale: 正規化(分散1)する (TRUE) か否 (FALSE) か
+    #' scale:  正規化(分散1)する (TRUE) か否 (FALSE) か
     10 * scale(x) + 50 # 偏差値得点への変換
   #+end_src
 
@@ -433,7 +433,7 @@
     正規分布より裾が重いと解釈されることが多い
     #+end_quote
 - [[color:green][正の超過尖度をもつ分布の例]]
-  - 自由度 \(\nu>4\) をもつ \(t\)-分布 \(t(\nu)\) の超過尖度は \(6/(\nu-4)\) \\
+  - 自由度 \(\nu>4\) をもつ \(t\) 分布 \(t(\nu)\) の超過尖度は \(6/(\nu-4)\) \\
     (\(\nu\leq 4\) のときは \(t(\nu)\) は4次モーメントをもたない)
   - ガンマ分布 \(\Gamma(\nu,\alpha)\) の超過尖度は \(6/\nu\)
 
@@ -443,7 +443,7 @@
   if(Sys.info()["sysname"]=="Darwin"){par(family="HiraginoSans-W4")}
   curve(dt(x,df=10), from=-3, to=3,
         col="blue", lwd=3,
-        ylab="密度", main="t-分布 (自由度 10; 歪度0, 超過尖度1)")
+        ylab="密度", main="t分布 (自由度 10; 歪度0, 超過尖度1)")
 #+end_src
 #+NAME: fig:sk_tdist
 #+ATTR_HTML: :width 100%
@@ -743,7 +743,7 @@
     #' na.rm: 欠損値を取り除くか否か
     #' probs: 計算する分位点の値
     #' names: 出力に関する指定，多数の分位点を計算する場合は FALSE とした方がよい
-    #' type: 計算法の指定(help(quantile) を参照)
+    #' type: 計算法の指定(?quantile を参照)
   #+end_src
 
 ** 連続分布の分位点
@@ -793,7 +793,7 @@
   #+begin_quote
   最大値と最小値の差 (外れ値の影響を大きく受ける)
   #+end_quote
-- *四分位範囲* (interquantile range)
+- *四分位範囲* (interquartile range)
   #+begin_quote
   第3四分位点と第1四分位点の差
   #+end_quote

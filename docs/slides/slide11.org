@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:53:40 mura>
+# Time-stamp: <2025-06-20 15:35:01 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -590,7 +590,7 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-- 適当な正規乱数を用いてMonte-Carlo実験を考案し，
+- 適当な正規乱数を用いて確率シミュレーションを考案し，
   \(t\) 検定の過誤について調べなさい．
   #+begin_src R :eval no :tangle no
     #' 例えば適当な数値を指定して以下のような実験を行えばよい
@@ -602,7 +602,7 @@
     #' 上記はp値の性質を調べる場合であるが，t統計量についても同様に調べることができる
   #+end_src
   
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice t検定のMonte-Carlo実験
   #' 
@@ -703,7 +703,7 @@
     \(n\) が大きければ
     標本平均 \(\bar{X}\) は正規分布で十分良く近似できる
 
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 視聴率の検定
   #'
@@ -912,7 +912,7 @@
       summarize(var(temp)) |> pull(`var(temp)`) |> mean()
   #+end_src
   
-#+begin_src R :eval no :exports none
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 気温の分散の検定
   #'
@@ -1143,7 +1143,7 @@
   7月と8月の気温の平均が同じかどうか検定しなさい．
 - 他の項目や自身の集めたデータでも試してみよ．
   
-#+begin_src R :eval no :exports none :tangle yes
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 平均の差の検定
   #'
@@ -1316,7 +1316,7 @@
   3月と6月の気温の分散が同じかどうか検定しなさい．
 - 他の項目や自身の集めたデータでも試してみよ．
 
-#+begin_src R :eval no :exports none :tangle yes
+#+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice 分散の比の検定
   #' 

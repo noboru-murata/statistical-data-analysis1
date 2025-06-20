@@ -1,0 +1,134 @@
+---
+title: "統計データ解析I"
+subtitle: "第11講 練習問題"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+#' 日本語を用いるので macOS ではフォントの設定を行う
+if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+    theme_update(text = element_text(family = "HiraginoSans-W4"))
+    update_geom_defaults("text", list(family = theme_get()$text$family))
+    update_geom_defaults("label", list(family = theme_get()$text$family))}
+```
+
+## $t$ 検定の確率シミュレーション
+
+### 問題
+
+適当な正規乱数を用いて確率シミュレーションを考案し，$t$ 検定の過誤について調べなさい．
+
+::: callout-note
+#### ヒント
+
+例えば適当な数値を指定して以下のような実験を行えばよい．
+
+```{r}
+#| eval: false
+mc_trial <- function(n){ 
+    result <- t.test(rnorm(n,mean = mu0,sd = sd0), mu = mu0)
+    return(result$p.value)}
+mc_data <- replicate(mc, mc_trial(n))
+table(mc_data < alpha)/mc # alpha以下のデータの数(比率)を調べる
+```
+
+上記はp値の性質を調べる場合であるが，t統計量についても同様に調べることができる．
+:::
+
+## 視聴率の検定
+
+### 問題
+
+ある番組の視聴率が2桁に達したかどうか知るために，n人にその番組を観たかどうか確認する． 確率変数 $$
+  \begin{equation}
+    X_{i}=
+    \begin{cases}
+      1,&\text{番組を観た}\\
+      0,&\text{番組を観ていない}
+    \end{cases},\;
+    i=1,2,\dotsc,n
+  \end{equation}
+$$ を定義して，これを用いた検定を考えてみよ．
+
+::: callout-note
+#### ヒント
+
+$X$ の生成は例えば `mu1` を真の視聴率として以下のようにすればよい
+
+```{r}
+#| eval: false
+x <- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
+```
+
+n人分の視聴結果 {1,0} のベクトルが得られる．
+
+$X$ は正規分布には従わないが， $n$ が大きければ標本平均 $\bar{X}$ は正規分布で十分良く近似できることを利用して良い．
+:::
+
+## 気温の分散の検定
+
+### 問題
+
+東京の気象データの気温の項目を用いて， 6月の気温の分散が， 月毎に計算した気温の分散の平均値より大きいかどうか検定せよ．
+
+::: callout-note
+#### ヒント
+
+```{r}
+#| eval: false
+tw_data <- read_csv("data/tokyo_weather.csv") 
+#' 月毎の気温の分散は以下で計算できる
+tw_data |> group_by(month) |> summarize(var(temp))
+#' この平均値は以下のように計算される
+tw_data |> group_by(month) |>
+    summarize(var(temp)) |> pull(`var(temp)`) |> mean()
+```
+:::
+
+## 平均の差の検定
+
+### 問題
+
+東京の気象データの気温の項目を用いて， 7月と8月の気温の平均が同じかどうか検定しなさい．
+
+::: callout-note
+他の項目や自身の集めたデータでも試してみよ．
+:::
+
+## 分散の比の検定
+
+### 問題
+
+東京の気象データの気温の項目を用いて， 3月と6月の気温の分散が同じかどうか検定しなさい．
+
+::: callout-note
+他の項目や自身の集めたデータでも試してみよ．
+:::
