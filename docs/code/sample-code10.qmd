@@ -58,8 +58,8 @@ $X$ を一様乱数に従う確率変数とし，平均値の推定量として�
 ```{r}
 #| eval: false
 estimate_means <- function(n, min, max){ # 観測データ数
-    x <- runif(n, min=min, max=max) # 一様乱数を生成，範囲は引数から
-    return(c(xbar=mean(x),med=median(x),mid=(max(x)+min(x))/2))
+    x <- runif(n, min = min, max = max) # 一様乱数を生成，範囲は引数から
+    return(c(xbar = mean(x), med = median(x), mid = (max(x)+min(x))/2))
 } # 3つまとめて計算する関数
 ```
 :::
@@ -90,12 +90,12 @@ a <- 0; b <- 50 # 一様乱数の区間
 ```{r}
 mc_data <- 
     replicate(mc, estimate_means(n, min = a, max = b)) |> # 3 x mc 型行列
-    t() |>      # 転置 mc x 3 型行列
+    t() |>      # 転置して mc x 3 型行列に変換
     as_tibble() # データフレーム化
 mc_data # 実験結果の一部を確認
 ```
 
-結果を集計する．
+それぞれの推定量の平均と分散を計算し，結果を集計する．
 
 ```{r}
 mc_data |> 
@@ -124,12 +124,14 @@ for(name in c("xbar","med","mid")) {
         geom_histogram(bins = 40,
                        fill = "pink",
                        colour = "brown") +
-        xlim(a,b) + ylim(0,2500) + # 同じ大きさの図にする
+        lims(x = c(a,b), y = c(0,2500)) + # 同じ大きさの図にする
         labs(x = "estimate",
              title = paste(name, "の分布"))
     print(gg)
 }
 ```
+
+一様分布においては，最大最小の平均が良い推定量であることがわかる．
 
 ::: callout-note
 違う分布で試してみる．
@@ -158,7 +160,7 @@ for(name in c("xbar","med","mid")) {
 }
 ```
 
-この分布では中央値が良い推定となることがわかる．
+この分布では中央値が良い推定量となることがわかる．
 :::
 
 ::: callout-tip
@@ -218,12 +220,15 @@ tw_data |>
 ```{r}
 library("stats4") # 関数mleを利用
 mle.gamma <- function(x,                # 観測データ
-                      nu0 = 1,          # nuの初期値
-                      alpha0 = 1,       # alphaの初期値
+                      nu0 = 1,          # nu (shape) の初期値 
+                      alpha0 = 1,       # alpha (rate) の初期値
                       verbose = FALSE){ # debug用に追加
     ## 負の対数尤度関数を定義 (最小化を考えるため)
     ll <- function(nu, alpha) # nuとalphaの関数として定義 
-        suppressWarnings(-sum(dgamma(x, nu, alpha, log = TRUE)))
+        suppressWarnings(-sum(dgamma(x,
+                                     shape = nu, 
+                                     rate = alpha, 
+                                     log = TRUE))) # 対数密度
     ## suppressWarnings は定義域外で評価された際の警告を表示させない
     ## 最尤推定(負の尤度の最小化)
     est <- mle(minuslogl = ll,   # 負の対数尤度関数
@@ -256,7 +261,7 @@ last_plot() +
 ```
 
 ::: callout-note
-シミュレーションにより一致性の検証を行うと以下のようになる．
+シミュレーションにより推定量の良さの検証(一致性や不偏性の確認)を行うと以下のようになる．
 
 ```{r}
 set.seed(5678)      # 乱数のシード値の指定 (変更して再現性を確認してみよ)
@@ -323,32 +328,26 @@ for(n in c(10, 50, 100)){ # データ数を変えて実験
 ```{r}
 set.seed(1357) # 乱数のシード値の指定 (変更して再現性を確認してみよ)
 n <- 50
-idx <- sample(nrow(tw_data),n) # データの抽出
-(xbar <- tw_data |> slice(idx) |> pull(solar) |> mean()) # 標本平均
-(sigma <- tw_data |> slice(idx) |> pull(solar) |> sd())  # 標本標準偏差
+est <- # 平均と標準偏差の推定を行う
+    tw_data |>
+    slice_sample(n = n) |> # ランダムにn個取り出す
+    summarize(across(solar, list(mean = mean, sd = sd))) 
+xbar  <- est[["solar_mean"]] # 標本平均
+sigma <- est[["solar_sd"]]   # 標本標準偏差
 z95 <- qnorm(0.95) # 標準正規分布の0.95分位点
 (ci <- c(L = xbar-z95*sigma/sqrt(n),
          U = xbar+z95*sigma/sqrt(n))) # 信頼区間
 ```
 
-::: callout-note
-平均と標準偏差については以下のようにしてまとめて計算してもよい．
-
-```{r}
-tw_data |>
-    slice_sample(n = n) |> # ランダムにn個取り出す
-    summarize(across(solar, list(mean = mean, sd = sd))) 
-```
-:::
-
-信頼区間の正答率を評価する．
+これを複数回行い，信頼区間の正答率を評価する．
 
 ```{r}
 mc <- 100
 mc_trial <- function(n){ # nを変えて実験できるように
-    idx <- sample(nrow(tw_data),n)
-    xbar <- tw_data |> slice(idx) |> pull(solar) |> mean() # 標本平均
-    sigma <- tw_data |> slice(idx) |> pull(solar) |> sd()  # 標本標準偏差
+    est <- tw_data |> slice_sample(n = n) |> 
+        summarize(across(solar, list(mean = mean, sd = sd))) 
+    xbar  <- est[["solar_mean"]] # 標本平均
+    sigma <- est[["solar_sd"]]   # 標本標準偏差
     return(c(L = xbar-z95*sigma/sqrt(n),
              U = xbar+z95*sigma/sqrt(n))) # 信頼区間
 }
@@ -359,7 +358,7 @@ mc_data |> count(answer)             # 頻度を見る
 ```
 
 ::: callout-note
-信頼区間について多数で評価する．
+信頼区間について更に多数で評価してみる．
 
 ```{r}
 mc <- 2000
@@ -371,7 +370,7 @@ mc_data |> count(answer) |> mutate(prob=n/sum(n)) # 確率を見る
 :::
 
 ::: callout-note
-日射量の平均の推定における観測データを全て使った推定値(真値に相当)と信頼区間の関係を グラフを描いて確認してみる．
+日射量の平均の推定における観測データを全て使った推定値(真値に相当)と信頼区間の関係をグラフを描いて確認してみる．
 
 ```{r}
 k <- 20 
