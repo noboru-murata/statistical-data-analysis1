@@ -1,0 +1,98 @@
+---
+title: "統計データ解析I"
+subtitle: "第12講 練習問題"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+#' 日本語を用いるので macOS ではフォントの設定を行う
+if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+    theme_update(text = element_text(family = "HiraginoSans-W4"))
+    update_geom_defaults("text", list(family = theme_get()$text$family))
+    update_geom_defaults("label", list(family = theme_get()$text$family))}
+```
+
+## 一元配置分散分析
+
+### 問題
+
+以下の問に答えなさい．
+
+- 一元配置分散分析について確率シミュレーションを行いなさい．
+
+- 東京の気候データ (~tokyo_weather.csv~) の
+  気温の項目について以下の問に答えよ．
+  - 曜日ごとの気温の平均と分散を求めよ．
+  - 曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．
+
+::: callout-note
+週日を因子(factor)とするには例えば以下のような項目を加えればよい．
+```{r}
+#| eval: false
+tw_data <- read_csv("data/tokyo_weather.csv") |>
+    mutate(day_of_week = ordered(day_of_week, # 曜日を順序付き因子にする
+                                 levels = wday(1:7, label = TRUE))) 
+```
+関数 `lubridate::wday()` の出力は使用言語に依存するので，
+強制的に英語にするには `locale` を指定して
+`wday(..., locale = "en_US")` とすれば良い．
+省略形を用いない場合は `abbr` を指定する．
+以下はドイツ語の例．
+```{r}
+#| eval: false
+wday(1:7, label = TRUE, abbr = FALSE, locale = "de_DE")
+```
+利用可能な言語を調べるには `stringi::stri_locale_list()` を用いる．
+:::
+
+## 二元配置分散分析
+
+### 問題
+
+`package::datarium` に含まれている
+`jobsatisfaction` データ
+(性別 (`gender`) と
+学歴 (`education_level`) の違いによる
+仕事の満足度 (`score`) を収集したデータ)
+について以下の問に答えよ．
+	
+	
+- データを適当な方法で可視化しなさい．
+- それぞれの因子で満足度の平均に違いがあるか，二元配置の分散分析を用いて検討しなさい．
+
+::: callout-note
+パッケージのインストールと読み込みは以下のように行うことができる．
+
+```{r}
+install.packages("datarium") # インストール
+library("datarium") # 読み込み
+```
+:::

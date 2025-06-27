@@ -1,0 +1,77 @@
+---
+title: "統計データ解析I"
+subtitle: "第13講 練習問題"
+date: "`r Sys.time()`"
+format:
+    html: 
+      toc: true
+      html-math-method: katex
+      self-contained: true
+      grid: 
+        margin-width: 350px
+execute: 
+  echo: true
+  warning: false
+reference-location: margin
+citation-location: margin
+tbl-cap-location: margin
+fig-cap-location: margin
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 準備
+
+以下で利用する共通パッケージを読み込む．
+
+```{r}
+library(conflicted)  # 関数名の衝突を警告
+conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
+library(tidyverse)
+#' 日本語を用いるので macOS ではフォントの設定を行う
+if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
+    theme_update(text = element_text(family = "HiraginoSans-W4"))
+    update_geom_defaults("text", list(family = theme_get()$text$family))
+    update_geom_defaults("label", list(family = theme_get()$text$family))}
+```
+
+## 回帰分析の確率シミュレーション
+
+### 問題
+
+回帰分析におけるモデルの推定量の精度に関する
+  確率シミュレーションを考えなさい．
+
+## 回帰モデルの点推定
+
+### 問題
+
+東京の気象データを用いて，
+必要であれば適当な期間を抽出し，
+日射量から気温を説明する回帰モデルを構成しなさい．
+
+## 回帰モデルの区間推定
+
+### 問題
+
+前問で作成した回帰モデルについて区間推定を行いなさい．
+
+## 回帰モデルの係数の検定
+
+### 問題
+
+前問で作成した回帰モデルについて係数の検定を行いなさい．
+
+## 決定係数による回帰モデルの検討
+
+### 問題
+
+前問で作成した回帰モデルについて
+決定係数を確認しなさい．
+また，説明変数として降水量を用いた回帰モデルについて
+検討しなさい．

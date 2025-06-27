@@ -199,60 +199,41 @@
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide11" >}}
 ** ハンドアウト
 - [[github:pdfs/slide11.pdf][PDF file]]
-** 解答例
-- [[github:code/slide11.R][RScript]]
+** 付録
+- 実習用 [[githubraw:code/practice11.qmd][Quarto]]
+- 解答例 [[github:code/sample-code11.html][HTML]] [[githubraw:code/sample-code11.qmd][Quarto]]
+# - 資料の例題 [[github:code/slide10.R][RScript]] # このスライドにはない
 
 * 第12講
 :PROPERTIES:
 :EXPORT_FILE_NAME: lecture12
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2024-06-20 Thu> 更新
+<2025-06-27 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide12" >}}
 ** ハンドアウト
 - [[github:pdfs/slide12.pdf][PDF file]]
-** 解答例
-- [[github:code/slide12.R][RScript]]
-
-# * COMMENT 講義13
-#   :PROPERTIES:
-#   :EXPORT_FILE_NAME: lecture13
-#   :EXPORT_DATE: <2020-09-19 Sat>
-#   :END:
-#   準備中
-# ** COMMENT スライド
-#    #+html: {{< myslide base="statistical-data-analysis1" name="slide13" >}}
-# ** COMMENT ハンドアウト
-#    - [[github:pdfs/slide13.pdf][PDF file]]
-# ** COMMENT 解答例
-#    - [[github:code/slide13.R][RScript]]
-
-# * COMMENT 講義14
-#   :PROPERTIES:
-#   :EXPORT_FILE_NAME: lecture14
-#   :EXPORT_DATE: <2020-09-19 Sat>
-#   :END:
-#   準備中
-# ** COMMENT スライド
-#    #+html: {{< myslide base="statistical-data-analysis1" name="slide14" >}}
-# ** COMMENT ハンドアウト
-#    - [[github:pdfs/slide14.pdf][PDF file]]
-# ** COMMENT 解答例
-#    - [[github:code/slide14.R][RScript]]
+** 付録
+- 実習用 [[githubraw:code/practice12.qmd][Quarto]]
+# - 解答例 [[github:code/sample-code12.html][HTML]] [[githubraw:code/sample-code12.qmd][Quarto]]
+# - 資料の例題 [[github:code/slide10.R][RScript]] # このスライドにはない
 
 * 第13講
 :PROPERTIES:
 :EXPORT_FILE_NAME: lecture13
 :EXPORT_DATE: <2021-04-03 Sat>
 :END:
-<2024-07-26 Fri> 更新
+<2025-06-27 Fri> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide13" >}}
 ** ハンドアウト
 - [[github:pdfs/slide13.pdf][PDF file]]
-** 解答例
-- [[github:code/slide13.R][RScript]]
+** 付録
+- 実習用 [[githubraw:code/practice13.qmd][Quarto]]
+# - 解答例 [[github:code/sample-code13.html][HTML]] [[githubraw:code/sample-code13.qmd][Quarto]]
+# - 資料の例題 [[github:code/slide10.R][RScript]] # このスライドにはない
+
 
 # * COMMENT 講義13
 #   :PROPERTIES:
