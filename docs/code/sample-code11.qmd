@@ -345,11 +345,11 @@ y <- tw_data |> filter(month == 8) |> pull(temp)
 t.test(x,y)
 ```
 
-2月と12月でも試してみる．
+1月と12月でも試してみる．
 
 ```{r}
 tw_data |>
-    filter(month %in% c(2,12)) |> 
+    filter(month %in% c(1,12)) |> 
     ggplot(aes(x = month, y = temp)) +
     geom_boxplot(fill = "lightblue") + # 色を変える
     geom_jitter(colour = "blue", width = 0.2) +
@@ -359,7 +359,7 @@ tw_data |>
 平均気温の差はばらつきと同程度のように見える．
 
 ```{r}
-x <- tw_data |> filter(month == 2) |> pull(temp)
+x <- tw_data |> filter(month == 1) |> pull(temp)
 y <- tw_data |> filter(month == 12) |> pull(temp)
 t.test(x,y)
 ```
@@ -381,7 +381,7 @@ tw_data |>
 
 ### 問題
 
-東京の気象データの気温の項目を用いて， 3月と6月の気温の分散が同じかどうか検定しなさい．
+東京の気象データの気温の項目を用いて， 4月と9月の気温の分散が同じかどうか検定しなさい．
 
 ::: callout-note
 他の項目や自身の集めたデータでも試してみよ．
@@ -389,11 +389,11 @@ tw_data |>
 
 ### 解答例
 
-3月と6月の気温の分散を比較する．
+4月と9月の気温の分散を比較する．
 
 ```{r}
 tw_data |>
-    filter(month %in% c(3,6)) |> 
+    filter(month %in% c(4,9)) |> 
     ggplot(aes(x = month, y = temp)) +
     geom_boxplot(fill = "lightgreen") + # 色を変える
     geom_jitter(colour = "seagreen", width = 0.2) +
@@ -403,16 +403,16 @@ tw_data |>
 平均気温は大きく異なるがばらつきは同等のように見える．
 
 ```{r}
-x <- tw_data |> filter(month == 3) |> pull(temp)
-y <- tw_data |> filter(month == 6) |> pull(temp)
+x <- tw_data |> filter(month == 4) |> pull(temp)
+y <- tw_data |> filter(month == 9) |> pull(temp)
 var.test(x,y)
 ```
 
-3月と11月でも試してみる．
+1月と2月でも試してみる．
 
 ```{r}
 tw_data |>
-    filter(month %in% c(3,11)) |> 
+    filter(month %in% c(1,2)) |> 
     ggplot(aes(x = month, y = temp)) +
     geom_boxplot(fill = "lightgreen") + # 色を変える
     geom_jitter(colour = "seagreen", width = 0.2) +
@@ -422,7 +422,7 @@ tw_data |>
 平均気温は似通っているがばらつきは異なるように見える．
 
 ```{r}
-x <- tw_data |> filter(month == 3) |> pull(temp)
-y <- tw_data |> filter(month == 11) |> pull(temp)
+x <- tw_data |> filter(month == 1) |> pull(temp)
+y <- tw_data |> filter(month == 2) |> pull(temp)
 var.test(x,y)
 ```
