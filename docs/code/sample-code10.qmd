@@ -103,7 +103,21 @@ mc_data |>
                      list(mean = mean, var = var)))
 ```
 
-もう少し詳しくみてみる．
+別々のヒストグラムにして比較してみる．
+
+```{r}
+mc_data |>
+    pivot_longer(everything()) |>
+    ggplot(aes(x = value)) +
+    geom_histogram(aes(fill = name),
+                   show.legend = FALSE) + # 凡例を表示しない
+    facet_wrap(~name)                     # 横に並べる 
+```
+
+一様分布においては，最大最小の平均が良い推定量であることがわかる．
+
+::: callout-note
+分位点を使ってもう少し詳しくみてみる．
 
 ```{r}
 mc_data |> summary() # 四分位点を表示 (簡便な方法)
@@ -111,9 +125,13 @@ mc_data |> # データフレームとして取得する方法 (以下は一例)
     pivot_longer(everything()) |> # long format に変更
     group_by(name) |> # 推定量ごとに集計
     summarize(as_tibble_row(quantile(value))) # 計算結果を行に並べる
+mc_data |> # 別形式のデータフレームの作成例
+    pivot_longer(everything()) |> # long format に変更
+    group_by(name) |> # 推定量ごとに集計
+    reframe(qs=quantile(value), probs=seq(0,1,.25)) 
 ```
 
-それぞれのヒストグラムを描いてみる．
+それぞれのヒストグラムを描くこともできる．
 
 ```{r}
 for(name in c("xbar","med","mid")) {
@@ -130,8 +148,7 @@ for(name in c("xbar","med","mid")) {
     print(gg)
 }
 ```
-
-一様分布においては，最大最小の平均が良い推定量であることがわかる．
+:::
 
 ::: callout-note
 違う分布で試してみる．
@@ -144,20 +161,13 @@ estimate_means2 <- function(n){
 mc_data2 <- 
     replicate(mc, estimate_means2(n)) |> t() |> as_tibble()
 #' それぞれの分布を書いてみる
-for(name in c("xbar","med","mid")) { 
-    name <- sym(name)
-    gg <-
-        mc_data2 |>
-        ggplot(aes(x = !!name)) +
-        geom_histogram(aes(y = after_stat(density)), # 密度表示
-                       bins = 40,
-                       fill = "pink",
-                       colour = "brown") +
-        xlim(-10,10) + # x軸を同じにする
-        labs(x = "estimate",
-             title = paste(name, "の分布"))
-    print(gg)
-}
+mc_data2 |>
+    pivot_longer(everything()) |>
+    ggplot(aes(x = value)) +
+    geom_histogram(aes(fill = name),
+                   show.legend = FALSE) + 
+    xlim(-8,8) +                          # x軸を調整する
+    facet_wrap(~name) 
 ```
 
 この分布では中央値が良い推定量となることがわかる．
@@ -190,6 +200,29 @@ tibble(x = rep(1:ncols, nrows),
 -   全データを用いてヒストグラム(密度)を作成しなさい．
 -   ガンマ分布でモデル化して最尤推定を行いなさい．
 -   推定した結果をヒストグラムに描き加えて比較しなさい．
+
+::: callout-note
+ガンマ分布の最尤推定量は以下のようにして作成できる
+
+```{r}
+#| eval: false
+library("stats4") # 関数mleを利用するため
+#' 数値最適化のためには尤度関数を最初に評価する初期値が必要
+mle.gamma <- function(x, # 観測データ
+                      nu0 = 1, alpha0 = 1){ # nu, alphaの初期値
+    ## 負の対数尤度関数を定義 (最小化を考えるため)
+    ll <- function(nu, alpha) # nuとalphaの関数として定義 
+        suppressWarnings(-sum(dgamma(x, nu, alpha, log = TRUE)))
+    ## suppressWarnings は定義域外で評価された際の警告を表示させない
+    ## 最尤推定(負の尤度の最小化)
+    est <- mle(minuslogl = ll,   # 負の対数尤度関数
+               start = list(nu = nu0, alpha = alpha0), # 初期値
+               method = "BFGS",  # 最適化方法 (選択可能)
+               nobs = length(x)) # 観測データ数
+    return(coef(est)) # 推定値のみ返す
+}
+```
+:::
 
 ::: callout-note
 余力のある者は，自身で収集したデータを用いてモデル化と最尤推定を試みよ．

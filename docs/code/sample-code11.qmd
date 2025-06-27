@@ -1,6 +1,6 @@
 ---
 title: "統計データ解析I"
-subtitle: "第11講 練習問題"
+subtitle: "第11講 練習問題 解答例"
 date: "`r Sys.time()`"
 format:
     html: 
@@ -73,25 +73,30 @@ mu0 <- 5
 sd0 <- 3
 mc <- 10000
 alpha <- 0.05
-mc_trial <- function(n){ 
+mc_trial <- function(n, pval = TRUE){ 
     result <- t.test(rnorm(n, mean = mu0, sd = sd0), mu = mu0)
-    return(result$statistic)} # 検定統計量を取り出す
+    if(pval) {
+        return(result$p.value)   # p値を取り出す
+    } else {
+        return(result$statistic) # 検定統計量を取り出す
+    }
+}
 ```
 
 検定統計量の分布を視覚化する．
 
 ```{r}
-mc_data <- replicate(mc, mc_trial(n)) |> as_tibble()
+mc_data <- replicate(mc, mc_trial(n, pval = FALSE)) |> as_tibble_col()
 mc_data |>
     ggplot(aes(x = value)) +
     geom_histogram(aes(y = after_stat(density)), # 密度表示
                    bins = 40,
                    fill = "lightgreen",
                    colour = "seagreen") +
-    geom_function(fun = dnorm,
+    geom_function(fun = dnorm,      # 正規分布
                   colour = "red",
                   linewidth = 1.2) +
-    geom_function(fun = dt,
+    geom_function(fun = dt,         # 自由度n-1のt分布
                   args = list(df = n-1),
                   colour = "blue",
                   linewidth = 1.2) +
@@ -103,28 +108,27 @@ mc_data |>
 $p$ 値の分布を見るには以下のようにすればよい．
 
 ```{r}
-mc_trial <- function(n){ 
-    result <- t.test(rnorm(n, mean = mu0, sd = sd0), mu = mu0)
-    return(result$p.value)} # p値を取り出す
-mc_data <- replicate(mc, mc_trial(n)) |> as_tibble()
+mc_data <- replicate(mc, mc_trial(n)) |> as_tibble_col()
 mc_data |>
     ggplot(aes(x = value)) +
     geom_histogram(fill = "plum",
                    colour = "orchid") +
     labs(x = "p値", title = "p値の分布")
-table(mc_data < alpha)/mc # alpha以下の結果の数を調べる = サイズ
+mc_data |>
+    count(value < alpha) |>
+    mutate(prob = n/sum(n)) # alpha以下の結果の数を調べる = サイズ
 ```
 
 $p$ 値は一様に分布し，有意水準と第一種の過誤の関係が確認できる．
 
-一方，帰無仮説が成り立たない場合の p 値の分布は以下のようになる．
+一方，帰無仮説が成り立たない場合の p 値の分布は例えば以下のようになる．
 
 ```{r}
 mc_trial <- function(n){ 
     result <- t.test(rnorm(n, mean = mu0+1, sd = sd0), mu = mu0)
     return(result$p.value)} # p値を取り出す
 replicate(mc, mc_trial(n)) |>
-    as_tibble() |>
+    as_tibble_col() |>
     ggplot(aes(x = value)) +
     geom_histogram(fill = "khaki",
                    colour = "tan") +
