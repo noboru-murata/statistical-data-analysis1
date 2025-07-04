@@ -111,7 +111,8 @@ $p$ 値の分布を見るには以下のようにすればよい．
 mc_data <- replicate(mc, mc_trial(n)) |> as_tibble_col()
 mc_data |>
     ggplot(aes(x = value)) +
-    geom_histogram(fill = "plum",
+    geom_histogram(bins = 20,
+                   fill = "plum",
                    colour = "orchid") +
     labs(x = "p値", title = "p値の分布")
 mc_data |>
@@ -208,10 +209,11 @@ mc_trial <- function(n){
     x <- sample(0:1, n, replace = TRUE, prob = c(1-mu1,mu1))
     result <- t.test(x, mu = mu0, alternative = "greater")
     return(result$p.value)}
-mc_data <- replicate(mc, mc_trial(n)) |> as_tibble()
+mc_data <- replicate(mc, mc_trial(n)) |> as_tibble_col()
 mc_data |>
     ggplot(aes(x = value)) +
-    geom_histogram(fill = "plum",
+    geom_histogram(bins = 20,
+                   fill = "plum",
                    colour = "orchid") +
     labs(x = "p値", title = paste0("p値の分布 (n=",n,")"))
 table(mc_data < alpha)/mc # alpha以下のデータの数を調べる=検出力
@@ -221,10 +223,11 @@ $n$ を変えて実験してみる．
 
 ```{r}
 n <- 5000
-mc_data <- replicate(mc, mc_trial(n)) |> as_tibble()
+mc_data <- replicate(mc, mc_trial(n)) |> as_tibble_col()
 mc_data |>
     ggplot(aes(x = value)) +
-    geom_histogram(fill = "plum",
+    geom_histogram(bins = 20,
+                   fill = "plum",
                    colour = "orchid") +
     labs(x = "p値", title = paste0("p値の分布 (n=",n,")"))
 table(mc_data < alpha)/mc # alpha以下のデータの数を調べる=検出力
@@ -272,19 +275,19 @@ tw_data |>
 月毎の分散を計算する．
 
 ```{r}
-tw_data |> group_by(month) |> summarize(var(temp)) |>
-    ggplot(aes(x = month, # 
-               y = `var(temp)`)) +
+tw_data |> group_by(month) |> summarize(var = var(temp)) |>
+    ggplot(aes(x = month, y = var)) +
     geom_bar(stat = "identity", fill = "royalblue") +
     labs(x = "月", y = "気温の分散", title = "東京の気温のばらつき")
 ```
 
 ::: callout-note
-関数 `summarize()` は列名を指定しなければ計算内容に\`\`を付けて列名とする． これは "()" が特殊な文字(関数の引数を表す)のためである． このような指定が面倒であれば列名を指定すればよい．
+関数 `summarize()` は列名を指定しなければ計算内容に\`\`を付けて列名とする．これは "()" が特殊な文字(関数の引数を表す)のためである．
 
 ```{r}
-tw_data |> group_by(month) |> summarize(var = var(temp)) |>
-    ggplot(aes(x = month, y = var)) +
+tw_data |> group_by(month) |> summarize(var(temp)) |>
+    ggplot(aes(x = month,
+               y = `var(temp)`)) +
     geom_bar(stat = "identity", fill = "skyblue") +
     labs(x = "月", y = "気温の分散", title = "東京の気温のばらつき")
 ```
@@ -294,11 +297,12 @@ tw_data |> group_by(month) |> summarize(var = var(temp)) |>
 
 ```{r}
 v0 <- tw_data |> group_by(month) |>
-    summarize(var(temp)) |> pull(`var(temp)`) |> mean()
+    summarize(var = var(temp)) |>
+    pull(var) |> mean() # 12ヶ月分の分散の単純な平均
 x <- tw_data |> filter(month == 6) |> pull(temp) # 6月の気温のベクトル
 (n <- length(x)) # データ数
 (chi2 <- (n-1)*var(x)/v0) # 検定統計量
-p0 <- pchisq(chi2, df=n-1)
+p0 <- pchisq(chi2, df = n-1)
 (p <- 2*min(p0,1-p0))
 ```
 
@@ -308,7 +312,7 @@ p0 <- pchisq(chi2, df=n-1)
 x <- tw_data |> filter(month == 8) |> pull(temp) # 8月の気温のベクトル
 (n <- length(x)) # データ数
 (chi2 <- (n-1)*var(x)/v0) # 検定統計量
-p0 <- pchisq(chi2, df=n-1)
+p0 <- pchisq(chi2, df = n-1)
 (p <- 2*min(p0,1-p0))
 ```
 

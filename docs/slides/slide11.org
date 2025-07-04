@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-06-20 15:35:01 mura>
+# Time-stamp: <2025-07-04 13:53:38 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -1313,7 +1313,7 @@
 :reveal_background: #fef4f4
 :END:
 - 東京の気象データの気温の項目を用いて，
-  3月と6月の気温の分散が同じかどうか検定しなさい．
+  4月と9月の気温の分散が同じかどうか検定しなさい．
 - 他の項目や自身の集めたデータでも試してみよ．
 
 #+begin_src R :eval no :exports none :tangle no
