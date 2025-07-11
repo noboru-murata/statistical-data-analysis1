@@ -48,7 +48,7 @@ if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォン�
 
 ### 解答例
 
-人工データによ一元配置分散分析の Monte-Carlo 実験を行う．
+人工データにより一元配置分散分析の Monte-Carlo 実験を行う．
 
 A,B,Cの3つの水準をもつデータを考える．
 
