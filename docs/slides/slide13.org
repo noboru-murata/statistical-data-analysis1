@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-04-11 16:54:16 mura>
+# Time-stamp: <2025-07-14 12:42:49 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/mycourse.org"
 # C-c C-x C-v でinlineを切り替え
@@ -480,7 +480,8 @@
 - 残差の二乗平均の性質 (標本分散と同様の計算)
   #+begin_quote
   \begin{equation}
-    \mathbb{E}[\hat{\epsilon}_i^2]=\sigma^2(n{-}2)/n\quad(i=1,\dotsc,n)      
+    \mathbb{E}\Bigl[\frac{1}{n}\sum_{i=1}^{n}\hat{\epsilon}_i^2\Bigr]
+    =\frac{n{-}2}{n}\sigma^2
     % \mathbb{E}[\hat{\epsilon}_i^2]=\frac{n{-}2}{n}\sigma^2\quad(i=1,\dotsc,n)      
   \end{equation}
   #+end_quote
