@@ -118,22 +118,29 @@ mc_trial <- function(){
     return(coef(est))
 }
 mc_data <- # 実験結果をデータフレームに変換
-    replicate(2000, mc_trial()) |> t() |> as_tibble()
+    replicate(2000, mc_trial()) |> t() |> as_tibble() |>
+    set_names(c("alpha", "beta")) # 列名を変更
 ```
 
 推定値の分布を視覚化する．
 
 ```{r}
 mc_data |> # 切片
-    ggplot(aes(x = `(Intercept)`)) +
+    ggplot(aes(x = alpha)) +
     geom_density(fill = "pink") +
     geom_vline(xintercept = alpha, colour = "orange") +
     labs(x = expression(hat(alpha)), title = "切片の分布")
 mc_data |> # 傾き
-    ggplot(aes(x = x)) +
+    ggplot(aes(x = beta)) +
     geom_density(fill = "palegreen") +
     geom_vline(xintercept = beta, colour = "darkgreen") +
     labs(x = expression(hat(beta)), title = "傾きの分布")
+mc_data |> # 散布図
+    ggplot(aes(x = alpha, y = beta)) +
+    geom_point(colour = "royalblue") +
+    labs(x = expression(hat(alpha)),
+         y = expression(hat(beta)),
+         title = "推定値の散布図")
 ```
 
 推定された回帰式のばらつきを表示する．
@@ -143,8 +150,8 @@ mc_data |>
     slice_sample(n = 40) |> # Monte-Carlo 実験から40個ランダムに選択
     rowid_to_column() |>    # 番号列(rowid)を作成
     ggplot() +
-    geom_abline(aes(intercept = `(Intercept)`,
-                    slope = x,
+    geom_abline(aes(intercept = alpha,
+                    slope = beta,
                     colour = as_factor(rowid)), # 色を変える
                 alpha = 0.4, # alpha値を低くして色を薄くする
                 show.legend = FALSE) + # 凡例は表示しない
@@ -766,12 +773,12 @@ bb_new_data <- # 作成したbody列に対する区間の計算
                           newdata = bb_new_body,
                           interval = "confidence") |> # 信頼区間
            select(.fitted, .lower, .upper) |> exp() |>
-           magrittr::set_colnames(c("brain","c.lower","c.upper")), # 列名の指定
+           set_names(c("brain","c.lower","c.upper")), # 列名の指定
            broom::augment(bb_lm,
                           newdata = bb_new_body,
                           interval = "prediction") |> # 予測区間
            select(.lower, .upper) |> exp() |>
-           magrittr::set_colnames(c("p.lower","p.upper"))) # 列名の指定
+           set_names(c("p.lower","p.upper"))) # 列名の指定
 Animals |>
     rownames_to_column() |>
     ggplot(aes(body, brain)) + 
