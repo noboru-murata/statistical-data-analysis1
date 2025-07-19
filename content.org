@@ -288,7 +288,7 @@
 :EXPORT_FILE_NAME: record
 :EXPORT_DATE: <2022-04-08 Fri>
 :END:
-<2025-07-12 Sat> 更新
+<2025-07-19 Sat> 更新
 
 講義の進捗に合わせて追加します．
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/zVSnnAOArVgSdkqvsKObKQMBIqEq4rzwcureyokrujB9nO-LXWsGYA2yXRbpzXBv.u4V_5Ll-PG8wv8LL?startTime=1747972168000][第1講 (2025年4月18日)]]
@@ -303,7 +303,7 @@
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/bjClMNWT5lAA4mWsDJbhWrU2NVcb36AsOSVxPKjpbS_7cq4cigIcmDWZgFgupCQ.LDPh2i2GnCUbJDPJ?startTime=1751010926000][第10講 (2025年6月27日)]]
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/jqtTPN_8EqqPGDwoOazB0cOyvLzzquqkNkwkjMjOMtOyAtcjHHE1He0r59un_kAJ.yY_7mBOGGD4MJA9c?startTime=1751615733000][第11講 (2025年7月4日)]]
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/MTRachdryPW-jgGQYKSNb7zLQTIs73R2zX1qJz6Kj_9YxFYfpQjv3-KCeOZpnOcX.3uq9hphuFswoW7gE?startTime=1752220542000][第12講 (2025年7月11日)]]
-- 第13講 (2025年7月18日)
+- [[https://u-tokyo-ac-jp.zoom.us/rec/share/Ed9r87zCaAeCzJ5RHfOblyn0PZ5GeDLLgMO1PrUDiBaPmbWAd5K8q7OhJpdwSXYq.D55-OqEQEn32vQ5i?startTime=1752825325000][第13講 (2025年7月18日)]]
 
 -----
 (参考) 2024年度の記録
