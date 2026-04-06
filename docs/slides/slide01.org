@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-06 15:25:52 mura>
+# Time-stamp: <2026-04-06 21:33:27 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -356,7 +356,7 @@
 - エディタ上でコマンドを記述
 - 実行範囲の選択
    - 一行のみ: カーソルをその行に移動
-   - 複数行: クリックしてながら移動して選択する
+   - 複数行: クリックしながら移動して選択する
 - 選択範囲の実行 (以下のいずれか)
    - 左上の *Run* をクリック
    - *Code* から 
