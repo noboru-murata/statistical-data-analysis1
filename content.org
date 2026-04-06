@@ -41,14 +41,14 @@
 :EXPORT_FILE_NAME: lecture01
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-04-11 Fri> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide01" >}}
 ** ハンドアウト
 - [[github:pdfs/slide01.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice01.qmd][Quarto]]
-- 解答例 [[github:code/sample-code01.html][HTML]] [[githubraw:code/sample-code01.qmd][Quarto]] 
+- 解答例 [[github:code/practice01.html][HTML]]
 - 資料の例題 [[github:code/slide01.R][RScript]]
    
 * 第2講
@@ -56,14 +56,14 @@
 :EXPORT_FILE_NAME: lecture02
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-04-18 Fri> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide02" >}}
 ** ハンドアウト
 - [[github:pdfs/slide02.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice02.qmd][Quarto]]
-- 解答例 [[github:code/sample-code02.html][HTML]] [[githubraw:code/sample-code02.qmd][Quarto]] 
+- 解答例 [[github:code/practice02.html][HTML]]
 - 資料の例題 [[github:code/slide02.R][RScript]]
 
 * 第3講
@@ -71,14 +71,14 @@
 :EXPORT_FILE_NAME: lecture03
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-04-25 Fri> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide03" >}}
 ** ハンドアウト
 - [[github:pdfs/slide03.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice03.qmd][Quarto]]
-- 解答例 [[github:code/sample-code03.html][HTML]] [[githubraw:code/sample-code03.qmd][Quarto]] 
+- 解答例 [[github:code/practice03.html][HTML]]
 - 資料の例題 [[github:code/slide03.R][RScript]]
 
 * 第4講
@@ -86,62 +86,61 @@
 :EXPORT_FILE_NAME: lecture04
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2024-04-24 Wed> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide04" >}}
 ** ハンドアウト
 - [[github:pdfs/slide04.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice04.qmd][Quarto]]
-- 解答例 [[github:code/sample-code04.html][HTML]] [[githubraw:code/sample-code04.qmd][Quarto]] 
+- 解答例 [[github:code/practice04.html][HTML]]
 - 資料の例題 [[github:code/slide04.R][RScript]]
-- 練習用データ [[github:zips/jpdata.zip][jpdata]]
+- 練習用データ [[github:zips/data.zip][zip file]]
 
 * 第5講
 :PROPERTIES:
 :EXPORT_FILE_NAME: lecture05
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-05-01 Thu> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide05" >}}
 ** ハンドアウト
 - [[github:pdfs/slide05.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice05.qmd][Quarto]]
-- 解答例 [[github:code/sample-code05.html][HTML]] [[githubraw:code/sample-code05.qmd][Quarto]] 
+- 解答例 [[github:code/practice05.html][HTML]]
 - 資料の例題 [[github:code/slide05.R][RScript]]
-- 練習用データ [[github:zips/tokyo.zip][tokyo]] 
 
 * 第6講
 :PROPERTIES:
 :EXPORT_FILE_NAME: lecture06
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-05-09 Fri> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide06" >}}
 ** ハンドアウト
 - [[github:pdfs/slide06.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice06.qmd][Quarto]]
-- 解答例 [[github:code/sample-code06.html][HTML]] [[githubraw:code/sample-code06.qmd][Quarto]] 
+- 解答例 [[github:code/practice06.html][HTML]]
 - 資料の例題 [[github:code/slide06.R][RScript]]
-- [[https://github.com/noboru-murata/epidemic-model][確率シミュレーションの例]]
+- 確率シミュレーションの例 [[https://github.com/noboru-murata/epidemic-model][github repository]]
 
 * 第7講
 :PROPERTIES:
 :EXPORT_FILE_NAME: lecture07
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-05-30 Fri> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide07" >}}
 ** ハンドアウト
 - [[github:pdfs/slide07.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice07.qmd][Quarto]]
-- 解答例 [[github:code/sample-code07.html][HTML]] [[githubraw:code/sample-code07.qmd][Quarto]] 
+- 解答例 [[github:code/practice07.html][HTML]]
 - 資料の例題 [[github:code/slide07.R][RScript]]
 
 * 第8講
@@ -149,14 +148,14 @@
 :EXPORT_FILE_NAME: lecture08
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-06-06 Fri> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide08" >}}
 ** ハンドアウト
 - [[github:pdfs/slide08.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice08.qmd][Quarto]]
-- 解答例 [[github:code/sample-code08.html][HTML]] [[githubraw:code/sample-code08.qmd][Quarto]] 
+- 解答例 [[github:code/practice08.html][HTML]]
 - 資料の例題 [[github:code/slide08.R][RScript]]
 
 * 第9講
@@ -164,14 +163,14 @@
 :EXPORT_FILE_NAME: lecture09
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-06-17 Tue> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide09" >}}
 ** ハンドアウト
 - [[github:pdfs/slide09.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice09.qmd][Quarto]]
-- 解答例 [[github:code/sample-code09.html][HTML]] [[githubraw:code/sample-code09.qmd][Quarto]]
+- 解答例 [[github:code/practice09.html][HTML]]
 # - 資料の例題 [[github:code/slide09.R][RScript]] # このスライドにはない
 
 * 第10講
@@ -179,14 +178,14 @@
 :EXPORT_FILE_NAME: lecture10
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-06-17 Tue> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide10" >}}
 ** ハンドアウト
 - [[github:pdfs/slide10.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice10.qmd][Quarto]]
-- 解答例 [[github:code/sample-code10.html][HTML]] [[githubraw:code/sample-code10.qmd][Quarto]]
+- 解答例 [[github:code/practice10.html][HTML]]
 # - 資料の例題 [[github:code/slide10.R][RScript]] # このスライドにはない
 
 * 第11講
@@ -194,14 +193,14 @@
 :EXPORT_FILE_NAME: lecture11
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2024-06-19 Wed> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide11" >}}
 ** ハンドアウト
 - [[github:pdfs/slide11.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice11.qmd][Quarto]]
-- 解答例 [[github:code/sample-code11.html][HTML]] [[githubraw:code/sample-code11.qmd][Quarto]]
+- 解答例 [[github:code/practice11.html][HTML]]
 # - 資料の例題 [[github:code/slide10.R][RScript]] # このスライドにはない
 
 * 第12講
@@ -209,14 +208,14 @@
 :EXPORT_FILE_NAME: lecture12
 :EXPORT_DATE: <2020-09-19 Sat>
 :END:
-<2025-07-02 Wed> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide12" >}}
 ** ハンドアウト
 - [[github:pdfs/slide12.pdf][PDF file]]
 ** 付録
 - 実習用 [[githubraw:code/practice12.qmd][Quarto]]
-- 解答例 [[github:code/sample-code12.html][HTML]] [[githubraw:code/sample-code12.qmd][Quarto]]
+- 解答例 [[github:code/practice12.html][HTML]]
 # - 資料の例題 [[github:code/slide10.R][RScript]] # このスライドにはない
 
 * 第13講
@@ -224,7 +223,7 @@
 :EXPORT_FILE_NAME: lecture13
 :EXPORT_DATE: <2021-04-03 Sat>
 :END:
-<2025-07-02 Wed> 更新
+<2026-04-06 Mon> 更新
 ** スライド
 #+hugo: {{< myslide base="statistical-data-analysis1" name="slide13" >}}
 ** ハンドアウト
@@ -234,7 +233,7 @@
 :ID:       539A65C0-B033-44D0-A108-B63DB7B9EFCE
 :END:
 - 実習用 [[githubraw:code/practice13.qmd][Quarto]]
-- 解答例 [[github:code/sample-code13.html][HTML]] [[githubraw:code/sample-code13.qmd][Quarto]]
+- 解答例 [[github:code/practice13.html][HTML]]
 # - 資料の例題 [[github:code/slide10.R][RScript]] # このスライドにはない
 
 
@@ -381,14 +380,18 @@ shortcut key が表示されますが，
 ** フルスクリーン
 - f フルスクリーン表示
 - esc 元に戻る
-** 黒板
+** COMMENT 黒板
 - w スライドと黒板の切り替え (toggle)
 - x/y チョークの色の切り替え (巡回)
 - c 消去
-** メモ書き
+** COMMENT メモ書き
 - e 編集モードの切り替え (toggle)
 - x/y ペンの色の切り替え (巡回)
 - c 消去
+
+** 印刷
+- e 印刷用の表示との切り替え (toggle)
+
 * Quartoの使い方
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: ./post

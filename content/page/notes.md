@@ -6,7 +6,7 @@ draft = false
 weight = 1015
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-03-31 Fri&gt;</span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-03-31 Fri&gt; </span></span> 更新
 
 以下は統計データ解析 I・II の講義資料(随時更新)です．
 

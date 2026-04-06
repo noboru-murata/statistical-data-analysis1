@@ -1,0 +1,37 @@
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+    color: #283593;
+}
+.reveal-viewport {
+    background: #fafafa;
+    background-color: #fafafa; }
+.reveal h2 {
+    font-size: 2.0em; }
+.reveal pre {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f0f0f6;
+    padding: 15px;
+    border-radius: 5px; }
+.reveal .slide-footer {
+    position: fixed;
+    bottom: -60px;
+    width: 100%;
+    text-align: center;
+    font-size: 2vh;
+    color: gray;
+}
+.reveal > .overlay {
+    backdrop-filter: unset!important;
+}
+.reveal .slide-menu-button .fa-bars::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(42, 118, 221)" class="bi bi-list" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>')
+}
+pre.example {
+    background-color: #fafafa;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+}

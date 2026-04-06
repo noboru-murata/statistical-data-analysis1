@@ -13,13 +13,40 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/font-awesome/css/all.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+<link rel="stylesheet" href="./reveal.js/local/lecture.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/menu.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
-
-<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
@@ -36,7 +63,7 @@
     <p>第10講 - 確率分布を特徴づけるパラメタを推測する</p>
 </div>
 <div class="keyboard-usage">
-    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+    <p></p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
@@ -45,8 +72,8 @@
 
 </section>
 <section>
-<section id="slide-org139e7b4">
-<h2 id="org139e7b4">講義概要</h2>
+<section id="slide-org19579d7">
+<h2 id="org19579d7">講義概要</h2>
 <ul>
 <li>点推定
 <ul>
@@ -67,13 +94,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgb2be34b">
-<h2 id="orgb2be34b">推定とは</h2>
-<div class="outline-text-2" id="text-orgb2be34b">
+<section id="slide-org509f2b9">
+<h2 id="org509f2b9">推定とは</h2>
+<div class="outline-text-2" id="text-org509f2b9">
 </div>
 </section>
-<section id="slide-orgeb9ef3b">
-<h3 id="orgeb9ef3b">統計解析の目的</h3>
+<section id="slide-org0bb06ed">
+<h3 id="org0bb06ed">統計解析の目的</h3>
 <ul>
 <li>観測データを確率変数の実現値と考えてモデル化</li>
 <li>観測データの背後の確率分布を <b>推定</b>
@@ -91,8 +118,8 @@
 
 </ul>
 </section>
-<section id="slide-org06a88d0">
-<h3 id="org06a88d0">推定の標準的な枠組</h3>
+<section id="slide-orgb71ff45">
+<h3 id="orgb71ff45">推定の標準的な枠組</h3>
 <ul>
 <li>観測データは独立同分布な確率変数列 \(X_1,X_2,\dots,X_n\)</li>
 <li>\(X_i\) の従う共通の法則 \(\mathcal{L}\) を想定
@@ -116,13 +143,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgfc55ca4">
-<h2 id="orgfc55ca4">点推定</h2>
-<div class="outline-text-2" id="text-orgfc55ca4">
+<section id="slide-org46a85ca">
+<h2 id="org46a85ca">点推定</h2>
+<div class="outline-text-2" id="text-org46a85ca">
 </div>
 </section>
-<section id="slide-orgf1ab38e">
-<h3 id="orgf1ab38e">点推定</h3>
+<section id="slide-orgaf39d63">
+<h3 id="orgaf39d63">点推定</h3>
 <ul>
 <li><p>
 定義
@@ -158,8 +185,8 @@
 
 </ul>
 </section>
-<section id="slide-orgf6ab89e">
-<h3 id="orgf6ab89e">良い推定量</h3>
+<section id="slide-org03c3ed0">
+<h3 id="org03c3ed0">良い推定量</h3>
 <ul>
 <li>一般に1つのパラメタの推定量は無数に存在</li>
 <li>推定量の良さの代表的な基準 : <b>不偏性・一致性</b>
@@ -200,8 +227,8 @@
 
 </ul>
 </section>
-<section id="slide-orgb4c08c2">
-<h3 id="orgb4c08c2">良い不偏推定量</h3>
+<section id="slide-orgee85a6f">
+<h3 id="orgee85a6f">良い不偏推定量</h3>
 <ul>
 <li><p>
 一般に不偏推定量も複数存在
@@ -238,8 +265,8 @@
 
 </ul>
 </section>
-<section id="slide-org15ffad2">
-<h3 id="org15ffad2">Cramér-Rao の不等式</h3>
+<section id="slide-org19de0d4">
+<h3 id="org19de0d4">Cramér-Rao の不等式</h3>
 <ul>
 <li><p>
 定理
@@ -274,8 +301,8 @@
 
 </ul>
 </section>
-<section id="slide-orga563e1e">
-<h3 id="orga563e1e">一様最小分散不偏推定量</h3>
+<section id="slide-org32975c9">
+<h3 id="org32975c9">一様最小分散不偏推定量</h3>
 <ul>
 <li>用語の定義
 <ul>
@@ -296,8 +323,8 @@
 
 </ul>
 </section>
-<section id="slide-org7f8cb01">
-<h3 id="org7f8cb01">例 : 正規分布モデルの標本平均</h3>
+<section id="slide-org048ea02">
+<h3 id="org048ea02">例 : 正規分布モデルの標本平均</h3>
 <ul>
 <li>\(\mathcal{L}\) は平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布
 <ul>
@@ -325,44 +352,18 @@
 </section>
 </section>
 <section>
-<section id="slide-orgb88883b" data-background="#fef4f4">
-<h2 id="orgb88883b">実習</h2>
-</section>
-<section id="slide-org6ac1492" data-background="#fef4f4">
-<h3 id="org6ac1492">練習問題</h3>
-<ul>
-<li>\(X\) を一様乱数に従う確率変数とし，
-平均値の推定量として以下を考える．
-それぞれの推定量の分散を比較しなさい．
-<ul>
-<li>標本平均 (mean)</li>
-<li>中央値 (median)</li>
-<li>最大値と最小値の平均 ((max+min)/2)</li>
-
-</ul></li>
-<li><p>
-ヒント : 以下のような関数を作り，Monte-Carlo実験を行えばよい
-</p>
-<div class="org-src-container">
-
-<pre class="src src-R"><span style="color: #b77fdb; font-weight: bold;">estimate_means</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(n, min, max){ <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35251;&#28204;&#12487;&#12540;&#12479;&#25968;</span>
-  x <span style="color: #60aa00;">&lt;-</span> runif(n, min=min, max=max) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19968;&#27096;&#20081;&#25968;&#12434;&#29983;&#25104;&#65292;&#31684;&#22258;&#12399;&#24341;&#25968;&#12363;&#12425;</span>
-  <span style="color: #6c9ef8;">return</span>(c(xbar=mean(x),med=median(x),mid=(max(x)+min(x))/2))
-} <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">3&#12388;&#12414;&#12392;&#12417;&#12390;&#35336;&#31639;&#12377;&#12427;&#38306;&#25968;</span>
-</pre>
-</div></li>
-
-</ul>
+<section id="slide-org37eb712" data-background="#fef4f4">
+<h2 id="org37eb712">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org40948a6">
-<h2 id="org40948a6">最尤法</h2>
-<div class="outline-text-2" id="text-org40948a6">
+<section id="slide-org7766240">
+<h2 id="org7766240">最尤法</h2>
+<div class="outline-text-2" id="text-org7766240">
 </div>
 </section>
-<section id="slide-org892bd35">
-<h3 id="org892bd35">離散分布の場合</h3>
+<section id="slide-org0961b89">
+<h3 id="org0961b89">離散分布の場合</h3>
 <ul>
 <li>観測値 \(X_1=x_1,X_2=x_2,\dots,X_n=x_n\) の同時確率
 <ul>
@@ -390,8 +391,8 @@
 
 </ul>
 </section>
-<section id="slide-orgd12dcc5">
-<h3 id="orgd12dcc5">尤度関数</h3>
+<section id="slide-org6cab3b9">
+<h3 id="org6cab3b9">尤度関数</h3>
 <ul>
 <li><p>
 定義
@@ -426,8 +427,8 @@
 
 </ul>
 </section>
-<section id="slide-org07b705c">
-<h3 id="org07b705c">最尤法</h3>
+<section id="slide-org78a823b">
+<h3 id="org78a823b">最尤法</h3>
 <ul>
 <li><p>
 最尤法
@@ -470,8 +471,8 @@
 
 </ul>
 </section>
-<section id="slide-orgd0310a9">
-<h3 id="orgd0310a9">最尤推定量の計算</h3>
+<section id="slide-orgf8bfcc2">
+<h3 id="orgf8bfcc2">最尤推定量の計算</h3>
 <ul>
 <li><p>
 <b>対数尤度関数</b>
@@ -504,8 +505,8 @@
 
 </ul>
 </section>
-<section id="slide-orga6ce945">
-<h3 id="orga6ce945">連続分布の場合</h3>
+<section id="slide-org96a0838">
+<h3 id="org96a0838">連続分布の場合</h3>
 <ul>
 <li><b>確率密度関数</b> \(f_{\boldsymbol{\theta}}(x)\) を用いて尤度を定義</li>
 <li><p>
@@ -539,8 +540,8 @@
 
 </ul>
 </section>
-<section id="slide-orgd395d01">
-<h3 id="orgd395d01">例 : Poisson 分布の最尤推定</h3>
+<section id="slide-org75d2280">
+<h3 id="org75d2280">例 : Poisson 分布の最尤推定</h3>
 <ul>
 <li>\(\mathcal{L}\) をパラメタ \(\lambda>0\) のPoisson分布でモデル化
 <ul>
@@ -607,8 +608,8 @@
 
 </ul>
 </section>
-<section id="slide-org699ab26">
-<h3 id="org699ab26">例 : 指数分布の最尤推定</h3>
+<section id="slide-orgc554fc4">
+<h3 id="orgc554fc4">例 : 指数分布の最尤推定</h3>
 <ul>
 <li>\(\mathcal{L}\) をパラメタ \(\lambda>0\) の指数分布でモデル化
 <ul>
@@ -678,8 +679,8 @@
 
 </ul>
 </section>
-<section id="slide-orga2c8434">
-<h3 id="orga2c8434">例 : ガンマ分布の最尤推定</h3>
+<section id="slide-org75d70bd">
+<h3 id="org75d70bd">例 : ガンマ分布の最尤推定</h3>
 <ul>
 <li>\(\mathcal{L}\) をパラメタ \(\nu,\alpha>0\) のガンマ分布でモデル化
 <ul>
@@ -751,16 +752,16 @@
 <span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#25968;&#20516;&#26368;&#36969;&#21270;&#12398;&#12383;&#12417;&#12395;&#12399;&#23588;&#24230;&#38306;&#25968;&#12434;&#26368;&#21021;&#12395;&#35413;&#20385;&#12377;&#12427;&#21021;&#26399;&#20516;&#12364;&#24517;&#35201;</span>
 <span style="color: #b77fdb; font-weight: bold;">mle.gamma</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(x, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35251;&#28204;&#12487;&#12540;&#12479;</span>
                       nu0 = 1, alpha0 = 1){ <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">nu, alpha&#12398;&#21021;&#26399;&#20516;</span>
-    <span style="color: #808080; font-style: italic;">## </span><span style="color: #808080; font-style: italic;">&#36000;&#12398;&#23550;&#25968;&#23588;&#24230;&#38306;&#25968;&#12434;&#23450;&#32681; (&#26368;&#23567;&#21270;&#12434;&#32771;&#12360;&#12427;&#12383;&#12417;)</span>
-    <span style="color: #b77fdb; font-weight: bold;">ll</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(nu, alpha) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">nu&#12392;alpha&#12398;&#38306;&#25968;&#12392;&#12375;&#12390;&#23450;&#32681; </span>
-        suppressWarnings(-sum(dgamma(x, nu, alpha, log = <span style="color: #00aa80;">TRUE</span>)))
-    <span style="color: #808080; font-style: italic;">## </span><span style="color: #808080; font-style: italic;">suppressWarnings &#12399;&#23450;&#32681;&#22495;&#22806;&#12391;&#35413;&#20385;&#12373;&#12428;&#12383;&#38555;&#12398;&#35686;&#21578;&#12434;&#34920;&#31034;&#12373;&#12379;&#12394;&#12356;</span>
-    <span style="color: #808080; font-style: italic;">## </span><span style="color: #808080; font-style: italic;">&#26368;&#23588;&#25512;&#23450;(&#36000;&#12398;&#23588;&#24230;&#12398;&#26368;&#23567;&#21270;)</span>
-    est <span style="color: #60aa00;">&lt;-</span> mle(minuslogl = ll,   <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#36000;&#12398;&#23550;&#25968;&#23588;&#24230;&#38306;&#25968;</span>
-               start = list(nu = nu0, alpha = alpha0), <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21021;&#26399;&#20516;</span>
-               method = <span style="color: #d08928;">"BFGS"</span>,  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#36969;&#21270;&#26041;&#27861; (&#36984;&#25246;&#21487;&#33021;)</span>
-               nobs = length(x)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35251;&#28204;&#12487;&#12540;&#12479;&#25968;</span>
-    <span style="color: #6c9ef8;">return</span>(coef(est)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25512;&#23450;&#20516;&#12398;&#12415;&#36820;&#12377;</span>
+  <span style="color: #808080; font-style: italic;">## </span><span style="color: #808080; font-style: italic;">&#36000;&#12398;&#23550;&#25968;&#23588;&#24230;&#38306;&#25968;&#12434;&#23450;&#32681; (&#26368;&#23567;&#21270;&#12434;&#32771;&#12360;&#12427;&#12383;&#12417;)</span>
+  <span style="color: #b77fdb; font-weight: bold;">ll</span> <span style="color: #60aa00;">&lt;-</span> <span style="color: #6c9ef8;">function</span>(nu, alpha) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">nu&#12392;alpha&#12398;&#38306;&#25968;&#12392;&#12375;&#12390;&#23450;&#32681; </span>
+    suppressWarnings(-sum(dgamma(x, nu, alpha, log = <span style="color: #00aa80;">TRUE</span>)))
+  <span style="color: #808080; font-style: italic;">## </span><span style="color: #808080; font-style: italic;">suppressWarnings &#12399;&#23450;&#32681;&#22495;&#22806;&#12391;&#35413;&#20385;&#12373;&#12428;&#12383;&#38555;&#12398;&#35686;&#21578;&#12434;&#34920;&#31034;&#12373;&#12379;&#12394;&#12356;</span>
+  <span style="color: #808080; font-style: italic;">## </span><span style="color: #808080; font-style: italic;">&#26368;&#23588;&#25512;&#23450;(&#36000;&#12398;&#23588;&#24230;&#12398;&#26368;&#23567;&#21270;)</span>
+  est <span style="color: #60aa00;">&lt;-</span> mle(minuslogl = ll,   <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#36000;&#12398;&#23550;&#25968;&#23588;&#24230;&#38306;&#25968;</span>
+             start = list(nu = nu0, alpha = alpha0), <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21021;&#26399;&#20516;</span>
+             method = <span style="color: #d08928;">"BFGS"</span>,  <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26368;&#36969;&#21270;&#26041;&#27861; (&#36984;&#25246;&#21487;&#33021;)</span>
+             nobs = length(x)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35251;&#28204;&#12487;&#12540;&#12479;&#25968;</span>
+  <span style="color: #6c9ef8;">return</span>(coef(est)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#25512;&#23450;&#20516;&#12398;&#12415;&#36820;&#12377;</span>
 }
 </pre>
 </div></li>
@@ -769,34 +770,18 @@
 </section>
 </section>
 <section>
-<section id="slide-org723a464" data-background="#fef4f4">
-<h2 id="org723a464">演習</h2>
-</section>
-<section id="slide-org698d90d" data-background="#fef4f4">
-<h3 id="org698d90d">練習問題</h3>
-<ul>
-<li>東京都の気候データ (<code>tokyo_weather.csv</code>) の
-風速 (<code>wind</code>) の項目について以下の問に答えよ．
-
-<ul>
-<li>全データを用いてヒストグラム(密度)を作成しなさい．</li>
-<li>ガンマ分布でモデル化して最尤推定を行いなさい．</li>
-<li>推定した結果をヒストグラムに描き加えて比較しなさい．</li>
-
-</ul></li>
-<li>自身で収集したデータを用いて，モデル化と最尤推定を試みよ．</li>
-
-</ul>
+<section id="slide-org8998c1c" data-background="#fef4f4">
+<h2 id="org8998c1c">演習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgec1e13f">
-<h2 id="orgec1e13f">区間推定</h2>
-<div class="outline-text-2" id="text-orgec1e13f">
+<section id="slide-org41fff5d">
+<h2 id="org41fff5d">区間推定</h2>
+<div class="outline-text-2" id="text-org41fff5d">
 </div>
 </section>
-<section id="slide-org9f5993f">
-<h3 id="org9f5993f">推定誤差</h3>
+<section id="slide-org3ed3f1a">
+<h3 id="org3ed3f1a">推定誤差</h3>
 <ul>
 <li>推定量 \(\hat{\theta}\) には推定誤差が必ず存在</li>
 <li>推定結果の定量評価には推定誤差の評価が重要
@@ -835,8 +820,8 @@
 
 </ul>
 </section>
-<section id="slide-orge05b62c">
-<h3 id="orge05b62c">区間推定</h3>
+<section id="slide-org83263e0">
+<h3 id="org83263e0">区間推定</h3>
 <ul>
 <li><p>
 定義
@@ -865,8 +850,8 @@
 
 </ul>
 </section>
-<section id="slide-org96787c8">
-<h3 id="org96787c8">信頼区間の性質</h3>
+<section id="slide-org809525e">
+<h3 id="org809525e">信頼区間の性質</h3>
 <ul>
 <li>信頼区間は幅が狭いほど推定精度が良い
 <ul>
@@ -896,13 +881,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orge2b6de7">
-<h2 id="orge2b6de7">正規母集団の区間推定</h2>
-<div class="outline-text-2" id="text-orge2b6de7">
+<section id="slide-orga614295">
+<h2 id="orga614295">正規母集団の区間推定</h2>
+<div class="outline-text-2" id="text-orga614295">
 </div>
 </section>
-<section id="slide-orgb4da6cf">
-<h3 id="orgb4da6cf">平均の区間推定 (分散既知)</h3>
+<section id="slide-org4fc56c2">
+<h3 id="org4fc56c2">平均の区間推定 (分散既知)</h3>
 <ul>
 <li>正規分布に従う独立な確率変数の重み付き和は正規分布に従う</li>
 <li><p>
@@ -990,7 +975,7 @@
 </section>
 <section>
 
-<div id="org11725d9" class="figure">
+<div id="org725683e" class="figure">
 <p><img src="figs/z_quantile.png" alt="z_quantile.png" height="100%" />
 </p>
 </div>
@@ -1024,7 +1009,7 @@
 </section>
 <section>
 
-<div id="org9a3337a" class="figure">
+<div id="org0f9e33e" class="figure">
 <p><img src="figs/z_conf.png" alt="z_conf.png" height="100%" />
 </p>
 </div>
@@ -1062,8 +1047,8 @@
 
 </ul>
 </section>
-<section id="slide-org1aaa294">
-<h3 id="org1aaa294">平均の区間推定 (分散未知)</h3>
+<section id="slide-orgc0e539a">
+<h3 id="orgc0e539a">平均の区間推定 (分散未知)</h3>
 <ul>
 <li><p>
 \(\chi^2\) 分布の特徴付け
@@ -1103,16 +1088,16 @@
 <li>\(\chi^{2}\) 分布</li>
 
 </ul>
-<div class="leftcol" id="org5cd9f21">
+<div class="leftcol" id="orge287b6e">
 
-<div id="org3089a17" class="figure">
+<div id="orgb021d06" class="figure">
 <p><img src="figs/pdf_chisq.png" alt="pdf_chisq.png" width="100%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>\(\chi^{2}\) 分布 (自由度\(3\))</p>
 </div>
 
 </div>
-<div class="rightcol" id="org724bfc6">
+<div class="rightcol" id="org156a5ab">
 <blockquote>
 <ul>
 <li>見本空間 : \([0,\infty)\)</li>
@@ -1145,16 +1130,16 @@
 <li>\(t\) 分布</li>
 
 </ul>
-<div class="leftcol" id="org4eafcea">
+<div class="leftcol" id="org1a8df54">
 
-<div id="org1609889" class="figure">
+<div id="org3cff851" class="figure">
 <p><img src="figs/pdf_t.png" alt="pdf_t.png" width="100%" />
 </p>
 <p><span class="figure-number">Figure 2: </span>\(t\) 分布 (自由度\(3\))</p>
 </div>
 
 </div>
-<div class="rightcol" id="org3949df6">
+<div class="rightcol" id="org2f7a2c0">
 <blockquote>
 <ul>
 <li>見本空間 : \((-\infty,\infty)\)</li>
@@ -1274,8 +1259,8 @@
 
 </ul>
 </section>
-<section id="slide-org97397e4">
-<h3 id="org97397e4">分散の区間推定</h3>
+<section id="slide-orgb2fb35a">
+<h3 id="orgb2fb35a">分散の区間推定</h3>
 <ul>
 <li><p>
 不偏分散の性質
@@ -1345,13 +1330,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgfa46fa5">
-<h2 id="orgfa46fa5">漸近正規性にもとづく区間推定</h2>
-<div class="outline-text-2" id="text-orgfa46fa5">
+<section id="slide-org3bb5a2c">
+<h2 id="org3bb5a2c">漸近正規性にもとづく区間推定</h2>
+<div class="outline-text-2" id="text-org3bb5a2c">
 </div>
 </section>
-<section id="slide-org2502ac7">
-<h3 id="org2502ac7">推定量の漸近正規性</h3>
+<section id="slide-org074472a">
+<h3 id="org074472a">推定量の漸近正規性</h3>
 <ul>
 <li><p>
 <b>漸近正規性</b>
@@ -1371,8 +1356,8 @@
 
 </ul>
 </section>
-<section id="slide-orgbde48e4">
-<h3 id="orgbde48e4">標本平均の漸近正規性</h3>
+<section id="slide-orge382703">
+<h3 id="orge382703">標本平均の漸近正規性</h3>
 <ul>
 <li><p>
 定理
@@ -1405,8 +1390,8 @@
 
 </ul>
 </section>
-<section id="slide-org2e562f8">
-<h3 id="org2e562f8">平均の区間推定 (分散既知)</h3>
+<section id="slide-orge6f090a">
+<h3 id="orge6f090a">平均の区間推定 (分散既知)</h3>
 <ul>
 <li><p>
 標本平均の確率
@@ -1464,8 +1449,8 @@
 
 </ul>
 </section>
-<section id="slide-orgbad46c7">
-<h3 id="orgbad46c7">平均の区間推定 (分散未知)</h3>
+<section id="slide-org744ba99">
+<h3 id="org744ba99">平均の区間推定 (分散未知)</h3>
 <ul>
 <li>\(\sigma\) をその一致推定量 \(\hat{\sigma}\) で置き換えてもそのまま成立する
 <ul>
@@ -1513,8 +1498,8 @@
 
 </ul>
 </section>
-<section id="slide-org8d4e37c">
-<h3 id="org8d4e37c">最尤推定量の区間推定</h3>
+<section id="slide-orge947551">
+<h3 id="orge947551">最尤推定量の区間推定</h3>
 <ul>
 <li><p>
 定理 (最尤推定量の漸近正規性)
@@ -1551,28 +1536,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org9b60163" data-background="#fef4f4">
-<h2 id="org9b60163">実習</h2>
-</section>
-<section id="slide-org4a23f45" data-background="#fef4f4">
-<h3 id="org4a23f45">練習問題</h3>
-<ul>
-<li>東京都の気候データ (<code>tokyo_weather.csv</code>) の
-日射量 (<code>solar</code>) の項目について以下の問に答えよ．
-<ul>
-<li>全データによる平均値を計算しなさい．</li>
-<li>ランダムに抽出した50点を用いて，平均値の0.9(90%)信頼区間を求めなさい．</li>
-<li>上記の推定を100回繰り返した際，真の値(全データによる平均値)が信頼区間に何回含まれるか確認しなさい．</li>
-
-</ul></li>
-<li>自身で収集したデータで区間推定を試みよ．</li>
-
-</ul>
+<section id="slide-org19e5a69" data-background="#fef4f4">
+<h2 id="org19e5a69">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org197bd80">
-<h2 id="org197bd80">次回の予定</h2>
+<section id="slide-orgfa2b5b2">
+<h2 id="orgfa2b5b2">次回の予定</h2>
 <ul>
 <li>検定
 <ul>
@@ -1587,15 +1557,19 @@
 <li>分散の比の検定</li>
 
 </ul>
+</section>
+</section>
 </div>
 </div>
+<p> Created by Noboru Murata | Licensed under CC BY-NC 4.0 </p>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/menu/menu.js"></script>
-<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
 <script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
@@ -1604,30 +1578,44 @@ Reveal.initialize({
 
 controls: true,
 progress: true,
-history: true,
+history: false,
 center: true,
 slideNumber: 'c',
-rollingLinks: false,
+rollingLinks: true,
 keyboard: true,
 mouseWheel: false,
-fragmentInURL: true,
+fragmentInURL: false,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
 overview: true,
+width: 1050,
+height: 700,
+margin: 0.10,
+minScale: 0.75,
+maxScale: 1.25,
 
 transition: 'fade',
 transitionSpeed: 'default',
 showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
-spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
+'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
 ]
 
 });
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
 </script>
 </body>
 </html>

@@ -4,9 +4,9 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-05-02 13:09:14 mura>
+# Time-stamp: <2026-04-06 17:00:05 mura>
 :REVEAL:
-#+SETUPFILE: "./reveal.js/local/mycourse.org"
+#+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
@@ -15,6 +15,7 @@
 * COMMENT メモ
   - 関数の使い方，引数の扱い，順番，既定値
     
+
 * 講義概要
 :PROPERTIES:
 :ID:       6D97417D-4268-4DFE-B897-9717F3BFAE49
@@ -120,7 +121,7 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-** 練習問題
+** COMMENT 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :ID:       3B6C880F-F400-4FFF-A9D6-987A6FD1D965
@@ -240,7 +241,7 @@
     my_heron(12, 13, 5) 
   #+end_src
 
-** 練習問題
+** COMMENT 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :ID:       1356AE3E-1C3F-4386-BB1D-062EBBF54D92
@@ -482,7 +483,7 @@
     sapply(-2:5, my_fact4) # -2から5を my_fact4 で計算した結果を返す
   #+end_src
 
-** 練習問題
+** COMMENT 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :ID:       913811A5-8B17-4F8D-B559-CCD7E35A728B
@@ -568,9 +569,8 @@
 - データの集計
 
 
-* Footnotes
+* Footnotes                                                          :ignore:
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted
 # End:
-   

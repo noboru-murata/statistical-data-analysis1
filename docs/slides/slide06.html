@@ -13,13 +13,40 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/font-awesome/css/all.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+<link rel="stylesheet" href="./reveal.js/local/lecture.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/menu.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
-
-<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
@@ -36,7 +63,7 @@
     <p>第6講 - 乱数を用いた数値実験</p>
 </div>
 <div class="keyboard-usage">
-    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+    <p></p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
@@ -45,8 +72,8 @@
 
 </section>
 <section>
-<section id="slide-org29a7afc">
-<h2 id="org29a7afc">講義の内容</h2>
+<section id="slide-orgffe88c6">
+<h2 id="orgffe88c6">講義の内容</h2>
 <ul>
 <li>計算機による数値実験</li>
 <li>乱数とは</li>
@@ -56,13 +83,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgb7869bf">
-<h2 id="orgb7869bf">計算機による数値実験</h2>
-<div class="outline-text-2" id="text-orgb7869bf">
+<section id="slide-org22e4fde">
+<h2 id="org22e4fde">計算機による数値実験</h2>
+<div class="outline-text-2" id="text-org22e4fde">
 </div>
 </section>
-<section id="slide-org0f70dcd">
-<h3 id="org0f70dcd">データ解析の枠組</h3>
+<section id="slide-orga9fa43c">
+<h3 id="orga9fa43c">データ解析の枠組</h3>
 <ul>
 <li>分析の目的
 <ul>
@@ -88,8 +115,8 @@
 
 </ul>
 </section>
-<section id="slide-org6ee962d">
-<h3 id="org6ee962d">データのもつべき性質</h3>
+<section id="slide-org2472826">
+<h3 id="org2472826">データのもつべき性質</h3>
 <ul>
 <li>偏った一部のデータから全体の性質の推測は困難
 <ul>
@@ -116,8 +143,8 @@
 
 </ul>
 </section>
-<section id="slide-org9391929">
-<h3 id="org9391929">理論解析と数値実験</h3>
+<section id="slide-orgf9282d0">
+<h3 id="orgf9282d0">理論解析と数値実験</h3>
 <ul>
 <li><p>
 <b>データ収集の問題</b> 
@@ -146,13 +173,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org076ab27">
-<h2 id="org076ab27">乱数とは</h2>
-<div class="outline-text-2" id="text-org076ab27">
+<section id="slide-orgb1c4d02">
+<h2 id="orgb1c4d02">乱数とは</h2>
+<div class="outline-text-2" id="text-orgb1c4d02">
 </div>
 </section>
-<section id="slide-org7b2edd2">
-<h3 id="org7b2edd2">擬似乱数</h3>
+<section id="slide-orgd9d4228">
+<h3 id="orgd9d4228">擬似乱数</h3>
 <ul>
 <li>コンピューターで生成された数列
 <ul>
@@ -171,8 +198,8 @@
 
 </ul>
 </section>
-<section id="slide-org362707b">
-<h3 id="org362707b">基本的な乱数</h3>
+<section id="slide-org93d7dea">
+<h3 id="org93d7dea">基本的な乱数</h3>
 <ul>
 <li><b>ランダムサンプリング</b> (無作為抽出)
 <ul>
@@ -195,8 +222,8 @@
 
 </ul>
 </section>
-<section id="slide-org6923ab3">
-<h3 id="org6923ab3">乱数を発生する関数</h3>
+<section id="slide-org184abd5">
+<h3 id="org184abd5">乱数を発生する関数</h3>
 <ul>
 <li>Rには様々な確率分布に従う乱数が実装されている
 <ul>
@@ -209,8 +236,8 @@
 
 </ul>
 </section>
-<section id="slide-org38357e3">
-<h3 id="org38357e3">関数の利用例</h3>
+<section id="slide-org180a1a9">
+<h3 id="org180a1a9">関数の利用例</h3>
 <ul>
 <li><p>
 <span style="color:green;">関数 <code>sample()</code> の使い方</span>
@@ -292,13 +319,13 @@ runif(5)    <span style="color: #808080; font-style: italic;"># </span><span sty
 </section>
 </section>
 <section>
-<section id="slide-org6b91633">
-<h2 id="org6b91633">乱数を用いた数値実験</h2>
-<div class="outline-text-2" id="text-org6b91633">
+<section id="slide-org6b61cf3">
+<h2 id="org6b61cf3">乱数を用いた数値実験</h2>
+<div class="outline-text-2" id="text-org6b61cf3">
 </div>
 </section>
-<section id="slide-orgd2284e0">
-<h3 id="orgd2284e0">確率シミュレーション</h3>
+<section id="slide-orga8b3d80">
+<h3 id="orga8b3d80">確率シミュレーション</h3>
 <ul>
 <li>確率的現象の理解
 <ul>
@@ -326,8 +353,8 @@ runif(5)    <span style="color: #808080; font-style: italic;"># </span><span sty
 
 </ul>
 </section>
-<section id="slide-org4820bba">
-<h3 id="org4820bba">繰り返し実験の関数</h3>
+<section id="slide-org06ad70e">
+<h3 id="org06ad70e">繰り返し実験の関数</h3>
 <ul>
 <li>同じ手続きを指定した回数繰り返して評価</li>
 <li><p>
@@ -344,8 +371,8 @@ runif(5)    <span style="color: #808080; font-style: italic;"># </span><span sty
 
 </ul>
 </section>
-<section id="slide-org27a77d4">
-<h3 id="org27a77d4">数値実験の例</h3>
+<section id="slide-org1f9d964">
+<h3 id="org1f9d964">数値実験の例</h3>
 <ul>
 <li><p>
 <span style="color:green;">2つのサイコロを振る試行</span>
@@ -377,35 +404,18 @@ print(my_data) <span style="color: #808080; font-style: italic;"># </span><span 
 </section>
 </section>
 <section>
-<section id="slide-orga6abe80" data-background="#fef4f4">
-<h2 id="orga6abe80">演習</h2>
-</section>
-<section id="slide-orge4973ee" data-background="#fef4f4">
-<h3 id="orge4973ee">練習問題</h3>
-<ul>
-<li><p>
-以下のようなコイン投げの賭けを考える
-</p>
-<blockquote>
-<p>
-Alice と Bob の二人で交互にコインを投げ，最初に表が出た方を勝ちとする．
-</p>
-</blockquote>
-<p>
-この賭けの勝率を求めるための確率シミュレーションを行いなさい
-</p></li>
-
-</ul>
+<section id="slide-org83469c6" data-background="#fef4f4">
+<h2 id="org83469c6">演習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org5288584">
-<h2 id="org5288584">確率シミュレーションの例</h2>
-<div class="outline-text-2" id="text-org5288584">
+<section id="slide-orgcdb561f">
+<h2 id="orgcdb561f">確率シミュレーションの例</h2>
+<div class="outline-text-2" id="text-orgcdb561f">
 </div>
 </section>
-<section id="slide-orgec8d581">
-<h3 id="orgec8d581">Buffon の針</h3>
+<section id="slide-orga407714">
+<h3 id="orga407714">Buffon の針</h3>
 <ul>
 <li><p>
 問題
@@ -426,8 +436,8 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 
 </ul>
 </section>
-<section id="slide-org86b45c6">
-<h3 id="org86b45c6">Monty Hall 問題</h3>
+<section id="slide-org2967247">
+<h3 id="org2967247">Monty Hall 問題</h3>
 <ul>
 <li><p>
 問題
@@ -453,8 +463,8 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 
 </ul>
 </section>
-<section id="slide-org097448c">
-<h3 id="org097448c">秘書問題 (最適停止問題)</h3>
+<section id="slide-org446052b">
+<h3 id="org446052b">秘書問題 (最適停止問題)</h3>
 <ul>
 <li><p>
 問題
@@ -483,8 +493,8 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 </section>
 </section>
 <section>
-<section id="slide-orgaca8455">
-<h2 id="orgaca8455">次回の予定</h2>
+<section id="slide-org55e14a7">
+<h2 id="org55e14a7">次回の予定</h2>
 <ul>
 <li>独立な確率変数の性質</li>
 <li>大数の法則</li>
@@ -492,15 +502,19 @@ Alice と Bob の二人で交互にコインを投げ，最初に表が出た方
 <li>少数の法則</li>
 
 </ul>
+</section>
+</section>
 </div>
 </div>
+<p> Created by Noboru Murata | Licensed under CC BY-NC 4.0 </p>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/menu/menu.js"></script>
-<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
 <script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
@@ -509,30 +523,44 @@ Reveal.initialize({
 
 controls: true,
 progress: true,
-history: true,
+history: false,
 center: true,
 slideNumber: 'c',
-rollingLinks: false,
+rollingLinks: true,
 keyboard: true,
 mouseWheel: false,
-fragmentInURL: true,
+fragmentInURL: false,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
 overview: true,
+width: 1050,
+height: 700,
+margin: 0.10,
+minScale: 0.75,
+maxScale: 1.25,
 
 transition: 'fade',
 transitionSpeed: 'default',
 showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
-spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
+'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
 ]
 
 });
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
 </script>
 </body>
 </html>

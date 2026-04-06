@@ -13,13 +13,40 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/font-awesome/css/all.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+<link rel="stylesheet" href="./reveal.js/local/lecture.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/menu.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
-
-<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
@@ -36,7 +63,7 @@
     <p>第12講 - 複数のグループ間の違いを検証する</p>
 </div>
 <div class="keyboard-usage">
-    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+    <p></p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
@@ -45,8 +72,8 @@
 
 </section>
 <section>
-<section id="slide-orgad7f6e4">
-<h2 id="orgad7f6e4">講義概要</h2>
+<section id="slide-org60037ac">
+<h2 id="org60037ac">講義概要</h2>
 <ul>
 <li>分散分析とは</li>
 <li>一元配置
@@ -66,13 +93,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org782df86">
-<h2 id="org782df86">分散分析とは</h2>
-<div class="outline-text-2" id="text-org782df86">
+<section id="slide-orga073ef2">
+<h2 id="orga073ef2">分散分析とは</h2>
+<div class="outline-text-2" id="text-orga073ef2">
 </div>
 </section>
-<section id="slide-orgb390b70">
-<h3 id="orgb390b70">分散分析</h3>
+<section id="slide-org1334313">
+<h3 id="org1334313">分散分析</h3>
 <ul>
 <li>平均の差の検定 <br />
 <b>2つのグループ間</b> で平均の差があるか否か</li>
@@ -91,8 +118,8 @@
 
 </ul>
 </section>
-<section id="slide-org8abb5ba">
-<h3 id="org8abb5ba">基本的な考え方</h3>
+<section id="slide-org2caab7a">
+<h3 id="org2caab7a">基本的な考え方</h3>
 <ul>
 <li>データの変動 (<b>分散</b>) =不確定性 を分解 
 <ul>
@@ -112,13 +139,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org74b9f5e">
-<h2 id="org74b9f5e">分散の比の検定 (再掲)</h2>
-<div class="outline-text-2" id="text-org74b9f5e">
+<section id="slide-orge5a115c">
+<h2 id="orge5a115c">分散の比の検定 (再掲)</h2>
+<div class="outline-text-2" id="text-orge5a115c">
 </div>
 </section>
-<section id="slide-org9f28c34">
-<h3 id="org9f28c34">分散の比の検定</h3>
+<section id="slide-org9645e9d">
+<h3 id="org9645e9d">分散の比の検定</h3>
 <ul>
 <li><p>
 2種類のデータの分散が等しいか否かを検定する
@@ -134,8 +161,8 @@
 
 </ul>
 </section>
-<section id="slide-org07e01be">
-<h3 id="org07e01be">考え方</h3>
+<section id="slide-org5287d8c">
+<h3 id="org5287d8c">考え方</h3>
 <ul>
 <li>\(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
 の不偏分散: \(s_1^2\), \(s_2^2\)
@@ -176,8 +203,8 @@
 
 </ul>
 </section>
-<section id="slide-org84d9f62">
-<h3 id="org84d9f62">両側検定の棄却域</h3>
+<section id="slide-orgb543066">
+<h3 id="orgb543066">両側検定の棄却域</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
@@ -239,13 +266,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgcf6501e">
-<h2 id="orgcf6501e">一元配置</h2>
-<div class="outline-text-2" id="text-orgcf6501e">
+<section id="slide-org237b711">
+<h2 id="org237b711">一元配置</h2>
+<div class="outline-text-2" id="text-org237b711">
 </div>
 </section>
-<section id="slide-org5fda4c2">
-<h3 id="org5fda4c2">一元配置の問題設定</h3>
+<section id="slide-org9024aae">
+<h3 id="org9024aae">一元配置の問題設定</h3>
 <ul>
 <li>グループ分けが1種類 : \(p\) グループ
 \(A_1,A_2,\dotsc,A_p\)</li>
@@ -273,8 +300,8 @@
 
 </ul>
 </section>
-<section id="slide-org44b080a">
-<h3 id="org44b080a">一元配置のモデル</h3>
+<section id="slide-orgf5fac50">
+<h3 id="orgf5fac50">一元配置のモデル</h3>
 <ul>
 <li>分散分析の用語
 <ul>
@@ -302,8 +329,8 @@
 
 </ul>
 </section>
-<section id="slide-org33cc063">
-<h3 id="org33cc063">一元配置の検定</h3>
+<section id="slide-org190aeaf">
+<h3 id="org190aeaf">一元配置の検定</h3>
 <ul>
 <li><p>
 検定問題
@@ -332,8 +359,8 @@
 
 </ul>
 </section>
-<section id="slide-org94d1b7a">
-<h3 id="org94d1b7a">分析の考え方</h3>
+<section id="slide-org25d00b1">
+<h3 id="org25d00b1">分析の考え方</h3>
 <ul>
 <li>データの変動から因子間での変動と観測誤差の変動を抽出して比較</li>
 <li><p>
@@ -434,8 +461,8 @@
 
 </ul>
 </section>
-<section id="slide-org7fdd969">
-<h3 id="org7fdd969">一元配置の検定</h3>
+<section id="slide-org673d73a">
+<h3 id="org673d73a">一元配置の検定</h3>
 <ul>
 <li><p>
 検定統計量
@@ -460,8 +487,8 @@
 
 </ul>
 </section>
-<section id="slide-orgdb73366">
-<h3 id="orgdb73366">棄却域を用いる場合</h3>
+<section id="slide-org89a1031">
+<h3 id="org89a1031">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li>自由度 \(p{-}1,n{-}p\) の \(F\) 分布
@@ -513,8 +540,8 @@
 
 </ul>
 </section>
-<section id="slide-org0c91edf">
-<h3 id="org0c91edf">\(p\) 値を用いる場合</h3>
+<section id="slide-org5893268">
+<h3 id="org5893268">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 \(p\) 値を計算 (右片側検定の場合の計算方法)
@@ -535,8 +562,8 @@
 
 </ul>
 </section>
-<section id="slide-orga913b0f">
-<h3 id="orga913b0f">分散分析表 (一元配置の場合)</h3>
+<section id="slide-org186c370">
+<h3 id="org186c370">分散分析表 (一元配置の場合)</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -604,8 +631,8 @@
 
 </ul>
 </section>
-<section id="slide-org1456a89">
-<h3 id="org1456a89">モデルの別表現</h3>
+<section id="slide-org2272f96">
+<h3 id="org2272f96">モデルの別表現</h3>
 <ul>
 <li>各水準の平均値の相対効果による定式化
 <ul>
@@ -640,8 +667,8 @@
 
 </ul>
 </section>
-<section id="slide-orgcd108a1">
-<h3 id="orgcd108a1">分散分析の計算</h3>
+<section id="slide-org3135dbc">
+<h3 id="org3135dbc">分散分析の計算</h3>
 <ul>
 <li><p>
 基本書式 
@@ -669,8 +696,8 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 
 </ul>
 </section>
-<section id="slide-org9cfdaab">
-<h3 id="org9cfdaab">分散分析の計算 (検定のみ)</h3>
+<section id="slide-org9343480">
+<h3 id="org9343480">分散分析の計算 (検定のみ)</h3>
 <ul>
 <li><p>
 基本書式 
@@ -690,47 +717,18 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 </section>
 </section>
 <section>
-<section id="slide-org8f32ff9" data-background="#fef4f4">
-<h2 id="org8f32ff9">実習</h2>
-</section>
-<section id="slide-orgf53b4e1" data-background="#fef4f4">
-<h3 id="orgf53b4e1">練習問題</h3>
-<ul>
-<li>一元配置分散分析について確率シミュレーションを行いなさい．</li>
-<li>東京の気候データ (<code>tokyo_weather.csv</code>) の
-気温の項目について以下の問に答えよ．
-<ul>
-<li><p>
-曜日ごとの気温の平均と分散を求めよ．
-</p>
-<div class="org-src-container">
-
-<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#36913;&#26085;&#12434;&#22240;&#23376;(factor)&#12392;&#12377;&#12427;&#12395;&#12399;&#20363;&#12360;&#12400;&#20197;&#19979;&#12398;&#12424;&#12358;&#12394;&#38917;&#30446;&#12434;&#21152;&#12360;&#12428;&#12400;&#12424;&#12356;</span>
-tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: #d08928;">"data/tokyo_weather.csv"</span>) |&gt;
-  mutate(day_of_week = ordered(day_of_week, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26332;&#26085;&#12434;&#38918;&#24207;&#20184;&#12365;&#22240;&#23376;&#12395;&#12377;&#12427;</span>
-                               levels = wday(1:7, label = <span style="color: #00aa80;">TRUE</span>))) 
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; wday() &#12398;&#20986;&#21147;&#12399;&#20351;&#29992;&#35328;&#35486;&#12395;&#20381;&#23384;&#12377;&#12427;&#12398;&#12391;&#65292;&#24375;&#21046;&#30340;&#12395;&#33521;&#35486;&#12395;&#12377;&#12427;&#12395;&#12399; locale &#12434;&#25351;&#23450;&#12375;&#12390;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> wday(..., locale = "en_US") &#12392;&#12377;&#12428;&#12400;&#33391;&#12356;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#30465;&#30053;&#24418;&#12434;&#29992;&#12356;&#12394;&#12356;&#22580;&#21512;&#12399; abbr &#12434;&#25351;&#23450;&#12377;&#12427;&#65294;&#20197;&#19979;&#12399;&#12489;&#12452;&#12484;&#35486;&#12398;&#20363;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> wday(1:7, label = TRUE, abbr = FALSE, locale = "de_DE")</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#21033;&#29992;&#21487;&#33021;&#12394;locale(&#35328;&#35486;)&#12434;&#35519;&#12409;&#12427;&#12395;&#12399; stringi::stri_locale_list() &#12434;&#29992;&#12356;&#12427;</span>
-</pre>
-</div></li>
-<li>曜日ごとに平均が異なるといえるかどうか分散分析を用いて検定しなさい．</li>
-
-</ul></li>
-
-</ul>
+<section id="slide-org5cd8db4" data-background="#fef4f4">
+<h2 id="org5cd8db4">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgcfe2194">
-<h2 id="orgcfe2194">二元配置</h2>
-<div class="outline-text-2" id="text-orgcfe2194">
+<section id="slide-orgee683b4">
+<h2 id="orgee683b4">二元配置</h2>
+<div class="outline-text-2" id="text-orgee683b4">
 </div>
 </section>
-<section id="slide-org0a21774">
-<h3 id="org0a21774">二元配置の問題</h3>
+<section id="slide-org3d44f24">
+<h3 id="org3d44f24">二元配置の問題</h3>
 <ul>
 <li>因子が2種類ある場合
 <ul>
@@ -756,8 +754,8 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 
 </ul>
 </section>
-<section id="slide-orgfecbbe0">
-<h3 id="orgfecbbe0">二元配置のモデル</h3>
+<section id="slide-orgc251ee3">
+<h3 id="orgc251ee3">二元配置のモデル</h3>
 <ul>
 <li>2種類の因子 \(A, B\)
 <ul>
@@ -789,8 +787,8 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 
 </ul>
 </section>
-<section id="slide-orgb350621">
-<h3 id="orgb350621">二元配置の例</h3>
+<section id="slide-orgf4bfe5c">
+<h3 id="orgf4bfe5c">二元配置の例</h3>
 <ul>
 <li><span style="color:green;">複数の薬の治験の問題</span>
 <ul>
@@ -812,8 +810,8 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 
 </ul>
 </section>
-<section id="slide-orgff82c78">
-<h3 id="orgff82c78">二元配置の検定</h3>
+<section id="slide-orge52b63a">
+<h3 id="orge52b63a">二元配置の検定</h3>
 <ul>
 <li><p>
 検定問題
@@ -846,8 +844,8 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 
 </ul>
 </section>
-<section id="slide-org4677758">
-<h3 id="org4677758">分析の考え方</h3>
+<section id="slide-org7989484">
+<h3 id="org7989484">分析の考え方</h3>
 <ul>
 <li>データの変動から因子間での変動と観測誤差の変動を抽出して比較</li>
 <li><p>
@@ -982,8 +980,8 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 
 </ul>
 </section>
-<section id="slide-org13fd9a1">
-<h3 id="org13fd9a1">二元配置の検定</h3>
+<section id="slide-org88d3028">
+<h3 id="org88d3028">二元配置の検定</h3>
 <ul>
 <li><p>
 検定統計量
@@ -1008,8 +1006,8 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 
 </ul>
 </section>
-<section id="slide-org9d55be4">
-<h3 id="org9d55be4">棄却域を用いる場合</h3>
+<section id="slide-org4a370a4">
+<h3 id="org4a370a4">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準 : \(\alpha\in(0,1)\)</li>
 <li>自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布
@@ -1061,8 +1059,8 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 
 </ul>
 </section>
-<section id="slide-org55feb27">
-<h3 id="org55feb27">\(p\) 値を用いる場合</h3>
+<section id="slide-org39ec740">
+<h3 id="org39ec740">\(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
 \(p\) 値を計算 (右片側検定の場合の計算方法)
@@ -1083,8 +1081,8 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 
 </ul>
 </section>
-<section id="slide-org7c8de30">
-<h3 id="org7c8de30">分散分析表 (二元配置の場合)</h3>
+<section id="slide-org64fb11d">
+<h3 id="org64fb11d">分散分析表 (二元配置の場合)</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1147,8 +1145,8 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 
 </ul>
 </section>
-<section id="slide-org3aa0a8f">
-<h3 id="org3aa0a8f">モデルの別表現</h3>
+<section id="slide-orgfe8b200">
+<h3 id="orgfe8b200">モデルの別表現</h3>
 <p>
 相対効果による定式化
 </p>
@@ -1201,8 +1199,8 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 
 </ul>
 </section>
-<section id="slide-orgd03bae3">
-<h3 id="orgd03bae3">分散分析の計算</h3>
+<section id="slide-orgb75d806">
+<h3 id="orgb75d806">分散分析の計算</h3>
 <ul>
 <li><p>
 基本書式 
@@ -1220,43 +1218,13 @@ tw_data <span style="color: #60aa00;">&lt;-</span> read_csv(<span style="color: 
 </section>
 </section>
 <section>
-<section id="slide-org160d9dc" data-background="#fef4f4">
-<h2 id="org160d9dc">実習</h2>
-</section>
-<section id="slide-orgd35e397" data-background="#fef4f4">
-<h3 id="orgd35e397">練習問題</h3>
-<ul>
-<li><p>
-<code>package::datarium</code> に含まれている
-<code>jobsatisfaction</code> データについて以下の問に答えよ．
-</p>
-<blockquote>
-<p>
-性別 (<code>gender</code>) と
-学歴 (<code>education_level</code>) の違いによる
-仕事の満足度 (<code>score</code>) を収集したデータ
-</p>
-</blockquote>
-<ul>
-<li>データを適当な方法で可視化しなさい．</li>
-<li>それぞれの因子で満足度の平均に違いがあるか
-二元配置の分散分析を用いて検討しなさい．</li>
-
-</ul>
-<div class="org-src-container">
-
-<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#12497;&#12483;&#12465;&#12540;&#12472;&#12398;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;&#12392;&#35501;&#12415;&#36796;&#12415;&#12399;&#20197;&#19979;&#12398;&#12424;&#12358;&#12395;&#34892;&#12358;&#12371;&#12392;&#12364;&#12391;&#12365;&#12427;</span>
-install.packages(<span style="color: #d08928;">"datarium"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;</span>
-<span style="color: #60aa00;">library</span>(<span style="color: #d08928;">"datarium"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35501;&#12415;&#36796;&#12415;</span>
-</pre>
-</div></li>
-
-</ul>
+<section id="slide-orgda37ef3" data-background="#fef4f4">
+<h2 id="orgda37ef3">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgd2f98af">
-<h2 id="orgd2f98af">次回の予定</h2>
+<section id="slide-orgda36642">
+<h2 id="orgda36642">次回の予定</h2>
 <ul>
 <li>回帰分析</li>
 <li>回帰係数の推定
@@ -1273,15 +1241,19 @@ install.packages(<span style="color: #d08928;">"datarium"</span>) <span style="c
 <li>決定係数</li>
 
 </ul>
+</section>
+</section>
 </div>
 </div>
+<p> Created by Noboru Murata | Licensed under CC BY-NC 4.0 </p>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/menu/menu.js"></script>
-<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
 <script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
@@ -1290,30 +1262,44 @@ Reveal.initialize({
 
 controls: true,
 progress: true,
-history: true,
+history: false,
 center: true,
 slideNumber: 'c',
-rollingLinks: false,
+rollingLinks: true,
 keyboard: true,
 mouseWheel: false,
-fragmentInURL: true,
+fragmentInURL: false,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
 overview: true,
+width: 1050,
+height: 700,
+margin: 0.10,
+minScale: 0.75,
+maxScale: 1.25,
 
 transition: 'fade',
 transitionSpeed: 'default',
 showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
-spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
+'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
 ]
 
 });
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
 </script>
 </body>
 </html>

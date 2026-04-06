@@ -13,13 +13,40 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/font-awesome/css/all.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+<link rel="stylesheet" href="./reveal.js/local/lecture.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/menu.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
-
-<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
@@ -36,7 +63,7 @@
     <p>第9講 - 基礎的な記述統計量とデータの集約</p>
 </div>
 <div class="keyboard-usage">
-    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+    <p></p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
@@ -45,8 +72,8 @@
 
 </section>
 <section>
-<section id="slide-org03d998f">
-<h2 id="org03d998f">講義概要</h2>
+<section id="slide-org9485a9b">
+<h2 id="org9485a9b">講義概要</h2>
 <ul>
 <li>基本的な記述統計量</li>
 <li>&ldquo;モーメント&rdquo;に基づく記述統計量
@@ -62,13 +89,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org3482291">
-<h2 id="org3482291">基礎的な記述統計量</h2>
-<div class="outline-text-2" id="text-org3482291">
+<section id="slide-org616676c">
+<h2 id="org616676c">基礎的な記述統計量</h2>
+<div class="outline-text-2" id="text-org616676c">
 </div>
 </section>
-<section id="slide-org2d9bbd5">
-<h3 id="org2d9bbd5">記述統計量とは</h3>
+<section id="slide-orgdd536d4">
+<h3 id="orgdd536d4">記述統計量とは</h3>
 <ul>
 <li><b>記述統計量</b> : (または要約統計量・基本統計量)
 <ul>
@@ -87,8 +114,8 @@
 
 </ul>
 </section>
-<section id="slide-org717e1b0">
-<h3 id="org717e1b0">記述統計量の推定</h3>
+<section id="slide-org62d18f6">
+<h3 id="org62d18f6">記述統計量の推定</h3>
 <ul>
 <li>記述統計量は背後の確率分布(集団全体)で決まる量</li>
 <li>一般に確率分布は未知</li>
@@ -99,8 +126,8 @@
 
 </ul>
 </section>
-<section id="slide-orgbbf2720">
-<h3 id="orgbbf2720">独立同分布性</h3>
+<section id="slide-org44eb788">
+<h3 id="org44eb788">独立同分布性</h3>
 <ul>
 <li>統計解析における重要な仮定とその帰結
 <ul>
@@ -116,8 +143,8 @@
 
 </ul>
 </section>
-<section id="slide-org1705a2d">
-<h3 id="org1705a2d">推定量の一致性</h3>
+<section id="slide-org52076c5">
+<h3 id="org52076c5">推定量の一致性</h3>
 <ul>
 <li>サンプル数が大きい場合に &ldquo;合理的な&rdquo; 推定量となる根拠の1つ</li>
 <li><p>
@@ -142,8 +169,8 @@
 
 </ul>
 </section>
-<section id="slide-orgb4a5f72">
-<h3 id="orgb4a5f72">推定量の不偏性</h3>
+<section id="slide-org024f7ae">
+<h3 id="org024f7ae">推定量の不偏性</h3>
 <ul>
 <li>サンプル数が小さい場合の推定量の &ldquo;良さ&rdquo; に関する性質の1つ</li>
 <li><p>
@@ -169,13 +196,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org1bc649e">
-<h2 id="org1bc649e">&ldquo;モーメント&rdquo;に基づく記述統計量</h2>
-<div class="outline-text-2" id="text-org1bc649e">
+<section id="slide-org2156c7f">
+<h2 id="org2156c7f">&ldquo;モーメント&rdquo;に基づく記述統計量</h2>
+<div class="outline-text-2" id="text-org2156c7f">
 </div>
 </section>
-<section id="slide-org27cfb93">
-<h3 id="org27cfb93">平均</h3>
+<section id="slide-orgbe09f0e">
+<h3 id="orgbe09f0e">平均</h3>
 <ul>
 <li><p>
 <b>平均</b> (mean)
@@ -209,8 +236,8 @@
 
 </ul>
 </section>
-<section id="slide-org0dcb49b">
-<h3 id="org0dcb49b">分散・標準偏差</h3>
+<section id="slide-orgcc9c8ef">
+<h3 id="orgcc9c8ef">分散・標準偏差</h3>
 <ul>
 <li><p>
 <b>分散</b> (variance)
@@ -244,8 +271,8 @@
 
 </ul>
 </section>
-<section id="slide-orga9dc1e2">
-<h3 id="orga9dc1e2">標本平均・分散の不偏性</h3>
+<section id="slide-org4868a3a">
+<h3 id="org4868a3a">標本平均・分散の不偏性</h3>
 <ul>
 <li><p>
 標本平均は \(\mu\) の <b>不偏推定量である</b>
@@ -276,8 +303,8 @@
 
 </ul>
 </section>
-<section id="slide-org3c455ed">
-<h3 id="org3c455ed">不偏分散</h3>
+<section id="slide-org3f890ae">
+<h3 id="org3f890ae">不偏分散</h3>
 <ul>
 <li>不偏性を担保した分散の推定量</li>
 <li><p>
@@ -299,8 +326,8 @@
 
 </ul>
 </section>
-<section id="slide-org0a1d4b1">
-<h3 id="org0a1d4b1">標本標準偏差</h3>
+<section id="slide-orgaa55ce8">
+<h3 id="orgaa55ce8">標本標準偏差</h3>
 <ul>
 <li><b>標本標準偏差</b> (sample standard deviation) : <br />
 通常は不偏分散の平方根 \(s\) を指す</li>
@@ -308,8 +335,8 @@
 
 </ul>
 </section>
-<section id="slide-org5ef1869">
-<h3 id="org5ef1869">R : 平均・分散・標準偏差の計算</h3>
+<section id="slide-orga75358d">
+<h3 id="orga75358d">R : 平均・分散・標準偏差の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
@@ -327,8 +354,8 @@ sd(x, na.rm = <span style="color: #00aa80;">FALSE</span>)             <span styl
 
 </ul>
 </section>
-<section id="slide-org804d2b6">
-<h3 id="org804d2b6">標準化</h3>
+<section id="slide-org7782b58">
+<h3 id="org7782b58">標準化</h3>
 <ul>
 <li>多次元データの分析のために単位や基準を揃える</li>
 <li><p>
@@ -352,8 +379,8 @@ sd(x, na.rm = <span style="color: #00aa80;">FALSE</span>)             <span styl
 
 </ul>
 </section>
-<section id="slide-org167d557">
-<h3 id="org167d557">偏差値</h3>
+<section id="slide-org12f7b1e">
+<h3 id="org12f7b1e">偏差値</h3>
 <ul>
 <li>別の基準での標準化
 <ul>
@@ -376,8 +403,8 @@ sd(x, na.rm = <span style="color: #00aa80;">FALSE</span>)             <span styl
 
 </ul>
 </section>
-<section id="slide-org400671d">
-<h3 id="org400671d">R : 標準化の計算</h3>
+<section id="slide-org3de95df">
+<h3 id="org3de95df">R : 標準化の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
@@ -396,46 +423,18 @@ sd(x, na.rm = <span style="color: #00aa80;">FALSE</span>)             <span styl
 </section>
 </section>
 <section>
-<section id="slide-org864125c" data-background="#fef4f4">
-<h2 id="org864125c">実習</h2>
-</section>
-<section id="slide-org4c31c1c" data-background="#fef4f4">
-<h3 id="org4c31c1c">練習問題</h3>
-<ul>
-<li><p>
-東京の気候データ (<code>tokyo_weather.csv</code>) の中の
-</p>
-<blockquote>
-<p>
-気温 (<code>temp</code>) ，
-日射量 (<code>solar</code>) ，
-風速 (<code>wind</code>) 
-</p>
-</blockquote>
-<p>
-の項目について以下の問に答えよ．
-</p>
-
-<ul>
-<li>全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数365)</li>
-<li>毎月5日のデータのみを用いて各項目の平均・分散・標準偏差を求めよ．(データ数12)</li>
-<li>5の付く日(各月の5,15,25)のデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数36)</li>
-<li>ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，
-推定量のばらつきを確認せよ．</li>
-
-</ul></li>
-
-</ul>
+<section id="slide-org53d5685" data-background="#fef4f4">
+<h2 id="org53d5685">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orge765ab1">
-<h2 id="orge765ab1">歪度と尖度</h2>
-<div class="outline-text-2" id="text-orge765ab1">
+<section id="slide-org51ab013">
+<h2 id="org51ab013">歪度と尖度</h2>
+<div class="outline-text-2" id="text-org51ab013">
 </div>
 </section>
-<section id="slide-org886aa0f">
-<h3 id="org886aa0f">歪度と尖度</h3>
+<section id="slide-orgeb3d383">
+<h3 id="orgeb3d383">歪度と尖度</h3>
 <ul>
 <li>正規分布からのずれを調べるための統計量</li>
 <li>正規分布の特徴 
@@ -449,8 +448,8 @@ sd(x, na.rm = <span style="color: #00aa80;">FALSE</span>)             <span styl
 
 </ul>
 </section>
-<section id="slide-org371cc57">
-<h3 id="org371cc57">歪度</h3>
+<section id="slide-org7a6428a">
+<h3 id="org7a6428a">歪度</h3>
 <ul>
 <li>分布の非対称性を表す統計量</li>
 <li><p>
@@ -482,8 +481,8 @@ sd(x, na.rm = <span style="color: #00aa80;">FALSE</span>)             <span styl
 
 </ul>
 </section>
-<section id="slide-orgb29601c">
-<h3 id="orgb29601c">尖度</h3>
+<section id="slide-org1fd46d6">
+<h3 id="org1fd46d6">尖度</h3>
 <ul>
 <li>平均の周囲の分布の尖り具合を表す統計量</li>
 <li><p>
@@ -522,8 +521,8 @@ sd(x, na.rm = <span style="color: #00aa80;">FALSE</span>)             <span styl
 
 </ul>
 </section>
-<section id="slide-org8a3bbdc">
-<h3 id="org8a3bbdc">超過尖度</h3>
+<section id="slide-org3529bc9">
+<h3 id="org3529bc9">超過尖度</h3>
 <ul>
 <li>正規分布と比較して
 <ul>
@@ -552,25 +551,25 @@ sd(x, na.rm = <span style="color: #00aa80;">FALSE</span>)             <span styl
 
 </section>
 <section>
-<div class="leftcol" id="org59a3f0a">
+<div class="leftcol" id="org9a24ddf">
 
-<div id="org373cb92" class="figure">
+<div id="org20a467a" class="figure">
 <p><img src="figs/sk_tdist.png" alt="sk_tdist.png" width="100%" />
 </p>
 </div>
 
 </div>
-<div class="rightcol" id="org76b1ad5">
+<div class="rightcol" id="orgcdf7a92">
 
-<div id="org704834f" class="figure">
+<div id="org2dc19ac" class="figure">
 <p><img src="figs/sk_gamma.png" alt="sk_gamma.png" width="100%" />
 </p>
 </div>
 
 </div>
 </section>
-<section id="slide-orge4dac09">
-<h3 id="orge4dac09">標本歪度と標本尖度</h3>
+<section id="slide-orgc8e0c34">
+<h3 id="orgc8e0c34">標本歪度と標本尖度</h3>
 <ul>
 <li>観測データ \(X_{1},X_{2},\dotsc,X_{n}\) による推定</li>
 <li><p>
@@ -602,8 +601,8 @@ sd(x, na.rm = <span style="color: #00aa80;">FALSE</span>)             <span styl
 
 </ul>
 </section>
-<section id="slide-org8c43c11">
-<h3 id="org8c43c11">R : 歪度と尖度の計算</h3>
+<section id="slide-org82ca6d0">
+<h3 id="org82ca6d0">R : 歪度と尖度の計算</h3>
 <ul>
 <li><p>
 歪度・尖度を計算する関数はRの標準機能にはないので
@@ -634,44 +633,18 @@ kurtosis(x, na.rm = <span style="color: #00aa80;">FALSE</span>, type = 3) <span 
 </section>
 </section>
 <section>
-<section id="slide-org91db3c9" data-background="#fef4f4">
-<h2 id="org91db3c9">実習</h2>
-</section>
-<section id="slide-org51790cd" data-background="#fef4f4">
-<h3 id="org51790cd">練習問題</h3>
-<ul>
-<li><p>
-東京の気候データ (<code>tokyo_weather.csv</code>) の中の
-</p>
-<blockquote>
-<p>
-気温 (<code>temp</code>) ，
-日射量 (<code>solar</code>) ，
-風速 (<code>wind</code>) 
-</p>
-</blockquote>
-<p>
-の項目について以下の問に答えよ．
-</p>
-<ul>
-<li>全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数365)</li>
-<li>5のつく日のデータのみを用いて各項目の歪度と超過尖度を求めよ．(データ数36)</li>
-<li>それぞれの値から正規分布から逸脱していると思われる項目はいずれか考察せよ．</li>
-<li>各データのヒストグラムを描き，データから計算される平均と分散を持つ正規分布と比較せよ．</li>
-
-</ul></li>
-
-</ul>
+<section id="slide-orgb9bdde7" data-background="#fef4f4">
+<h2 id="orgb9bdde7">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org3335a00">
-<h2 id="org3335a00">相関と共分散</h2>
-<div class="outline-text-2" id="text-org3335a00">
+<section id="slide-org0c422d0">
+<h2 id="org0c422d0">相関と共分散</h2>
+<div class="outline-text-2" id="text-org0c422d0">
 </div>
 </section>
-<section id="slide-orgc6acf18">
-<h3 id="orgc6acf18">共分散</h3>
+<section id="slide-org07904f3">
+<h3 id="org07904f3">共分散</h3>
 <ul>
 <li>複数のデータ間の関係を知るための記述統計量</li>
 <li><p>
@@ -689,8 +662,8 @@ kurtosis(x, na.rm = <span style="color: #00aa80;">FALSE</span>, type = 3) <span 
 
 </ul>
 </section>
-<section id="slide-org2f2ac6c">
-<h3 id="org2f2ac6c">標本共分散</h3>
+<section id="slide-org78b0a52">
+<h3 id="org78b0a52">標本共分散</h3>
 <ul>
 <li>観測データ \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) による推定</li>
 <li><p>
@@ -712,8 +685,8 @@ kurtosis(x, na.rm = <span style="color: #00aa80;">FALSE</span>, type = 3) <span 
 
 </ul>
 </section>
-<section id="slide-orgf07f9b0">
-<h3 id="orgf07f9b0">相関</h3>
+<section id="slide-org49179d3">
+<h3 id="org49179d3">相関</h3>
 <ul>
 <li>複数のデータ間の正規化した記述統計量</li>
 <li><p>
@@ -736,8 +709,8 @@ kurtosis(x, na.rm = <span style="color: #00aa80;">FALSE</span>, type = 3) <span 
 
 </ul>
 </section>
-<section id="slide-org8fa86de">
-<h3 id="org8fa86de">標本相関</h3>
+<section id="slide-org61c9b60">
+<h3 id="org61c9b60">標本相関</h3>
 <ul>
 <li>観測データ \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) による推定</li>
 <li><p>
@@ -760,8 +733,8 @@ kurtosis(x, na.rm = <span style="color: #00aa80;">FALSE</span>, type = 3) <span 
 
 </ul>
 </section>
-<section id="slide-orgc715b7f">
-<h3 id="orgc715b7f">R : 相関と共分散の計算</h3>
+<section id="slide-orge9c2446">
+<h3 id="orge9c2446">R : 相関と共分散の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
@@ -782,43 +755,18 @@ cor(x, y = <span style="color: #00aa80;">NULL</span>, use = <span style="color: 
 </section>
 </section>
 <section>
-<section id="slide-org0606087" data-background="#fef4f4">
-<h2 id="org0606087">実習</h2>
-</section>
-<section id="slide-org4a0acba" data-background="#fef4f4">
-<h3 id="org4a0acba">練習問題</h3>
-<ul>
-<li><p>
-東京の気候データ (<code>tokyo_weather.csv</code>) の中の
-</p>
-<blockquote>
-<p>
-気温 (<code>temp</code>), 降水量 (<code>rain</code>), 日射量 (<code>solar</code>), 
-風速 (<code>wind</code>), 気圧 (<code>press</code>), 湿度 (<code>humid</code>)
-</p>
-</blockquote>
-<p>
-(いずれも数値データ)
-の項目について以下の問に答えよ．
-</p>
-<ul>
-<li>それぞれの項目間の共分散，および相関を求めよ．</li>
-<li>相関の高い項目の組(絶対値が大きい)，および相関の低い項目の組(0に近い)を求めよ．</li>
-<li>その項目同士の散布図を描け．</li>
-
-</ul></li>
-
-</ul>
+<section id="slide-org4068184" data-background="#fef4f4">
+<h2 id="org4068184">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org8961839">
-<h2 id="org8961839">&ldquo;順序&rdquo;に基づく統計量</h2>
-<div class="outline-text-2" id="text-org8961839">
+<section id="slide-orgd6486a0">
+<h2 id="orgd6486a0">&ldquo;順序&rdquo;に基づく統計量</h2>
+<div class="outline-text-2" id="text-orgd6486a0">
 </div>
 </section>
-<section id="slide-orgcf8f117">
-<h3 id="orgcf8f117">中央値</h3>
+<section id="slide-org59042c2">
+<h3 id="org59042c2">中央値</h3>
 <ul>
 <li><p>
 データの順序にもとづく記述統計量
@@ -849,8 +797,8 @@ cor(x, y = <span style="color: #00aa80;">NULL</span>, use = <span style="color: 
 
 </ul>
 </section>
-<section id="slide-org5fdfdc5">
-<h3 id="org5fdfdc5">分位点</h3>
+<section id="slide-org4011253">
+<h3 id="org4011253">分位点</h3>
 <ul>
 <li>メディアンの一般化</li>
 <li><p>
@@ -871,8 +819,8 @@ cor(x, y = <span style="color: #00aa80;">NULL</span>, use = <span style="color: 
 
 </ul>
 </section>
-<section id="slide-org0778575">
-<h3 id="org0778575">中央値・分位点の計算</h3>
+<section id="slide-org4dee9ef">
+<h3 id="org4dee9ef">中央値・分位点の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
@@ -893,8 +841,8 @@ summary(x) <span style="color: #808080; font-style: italic;"># </span><span styl
 
 </ul>
 </section>
-<section id="slide-orgb35d921">
-<h3 id="orgb35d921">連続分布の分位点</h3>
+<section id="slide-org8251170">
+<h3 id="org8251170">連続分布の分位点</h3>
 <ul>
 <li>分位点は推定や検定において重要な役割を果たす</li>
 <li><p>
@@ -949,8 +897,8 @@ summary(x) <span style="color: #808080; font-style: italic;"># </span><span styl
 
 </ul>
 </section>
-<section id="slide-orge9896bd">
-<h3 id="orge9896bd">分布の分位点の計算</h3>
+<section id="slide-org56febb2">
+<h3 id="org56febb2">分布の分位点の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
@@ -971,8 +919,8 @@ qxxx(p, <span style="color: #d08928;">"&#20998;&#24067;&#12398;&#29305;&#24615;&
 
 </ul>
 </section>
-<section id="slide-org6982b3c">
-<h3 id="org6982b3c">ばらつきの指標</h3>
+<section id="slide-org0ae5c5c">
+<h3 id="org0ae5c5c">ばらつきの指標</h3>
 <ul>
 <li>分位点を利用したデータのばらつきの指標</li>
 <li><p>
@@ -1003,8 +951,8 @@ qxxx(p, <span style="color: #d08928;">"&#20998;&#24067;&#12398;&#29305;&#24615;&
 
 </ul>
 </section>
-<section id="slide-orgf8e9b82">
-<h3 id="orgf8e9b82">ばらつきの指標の計算</h3>
+<section id="slide-orga2b5e95">
+<h3 id="orga2b5e95">ばらつきの指標の計算</h3>
 <ul>
 <li><p>
 基本的な使い方
@@ -1029,13 +977,13 @@ mad(x, center = median(x), constant = 1.4826, na.rm = <span style="color: #00aa8
 </section>
 </section>
 <section>
-<section id="slide-org3b7ac1f">
-<h2 id="org3b7ac1f">&ldquo;頻度&rdquo;に基づく統計量</h2>
-<div class="outline-text-2" id="text-org3b7ac1f">
+<section id="slide-org14ec0ad">
+<h2 id="org14ec0ad">&ldquo;頻度&rdquo;に基づく統計量</h2>
+<div class="outline-text-2" id="text-org14ec0ad">
 </div>
 </section>
-<section id="slide-orgc8ce1e1">
-<h3 id="orgc8ce1e1">頻度に基づく統計量</h3>
+<section id="slide-orgc8c9a23">
+<h3 id="orgc8c9a23">頻度に基づく統計量</h3>
 <ul>
 <li><p>
 <b>最頻値</b> もしくは <b>モード</b> (mode)
@@ -1059,38 +1007,13 @@ mad(x, center = median(x), constant = 1.4826, na.rm = <span style="color: #00aa8
 </section>
 </section>
 <section>
-<section id="slide-orgc77b734" data-background="#fef4f4">
-<h2 id="orgc77b734">実習</h2>
-</section>
-<section id="slide-org0ebf548" data-background="#fef4f4">
-<h3 id="org0ebf548">練習問題</h3>
-<ul>
-<li><p>
-東京の気候データ (<code>tokyo_weather.csv</code>) の中の
-</p>
-<blockquote>
-<p>
-気温 (<code>temp</code>; 数値データ)と最多風向 (<code>wdir</code>; ラベルデータ)
-</p>
-</blockquote>
-<p>
-を用いて
-以下の問に答えよ．
-</p>
-<ul>
-<li>全てのデータを用いて気温の四分位点を求めよ．(データ数365)</li>
-<li>5の付く日(各月の5,15,25)の気温の四分位点を求めよ．(データ数36)</li>
-<li>ランダムに選んだ36日分のデータで気温の四分位点がどのくらいばらつくか確認せよ．</li>
-<li>風向の最頻値を求めよ．</li>
-
-</ul></li>
-
-</ul>
+<section id="slide-org030f49b" data-background="#fef4f4">
+<h2 id="org030f49b">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org13df3e2">
-<h2 id="org13df3e2">次回の予定</h2>
+<section id="slide-orgb0aa9d6">
+<h2 id="orgb0aa9d6">次回の予定</h2>
 <ul>
 <li>点推定
 <ul>
@@ -1108,15 +1031,19 @@ mad(x, center = median(x), constant = 1.4826, na.rm = <span style="color: #00aa8
 </ul></li>
 
 </ul>
+</section>
+</section>
 </div>
 </div>
+<p> Created by Noboru Murata | Licensed under CC BY-NC 4.0 </p>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/menu/menu.js"></script>
-<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
 <script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
@@ -1125,30 +1052,44 @@ Reveal.initialize({
 
 controls: true,
 progress: true,
-history: true,
+history: false,
 center: true,
 slideNumber: 'c',
-rollingLinks: false,
+rollingLinks: true,
 keyboard: true,
 mouseWheel: false,
-fragmentInURL: true,
+fragmentInURL: false,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
 overview: true,
+width: 1050,
+height: 700,
+margin: 0.10,
+minScale: 0.75,
+maxScale: 1.25,
 
 transition: 'fade',
 transitionSpeed: 'default',
 showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
-spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
+'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
 ]
 
 });
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
 </script>
 </body>
 </html>

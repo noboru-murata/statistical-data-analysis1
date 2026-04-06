@@ -13,13 +13,40 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/font-awesome/css/all.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+<link rel="stylesheet" href="./reveal.js/local/lecture.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/menu.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
-
-<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
@@ -36,7 +63,7 @@
     <p>第8講 - いろいろな離散分布と連続分布</p>
 </div>
 <div class="keyboard-usage">
-    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+    <p></p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
@@ -45,8 +72,8 @@
 
 </section>
 <section>
-<section id="slide-orgf897165">
-<h2 id="orgf897165">講義概要</h2>
+<section id="slide-org827e32c">
+<h2 id="org827e32c">講義概要</h2>
 <ul>
 <li>一般の確率変数</li>
 <li>離散分布
@@ -66,13 +93,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org2a73093">
-<h2 id="org2a73093">一般の確率変数</h2>
-<div class="outline-text-2" id="text-org2a73093">
+<section id="slide-org842c3da">
+<h2 id="org842c3da">一般の確率変数</h2>
+<div class="outline-text-2" id="text-org842c3da">
 </div>
 </section>
-<section id="slide-orgcd34932">
-<h3 id="orgcd34932">確率分布</h3>
+<section id="slide-org982b168">
+<h3 id="org982b168">確率分布</h3>
 <ul>
 <li>確率変数 \(X\) 
 <ul>
@@ -100,8 +127,8 @@
 
 </ul>
 </section>
-<section id="slide-orge3a7516">
-<h3 id="orge3a7516">極限定理</h3>
+<section id="slide-org7edf2aa">
+<h3 id="org7edf2aa">極限定理</h3>
 <ul>
 <li>大数の法則，
 中心極限定理，
@@ -118,8 +145,8 @@
 
 </ul>
 </section>
-<section id="slide-orgd284328">
-<h3 id="orgd284328">確率変数列の独立性</h3>
+<section id="slide-org54801a8">
+<h3 id="org54801a8">確率変数列の独立性</h3>
 <ul>
 <li><p>
 定義
@@ -144,8 +171,8 @@
 
 </ul>
 </section>
-<section id="slide-orgb2bb909">
-<h3 id="orgb2bb909">確率変数列の同分布性</h3>
+<section id="slide-org4bfab36">
+<h3 id="org4bfab36">確率変数列の同分布性</h3>
 <ul>
 <li><p>
 定義
@@ -170,13 +197,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org0895674">
-<h2 id="org0895674">離散分布</h2>
-<div class="outline-text-2" id="text-org0895674">
+<section id="slide-org397f8dd">
+<h2 id="org397f8dd">離散分布</h2>
+<div class="outline-text-2" id="text-org397f8dd">
 </div>
 </section>
-<section id="slide-orgf748934">
-<h3 id="orgf748934">離散分布</h3>
+<section id="slide-org9ec78cd">
+<h3 id="org9ec78cd">離散分布</h3>
 <ul>
 <li>離散型確率変数 
 <ul>
@@ -196,8 +223,8 @@
 
 </ul>
 </section>
-<section id="slide-org19473bd">
-<h3 id="org19473bd">離散分布の平均</h3>
+<section id="slide-org66bf0b3">
+<h3 id="org66bf0b3">離散分布の平均</h3>
 <ul>
 <li><p>
 定義
@@ -265,8 +292,8 @@
 
 </ul>
 </section>
-<section id="slide-org9469105">
-<h3 id="org9469105">離散分布の分散</h3>
+<section id="slide-org80e65ef">
+<h3 id="org80e65ef">離散分布の分散</h3>
 <ul>
 <li><p>
 定義
@@ -291,11 +318,11 @@
 </section>
 </section>
 <section>
-<section id="slide-org3018f61">
-<h2 id="org3018f61">離散一様分布</h2>
+<section id="slide-org57bf3a1">
+<h2 id="org57bf3a1">離散一様分布</h2>
 </section>
-<section id="slide-orgcfbe22b">
-<h3 id="orgcfbe22b">離散一様分布の確率質量関数</h3>
+<section id="slide-org4f1461e">
+<h3 id="org4f1461e">離散一様分布の確率質量関数</h3>
 <ul>
 <li><p>
 集合 \(\{x_{1},\dotsc,x_n\}\) 上の離散一様分布
@@ -322,8 +349,8 @@
 
 </ul>
 </section>
-<section id="slide-org670b601">
-<h3 id="org670b601">離散一様分布の平均と分散</h3>
+<section id="slide-org2e63a2b">
+<h3 id="org2e63a2b">離散一様分布の平均と分散</h3>
 <ul>
 <li><p>
 平均
@@ -354,8 +381,8 @@
 
 </ul>
 </section>
-<section id="slide-orgea56a6c">
-<h3 id="orgea56a6c">離散一様分布に従う乱数</h3>
+<section id="slide-org935bff7">
+<h3 id="org935bff7">離散一様分布に従う乱数</h3>
 <ul>
 <li>歪みのないサイコロを1回投げたときに出る目の分布は, 
 集合 \(\{1,\dots,6\}\) 上の離散一様分布に従う</li>
@@ -373,11 +400,11 @@ sample(a, size=20, replace=TRUE) # 離散一様分布(20個)
 </section>
 </section>
 <section>
-<section id="slide-org97e0617">
-<h2 id="org97e0617">二項分布</h2>
+<section id="slide-orgb2ccedf">
+<h2 id="orgb2ccedf">二項分布</h2>
 </section>
-<section id="slide-org8259c46">
-<h3 id="org8259c46">二項分布の確率質量関数</h3>
+<section id="slide-orga04cb41">
+<h3 id="orga04cb41">二項分布の確率質量関数</h3>
 <ul>
 <li><p>
 試行回数 \(n\) , 成功確率 \(p\) の二項分布
@@ -401,8 +428,8 @@ sample(a, size=20, replace=TRUE) # 離散一様分布(20個)
 
 </ul>
 </section>
-<section id="slide-org29b1b2b">
-<h3 id="org29b1b2b">二項分布の平均</h3>
+<section id="slide-org0a57e74">
+<h3 id="org0a57e74">二項分布の平均</h3>
 <ul>
 <li><p>
 平均
@@ -423,8 +450,8 @@ sample(a, size=20, replace=TRUE) # 離散一様分布(20個)
 
 </ul>
 </section>
-<section id="slide-org1b98447">
-<h3 id="org1b98447">二項分布の分散</h3>
+<section id="slide-orgc135a33">
+<h3 id="orgc135a33">二項分布の分散</h3>
 <ul>
 <li><p>
 2次モーメント 
@@ -460,8 +487,8 @@ sample(a, size=20, replace=TRUE) # 離散一様分布(20個)
 
 </ul>
 </section>
-<section id="slide-org52f06b6">
-<h3 id="org52f06b6">二項分布に従う乱数</h3>
+<section id="slide-org433d00a">
+<h3 id="org433d00a">二項分布に従う乱数</h3>
 <ul>
 <li>表が出る確率が \(p\) のコインを \(n\) 回投げたときに表が出る回数は，
 試行回数 \(n\) ，成功確率 \(p\) の二項分布に従う</li>
@@ -477,8 +504,8 @@ rbinom(20, size=5, prob=0.6) <span style="color: #808080; font-style: italic;">#
 </div>
 
 <pre class="example">
- [1] 0 0 0 0 1 1 0 1 0 1
-[1] 3 3 3 3 3 2 4 2 3 3 3 1 2 3 3 3 3 4 3 5
+ [1] 1 0 1 1 0 0 0 1 1 0
+[1] 2 1 3 2 2 2 4 3 2 2 2 2 4 5 2 2 2 3 4 1
 </pre></li>
 
 <li>確率質量関数は関数 <code>dbinom()</code> で計算できる</li>
@@ -487,11 +514,11 @@ rbinom(20, size=5, prob=0.6) <span style="color: #808080; font-style: italic;">#
 </section>
 </section>
 <section>
-<section id="slide-orgfe8e160" data-background="#fef4f4">
-<h2 id="orgfe8e160">実習</h2>
+<section id="slide-orgca11437" data-background="#fef4f4">
+<h2 id="orgca11437">実習</h2>
 </section>
-<section id="slide-orgb5f0e4a">
-<h3 id="orgb5f0e4a">数値実験の雛形(離散分布)</h3>
+<section id="slide-org82291c3">
+<h3 id="org82291c3">数値実験の雛形(離散分布)</h3>
 <ul>
 <li>人工的に生成した乱数と理論曲線(確率質量関数)との比較を行う</li>
 <li><p>
@@ -517,29 +544,13 @@ replicate(mc, my_random()) |&gt; <span style="color: #808080; font-style: italic
 
 </ul>
 </section>
-<section id="slide-org043313f" data-background="#fef4f4">
-<h3 id="org043313f">練習問題</h3>
-<ul>
-<li>二項分布に関して以下を考察せよ．
-<ul>
-<li>平均と分散の計算を確認しなさい．</li>
-<li>\(X_{1},\dotsc,X_n\) を成功確率 \(p\) の
-Bernoulli 分布に従う独立同分布な確率変数列とする．
-このとき \(\sum_{i=1}^nX_i\) の分布は，
-試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う．
-これをグラフに描画して確認しなさい．</li>
-
-</ul></li>
-
-</ul>
-</section>
 </section>
 <section>
-<section id="slide-org6987274">
-<h2 id="org6987274">Poisson 分布</h2>
+<section id="slide-orgabd82fe">
+<h2 id="orgabd82fe">Poisson 分布</h2>
 </section>
-<section id="slide-orgb8e7bec">
-<h3 id="orgb8e7bec">Poisson 分布の確率質量関数</h3>
+<section id="slide-orgd019ccf">
+<h3 id="orgd019ccf">Poisson 分布の確率質量関数</h3>
 <ul>
 <li><p>
 強度 \(\lambda\) の Poisson 分布
@@ -564,8 +575,8 @@ Bernoulli 分布に従う独立同分布な確率変数列とする．
 
 </ul>
 </section>
-<section id="slide-org6156529">
-<h3 id="org6156529">Poisson 分布の平均</h3>
+<section id="slide-orgebad802">
+<h3 id="orgebad802">Poisson 分布の平均</h3>
 <ul>
 <li><p>
 平均
@@ -585,8 +596,8 @@ Bernoulli 分布に従う独立同分布な確率変数列とする．
 
 </ul>
 </section>
-<section id="slide-org293a9cb">
-<h3 id="org293a9cb">Poisson 分布の分散</h3>
+<section id="slide-orgdd530e1">
+<h3 id="orgdd530e1">Poisson 分布の分散</h3>
 <ul>
 <li><p>
 2次モーメント
@@ -619,8 +630,8 @@ Bernoulli 分布に従う独立同分布な確率変数列とする．
 
 </ul>
 </section>
-<section id="slide-org80a7443">
-<h3 id="org80a7443">Poisson 分布に従う乱数</h3>
+<section id="slide-org2e7761b">
+<h3 id="org2e7761b">Poisson 分布に従う乱数</h3>
 <ul>
 <li>発生確率が低い事象が十分長い期間で起こる回数の分布は
 Poisson 分布で近似できる (<b>少数の法則</b>)
@@ -640,8 +651,8 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 </div>
 
 <pre class="example">
- [1] 1 3 0 0 4 2 1 0 1 1 0 1 1 0 0
-[1] 14  8 13 10 14 14 12  6  7  7  9  5 11 10  9
+ [1] 1 1 1 1 0 2 1 1 0 0 2 1 1 3 2
+[1] 10 14 15 11 12  9  6  7  6 11  8 12 14  7  8
 </pre></li>
 
 <li>確率質量関数は関数 <code>dpois()</code> で計算できる</li>
@@ -650,32 +661,16 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 </section>
 </section>
 <section>
-<section id="slide-orgdcfa42a" data-background="#fef4f4">
-<h2 id="orgdcfa42a">実習</h2>
-</section>
-<section id="slide-org43ddea6" data-background="#fef4f4">
-<h3 id="org43ddea6">練習問題</h3>
-<ul>
-<li>Poisson 分布に関して以下を考察せよ．
-<ul>
-<li>平均と分散の計算を確認しなさい．</li>
-<li>\(X,Y\) を独立な2つの確率変数とし，
-それぞれ強度 \(\lambda_{1},\lambda_{2}\) の Poisson 分布に従うとする．
-このとき, 和 \(X+Y\) の分布は
-強度 \(\lambda_{1}+\lambda_{2}\) の Poisson 分布に従う．
-これをグラフに描画して確認しなさい．</li>
-
-</ul></li>
-
-</ul>
+<section id="slide-org447ab6a" data-background="#fef4f4">
+<h2 id="org447ab6a">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orga411a01">
-<h2 id="orga411a01">幾何分布</h2>
+<section id="slide-org061f391">
+<h2 id="org061f391">幾何分布</h2>
 </section>
-<section id="slide-orgbc9757b">
-<h3 id="orgbc9757b">幾何分布の確率質量関数</h3>
+<section id="slide-org18d068b">
+<h3 id="org18d068b">幾何分布の確率質量関数</h3>
 <ul>
 <li><p>
 成功確率 \(p\) の幾何分布 
@@ -700,8 +695,8 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 
 </ul>
 </section>
-<section id="slide-org3f318ea">
-<h3 id="org3f318ea">幾何分布の平均</h3>
+<section id="slide-org667b604">
+<h3 id="org667b604">幾何分布の平均</h3>
 <ul>
 <li><p>
 平均 
@@ -723,8 +718,8 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 
 </ul>
 </section>
-<section id="slide-org3cf915d">
-<h3 id="org3cf915d">幾何分布の分散</h3>
+<section id="slide-orgcb9ece9">
+<h3 id="orgcb9ece9">幾何分布の分散</h3>
 <ul>
 <li><p>
 2次モーメント
@@ -759,8 +754,8 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 
 </ul>
 </section>
-<section id="slide-org31e0d98">
-<h3 id="org31e0d98">幾何分布に従う乱数</h3>
+<section id="slide-org6b7a811">
+<h3 id="org6b7a811">幾何分布に従う乱数</h3>
 <ul>
 <li>表が出る確率が \(p\) のコインを投げ続けて，
 初めて表が出るまでに出た裏の回数は，
@@ -775,7 +770,7 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 </div>
 
 <pre class="example">
-[1]  1  8  7  0 18 18  1 11  3 13  3 10  5 20 14
+[1]  7  7 34  1 34  0  0  2  0  4  7 23  1  6 27
 </pre></li>
 
 <li>確率質量関数は関数 <code>dgeom()</code> で計算できる</li>
@@ -784,13 +779,13 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 </section>
 </section>
 <section>
-<section id="slide-org85f7e88">
-<h2 id="org85f7e88">連続分布</h2>
-<div class="outline-text-2" id="text-org85f7e88">
+<section id="slide-orga8ebbb4">
+<h2 id="orga8ebbb4">連続分布</h2>
+<div class="outline-text-2" id="text-orga8ebbb4">
 </div>
 </section>
-<section id="slide-org9c068b9">
-<h3 id="org9c068b9">連続分布</h3>
+<section id="slide-orga4f6d35">
+<h3 id="orga4f6d35">連続分布</h3>
 <ul>
 <li>連続型確率変数
 <ul>
@@ -818,8 +813,8 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 
 </ul>
 </section>
-<section id="slide-org64f4e9d">
-<h3 id="org64f4e9d">連続分布の平均</h3>
+<section id="slide-orge053ca8">
+<h3 id="orge053ca8">連続分布の平均</h3>
 <ul>
 <li><p>
 連続型の確率変数 \(X\) の平均 <br />
@@ -874,8 +869,8 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 
 </ul>
 </section>
-<section id="slide-orgc29e7b6">
-<h3 id="orgc29e7b6">連続分布の分散</h3>
+<section id="slide-orga4f23c3">
+<h3 id="orga4f23c3">連続分布の分散</h3>
 <ul>
 <li><p>
 分散
@@ -896,11 +891,11 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 </section>
 </section>
 <section>
-<section id="slide-org85a485b">
-<h2 id="org85a485b">一様分布</h2>
+<section id="slide-orgef1651c">
+<h2 id="orgef1651c">一様分布</h2>
 </section>
-<section id="slide-org088d2fc">
-<h3 id="org088d2fc">一様分布の確率密度関数</h3>
+<section id="slide-orgb9dfde6">
+<h3 id="orgb9dfde6">一様分布の確率密度関数</h3>
 <ul>
 <li><p>
 区間 \((a,b)\) 上の一様分布
@@ -929,8 +924,8 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 
 </ul>
 </section>
-<section id="slide-org9bfd83f">
-<h3 id="org9bfd83f">一様分布の平均</h3>
+<section id="slide-org1beb37a">
+<h3 id="org1beb37a">一様分布の平均</h3>
 <ul>
 <li><p>
 平均
@@ -950,8 +945,8 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 
 </ul>
 </section>
-<section id="slide-org31769c7">
-<h3 id="org31769c7">一様分布の分散</h3>
+<section id="slide-orgd82e0f1">
+<h3 id="orgd82e0f1">一様分布の分散</h3>
 <ul>
 <li><p>
 2次モーメント
@@ -986,8 +981,8 @@ rpois(15, lambda=10) <span style="color: #808080; font-style: italic;"># </span>
 
 </ul>
 </section>
-<section id="slide-org0208d1a">
-<h3 id="org0208d1a">一様分布に従う乱数</h3>
+<section id="slide-org20b3ac3">
+<h3 id="org20b3ac3">一様分布に従う乱数</h3>
 <ul>
 <li><p>
 乱数の発生は関数 <code>runif()</code> を用いる
@@ -1000,10 +995,8 @@ runif(8,min=-1,max=1) <span style="color: #808080; font-style: italic;"># </span
 </div>
 
 <pre class="example">
-[1] 0.6858972 0.4448939 0.9240899 0.1254211 0.7857660 0.8307911 0.6736203
-[8] 0.6808840
-[1] -0.16649568 -0.30514662  0.77511927  0.15319022  0.06603126  0.62478791
-[7]  0.78681901 -0.90512770
+[1] 0.38751279 0.30222437 0.06829675 0.83015825 0.67550257 0.08425570 0.10768942 0.59537554
+[1]  0.80842313  0.42843902 -0.36962290  0.66995898 -0.22299579  0.05969768 -0.58449364 -0.94449989
 </pre></li>
 
 <li>確率密度関数は関数 <code>dunif()</code> で計算できる</li>
@@ -1012,11 +1005,11 @@ runif(8,min=-1,max=1) <span style="color: #808080; font-style: italic;"># </span
 </section>
 </section>
 <section>
-<section id="slide-org990157a">
-<h2 id="org990157a">正規分布</h2>
+<section id="slide-org065a080">
+<h2 id="org065a080">正規分布</h2>
 </section>
-<section id="slide-orgbdadba4">
-<h3 id="orgbdadba4">正規分布の確率密度関数</h3>
+<section id="slide-orgc544a6b">
+<h3 id="orgc544a6b">正規分布の確率密度関数</h3>
 <ul>
 <li>平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布
 \(N(\mu,\sigma^2)\) <br />
@@ -1037,8 +1030,8 @@ runif(8,min=-1,max=1) <span style="color: #808080; font-style: italic;"># </span
 
 </ul>
 </section>
-<section id="slide-org7d2a0db">
-<h3 id="org7d2a0db">正規分布の特徴付け</h3>
+<section id="slide-org56e3bb9">
+<h3 id="org56e3bb9">正規分布の特徴付け</h3>
 <ul>
 <li>物理実験等の観測誤差の分布はしばしば正規分布でモデル化される</li>
 <li>真の平均を標本平均で推定した際の推定誤差の確率分布は，
@@ -1081,8 +1074,8 @@ runif(8,min=-1,max=1) <span style="color: #808080; font-style: italic;"># </span
 
 </ul>
 </section>
-<section id="slide-orgb53d004">
-<h3 id="orgb53d004">正規分布に従う乱数</h3>
+<section id="slide-org328a3e3">
+<h3 id="org328a3e3">正規分布に従う乱数</h3>
 <ul>
 <li><p>
 乱数の発生は関数 <code>rnorm()</code> を用いる
@@ -1095,10 +1088,8 @@ rnorm(8,mean=1,sd=2) <span style="color: #808080; font-style: italic;"># </span>
 </div>
 
 <pre class="example">
-[1]  0.24847477 -0.72567324  0.58861792 -0.04374116  1.61836117  0.12205113
-[7]  0.04931995  0.01901636
-[1] 3.9634893 2.8658143 0.6406803 1.6842676 1.1882395 4.7266232 0.4541448
-[8] 3.7178549
+[1] -0.71668143  0.89544359  0.48992133  0.51115494  1.88522166 -0.08382194 -0.13133869 -0.11907783
+[1]  5.1155229  1.1670716 -0.5715320  0.1779828  2.1809831  3.5575088  2.8494001  4.2634010
 </pre></li>
 
 <li>確率密度関数は関数 <code>dnorm()</code> で計算できる</li>
@@ -1107,11 +1098,11 @@ rnorm(8,mean=1,sd=2) <span style="color: #808080; font-style: italic;"># </span>
 </section>
 </section>
 <section>
-<section id="slide-org6243983" data-background="#fef4f4">
-<h2 id="org6243983">実習</h2>
+<section id="slide-org85dda5e" data-background="#fef4f4">
+<h2 id="org85dda5e">実習</h2>
 </section>
-<section id="slide-orgf9ac7e2">
-<h3 id="orgf9ac7e2">数値実験の雛形(連続)</h3>
+<section id="slide-orga8b56ce">
+<h3 id="orga8b56ce">数値実験の雛形(連続)</h3>
 <ul>
 <li>人工的に生成した乱数と理論曲線(確率密度)との比較を行う</li>
 <li><p>
@@ -1133,41 +1124,13 @@ replicate(mc, my_random()) |&gt; <span style="color: #808080; font-style: italic
 
 </ul>
 </section>
-<section id="slide-orgeb26af4" data-background="#fef4f4">
-<h3 id="orgeb26af4">練習問題</h3>
-<ul>
-<li>正規分布に関して以下を考察せよ．
-<ul>
-<li><p>
-\(U_{1},U_{2}\) を \((0,1)\) 上の
-一様分布に従う独立な確率変数とする．
-このとき
-</p>
-<div>
-\begin{align}
-  X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
-  X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
-\end{align}
-
-</div>
-<p>
-とおくと，
-\(X_{1},X_{2}\) は独立かつともに標準正規分布に従う．
-これをグラフに描画して確認せよ. <br />
-(この変換を Box-Muller 変換と呼ぶ)
-</p></li>
-
-</ul></li>
-
-</ul>
-</section>
 </section>
 <section>
-<section id="slide-org7cdbe9d">
-<h2 id="org7cdbe9d">ガンマ分布</h2>
+<section id="slide-orgb8edf35">
+<h2 id="orgb8edf35">ガンマ分布</h2>
 </section>
-<section id="slide-org02b9007">
-<h3 id="org02b9007">ガンマ分布の確率密度関数</h3>
+<section id="slide-org30a369a">
+<h3 id="org30a369a">ガンマ分布の確率密度関数</h3>
 <ul>
 <li>パラメータ \(\nu\) , \(\alpha\) のガンマ分布 <br />
 \(\Gamma(\nu,\alpha)\) または \(G(\alpha,\nu)\) 
@@ -1202,8 +1165,8 @@ replicate(mc, my_random()) |&gt; <span style="color: #808080; font-style: italic
 
 </ul>
 </section>
-<section id="slide-orgedc9a5f">
-<h3 id="orgedc9a5f">ガンマ分布の性質</h3>
+<section id="slide-org390d4c4">
+<h3 id="org390d4c4">ガンマ分布の性質</h3>
 <ul>
 <li>\(\nu,\alpha\) はそれぞれ <b>形状パラメータ</b> ， <b>レート</b> と呼ばれることがある</li>
 <li>平均は \(\nu/\alpha\) , 分散は \(\nu/\alpha^2\) で与えられる</li>
@@ -1216,8 +1179,8 @@ replicate(mc, my_random()) |&gt; <span style="color: #808080; font-style: italic
 
 </ul>
 </section>
-<section id="slide-org5b45649">
-<h3 id="org5b45649">ガンマ分布に従う乱数</h3>
+<section id="slide-org83a2d64">
+<h3 id="org83a2d64">ガンマ分布に従う乱数</h3>
 <ul>
 <li><p>
 乱数の発生は <code>rgamma()</code> を用いる
@@ -1230,9 +1193,8 @@ rgamma(8, shape=1, rate=3) <span style="color: #808080; font-style: italic;"># <
 </div>
 
 <pre class="example">
-[1] 1.556503 1.752884 2.981918 2.170430 6.887037 4.407263 1.157782 3.733272
-[1] 0.80726266 0.56563498 0.63007432 0.13429052 0.17420278 0.17147834
-[7] 0.09992692 0.45799397
+[1] 3.4023501 3.6306335 3.6469440 0.5808054 2.7037517 3.3022527 2.0585425 3.1122727
+[1] 0.303475669 0.447978086 0.319710430 0.185434338 0.043713723 0.078426957 0.704110546 0.002177825
 </pre>
 
 
@@ -1243,8 +1205,8 @@ rgamma(8, shape=1, rate=3) <span style="color: #808080; font-style: italic;"># <
 
 </ul>
 </section>
-<section id="slide-orgc6fefd9">
-<h3 id="orgc6fefd9">指数分布の確率密度関数</h3>
+<section id="slide-orgb20e7cf">
+<h3 id="orgb20e7cf">指数分布の確率密度関数</h3>
 <ul>
 <li><p>
 パラメタ \(\lambda\) の指数分布
@@ -1267,8 +1229,8 @@ rgamma(8, shape=1, rate=3) <span style="color: #808080; font-style: italic;"># <
 
 </ul>
 </section>
-<section id="slide-orga6c5877">
-<h3 id="orga6c5877">指数分布に従う乱数</h3>
+<section id="slide-orged53943">
+<h3 id="orged53943">指数分布に従う乱数</h3>
 <ul>
 <li><p>
 乱数の発生は関数 <code>rexp()</code> を用いる
@@ -1281,16 +1243,14 @@ rexp(8, rate=0.5) <span style="color: #808080; font-style: italic;"># </span><sp
 </div>
 
 <pre class="example">
-[1] 0.55103043 0.02320264 0.30259596 1.74271710 3.22426874 1.85554046
-[7] 0.38328545 0.83828602
-[1]  0.8799748  2.4263653  2.7576100  0.9749199  4.8472576 12.8701243
-[7]  0.7204150  2.6989985
+[1] 2.9103513 1.2560190 2.7683087 1.2797876 1.0965795 1.0216147 0.5029382 0.6295330
+[1] 10.8914432  2.4472805  3.3723084  0.3095520  5.1354296  1.4551304  0.8877565  2.9132515
 </pre></li>
 
 </ul>
 </section>
-<section id="slide-orgda77377">
-<h3 id="orgda77377">\(\chi^2\) 分布の確率密度関数</h3>
+<section id="slide-org8955341">
+<h3 id="org8955341">\(\chi^2\) 分布の確率密度関数</h3>
 <ul>
 <li><p>
 自由度 \(k\) の \(\chi^2\) 分布 
@@ -1312,8 +1272,8 @@ rexp(8, rate=0.5) <span style="color: #808080; font-style: italic;"># </span><sp
 
 </ul>
 </section>
-<section id="slide-org5b3d25d">
-<h3 id="org5b3d25d">\(\chi^2\) 分布の平均と分散</h3>
+<section id="slide-org0549bb5">
+<h3 id="org0549bb5">\(\chi^2\) 分布の平均と分散</h3>
 <ul>
 <li><p>
 平均
@@ -1342,8 +1302,8 @@ rexp(8, rate=0.5) <span style="color: #808080; font-style: italic;"># </span><sp
 
 </ul>
 </section>
-<section id="slide-org46d5401">
-<h3 id="org46d5401">\(\chi^2\) 分布の特徴付け</h3>
+<section id="slide-orga644b64">
+<h3 id="orga644b64">\(\chi^2\) 分布の特徴付け</h3>
 <ul>
 <li>\(\chi^2\) は <b>カイ二乗</b> と読む</li>
 <li>標準正規分布に従う \(k\) 個の独立な確率変数の
@@ -1351,8 +1311,8 @@ rexp(8, rate=0.5) <span style="color: #808080; font-style: italic;"># </span><sp
 
 </ul>
 </section>
-<section id="slide-org7535854">
-<h3 id="org7535854">\(\chi^2\) 分布に従う乱数</h3>
+<section id="slide-org21eee1c">
+<h3 id="org21eee1c">\(\chi^2\) 分布に従う乱数</h3>
 <ul>
 <li><p>
 乱数の発生は関数 <code>rchisq()</code> を用いる
@@ -1365,10 +1325,8 @@ rchisq(8, df=4) <span style="color: #808080; font-style: italic;"># </span><span
 </div>
 
 <pre class="example">
-[1] 1.26515548 2.44687981 0.01145818 0.45233265 4.71588029 0.15612976
-[7] 0.09782705 0.13273587
-[1] 0.2207956 2.9783944 9.8995862 9.4639555 2.8162690 2.2372569 3.9737643
-[8] 4.8739706
+[1] 1.5492633 1.0311878 0.5730046 0.3210647 3.4826029 0.3867041 1.4727438 1.8102124
+[1]  4.362031  2.610825  1.600799  2.257753  6.307876  4.290416 10.434826  5.864355
 </pre></li>
 
 <li>確率密度関数は関数 <code>dchisq()</code> で計算できる</li>
@@ -1377,29 +1335,16 @@ rchisq(8, df=4) <span style="color: #808080; font-style: italic;"># </span><span
 </section>
 </section>
 <section>
-<section id="slide-org658e563" data-background="#fef4f4">
-<h2 id="org658e563">実習</h2>
-</section>
-<section id="slide-orga458f5d" data-background="#fef4f4">
-<h3 id="orga458f5d">練習問題</h3>
-<ul>
-<li>\(\chi^2\) 分布に関して以下を考察せよ．
-<ul>
-<li>標準正規分布に従う \(k\) 個の独立な確率変数の
-二乗和は自由度 \(k\) の \(\chi^2\) 分布に従うことを
-確認しなさい．</li>
-
-</ul></li>
-
-</ul>
+<section id="slide-orgb28fd29" data-background="#fef4f4">
+<h2 id="orgb28fd29">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org7cdc47d">
-<h2 id="org7cdc47d">\(t\) 分布</h2>
+<section id="slide-orgf5d80cb">
+<h2 id="orgf5d80cb">\(t\) 分布</h2>
 </section>
-<section id="slide-org2ed177e">
-<h3 id="org2ed177e">\(t\) 分布の確率密度関数</h3>
+<section id="slide-orgc22c1b8">
+<h3 id="orgc22c1b8">\(t\) 分布の確率密度関数</h3>
 <ul>
 <li>自由度 \(\nu\) の(Studentの) \(t\) 分布
 \(t(\nu)\) (\(\nu > 0\))</li>
@@ -1424,8 +1369,8 @@ rchisq(8, df=4) <span style="color: #808080; font-style: italic;"># </span><span
 
 </ul>
 </section>
-<section id="slide-orga0fd752">
-<h3 id="orga0fd752">\(t\) 分布の平均と分散</h3>
+<section id="slide-org2e702a8">
+<h3 id="org2e702a8">\(t\) 分布の平均と分散</h3>
 <ul>
 <li><p>
 平均
@@ -1454,8 +1399,8 @@ rchisq(8, df=4) <span style="color: #808080; font-style: italic;"># </span><span
 
 </ul>
 </section>
-<section id="slide-org44367ca">
-<h3 id="org44367ca">\(t\) 分布の特徴付け</h3>
+<section id="slide-org347f7e0">
+<h3 id="org347f7e0">\(t\) 分布の特徴付け</h3>
 <ul>
 <li><p>
 \(Z\) を標準正規分布に従う確率変数，
@@ -1477,8 +1422,8 @@ rchisq(8, df=4) <span style="color: #808080; font-style: italic;"># </span><span
 
 </ul>
 </section>
-<section id="slide-orgc11047e">
-<h3 id="orgc11047e">\(t\) 分布に従う乱数</h3>
+<section id="slide-org37e7b9b">
+<h3 id="org37e7b9b">\(t\) 分布に従う乱数</h3>
 <ul>
 <li><p>
 乱数の発生は関数 <code>rt()</code> を用いる
@@ -1491,10 +1436,8 @@ rt(8, df=4) <span style="color: #808080; font-style: italic;"># </span><span sty
 </div>
 
 <pre class="example">
-[1]   0.5460034   3.1623973 -77.0591449  -0.1327108   3.7171055  -0.5221049
-[7]   0.3312527  -7.5303656
-[1] -0.14409493  0.40417799  0.09412785  2.63094995  0.15467757  0.18457793
-[7]  1.05106218  0.24335396
+[1] -2.12345176  0.46531542 -0.97734393 -0.25526606 -6.80959537 -0.09021367 -0.07124738 -0.46400280
+[1] -0.1815505  1.4009682 -0.5463940  1.0056205 -0.2851987 -0.3052288 -0.3566465 -1.9048051
 </pre>
 
 
@@ -1507,43 +1450,16 @@ rt(8, df=4) <span style="color: #808080; font-style: italic;"># </span><span sty
 </section>
 </section>
 <section>
-<section id="slide-org3cfe1d4" data-background="#fef4f4">
-<h2 id="org3cfe1d4">実習</h2>
-</section>
-<section id="slide-orge3e207e" data-background="#fef4f4">
-<h3 id="orge3e207e">練習問題</h3>
-<ul>
-<li>\(t\) 分布に関して以下を考察せよ．
-<ul>
-<li><p>
-\(Z\) を標準正規分布に従う確率変数，
-\(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
-\(Z,Y\) は独立であるとする．
-このとき確率変数
-</p>
-<blockquote>
-<div>
-\begin{equation}
-  \frac{Z}{\sqrt{Y/k}}
-\end{equation}
-
-</div>
-</blockquote>
-<p>
-は自由度 \(k\) の \(t\) 分布に従うことを確認しなさい．
-</p></li>
-
-</ul></li>
-
-</ul>
+<section id="slide-orgd6c1b1f" data-background="#fef4f4">
+<h2 id="orgd6c1b1f">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org5a7ce05">
-<h2 id="org5a7ce05">\(F\) 分布</h2>
+<section id="slide-orgf6601d3">
+<h2 id="orgf6601d3">\(F\) 分布</h2>
 </section>
-<section id="slide-org86c0d0f">
-<h3 id="org86c0d0f">\(F\) 分布の確率密度関数</h3>
+<section id="slide-orgedef6d5">
+<h3 id="orgedef6d5">\(F\) 分布の確率密度関数</h3>
 <ul>
 <li>自由度 \(\nu_{1},\nu_{2}\) の \(F\) 分布
 \(F(\nu_{1},\nu_{2})\) (\(\nu_{1} > 0, \nu_{2} > 0\))</li>
@@ -1566,8 +1482,8 @@ rt(8, df=4) <span style="color: #808080; font-style: italic;"># </span><span sty
 
 </ul>
 </section>
-<section id="slide-org20bbc06">
-<h3 id="org20bbc06">\(F\) 分布の平均と分散</h3>
+<section id="slide-orgeeeb285">
+<h3 id="orgeeeb285">\(F\) 分布の平均と分散</h3>
 <ul>
 <li><p>
 平均
@@ -1597,8 +1513,8 @@ rt(8, df=4) <span style="color: #808080; font-style: italic;"># </span><span sty
 
 </ul>
 </section>
-<section id="slide-org443154e">
-<h3 id="org443154e">\(F\) 分布の特徴付け</h3>
+<section id="slide-orgdc672b5">
+<h3 id="orgdc672b5">\(F\) 分布の特徴付け</h3>
 <ul>
 <li><p>
 \(Y_{1},Y_{2}\) をそれぞれ自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う独立な
@@ -1618,8 +1534,8 @@ rt(8, df=4) <span style="color: #808080; font-style: italic;"># </span><span sty
 
 </ul>
 </section>
-<section id="slide-org5cf7716">
-<h3 id="org5cf7716">\(F\) 分布に従う乱数</h3>
+<section id="slide-orge77f066">
+<h3 id="orge77f066">\(F\) 分布に従う乱数</h3>
 <ul>
 <li><p>
 乱数の発生は関数 <code>rf()</code> を用いる
@@ -1632,10 +1548,8 @@ rf(10, df1=7, df2=12) <span style="color: #808080; font-style: italic;"># </span
 </div>
 
 <pre class="example">
- [1] 4.5865906 2.1940175 0.2762171 3.8015202 2.7687916 1.2361011 0.4982993
- [8] 3.5938750 0.5563339 0.5265066
-[1] 1.0522769 0.5380872 0.5995419 0.9979992 2.4028943 0.2177330 0.2627006
- [8] 0.7520232 1.4257293 3.0048758
+ [1] 1.4744266 1.1737716 5.0728849 0.1858272 4.4003451 0.1615950 4.2237953 0.2048677 0.8943012 1.9694392
+[1] 0.8065490 1.1430727 0.9565232 0.7488964 0.6905875 0.6047086 0.8542193 1.8349279 0.4946922 0.3944779
 </pre>
 
 
@@ -1648,36 +1562,11 @@ rf(10, df1=7, df2=12) <span style="color: #808080; font-style: italic;"># </span
 </section>
 </section>
 <section>
-<section id="slide-org1e59940" data-background="#fef4f4">
-<h2 id="org1e59940">実習</h2>
+<section id="slide-orgdf70cea" data-background="#fef4f4">
+<h2 id="orgdf70cea">実習</h2>
 </section>
-<section id="slide-org71897b0" data-background="#fef4f4">
-<h3 id="org71897b0">練習問題</h3>
-<ul>
-<li>\(F\) 分布に関して以下を考察せよ．
-<ul>
-<li><p>
-\(Y_{1},Y_{2}\) をそれぞれ
-自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う
-独立な確率変数とする．
-このとき, 確率変数
-</p>
-<div>
-\begin{equation}
-  \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
-\end{equation}
-
-</div>
-<p>
-は自由度 \(k_{1},k_{2}\) の \(F\) 分布に従うことを確認しなさい．
-</p></li>
-
-</ul></li>
-
-</ul>
-</section>
-<section id="slide-orgc341f19">
-<h3 id="orgc341f19">参考</h3>
+<section id="slide-org86c3e03">
+<h3 id="org86c3e03">参考</h3>
 <ul>
 <li>練習用に興味のあるデータを収集しておくと良い
 <ul>
@@ -1698,8 +1587,8 @@ rf(10, df1=7, df2=12) <span style="color: #808080; font-style: italic;"># </span
 </section>
 </section>
 <section>
-<section id="slide-org29e32e3">
-<h2 id="org29e32e3">次回の予定</h2>
+<section id="slide-orge85bd79">
+<h2 id="orge85bd79">次回の予定</h2>
 <ul>
 <li>基本的な記述統計量</li>
 <li>&ldquo;モーメント&rdquo;に基づく記述統計量
@@ -1712,15 +1601,19 @@ rf(10, df1=7, df2=12) <span style="color: #808080; font-style: italic;"># </span
 <li>&ldquo;頻度&rdquo;に基づく統計量</li>
 
 </ul>
+</section>
+</section>
 </div>
 </div>
+<p> Created by Noboru Murata | Licensed under CC BY-NC 4.0 </p>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/menu/menu.js"></script>
-<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
 <script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
@@ -1729,30 +1622,44 @@ Reveal.initialize({
 
 controls: true,
 progress: true,
-history: true,
+history: false,
 center: true,
 slideNumber: 'c',
-rollingLinks: false,
+rollingLinks: true,
 keyboard: true,
 mouseWheel: false,
-fragmentInURL: true,
+fragmentInURL: false,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
 overview: true,
+width: 1050,
+height: 700,
+margin: 0.10,
+minScale: 0.75,
+maxScale: 1.25,
 
 transition: 'fade',
 transitionSpeed: 'default',
 showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
-spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
+'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
 ]
 
 });
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
 </script>
 </body>
 </html>

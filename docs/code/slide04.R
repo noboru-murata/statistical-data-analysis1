@@ -131,5 +131,5 @@ jp_data |>
   mutate(地方 = as_factor(jp_area[["地方"]]),    # 地方の情報を付加
          人口密度 = 人口/面積,                   # 人口密度を計算
          過密 = 人口密度 >= median(人口密度)) |> # 人口密度が中央値以上
-  group_by(地方, 過密) |>                      # 地方ごとにグループ化
-  summarize((across(人口:面積, sum)))          # グループごとに集計
+  group_by(地方, 過密) |>                        # 地方ごとにグループ化
+  summarize((across(人口:面積, sum)))            # グループごとに集計

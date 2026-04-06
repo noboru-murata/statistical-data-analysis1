@@ -4,9 +4,9 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2025-05-09 16:20:07 mura>
+# Time-stamp: <2026-04-06 17:19:30 mura>
 :REVEAL:
-#+SETUPFILE: "./reveal.js/local/mycourse.org"
+#+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
 # <m C-i でlatex block (math env用)
 # C-c '
@@ -15,6 +15,7 @@
 * COMMENT メモ
 - シミュレーション例として epdemic を追加(説明はなし)
 - mc-xxx.r は若干修正 (図の書き方は考えてもよい)
+
 
 * 講義の内容
 :PROPERTIES:
@@ -197,7 +198,7 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-** 練習問題
+** COMMENT 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :ID:       9591DAC4-F181-4367-B4DF-8D1E5F314E21
@@ -588,10 +589,8 @@
 - 少数の法則
 
 
-* Footnotes
+* Footnotes                                                          :ignore:
 * COMMENT ローカル変数
 # Local Variables:
 # org-latex-listings: minted
 # End:
-   
-   

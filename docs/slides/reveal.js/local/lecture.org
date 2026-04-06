@@ -1,0 +1,157 @@
+# -*- eval: (visual-line-mode) -*-
+
+# Designed by Noboru Murata (noboru.murata@gmail.com)
+
+# -----
+
+# Based on Jens Lechtenbörger's org/config.org
+# original license identifiers are:
+# SPDX-FileCopyrightText: 2017-2024 Jens Lechtenbörger
+# SPDX-License-Identifier: CC-BY-SA-4.0
+
+#+OPTIONS: date:t H:4 num:nil toc:nil \n:nil
+#+OPTIONS: @:t ::t |:t ^:t -:t f:t *:t TeX:t LaTeX:t ':t
+#+OPTIONS: skip:nil d:nil todo:t pri:nil tags:not-in-toc
+
+# -----
+
+# presentation size
+# #+OPTIONS: reveal_width:960 reveal_height:700
+#+OPTIONS: reveal_width:1050 reveal_height:700
+# #+OPTIONS: reveal_width:1152 reveal_height:720
+# #+OPTIONS: reveal_width:1400 reveal_height:1000
+# #+OPTIONS: reveal_width:1920 reveal_height:1200
+
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_klipsify_src:t
+#+OPTIONS: reveal_pdfseparatefragments:nil
+# #+OPTIONS: reveal_fragmentinurl:t
+# #+OPTIONS: reveal_mousewheel:nil
+# #+OPTIONS: reveal_inter_presentation_links:t
+
+#+REVEAL_ROOT: ./reveal.js
+#+REVEAL_MIN_SCALE: 0.75
+#+REVEAL_MAX_SCALE: 1.25
+#+REVEAL_PLUGINS: (notes search zoom)
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_TRANS: fade
+#+REVEAL_THEME: oer-reveal
+#+REVEAL_HLEVEL: 1
+#+REVEAL_POSTAMBLE: <p> Created by Noboru Murata | Licensed under CC BY-NC 4.0 </p>
+#+REVEAL_EXPORT_NOTES_TO_PDF: separate-page
+#+REVEAL_TOC_SLIDE_TITLE: Agenda
+
+# define fonts
+#+REVEAL_EXTRA_CSS: ./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css
+
+# reveal-menu plugins imported from quarto
+#+REVEAL_ADD_PLUGIN: menu RevealMenu plugin/reveal-menu/menu.js plugin/reveal-menu/menu.css plugin/reveal-menu/quarto-menu.css
+#+REVEAL_EXTRA_SCRIPTS: ("./reveal.js/plugin/reveal-menu/quarto-menu.js")
+
+# chalkboard plugins (B/C)
+#+REVEAL_ADD_PLUGIN: chalkboard RevealChalkboard plugin/chalkboard/plugin.js plugin/chalkboard/style.css
+#+REVEAL_EXTRA_CSS: ./reveal.js/plugin/chalkboard/font-awesome/css/all.css 
+
+# pdfexport plugins (E)
+#+REVEAL_ADD_PLUGIN: pdfexport PdfExport plugin/pdf-export/pdfexport.js
+
+# spotlight plugins (Q/Z)
+#+REVEAL_ADD_PLUGIN: spotlight RevealSpotlight plugin/spotlight/spotlight.js
+
+# allow to selectively hide links.
+#+REVEAL_EXTRA_SCRIPTS: ("./reveal.js/dist/theme/hidelinks.js")
+
+# add to reveal initialization
+#+REVEAL_EXTRA_OPTIONS: 'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, }
+
+# custom title slide/css
+#+REVEAL_TITLE_SLIDE: ./reveal.js/local/lecture-title.html
+#+REVEAL_EXTRA_CSS: ./reveal.js/local/lecture.css
+
+# -----
+
+# default bib file.
+#+MACRO: bibliographyfile bibliography:library.bib
+
+# macros to display square brackets (in texts of hyperlinks).
+# Based on: https://emacs.stackexchange.com/questions/7792/can-i-make-links-in-org-mode-that-contain-brackets-or
+# Square Bracket Open [
+#+MACRO: BO @@latex:\char91{}@@@@html:&#91;@@
+# Square Bracket Close ]
+#+MACRO: BC @@latex:\char93{}@@@@html:&#93;@@
+
+# macro for forced line break/newline, e.g., in titles.
+#+MACRO: BR @@latex:\\@@@@html:<br />@@
+
+# macro to generate abbr element in HTML.  If a second argument is given, it
+# defines the title attribute.  For LaTeX, output first attribute as is and
+# ignore second one.
+#+MACRO: abbr (eval (concat "@@latex:" $1 "@@@@html:<abbr" (if (< 0 (length $2)) (concat " title=\"" $2 "\"") "") ">" $1 "</abbr>@@"))
+
+# -----
+
+# setup for PDF generation via LaTeX export
+#+LaTeX_CLASS: scrartcl
+#+LaTeX_CLASS_OPTIONS: [10pt,oneside,fleqn]
+#+LATEX_HEADER: \usepackage[style=plain,list=minted]{myhandout}
+#+LATEX_HEADER: \usepackage[backend=biber,style=alphabetic]{biblatex}
+#+LATEX_HEADER: \addbibresource{library.bib}
+#+LATEX_HEADER: \newenvironment{notes}{\par\footnotesize}{\par}
+#+LATEX_HEADER: \newenvironment{NOTES}{\par\footnotesize}{\par}
+#+LATEX_HEADER: \newenvironment{leftcol}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{rightcol}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{leftcol30}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{leftcol40}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{leftcol60}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{leftcol70}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{rightcol30}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{rightcol40}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{rightcol60}{\relax}{\relax}
+#+LATEX_HEADER: \newenvironment{rightcol70}{\relax}{\relax}
+#+LATEX_HEADER: \definecolor{red}{named}{myDarkRed}
+#+LATEX_HEADER: \definecolor{green}{named}{myDarkGreen}
+#+LATEX_HEADER: \definecolor{blue}{named}{myDarkBlue}
+#+LATEX_HEADER: \definecolor{orange}{named}{myDarkOrange}
+
+# -----
+
+# display code in different colors
+#+MACRO: blackcode (eval (format "@@html:<code><span style=\"color:black; font-size:smaller;\">%s</span></code>@@ @@latex:\\verb|%s|@@" (org-html-encode-plain-text $1) $1))
+#+MACRO: redcode (eval (format "@@html:<code><span style=\"color:darkred; font-size:smaller;\">%s</span></code>@@ @@latex:\\rverb|%s|@@" (org-html-encode-plain-text $1) $1))
+#+MACRO: greencode (eval (format "@@html:<code><span style=\"color:darkgreen; font-size:smaller;\">%s</span></code>@@ @@latex:\\gverb|%s|@@" (org-html-encode-plain-text $1) $1))
+#+MACRO: bluecode (eval (format "@@html:<code><span style=\"color:darkblue; font-size:smaller;\">%s</span></code>@@ @@latex:\\bverb|%s|@@" (org-html-encode-plain-text $1) $1))
+
+# insert an agenda at position of choice  
+# insert the following line where your agenda should appear: #+CALL: insert-agenda()
+#+name: insert-agenda
+#+begin_src emacs-lisp :var agenda-heading="Agenda" :var agenda-heading-depth=1 :var include-depth=1 :results value raw :exports none
+  (concat (make-string agenda-heading-depth ?*)
+          " " agenda-heading "\n"
+          ":PROPERTIES:
+  :UNNUMBERED: notoc
+  :reveal_data_state: no-toc-progress
+  :HTML_HEADLINE_CLASS: no-toc-progress
+  :END:
+  ,#+REVEAL_TOC: headlines "
+          (format "%s\n" include-depth)
+          "#+LATEX: \\renewcommand{\\printtoctitle}[1]{}\n"
+          "#+LATEX: \\tableofcontents\n\n")
+#+end_src
+
+# display images with license information
+#+MACRO: revealimg (eval (oer-reveal-export-attribution $1 $2 $3 $4 $5 $6))
+#+MACRO: reveallicense (eval (oer-reveal-export-attribution $1 nil $2 $3 $4 $5 $6))
+
+# create an image grid
+#+MACRO: revealgrid (eval (oer-reveal-export-image-grid $1 $2 $3 $4 $5 $6 $7 $8))
+
+# -----
+
+# custom setup for R language
+#+PROPERTY: header-args:R :cache yes :session *R*
+#+PROPERTY: header-args:R+ :exports both :results output
+#+PROPERTY: header-args:R+ :width 800 :height 800 :res 100
+#+PROPERTY: header-args:R+ :tangle yes
+
+# -----

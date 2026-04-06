@@ -13,13 +13,40 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/font-awesome/css/all.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+<link rel="stylesheet" href="./reveal.js/local/lecture.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/menu.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
-
-<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
@@ -36,7 +63,7 @@
     <p>第13講 - 変数間の関係を推測する</p>
 </div>
 <div class="keyboard-usage">
-    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+    <p></p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
@@ -45,8 +72,8 @@
 
 </section>
 <section>
-<section id="slide-orgd0e2ab3">
-<h2 id="orgd0e2ab3">講義概要</h2>
+<section id="slide-orge2f882b">
+<h2 id="orge2f882b">講義概要</h2>
 <ul>
 <li>回帰分析</li>
 <li>回帰係数の推定
@@ -66,13 +93,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org3deb0d2">
-<h2 id="org3deb0d2">回帰分析</h2>
-<div class="outline-text-2" id="text-org3deb0d2">
+<section id="slide-orgea266c6">
+<h2 id="orgea266c6">回帰分析</h2>
+<div class="outline-text-2" id="text-orgea266c6">
 </div>
 </section>
-<section id="slide-org54fcc46">
-<h3 id="org54fcc46">回帰分析</h3>
+<section id="slide-org73716ba">
+<h3 id="org73716ba">回帰分析</h3>
 <ul>
 <li>データのある変量をその他の変量を用いて説明・予測するモデル
 (<b>回帰モデル</b>)を構築するための分析法</li>
@@ -95,14 +122,14 @@
 </section>
 <section>
 
-<div id="org02f8178" class="figure">
+<div id="org238c1cf" class="figure">
 <p><img src="figs/r-brainbody.png" alt="r-brainbody.png" height="100%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>脳の重さと体重の関係</p>
 </div>
 </section>
-<section id="slide-org7e473af">
-<h3 id="org7e473af">回帰モデル</h3>
+<section id="slide-org5e3865e">
+<h3 id="org5e3865e">回帰モデル</h3>
 <ul>
 <li>説明変数 : \(X\)</li>
 <li>目的変数 : \(Y\)</li>
@@ -133,13 +160,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgeca6723">
-<h2 id="orgeca6723">回帰係数の点推定</h2>
-<div class="outline-text-2" id="text-orgeca6723">
+<section id="slide-orge1a488e">
+<h2 id="orge1a488e">回帰係数の点推定</h2>
+<div class="outline-text-2" id="text-orge1a488e">
 </div>
 </section>
-<section id="slide-orgefb19c8">
-<h3 id="orgefb19c8">回帰係数の点推定</h3>
+<section id="slide-org43b4761">
+<h3 id="org43b4761">回帰係数の点推定</h3>
 <ul>
 <li><p>
 \(n\) 個の説明変数と目的変数の組 \((X,Y)\) を観測
@@ -171,8 +198,8 @@
 
 </ul>
 </section>
-<section id="slide-org41a093c">
-<h3 id="org41a093c">分析における仮定</h3>
+<section id="slide-org9da73df">
+<h3 id="org9da73df">分析における仮定</h3>
 <ul>
 <li>説明変数 \(X_1,\dotsc,X_n\) は確率変数ではなく <b>確定値</b></li>
 <li>説明変数は一定値ではない <br />
@@ -183,8 +210,8 @@
 
 </ul>
 </section>
-<section id="slide-org45a21ca">
-<h3 id="org45a21ca">最小二乗法</h3>
+<section id="slide-org6e2415d">
+<h3 id="org6e2415d">最小二乗法</h3>
 <ul>
 <li><p>
 係数 \(\alpha,\beta\) の回帰式で説明できない
@@ -273,8 +300,8 @@
 
 </ul>
 </section>
-<section id="slide-orgc18ccf3">
-<h3 id="orgc18ccf3">回帰分析の計算</h3>
+<section id="slide-org8b8fe34">
+<h3 id="org8b8fe34">回帰分析の計算</h3>
 <ul>
 <li><p>
 関数 <code>stats::lm()</code> : 線形モデルを当てはめる
@@ -294,29 +321,18 @@
 </section>
 </section>
 <section>
-<section id="slide-org34705dc" data-background="#fef4f4">
-<h2 id="org34705dc">実習</h2>
-</section>
-<section id="slide-org90f2ffc" data-background="#fef4f4">
-<h3 id="org90f2ffc">練習問題</h3>
-<ul>
-<li>回帰分析におけるモデルの推定量の精度に関する
-確率シミュレーションを考えなさい．</li>
-<li>東京の気象データを用いて，
-必要であれば適当な期間を抽出し，
-日射量から気温を説明する回帰モデルを構成しなさい．</li>
-
-</ul>
+<section id="slide-orgee8a90f" data-background="#fef4f4">
+<h2 id="orgee8a90f">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org4bd6c57">
-<h2 id="org4bd6c57">回帰係数の区間推定</h2>
-<div class="outline-text-2" id="text-org4bd6c57">
+<section id="slide-orgbee9cd0">
+<h2 id="orgbee9cd0">回帰係数の区間推定</h2>
+<div class="outline-text-2" id="text-orgbee9cd0">
 </div>
 </section>
-<section id="slide-orgc5f4310">
-<h3 id="orgc5f4310">誤差項に関する仮定</h3>
+<section id="slide-org1e2961c">
+<h3 id="org1e2961c">誤差項に関する仮定</h3>
 <ul>
 <li>\(\epsilon_i\) は正規分布に従う</li>
 <li>上の仮定より
@@ -339,8 +355,8 @@
 
 </ul>
 </section>
-<section id="slide-org4a4d66e">
-<h3 id="org4a4d66e">誤差分散の推定</h3>
+<section id="slide-org271836f">
+<h3 id="org271836f">誤差分散の推定</h3>
 <ul>
 <li>一般に \(\sigma^2\) は <b>既知でない</b> ためデータから推定
 <ul>
@@ -420,8 +436,8 @@
 
 </ul>
 </section>
-<section id="slide-org89fa13a">
-<h3 id="org89fa13a">回帰係数の性質</h3>
+<section id="slide-org2190830">
+<h3 id="org2190830">回帰係数の性質</h3>
 <ul>
 <li><p>
 \(\hat{\alpha},\hat{\beta}\) の分散の推定量 (資料; Gauss-Markovの定理)
@@ -456,8 +472,8 @@
 
 </ul>
 </section>
-<section id="slide-orga620211">
-<h3 id="orga620211">回帰係数の区間推定</h3>
+<section id="slide-org48bacc7">
+<h3 id="org48bacc7">回帰係数の区間推定</h3>
 <ul>
 <li><p>
 以下の確率変数は自由度 \(n{-}2\) の \(t\) 分布に従う
@@ -489,8 +505,8 @@
 
 </ul>
 </section>
-<section id="slide-orge75eaf8">
-<h3 id="orge75eaf8">区間推定の計算</h3>
+<section id="slide-org20e2619">
+<h3 id="org20e2619">区間推定の計算</h3>
 <ul>
 <li><p>
 関数 <code>confint()</code> : 係数の信頼区間を求める
@@ -516,13 +532,13 @@
 <div class="org-src-container">
 
 <pre class="src src-R">predict(object, newdata, se.fit = <span style="color: #00aa80;">FALSE</span>, scale = <span style="color: #00aa80;">NULL</span>, df = <span style="color: #00aa80;">Inf</span>,
-    interval = c(<span style="color: #d08928;">"none"</span>, <span style="color: #d08928;">"confidence"</span>, <span style="color: #d08928;">"prediction"</span>),
-    level = 0.95, type = c(<span style="color: #d08928;">"response"</span>, <span style="color: #d08928;">"terms"</span>),
-    terms = <span style="color: #00aa80;">NULL</span>, na.action = na.pass,
-    pred.var = res.var/weights, weights = 1,
-    rankdeficient = c(<span style="color: #d08928;">"warnif"</span>, <span style="color: #d08928;">"simple"</span>, <span style="color: #d08928;">"non-estim"</span>, <span style="color: #d08928;">"NA"</span>, <span style="color: #d08928;">"NAwarn"</span>),
-    tol = 1e-6, verbose = <span style="color: #00aa80;">FALSE</span>,
-    ...)
+        interval = c(<span style="color: #d08928;">"none"</span>, <span style="color: #d08928;">"confidence"</span>, <span style="color: #d08928;">"prediction"</span>),
+        level = 0.95, type = c(<span style="color: #d08928;">"response"</span>, <span style="color: #d08928;">"terms"</span>),
+        terms = <span style="color: #00aa80;">NULL</span>, na.action = na.pass,
+        pred.var = res.var/weights, weights = 1,
+        rankdeficient = c(<span style="color: #d08928;">"warnif"</span>, <span style="color: #d08928;">"simple"</span>, <span style="color: #d08928;">"non-estim"</span>, <span style="color: #d08928;">"NA"</span>, <span style="color: #d08928;">"NAwarn"</span>),
+        tol = 1e-6, verbose = <span style="color: #00aa80;">FALSE</span>,
+        ...)
 <span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> object: &#38306;&#25968; lm &#12391;&#25512;&#23450;&#12375;&#12383;&#12514;&#12487;&#12523;</span>
 <span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> newdata: &#20104;&#28204;&#20516;&#12434;&#35336;&#31639;&#12377;&#12427;&#35500;&#26126;&#22793;&#25968;</span>
 <span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> interval: &#20309;&#12418;&#20184;&#12369;&#12394;&#12356;(none)&#12539;&#20449;&#38972;&#21306;&#38291;(confidence)&#12539;&#20104;&#28204;&#21306;&#38291;(prediction)</span>
@@ -562,26 +578,18 @@
 </section>
 </section>
 <section>
-<section id="slide-orga89b507" data-background="#fef4f4">
-<h2 id="orga89b507">実習</h2>
-</section>
-<section id="slide-orgf80d9d7" data-background="#fef4f4">
-<h3 id="orgf80d9d7">練習問題</h3>
-<ul>
-<li>前問で作成した回帰モデルについて
-区間推定を行いなさい．</li>
-
-</ul>
+<section id="slide-orgad22224" data-background="#fef4f4">
+<h2 id="orgad22224">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org05ace04">
-<h2 id="org05ace04">回帰係数の有意性検定</h2>
-<div class="outline-text-2" id="text-org05ace04">
+<section id="slide-org3d8a194">
+<h2 id="org3d8a194">回帰係数の有意性検定</h2>
+<div class="outline-text-2" id="text-org3d8a194">
 </div>
 </section>
-<section id="slide-org2474daa">
-<h3 id="org2474daa">回帰係数の有意性</h3>
+<section id="slide-orgea698fd">
+<h3 id="orgea698fd">回帰係数の有意性</h3>
 <ul>
 <li><p>
 説明変数 \(X\) が目的変数 \(Y\) を説明・予測するのに本当に役立っているかを検証
@@ -606,8 +614,8 @@
 
 </ul>
 </section>
-<section id="slide-org09b3918">
-<h3 id="org09b3918">回帰係数の有意性検定</h3>
+<section id="slide-orgbbc83f0">
+<h3 id="orgbbc83f0">回帰係数の有意性検定</h3>
 <ul>
 <li><p>
 帰無仮説 \(H_0\) が正しければ以下の統計量
@@ -663,8 +671,8 @@
 
 </ul>
 </section>
-<section id="slide-org3e2c64d">
-<h3 id="org3e2c64d">係数の検定</h3>
+<section id="slide-org8625c68">
+<h3 id="org8625c68">係数の検定</h3>
 <ul>
 <li><p>
 関数 <code>stat::summary()</code> : 情報の要約 (base R)
@@ -713,26 +721,18 @@
 </section>
 </section>
 <section>
-<section id="slide-org5728d5e" data-background="#fef4f4">
-<h2 id="org5728d5e">実習</h2>
-</section>
-<section id="slide-org12a4cdd" data-background="#fef4f4">
-<h3 id="org12a4cdd">練習問題</h3>
-<ul>
-<li>前問で作成した回帰モデルについて
-係数の検定を行いなさい．</li>
-
-</ul>
+<section id="slide-org403981f" data-background="#fef4f4">
+<h2 id="org403981f">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org1781999">
-<h2 id="org1781999">決定係数</h2>
-<div class="outline-text-2" id="text-org1781999">
+<section id="slide-org11b2523">
+<h2 id="org11b2523">決定係数</h2>
+<div class="outline-text-2" id="text-org11b2523">
 </div>
 </section>
-<section id="slide-org8643abb">
-<h3 id="org8643abb">決定係数</h3>
+<section id="slide-org3a3e748">
+<h3 id="org3a3e748">決定係数</h3>
 <ul>
 <li>\(X\) が \(Y\) の変動をどの程度説明できるかを数量化</li>
 <li><p>
@@ -814,8 +814,8 @@
 
 </ul>
 </section>
-<section id="slide-orga5db2c9">
-<h3 id="orga5db2c9">決定係数の別表現</h3>
+<section id="slide-orgc79ea9d">
+<h3 id="orgc79ea9d">決定係数の別表現</h3>
 <ul>
 <li>\(R^2\) は以下のように書き直すことも可能
 <ul>
@@ -858,8 +858,8 @@
 
 </ul>
 </section>
-<section id="slide-org40bb28c">
-<h3 id="org40bb28c">自由度調整済み決定係数</h3>
+<section id="slide-orgf1365df">
+<h3 id="orgf1365df">自由度調整済み決定係数</h3>
 <ul>
 <li>不偏分散による \(R^2\) の修正
 <ul>
@@ -892,8 +892,8 @@
 
 </ul>
 </section>
-<section id="slide-orga317ba0">
-<h3 id="orga317ba0">決定係数の計算</h3>
+<section id="slide-org92fe0eb">
+<h3 id="org92fe0eb">決定係数の計算</h3>
 <ul>
 <li><p>
 関数 <code>stat::summary()</code> : 情報の要約 (base R)
@@ -942,27 +942,21 @@
 </section>
 </section>
 <section>
-<section id="slide-org40dd11c" data-background="#fef4f4">
-<h2 id="org40dd11c">演習</h2>
+<section id="slide-orga2cff35" data-background="#fef4f4">
+<h2 id="orga2cff35">演習</h2>
 </section>
-<section id="slide-org756b1a1" data-background="#fef4f4">
-<h3 id="org756b1a1">練習問題</h3>
-<ul>
-<li>前問で作成した回帰モデルについて
-決定係数を確認しなさい．</li>
-<li>説明変数として降水量を用いた回帰モデルについて
-検討しなさい．</li>
-
-</ul>
+</section>
 </div>
 </div>
+<p> Created by Noboru Murata | Licensed under CC BY-NC 4.0 </p>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/menu/menu.js"></script>
-<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
 <script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
@@ -971,30 +965,44 @@ Reveal.initialize({
 
 controls: true,
 progress: true,
-history: true,
+history: false,
 center: true,
 slideNumber: 'c',
-rollingLinks: false,
+rollingLinks: true,
 keyboard: true,
 mouseWheel: false,
-fragmentInURL: true,
+fragmentInURL: false,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
 overview: true,
+width: 1050,
+height: 700,
+margin: 0.10,
+minScale: 0.75,
+maxScale: 1.25,
 
 transition: 'fade',
 transitionSpeed: 'default',
 showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
-spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
+'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
 ]
 
 });
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
 </script>
 </body>
 </html>

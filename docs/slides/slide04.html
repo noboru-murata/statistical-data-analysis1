@@ -13,13 +13,40 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/font-awesome/css/all.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+<link rel="stylesheet" href="./reveal.js/local/lecture.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/menu.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
-
-<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
 </head>
 <body>
 <div class="reveal">
@@ -35,7 +62,7 @@
     <p>第4講 - データフレームのより進んだ操作</p>
 </div>
 <div class="keyboard-usage">
-    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+    <p></p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
@@ -44,8 +71,8 @@
 
 </section>
 <section>
-<section id="slide-org3dc1f46">
-<h2 id="org3dc1f46">講義概要</h2>
+<section id="slide-org18b11cd">
+<h2 id="org18b11cd">講義概要</h2>
 <ul>
 <li>データフレームの操作</li>
 <li>ファイルの取り扱い</li>
@@ -55,13 +82,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org1c952f3">
-<h2 id="org1c952f3">データフレームの操作</h2>
-<div class="outline-text-2" id="text-org1c952f3">
+<section id="slide-org7911597">
+<h2 id="org7911597">データフレームの操作</h2>
+<div class="outline-text-2" id="text-org7911597">
 </div>
 </section>
-<section id="slide-orgd6f2c68">
-<h3 id="orgd6f2c68">データ構造</h3>
+<section id="slide-org054e682">
+<h3 id="org054e682">データ構造</h3>
 <ul>
 <li>Rに用意されている基本的なデータ構造
 <ul>
@@ -79,8 +106,8 @@
 
 </ul>
 </section>
-<section id="slide-org9b88a1c">
-<h3 id="org9b88a1c">データフレーム</h3>
+<section id="slide-org542a1cb">
+<h3 id="org542a1cb">データフレーム</h3>
 <ul>
 <li>複数の個体について，いくつかの属性を集計した表
 <ul>
@@ -157,8 +184,8 @@
 
 </ul>
 </section>
-<section id="slide-orgb2146bb">
-<h3 id="orgb2146bb">tidyverse パッケージ</h3>
+<section id="slide-org384ff5e">
+<h3 id="org384ff5e">tidyverse パッケージ</h3>
 <ul>
 <li>データ操作とグラフィクスの拡張 (再掲)
 <ul>
@@ -186,8 +213,8 @@
 
 </ul>
 </section>
-<section id="slide-orgf7cf258">
-<h3 id="orgf7cf258">データ例</h3>
+<section id="slide-orga3c4225">
+<h3 id="orga3c4225">データ例</h3>
 <ul>
 <li><p>
 <b><code>datasets::airquality</code></b>
@@ -243,8 +270,8 @@ tail(aq_df, n = 10)             <span style="color: #808080; font-style: italic;
 
 </ul>
 </section>
-<section id="slide-orgcc9385f">
-<h3 id="orgcc9385f">項目の抽出</h3>
+<section id="slide-org27ba039">
+<h3 id="org27ba039">項目の抽出</h3>
 <ul>
 <li><p>
 添字の番号(行と列)を指定
@@ -279,8 +306,8 @@ aq_tbl$Ozone                                <span style="color: #808080; font-st
 
 </ul>
 </section>
-<section id="slide-org975f1a4">
-<h3 id="org975f1a4">行の選択 (素朴な方法)</h3>
+<section id="slide-orgc812abb">
+<h3 id="orgc812abb">行の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 行番号による指定
@@ -316,8 +343,8 @@ aq_tbl[which(with(aq_tbl, Ozone&gt;100 &amp; Wind&lt;=5)), ]
 
 </ul>
 </section>
-<section id="slide-org6b63d6f">
-<h3 id="org6b63d6f">列の選択 (素朴な方法)</h3>
+<section id="slide-org8b1bc48">
+<h3 id="org8b1bc48">列の選択 (素朴な方法)</h3>
 <ul>
 <li><p>
 列番号による指定
@@ -351,8 +378,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color
 
 </ul>
 </section>
-<section id="slide-org5598b98">
-<h3 id="org5598b98">行の選択</h3>
+<section id="slide-org7d0e0d5">
+<h3 id="org7d0e0d5">行の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::filter()</code> : 条件を指定して行を選択
@@ -377,8 +404,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color
 
 </ul>
 </section>
-<section id="slide-org2272db8">
-<h3 id="org2272db8">列の選択</h3>
+<section id="slide-org39cdb69">
+<h3 id="org39cdb69">列の選択</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::select()</code> : 条件を指定して列を選択
@@ -402,8 +429,8 @@ aq_tbl[which(with(aq_tbl, Ozone &gt; 100 &amp; Wind &lt;= 5)),<span style="color
 
 </ul>
 </section>
-<section id="slide-org6d949c1">
-<h3 id="org6d949c1">パイプ演算子</h3>
+<section id="slide-org9088c5f">
+<h3 id="org9088c5f">パイプ演算子</h3>
 <ul>
 <li>処理を順次結合する演算子 (いくつか定義がある)
 <ul>
@@ -430,34 +457,18 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 </section>
 </section>
 <section>
-<section id="slide-org5e746f0" data-background="#fef4f4">
-<h2 id="org5e746f0">実習</h2>
-</section>
-<section id="slide-org96b6e34" data-background="#fef4f4">
-<h3 id="org96b6e34">練習問題</h3>
-<ul>
-<li><code>datasets::airquality</code> に対して
-以下の条件を満たすデータを取り出しなさい．
-<ul>
-<li>7月のオゾン濃度 (<code>Ozone</code>)</li>
-<li>風速 (<code>Wind</code>) が時速10マイル以上で，
-かつ気温 (<code>Temp</code>) が華氏80度以上の日のデータ</li>
-<li>オゾン (<code>Ozone</code>) も日射量 (<code>Solar.R</code>) も
-欠測 (<code>NA</code>) でないデータの月 (<code>Month</code>) と日 (<code>Day</code>)</li>
-
-</ul></li>
-
-</ul>
+<section id="slide-org9055967" data-background="#fef4f4">
+<h2 id="org9055967">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org188bd9b">
-<h2 id="org188bd9b">ファイルの取り扱い</h2>
-<div class="outline-text-2" id="text-org188bd9b">
+<section id="slide-org3a3cd75">
+<h2 id="org3a3cd75">ファイルの取り扱い</h2>
+<div class="outline-text-2" id="text-org3a3cd75">
 </div>
 </section>
-<section id="slide-org0918ba5">
-<h3 id="org0918ba5">データファイルの読み書き</h3>
+<section id="slide-orga67d92e">
+<h3 id="orga67d92e">データファイルの読み書き</h3>
 <ul>
 <li>実際の解析においては以下の操作が必要
 <ul>
@@ -476,8 +487,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 
 </ul>
 </section>
-<section id="slide-orgb204175">
-<h3 id="orgb204175">作業ディレクトリ</h3>
+<section id="slide-orgea46283">
+<h3 id="orgea46283">作業ディレクトリ</h3>
 <ul>
 <li>Rの処理は <b>作業ディレクトリ</b> で実行される
 <ul>
@@ -507,8 +518,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 
 </ul>
 </section>
-<section id="slide-org694a2ca">
-<h3 id="org694a2ca">作業ディレクトリの操作</h3>
+<section id="slide-org5db3fab">
+<h3 id="org5db3fab">作業ディレクトリの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::getwd()</code> : 作業ディレクトリの確認
@@ -537,8 +548,8 @@ aq_tbl |&gt; filter(Ozone &gt; 120 | Wind &lt;= 3) |&gt; select(!Temp)
 
 </ul>
 </section>
-<section id="slide-org12c6ff1">
-<h3 id="org12c6ff1">CSV ファイルの操作</h3>
+<section id="slide-org8c62208">
+<h3 id="org8c62208">CSV ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>readr::write_csv()</code> : ファイルの書き出し
@@ -598,8 +609,8 @@ dim(new_data) <span style="color: #808080; font-style: italic;"># </span><span s
 
 </ul>
 </section>
-<section id="slide-orgca634ce">
-<h3 id="orgca634ce">RData ファイルの操作</h3>
+<section id="slide-org811af3c">
+<h3 id="org811af3c">RData ファイルの操作</h3>
 <ul>
 <li><p>
 関数 <code>base::save()</code> : ファイルの書き出し
@@ -665,63 +676,18 @@ my_data_2
 </section>
 </section>
 <section>
-<section id="slide-orgebc37c9" data-background="#fef4f4">
-<h2 id="orgebc37c9">実習</h2>
-</section>
-<section id="slide-org0367b30" data-background="#fef4f4">
-<h3 id="org0367b30">練習問題</h3>
-<ul>
-<li><p>
-以下のデータを読み込んで操作してみよう
-</p>
-<blockquote>
-<ul>
-<li>データファイル (文字コード : utf8)
-<ul>
-<li>jpdata1.csv : 県別の対象データ</li>
-<li>jpdata2.csv : 対象データの内容説明</li>
-<li>jpdata3.csv : 県と地域の対応関係</li>
-
-</ul></li>
-<li><a href="https://www.e-stat.go.jp">https://www.e-stat.go.jp</a> より取得したデータ<br />
-(地域から探す / 全県を選択 / 項目を選択してダウンロード)</li>
-
-</ul>
-</blockquote>
-<ul>
-<li><p>
-作業ディレクトリの data 内に置いて読み込む
-</p>
-<div class="org-src-container">
-
-<pre class="src src-R">jp_data <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata1.csv"</span>)
-jp_item <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata2.csv"</span>)
-jp_area <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata3.csv"</span>)
-</pre>
-</div></li>
-<li><p>
-日本語に問題がある場合は英語版を読み込む
-</p>
-<div class="org-src-container">
-
-<pre class="src src-R">jp_data_en <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata1-en.csv"</span>)
-jp_area_en <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span style="color: #d08928;">"data/jpdata3-en.csv"</span>)
-</pre>
-</div></li>
-
-</ul></li>
-
-</ul>
+<section id="slide-org0df2413" data-background="#fef4f4">
+<h2 id="org0df2413">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org0b197c8">
-<h2 id="org0b197c8">データの集計</h2>
-<div class="outline-text-2" id="text-org0b197c8">
+<section id="slide-org0a43289">
+<h2 id="org0a43289">データの集計</h2>
+<div class="outline-text-2" id="text-org0a43289">
 </div>
 </section>
-<section id="slide-org4da7433">
-<h3 id="org4da7433">統計量の計算</h3>
+<section id="slide-orgb6b01cb">
+<h3 id="orgb6b01cb">統計量の計算</h3>
 <ul>
 <li>データを集約した値 = 統計量
 <ul>
@@ -737,8 +703,8 @@ jp_area_en <span style="color: #60aa00;">&lt;-</span> read_csv(file = <span styl
 
 </ul>
 </section>
-<section id="slide-org6fd2190">
-<h3 id="org6fd2190">集約のための関数の使い方</h3>
+<section id="slide-orge5453f9">
+<h3 id="orge5453f9">集約のための関数の使い方</h3>
 <ul>
 <li><p>
 <span style="color:green;">データの集計の例</span>
@@ -766,8 +732,8 @@ jp_data |&gt; select(<span style="color: #d08928;">"&#32769;&#20154;"</span>) |&
 
 </ul>
 </section>
-<section id="slide-org4016668">
-<h3 id="org4016668">列ごとの集約</h3>
+<section id="slide-org2697d94">
+<h3 id="org2697d94">列ごとの集約</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::summarise()</code> : 列ごとに計算する
@@ -796,8 +762,8 @@ jp_data |&gt; summarise(across(where(is.double), min))       <span style="color:
 
 </ul>
 </section>
-<section id="slide-orgf3b8bbb">
-<h3 id="orgf3b8bbb">グループごとの操作</h3>
+<section id="slide-org64163f3">
+<h3 id="org64163f3">グループごとの操作</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::group_by()</code> : グループ化を行う
@@ -829,37 +795,13 @@ jp_data |&gt;
 </section>
 </section>
 <section>
-<section id="slide-orgebf7820" data-background="#fef4f4">
-<h2 id="orgebf7820">実習</h2>
-</section>
-<section id="slide-org3bbdc03" data-background="#fef4f4">
-<h3 id="org3bbdc03">練習問題</h3>
-<ul>
-<li>サンプルデータ (<code>jpdata</code>) の整理をしてみよう．
-<ul>
-<li>県別の人口密度を求めよ．</li>
-<li>地方別の人口密度を求めよ．
-<ul>
-<li>県ごとに人口が異なるので単純に人口密度を平均してはいけない．</li>
-
-</ul></li>
-<li>地方別の1000人当たりの婚姻・離婚数を概算せよ．
-<ul>
-<li>データの記述では「人口1000人当たり」とあるが，
-この「人口」とは若年層は婚姻不可として除いた
-「婚姻可能な人口1000人当たり」
-と考えて計算しなさい．</li>
-
-</ul></li>
-
-</ul></li>
-
-</ul>
+<section id="slide-orgc85d0b6" data-background="#fef4f4">
+<h2 id="orgc85d0b6">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgfe32da2">
-<h2 id="orgfe32da2">次回の予定</h2>
+<section id="slide-orgfa7fcef">
+<h2 id="orgfa7fcef">次回の予定</h2>
 <ul>
 <li>可視化の重要性</li>
 <li>基本的な描画</li>
@@ -868,15 +810,19 @@ jp_data |&gt;
 <li>多次元データの視覚化</li>
 
 </ul>
+</section>
+</section>
 </div>
 </div>
+<p> Created by Noboru Murata | Licensed under CC BY-NC 4.0 </p>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/menu/menu.js"></script>
-<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
 <script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
@@ -885,30 +831,44 @@ Reveal.initialize({
 
 controls: true,
 progress: true,
-history: true,
+history: false,
 center: true,
 slideNumber: 'c',
-rollingLinks: false,
+rollingLinks: true,
 keyboard: true,
 mouseWheel: false,
-fragmentInURL: true,
+fragmentInURL: false,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
 overview: true,
+width: 1050,
+height: 700,
+margin: 0.10,
+minScale: 0.75,
+maxScale: 1.25,
 
 transition: 'fade',
 transitionSpeed: 'default',
 showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
-spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
+'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
 ]
 
 });
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
 </script>
 </body>
 </html>

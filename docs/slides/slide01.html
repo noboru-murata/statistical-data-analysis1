@@ -13,13 +13,40 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/font-awesome/css/all.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+<link rel="stylesheet" href="./reveal.js/local/lecture.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/menu.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
-
-<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
@@ -36,7 +63,7 @@
     <p>第1講 - R言語の仕様とRStudioの使い方</p>
 </div>
 <div class="keyboard-usage">
-    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+    <p></p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
@@ -45,8 +72,8 @@
 
 </section>
 <section>
-<section id="slide-org476b321">
-<h2 id="org476b321">講義概要</h2>
+<section id="slide-org8022bb5">
+<h2 id="org8022bb5">講義概要</h2>
 <ul>
 <li>R言語の概要</li>
 <li>RStudio の UI (ユーザインタフェース)</li>
@@ -57,13 +84,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org7c8ceb7">
-<h2 id="org7c8ceb7">R言語の概要</h2>
-<div class="outline-text-2" id="text-org7c8ceb7">
+<section id="slide-org349c533">
+<h2 id="org349c533">R言語の概要</h2>
+<div class="outline-text-2" id="text-org349c533">
 </div>
 </section>
-<section id="slide-org12f699d">
-<h3 id="org12f699d">R言語とは</h3>
+<section id="slide-org2aaa1eb">
+<h3 id="org2aaa1eb">R言語とは</h3>
 <ul>
 <li>統計計算のための言語と環境の総称</li>
 <li>オープンソース・フリーソフトウェア</li>
@@ -77,8 +104,8 @@
 
 </ul>
 </section>
-<section id="slide-org587e6bb">
-<h3 id="org587e6bb">RStudioとは</h3>
+<section id="slide-org5eb9c16">
+<h3 id="org5eb9c16">RStudioとは</h3>
 <ul>
 <li>Posit Software が開発している統合開発環境 (IDE)
 <ul>
@@ -91,8 +118,8 @@
 
 </ul>
 </section>
-<section id="slide-org0b6a0c2">
-<h3 id="org0b6a0c2">Rの得意分野</h3>
+<section id="slide-org3d36093">
+<h3 id="org3d36093">Rの得意分野</h3>
 <ul>
 <li><b>データの分類・集計・整理</b>
 <ul>
@@ -110,8 +137,8 @@
 
 </ul>
 </section>
-<section id="slide-org3c7af63">
-<h3 id="org3c7af63">データ形式の分類</h3>
+<section id="slide-org3102af0">
+<h3 id="org3102af0">データ形式の分類</h3>
 <ul>
 <li>構造化データ
 <ul>
@@ -131,8 +158,8 @@
 
 </ul>
 </section>
-<section id="slide-orgcc73fab">
-<h3 id="orgcc73fab">参考 : R言語のオンラインコース</h3>
+<section id="slide-org9875165">
+<h3 id="org9875165">参考 : R言語のオンラインコース</h3>
 <ul>
 <li>RStudio の初心者向ガイド <br />
 <a href="https://education.rstudio.com/learn/beginner/">https://education.rstudio.com/learn/beginner/</a></li>
@@ -145,13 +172,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org15e2c44">
-<h2 id="org15e2c44">RStudio の UI</h2>
-<div class="outline-text-2" id="text-org15e2c44">
+<section id="slide-orge62fa97">
+<h2 id="orge62fa97">RStudio の UI</h2>
+<div class="outline-text-2" id="text-orge62fa97">
 </div>
 </section>
-<section id="slide-org3d1a64e">
-<h3 id="org3d1a64e">起動画面</h3>
+<section id="slide-org726dc3f">
+<h3 id="org726dc3f">起動画面</h3>
 <ul>
 <li>以下 <b>RStudio</b> を用いて説明する</li>
 <li>複数の <b>タブ</b> (tab; つまみ) を含む4つの <b>ペイン</b> (pane; 枠) が立ち上がる
@@ -170,8 +197,8 @@
 
 </ul>
 </section>
-<section id="slide-orgc66908b">
-<h3 id="orgc66908b">コンソール (左下ペイン)</h3>
+<section id="slide-orgaa8f20d">
+<h3 id="orgaa8f20d">コンソール (左下ペイン)</h3>
 <ul>
 <li>R言語で記述されたコマンドを入力
 <ul>
@@ -205,8 +232,8 @@ q()
 
 </ul>
 </section>
-<section id="slide-org54e8ecb">
-<h3 id="org54e8ecb">エディタ (左上ペイン)</h3>
+<section id="slide-orge91dac8">
+<h3 id="orge91dac8">エディタ (左上ペイン)</h3>
 <ul>
 <li>コマンドを記述したファイルを操作</li>
 <li>一連のコマンドをまとめたり修正しながら実行
@@ -226,8 +253,8 @@ q()
 
 </ul>
 </section>
-<section id="slide-org5ece31c">
-<h3 id="org5ece31c">ヘルプ (右下ペイン)</h3>
+<section id="slide-org22304d5">
+<h3 id="org22304d5">ヘルプ (右下ペイン)</h3>
 <ul>
 <li>各関数の詳細を記述したヘルプが参照可能
 <ul>
@@ -240,8 +267,8 @@ q()
 
 </ul>
 </section>
-<section id="slide-orga502ed2">
-<h3 id="orga502ed2">パッケージ (右下ペイン)</h3>
+<section id="slide-org2820271">
+<h3 id="org2820271">パッケージ (右下ペイン)</h3>
 <ul>
 <li>パッケージを用いて機能を拡張</li>
 <li>RStudio でのインストール手順
@@ -256,8 +283,8 @@ q()
 
 </ul>
 </section>
-<section id="slide-org148de8d">
-<h3 id="org148de8d">作業ディレクトリ</h3>
+<section id="slide-orgda84bfe">
+<h3 id="orgda84bfe">作業ディレクトリ</h3>
 <ul>
 <li>プログラムが実行されるディレクトリ(フォルダ)</li>
 <li>作業ディレクトリにあるファイルの読み書きはパスを指定する必要がない</li>
@@ -272,8 +299,8 @@ q()
 
 </ul>
 </section>
-<section id="slide-org6019c8b">
-<h3 id="org6019c8b">プロジェクト</h3>
+<section id="slide-org3d1b477">
+<h3 id="org3d1b477">プロジェクト</h3>
 <ul>
 <li>作業環境をまとめて設定・保存する機能
 <ul>
@@ -299,8 +326,8 @@ q()
 
 </ul>
 </section>
-<section id="slide-org35f0cf0">
-<h3 id="org35f0cf0">終了時の注意</h3>
+<section id="slide-org2b3e377">
+<h3 id="org2b3e377">終了時の注意</h3>
 <ul>
 <li><p>
 終了時にコンソールに以下のメッセージが表示される場合がある
@@ -308,7 +335,7 @@ q()
 <div class="org-src-container">
 
 <pre class="src src-R">&gt; q()
-Save workspace image? [y/n/c]:     
+Save workspace image<span style="color: #6c9ef8;">?</span> [y/n/c]:     
 </pre>
 </div></li>
 <li>作業で使った変数などをセーブするか尋ねている
@@ -324,13 +351,13 @@ Save workspace image? [y/n/c]:
 </section>
 </section>
 <section>
-<section id="slide-org300d99c">
-<h2 id="org300d99c">基本的な使い方</h2>
-<div class="outline-text-2" id="text-org300d99c">
+<section id="slide-org860b1ca">
+<h2 id="org860b1ca">基本的な使い方</h2>
+<div class="outline-text-2" id="text-org860b1ca">
 </div>
 </section>
-<section id="slide-orge41c4dc">
-<h3 id="orge41c4dc">計算をする</h3>
+<section id="slide-orgfca870f">
+<h3 id="orgfca870f">計算をする</h3>
 <ul>
 <li>四則演算や数学関数は直感的な文法で計算可能</li>
 
@@ -392,8 +419,8 @@ Save workspace image? [y/n/c]:
 </tbody>
 </table>
 </section>
-<section id="slide-org621c15d">
-<h3 id="org621c15d">電卓として使う</h3>
+<section id="slide-org6220a69">
+<h3 id="org6220a69">電卓として使う</h3>
 <ul>
 <li><p>
 <span style="color:green;">コンソール上での計算例</span>
@@ -420,8 +447,8 @@ sqrt(2) + abs(-0.6)
 
 </ul>
 </section>
-<section id="slide-org4cd3b45">
-<h3 id="org4cd3b45">エディタから実行する</h3>
+<section id="slide-org627869f">
+<h3 id="org627869f">エディタから実行する</h3>
 <ul>
 <li>新規ファイルの作成 (以下のいずれか)
 <ul>
@@ -450,8 +477,8 @@ sqrt(2) + abs(-0.6)
 
 </ul>
 </section>
-<section id="slide-orgd7dd645">
-<h3 id="orgd7dd645">ファイルを保存する</h3>
+<section id="slide-org7b1205a">
+<h3 id="org7b1205a">ファイルを保存する</h3>
 <ul>
 <li>以下のいずれかで保存することができる
 <ul>
@@ -477,11 +504,11 @@ sqrt(2) + abs(-0.6)
 </section>
 </section>
 <section>
-<section id="slide-org14d4824" data-background="#fef4f4">
-<h2 id="org14d4824">実習</h2>
+<section id="slide-org814c5b5" data-background="#fef4f4">
+<h2 id="org814c5b5">実習</h2>
 </section>
-<section id="slide-org80b492a" data-background="#fef4f4">
-<h3 id="org80b492a">練習問題</h3>
+<section id="slide-org98700b5" data-background="#fef4f4">
+<h3 id="org98700b5">練習問題</h3>
 <p>
 基本的な操作に慣れよう
 </p>
@@ -499,13 +526,13 @@ sqrt(2) + abs(-0.6)
 </section>
 </section>
 <section>
-<section id="slide-orgf244524">
-<h2 id="orgf244524">より進んだ使い方</h2>
-<div class="outline-text-2" id="text-orgf244524">
+<section id="slide-org0304dfd">
+<h2 id="org0304dfd">より進んだ使い方</h2>
+<div class="outline-text-2" id="text-org0304dfd">
 </div>
 </section>
-<section id="slide-orgd4850f6">
-<h3 id="orgd4850f6">関数</h3>
+<section id="slide-orge39a33d">
+<h3 id="orge39a33d">関数</h3>
 <ul>
 <li>関数の取り扱いは一般的な計算機言語とほぼ同様
 <ul>
@@ -532,8 +559,8 @@ f(value1, value2) <span style="color: #808080; font-style: italic;"># </span><sp
 
 </ul>
 </section>
-<section id="slide-orgee41c4f">
-<h3 id="orgee41c4f">関数の実行例</h3>
+<section id="slide-orgbc807ef">
+<h3 id="orgbc807ef">関数の実行例</h3>
 <ul>
 <li><p>
 <span style="color:green;">正弦関数の計算</span>
@@ -562,8 +589,8 @@ log(a)               <span style="color: #808080; font-style: italic;"># </span>
 
 </ul>
 </section>
-<section id="slide-org3dd9123">
-<h3 id="org3dd9123">ヘルプ機能</h3>
+<section id="slide-orgd933dbf">
+<h3 id="orgd933dbf">ヘルプ機能</h3>
 <ul>
 <li>各関数の詳細を記述したヘルプが用意されている
 <ul>
@@ -590,8 +617,8 @@ log(a)               <span style="color: #808080; font-style: italic;"># </span>
 
 </ul>
 </section>
-<section id="slide-org8ecacad">
-<h3 id="org8ecacad">ヘルプ機能の利用例</h3>
+<section id="slide-org9c2699e">
+<h3 id="org9c2699e">ヘルプ機能の利用例</h3>
 <ul>
 <li><p>
 <span style="color:green;">ヘルプの使い方</span> 
@@ -600,10 +627,10 @@ log(a)               <span style="color: #808080; font-style: italic;"># </span>
 
 <pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968; log() &#12395;&#38306;&#12377;&#12427;&#12504;&#12523;&#12503;&#12398;&#20363;</span>
 help(log)          <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">Help&#12479;&#12502;&#12395;&#32080;&#26524;&#12399;&#34920;&#31034;&#12373;&#12428;&#12427;</span>
-?log               <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#20516;</span>
+<span style="color: #6c9ef8;">?</span>log               <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#20516;</span>
 example(log)       <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12504;&#12523;&#12503;&#20869;&#12398;&#20363;&#12434;&#23455;&#34892;</span>
 help.search(<span style="color: #d08928;">"log"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">"log"&#12395;&#38306;&#36899;&#12377;&#12427;&#38917;&#30446;&#12399;&#65311;</span>
-??<span style="color: #d08928;">"log"</span>            <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#20516;</span>
+<span style="color: #6c9ef8;">??</span><span style="color: #d08928;">"log"</span>            <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#19978;&#12392;&#21516;&#20516;</span>
 </pre>
 </div>
 <ul>
@@ -613,8 +640,8 @@ help.search(<span style="color: #d08928;">"log"</span>) <span style="color: #808
 
 </ul>
 </section>
-<section id="slide-org2d43d84">
-<h3 id="org2d43d84">オブジェクト</h3>
+<section id="slide-orgfc98bfc">
+<h3 id="orgfc98bfc">オブジェクト</h3>
 <ul>
 <li>Rで扱う対象を総称して <b>オブジェクト</b> と呼ぶ
 <ul>
@@ -634,8 +661,8 @@ help.search(<span style="color: #d08928;">"log"</span>) <span style="color: #808
 
 </ul>
 </section>
-<section id="slide-orgaa570f8">
-<h3 id="orgaa570f8">オブジェクトの代入の例</h3>
+<section id="slide-orga47a671">
+<h3 id="orga47a671">オブジェクトの代入の例</h3>
 <ul>
 <li><p>
 <span style="color:green;">代入操作の例</span>
@@ -666,8 +693,8 @@ print(bar)
 
 </ul>
 </section>
-<section id="slide-org8c4152e">
-<h3 id="org8c4152e">パッケージの操作</h3>
+<section id="slide-org3b05799">
+<h3 id="org3b05799">パッケージの操作</h3>
 <ul>
 <li>機能を拡張する多数のパッケージが存在</li>
 <li>利用可能なパッケージは右下ペインの
@@ -693,11 +720,11 @@ print(bar)
 </section>
 </section>
 <section>
-<section id="slide-orgbe6369d" data-background="#fef4f4">
-<h2 id="orgbe6369d">実習</h2>
+<section id="slide-org5fafe3a" data-background="#fef4f4">
+<h2 id="org5fafe3a">実習</h2>
 </section>
-<section id="slide-org6b4802d" data-background="#fef4f4">
-<h3 id="org6b4802d">練習問題</h3>
+<section id="slide-org3ce0cb9" data-background="#fef4f4">
+<h3 id="org3ce0cb9">練習問題</h3>
 <ul>
 <li>パッケージを導入して，含まれている関数について調べなさい
 <ul>
@@ -716,13 +743,13 @@ print(bar)
 </section>
 </section>
 <section>
-<section id="slide-org028c9f8">
-<h2 id="org028c9f8">Rで用いるデータ構造</h2>
-<div class="outline-text-2" id="text-org028c9f8">
+<section id="slide-orgda93e99">
+<h2 id="orgda93e99">Rで用いるデータ構造</h2>
+<div class="outline-text-2" id="text-orgda93e99">
 </div>
 </section>
-<section id="slide-org61358fb">
-<h3 id="org61358fb">データ型</h3>
+<section id="slide-org697825a">
+<h3 id="org697825a">データ型</h3>
 <ul>
 <li>Rではさまざまな数値を扱うことができる
 <ul>
@@ -777,8 +804,8 @@ print(bar)
 </tbody>
 </table>
 </section>
-<section id="slide-org9c1f1e2">
-<h3 id="org9c1f1e2">データ構造</h3>
+<section id="slide-orgdc48601">
+<h3 id="orgdc48601">データ構造</h3>
 <ul>
 <li>Rではさまざまなデータの集合を扱うことができる</li>
 
@@ -826,8 +853,8 @@ print(bar)
 </tbody>
 </table>
 </section>
-<section id="slide-orge9a2ed0">
-<h3 id="orge9a2ed0">ベクトルとは</h3>
+<section id="slide-orga4ea04e">
+<h3 id="orga4ea04e">ベクトルとは</h3>
 <ul>
 <li>同じデータ型の値 (スカラー値) の集合</li>
 <li>Rオブジェクトの多くはベクトルとして扱われる</li>
@@ -921,8 +948,8 @@ print(bar)
 
 </ul>
 </section>
-<section id="slide-org67692e7">
-<h3 id="org67692e7">ベクトルの作成</h3>
+<section id="slide-orga2998cf">
+<h3 id="orga2998cf">ベクトルの作成</h3>
 <ul>
 <li>作成方法はいくつか用意されている
 <ul>
@@ -947,8 +974,8 @@ rep(1:2, each=3)                      <span style="color: #808080; font-style: i
 
 </ul>
 </section>
-<section id="slide-orgb8df317">
-<h3 id="orgb8df317">ベクトルの要素の選択</h3>
+<section id="slide-orgadc5065">
+<h3 id="orgadc5065">ベクトルの要素の選択</h3>
 <ul>
 <li>演算子 <code>[]</code> を用いて指定する
 <ul>
@@ -968,8 +995,8 @@ y[c(1,3,4)] <span style="color: #808080; font-style: italic;"># </span><span sty
 
 </ul>
 </section>
-<section id="slide-orgd5890e0">
-<h3 id="orgd5890e0">データフレーム</h3>
+<section id="slide-org0b01ae0">
+<h3 id="org0b01ae0">データフレーム</h3>
 <ul>
 <li>複数の個体について，いくつかの属性を集計した表
 <ul>
@@ -1046,8 +1073,8 @@ y[c(1,3,4)] <span style="color: #808080; font-style: italic;"># </span><span sty
 
 </ul>
 </section>
-<section id="slide-org81b1c83">
-<h3 id="org81b1c83">&ldquo;base R&rdquo; vs &ldquo;tidyverse&rdquo;</h3>
+<section id="slide-orgb861bd8">
+<h3 id="orgb861bd8">&ldquo;base R&rdquo; vs &ldquo;tidyverse&rdquo;</h3>
 <ul>
 <li>データ操作とグラフィクスの枠組
 <ul>
@@ -1076,8 +1103,8 @@ y[c(1,3,4)] <span style="color: #808080; font-style: italic;"># </span><span sty
 
 </ul>
 </section>
-<section id="slide-org656a919">
-<h3 id="org656a919">データフレームの作成</h3>
+<section id="slide-org415efae">
+<h3 id="org415efae">データフレームの作成</h3>
 <ul>
 <li>作成方法はいくつか用意されている
 <ul>
@@ -1103,8 +1130,8 @@ y[c(1,3,4)] <span style="color: #808080; font-style: italic;"># </span><span sty
 
 </ul>
 </section>
-<section id="slide-org85f1db5">
-<h3 id="org85f1db5">データフレームの要素の選択</h3>
+<section id="slide-org3a2d6a8">
+<h3 id="org3a2d6a8">データフレームの要素の選択</h3>
 <ul>
 <li>選択方法はいくつか用意されている
 <ul>
@@ -1137,11 +1164,11 @@ z$two                  <span style="color: #808080; font-style: italic;"># </spa
 </section>
 </section>
 <section>
-<section id="slide-orgb83de27" data-background="#fef4f4">
-<h2 id="orgb83de27">実習</h2>
+<section id="slide-orgc220e33" data-background="#fef4f4">
+<h2 id="orgc220e33">実習</h2>
 </section>
-<section id="slide-orgeade4c5" data-background="#fef4f4">
-<h3 id="orgeade4c5">練習問題</h3>
+<section id="slide-orga78ab82" data-background="#fef4f4">
+<h3 id="orga78ab82">練習問題</h3>
 <ul>
 <li><p>
 次の表に対応するデータフレームを作成しなさい
@@ -1217,23 +1244,27 @@ z$two                  <span style="color: #808080; font-style: italic;"># </spa
 </section>
 </section>
 <section>
-<section id="slide-org9525afb">
-<h2 id="org9525afb">次回の予定</h2>
+<section id="slide-orgfcaf62a">
+<h2 id="orgfcaf62a">次回の予定</h2>
 <ul>
 <li>R言語のデータ構造</li>
 <li>ベクトル・行列・リストの操作</li>
 <li>ベクトルと行列のさまざまな計算</li>
 
 </ul>
+</section>
+</section>
 </div>
 </div>
+<p> Created by Noboru Murata | Licensed under CC BY-NC 4.0 </p>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/menu/menu.js"></script>
-<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
 <script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
@@ -1245,27 +1276,41 @@ progress: true,
 history: true,
 center: true,
 slideNumber: 'c',
-rollingLinks: false,
+rollingLinks: true,
 keyboard: true,
 mouseWheel: false,
-fragmentInURL: true,
+fragmentInURL: false,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
 overview: true,
+width: 1050,
+height: 700,
+margin: 0.10,
+minScale: 0.75,
+maxScale: 1.25,
 
 transition: 'fade',
 transitionSpeed: 'default',
 showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
-spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
+'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
 ]
 
 });
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
 </script>
 </body>
 </html>
