@@ -72,13 +72,13 @@
 
 </section>
 <section>
-<section id="slide-org706dbd4">
-<h2 id="org706dbd4">Quarto とは</h2>
-<div class="outline-text-2" id="text-org706dbd4">
+<section id="slide-org2c652de">
+<h2 id="org2c652de">Quarto とは</h2>
+<div class="outline-text-2" id="text-org2c652de">
 </div>
 </section>
-<section id="slide-orgf809525">
-<h3 id="orgf809525">Quarto の概要</h3>
+<section id="slide-org2ec59ac">
+<h3 id="org2ec59ac">Quarto の概要</h3>
 <ul>
 <li>Pandoc を利用した出版システム</li>
 <li>文章とプログラムをまとめて記述</li>
@@ -88,8 +88,8 @@
 
 </ul>
 </section>
-<section id="slide-org7c1c9b1">
-<h3 id="org7c1c9b1">Quarto の構造</h3>
+<section id="slide-org7902196">
+<h3 id="org7902196">Quarto の構造</h3>
 <ul>
 <li>3つの領域から構成
 <dl>
@@ -101,8 +101,8 @@
 
 </ul>
 </section>
-<section id="slide-org048028a">
-<h3 id="org048028a">YAMLヘッダー</h3>
+<section id="slide-org0be2edc">
+<h3 id="org0be2edc">YAMLヘッダー</h3>
 <ul>
 <li>文書の先頭に置く</li>
 <li><code>---</code> と <code>---</code> の間に必要な事項を記述する</li>
@@ -126,8 +126,8 @@ editor: visual
 
 </ul>
 </section>
-<section id="slide-orgd0b7880">
-<h3 id="orgd0b7880">コードチャンク</h3>
+<section id="slide-org4722633">
+<h3 id="org4722633">コードチャンク</h3>
 <ul>
 <li>文書中の必要な場所に置く</li>
 <li>Rの場合 <code>```{r}</code> と <code>```</code> の間にコードを記述する</li>
@@ -151,38 +151,31 @@ sigmoid &lt;- function(x, a = 1){ # シグモイド関数を定義する
 
 </ul>
 </section>
-<section id="slide-org1f69ad1">
-<h3 id="org1f69ad1">テキスト</h3>
+<section id="slide-orgdcc49f6">
+<h3 id="orgdcc49f6">テキスト</h3>
 <ul>
 <li>一般的な markdown 文法で解釈される</li>
-<li>数式はTeXの基本的な記述を理解する
-<ul>
-<li>テキスト中は <code>$ 数式 $</code> ，独立した表示は <code>$$ 数式 $$</code></li>
-
-</ul></li>
 <li><p>
-以下は数式の記述の例である
+数式はTeXの記法を利用．テキスト中は <code>$ 数式 $</code> ，独立した表示は <code>$$ 数式 $$</code> ．
 </p>
 <div class="org-src-container">
 
 <pre class="src src-quarto">正規分布は $\mathbb{R}=(-\infty,\infty)$ 上の確率分布で，
-平均 $\mu$ 分散 $\sigma^{2}$ である分布の密度関数は
+平均 $\mu$ 分散 $\sigma^{2}$ である分布の密度関数は以下で表される．
 $$
 \phi(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}}
             e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}
 $$
-となる．
 </pre>
 </div>
 <blockquote>
 <p>
 正規分布は \(\mathbb{R}=(-\infty,\infty)\) 上の確率分布で，
-平均 \(\mu\) 分散 \(\sigma^{2}\) である分布の密度関数は
+平均 \(\mu\) 分散 \(\sigma^{2}\) である分布の密度関数は以下で表される．
 \[
     \phi(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}}
                 e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}
     \]
-となる．
 </p>
 </blockquote></li>
 
@@ -190,13 +183,13 @@ $$
 </section>
 </section>
 <section>
-<section id="slide-org0c6cddf">
-<h2 id="org0c6cddf">RStudio での利用法</h2>
-<div class="outline-text-2" id="text-org0c6cddf">
+<section id="slide-orgb86f85b">
+<h2 id="orgb86f85b">RStudio での利用法</h2>
+<div class="outline-text-2" id="text-orgb86f85b">
 </div>
 </section>
-<section id="slide-orgecc5f8e">
-<h3 id="orgecc5f8e">Quarto ファイルの作成</h3>
+<section id="slide-org27f4651">
+<h3 id="org27f4651">Quarto ファイルの作成</h3>
 <ul>
 <li>左上の <code>＋</code> ボタン(または&ldquo;File/New File&rdquo;)を開く</li>
 <li>&ldquo;Quarto Document&rdquo; を選択する</li>
@@ -223,8 +216,8 @@ $$
 
 </ul>
 </section>
-<section id="slide-org6ed1e3f">
-<h3 id="org6ed1e3f">エディタの設定</h3>
+<section id="slide-orgd3e20ca">
+<h3 id="orgd3e20ca">エディタの設定</h3>
 <ul>
 <li>Quarto ファイルは左上のペインに表示される</li>
 <li>左上の &ldquo;Source/Visual&rdquo; ボタンでモードが変わる
@@ -242,8 +235,8 @@ $$
 
 </ul>
 </section>
-<section id="slide-orga212bc1">
-<h3 id="orga212bc1">コードの入力と実行</h3>
+<section id="slide-org8a8645d">
+<h3 id="org8a8645d">コードの入力と実行</h3>
 <ul>
 <li>コードを入力するにはチャンクを作成する
 <ul>
@@ -275,8 +268,8 @@ $$
 
 </ul>
 </section>
-<section id="slide-org9296a65">
-<h3 id="org9296a65">出版</h3>
+<section id="slide-orgab599a7">
+<h3 id="orgab599a7">出版</h3>
 <ul>
 <li>全体をまとめて整形することができる</li>
 <li><code>歯車</code> ボタンで出力時の挙動を設定する

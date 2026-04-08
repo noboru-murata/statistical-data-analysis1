@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-08 11:08:51 mura>
+# Time-stamp: <2026-04-08 15:38:04 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -56,26 +56,22 @@
 
 ** テキスト
 - 一般的な markdown 文法で解釈される
-- 数式はTeXの基本的な記述を理解する
-  - テキスト中は ~$ 数式 $~ ，独立した表示は ~$$ 数式 $$~ 
-- 以下は数式の記述の例である
+- 数式はTeXの記法を利用．テキスト中は ~$ 数式 $~ ，独立した表示は ~$$ 数式 $$~ ．
   #+begin_src quarto
     正規分布は $\mathbb{R}=(-\infty,\infty)$ 上の確率分布で，
-    平均 $\mu$ 分散 $\sigma^{2}$ である分布の密度関数は
+    平均 $\mu$ 分散 $\sigma^{2}$ である分布の密度関数は以下で表される．
     $$
     \phi(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}}
                 e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}
     $$
-    となる．
   #+end_src
   #+begin_quote
     正規分布は $\mathbb{R}=(-\infty,\infty)$ 上の確率分布で，
-    平均 $\mu$ 分散 $\sigma^{2}$ である分布の密度関数は
+    平均 $\mu$ 分散 $\sigma^{2}$ である分布の密度関数は以下で表される．
     $$
     \phi(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}}
                 e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}
     $$
-    となる．
   #+end_quote
 
 * RStudio での利用法
