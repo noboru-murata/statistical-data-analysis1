@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-06 21:33:27 mura>
+# Time-stamp: <2026-04-08 17:30:06 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -346,23 +346,73 @@
    #+end_src
 - 入力内容は右上の *History* タブで確認可能
   
-** エディタから実行する
+** COMMENT エディタから実行する
 - 新規ファイルの作成 (以下のいずれか)
    - 左上の *+* から
-      *R Script* (または *Quarto*) を選択
+      *Quarto Document* (または *R Script*) を選択
    - *File* から
       *New File* を選択，
-      更に *R Script* を選択
+      更に *Quarto Document* を選択
 - エディタ上でコマンドを記述
 - 実行範囲の選択
    - 一行のみ: カーソルをその行に移動
    - 複数行: クリックしながら移動して選択する
 - 選択範囲の実行 (以下のいずれか)
-   - 左上の *Run* をクリック
+   - 右上の *Run* をクリック (適切な処理を選択)
    - *Code* から 
-      *Selected Line(s)* を選択
+      *Run Selected Line(s)* を選択
       (Ctrl/Command+Enter)
-
+** COMMENT エディタから実行する
+- 新規ファイルの作成 (以下のいずれか)
+   - 左上の *+* から
+      *Quarto Document* (または *R Script*) を選択
+   - *File* から
+      *New File* を選択，
+      更に *Quarto Document* を選択
+- エディタ上でコマンドを記述
+** Quarto を用いた処理
+- Quarto とは
+  - Pandoc を利用した出版システム
+  - 文章とプログラムをまとめて記述
+  - レポート，スライド，Webページを簡単に作成
+  - R 以外の言語 (Python や Julia) も利用可能
+  - R Markdown 形式の後継
+- Quarto の構造
+  - *YAMLヘッダー* : 文書全体の体裁を整えるための設定を行う
+  - *コードチャンク* : プログラムを記述する
+  - *テキスト* : markdown形式で文章を記述する
+** Quarto ファイルの作成
+- 左上の ~＋~ ボタン(または *File/New File*)を開く
+- *Quarto Document* を選択する
+- ダイアログに必要な情報を記入する
+  - 文書の *Title/Author* の設定
+  - フォーマットの選択 (*HTML* /PDF/Word)
+- *Create* をクリックするとファイルが作成される
+  - *Create* は雛型の文書付き
+  - *Create Empty Document* はYAMLヘッダーのみ (慣れたらこちらで)
+    
+** エディタの設定
+- Quarto ファイルは左上のペインに表示される
+- 左上の *Source/Visual* ボタンでモードが変わる
+  - *Source* : 装飾なしのテキストエディタ
+  - *Visual* : Markdown 記法に従った装飾ありの表示
+- 各モードでの注意
+  - Visual モードは GUI を利用して装飾を変更する
+  - History 機能は現在 Source モードでしか機能しない
+  
+** コードの入力と実行
+- コードを入力するにはチャンクを作成する
+  - 入力したい箇所にカーソルを移動
+  - 上枠の ~+C~ (緑)ボタン(または *Code/Insert Chunk* )をクリック
+- ~歯車~ ボタンで実行時の出力先を設定する
+  - *Chunk Output Inline* : エディタ内に出力
+  - *Chunk Output in Console* : コンソール内に出力
+- 実行法にはいくつかのオプションが用意されている
+  - [[color:green][▶]] : チャンク内を実行
+  - [[color:green][_▽_]] : そのチャンク以前を実行 
+    - カーソル位置のみ実行することも可能
+    - ショートカットキーも用意されている
+    
 ** COMMENT 式の入力
 - 四則演算や数学関数は直感的な文法で計算可能
    - + (加算)，- (減算)，* (乗算)，/ (除算)，＾または** (ベキ乗)
@@ -432,9 +482,9 @@
       *Save* を選択 (Ctrl/Command+S)
 - ファイル作成に関する注意
    - 保存する時にファイル名の入力が求められる
+      - *Quarto* の拡張子は *.qmd* を利用
       - *R Script* の拡張子は通常
          *.R* または *.r* を利用
-      - *Quarto* の拡張子は *.qmd* を利用
    - *#* 以降の文字列は実行されないのでコメントとして有用
 
 ** COMMENT ファイルの保存
@@ -468,7 +518,7 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-** 練習問題
+** COMMENT 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :ID:       352F50B2-453D-4ED2-8C0C-ED2E64E334D0
@@ -765,7 +815,7 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-** 練習問題
+** COMMENT 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :ID:       4CFD7C92-5054-4948-9B8D-25CCFC8823E9
@@ -981,7 +1031,7 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-** 練習問題
+** COMMENT 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :ID:       7EF7532D-E2FB-4AF5-AEEE-55A6E9ECCFFA
