@@ -13,13 +13,41 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/menu.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/chalkboard/font-awesome/css/all.css"/>
 
-<link rel="stylesheet" href="./reveal.js/plugin/menu/font-awesome/css/fontawesome.css"/>
+<link rel="stylesheet" href="./reveal.js/local/lecture.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/menu.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
-
-<link rel="stylesheet" href="./reveal.js/local/mycourse.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 <div class="reveal">
@@ -35,7 +63,7 @@
     <p>文章とプログラムの記述</p>
 </div>
 <div class="keyboard-usage">
-    <p>(Press <code>?</code> for help, <code>n</code> and <code>p</code> for next and previous slide)</p>
+    <p></p>
 </div>
 <div class="talk-author">
   <p>村田 昇<br />
@@ -44,13 +72,13 @@
 
 </section>
 <section>
-<section id="slide-orgd6e8383">
-<h2 id="orgd6e8383">Quarto とは</h2>
-<div class="outline-text-2" id="text-orgd6e8383">
+<section id="slide-org706dbd4">
+<h2 id="org706dbd4">Quarto とは</h2>
+<div class="outline-text-2" id="text-org706dbd4">
 </div>
 </section>
-<section id="slide-orgda752a0">
-<h3 id="orgda752a0">Quarto の概要</h3>
+<section id="slide-orgf809525">
+<h3 id="orgf809525">Quarto の概要</h3>
 <ul>
 <li>Pandoc を利用した出版システム</li>
 <li>文章とプログラムをまとめて記述</li>
@@ -60,8 +88,8 @@
 
 </ul>
 </section>
-<section id="slide-org3adb08c">
-<h3 id="org3adb08c">Quarto の構造</h3>
+<section id="slide-org7c1c9b1">
+<h3 id="org7c1c9b1">Quarto の構造</h3>
 <ul>
 <li>3つの領域から構成
 <dl>
@@ -73,8 +101,8 @@
 
 </ul>
 </section>
-<section id="slide-orgdb9ff45">
-<h3 id="orgdb9ff45">YAMLヘッダー</h3>
+<section id="slide-org048028a">
+<h3 id="org048028a">YAMLヘッダー</h3>
 <ul>
 <li>文書の先頭に置く</li>
 <li><code>---</code> と <code>---</code> の間に必要な事項を記述する</li>
@@ -98,8 +126,8 @@ editor: visual
 
 </ul>
 </section>
-<section id="slide-orgbb51483">
-<h3 id="orgbb51483">コードチャンク</h3>
+<section id="slide-orgd0b7880">
+<h3 id="orgd0b7880">コードチャンク</h3>
 <ul>
 <li>文書中の必要な場所に置く</li>
 <li>Rの場合 <code>```{r}</code> と <code>```</code> の間にコードを記述する</li>
@@ -108,10 +136,10 @@ editor: visual
 </p>
 <div class="org-src-container">
 
-<pre class="src src-qmd"><span style="color: #d02b61; background-color: #3a3a3a;">```{</span><span style="color: #00aa80; background-color: #3a3a3a;">r</span><span style="color: #d02b61; background-color: #3a3a3a;">}</span>
-<span style="color: #d08928; background-color: #3a3a3a;">sigmoid &lt;- function(x, a = 1){ # &#12471;&#12464;&#12514;&#12452;&#12489;&#38306;&#25968;&#12434;&#23450;&#32681;&#12377;&#12427;</span>
-<span style="color: #d08928; background-color: #3a3a3a;">  y &lt;- 1 / (1 + exp(-a * x)) }</span>
-<span style="color: #d02b61; background-color: #3a3a3a;">```</span>
+<pre class="src src-quarto">```{r}
+sigmoid &lt;- function(x, a = 1){ # シグモイド関数を定義する
+  y &lt;- 1 / (1 + exp(-a * x)) }
+```
 </pre>
 </div>
 <ul>
@@ -123,13 +151,13 @@ editor: visual
 
 </ul>
 </section>
-<section id="slide-orge369b16">
-<h3 id="orge369b16">テキスト</h3>
+<section id="slide-org1f69ad1">
+<h3 id="org1f69ad1">テキスト</h3>
 <ul>
 <li>一般的な markdown 文法で解釈される</li>
 <li>数式はTeXの基本的な記述を理解する
 <ul>
-<li>テキスト中は <code>$ 数式 $~，独立した表示は ~$$ 数式 $$</code></li>
+<li>テキスト中は <code>$ 数式 $</code> ，独立した表示は <code>$$ 数式 $$</code></li>
 
 </ul></li>
 <li><p>
@@ -137,27 +165,38 @@ editor: visual
 </p>
 <div class="org-src-container">
 
-<pre class="src src-qmd">&#27491;&#35215;&#20998;&#24067;&#12399; $<span style="color: #d02b61;">\</span>mathbb{R}=(-<span style="color: #d02b61;">\</span>infty,<span style="color: #d02b61;">\</span>infty)$ &#19978;&#12398;&#30906;&#29575;&#20998;&#24067;&#12391;&#65292;
-&#24179;&#22343; $<span style="color: #d02b61;">\</span>mu$ &#20998;&#25955; $<span style="color: #d02b61;">\</span>sigma^{2}$ &#12391;&#12354;&#12427;&#20998;&#24067;&#12398;&#23494;&#24230;&#38306;&#25968;&#12399;
+<pre class="src src-quarto">正規分布は $\mathbb{R}=(-\infty,\infty)$ 上の確率分布で，
+平均 $\mu$ 分散 $\sigma^{2}$ である分布の密度関数は
 $$
-<span style="color: #d02b61;">\</span>phi(x) = <span style="color: #d02b61;">\</span>frac{1}{<span style="color: #d02b61;">\</span>sqrt{2<span style="color: #d02b61;">\</span>pi<span style="color: #d02b61;">\</span>sigma^{2}}}
-            e^{-<span style="color: #d02b61;">\</span>frac{(x-<span style="color: #d02b61;">\</span>mu)^{2}}{2<span style="color: #d02b61;">\</span>sigma^{2}}}
+\phi(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}}
+            e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}
 $$
-&#12392;&#12394;&#12427;&#65294;
+となる．
 </pre>
-</div></li>
+</div>
+<blockquote>
+<p>
+正規分布は \(\mathbb{R}=(-\infty,\infty)\) 上の確率分布で，
+平均 \(\mu\) 分散 \(\sigma^{2}\) である分布の密度関数は
+\[
+    \phi(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}}
+                e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}
+    \]
+となる．
+</p>
+</blockquote></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-org7811592">
-<h2 id="org7811592">RStudio での利用法</h2>
-<div class="outline-text-2" id="text-org7811592">
+<section id="slide-org0c6cddf">
+<h2 id="org0c6cddf">RStudio での利用法</h2>
+<div class="outline-text-2" id="text-org0c6cddf">
 </div>
 </section>
-<section id="slide-org5720f62">
-<h3 id="org5720f62">Quarto ファイルの作成</h3>
+<section id="slide-orgecc5f8e">
+<h3 id="orgecc5f8e">Quarto ファイルの作成</h3>
 <ul>
 <li>左上の <code>＋</code> ボタン(または&ldquo;File/New File&rdquo;)を開く</li>
 <li>&ldquo;Quarto Document&rdquo; を選択する</li>
@@ -184,8 +223,8 @@ $$
 
 </ul>
 </section>
-<section id="slide-orgcf80cf9">
-<h3 id="orgcf80cf9">エディタの設定</h3>
+<section id="slide-org6ed1e3f">
+<h3 id="org6ed1e3f">エディタの設定</h3>
 <ul>
 <li>Quarto ファイルは左上のペインに表示される</li>
 <li>左上の &ldquo;Source/Visual&rdquo; ボタンでモードが変わる
@@ -203,8 +242,8 @@ $$
 
 </ul>
 </section>
-<section id="slide-org5b1ba8d">
-<h3 id="org5b1ba8d">コードの入力と実行</h3>
+<section id="slide-orga212bc1">
+<h3 id="orga212bc1">コードの入力と実行</h3>
 <ul>
 <li>コードを入力するにはチャンクを作成する
 <ul>
@@ -236,8 +275,8 @@ $$
 
 </ul>
 </section>
-<section id="slide-orgd16c9b0">
-<h3 id="orgd16c9b0">出版</h3>
+<section id="slide-org9296a65">
+<h3 id="org9296a65">出版</h3>
 <ul>
 <li>全体をまとめて整形することができる</li>
 <li><code>歯車</code> ボタンで出力時の挙動を設定する
@@ -271,15 +310,19 @@ format:
 </ul></li>
 
 </ul>
+</section>
+</section>
 </div>
 </div>
+<p> Created by Noboru Murata | Licensed under CC BY-NC 4.0 </p>
 <script src="./reveal.js/dist/reveal.js"></script>
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/menu/menu.js"></script>
-<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
+<script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
+<script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
+<script src="./reveal.js/plugin/spotlight/spotlight.js"></script>
 <script src="./reveal.js/dist/theme/hidelinks.js"></script>
 <script>
 // Full list of configuration options available here:
@@ -288,30 +331,44 @@ Reveal.initialize({
 
 controls: true,
 progress: true,
-history: true,
+history: false,
 center: true,
 slideNumber: 'c',
-rollingLinks: false,
+rollingLinks: true,
 keyboard: true,
 mouseWheel: false,
-fragmentInURL: true,
+fragmentInURL: false,
 hashOneBasedIndex: false,
 pdfSeparateFragments: false,
 overview: true,
+width: 1050,
+height: 700,
+margin: 0.10,
+minScale: 0.75,
+maxScale: 1.25,
 
 transition: 'fade',
 transitionSpeed: 'default',
 showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
-spotlight: { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 87: function() { RevealSpotlight.togglePresentationMode();}, },
+'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealSpotlight, RevealChalkboard ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
 ]
 
 });
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
 </script>
 </body>
 </html>

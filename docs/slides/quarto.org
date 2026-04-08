@@ -1,0 +1,141 @@
+#+TITLE: Quarto の使い方
+#+SUBTITLE: 文章とプログラムの記述
+#+AUTHOR: 村田 昇
+#+EMAIL: noboru.murata@gmail.com
+#+DATE: 
+#+STARTUP: hidestars content indent
+# Time-stamp: <2026-04-08 11:08:51 mura>
+:REVEAL:
+#+SETUPFILE: "./reveal.js/local/lecture.org"
+# C-c C-x C-v でinlineを切り替え
+# <m C-i でlatex block (math env用)
+# C-c '
+:END:
+
+* Quarto とは
+** Quarto の概要
+- Pandoc を利用した出版システム
+- 文章とプログラムをまとめて記述
+- レポート，スライド，Webページを簡単に作成
+- R 以外の言語 (Python や Julia) も利用可能
+- R Markdown 形式の後継
+
+** Quarto の構造
+- 3つの領域から構成
+  - YAMLヘッダー :: 文書全体の体裁を整えるための設定を行う
+  - コードチャンク :: プログラムを記述する
+  - テキスト :: markdown形式で文章を記述する
+
+** YAMLヘッダー
+- 文書の先頭に置く
+- ~---~ と ~---~ の間に必要な事項を記述する
+- 最も簡単な例は以下のとおり
+  #+begin_src yaml
+  ---
+  title: "この文書のタイトル"
+  format: html
+  editor: visual
+  ---
+  #+end_src
+  - 出力フォーマットは HTML(webページ)
+  - エディタは visual モードを利用
+
+** コードチャンク
+- 文書中の必要な場所に置く
+- Rの場合 ~```{r}~ と ~```~ の間にコードを記述する
+- 例えば以下のように記述する
+  #+begin_src quarto
+    ```{r}
+    sigmoid <- function(x, a = 1){ # シグモイド関数を定義する
+      y <- 1 / (1 + exp(-a * x)) }
+    ```
+  #+end_src
+  - チャンク間の情報(計算結果)は共有できる
+  - Rのコードはパッケージ ~knitr~ を利用して処理される
+    [[https://quarto.org/docs/reference/cells/cells-knitr.html]]
+
+** テキスト
+- 一般的な markdown 文法で解釈される
+- 数式はTeXの基本的な記述を理解する
+  - テキスト中は ~$ 数式 $~ ，独立した表示は ~$$ 数式 $$~ 
+- 以下は数式の記述の例である
+  #+begin_src quarto
+    正規分布は $\mathbb{R}=(-\infty,\infty)$ 上の確率分布で，
+    平均 $\mu$ 分散 $\sigma^{2}$ である分布の密度関数は
+    $$
+    \phi(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}}
+                e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}
+    $$
+    となる．
+  #+end_src
+  #+begin_quote
+    正規分布は $\mathbb{R}=(-\infty,\infty)$ 上の確率分布で，
+    平均 $\mu$ 分散 $\sigma^{2}$ である分布の密度関数は
+    $$
+    \phi(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}}
+                e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}
+    $$
+    となる．
+  #+end_quote
+
+* RStudio での利用法
+** Quarto ファイルの作成
+- 左上の ~＋~ ボタン(または"File/New File")を開く
+- "Quarto Document" を選択する
+- ダイアログに必要な情報を記入する
+  - 文書の "Title/Author" の設定
+  - フォーマットの選択 (HTML/PDF/Word)
+    - 講義ではHTMLを利用
+- "Create" をクリックするとファイルが作成される
+  - "Create" は雛型の文書付き
+  - "Create Empty Document" はYAMLヘッダーのみ
+    - 慣れたらこちらで
+    
+** エディタの設定
+- Quarto ファイルは左上のペインに表示される
+- 左上の "Source/Visual" ボタンでモードが変わる
+  - *Source* : 装飾なしのテキストエディタ
+  - *Visual* : Markdown 記法に従った装飾ありの表示
+- 各モードでの注意
+  - Visual モードは GUI を利用して装飾を変更する
+  - History 機能は現在 Source モードでしか機能しない
+  
+** コードの入力と実行
+- コードを入力するにはチャンクを作成する
+  - 入力したい箇所にカーソルを移動
+  - 上枠の ~+C~ (緑)ボタン(または"Code/Insert Chunk")をクリック
+- ~歯車~ ボタンで実行時の出力先を設定する
+  - *"Chunk Output Inline"* : エディタ内に出力
+  - *"Chunk Output in Console"* : コンソール内に出力
+    - 講義ではコンソールを利用
+- 実行法にはいくつかのオプションが用意されている
+  - *~▶~ (緑)* : チャンク内を実行
+  - *~▽~* : そのチャンク以前を実行
+    - カーソル位置のみ実行することも可能
+    - ショートカットキーも用意されている
+    
+** 出版
+- 全体をまとめて整形することができる
+- ~歯車~ ボタンで出力時の挙動を設定する
+  - *"Preview in Window"* : ブラウザに表示
+  - *"Preview in Viewer Pane"* : RStudioのViewerペインに表示
+    - 講義では Viewer を利用
+    - Viewer の上の左から2番目のボタンでブラウザに送ることは可能
+- Quarto と同じ場所にファイルは保存される
+  - フォーマットによって拡張子が異なる
+  - 付加的なファイルは "ファイル名 + files" に保存される
+  - 単一のファイルにするにはYAMLヘッダーで以下を宣言する
+    #+begin_src yaml
+    ---
+    format:
+      html:
+        self-contained: true
+    ---
+    #+end_src
+
+
+* Footnotes                                                          :ignore:
+* COMMENT ローカル変数
+# Local Variables:
+# End:
+
