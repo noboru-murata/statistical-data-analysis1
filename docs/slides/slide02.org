@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-06 16:36:20 mura>
+# Time-stamp: <2026-04-08 17:41:43 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -130,7 +130,7 @@
 :PROPERTIES:
 :reveal_background: #fef4f4
 :END:
-** 練習問題
+** COMMENT 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
 :ID:       0C7D2DB5-DBA2-40D6-AE2C-1DD964C9F1BD
