@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-08 17:41:43 mura>
+# Time-stamp: <2026-04-10 14:40:14 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -249,7 +249,7 @@
 - 関数 ~cbind()/rbind()~ は行数・列数が等しい行列も横・縦に結合できる
 - 行列の高次元版として配列(array)が用意されている
 - 関数 ~rownames()/colnames()~ を用いると行と列に名前を付けることができる
-- [[color:gray][これらの機能は講義の中で使いながら説明する]]
+- [[color:orange][これらの機能は講義の中で使いながら説明する]]
 
 
 * 実習
@@ -359,7 +359,7 @@
 :PROPERTIES:
 :ID:       F1573615-2B04-4FD8-BDDA-E19EB5C69E07
 :END:
-- データフレームの生成 (関数 ~data.frame()~)
+- データフレームの生成 (関数 ~tibble()~)
    #+begin_src R :eval no
      #' 前回の練習問題
      library(tibble)
@@ -371,7 +371,7 @@
           chem = c(65,100, 70, 40, 75),
           bio  = c(70, 50, 30, 80,100)))
    #+end_src
-- [[color:gray][操作については別の回に詳細に説明する]]
+- [[color:orange][操作については別の回に詳細に説明する]]
 
 
 * ベクトルの計算
@@ -427,7 +427,7 @@
 - *同じ長さの2つのベクトル* の乗法
    - 成分ごとの積 (Hadamard 積; 要素積)
    - ベクトルの内積
-   [[color:gray][2種類あることに注意する]]
+   [[color:orange][2種類あることに注意する]]
 - データ解析ではどちらも良く用いられる
 
 ** Hadamard 積
@@ -528,7 +528,7 @@
 - 2つの行列の乗法
    - *同じ大きさの行列* の成分ごとの積 (Hadamard 積; 要素積)
    - *\(n\times m\) 型行列と \(m\times l\) 型行列* の積
-   [[color:gray][2種類あることに注意する]]
+   [[color:orange][2種類あることに注意する]]
 - データ解析ではどちらも良く用いられる
 
 ** Hadamard 積
@@ -602,7 +602,7 @@
      sum(diag(A)) # 行列のトレース
    #+end_src
    - 関数 ~diag()~ : 行列の対角成分を取り出す \\
-      (ベクトルを引数とする場合はそれを対角成分とする対角行列を返す)
+      (引数がベクトルの場合はそれを対角成分とする対角行列を返す)
    - 関数 ~sum()~ : ベクトルの総和を計算する 
 
 

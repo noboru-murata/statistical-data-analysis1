@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-08 17:30:06 mura>
+# Time-stamp: <2026-04-10 14:37:57 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -242,7 +242,7 @@
    #+begin_src R :eval no
      q() # "Save workspace image?" と聞かれることがある (後述)
    #+end_src
-- [[color:gray][終了できない場合はOSの機能で強制終了]]
+- [[color:orange][終了できない場合はOSの機能で強制終了]]
 
 ** エディタ (左上)
 - コマンドを記述したファイルを扱うためのペイン
@@ -253,7 +253,7 @@
    - ファイルを保存
    - ファイルを実行
    - *History* からコピーできる
-- [[color:gray][講義の中で使いながら説明]]
+- [[color:orange][講義の中で使いながら説明]]
 
 ** プロジェクト
 - 作業環境をまとめて設定
@@ -413,6 +413,24 @@
     - カーソル位置のみ実行することも可能
     - ショートカットキーも用意されている
     
+** 文書の整形
+- ~歯車~ ボタンで出力時の挙動を設定する
+  - *Preview in Window* : ブラウザに表示
+  - *Preview in Viewer Pane* : RStudioの右下ペインViewerタブに表示
+    - 講義では Viewer を利用
+    - Viewer の上の左から2番目のボタンでブラウザに送ることは可能
+- Quarto と同じ場所にファイルは保存される
+  - フォーマットによって拡張子が異なる
+  - 付加的なファイルは "ファイル名 + files" に保存される
+  - 単一のファイルにするにはYAMLヘッダーで以下を宣言する
+    #+begin_src yaml
+    ---
+    format:
+      html:
+        self-contained: true
+    ---
+    #+end_src
+
 ** COMMENT 式の入力
 - 四則演算や数学関数は直感的な文法で計算可能
    - + (加算)，- (減算)，* (乗算)，/ (除算)，＾または** (ベキ乗)
@@ -605,7 +623,7 @@
      ## arg1, arg2 は引数の名前，value1, value2 は引数に渡す値を表す
      f(value1, value2) # 上と同値．順序に注意
    #+end_src
-   - [[color:gray][擬似コード = 実行しても動かない]]
+   - [[color:orange][擬似コード = 実行しても動かない]]
    # - 引数が存在しない，
    #  もしくはすべての引数に対し既定値が設定されている関数もある．
    #  例えば ~f~ がそのような関数だった場合，
@@ -775,7 +793,7 @@
      help.search("log") # "log"に関連する項目は？
      ??"log" # 上と同値
    #+end_src
-   - [[color:gray][ヘルプは右下のペインに表示される]]
+   - [[color:orange][ヘルプは右下のペインに表示される]]
 ** COMMENT 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
