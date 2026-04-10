@@ -6,7 +6,7 @@ draft = false
 weight = 1015
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-03-31 Fri&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2026-04-10 Fri&gt;</span></span> 更新
 
 以下は統計データ解析 I・II の講義資料(随時更新)です．
 
@@ -16,6 +16,10 @@ weight = 1015
 
 特に統計データ解析Iでは「Rの基礎」と「確率と統計」を用います．
 
-秋期に開講する統計データ解析IIの資料は
-[こちら](https://noboru-murata.github.io/statistical-data-analysis2/)
-にあります．
+秋期に開講する講義の資料は [統計データ解析II](https://noboru-murata.github.io/statistical-data-analysis2/) です．
+
+---
+
+講義ノートを増補・改訂したものが東京大学出版会より書籍として発売されています．
+
+[Ｒによる統計データ解析, 小池 祐太・村田 昇・吉田 朋広, 東京大学出版会, 2025.](https://www.utp.or.jp/book/b10136649.html)
