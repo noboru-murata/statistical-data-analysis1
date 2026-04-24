@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-20 18:17:03 mura>
+# Time-stamp: <2026-04-24 13:01:30 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -310,7 +310,7 @@
 :END:
 - [[color:green][今日の日付が19で割り切れるか?]]
   #+begin_src R
-    today <- 20250502      # 今日の日付
+    today <- 20260424      # 今日の日付
     if(today %% 19 == 0) { # %% は余りを計算
       print("割り切れます．商は以下の値です．") 
       print(today %/% 19)  # 商を表示
