@@ -156,7 +156,7 @@ tail(jp_data, n = 10)
 View(jp_area) # 左上ペインに表として表示される
 #' 人口の最大値を見る
 with(jp_data, max(人口))
-#' どの都道府県の人口多いか調べる ('?which.max' を参照)
+#' どの都道府県の人口が多いか調べる ('?which.max' を参照)
 with(jp_data, which.max(人口)) # 行番号が返る
 jp_data[with(jp_data, which.max(人口)),]
 #' 行を抽出するには関数 dplyr::filter() を使うのが簡単
@@ -182,7 +182,7 @@ View(jp_area_en)
 with(jp_data_en, max(population))
 #' 人口の最大値を与える県の番号を見る
 with(jp_data_en, which.max(population))
-#' どの都道府県の人口多いか調べる
+#' どの都道府県の人口が多いか調べる
 jp_data_en |> filter(population == max(population))
 #' 人口の多い順に都道府県を並べる
 jp_data_en |> arrange(desc(population)) |> View()
@@ -232,7 +232,7 @@ jp_data |>
 jp_data |>
     mutate(地方 = as_factor(jp_area[["地方"]])) |> # 地方の情報を付加
     group_by(地方) |>                              # 地方ごとにグループ化
-    summarize((across(c(人口, 面積), sum))) |>     # 地方ごとに人口と面積を集計
+    summarize(across(c(人口, 面積), sum)) |>     # 地方ごとに人口と面積を集計
     mutate(人口密度 = 人口/面積)                   # 地方別の人口密度を計算
 ```
 
@@ -245,7 +245,7 @@ jp_data |>
            離婚数 = 婚姻可能*離婚/1000,            # 離婚数/1000人から人数を推計
            地方 = as_factor(jp_area[["地方"]])) |> # 地方の情報を付加
     group_by(地方) |>                              # 地方ごとにグループ化
-    summarize((across(婚姻可能:離婚数, sum))) |>   # 地方別の合計を計算
+    summarize(across(婚姻可能:離婚数, sum)) |>   # 地方別の合計を計算
     mutate(婚姻 = 婚姻数/婚姻可能*1000,            # 1000人あたりの婚姻数を計算
            離婚 = 離婚数/婚姻可能*1000)            # 1000人あたりの離婚数を計算
 ```

@@ -2499,7 +2499,7 @@ Note
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 13724000</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; どの都道府県の人口多いか調べる (&#39;?which.max&#39; を参照)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; どの都道府県の人口が多いか調べる (&#39;?which.max&#39; を参照)</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(jp_data, <span class="fu">which.max</span>(人口)) <span class="co"># 行番号が返る</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 13</code></pre>
@@ -2658,7 +2658,7 @@ Note
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 13</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; どの都道府県の人口多いか調べる</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; どの都道府県の人口が多いか調べる</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>jp_data_en <span class="sc">|&gt;</span> <span class="fu">filter</span>(population <span class="sc">==</span> <span class="fu">max</span>(population))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 8
@@ -2742,7 +2742,7 @@ Warning
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>jp_data <span class="sc">|&gt;</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(地方 <span class="ot">=</span> <span class="fu">as_factor</span>(jp_area[[<span class="st">&quot;地方&quot;</span>]])) <span class="sc">|&gt;</span> <span class="co"># 地方の情報を付加</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(地方) <span class="sc">|&gt;</span>                              <span class="co"># 地方ごとにグループ化</span></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>((<span class="fu">across</span>(<span class="fu">c</span>(人口, 面積), sum))) <span class="sc">|&gt;</span>     <span class="co"># 地方ごとに人口と面積を集計</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">c</span>(人口, 面積), sum)) <span class="sc">|&gt;</span>     <span class="co"># 地方ごとに人口と面積を集計</span></span>
 <span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(人口密度 <span class="ot">=</span> 人口<span class="sc">/</span>面積)                   <span class="co"># 地方別の人口密度を計算</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 4
@@ -2766,7 +2766,7 @@ Warning
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>           離婚数 <span class="ot">=</span> 婚姻可能<span class="sc">*</span>離婚<span class="sc">/</span><span class="dv">1000</span>,            <span class="co"># 離婚数/1000人から人数を推計</span></span>
 <span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>           地方 <span class="ot">=</span> <span class="fu">as_factor</span>(jp_area[[<span class="st">&quot;地方&quot;</span>]])) <span class="sc">|&gt;</span> <span class="co"># 地方の情報を付加</span></span>
 <span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(地方) <span class="sc">|&gt;</span>                              <span class="co"># 地方ごとにグループ化</span></span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>((<span class="fu">across</span>(婚姻可能<span class="sc">:</span>離婚数, sum))) <span class="sc">|&gt;</span>   <span class="co"># 地方別の合計を計算</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">across</span>(婚姻可能<span class="sc">:</span>離婚数, sum)) <span class="sc">|&gt;</span>   <span class="co"># 地方別の合計を計算</span></span>
 <span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(婚姻 <span class="ot">=</span> 婚姻数<span class="sc">/</span>婚姻可能<span class="sc">*</span><span class="dv">1000</span>,            <span class="co"># 1000人あたりの婚姻数を計算</span></span>
 <span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>           離婚 <span class="ot">=</span> 離婚数<span class="sc">/</span>婚姻可能<span class="sc">*</span><span class="dv">1000</span>)            <span class="co"># 1000人あたりの離婚数を計算</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
