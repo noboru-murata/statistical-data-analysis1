@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-06 17:09:47 mura>
+# Time-stamp: <2026-04-28 17:09:47 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -1052,7 +1052,7 @@
     jp_data |>
       mutate(地方 = as_factor(jp_area[["地方"]])) |> # 地方の情報を付加
       group_by(地方) |>                              # 地方ごとにグループ化
-      summarize((across(人口:面積, sum)))            # グループごとに集計
+      summarize(across(人口:面積, sum))            # グループごとに集計
   #+end_src
   #+begin_src R :eval no :exports none
     #' @notes
@@ -1065,7 +1065,7 @@
              人口密度 = 人口/面積,                   # 人口密度を計算
              過密 = 人口密度 >= median(人口密度)) |> # 人口密度が中央値以上
       group_by(地方, 過密) |>                        # 地方ごとにグループ化
-      summarize((across(人口:面積, sum)))            # グループごとに集計
+      summarize(across(人口:面積, sum))            # グループごとに集計
   #+end_src
 
 ** COMMENT 練習問題
@@ -1163,7 +1163,7 @@
   jp_data |>
     mutate(地方 = as_factor(jp_area[["地方"]])) |> # 地方の情報を付加
     group_by(地方) |> # 地方ごとにグループ化
-    summarize((across(c(人口, 面積), sum))) |> # 地方ごとに人口と面積を集計
+    summarize(across(c(人口, 面積), sum)) |> # 地方ごとに人口と面積を集計
     mutate(人口密度 = 人口/面積) # 地方別の人口密度を計算
   #'
   #' 地方別の婚姻・離婚数/1000人
@@ -1173,7 +1173,7 @@
            離婚数 = 婚姻可能*離婚/1000, # 離婚数/1000人から人数を推計
            地方 = as_factor(jp_area[["地方"]])) |> # 地方の情報を付加
     group_by(地方) |> # 地方ごとにグループ化
-    summarize((across(婚姻可能:離婚数, sum))) |> # 地方別の合計を計算
+    summarize(across(婚姻可能:離婚数, sum)) |> # 地方別の合計を計算
     mutate(婚姻 = 婚姻数/婚姻可能*1000, # 1000人あたりの婚姻数を計算
            離婚 = 離婚数/婚姻可能*1000) # 1000人あたりの離婚数を計算
   #'
