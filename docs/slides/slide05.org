@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-06 17:14:18 mura>
+# Time-stamp: <2026-05-06 15:31:04 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -700,7 +700,7 @@
      if(Sys.info()["sysname"] == "Darwin") { # macOS か調べる
        #' OS標準のヒラギノフォントを指定する場合
        theme_update(text = element_text(family = "HiraginoSans-W4"))
-       #' gome_text/geom_label内で用いられる日本語フォントの指定
+       #' geom_text/geom_label内で用いられる日本語フォントの指定
        update_geom_defaults("text", list(family = theme_get()$text$family))
        update_geom_defaults("label", list(family = theme_get()$text$family))}
    #+end_src
@@ -826,7 +826,7 @@
        ...,
        binwidth = NULL,
        bins = NULL,
-       na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TREU
+       na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TRUE
      )
      #' binwidth: ヒストグラムのビンの幅を指定
      #' bins: ヒストグラムのビンの数を指定
@@ -964,7 +964,7 @@
        notch = FALSE, notchwidth = 0.5, varwidth = FALSE,
        na.rm = FALSE, orientation = NA, show.legend = NA, inherit.aes = TRUE
      )
-     #' ourlier.*: 外れ値の描画方法の指定
+     #' outlier.*: 外れ値の描画方法の指定
      #' notch*: ボックスの切れ込みの設定
      #' varwidth: ボックスの幅でデータ数を表示
      #' 詳細は '?ggplot2::geom_boxplot' を参照
