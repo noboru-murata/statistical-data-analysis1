@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Generated on 2026-05-08 Fri 15:18 -->
 <meta charset="utf-8"/>
 <title>データの可視化</title>
 <meta name="author" content="村田 昇"/>
@@ -72,8 +73,8 @@
 
 </section>
 <section>
-<section id="slide-org27799b9">
-<h2 id="org27799b9">講義の内容</h2>
+<section id="slide-org4cfdb9d">
+<h2 id="org4cfdb9d">講義の内容</h2>
 <ul>
 <li>可視化の重要性</li>
 <li>基本的な描画</li>
@@ -85,13 +86,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgfed3090">
-<h2 id="orgfed3090">可視化の重要性</h2>
-<div class="outline-text-2" id="text-orgfed3090">
+<section id="slide-org8a341c7">
+<h2 id="org8a341c7">可視化の重要性</h2>
+<div class="outline-text-2" id="text-org8a341c7">
 </div>
 </section>
-<section id="slide-org1dc84cc">
-<h3 id="org1dc84cc">データの可視化</h3>
+<section id="slide-org0a9bb51">
+<h3 id="org0a9bb51">データの可視化</h3>
 <ul>
 <li>データ全体の特徴や傾向を把握するための直感的で効果的な方法</li>
 <li>R言語には極めて多彩な作図機能が用意されている
@@ -106,8 +107,8 @@
 
 </ul>
 </section>
-<section id="slide-org1bef33d">
-<h3 id="org1bef33d">tidyverse パッケージ</h3>
+<section id="slide-org4453652">
+<h3 id="org4453652">tidyverse パッケージ</h3>
 <ul>
 <li>データ操作とグラフィクスの拡張 (再掲)
 <ul>
@@ -140,8 +141,8 @@ library(tidyverse)
 
 </ul>
 </section>
-<section id="slide-orga9f1e5a">
-<h3 id="orga9f1e5a">サンプルデータの説明</h3>
+<section id="slide-org605204a">
+<h3 id="org605204a">サンプルデータの説明</h3>
 <ul>
 <li><p>
 <code>jpdata[1-3].csv</code> (再掲)
@@ -249,13 +250,13 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </section>
 </section>
 <section>
-<section id="slide-orga8d360e">
-<h2 id="orga8d360e">描画の基礎</h2>
-<div class="outline-text-2" id="text-orga8d360e">
+<section id="slide-org8be38df">
+<h2 id="org8be38df">描画の基礎</h2>
+<div class="outline-text-2" id="text-org8be38df">
 </div>
 </section>
-<section id="slide-org3a5ea63">
-<h3 id="org3a5ea63">描画の初期化</h3>
+<section id="slide-org580d035">
+<h3 id="org580d035">描画の初期化</h3>
 <ul>
 <li><p>
 <code>package::ggplot2</code> ではさまざまな作図関数を演算子 <code>+</code> で追加しながら描画する
@@ -282,8 +283,8 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 
 </ul>
 </section>
-<section id="slide-orgfe3fbe2">
-<h3 id="orgfe3fbe2">折線グラフ</h3>
+<section id="slide-org37eb2ac">
+<h3 id="org37eb2ac">折線グラフ</h3>
 <ul>
 <li><p>
 関数 <code>ggplot2::geom_line()</code> : 線の描画
@@ -328,15 +329,15 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </div>
 
 
-<div id="org77e2c8a" class="figure">
+<div id="orgc3e4eff" class="figure">
 <p><img src="figs/05-geomline-geomline.png" alt="05-geomline-geomline.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org89a1e41">
-<h3 id="org89a1e41">データフレームの形の変更</h3>
+<section id="slide-org7373989">
+<h3 id="org7373989">データフレームの形の変更</h3>
 <ul>
 <li><p>
 関数 <code>dplyr::pivot_longer()</code> : 列の集約
@@ -384,7 +385,7 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </div>
 
 
-<div id="org7244b79" class="figure">
+<div id="org874a8d9" class="figure">
 <p><img src="figs/05-geomline.png" alt="05-geomline.png" width="50%" />
 </p>
 </div></li>
@@ -409,15 +410,15 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </div>
 
 
-<div id="orge31c4fb" class="figure">
+<div id="orgc1111f5" class="figure">
 <p><img src="figs/05-geomline-facetgrid.png" alt="05-geomline-facetgrid.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-orgc55308d">
-<h3 id="orgc55308d">図の保存</h3>
+<section id="slide-org5f4a997">
+<h3 id="org5f4a997">図の保存</h3>
 <ul>
 <li>RStudioの機能を使う (少数の場合はこちらが簡便)
 <ul>
@@ -450,18 +451,18 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </section>
 </section>
 <section>
-<section id="slide-org28941bc" data-background="#fef4f4">
-<h2 id="org28941bc">実習</h2>
+<section id="slide-org7a95047" data-background="#fef4f4">
+<h2 id="org7a95047">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org3b84323">
-<h2 id="org3b84323">散布図の描画</h2>
-<div class="outline-text-2" id="text-org3b84323">
+<section id="slide-orgf4f1266">
+<h2 id="orgf4f1266">散布図の描画</h2>
+<div class="outline-text-2" id="text-orgf4f1266">
 </div>
 </section>
-<section id="slide-org8b27df8">
-<h3 id="org8b27df8">散布図</h3>
+<section id="slide-org1ede279">
+<h3 id="org1ede279">散布図</h3>
 <ul>
 <li><p>
 関数 <code>ggplot2::geom_point()</code> : 点の描画
@@ -505,7 +506,7 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </div>
 
 
-<div id="org7132885" class="figure">
+<div id="orgd34504b" class="figure">
 <p><img src="figs/05-geompoint.png" alt="05-geompoint.png" width="50%" />
 </p>
 </div></li>
@@ -528,7 +529,7 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </div>
 
 
-<div id="org8f51022" class="figure">
+<div id="orge013639" class="figure">
 <p><img src="figs/05-geompoint-size.png" alt="05-geompoint-size.png" width="50%" />
 </p>
 </div></li>
@@ -552,15 +553,15 @@ jp_area &lt;- read_csv(file = "data/jpdata3.csv")
 </div>
 
 
-<div id="org752ea3a" class="figure">
+<div id="org03cf359" class="figure">
 <p><img src="figs/05-geompoint-scalelog.png" alt="05-geompoint-scalelog.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org2031632">
-<h3 id="org2031632">散布図行列</h3>
+<section id="slide-org9c194ec">
+<h3 id="org9c194ec">散布図行列</h3>
 <ul>
 <li>複数の散布図を行列状に配置したもの</li>
 <li><p>
@@ -607,7 +608,7 @@ ggpairs(
 </div>
 
 
-<div id="orgffc922c" class="figure">
+<div id="org050bf61" class="figure">
 <p><img src="figs/05-ggpairs.png" alt="05-ggpairs.png" width="50%" />
 </p>
 </div></li>
@@ -632,15 +633,15 @@ ggpairs(
 </div>
 
 
-<div id="orgcc7c610" class="figure">
+<div id="org85d59f7" class="figure">
 <p><img src="figs/05-ggpairs-quarter.png" alt="05-ggpairs-quarter.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org6d596dd">
-<h3 id="org6d596dd">対話型のグラフ</h3>
+<section id="slide-orga52c8f8">
+<h3 id="orga52c8f8">対話型のグラフ</h3>
 <ul>
 <li><code>ggplot2</code> で描画したグラフは
 対話型 (interactive) のグラフに変換することができる</li>
@@ -712,8 +713,8 @@ ggplotly(bar) # 保存した ggplot オブジェクトを変換
 
 </ul>
 </section>
-<section id="slide-org9042b9e">
-<h3 id="org9042b9e">日本語に関する注意 (主にmacOS)</h3>
+<section id="slide-org70c694d">
+<h3 id="org70c694d">日本語に関する注意 (主にmacOS)</h3>
 <ul>
 <li>日本語を含む図で文字化けが起こる場合がある</li>
 <li><p>
@@ -739,18 +740,18 @@ ggplotly(bar) # 保存した ggplot オブジェクトを変換
 </section>
 </section>
 <section>
-<section id="slide-org45945dc" data-background="#fef4f4">
-<h2 id="org45945dc">実習</h2>
+<section id="slide-org020ebb4" data-background="#fef4f4">
+<h2 id="org020ebb4">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org2789243">
-<h2 id="org2789243">さまざまなグラフ</h2>
-<div class="outline-text-2" id="text-org2789243">
+<section id="slide-orgb677649">
+<h2 id="orgb677649">さまざまなグラフ</h2>
+<div class="outline-text-2" id="text-orgb677649">
 </div>
 </section>
-<section id="slide-org39a94ae">
-<h3 id="org39a94ae">ヒストグラム</h3>
+<section id="slide-orga2158a9">
+<h3 id="orga2158a9">ヒストグラム</h3>
 <ul>
 <li>データの値の範囲をいくつかの区間に分割し，
 各区間に含まれるデータの個数を棒グラフにした図
@@ -796,15 +797,15 @@ ggplotly(bar) # 保存した ggplot オブジェクトを変換
 </div>
 
 
-<div id="org375863b" class="figure">
+<div id="orgc547827" class="figure">
 <p><img src="figs/05-geomhistogram.png" alt="05-geomhistogram.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org0d96aea">
-<h3 id="org0d96aea">密度</h3>
+<section id="slide-orgb2e3aac">
+<h3 id="orgb2e3aac">密度</h3>
 <ul>
 <li>データからカーネル法で確率密度を推定した図
 <ul>
@@ -849,15 +850,15 @@ ggplotly(bar) # 保存した ggplot オブジェクトを変換
 </div>
 
 
-<div id="org09b1243" class="figure">
+<div id="org5b853d7" class="figure">
 <p><img src="figs/05-geomdensity.png" alt="05-geomdensity.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-orgb6ec5b2">
-<h3 id="orgb6ec5b2">箱ひげ図</h3>
+<section id="slide-orgff1a91c">
+<h3 id="orgff1a91c">箱ひげ図</h3>
 <ul>
 <li>データの散らばり具合を考察するための図
 <ul>
@@ -906,15 +907,15 @@ ggplotly(bar) # 保存した ggplot オブジェクトを変換
 </div>
 
 
-<div id="orgf4ea659" class="figure">
+<div id="orgb1b01d1" class="figure">
 <p><img src="figs/05-geomboxplot.png" alt="05-geomboxplot.png" width="50%" />
 </p>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org4781743">
-<h3 id="org4781743">棒グラフ</h3>
+<section id="slide-orga58edeb">
+<h3 id="orga58edeb">棒グラフ</h3>
 <ul>
 <li><p>
 項目ごとの量を並べて表示した図
@@ -965,7 +966,7 @@ ggplotly(bar) # 保存した ggplot オブジェクトを変換
 </div>
 
 
-<div id="org205c8ba" class="figure">
+<div id="org4d72fef" class="figure">
 <p><img src="figs/05-geombar.png" alt="05-geombar.png" width="50%" />
 </p>
 </div></li>
@@ -974,13 +975,13 @@ ggplotly(bar) # 保存した ggplot オブジェクトを変換
 </section>
 </section>
 <section>
-<section id="slide-org0f71f01" data-background="#fef4f4">
-<h2 id="org0f71f01">実習</h2>
+<section id="slide-orgebf9a4c" data-background="#fef4f4">
+<h2 id="orgebf9a4c">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org107bfc6">
-<h2 id="org107bfc6">次回の予定</h2>
+<section id="slide-org47cdf89">
+<h2 id="org47cdf89">次回の予定</h2>
 <ul>
 <li>計算機による数値実験</li>
 <li>乱数とは</li>
@@ -1039,7 +1040,7 @@ dependencies: [
 
 });
 </script>
-<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script defer src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>
 /* Recompute layout upon changes by klipse.  Code fragment from
    asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
