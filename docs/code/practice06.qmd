@@ -39,7 +39,7 @@ library(tidyverse)
 
 以下のようなコイン投げの賭けを考える．
 
--   Alice と Bob の二人で交互にコインを投げ，最初に表が出た方を勝ちとする．
+- Alice と Bob の二人で交互にコインを投げ，最初に表が出た方を勝ちとする．
 
 この賭けの勝率を求めるための確率シミュレーションを行いなさい．
 
@@ -111,7 +111,7 @@ table(my_data)/mc # 勝率の計算 (全実験回数で除算)
 
 ### 解答例
 
-針を投げる試行を定義する． 試行の周期性から1本の線の回りで問題を考えれば良い． 針の中心位置 $x\;(-d/2<x<d/2)$ と向き $\theta\;(0<\theta<2\pi)$ をランダムに生成する． 針の先と尾の座標の符号が異なれば位置0の線と交わっていると判断できる．
+針を投げる試行を定義する． 試行の周期性から1本の線の周りで問題を考えれば良い． 針の中心位置 $x\;(-d/2<x<d/2)$ と向き $\theta\;(0<\theta<2\pi)$ をランダムに生成する． 針の先と尾の座標の符号が異なれば位置0の線と交わっていると判断できる．
 
 ```{r}
 buffon_trial <- function(d, l, verbose = FALSE){ # dとlを指定
@@ -158,7 +158,7 @@ replicate(mc, buffon_trial(d, l, verbose = TRUE)) |>
         x2 = x+l/2*cos(theta),
         y1 = y-l/2*sin(theta),
         y2 = y+l/2*sin(theta),
-        cross = as.logical(cross)) |> # 交わり表すラベル(論理値)
+        cross = as.logical(cross)) |> # 交わりを表すラベル(論理値)
     ggplot() + 
     geom_vline(xintercept = c(-d,0,d)) + # 縦棒を描く
     geom_segment(aes(x = x1, y = y1,       # 始点
@@ -326,7 +326,7 @@ table(monty_data)/mc # 確率(推定値)
 monty_trial <- function(change = FALSE, # ドアを変えるか否か
                         verbose = FALSE){
     doors <- LETTERS[1:3]      # ドアの名前 A,B,C 
-    prize <-  sample(doors, 1) # 商品のドア
+    prize <-  sample(doors, 1) # 賞品のドア
     choice <- sample(doors, 1) # 選んだドア
     monty <-  sample(doors[(doors != prize) & (doors != choice)], 1) # モンティが開いたドア
     if(change){ # 選択を変えた場合の最後に選んだドア
@@ -353,15 +353,15 @@ table(replicate(mc, monty_trial(change = TRUE)))/mc # 選んだドアを変え�
 
 以下の条件のもと秘書を1人雇うとする．
 
--   $n$ 人が応募しており $n$ は既知とする．
+- $n$ 人が応募しており $n$ は既知とする．
 
--   応募者には $1$ 位から $n$ 位まで順位付けできる．
+- 応募者には $1$ 位から $n$ 位まで順位付けできる．
 
--   無作為な順序で1人ずつ面接を行う．
+- 無作為な順序で1人ずつ面接を行う．
 
--   毎回の面接後その応募者を採用するか否かを決定する．
+- 毎回の面接後その応募者を採用するか否かを決定する．
 
--   不採用にした応募者を後から採用することはできない．
+- 不採用にした応募者を後から採用することはできない．
 
 "$r-1$ 番までの応募者は採用せず， $r$ 番以降の応募者でそれまで面接した中で最も良い者を採用する" という戦略を取るとき，最適な $r$ はいくつだろうか?
 
@@ -381,7 +381,7 @@ secretary_trial <- function(n, r, verbose = FALSE){ # nとrを指定
     ref <- applicants[1:(r-1)] # r-1人目までは参照(最高順位が基準点)
     test <- applicants[r:n]    # r人目以降が採用候補
     idx <- which(test < min(ref)) # 採用候補の中で基準点より良い人を選出
-    if(length(idx) == 0) { # 1人も規準良い人がいない場合
+    if(length(idx) == 0) { # 1人も基準より良い人がいない場合
         employed <- applicants[n] # 最後の人を採用
     } else {
         employed <- test[idx[1]]  # 最初に基準点を越えた人を採用
