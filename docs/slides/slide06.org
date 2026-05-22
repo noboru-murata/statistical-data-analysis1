@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-05-22 14:53:46 mura>
+# Time-stamp: <2026-05-22 16:06:36 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -30,6 +30,12 @@
 #+end_src
 #+begin_src R :exports none
   ### 第6講 サンプルコード
+  library(conflicted)  # 関数名の衝突を警告
+  conflicts_prefer(    # 優先的に使う関数を指定
+    dplyr::filter(),
+    dplyr::select(),
+    dplyr::lag(),
+    )
   library(tidyverse)
 #+end_src
 
@@ -261,6 +267,52 @@
    #+end_quote
    - 針の位置(例えば中心)と平行線となす角度が適当な範囲でランダムに選ばれると考えればよい
 
+#+reveal: split
+#+header: :width 720 :height 720 :res 100
+#+begin_src R :file figs/buffon.png :exports results :results graphics
+  buffon_trial <- function(d, l, verbose = FALSE){ # dとlを指定
+    x <- runif(1, min = -d/2, max = d/2) # 位置
+    theta <- runif(1, min = 0, max = 2*pi) # 角度
+    cross <- FALSE # 交わったかどうかを示す変数
+    if((x+l*cos(theta)/2)*(x-l*cos(theta)/2) < 0){
+      cross <- TRUE # 交わった場合に書き換え
+    }
+    if(verbose == TRUE){ # 位置と角度も返す
+      return(c(x = x, theta = theta,       # ベクトルで返すので
+               cross = as.numeric(cross))) # データ型を揃える
+    } else { # 交わったかどうかだけ返す
+      return(cross) # 論理値のまま返す
+    }
+  }
+  d <- 10
+  l <- 7
+  mc <- 10
+  replicate(mc, buffon_trial(d, l, verbose = TRUE)) |>
+    t() |> # 配列を転置
+    as_tibble() |> # tibble に変換
+    mutate( # 図に必要な情報を加える
+      y = runif(mc, min = -(d+l)/2, max = (d+l)/2), # 中心のy座標をランダムに生成
+      x1 = x-l/2*cos(theta), 
+      x2 = x+l/2*cos(theta),
+      y1 = y-l/2*sin(theta),
+      y2 = y+l/2*sin(theta),
+      cross = as.logical(cross)) |> # 交わりを表すラベル(論理値)
+    ggplot() + 
+    geom_vline(xintercept = c(-d,0,d)) + # 縦棒を描く
+    geom_segment(aes(x = x1, y = y1,       # 始点
+                     xend = x2, yend = y2, # 終点
+                     colour = cross)) +    # 交わりを表示
+    labs(x = "x", y = "y") +
+    coord_fixed() # 座標軸の比を1に固定
+#+end_src
+
+#+caption: Buffonの針
+#+name: fig:buffon
+#+attr_html: :class r-stretch
+#+attr_latex: :width 0.6\linewidth
+[[file:figs/buffon.png]]
+         
+      
 #+begin_src R :eval no :exports none :tangle no
   #' ---------------------------------------------------------------------------
   #' @practice Buffonの針
