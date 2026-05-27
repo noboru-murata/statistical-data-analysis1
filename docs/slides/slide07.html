@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
 <link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
 <style>
 /* Position computations of klipse get confused by reveal.js's scaling.
@@ -72,8 +73,8 @@
 
 </section>
 <section>
-<section id="slide-org789ab11">
-<h2 id="org789ab11">講義概要</h2>
+<section id="slide-orgc025178">
+<h2 id="orgc025178">講義概要</h2>
 <ul>
 <li>独立な確率変数の性質</li>
 <li>大数の法則</li>
@@ -84,11 +85,11 @@
 </section>
 </section>
 <section>
-<section id="slide-org67ea116">
-<h2 id="org67ea116">基本事項の確認</h2>
+<section id="slide-org666110e">
+<h2 id="org666110e">基本事項の確認</h2>
 </section>
-<section id="slide-orgb373651">
-<h3 id="orgb373651">確率変数</h3>
+<section id="slide-orge3a6c22">
+<h3 id="orge3a6c22">確率変数</h3>
 <ul>
 <li>乱数の数学モデル : 値がランダムに決定される変数</li>
 <li>任意の区間 \([a,b]\) に含まれる確率が定められている 
@@ -118,8 +119,8 @@
 
 </ul>
 </section>
-<section id="slide-org339b83d">
-<h3 id="org339b83d">平均と分散</h3>
+<section id="slide-orgdc4db92">
+<h3 id="orgdc4db92">平均と分散</h3>
 <ul>
 <li>確率変数 \(X\) の観測値 : \(x_1,x_2,\dotsc,x_N\)</li>
 <li><p>
@@ -150,8 +151,8 @@
 
 </ul>
 </section>
-<section id="slide-org5f8df0c">
-<h3 id="org5f8df0c">例題</h3>
+<section id="slide-org585c516">
+<h3 id="org585c516">例題</h3>
 <ul>
 <li><p>
 <span style="color:green;">偏ったサイコロの問題</span>
@@ -214,18 +215,18 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R"><span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#24179;&#22343;&#12392;&#20998;&#25955;&#12398;&#35336;&#31639;</span>
-p <span style="color: #60aa00;">&lt;-</span> rep(c(1/9,2/9),3) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#30906;&#29575;&#12398;&#20516; (1/9 &#12392; 2/9 &#12434;&#20132;&#20114;&#12395;3&#22238;&#32368;&#12426;&#36820;&#12377;)</span>
-x <span style="color: #60aa00;">&lt;-</span> 1:6 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12469;&#12452;&#12467;&#12525;&#12398;&#30446;&#12398;&#20516;</span>
-(mu <span style="color: #60aa00;">&lt;-</span> sum(x*p)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24179;&#22343;&#20516;&#12398;&#35336;&#31639;</span>
-(v <span style="color: #60aa00;">&lt;-</span> sum((x-mu)^2*p)) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20998;&#25955;&#12398;&#35336;&#31639;</span>
-sqrt(v) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#27161;&#28310;&#20559;&#24046;</span>
+<pre><code class="R" >#' 平均と分散の計算
+p &lt;- rep(c(1/9,2/9),3) # 確率の値 (1/9 と 2/9 を交互に3回繰り返す)
+x &lt;- 1:6 # サイコロの目の値
+(mu &lt;- sum(x*p)) # 平均値の計算
+(v &lt;- sum((x-mu)^2*p)) # 分散の計算
+sqrt(v) # 標準偏差
 
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#27491;&#35215;&#21270;&#12375;&#12394;&#12356;&#12391;&#35336;&#31639;&#12377;&#12427;&#26041;&#27861;&#12418;&#12354;&#12427;</span>
-w <span style="color: #60aa00;">&lt;-</span> rep(1:2,3) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1,2 &#12398;&#32368;&#12426;&#36820;&#12375; (&#30906;&#29575;&#12391;&#12399;&#12394;&#12356;)</span>
+#' 正規化しないで計算する方法もある
+w &lt;- rep(1:2,3) # 1,2 の繰り返し (確率ではない)
 weighted.mean(x,w)
 weighted.mean(x^2,w)-weighted.mean(x,w)^2
-</pre>
+</code></pre>
 </div>
 
 <pre class="example">
@@ -240,13 +241,13 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-org4d610d1">
-<h2 id="org4d610d1">独立性と同分布性</h2>
-<div class="outline-text-2" id="text-org4d610d1">
+<section id="slide-orgd95a2df">
+<h2 id="orgd95a2df">独立性と同分布性</h2>
+<div class="outline-text-2" id="text-orgd95a2df">
 </div>
 </section>
-<section id="slide-orge585a2c">
-<h3 id="orge585a2c">同時分布</h3>
+<section id="slide-org2a52806">
+<h3 id="org2a52806">同時分布</h3>
 <ul>
 <li>観測データは確率変数の集合</li>
 <li><b>確率変数列</b> \(X_1,X_2,\dotsc,X_n\) に対する考察が重要</li>
@@ -272,8 +273,8 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-orgc6f0c12">
-<h3 id="orgc6f0c12">独立性</h3>
+<section id="slide-orgae9fa41">
+<h3 id="orgae9fa41">独立性</h3>
 <ul>
 <li>無関係にサンプリングされた観測データの性質</li>
 <li><p>
@@ -298,8 +299,8 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-org377bdbb">
-<h3 id="org377bdbb">同分布性</h3>
+<section id="slide-orgcdfd078">
+<h3 id="orgcdfd078">同分布性</h3>
 <ul>
 <li>同一の法則に従って生成された観測データの性質</li>
 <li><p>
@@ -323,8 +324,8 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-org0aaf99a">
-<h3 id="org0aaf99a">独立同分布性</h3>
+<section id="slide-org4fac1cb">
+<h3 id="org4fac1cb">独立同分布性</h3>
 <ul>
 <li>一般に分析対象のデータには
 <b>独立性</b> と <b>同分布性</b> 
@@ -348,8 +349,8 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-orgbf83366">
-<h3 id="orgbf83366">無限列の独立性と同分布性</h3>
+<section id="slide-orga181019">
+<h3 id="orga181019">無限列の独立性と同分布性</h3>
 <ul>
 <li>無限列に対しては任意の部分列について考える</li>
 <li><p>
@@ -387,13 +388,13 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-org8f26444">
-<h2 id="org8f26444">大数の法則</h2>
-<div class="outline-text-2" id="text-org8f26444">
+<section id="slide-org1431103">
+<h2 id="org1431103">大数の法則</h2>
+<div class="outline-text-2" id="text-org1431103">
 </div>
 </section>
-<section id="slide-org79cc22c">
-<h3 id="org79cc22c">大数の法則の概要</h3>
+<section id="slide-org6610ff4">
+<h3 id="org6610ff4">大数の法則の概要</h3>
 <ul>
 <li><p>
 要点
@@ -415,8 +416,8 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-org68230f3">
-<h3 id="org68230f3">大数の強法則</h3>
+<section id="slide-org9b0fe73">
+<h3 id="org9b0fe73">大数の強法則</h3>
 <ul>
 <li><p>
 定理
@@ -449,11 +450,11 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-orgbe17347" data-background="#fef4f4">
-<h2 id="orgbe17347">実習</h2>
+<section id="slide-orged8b80c" data-background="#fef4f4">
+<h2 id="orged8b80c">実習</h2>
 </section>
-<section id="slide-orge124280">
-<h3 id="orge124280">数値実験の設計</h3>
+<section id="slide-org5f33a48">
+<h3 id="org5f33a48">数値実験の設計</h3>
 <ul>
 <li><p>
 方針
@@ -480,13 +481,13 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-org3420937">
-<h2 id="org3420937">中心極限定理</h2>
-<div class="outline-text-2" id="text-org3420937">
+<section id="slide-org70e5907">
+<h2 id="org70e5907">中心極限定理</h2>
+<div class="outline-text-2" id="text-org70e5907">
 </div>
 </section>
-<section id="slide-orgf9e9749">
-<h3 id="orgf9e9749">中心極限定理の概要</h3>
+<section id="slide-orgcfb2357">
+<h3 id="orgcfb2357">中心極限定理の概要</h3>
 <ul>
 <li>大数の法則の主張
 <ul>
@@ -515,8 +516,8 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-org964f0eb">
-<h3 id="org964f0eb">中心極限定理</h3>
+<section id="slide-org00beba4">
+<h3 id="org00beba4">中心極限定理</h3>
 <ul>
 <li><p>
 定理
@@ -542,8 +543,8 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-orgff1df3d">
-<h3 id="orgff1df3d">中心極限定理の意味</h3>
+<section id="slide-orgaed1421">
+<h3 id="orgaed1421">中心極限定理の意味</h3>
 <ul>
 <li><p>
 \(X_i\) の分布が何であっても，
@@ -578,11 +579,11 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-orge101607" data-background="#fef4f4">
-<h2 id="orge101607">実習</h2>
+<section id="slide-org9a83e4e" data-background="#fef4f4">
+<h2 id="org9a83e4e">実習</h2>
 </section>
-<section id="slide-org8e81a15">
-<h3 id="org8e81a15">数値実験の設計</h3>
+<section id="slide-orgf205419">
+<h3 id="orgf205419">数値実験の設計</h3>
 <ul>
 <li><p>
 方針
@@ -609,7 +610,7 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 <li>\(Z\) の分布と
 標準正規密度 \(\phi(x)\) を比較する
 <ul>
-<li>密度表示は関数 <code>geom_histogram(aes(y = after_stat(density))</code> を指定</li>
+<li>密度表示は関数 <code>geom_histogram(aes(y = after_stat(density)))</code> を指定</li>
 <li>標準正規密度 \(\phi(x)\) は関数 <code>dnorm()</code> で計算可</li>
 
 </ul></li>
@@ -620,13 +621,13 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-orgc380725">
-<h2 id="orgc380725">少数の法則</h2>
-<div class="outline-text-2" id="text-orgc380725">
+<section id="slide-orgb7957e6">
+<h2 id="orgb7957e6">少数の法則</h2>
+<div class="outline-text-2" id="text-orgb7957e6">
 </div>
 </section>
-<section id="slide-org5d65da9">
-<h3 id="org5d65da9">少数の法則の概要</h3>
+<section id="slide-org4c5a716">
+<h3 id="org4c5a716">少数の法則の概要</h3>
 <ul>
 <li>滅多に起きない事が起こる回数に関する法則</li>
 <li><p>
@@ -652,8 +653,8 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-org30c0601">
-<h3 id="org30c0601">少数の法則</h3>
+<section id="slide-org0d6c8af">
+<h3 id="org0d6c8af">少数の法則</h3>
 <ul>
 <li><p>
 定理の問題設定
@@ -714,8 +715,8 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-org38dcec1">
-<h3 id="org38dcec1">Poisson 分布</h3>
+<section id="slide-org30bc0b3">
+<h3 id="org30bc0b3">Poisson 分布</h3>
 <ul>
 <li><p>
 定義
@@ -742,11 +743,11 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-org633cbb0" data-background="#fef4f4">
-<h2 id="org633cbb0">実習</h2>
+<section id="slide-orga982c99" data-background="#fef4f4">
+<h2 id="orga982c99">実習</h2>
 </section>
-<section id="slide-org6e96115">
-<h3 id="org6e96115">数値実験の設計</h3>
+<section id="slide-orgeb3110d">
+<h3 id="orgeb3110d">数値実験の設計</h3>
 <ul>
 <li><p>
 方針
@@ -776,13 +777,13 @@ Poisson 分布と比較する．
 </section>
 </section>
 <section>
-<section id="slide-org03d8ef9">
-<h2 id="org03d8ef9">補遺</h2>
-<div class="outline-text-2" id="text-org03d8ef9">
+<section id="slide-org11c3981">
+<h2 id="org11c3981">補遺</h2>
+<div class="outline-text-2" id="text-org11c3981">
 </div>
 </section>
-<section id="slide-org1a90a5d">
-<h3 id="org1a90a5d">重複対数の法則</h3>
+<section id="slide-orgf6be6cf">
+<h3 id="orgf6be6cf">重複対数の法則</h3>
 <ul>
 <li><p>
 定理
@@ -817,8 +818,8 @@ Poisson 分布と比較する．
 
 </ul>
 </section>
-<section id="slide-org9b32cf4">
-<h3 id="org9b32cf4">Hartman-Wintnerの定理</h3>
+<section id="slide-org182d2ee">
+<h3 id="org182d2ee">Hartman-Wintnerの定理</h3>
 <ul>
 <li><p>
 定理
@@ -846,8 +847,8 @@ Poisson 分布と比較する．
 </section>
 </section>
 <section>
-<section id="slide-org9d8f7bc">
-<h2 id="org9d8f7bc">次回の予定</h2>
+<section id="slide-org445b218">
+<h2 id="org445b218">次回の予定</h2>
 <ul>
 <li>一般の確率変数</li>
 <li>離散分布
@@ -873,6 +874,7 @@ Poisson 分布と比較する．
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
 <script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
 <script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
@@ -907,7 +909,7 @@ showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : fal
 'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [

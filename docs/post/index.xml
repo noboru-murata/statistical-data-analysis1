@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on 統計データ解析I</title>
-    <link>https://noboru-murata.github.io/statistical-data-analysis1/post/</link>
-    <description>Recent content in Posts on 統計データ解析I</description>
-    <generator>Hugo</generator>
-    <language>en-US</language>
-    <lastBuildDate>Fri, 11 Apr 2025 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://noboru-murata.github.io/statistical-data-analysis1/post/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>R/RStudioの導入方法</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/post/post1/</link>
-      <pubDate>Fri, 31 Mar 2023 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/post/post1/</guid>
-      <description>&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;https://noboru-murata.github.io/statistical-data-analysis1/slides/install.html&#34;&#xA;&#x9;  style=&#34;position:absolute; top:0; left:0;&#xA;&#x9;&#x9; width:200%;  /* 0.5倍にするなら、幅を2倍(200%)にする */&#xA;&#x9;&#x9; height:200%; /* 高さも2倍(200%)にする */&#xA;&#x9;&#x9; transform: scale(0.5); /* ここで半分に縮小 */&#xA;&#x9;&#x9; transform-origin: 0 0;&#34; /* 左上を起点に縮小 */&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;&#x9;  allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/slides/install.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/install.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-    </item>
-    <item>
-      <title>スライドの使い方</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/post/post2/</link>
-      <pubDate>Fri, 02 Apr 2021 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/post/post2/</guid>
-      <description>&lt;p&gt;スライドは&#xA;&lt;a href=&#34;https://revealjs.com&#34;&gt;reveal.js&lt;/a&gt;&#xA;を使って作っています．&lt;/p&gt;&#xA;&lt;p&gt;スライドを click して &amp;ldquo;?&amp;rdquo; を入力すると&#xA;shortcut key が表示されますが，これ以外にも以下の key などが使えます．&lt;/p&gt;&#xA;&lt;h2 id=&#34;フルスクリーン&#34;&gt;フルスクリーン&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;f フルスクリーン表示&lt;/li&gt;&#xA;&lt;li&gt;esc 元に戻る&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;印刷&#34;&gt;印刷&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;e 印刷用の表示との切り替え (toggle)&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-    </item>
-    <item>
-      <title>Quartoの使い方</title>
-      <link>https://noboru-murata.github.io/statistical-data-analysis1/post/post3/</link>
-      <pubDate>Fri, 11 Apr 2025 00:00:00 +0900</pubDate>
-      <guid>https://noboru-murata.github.io/statistical-data-analysis1/post/post3/</guid>
-      <description>&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;https://noboru-murata.github.io/statistical-data-analysis1/slides/quarto.html&#34;&#xA;&#x9;  style=&#34;position:absolute; top:0; left:0;&#xA;&#x9;&#x9; width:200%;  /* 0.5倍にするなら、幅を2倍(200%)にする */&#xA;&#x9;&#x9; height:200%; /* 高さも2倍(200%)にする */&#xA;&#x9;&#x9; transform: scale(0.5); /* ここで半分に縮小 */&#xA;&#x9;&#x9; transform-origin: 0 0;&#34; /* 左上を起点に縮小 */&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;&#x9;  allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/slides/quarto.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/quarto.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-    </item>
-  </channel>
+	<channel>
+		<title>Posts on 統計データ解析I</title>
+		<link>https://noboru-murata.github.io/statistical-data-analysis1/post/</link>
+		<description>Recent content in Posts on 統計データ解析I</description>
+		<generator>Hugo</generator>
+		<language>en-US</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 11 Apr 2025 00:00:00 +0900</lastBuildDate>
+		
+			<atom:link href="https://noboru-murata.github.io/statistical-data-analysis1/post/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>R/RStudioの導入方法</title>
+				<link>https://noboru-murata.github.io/statistical-data-analysis1/post/post1/</link>
+				<pubDate>Fri, 31 Mar 2023 00:00:00 +0900</pubDate>
+				<guid>https://noboru-murata.github.io/statistical-data-analysis1/post/post1/</guid>
+				<description>&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;https://noboru-murata.github.io/statistical-data-analysis1/slides/install.html&#34;&#xA;&#x9;  style=&#34;position:absolute; top:0; left:0;&#xA;&#x9;&#x9; width:200%;  /* 0.5倍にするなら、幅を2倍(200%)にする */&#xA;&#x9;&#x9; height:200%; /* 高さも2倍(200%)にする */&#xA;&#x9;&#x9; transform: scale(0.5); /* ここで半分に縮小 */&#xA;&#x9;&#x9; transform-origin: 0 0;&#34; /* 左上を起点に縮小 */&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;&#x9;  allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/slides/install.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/install.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+			</item>
+			<item>
+				<title>スライドの使い方</title>
+				<link>https://noboru-murata.github.io/statistical-data-analysis1/post/post2/</link>
+				<pubDate>Fri, 02 Apr 2021 00:00:00 +0900</pubDate>
+				<guid>https://noboru-murata.github.io/statistical-data-analysis1/post/post2/</guid>
+				<description>&lt;p&gt;スライドは&#xA;&lt;a href=&#34;https://revealjs.com&#34;&gt;reveal.js&lt;/a&gt;&#xA;を使って作っています．&lt;/p&gt;&#xA;&lt;p&gt;スライドを click して &amp;ldquo;?&amp;rdquo; を入力すると&#xA;shortcut key が表示されますが，これ以外にも以下の key などが使えます．&lt;/p&gt;&#xA;&lt;h2 id=&#34;フルスクリーン&#34;&gt;フルスクリーン&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;f フルスクリーン表示&lt;/li&gt;&#xA;&lt;li&gt;esc 元に戻る&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;印刷&#34;&gt;印刷&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;e 印刷用の表示との切り替え (toggle)&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+			</item>
+			<item>
+				<title>Quartoの使い方</title>
+				<link>https://noboru-murata.github.io/statistical-data-analysis1/post/post3/</link>
+				<pubDate>Fri, 11 Apr 2025 00:00:00 +0900</pubDate>
+				<guid>https://noboru-murata.github.io/statistical-data-analysis1/post/post3/</guid>
+				<description>&lt;h2 id=&#34;スライド&#34;&gt;スライド&lt;/h2&gt;&#xA;&#xA;&lt;div style=&#34;position:relative;width:100%;padding-top:62.5%;&#34;&gt;&#xA;  &lt;iframe src=&#34;https://noboru-murata.github.io/statistical-data-analysis1/slides/quarto.html&#34;&#xA;&#x9;  style=&#34;position:absolute; top:0; left:0;&#xA;&#x9;&#x9; width:200%;  /* 0.5倍にするなら、幅を2倍(200%)にする */&#xA;&#x9;&#x9; height:200%; /* 高さも2倍(200%)にする */&#xA;&#x9;&#x9; transform: scale(0.5); /* ここで半分に縮小 */&#xA;&#x9;&#x9; transform-origin: 0 0;&#34; /* 左上を起点に縮小 */&#xA;&#x9;  frameborder=&#34;0&#34;&#xA;&#x9;  allowfullscreen&gt;&#xA;  &lt;/iframe&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/slides/quarto.html&#34;&gt;full size&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&lt;h2 id=&#34;ハンドアウト&#34;&gt;ハンドアウト&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://noboru-murata.github.io/statistical-data-analysis1/pdfs/quarto.pdf&#34;&gt;PDF file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+			</item>
+	</channel>
 </rss>
