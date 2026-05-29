@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-06 17:30:29 mura>
+# Time-stamp: <2026-05-29 15:39:36 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -71,6 +71,8 @@
 
 ** 確率変数列の独立性
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(n\) 個の確率変数 \(X_{1},X_{2},\dotsc,X_n\) が *独立* であるとは，
    \(a_i\leq b_i\) \((i=1,\dots,n)\) なる
@@ -84,6 +86,8 @@
 
 ** 確率変数列の同分布性
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(n\) 個の確率変数 \(X_{1},X_{2},\dotsc,X_n\) が *同分布* であるとは，
    \(a\leq b\) なる任意の実数 \(a,b\) に対して
@@ -101,13 +105,15 @@
       もしくは可算無限個 (例えば整数値のみとる場合)
 - 離散分布 
    - 離散型確率変数の確率分布
-   - \(X=x\) となる確率 \(P(X=x)\) で完全に決定される
+   -  \(X=x\) となる確率 \(P(X=x)\) で完全に決定される
    - 関数 \(f(x)=P(X=x)\) を 
       *確率質量関数* (*確率関数*)
       と呼ぶ
 
 ** 離散分布の平均
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    以下の右辺が定義できる(絶対収束する)とき
    離散型の確率変数 
@@ -131,17 +137,19 @@
      \mathbb{E}[\varphi(X)]=\sum_{x\in\mathcal{X}}\varphi(x)P(X=x)
    \end{equation}
    #+end_quote
-- \(p\) 次の *モーメント* (あるいは *積率* )
+-  \(p\) 次の *モーメント* (あるいは *積率* )
    #+begin_quote
    \begin{equation}
      \mathbb{E}[X^p]=\sum_{x\in\mathcal{X}}x^pP(X=x)
    \end{equation}
    #+end_quote
-   - \(X\) が正整数 \(p\) 次のモーメントをもてば，
+   -  \(X\) が正整数 \(p\) 次のモーメントをもてば，
      \(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ
 
 ** 離散分布の分散
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{align}
      \mathrm{Var}(X)
@@ -149,8 +157,8 @@
      =&\sum_{x\in\mathcal{X}}(x-\mathbb{E}[X])^2P(X=x)
    \end{align}
    #+end_quote
-   - \(X\) が *2次のモーメントをもつ* ときのみ定義できる
-   - 分散の平方根\(\sqrt{\mathrm{Var}(X)}\) を *標準偏差* と呼ぶ
+   -  \(X\) が *2次のモーメントをもつ* ときのみ定義できる
+- 分散の平方根\(\sqrt{\mathrm{Var}(X)}\) を *標準偏差* と呼ぶ
 
 
 * 離散一様分布
@@ -193,7 +201,7 @@
      =\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2
    \end{equation}
    #+end_quote
-   # - \(X\) を集合 \(\{x_{1},\dots,x_n\}\) 上の
+   # -  \(X\) を集合 \(\{x_{1},\dots,x_n\}\) 上の
    #   離散一様分布に従う確率変数とする
    
 ** 離散一様分布に従う乱数
@@ -315,7 +323,7 @@
 :END:
 - 二項分布に関して以下を考察せよ．
    - 平均と分散の計算を確認しなさい．
-   - \(X_{1},\dotsc,X_n\) を成功確率 \(p\) の
+   -  \(X_{1},\dotsc,X_n\) を成功確率 \(p\) の
       Bernoulli 分布に従う独立同分布な確率変数列とする．
       このとき \(\sum_{i=1}^nX_i\) の分布は，
       試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う．
@@ -443,7 +451,7 @@
 :END:
 - Poisson 分布に関して以下を考察せよ．
    - 平均と分散の計算を確認しなさい．
-   - \(X,Y\) を独立な2つの確率変数とし，
+   -  \(X,Y\) を独立な2つの確率変数とし，
       それぞれ強度 \(\lambda_{1},\lambda_{2}\) の Poisson 分布に従うとする．
       このとき, 和 \(X+Y\) の分布は
       強度 \(\lambda_{1}+\lambda_{2}\) の Poisson 分布に従う．
@@ -561,7 +569,9 @@
    - 関数 \(f\) を *確率密度関数* (または *密度*)と呼ぶ
 
 ** 連続分布の平均
-- 連続型の確率変数 \(X\) の平均 \\
+- 連続型の確率変数 \(X\) の平均 
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    積分 \(\int_{-\infty}^\infty xf(x)dx\) が絶対収束するとき
    \(X\) の *平均* (または *期待値*)を
@@ -570,11 +580,11 @@
    \end{equation}
    で定義する．
    #+end_quote
-- 右辺の積分が絶対収束しない場合は
-   \(X\) は *平均をもたない* とする
+   - 右辺の積分が絶対収束しない場合は
+     \(X\) は *平均をもたない* とする
    # 積分 \(\int_{-\infty}^\infty xf(x)dx\) が
    # - 離散分布の場合と同様に, 連続分布に対しても平均, 分散, 標準偏差の概念が定義される
-   # - \(X\) を連続型の確率変数, \(f\) を \(X\) の分布の確率密度関数とする
+   # -  \(X\) を連続型の確率変数, \(f\) を \(X\) の分布の確率密度関数とする
 
 #+reveal: split
 - 確率変数の変換 \(\varphi(X)\) の期待値
@@ -583,24 +593,26 @@
      \mathbb{E}[\varphi(X)]=\int_{-\infty}^\infty\varphi(x)f(x)dx
    \end{equation}
    #+end_quote
-- \(p\) 次の *モーメント* (あるいは *積率* )
+-  \(p\) 次の *モーメント* (あるいは *積率* )
    #+begin_quote
    \begin{equation}
      \mathbb{E}[X^p]=\int_{-\infty}^\infty x^pf(x)dx
    \end{equation}
    #+end_quote
-- \(X\) が正整数 \(p\) 次のモーメントをもてば，
+-  \(X\) が正整数 \(p\) 次のモーメントをもてば，
    \(q\leq p\) なるすべての正整数 \(q\) 次のモーメントをもつ
 
 ** 連続分布の分散
 - 分散
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{align}
      \mathrm{Var}(X)=& \mathbb{E}[(X-\mathbb{E}[X])^2]=\mathbb{E}[X^2]-\mathbb{E}[X]^2\\
      =&\int_{-\infty}^\infty(x-\mathbb{E}[X])^2f(x)dx
    \end{align}
    #+end_quote
-- \(X\) が *2次のモーメントをもつ* ときのみ定義できる
+   -  \(X\) が *2次のモーメントをもつ* ときのみ定義できる
 - 分散の平方根 \(\sqrt{\mathrm{Var}(X)}\) を *標準偏差* と呼ぶ
 
 
@@ -704,9 +716,9 @@
 
 #+reveal: split
 - 中心極限定理の特殊な形 (de Moivre-Laplaceの定理)
-  - \(X_{1},\dotsc,X_n\) を成功確率 \(p\) のBernoulli分布に従う
+  -  \(X_{1},\dotsc,X_n\) を成功確率 \(p\) のBernoulli分布に従う
     独立同分布な確率変数列とする
-  - \(Y=\sum_{i=1}^nX_i\) は試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う
+  -  \(Y=\sum_{i=1}^nX_i\) は試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う
   - Bernoulli分布は平均 \(p\) , 分散 \(p(1-p)\) である
   - 中心極限定理により
     #+begin_quote
@@ -717,12 +729,12 @@
     \end{equation}
     #+end_quote
     の分布は標準正規分布で近似できる
-  - \(p\) が非常に小さい場合，
+  -  \(p\) が非常に小さい場合，
     特に \(np\) がそれほど大きくならない程度に \(p\) が小さい場合は，
     \((Y-np)/\sqrt{np(1-p)}\) の分布の正規近似よりも，
     \(Y\) の分布は強度 \(np\) の Poisson 分布による近似の方が精度がよい (*少数の法則*)
 
-    # - \(Y\) を試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う確率変数とすると，
+    # -  \(Y\) を試行回数 \(n\) , 成功確率 \(p\) の二項分布に従う確率変数とすると，
     #   \(n\) が十分大きいとき \((Y-np)/\sqrt{np(1-p)}\) の分布は標準正規分布で
     #   近似できる 
     # ** 二項分布の近似
@@ -766,7 +778,7 @@
 :ID:       6B9A75BA-A33C-4546-9570-67026EAA7FB0
 :END:
 - 正規分布に関して以下を考察せよ．
-   - \(U_{1},U_{2}\) を \((0,1)\) 上の
+   -  \(U_{1},U_{2}\) を \((0,1)\) 上の
       一様分布に従う独立な確率変数とする．
       このとき
       \begin{align}
@@ -876,11 +888,11 @@
    #+end_quote
 
 ** ガンマ分布の性質
-- \(\nu,\alpha\) はそれぞれ *形状パラメータ* ， *レート* と呼ばれることがある
+-  \(\nu,\alpha\) はそれぞれ *形状パラメータ* ， *レート* と呼ばれることがある
 - 平均は \(\nu/\alpha\) , 分散は \(\nu/\alpha^2\) で与えられる
 - ガンマ分布は応用上重要な確率分布を含む
    - 指数分布
-   - \(\chi^2\) 分布
+   -  \(\chi^2\) 分布
 
 ** ガンマ分布に従う乱数
 :PROPERTIES:
@@ -905,7 +917,7 @@
      \end{cases}
    \end{equation}
    #+end_quote
-- \(\lambda\) は *レート* と呼ばれることがある
+-  \(\lambda\) は *レート* と呼ばれることがある
 - 平均，分散はそれぞれ \(\lambda^{-1}\) , \(\lambda^{-2}\) で与えられる
 
 ** 指数分布に従う乱数
@@ -949,7 +961,7 @@
    #+end_quote
 
 ** @@latex:@@\(\chi^2\) 分布の特徴付け
-- \(\chi^2\) は *カイ二乗* と読む
+-  \(\chi^2\) は *カイ二乗* と読む
 - 標準正規分布に従う \(k\) 個の独立な確率変数の
    二乗和は自由度 \(k\) の \(\chi^2\) 分布に従う
 # - 平均, 分散はそれぞれ \(k\) , \(2k\) で与えられる
@@ -975,7 +987,7 @@
 :reveal_background: #fef4f4
 :ID:       DB5E4C74-4222-4526-B32B-F5F64EC3419A
 :END:
-- \(\chi^2\) 分布に関して以下を考察せよ．
+-  \(\chi^2\) 分布に関して以下を考察せよ．
    - 標準正規分布に従う \(k\) 個の独立な確率変数の
       二乗和は自由度 \(k\) の \(\chi^2\) 分布に従うことを
       確認しなさい．
@@ -1058,7 +1070,7 @@
    #+end_quote
 
 ** @@latex:@@\(t\) 分布の特徴付け 
-- \(Z\) を標準正規分布に従う確率変数，
+-  \(Z\) を標準正規分布に従う確率変数，
    \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
    \(Z,Y\) は独立であるとする．
    このとき確率変数
@@ -1090,8 +1102,8 @@
 :reveal_background: #fef4f4
 :ID:       630198E5-75AA-46C2-B96E-2D0E3266DF61
 :END:
-- \(t\) 分布に関して以下を考察せよ．
-   - \(Z\) を標準正規分布に従う確率変数，
+-  \(t\) 分布に関して以下を考察せよ．
+   -  \(Z\) を標準正規分布に従う確率変数，
       \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
       \(Z,Y\) は独立であるとする．
       このとき確率変数
@@ -1169,7 +1181,7 @@
    #+end_quote
 
 ** @@latex:@@\(F\) 分布の特徴付け
-- \(Y_{1},Y_{2}\) をそれぞれ自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う独立な
+-  \(Y_{1},Y_{2}\) をそれぞれ自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う独立な
    確率変数とする．このとき, 確率変数
    #+begin_quote
    \begin{equation}
@@ -1199,8 +1211,8 @@
 :reveal_background: #fef4f4
 :ID:       16D040B1-8D23-45CB-920F-A587F3736174
 :END:
-- \(F\) 分布に関して以下を考察せよ．
-   - \(Y_{1},Y_{2}\) をそれぞれ
+-  \(F\) 分布に関して以下を考察せよ．
+   -  \(Y_{1},Y_{2}\) をそれぞれ
       自由度 \(k_{1},k_{2}\) の \(\chi^2\) 分布に従う
       独立な確率変数とする．
       このとき, 確率変数

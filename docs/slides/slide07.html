@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Generated on 2026-05-29 Fri 15:27 -->
 <meta charset="utf-8"/>
 <title>極限定理</title>
 <meta name="author" content="村田 昇"/>
@@ -73,8 +74,8 @@
 
 </section>
 <section>
-<section id="slide-orgc025178">
-<h2 id="orgc025178">講義概要</h2>
+<section id="slide-orge1d8445">
+<h2 id="orge1d8445">講義概要</h2>
 <ul>
 <li>独立な確率変数の性質</li>
 <li>大数の法則</li>
@@ -85,16 +86,16 @@
 </section>
 </section>
 <section>
-<section id="slide-org666110e">
-<h2 id="org666110e">基本事項の確認</h2>
+<section id="slide-org314185d">
+<h2 id="org314185d">基本事項の確認</h2>
 </section>
-<section id="slide-orge3a6c22">
-<h3 id="orge3a6c22">確率変数</h3>
+<section id="slide-org44d126d">
+<h3 id="org44d126d">確率変数</h3>
 <ul>
 <li>乱数の数学モデル : 値がランダムに決定される変数</li>
 <li>任意の区間 \([a,b]\) に含まれる確率が定められている 
 <ul>
-<li><i><span style="color:orange;">数学的には厳密性を欠くが，本講義ではこの定義</span></i></li>
+<li><i>数学的には厳密性を欠くが，本講義ではこの定義</i></li>
 
 </ul></li>
 <li><p>
@@ -107,20 +108,21 @@
 \end{equation}
 
 </div>
-<p>
-(特に \(a=b\) のとき \(P(X=a)\) と書く)
-</p>
-</blockquote></li>
+</blockquote>
+<ul>
+<li>特に \(a=b\) のとき \(P(X=a)\) と書く</li>
+
+</ul></li>
 <li>今回は有限個の値のみをとる確率変数を考える
 <ul>
-<li><i><span style="color:orange;">無限個の値，特に連続的な値については次回以降</span></i></li>
+<li><i>無限個の値，特に連続的な値については次回以降</i></li>
 
 </ul></li>
 
 </ul>
 </section>
-<section id="slide-orgdc4db92">
-<h3 id="orgdc4db92">平均と分散</h3>
+<section id="slide-orgd8bf099">
+<h3 id="orgd8bf099">平均と分散</h3>
 <ul>
 <li>確率変数 \(X\) の観測値 : \(x_1,x_2,\dotsc,x_N\)</li>
 <li><p>
@@ -151,16 +153,16 @@
 
 </ul>
 </section>
-<section id="slide-org585c516">
-<h3 id="org585c516">例題</h3>
+<section id="slide-org6579c09">
+<h3 id="org6579c09">例題</h3>
 <ul>
 <li><p>
-<span style="color:green;">偏ったサイコロの問題</span>
+偏ったサイコロの問題
 </p>
-<blockquote>
+<blockquote class="callout-tip">
 <p>
 確率変数 \(X\) は
-偶数の出る確率が奇数の2倍のサイコロの目を表すとする．
+偶数の目の出る確率が奇数の目の出る確率の2倍であるサイコロの目を表すとする．
 </p>
 <div>
 \begin{align}
@@ -180,9 +182,9 @@
 <section>
 <ul>
 <li><p>
-<span style="color:green;">解答 (計算例)</span>
+解答 (計算例)
 </p>
-<blockquote>
+<blockquote class="callout-tip">
 <p>
 \(X\) の平均は
 </p>
@@ -211,7 +213,7 @@
 <section>
 <ul>
 <li><p>
-<span style="color:green;">解答 (Rを用いた計算例)</span>
+解答 (Rを用いた計算例)
 </p>
 <div class="org-src-container">
 
@@ -221,8 +223,18 @@ x &lt;- 1:6 # サイコロの目の値
 (mu &lt;- sum(x*p)) # 平均値の計算
 (v &lt;- sum((x-mu)^2*p)) # 分散の計算
 sqrt(v) # 標準偏差
+</code></pre>
+</div>
 
-#' 正規化しないで計算する方法もある
+<pre class="example">
+[1] 3.666667
+[1] 2.888889
+[1] 1.699673
+</pre>
+
+<div class="org-src-container">
+
+<pre><code class="R" >#' 正規化しないで計算する方法もある
 w &lt;- rep(1:2,3) # 1,2 の繰り返し (確率ではない)
 weighted.mean(x,w)
 weighted.mean(x^2,w)-weighted.mean(x,w)^2
@@ -232,29 +244,26 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 <pre class="example">
 [1] 3.666667
 [1] 2.888889
-[1] 1.699673
-[1] 3.666667
-[1] 2.888889
 </pre></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-orgd95a2df">
-<h2 id="orgd95a2df">独立性と同分布性</h2>
-<div class="outline-text-2" id="text-orgd95a2df">
+<section id="slide-org176b4fa">
+<h2 id="org176b4fa">独立性と同分布性</h2>
+<div class="outline-text-2" id="text-org176b4fa">
 </div>
 </section>
-<section id="slide-org2a52806">
-<h3 id="org2a52806">同時分布</h3>
+<section id="slide-orgaca1c29">
+<h3 id="orgaca1c29">同時分布</h3>
 <ul>
 <li>観測データは確率変数の集合</li>
 <li><b>確率変数列</b> \(X_1,X_2,\dotsc,X_n\) に対する考察が重要</li>
 <li><p>
 定義
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 &ldquo;\(X_1\) が \(x_1\) という値をとり，
 \(X_2\) が \(x_2\) という値をとり， \(\dots\) ，
@@ -273,14 +282,14 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-orgae9fa41">
-<h3 id="orgae9fa41">独立性</h3>
+<section id="slide-org0d093a9">
+<h3 id="org0d093a9">独立性</h3>
 <ul>
 <li>無関係にサンプリングされた観測データの性質</li>
 <li><p>
 定義
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 確率変数列 \(X_1,X_2,\dotsc,X_n\) が <b>独立</b> であるとは，
 任意の \(n\) 個の実数 \(x_1,x_2,\dotsc,x_n\) に対して
@@ -299,14 +308,14 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-orgcdfd078">
-<h3 id="orgcdfd078">同分布性</h3>
+<section id="slide-orgfe9c61f">
+<h3 id="orgfe9c61f">同分布性</h3>
 <ul>
 <li>同一の法則に従って生成された観測データの性質</li>
 <li><p>
 定義
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 確率変数列 \(X_1,X_2,\dotsc,X_n\) が <b>同分布</b> であるとは，
 任意の実数 \(x\) に対して
@@ -324,8 +333,8 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-org4fac1cb">
-<h3 id="org4fac1cb">独立同分布性</h3>
+<section id="slide-org55c9f74">
+<h3 id="org55c9f74">独立同分布性</h3>
 <ul>
 <li>一般に分析対象のデータには
 <b>独立性</b> と <b>同分布性</b> 
@@ -333,7 +342,7 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 <li><p>
 定義
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 独立かつ同分布である確率変数列を
 <b>独立同分布</b>
@@ -349,14 +358,14 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-orga181019">
-<h3 id="orga181019">無限列の独立性と同分布性</h3>
+<section id="slide-org4202a72">
+<h3 id="org4202a72">無限列の独立性と同分布性</h3>
 <ul>
 <li>無限列に対しては任意の部分列について考える</li>
 <li><p>
 独立性
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 \(X_1,X_2,\dotsc\) が <b>独立</b> であるとは，
 任意の正整数 \(n\) に対して \(X_1,X_2,\dotsc,X_n\) が
@@ -366,7 +375,7 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 <li><p>
 同分布性
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 \(X_1,X_2,\dotsc\) が <b>同分布</b> であるとは，
 任意の正整数 \(n\) に対して \(X_1,X_2,\dotsc,X_n\) が
@@ -376,7 +385,7 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 <li><p>
 独立同分布性
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 \(X_1,X_2,\dotsc\) が <b>独立同分布</b>
 もしくは <b>i.i.d.</b> であるとは，
@@ -388,18 +397,18 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-org1431103">
-<h2 id="org1431103">大数の法則</h2>
-<div class="outline-text-2" id="text-org1431103">
+<section id="slide-orgdc956ca">
+<h2 id="orgdc956ca">大数の法則</h2>
+<div class="outline-text-2" id="text-orgdc956ca">
 </div>
 </section>
-<section id="slide-org6610ff4">
-<h3 id="org6610ff4">大数の法則の概要</h3>
+<section id="slide-org77da065">
+<h3 id="org77da065">大数の法則の概要</h3>
 <ul>
 <li><p>
 要点
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 同一の法則に従って生成された集団から
 <b>ランダム</b> な観測を多数繰り返すと，
@@ -408,21 +417,21 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </blockquote></li>
 <li>例
 <ul>
-<li><span style="color:green;">歪みの無いコインの表が出た回数の割合</span></li>
-<li><span style="color:green;">視聴率の調査</span></li>
+<li>歪みの無いコインの表が出た回数の割合</li>
+<li>視聴率の調査</li>
 
 </ul></li>
 <li>この法則を数学的に定式化した定理が <b>大数の法則</b></li>
 
 </ul>
 </section>
-<section id="slide-org9b0fe73">
-<h3 id="org9b0fe73">大数の強法則</h3>
+<section id="slide-orgeae6167">
+<h3 id="orgeae6167">大数の強法則</h3>
 <ul>
 <li><p>
 定理
 </p>
-<blockquote>
+<blockquote class="callout-important">
 <p>
 \(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
 その平均を \(\mu\) とする．
@@ -450,16 +459,16 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-orged8b80c" data-background="#fef4f4">
-<h2 id="orged8b80c">実習</h2>
+<section id="slide-org0d4448c" data-background="#fef4f4">
+<h2 id="org0d4448c">実習</h2>
 </section>
-<section id="slide-org5f33a48">
-<h3 id="org5f33a48">数値実験の設計</h3>
+<section id="slide-org6e804e0">
+<h3 id="org6e804e0">数値実験の設計</h3>
 <ul>
 <li><p>
 方針
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 真の平均と標本平均を比較する．
 </p>
@@ -470,10 +479,10 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </p>
 </blockquote>
 <ul>
-<li>適当な分布を設定する <span style="color:green;">(例 : 偏りのあるサイコロ)</span></li>
-<li>\(n\) 個の確率変数(乱数)の標本平均を計算する</li>
+<li>適当な分布を設定する (例 : 偏りのあるサイコロ)</li>
+<li> \(n\) 個の確率変数(乱数)の標本平均を計算する</li>
 <li>真の平均と標本平均の差を計算する</li>
-<li>\(n\) を大きくしたときの差の性質を観察する</li>
+<li> \(n\) を大きくしたときの差の性質を観察する</li>
 
 </ul></li>
 
@@ -481,17 +490,17 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-org70e5907">
-<h2 id="org70e5907">中心極限定理</h2>
-<div class="outline-text-2" id="text-org70e5907">
+<section id="slide-orgd4d8dbe">
+<h2 id="orgd4d8dbe">中心極限定理</h2>
+<div class="outline-text-2" id="text-orgd4d8dbe">
 </div>
 </section>
-<section id="slide-orgcfb2357">
-<h3 id="orgcfb2357">中心極限定理の概要</h3>
+<section id="slide-orgbf12cb9">
+<h3 id="orgbf12cb9">中心極限定理の概要</h3>
 <ul>
 <li>大数の法則の主張
 <ul>
-<li>\(n\) を大きくすると標本平均 \(\bar{X}_n\) は真の平均 \(\mu\) に近づく</li>
+<li> \(n\) を大きくすると標本平均 \(\bar{X}_n\) は真の平均 \(\mu\) に近づく</li>
 <li>推定誤差 \(\bar{X}_n-\mu\) は \(n\) を大きくすると0に近づく</li>
 <li>どの程度の大きさになるのか定量的な評価は与えていない</li>
 
@@ -516,13 +525,13 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-org00beba4">
-<h3 id="org00beba4">中心極限定理</h3>
+<section id="slide-org87a407c">
+<h3 id="org87a407c">中心極限定理</h3>
 <ul>
 <li><p>
 定理
 </p>
-<blockquote>
+<blockquote class="callout-important">
 <p>
 \(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
 その平均を \(\mu\) ，標準偏差を \(\sigma\) とする．
@@ -543,10 +552,14 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-orgaed1421">
-<h3 id="orgaed1421">中心極限定理の意味</h3>
+<section id="slide-org8089a22">
+<h3 id="org8089a22">中心極限定理の意味</h3>
 <ul>
 <li><p>
+誤差の評価
+</p>
+<blockquote class="callout">
+<p>
 \(X_i\) の分布が何であっても，
 サンプル数 \(n\) が十分大きければ，
 標本平均と真の平均の差
@@ -555,7 +568,6 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 <b>標準正規分布</b>
 で近似できる
 </p>
-<blockquote>
 <div>
 \begin{equation}
   P\Bigl(a\frac{\sigma}{\sqrt{n}}\leq\bar{X}_n-\mu\leq
@@ -579,16 +591,16 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-org9a83e4e" data-background="#fef4f4">
-<h2 id="org9a83e4e">実習</h2>
+<section id="slide-orgdcbf525" data-background="#fef4f4">
+<h2 id="orgdcbf525">実習</h2>
 </section>
-<section id="slide-orgf205419">
-<h3 id="orgf205419">数値実験の設計</h3>
+<section id="slide-org67824b2">
+<h3 id="org67824b2">数値実験の設計</h3>
 <ul>
 <li><p>
 方針
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 規格化した標本平均と真の平均の差
 </p>
@@ -606,11 +618,11 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 <li>中心極限定理が正しければ，
 十分小さいビン \([a,b]\) におけるヒストグラムの高さ(密度)は
 \(\phi(a)\) で近似される</li>
-<li>\(Z\) を多数観測し分布(ヒストグラム)を求める</li>
-<li>\(Z\) の分布と
+<li> \(Z\) を多数観測し分布(ヒストグラム)を求める</li>
+<li> \(Z\) の分布と
 標準正規密度 \(\phi(x)\) を比較する
 <ul>
-<li>密度表示は関数 <code>geom_histogram(aes(y = after_stat(density)))</code> を指定</li>
+<li>密度表示は <code>geom_histogram(aes(y = after_stat(density)))</code> を指定</li>
 <li>標準正規密度 \(\phi(x)\) は関数 <code>dnorm()</code> で計算可</li>
 
 </ul></li>
@@ -621,19 +633,19 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-orgb7957e6">
-<h2 id="orgb7957e6">少数の法則</h2>
-<div class="outline-text-2" id="text-orgb7957e6">
+<section id="slide-orge6fdfd9">
+<h2 id="orge6fdfd9">少数の法則</h2>
+<div class="outline-text-2" id="text-orge6fdfd9">
 </div>
 </section>
-<section id="slide-org4c5a716">
-<h3 id="org4c5a716">少数の法則の概要</h3>
+<section id="slide-org0713aff">
+<h3 id="org0713aff">少数の法則の概要</h3>
 <ul>
 <li>滅多に起きない事が起こる回数に関する法則</li>
 <li><p>
-<span style="color:green;">例 : 不良品発生率の低い工場での日々の不良品の個数の分布</span>
+例 : 不良品発生率の低い工場での不良品の個数の分布
 </p>
-<blockquote>
+<blockquote class="callout-tip">
 <p>
 ある製品の不良品率 \(p\) はとても小さいとする.
 </p>
@@ -653,13 +665,13 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-org0d6c8af">
-<h3 id="org0d6c8af">少数の法則</h3>
+<section id="slide-org4653b1b">
+<h3 id="org4653b1b">少数の法則</h3>
 <ul>
 <li><p>
 定理の問題設定
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 \(X_1,X_2,\dotsc,X_n\) を独立な確率変数列とし，
 各 \(i=1,2,\dotsc,n\) について 
@@ -684,7 +696,7 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 <li><p>
 定理
 </p>
-<blockquote>
+<blockquote class="callout-important">
 <p>
 このとき
 ある正の実数 \(\lambda\) が存在して, \(n\to\infty\) のとき
@@ -715,13 +727,13 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 
 </ul>
 </section>
-<section id="slide-org30bc0b3">
-<h3 id="org30bc0b3">Poisson 分布</h3>
+<section id="slide-orgabc8ee7">
+<h3 id="orgabc8ee7">Poisson 分布</h3>
 <ul>
 <li><p>
 定義
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 確率変数 \(X\) の取りうる値が0以上の整数全体で，
 値が整数 \(k\geq0\) となる確率が
@@ -743,16 +755,16 @@ weighted.mean(x^2,w)-weighted.mean(x,w)^2
 </section>
 </section>
 <section>
-<section id="slide-orga982c99" data-background="#fef4f4">
-<h2 id="orga982c99">実習</h2>
+<section id="slide-org155871e" data-background="#fef4f4">
+<h2 id="org155871e">実習</h2>
 </section>
-<section id="slide-orgeb3110d">
-<h3 id="orgeb3110d">数値実験の設計</h3>
+<section id="slide-orgc577b66">
+<h3 id="orgc577b66">数値実験の設計</h3>
 <ul>
 <li><p>
 方針
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 小さな確率で \(X=1\) となる確率変数を多数観測し，
 その合計値の分布を調べ，
@@ -761,9 +773,9 @@ Poisson 分布と比較する．
 </blockquote>
 <ul>
 <li>確率 \(P(X=1)=p\) を小さな値に設定する</li>
-<li>\(n\) 個(非常に多数)の確率変数の合計 \(S_n\) を計算する</li>
-<li>\(S_n\) を多数観測し分布を求める</li>
-<li>\(S_n\) の分布を
+<li> \(n\) 個(非常に多数)の確率変数の合計 \(S_n\) を計算する</li>
+<li> \(S_n\) を多数観測し分布を求める</li>
+<li> \(S_n\) の分布を
 強度 \(\lambda=pn\) の Poisson 分布と比較する
 <ul>
 <li>確率 \(p\) サイズ \(n\) の二項乱数 <code>rbinom()</code> が利用可能</li>
@@ -777,18 +789,18 @@ Poisson 分布と比較する．
 </section>
 </section>
 <section>
-<section id="slide-org11c3981">
-<h2 id="org11c3981">補遺</h2>
-<div class="outline-text-2" id="text-org11c3981">
+<section id="slide-orgf7ee279">
+<h2 id="orgf7ee279">補遺</h2>
+<div class="outline-text-2" id="text-orgf7ee279">
 </div>
 </section>
-<section id="slide-orgf6be6cf">
-<h3 id="orgf6be6cf">重複対数の法則</h3>
+<section id="slide-orgb96500f">
+<h3 id="orgb96500f">重複対数の法則</h3>
 <ul>
 <li><p>
 定理
 </p>
-<blockquote>
+<blockquote class="callout-important">
 <p>
 \(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
 その平均を \(\mu\) ，標準偏差を \(\sigma\) とする．
@@ -818,13 +830,13 @@ Poisson 分布と比較する．
 
 </ul>
 </section>
-<section id="slide-org182d2ee">
-<h3 id="org182d2ee">Hartman-Wintnerの定理</h3>
+<section id="slide-orgb14bc1e">
+<h3 id="orgb14bc1e">Hartman-Wintnerの定理</h3>
 <ul>
 <li><p>
 定理
 </p>
-<blockquote>
+<blockquote class="callout-important">
 <p>
 前定理の条件のもと，列
 </p>
@@ -847,8 +859,8 @@ Poisson 分布と比較する．
 </section>
 </section>
 <section>
-<section id="slide-org445b218">
-<h2 id="org445b218">次回の予定</h2>
+<section id="slide-orgfd7a942">
+<h2 id="orgfd7a942">次回の予定</h2>
 <ul>
 <li>一般の確率変数</li>
 <li>離散分布
@@ -917,7 +929,7 @@ dependencies: [
 
 });
 </script>
-<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script defer src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>
 /* Recompute layout upon changes by klipse.  Code fragment from
    asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:

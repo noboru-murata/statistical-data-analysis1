@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-05-27 16:42:06 mura>
+# Time-stamp: <2026-05-29 15:29:11 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -13,6 +13,7 @@
 :END:
 
 * COMMENT メモ
+
 
 * 講義概要
 :PROPERTIES:
@@ -42,16 +43,16 @@
 ** 確率変数
 - 乱数の数学モデル : 値がランダムに決定される変数
 - 任意の区間 \([a,b]\) に含まれる確率が定められている 
-   - /[[color:orange][数学的には厳密性を欠くが，本講義ではこの定義]]/
+   - /数学的には厳密性を欠くが，本講義ではこの定義/
 - 確率変数 \(X\) が区間 \([a,b]\) \((a\leq b)\) に含まれる確率
    #+begin_quote
    \begin{equation}
      P(a\leq X\leq b)
    \end{equation}
-   (特に \(a=b\) のとき \(P(X=a)\) と書く)
    #+end_quote
+   - 特に \(a=b\) のとき \(P(X=a)\) と書く
 - 今回は有限個の値のみをとる確率変数を考える
-   - /[[color:orange][無限個の値，特に連続的な値については次回以降]]/
+   - /無限個の値，特に連続的な値については次回以降/
 
 ** 平均と分散
 - 確率変数 \(X\) の観測値 : \(x_1,x_2,\dotsc,x_N\)
@@ -75,10 +76,12 @@
 :PROPERTIES:
 :ID:       2CBDF9CB-1AC7-4A14-BC02-CBA85E655F7E
 :END:
-- [[color:green][偏ったサイコロの問題]]
+- 偏ったサイコロの問題
+   #+attr_html: :class callout-tip
+   #+attr_latex: :environment callout-tip
    #+begin_quote
    確率変数 \(X\) は
-   偶数の出る確率が奇数の2倍のサイコロの目を表すとする．
+   偶数の目の出る確率が奇数の目の出る確率の2倍であるサイコロの目を表すとする．
    \begin{align}
      &P(X=1)=P(X=3)=P(X=5)=1/9\\ 
      &P(X=2)=P(X=4)=P(X=6)=2/9
@@ -87,7 +90,9 @@
    #+end_quote
 
 #+reveal: split
-- [[color:green][解答 (計算例)]]
+- 解答 (計算例)
+   #+attr_html: :class callout-tip
+   #+attr_latex: :environment callout-tip
    #+begin_quote
    \(X\) の平均は
    \begin{equation}
@@ -102,7 +107,7 @@
    #+end_quote
 
 #+reveal: split
-- [[color:green][解答 (Rを用いた計算例)]]
+- 解答 (Rを用いた計算例)
    #+begin_src R
      #' 平均と分散の計算
      p <- rep(c(1/9,2/9),3) # 確率の値 (1/9 と 2/9 を交互に3回繰り返す)
@@ -110,7 +115,8 @@
      (mu <- sum(x*p)) # 平均値の計算
      (v <- sum((x-mu)^2*p)) # 分散の計算
      sqrt(v) # 標準偏差
-
+   #+end_src
+   #+begin_src R
      #' 正規化しないで計算する方法もある
      w <- rep(1:2,3) # 1,2 の繰り返し (確率ではない)
      weighted.mean(x,w)
@@ -123,6 +129,8 @@
 - 観測データは確率変数の集合
 - *確率変数列* \(X_1,X_2,\dotsc,X_n\) に対する考察が重要
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    "\(X_1\) が \(x_1\) という値をとり，
    \(X_2\) が \(x_2\) という値をとり， \(\dots\) ，
@@ -138,6 +146,8 @@
 ** 独立性
 - 無関係にサンプリングされた観測データの性質
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    確率変数列 \(X_1,X_2,\dotsc,X_n\) が *独立* であるとは，
    任意の \(n\) 個の実数 \(x_1,x_2,\dotsc,x_n\) に対して
@@ -154,6 +164,8 @@
 ** 同分布性
 - 同一の法則に従って生成された観測データの性質
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    確率変数列 \(X_1,X_2,\dotsc,X_n\) が *同分布* であるとは，
    任意の実数 \(x\) に対して
@@ -168,6 +180,8 @@
    *独立性* と *同分布性* 
    が同時に仮定される
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    独立かつ同分布である確率変数列を
    *独立同分布*
@@ -180,18 +194,24 @@
 ** 無限列の独立性と同分布性
 - 無限列に対しては任意の部分列について考える
 - 独立性
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
    #+begin_quote
    \(X_1,X_2,\dotsc\) が *独立* であるとは，
    任意の正整数 \(n\) に対して \(X_1,X_2,\dotsc,X_n\) が
    独立であることをいう．
    #+end_quote
 - 同分布性
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
    #+begin_quote
    \(X_1,X_2,\dotsc\) が *同分布* であるとは，
    任意の正整数 \(n\) に対して \(X_1,X_2,\dotsc,X_n\) が
    同分布であることをいう．
    #+end_quote
 - 独立同分布性
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
    #+begin_quote
    \(X_1,X_2,\dotsc\) が *独立同分布*
    もしくは *i.i.d.* であるとは，
@@ -202,6 +222,8 @@
 * 大数の法則
 ** 大数の法則の概要
 - 要点
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
    #+begin_quote
    同一の法則に従って生成された集団から
    *ランダム* な観測を多数繰り返すと，
@@ -211,12 +233,14 @@
    # % 均を計算しても, データのサンプル数が十分大きければ, その平均値は集団
    # % 全体の平均値に近い値であると考えられることは, 経験則としてよく知られ
 - 例
-   - [[color:green][歪みの無いコインの表が出た回数の割合]]
-   - [[color:green][視聴率の調査]]
+   - 歪みの無いコインの表が出た回数の割合
+   - 視聴率の調査
 - この法則を数学的に定式化した定理が *大数の法則*
 
 ** 大数の強法則
 - 定理
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    \(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
    その平均を \(\mu\) とする．
@@ -239,16 +263,18 @@
 :END:
 ** 数値実験の設計
 - 方針
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
    #+begin_quote
    真の平均と標本平均を比較する．
 
    標本平均は観測データに依存するので，
    統計的な性質を見るには繰り返し実験 (Monte-Carlo法) を行う．
    #+end_quote
-   - 適当な分布を設定する [[color:green][(例 : 偏りのあるサイコロ)]]
-   - \(n\) 個の確率変数(乱数)の標本平均を計算する
+   - 適当な分布を設定する (例 : 偏りのあるサイコロ)
+   -  \(n\) 個の確率変数(乱数)の標本平均を計算する
    - 真の平均と標本平均の差を計算する
-   - \(n\) を大きくしたときの差の性質を観察する
+   -  \(n\) を大きくしたときの差の性質を観察する
 ** COMMENT 練習問題
 :PROPERTIES:
 :reveal_background: #fef4f4
@@ -426,7 +452,7 @@
 * 中心極限定理
 ** 中心極限定理の概要
 - 大数の法則の主張
-   - \(n\) を大きくすると標本平均 \(\bar{X}_n\) は真の平均 \(\mu\) に近づく
+   -  \(n\) を大きくすると標本平均 \(\bar{X}_n\) は真の平均 \(\mu\) に近づく
    - 推定誤差 \(\bar{X}_n-\mu\) は \(n\) を大きくすると0に近づく
    - どの程度の大きさになるのか定量的な評価は与えていない
 - 誤差の評価の定量化とは
@@ -441,6 +467,8 @@
 
 ** 中心極限定理
 - 定理
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    \(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
    その平均を \(\mu\) ，標準偏差を \(\sigma\) とする．
@@ -454,14 +482,17 @@
    #+end_quote
 
 ** 中心極限定理の意味
-- \(X_i\) の分布が何であっても，
+- 誤差の評価
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
+   #+begin_quote
+   \(X_i\) の分布が何であっても，
    サンプル数 \(n\) が十分大きければ，
    標本平均と真の平均の差
    \(\bar{X}_n-\mu\) 
    の分布は
    *標準正規分布*
    で近似できる
-   #+begin_quote
    \begin{equation}
      P\Bigl(a\frac{\sigma}{\sqrt{n}}\leq\bar{X}_n-\mu\leq
      b\frac{\sigma}{\sqrt{n}} \Bigr)
@@ -487,6 +518,8 @@
 :END:
 ** 数値実験の設計
 - 方針
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
    #+begin_quote
    規格化した標本平均と真の平均の差
    \begin{equation}
@@ -497,10 +530,10 @@
    - 中心極限定理が正しければ，
      十分小さいビン \([a,b]\) におけるヒストグラムの高さ(密度)は
      \(\phi(a)\) で近似される
-   - \(Z\) を多数観測し分布(ヒストグラム)を求める
-   - \(Z\) の分布と
+   -  \(Z\) を多数観測し分布(ヒストグラム)を求める
+   -  \(Z\) の分布と
      標準正規密度 \(\phi(x)\) を比較する
-     - 密度表示は関数 ~geom_histogram(aes(y = after_stat(density)))~ を指定
+     - 密度表示は ~geom_histogram(aes(y = after_stat(density)))~ を指定
      - 標準正規密度 \(\phi(x)\) は関数 ~dnorm()~ で計算可
    # \(\phi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\)
    # \(\sqrt{n}(\bar{X}_n-\mu)/\sigma\) のヒストグラムに
@@ -578,7 +611,9 @@
 * 少数の法則
 ** 少数の法則の概要
 - 滅多に起きない事が起こる回数に関する法則
-- [[color:green][例 : 不良品発生率の低い工場での日々の不良品の個数の分布]]
+- 例 : 不良品発生率の低い工場での不良品の個数の分布
+   #+attr_html: :class callout-tip
+   #+attr_latex: :environment callout-tip
    #+begin_quote
    ある製品の不良品率 \(p\) はとても小さいとする.
 
@@ -593,6 +628,8 @@
 
 ** 少数の法則
 - 定理の問題設定
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
    #+begin_quote
    \(X_1,X_2,\dotsc,X_n\) を独立な確率変数列とし，
    各 \(i=1,2,\dotsc,n\) について 
@@ -607,6 +644,8 @@
 
 #+reveal: split
 - 定理
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    このとき
    ある正の実数 \(\lambda\) が存在して, \(n\to\infty\) のとき
@@ -625,6 +664,8 @@
 
 ** Poisson 分布
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    確率変数 \(X\) の取りうる値が0以上の整数全体で，
    値が整数 \(k\geq0\) となる確率が
@@ -643,15 +684,17 @@
 :END:
 ** 数値実験の設計
 - 方針
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
    #+begin_quote
    小さな確率で \(X=1\) となる確率変数を多数観測し，
    その合計値の分布を調べ，
    Poisson 分布と比較する．
    #+end_quote
    - 確率 \(P(X=1)=p\) を小さな値に設定する
-   - \(n\) 個(非常に多数)の確率変数の合計 \(S_n\) を計算する
-   - \(S_n\) を多数観測し分布を求める
-   - \(S_n\) の分布を
+   -  \(n\) 個(非常に多数)の確率変数の合計 \(S_n\) を計算する
+   -  \(S_n\) を多数観測し分布を求める
+   -  \(S_n\) の分布を
      強度 \(\lambda=pn\) の Poisson 分布と比較する
      - 確率 \(p\) サイズ \(n\) の二項乱数 ~rbinom()~ が利用可能
      - Poisson 分布の確率値は関数 ~dpois()~ で計算可能
@@ -743,6 +786,8 @@
 * 補遺
 ** 重複対数の法則
 - 定理
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    \(X_1,X_2,\dotsc\) を独立同分布な確率変数列とし，
    その平均を \(\mu\) ，標準偏差を \(\sigma\) とする．
@@ -763,6 +808,8 @@
 
 ** Hartman-Wintnerの定理
 - 定理
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    前定理の条件のもと，列
    \begin{equation}
