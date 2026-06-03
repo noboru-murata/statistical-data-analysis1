@@ -61,7 +61,7 @@ if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォン�
 ```{r}
 n <- 16 
 p <- 0.6
-my_random <- function(){ # Bernolli分布をm個生成して合計
+my_random <- function(){ # Bernoulli分布をm個生成して合計
     sum(rbinom(n, size=1, prob=p))}
 ```
 
@@ -90,47 +90,50 @@ my_data |>
 棒グラフを利用して頻度表を視覚化する．
 
 ```{r}
-my_data |> as_tibble_col() |>
-    count(value) |>
-    ggplot(aes(x = value, y = n)) +
-    geom_bar(stat = "identity") # 最も単純な表示
+my_data |> 
+    as_tibble_col() |>              # tibbleに変換
+    count(value) |>                 # 頻度の集計
+    ggplot(aes(x = value, y = n)) + # 描画の基本設定
+    geom_bar(stat = "identity")     # 最も単純な表示
 ```
 
 理論値(確率)は関数 `dbinom()` で計算できるので，組み合わせて横並びに表示する．
 
 ```{r}
-my_data |> as_tibble_col() |>
+my_data |>
+    as_tibble_col() |>
     count(value) |>
-    set_names(c("値","観測値")) |>                      # 列名を変更
+    set_names(c("値","観測値")) |>                     # 列名を日本語に変更
     mutate(観測値 = 観測値/sum(観測値),                  # 確率に変換
            理論値 = dbinom(値, size = n, prob = p)) |> # 理論値を追加
-    pivot_longer(!値, values_to = "確率") |>
-    ggplot(aes(x = 値, y = 確率, fill = name)) +
+    pivot_longer(!値, values_to = "確率") |>           # long formatに変換
+    ggplot(aes(x = 値, y = 確率, fill = name)) +       # 描画の基本設定
     geom_bar(stat = "identity",
-             width = 0.8, # 並びがわかりやすいように幅を調整
+             width = 0.8,                             # 並びがわかりやすいように幅を調整
              position = "dodge") +
-    labs(fill = NULL, # 凡例のfillの名称(name)を消去
+    labs(fill = NULL,                                 # 凡例のfillの名称(name)を消去
          title = paste0("二項分布(試行回数", n, ", 成功確率", p, ")"))
 ```
 
-::: callout-note
+::: column-margin
 上記の例では `dplyr::count` を利用する場合を示したが， 視覚化のためのデータフレームはいろいろな方法で作成できる．
 
 `base::table()` および `base::prop.table()` を利用する場合．
 
 ```{r}
 my_table <- my_data |> table() |> prop.table() 
-tibble(値 = as.integer(names(my_table)), # 列名は文字列なので整数値に変換(as.numericでも良い)
-       観測値 = as.vector(my_table),      # table型をvector型に変換(as.numericでも良い)
-       理論値 = dbinom(値, size = n, prob = p))
+tibble(値 = as.integer(names(my_table)),       # 列名は文字列なので整数値に変換(as.numericでも良い)
+       観測値 = as.vector(my_table),            # table型をvector型に変換(as.numericでも良い)
+       理論値 = dbinom(値, size = n, prob = p)) # 理論値を追加
 ```
 
 `package::janitor` を利用する場合．
 
 ```{r}
 library(janitor)
-my_data |> as_tibble_col() |> 
-    tabyl(value) |>                                # 確率
+my_data |>
+    as_tibble_col() |> 
+    tabyl(value) |>                                # 確率の計算
     set_names(c("値","頻度","観測値")) |>            # 列名を変更
     mutate(理論値 = dbinom(値, size = n, prob = p)) # 理論値を追加
 ```
@@ -169,8 +172,8 @@ my_random <- function(){ # 2つの Poisson 分布の和
 mc <- 10000 
 my_data <- replicate(mc, my_random())
 my_data |> as_tibble_col() |>
-    count(value) |>                                       # 頻度を計算
-    set_names(c("値","観測値")) |>                         # 列名を変更
+    count(value) |>                                      # 頻度を計算
+    set_names(c("値","観測値")) |>                        # 列名を変更
     mutate(観測値 = 観測値/sum(観測値),                     # 確率に変換
            理論値 = dpois(値, lambda=lambda1+lambda2)) |> # 理論値を追加
     pivot_longer(!値, values_to = "確率") |>
@@ -188,16 +191,14 @@ my_data |> as_tibble_col() |>
 
 正規分布に関して以下を考察せよ．
 
-- $U_{1},U_{2}$ を $(0,1)$ 上の一様分布に従う独立な確率変数とする． このとき
-  $$  \begin{align}
+- $U_{1},U_{2}$ を $(0,1)$ 上の一様分布に従う独立な確率変数とする． このとき $$  \begin{align}
       X_{1}&=\sqrt{-2\log(U_{1})}\cos(2\pi U_{2}),\\
       X_{2}&=\sqrt{-2\log(U_{1})}\sin(2\pi U_{2})
-    \end{align}$$
-  とおくと， $X_{1},X_{2}$ は独立かつともに標準正規分布に従う． これをグラフに描画して確認しなさい．
+    \end{align}$$ とおくと， $X_{1},X_{2}$ は独立かつともに標準正規分布に従う． これをグラフに描画して確認しなさい．
 
-  ::: callout-note
-  この変換を Box-Muller 変換と呼ぶ．
-  :::
+::: callout-note
+この変換を Box-Muller 変換と呼ぶ．
+:::
 
 ### 解答欄
 
@@ -220,15 +221,15 @@ my_random <- function(){ # 一方の分布を確認する
 
 ```{r}
 mc <- 10000 # 実験回数を指定
-replicate(mc, my_random()) |> # 確率シミュレーション
-    as_tibble_col() |>        # 既定値では列名は value
+replicate(mc, my_random()) |>        # 確率シミュレーション
+    as_tibble_col() |>               # 既定値では列名は value
     ggplot(aes(x = value)) +
-    geom_histogram(bins = 30, # 既定値では頻度で表示される
-                   fill ="blue",          
-                   colour = "white")
+    geom_histogram(bins = 30,        # 既定値では頻度で表示される
+                   fill ="blue",     # 塗り潰しの色     
+                   colour = "white") # 外枠の色
 ```
 
-理論値は関数 `stats::dnorm()` で計算できるので， 関数 `ggplot2::geom_funciton()` を用いて重ね描きする．
+理論値は関数 `stats::dnorm()` で計算できるので， 関数 `ggplot2::geom_function()` を用いて重ね描きする．
 
 ```{r}
 replicate(mc, my_random()) |> 
@@ -258,7 +259,7 @@ boxmuller <- function(){
 2つの変数の散布図を描く．
 
 ```{r}
-x <- replicate(mc, boxmuller()) # 2行xmc列の行列が得られる
+x <- replicate(mc, boxmuller()) # 2行 x mc列の行列が得られる
 tibble(x1 = x[1,], x2 = x[2,]) |>
     ggplot(aes(x = x1, y = x2)) +
     geom_point(colour = "royalblue")
@@ -278,17 +279,18 @@ tibble(x = as.vector(x)) |>
     geom_function(fun = dnorm,
                   args = list(mean = mu, sd = sigma),
                   colour = "red") +
-    labs(title = paste0("正規分布(平均", round(mu,2), # 2桁で四捨五入
+    labs(title = paste0("正規分布(平均", round(mu,2),       # 2桁で四捨五入
                         ", 分散", round(sigma^2,2), ")"))
 ```
 
-::: callout-note
+::: column-margin
 散布図を描くためのデータフレームは以下のようにして作ることもできる． 高次元の場合には関数を利用した方が簡単に記述できる．
 
 ```{r}
-x |> t() |>
-    as_tibble(.name_repair = "minimal") |>
-    set_names(paste0("x", 1:2)) |>
+x |>
+    t() |>                                 # 行列を転置
+    as_tibble(.name_repair = "minimal") |> # tibbleに変換，列名の修正を指示
+    set_names(paste0("x", 1:2)) |>         # 列名の書き換え
     ggplot(aes(x = x1, y = x2)) +
     geom_point(colour = "royalblue")
 ```
@@ -313,16 +315,17 @@ $\chi^2$ 分布に関して以下を考察せよ．
 試行を模擬する関数を定義する．
 
 ```{r}
-k <- 8 # 自由度を設定
+k <- 8                   # 自由度を設定
 my_random <- function(){ 
-    sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
+    sum(rnorm(k)^2)}     # k個の標準正規乱数の二乗和
 ```
 
 確率シミュレーションを行い，視覚化する．
 
 ```{r}
 mc <- 10000 # 実験回数を指定
-my_data <- replicate(mc, my_random()) # 注で使うので保存しておく
+my_data <-
+    replicate(mc, my_random()) # 注で使うので保存しておく
 my_data |>
     as_tibble_col() |>
     ggplot(aes(x = value)) +
@@ -336,7 +339,7 @@ my_data |>
     labs(title = bquote(paste(chi^2,"分布 (自由度",.(k),")")))
 ```
 
-::: callout-note
+::: column-margin
 関数 bquote() は関数 expression() と同様な働きをするが，自由度の k を .(k) で評価して取り込むことができる． 以下と表示を比較してみよう．
 
 ```{r}
@@ -360,11 +363,9 @@ my_data |>
 
 $t$ 分布に関して以下を考察せよ．
 
-- $Z$ を標準正規分布に従う確率変数，$Y$ を自由度 $k$ の $\chi^2$ 分布に従う確率変数とし，$Z,Y$ は独立であるとする． このとき確率変数
-  $$  \begin{equation}
+- $Z$ を標準正規分布に従う確率変数，$Y$ を自由度 $k$ の $\chi^2$ 分布に従う確率変数とし，$Z,Y$ は独立であるとする． このとき確率変数 $$  \begin{equation}
       \frac{Z}{\sqrt{Y/k}}
-    \end{equation}$$
-  は自由度 $k$ の $t$ 分布に従うことを確認しなさい．
+    \end{equation}$$ は自由度 $k$ の $t$ 分布に従うことを確認しなさい．
 
 ### 解答欄
 
@@ -377,46 +378,30 @@ $t$ 分布に関して以下を考察せよ．
 試行を模擬する関数を作成する．
 
 ```{r}
-k <- 8 # 自由度を設定
+k <- 7 # 自由度を設定
 my_random <- function(){ 
-    sum(rnorm(k)^2)} # k個の標準正規乱数の二乗和
+    y <- rchisq(1, df=k) # 自由度kのカイ2乗分布
+    ## y <- sum(rnorm(k)^2) # 正規乱数を用いてもよい
+    z <- rnorm(1) # 標準正規乱数
+    return(z/sqrt(y/k))}
 ```
 
 確率シミュレーションを行い，視覚化する．
 
 ```{r}
 mc <- 10000 # 実験回数を指定
-my_data <- replicate(mc, my_random()) # 注のところでもう一度描くので保存しておく
-my_data |>
-    as_tibble_col() |>
-    ggplot(aes(x = value)) +
+my_data <- replicate(mc, my_random()) # Monte-Carlo実験
+tibble(x = my_data) |>
+    ggplot(aes(x = x)) +
     geom_histogram(aes(y = after_stat(density)), 
                    bins = 30,                    
                    fill ="lightblue",          
                    colour = "white") + 
-    geom_function(fun = dchisq,
+    geom_function(fun = dt,
                   args = list(df = k),
                   colour = "red") +
-    labs(title = bquote(paste(chi^2,"分布 (自由度",.(k),")")))
+    labs(title = bquote(paste(Z/sqrt(Y/k)," (",k==.(k),")"))) # "="を表示するには"=="とする
 ```
-
-::: callout-note
-関数 bquote() は関数 expression() と同様な働きをするが， 自由度の k を .(k) で評価して取り込むことができる． 以下と比較してみよう．
-
-```{r}
-my_data |>
-    as_tibble_col() |>
-    ggplot(aes(x = value)) +
-    geom_histogram(aes(y = after_stat(density)), 
-                   bins = 30,                    
-                   fill ="lightblue",          
-                   colour = "white") + 
-    geom_function(fun = dchisq,
-                  args = list(df = k),
-                  colour = "red") +
-    labs(title = expression(paste(chi^2,"分布 (自由度",k,")")))
-```
-:::
 
 ## $F$ 分布
 
@@ -424,11 +409,9 @@ my_data |>
 
 $F$ 分布に関して以下を考察せよ．
 
-- $Y_{1},Y_{2}$ をそれぞれ自由度 $k_{1},k_{2}$ の $\chi^2$ 分布に従う独立な確率変数とする． このとき, 確率変数
-  $$ \begin{equation}
+- $Y_{1},Y_{2}$ をそれぞれ自由度 $k_{1},k_{2}$ の $\chi^2$ 分布に従う独立な確率変数とする． このとき, 確率変数 $$ \begin{equation}
      \frac{Y_{1}/k_{1}}{Y_{2}/k_{2}}
-   \end{equation}$$
-  は自由度 $k_{1},k_{2}$ の $F$ 分布に従うことを確認しなさい．
+   \end{equation}$$ は自由度 $k_{1},k_{2}$ の $F$ 分布に従うことを確認しなさい．
 
 ### 解答欄
 
@@ -451,7 +434,7 @@ my_random <- function(){
     return((y1/k1)/(y2/k2))}
 ```
 
-確率シミューレションを行い，視覚化する．
+確率シミュレーションを行い，視覚化する．
 
 ```{r}
 mc <- 10000 # 実験回数を指定
@@ -470,7 +453,7 @@ replicate(mc, my_random()) |>
                               ", ",k[2]==.(k2),")")))
 ```
 
-::: callout-note
+::: column-margin
 グラフの一部に着目したい場合は xlim/ylim で表示を調整することができる．
 
 ```{r}
