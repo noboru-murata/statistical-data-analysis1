@@ -6,7 +6,7 @@ draft = false
 weight = 1016
 +++
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2026-05-31 Sun&gt; </span></span> 更新
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2026-06-07 Sun&gt; </span></span> 更新
 
 講義の進捗に合わせて追加します．
 
@@ -17,7 +17,7 @@ weight = 1016
 -   [第5講 (2026年5月8日)](https://u-tokyo-ac-jp.zoom.us/rec/share/Mq7Gt7RYFuJ1jzphbcygsUNK1OcW5Q_J7uzjr6LOyHs7o9mhyO-sanbY_Vyo6TRd.NI06cL_DQq-hCvLG?startTime=1778227213000)
 -   [第6講 (2026年5月22日)](https://u-tokyo-ac-jp.zoom.us/rec/share/WNsGg3ILEspZRtCpIg3u3fRJBCU-GL7kDrfRSHC0BIbe5vss9H_igIaybbjXSbZG.wWC85xN9z61oFRpc?startTime=1779436817000)
 -   [第7講 (2026年5月29日)](https://u-tokyo-ac-jp.zoom.us/rec/share/I5bqS763-XGecwlu64K7kdowB7wnpmK77UW0owqmKuO_rjQ00Xak4iTnLsnpLuwK.afNCbrbpRFaycyIC?startTime=1780041627000)
--   第8講 (2026年6月5日)
+-   [第8講 (2026年6月5日)](https://u-tokyo-ac-jp.zoom.us/rec/share/HUDh4YkCg8eOed4Z5yh5PsZxjXM176rt8vUvcRLmGGVmCcAKc6YUGU2M7t_bQh8.aedMccyoNF5QTCJY?startTime=1780646420000)
 -   第9講 (2026年6月12日)
 -   第10講 (2026年6月19日)
 -   第11講 (2026年6月26日)
