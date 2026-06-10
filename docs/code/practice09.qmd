@@ -44,21 +44,21 @@ if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォン�
 
 東京の気候データ (`tokyo_weather.csv`) の中の
 
--   気温 (`temp`) ，
--   日射量 (`solar`) ，
--   風速 (`wind`)
+- 気温 (`temp`) ，
+- 日射量 (`solar`) ，
+- 風速 (`wind`)
 
 の項目について以下の問に答えよ．
 
--   全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数365)
+- 全てのデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数365)
 
--   毎月5日のデータのみを用いて各項目の平均・分散・標準偏差を求めよ．(データ数12)
+- 毎月5日のデータのみを用いて各項目の平均・分散・標準偏差を求めよ．(データ数12)
 
--   5の付く日(各月の5,15,25)のデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数36)
+- 5の付く日(各月の5,15,25)のデータを用いて各項目の平均・分散・標準偏差を求めよ．(データ数36)
 
--   ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，推定量のばらつきを確認せよ．
+- ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，推定量のばらつきを確認せよ．
 
-::: callout-note
+::: column-margin
 データの読み込みは以下のようにすればよい．
 
 ```{r}
@@ -157,7 +157,7 @@ tibble(平均気温の推定値 = xbars) |>
                colour = "red") 
 ```
 
-::: callout-note
+::: column-margin
 上記の例では保存しておいた平均の値を参照しているが， geom_vline の中で計算し直すこともできる．
 
 ```{r}
@@ -174,7 +174,7 @@ tibble(平均気温の推定値 = xbars) |>
 ```
 :::
 
-::: callout-note
+::: column-margin
 例えば以下のようにすれば，項目および統計量を総当たりで調べることができる．
 
 ```{r}
@@ -207,9 +207,9 @@ my_plot <- function(data,    # データ
         labs(title = paste(item, "の", func, "の推定"))
     print(gg) # 関数内では明示的に描画を指示する
 }
-#' 全ての組み合わせは for 文で実行可能
-for(item in c("temp","solar","wind")){ # 項目を指定
-    for(func in c("mean","var","sd")){ # 関数を指定
+#' 全ての組み合わせは for 文で実行可能 (以下の例では一部を表示)
+for(item in c("temp","wind")){ # 項目を指定．全部は c("temp","solar","wind")
+    for(func in c("mean","sd")){ # 関数を指定．全部は c("mean","var","sd")
         my_plot(my_data, tw_summary, item, func)
     }
 }
@@ -233,19 +233,19 @@ my_plot(replicate(mc, my_trial(n = 108)) |> t() |> as_tibble(),
 
 東京の気候データ (`tokyo_weather.csv`) の中の
 
--   気温 (`temp`) ，
--   日射量 (`solar`) ，
--   風速 (`wind`)
+- 気温 (`temp`) ，
+- 日射量 (`solar`) ，
+- 風速 (`wind`)
 
 の項目について以下の問に答えよ．
 
--   全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数365)
+- 全てのデータを用いて各項目の歪度と超過尖度を求めよ．(データ数365)
 
--   5のつく日のデータのみを用いて各項目の歪度と超過尖度を求めよ．(データ数36)
+- 5のつく日のデータのみを用いて各項目の歪度と超過尖度を求めよ．(データ数36)
 
--   それぞれの値から正規分布から逸脱していると思われる項目はいずれか考察せよ．
+- それぞれの値から正規分布から逸脱していると思われる項目はいずれか考察せよ．
 
--   各データのヒストグラムを描き，データから計算される平均と分散を持つ正規分布と比較せよ．
+- 各データのヒストグラムを描き，データから計算される平均と分散を持つ正規分布と比較せよ．
 
 ### 解答欄
 
@@ -269,7 +269,7 @@ tw_data |>
                      list(skew = skewness, kurt = kurtosis)))
 ```
 
-::: callout-note
+::: column-margin
 パッケージの一部の関数しか利用しない場合は， 関数 `library()` でパッケージを読み込まなくても， パッケージ名とともに関数を指定することで利用することができる． ただし，関数内で他の関数に依存する場合は注意する必要がある．
 
 ```{r}
@@ -289,7 +289,7 @@ tw_data |>
                      list(skew = skewness, kurt = kurtosis)))
 ```
 
-::: callout-note
+::: column-margin
 歪度や尖度は3次・4次の計算なので，少数のデータでは計算結果が不安定になりやすい．このためデータ数については注意する必要がある．
 :::
 
@@ -323,20 +323,20 @@ for(item in c("temp","solar","wind")){ # 項目を指定
 
 東京の気候データ (`tokyo_weather.csv`) の中の
 
--   気温 (`temp`)
--   降水量 (`rain`)
--   日射量 (`solar`)
--   風速 (`wind`)
--   気圧 (`press`)
--   湿度 (`humid`)
+- 気温 (`temp`)
+- 降水量 (`rain`)
+- 日射量 (`solar`)
+- 風速 (`wind`)
+- 気圧 (`press`)
+- 湿度 (`humid`)
 
 の項目(いずれも数値データ)について以下の問に答えよ．
 
--   それぞれの項目間の共分散，および相関を求めよ．
+- それぞれの項目間の共分散，および相関を求めよ．
 
--   相関の高い項目の組(絶対値が大きい)，および相関の低い項目の組(0に近い)を求めよ．
+- 相関の高い項目の組(絶対値が大きい)，および相関の低い項目の組(0に近い)を求めよ．
 
--   その項目同士の散布図を描け．
+- その項目同士の散布図を描け．
 
 ### 解答欄
 
@@ -374,20 +374,9 @@ library(GGally) # 散布図行列を描くためのパッケージ
 tw_data |> # 対象データを全て表示してみる
     select(temp,rain,solar,wind,press,humid) |>
     ggpairs() 
-tw_data |> # columnsを指定すれば関数selectを使わなくてもよい
-    ggpairs(columns = c("temp","rain","solar","wind","press","humid"))
-tw_data |> # 月ごとに色を変えることもできる
-    ggpairs(columns = c("temp","rain","solar","wind","press","humid"),
-            lower = list(mapping = aes(colour = as_factor(month))))
-tw_data |> # 負の最大相関
-    ggpairs(columns = c("temp","press"))
-tw_data |> # 最大相関
-    ggpairs(columns = c("temp","humid"))
-tw_data |> # 最小相関
-    ggpairs(columns = c("rain","wind"))
 ```
 
-::: callout-note
+::: column-margin
 数値項目を抽出するのであれば以下のように簡潔に書ける．
 
 ```{r}
@@ -403,24 +392,45 @@ tw_data |>
 ```
 :::
 
+::: column-margin
+関数 `ggpairs()` のオプションを利用して選択することもできる． また属性を指定して色を変えることも可能である．
+
+```{r}
+tw_data |> # columnsを指定すれば関数selectを使わなくてもよい
+    ggpairs(columns = c("temp","rain","solar","wind","press","humid"))
+tw_data |> # 月ごとに色を変えることもできる
+    ggpairs(columns = c("temp","rain","solar","wind","press","humid"),
+            lower = list(mapping = aes(colour = as_factor(month))))
+```
+:::
+
+```{r}
+tw_data |> # 負の最大相関
+    ggpairs(columns = c("temp","press"))
+tw_data |> # 最大相関
+    ggpairs(columns = c("temp","humid"))
+tw_data |> # 最小相関
+    ggpairs(columns = c("rain","wind"))
+```
+
 ## 分位点と最頻値の計算
 
 ### 問題
 
 東京の気候データ (`tokyo_weather.csv`) の中の
 
--   気温 (`temp`; 数値データ)
--   最多風向 (`wdir`; ラベルデータ)
+- 気温 (`temp`; 数値データ)
+- 最多風向 (`wdir`; ラベルデータ)
 
 を用いて 以下の問に答えよ．
 
--   全てのデータを用いて気温の四分位点を求めよ．(データ数365)
+- 全てのデータを用いて気温の四分位点を求めよ．(データ数365)
 
--   5の付く日(各月の5,15,25)の気温の四分位点を求めよ．(データ数36)
+- 5の付く日(各月の5,15,25)の気温の四分位点を求めよ．(データ数36)
 
--   ランダムに選んだ36日分のデータで気温の四分位点がどのくらいばらつくか確認せよ．
+- ランダムに選んだ36日分のデータで気温の四分位点がどのくらいばらつくか確認せよ．
 
--   風向の最頻値を求めよ．
+- 風向の最頻値を求めよ．
 
 ### 解答欄
 
@@ -480,7 +490,7 @@ for(name in names(my_data)){
 以下のようにすれば定義域とビンを揃えて表示することができる．
 
 ```{r}
-breaks <- # 全データを用いて適切なビンの計算して固定する
+breaks <- # 全データを用いて適切なビンを計算して固定する
     tw_data |> pull(temp) |> pretty(n = 50)
 for(name in names(my_data)){
     name <- sym(name)
@@ -530,7 +540,7 @@ tw_data |>       # filterを用いることもできる
     filter(n == max(n)) 
 ```
 
-::: callout-note
+::: column-margin
 例えば以下のようにすれば16方位の頻度をグラフ化することができる．
 
 ```{r}
