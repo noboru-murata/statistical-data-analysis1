@@ -58,7 +58,7 @@ if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォン�
 
 - ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，推定量のばらつきを確認せよ．
 
-::: column-margin
+::: callout
 データの読み込みは以下のようにすればよい．
 
 ```{r}
@@ -301,9 +301,11 @@ tw_summary <- # 前の練習問題の結果を利用
     summarise(across(c(temp,solar,wind),
                      list(mean = mean, var = var, sd = sd)))
 for(item in c("temp","solar","wind")){ # 項目を指定
-    item <- sym(item)
     gg <- tw_data |>
-        ggplot(aes(x = !!item)) + 
+        ggplot(aes(x = !!sym(item))) + 
+        #' '文字列を利用して関数aes()などで列名を指定するには
+        #'   aes(x = !!sym("文字列"))
+        #' という非標準評価(NSE)の仕組みを使う必要がある
         geom_histogram(aes(y = after_stat(density)), 
                        bins = 30,                    
                        fill ="lightblue",          
@@ -472,9 +474,8 @@ my_data <-
     replicate(mc, my_trial()) |> t() |> as_tibble()
 #' ヒストグラムの表示
 for(name in names(my_data)){
-    name <- sym(name)
     gg <- my_data |>
-        ggplot(aes(x = !!name)) +
+        ggplot(aes(x = !!sym(name))) +
         geom_histogram(aes(y = after_stat(density)),
                        bins = 40,
                        fill = "lightblue",
@@ -493,9 +494,8 @@ for(name in names(my_data)){
 breaks <- # 全データを用いて適切なビンを計算して固定する
     tw_data |> pull(temp) |> pretty(n = 50)
 for(name in names(my_data)){
-    name <- sym(name)
     gg <- my_data |>
-        ggplot(aes(x = !!name)) +
+        ggplot(aes(x = !!sym(name))) +
         geom_histogram(aes(y = after_stat(density)),
                        breaks = breaks, # ビンを固定
                        fill = "lightblue",
@@ -509,13 +509,13 @@ for(name in names(my_data)){
 }
 ```
 
+::: column-margin
 表示には密度推定を用いても良い．
 
 ```{r}
 for(name in names(my_data)){
-    name <- sym(name)
     gg <- my_data |>
-        ggplot(aes(x = !!name)) +
+        ggplot(aes(x = !!sym(name))) +
         geom_density(fill = "lightblue",
                      colour = "blue") +
         geom_vline(xintercept = tw_temp_summary[[name]],
@@ -526,6 +526,7 @@ for(name in names(my_data)){
     print(gg)
 }
 ```
+:::
 
 最多風向の最頻値を調べる．
 
