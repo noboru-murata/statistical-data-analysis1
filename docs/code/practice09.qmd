@@ -374,6 +374,13 @@ tw_cor == max(tw_cor-diag(diag(tw_cor))) # 対角を除く最大相関 (temp,hum
 abs(tw_cor) == min(abs(tw_cor))          # 最小相関(0に近い) (rain,wind)
 ```
 
+変数名を取り出すには以下のようにすればよい．
+
+```{r}
+which(tw_cor == max(tw_cor-diag(diag(tw_cor))), # 最大相関
+      arr.ind = TRUE)                           # 配列の成分名を表示
+```
+
 散布図を描画する．
 
 ```{r}
