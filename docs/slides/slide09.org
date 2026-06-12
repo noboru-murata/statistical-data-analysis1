@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-06 17:36:40 mura>
+# Time-stamp: <2026-06-12 15:09:17 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -83,6 +83,8 @@
 ** 推定量の一致性
 - サンプル数が大きい場合に "合理的な" 推定量となる根拠の1つ
 - *一致性* (consistency) 
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    推定量がサンプル数
    \(n\to\infty\) のとき確率1で真の値に収束する性質
@@ -100,6 +102,8 @@
 ** 推定量の不偏性
 - サンプル数が小さい場合の推定量の "良さ" に関する性質の1つ
 - *不偏性* (unbiasedness) 
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    推定量 \(\hat{\theta}\)
    が不偏であるとは,
@@ -112,16 +116,20 @@
 - *不偏推定量* : 不偏性をもつ推定量
 
 
-* "モーメント"に基づく記述統計量
+* "積率"に基づく記述統計量
 ** 平均
+- データの代表値を表す記述統計量
 - *平均* (mean)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      \mu=\mathbb{E}[X]
    \end{equation}
    #+end_quote
-   - データの代表値を表す記述統計量
 - *標本平均* (sample mean)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      \bar{X}
@@ -132,14 +140,18 @@
    #+end_quote
 
 ** 分散・標準偏差
-- *分散* (variance)
+- データのばらつきを表す記述統計量
+- *分散* (variance) 
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      \mathrm{Var}(X)=\sigma^{2}=\mathbb{E}[(X-\mu)^{2}]
    \end{equation}
    #+end_quote
-   - データのばらつきを表す記述統計量
 - *標本分散* (sample variance)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      S^{2}
@@ -168,14 +180,16 @@
 
 ** 不偏分散
 - 不偏性を担保した分散の推定量
-- バイアス補正 :
-   標本分散に \(n/(n-1)\) を乗じたもの
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      s^2=\frac{n}{n-1}S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2
    \end{equation}
    #+end_quote
-   - \(\sigma^2\) の *不偏推定量* となる
+   - バイアス補正 :
+     標本分散に \(n/(n-1)\) を乗じたもの
+- \(\sigma^2\) の *不偏推定量* となる
       # - 不偏分散の計算: ~var()~
       # - わざわざ不偏性を持たない \(S^2\) を \(\sigma^2\) の推定量として使う理由は通常ないので,
       #   補正した \(s^2\) を *標本分散* と呼ぶこともあるが，
@@ -187,7 +201,7 @@
 - 一般に \(s\) は標準偏差 \(\sigma\) の *不偏推定量ではない*
    # - 標本標準偏差の計算: ~sd()~
 
-** R : 平均・分散・標準偏差の計算
+** 平均・分散・標準偏差の計算
 - 基本的な使い方
    #+begin_src R :eval no :tangle no
      mean(x, trim = 0, na.rm = FALSE) # 標本平均
@@ -201,30 +215,34 @@
 ** 標準化
 - 多次元データの分析のために単位や基準を揃える
 - データ \(X_{1},X_{2},\dotsc,X_{n}\) の *標準化*
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      Z_{i}=\frac{X_i-\bar{X}}{s}\quad(i=1,2,\dotsc,n)
    \end{equation}
    #+end_quote
-   - \(s\) の代わりに \(S\) で割って定義する文献もある
-- 定義から \(Z_{1},Z_{2},\dotsc,Z_{n}\) の
-   標本平均は0, 不偏分散は1 に *規格化* される
+   - \(Z_{1},Z_{2},\dotsc,Z_{n}\) の
+     標本平均は0, 不偏分散は1 に *規格化* される
+   - /\(s\) の代わりに \(S\) で割って定義する文献もある/
 - \(Z_{i}\) : *標準得点* あるいは *Zスコア*
    # (そうなるようにデータを一次変換したものが標準化)
 
 ** 偏差値
 - 別の基準での標準化
-   - 教育学や心理学では, 平均50, 標準偏差10が好まれる
-- 標本平均50, 標準偏差10に線形変換
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      T_{i}=10Z_{i}+50\quad(i=1,\dotsc,n)
    \end{equation}
    #+end_quote
+   - 標本平均50, 標準偏差10に線形変換
+   - /教育学や心理学では, 平均50, 標準偏差10が好まれる/
 - \(T_{i}\) :
    *偏差値得点* あるいは *Tスコア* 
 
-** R : 標準化の計算
+** 標準化の計算
 - 基本的な使い方
    #+begin_src R :eval no :tangle no
      scale(x, center = TRUE, scale = TRUE) # 標準化
@@ -389,7 +407,9 @@
 
 ** 歪度
 - 分布の非対称性を表す統計量
-- *歪度* (skewness)
+- *歪度* (skewness) 
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    平均 \(\mu\) , 分散 \(\sigma^2\) で
    3次モーメントをもつ確率変数 \(X\) 
@@ -400,19 +420,28 @@
 - 左右に対称的な分布の歪度は0 (正規分布の歪度は0)
    - 歪度が正の場合 : 分布の右の裾の方が重い
    - 歪度が負の場合 : 分布の左の裾の方が重い
-- [[color:green][正の歪度をもつ分布の例]]
+- 正の歪度をもつ分布の例
+   #+attr_html: :class callout-tip
+   #+attr_latex: :environment callout-tip
+   #+begin_quote
    - ガンマ分布 \(\Gamma(\nu,\alpha)\) の歪度は \(2/\sqrt{\nu}\)
+   #+end_quote
 
 ** 尖度
 - 平均の周囲の分布の尖り具合を表す統計量
-- *尖度* (kurtosis)
+- *尖度* (kurtosis) 
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
+   平均 \(\mu\) , 分散 \(\sigma^2\) で
    4次のモーメントをもつ確率変数 \(X\)
    \begin{equation}
      \mathrm{kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}
    \end{equation}
    #+end_quote
 - *超過尖度* (excess kurtosis) :
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      % \mathrm{excess\ kurtosis}=\frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}-3
@@ -422,21 +451,27 @@
    \end{equation}
    #+end_quote
    - 正規分布との比較のため正規分布の尖度3を引いた量
-   - こちらを単に尖度と呼ぶ文献もあるので注意
+   - /こちらを単に尖度と呼ぶ文献もあるので注意/
 
 ** 超過尖度
 - 正規分布と比較して
    - 超過尖度が正の場合 : 平均の周囲の分布の形状が尖っている
    - 超過尖度が負の場合 : 分布の形状は丸みを帯びている
-      #+begin_quote
-      正の場合，正規分布に比べて平均まわりの密度が
-      分布の裾の方にまわっていることが多いため,
-      正規分布より裾が重いと解釈されることが多い
-      #+end_quote
-- [[color:green][正の超過尖度をもつ分布の例]]
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
+   #+begin_quote
+   正の場合，正規分布に比べて平均まわりの密度が
+   分布の裾の方にまわっていることが多いため,
+   正規分布より裾が重いと解釈されることが多い
+   #+end_quote
+- 正の超過尖度をもつ分布の例
+   #+attr_html: :class callout-tip
+   #+attr_latex: :environment callout-tip
+   #+begin_quote
    - 自由度 \(\nu>4\) をもつ \(t\) 分布 \(t(\nu)\) の超過尖度は \(6/(\nu-4)\) \\
       (\(\nu\leq 4\) のときは \(t(\nu)\) は4次モーメントをもたない)
    - ガンマ分布 \(\Gamma(\nu,\alpha)\) の超過尖度は \(6/\nu\)
+   #+end_quote
 
 #+reveal: split
 #+begin_leftcol  
@@ -467,22 +502,28 @@
 ** 標本歪度と標本尖度
 - 観測データ \(X_{1},X_{2},\dotsc,X_{n}\) による推定
 - *標本歪度* (sample skewness)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      \mathrm{skewness}=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^3}{s^3}
    \end{equation}
    #+end_quote
 - *標本尖度* (sample kurtosis)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      \mathrm{kurtosis}=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^4}{s^4}
    \end{equation}
    #+end_quote
-   - 分子の計算は \(1/n\) としているが，別の場合もあるので注意
+   - /分子の計算は \(1/n\) としているが，別の場合もあるので注意/
 
-** R : 歪度と尖度の計算
+** 歪度と尖度の計算
 - 歪度・尖度を計算する関数はRの標準機能にはないので
    ~package::e1071~ を利用 (自作してもよい)
+   #+attr_html: :class callout
+   #+attr_latex: :environment callout
    #+begin_quote
    標本歪度・標本尖度の値は標本平均・分散に比べて
    *ばらつきが大きい* ので，
@@ -582,6 +623,8 @@
 ** 共分散
 - 複数のデータ間の関係を知るための記述統計量
 - *共分散* (covariance) 
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      \mathrm{Cov}(X,Y)=\mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])]
@@ -590,30 +633,36 @@
 - 直感的には2種類のデータ間の比例関係の大きさ
 
 ** 標本共分散
-- 観測データ \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) による推定
+- 観測値 \(X_1,X_2,\dotsc,X_n\) および \(Y_1,Y_2,\dotsc,Y_n\) による推定
 - *標本共分散* (sample covariance)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      \mathrm{Cov}(X,Y)=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{n-1}
    \end{equation}
    #+end_quote
    - ただし\(\bar{X},\bar{Y}\)は
-      \(X_1,X_2,\dotsc,X_N\) および \(Y_1,Y_2,\dotsc,Y_N\) の平均
+      \(X_1,X_2,\dotsc,X_N\) および \(Y_1,Y_2,\dotsc,Y_N\) の標本平均
 
 ** 相関
 - 複数のデータ間の正規化した記述統計量
 - *相関* (correlation) 
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      \rho=\frac{\mathrm{Cov}(X,Y)}{\sqrt{\mathrm{Var}(X)\mathrm{Var}(Y)}}
    \end{equation}
    #+end_quote
 - 相関の値は \(-1\) 以上 \(1\) 以下
-   - \(1\) に近いほど正の比例関係が強い
+   - \(+1\) に近いほど正の比例関係が強い
    - \(-1\) に近いほど負の比例関係が強い
 ** 標本相関
-- 観測データ \(X_1,X_2,\dots,X_n\) および \(Y_1,Y_2,\dots,Y_n\) による推定
+- 観測値 \(X_1,X_2,\dotsc,X_n\) および \(Y_1,Y_2,\dotsc,Y_n\) による推定
 - *標本相関* (sample correlation)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      \rho=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}
@@ -621,9 +670,9 @@
    \end{equation}
    #+end_quote
    - ただし\(\bar{X},\bar{Y}\)は
-      \(X_1,X_2,\dotsc,X_N\) および \(Y_1,Y_2,\dotsc,Y_N\) の平均
+      \(X_1,X_2,\dotsc,X_N\) および \(Y_1,Y_2,\dotsc,Y_N\) の標本平均
 
-** R : 相関と共分散の計算
+** 相関と共分散の計算
 - 基本的な使い方
    #+begin_src R :eval no :tangle no
      cov(x, y = NULL, use = "everything", 
@@ -714,6 +763,8 @@
    \end{equation}
    #+end_quote
 - *中央値* もしくは *メディアン* (median)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    データを昇順に並べ替えたとき中央にくる値
    - \(n\) が奇数の場合 : \(X_{((n+1)/2)}\)
@@ -724,7 +775,9 @@
 
 ** 分位点
 - メディアンの一般化
-- \(100\alpha\) % *分位点* (percentile/quantile)
+-  \(100\alpha\) % *分位点* (percentile/quantile)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(\alpha\in[0,1]\) に対して,
    その点以下のデータの個数が全体の約 \(100\alpha\) % になるような点
@@ -750,8 +803,10 @@
 ** 連続分布の分位点
 - 分位点は推定や検定において重要な役割を果たす
 - 連続分布の \(100\alpha\) % *分位点*
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
-   \(0<\alpha<1\) に対して，その分布に従う確率変数を \(X\) としたとき，
+   \(0<\alpha<1\) に対して，その分布に従う確率変数を \(X\) としたとき
    不等式
    \begin{equation}
      P(X\leq x)\geq\alpha
@@ -767,6 +822,8 @@
 
 #+reveal: split
 - 分位点の性質
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    \(X_1,X_2,\dots,X_n\) が独立同分布な確率変数の列のとき,
    \(X_1,X_2,\dots,X_n\) の \(100\alpha\) %分位点は，
@@ -791,14 +848,20 @@
 ** ばらつきの指標
 - 分位点を利用したデータのばらつきの指標
 - *範囲* (range)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    最大値と最小値の差 (外れ値の影響を大きく受ける)
    #+end_quote
 - *四分位範囲* (interquartile range)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    第3四分位点と第1四分位点の差
    #+end_quote
 - *中央絶対偏差* (median absolute deviation)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(X_1,X_2,\dots,X_n\) の中央値を \(m\) としたとき,
    \(|X_1-m|,|X_2-m|,\dots,|X_n-m|\) の中央値
@@ -823,15 +886,16 @@
 * "頻度"に基づく統計量
 ** 頻度に基づく統計量
 - *最頻値* もしくは *モード* (mode)
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    データの中で最も頻度が高く現れる値
    #+end_quote
-- データが有限個の値を取る場合に特に有効
-- データが連続で無限に多くの値を取ることができる場合には
-   注意が必要
-   - 連続なデータの場合でも有限個の観測データに対してモードは定義できる
-   - ただし，偶々観測値として現れた値なのでその意味はよく考えなくてはならない
-   - 必要に応じて, 例えば区分的に集計するなどの工夫をすることもある
+   - データが有限個の値を取る場合に特に有効
+   - データが連続で無限に多くの値を取る場合には注意が必要
+      - 連続なデータの場合でも有限個の観測データに対してモードは定義できる
+      - ただし，偶々観測値として現れた値なのでその意味はよく考えなくてはならない
+      - 必要に応じて, 例えば区分的に集計するなどの工夫をすることもある
 
 
 * 実習

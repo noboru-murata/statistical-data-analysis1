@@ -17,8 +17,6 @@ citation-location: margin
 tbl-cap-location: margin
 fig-cap-location: margin
 editor: visual
-editor_options: 
-  chunk_output_type: console
 ---
 
 ## 準備
@@ -46,11 +44,10 @@ if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォン�
 
 $X$ を一様乱数に従う確率変数とし，平均値の推定量として以下を考える． それぞれの推定量の分散を比較しなさい．
 
--   標本平均 (mean)
--   中央値 (median)
--   最大値と最小値の平均 ((max+min)/2)
+- 標本平均 (mean)
+- 中央値 (median)
+- 最大値と最小値の平均 ((max+min)/2)
 
-::: callout-note
 #### ヒント
 
 以下のような関数を作り，確率シミュレーションを行えばよい．
@@ -62,7 +59,6 @@ estimate_means <- function(n, min, max){ # 観測データ数
     return(c(xbar = mean(x), med = median(x), mid = (max(x)+min(x))/2))
 } # 3つまとめて計算する関数
 ```
-:::
 
 ### 解答欄
 
@@ -117,12 +113,12 @@ mc_data |>
     ggplot(aes(x = value)) +
     geom_histogram(aes(fill = name),
                    show.legend = FALSE) + # 凡例を表示しない
-    facet_wrap(~name)                     # 横に並べる 
+    facet_wrap(vars(name))                # 横に並べる 
 ```
 
 一様分布においては，最大最小の平均が良い推定量であることがわかる．
 
-::: callout-note
+::: column-margin
 分位点を使ってもう少し詳しくみてみる．
 
 ```{r}
@@ -141,10 +137,9 @@ mc_data |> # 別形式のデータフレームの作成例
 
 ```{r}
 for(name in c("xbar","med","mid")) {
-    name <- sym(name)
     gg <-
         mc_data |>
-        ggplot(aes(x = !!name)) +
+        ggplot(aes(x = !!sym(name))) +
         geom_histogram(bins = 40,
                        fill = "pink",
                        colour = "brown") +
@@ -156,7 +151,6 @@ for(name in c("xbar","med","mid")) {
 ```
 :::
 
-::: callout-note
 違う分布で試してみる．
 
 ```{r}
@@ -173,22 +167,23 @@ mc_data2 |>
     geom_histogram(aes(fill = name),
                    show.legend = FALSE) + 
     xlim(-8,8) +                          # x軸を調整する
-    facet_wrap(~name) 
+    facet_wrap(vars(name))
 ```
 
 この分布では中央値が良い推定量となることがわかる．
-:::
 
 ::: callout-tip
 Rで用いることのできる色の名前は関数 colors()/colours() で確認することができる. 例えば以下のようにすると視覚的に確認することができる.
 
 ```{r}
 cols <- colors()[grep("(grey|[0-1,3-9])",  # greyおよび2以外の数を含む色を排除
-                      colors(), invert = TRUE)]
-ncols <- 6; nrows <- ceiling(length(cols)/ncols) # 必要なタイルの枚数の計算
+                      colors(),
+                      invert = TRUE)]
+ncols <- 6
+nrows <- ceiling(length(cols)/ncols)       # 必要なタイルの枚数の計算
 tibble(x = rep(1:ncols, nrows),
        y = rep(1:nrows, each = ncols),
-       z = factor(1:(nrows*ncols))) |>   # タイルの配置のためのデータフレーム
+       z = factor(1:(nrows*ncols))) |>     # タイルの配置のためのデータフレーム
     slice_head(n = length(cols)) |>        # 必要な行のみ残す
     ggplot(aes(x = x, y = y, fill = z)) +
     scale_fill_manual(values = cols) +     # fillの色を指定
@@ -203,11 +198,13 @@ tibble(x = rep(1:ncols, nrows),
 
 東京都の気候データ (`tokyo_weather.csv`) の風速 (`wind`) の項目について以下の問に答えよ．
 
--   全データを用いてヒストグラム(密度)を作成しなさい．
--   ガンマ分布でモデル化して最尤推定を行いなさい．
--   推定した結果をヒストグラムに描き加えて比較しなさい．
+- 全データを用いてヒストグラム(密度)を作成しなさい．
+- ガンマ分布でモデル化して最尤推定を行いなさい．
+- 推定した結果をヒストグラムに描き加えて比較しなさい．
+- 余力のある者は，自身で収集したデータを用いてモデル化と最尤推定を試みよ．
 
-::: callout-note
+#### ヒント
+
 ガンマ分布の最尤推定量は以下のようにして作成できる
 
 ```{r}
@@ -228,11 +225,6 @@ mle.gamma <- function(x, # 観測データ
     return(coef(est)) # 推定値のみ返す
 }
 ```
-:::
-
-::: callout-note
-余力のある者は，自身で収集したデータを用いてモデル化と最尤推定を試みよ．
-:::
 
 ### 解答欄
 
@@ -305,13 +297,40 @@ last_plot() +
                   linewidth = 1.2)
 ```
 
-::: callout-note
+::: column-margin
 シミュレーションにより推定量の良さの検証(一致性や不偏性の確認)を行うと以下のようになる．
 
 ```{r}
 set.seed(5678)      # 乱数のシード値の指定 (変更して再現性を確認してみよ)
 nu <- 5; alpha <- 2 # 真のパラメタ
+grand_truth <-      # 真のパラメタのデータフレーム
+    tibble(nu,alpha) |>
+    pivot_longer(everything())
 mc <- 1000          # 実験回数 (計算が重いので少なめにしている)
+#' Monte-Carlo実験
+mc_data <-
+    tibble(n = rep(c(10,50,100), each = mc)) |>    # 実験設定(データ数)のデータフレーム
+    rowwise() |>                                   # 各行ごとに次の処理を実行
+    mutate(est = list(as_tibble_row(               # 実験結果をtibble型式に変換して保存
+               mle.gamma(rgamma(n,nu,alpha))))) |>
+    unnest(est)                                    # リストを展開して通常のデータフレームに変換
+mc_data |>
+    mutate(n = as_factor(n)) |>                    # 実験設定を因子化して整理
+    pivot_longer(!n) |>
+    ggplot(aes(x = value, fill = name)) +          # nu/alphaごとに密度を推定
+    geom_density(alpha = 0.6,
+                 show.legend = FALSE) + 
+    geom_vline(data = grand_truth,                 # 真値の表示
+               aes(xintercept = value), 
+               colour = "tomato") +
+    facet_grid(rows = vars(n), cols = vars(name),  # nu/alpha およびデータ数ごとにグラフを表示
+               scales = "free_x")                    # 座標軸は各列で適宜合わせる
+```
+
+個別に描く場合は，例えば以下のようにすればよい．
+
+```{r}
+#| eval: false
 for(n in c(10, 50, 100)){ # データ数を変えて実験
     ## Monte-Carlo実験
     mc_data <- # 推定値のデータフレーム
@@ -350,13 +369,10 @@ for(n in c(10, 50, 100)){ # データ数を変えて実験
 
 東京都の気候データ (`tokyo_weather.csv`) の日射量 (`solar`) の項目について以下の問に答えよ．
 
--   全データによる平均値を計算しなさい．
--   ランダムに抽出した50点を用いて，平均値の0.9(90%)信頼区間を求めなさい．
--   上記の推定を100回繰り返した際，真の値(全データによる平均値)が信頼区間に何回含まれるか確認しなさい．
-
-::: callout-note
-余力のある者は，自身で収集したデータで区間推定を試みよ．
-:::
+- 全データによる平均値を計算しなさい．
+- ランダムに抽出した50点を用いて，平均値の0.9(90%)信頼区間を求めなさい．
+- 上記の推定を100回繰り返した際，真の値(全データによる平均値)が信頼区間に何回含まれるか確認しなさい．
+- 余力のある者は，自身で収集したデータで区間推定を試みよ．
 
 ### 解答欄
 
@@ -405,10 +421,11 @@ mc_trial <- function(n){ # nを変えて実験できるように
 mc_data <- # 信頼区間のMonte-Carlo実験
     replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
     mutate(answer = L < mu & mu < U) # 真値が信頼区間に含まれるか
+mc_data                              # 実験結果を見る
 mc_data |> count(answer)             # 頻度を見る
 ```
 
-::: callout-note
+::: column-margin
 信頼区間について更に多数で評価してみる．
 
 ```{r}
@@ -416,11 +433,12 @@ mc <- 2000
 mc_data <- # 信頼区間のMonte-Carlo実験
     replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
     mutate(answer = L < mu & mu < U)
-mc_data |> count(answer) |> mutate(prob=n/sum(n)) # 確率を見る
+mc_data |> 
+    count(answer) |>        # 頻度を見る
+    mutate(prob = n/sum(n)) # 確率を見る
 ```
 :::
 
-::: callout-note
 日射量の平均の推定における観測データを全て使った推定値(真値に相当)と信頼区間の関係をグラフを描いて確認してみる．
 
 ```{r}
@@ -436,4 +454,3 @@ mc_data |>
                colour = "orange",
                linewidth = 1.1)
 ```
-:::

@@ -58,14 +58,12 @@ if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォン�
 
 - ランダムに選んだ36日分のデータで各項目の平均・分散・標準偏差を求めたとき，推定量のばらつきを確認せよ．
 
-::: callout
-データの読み込みは以下のようにすればよい．
+なお，データの読み込みは以下のようにすればよい．
 
 ```{r}
 #| eval: false
 tw_data <- read_csv("data/tokyo_weather.csv") # 読み込み方の例
 ```
-:::
 
 ### 解答欄
 
@@ -101,6 +99,12 @@ tw_data |>
 ```{r}
 tw_data |>
     summarise(across(c(temp,solar,wind), mean))
+```
+
+その他の関数 `var()`, `sd()` などについても同様に計算すれば良い
+
+```{r}
+#| eval: false
 tw_data |>
     summarise(across(c(temp,solar,wind), var))
 tw_data |>
@@ -128,6 +132,7 @@ tw_data |>
 同様に5の付く日のデータによる計算は以下のようになる．
 
 ```{r}
+#| eval: false
 tw_data |>
     filter(day %in% c(5,15,25)) |>
     summarise(across(c(temp,solar,wind),
@@ -208,8 +213,8 @@ my_plot <- function(data,    # データ
     print(gg) # 関数内では明示的に描画を指示する
 }
 #' 全ての組み合わせは for 文で実行可能 (以下の例では一部を表示)
-for(item in c("temp","wind")){ # 項目を指定．全部は c("temp","solar","wind")
-    for(func in c("mean","sd")){ # 関数を指定．全部は c("mean","var","sd")
+for(item in c("temp","wind")){ # 項目を指定．c("temp","solar","wind") で全部指定
+    for(func in c("mean")){ # 関数を指定．c("mean","var","sd") で全部指定
         my_plot(my_data, tw_summary, item, func)
     }
 }
@@ -395,20 +400,34 @@ tw_data |>
 :::
 
 ::: column-margin
-関数 `ggpairs()` のオプションを利用して選択することもできる． また属性を指定して色を変えることも可能である．
+関数 `ggpairs()` のオプションを利用して選択することもできる．
 
 ```{r}
+#| eval: false
 tw_data |> # columnsを指定すれば関数selectを使わなくてもよい
     ggpairs(columns = c("temp","rain","solar","wind","press","humid"))
+```
+
+また属性を指定して色を変えることも可能である．
+
+```{r}
 tw_data |> # 月ごとに色を変えることもできる
     ggpairs(columns = c("temp","rain","solar","wind","press","humid"),
             lower = list(mapping = aes(colour = as_factor(month))))
 ```
 :::
 
+負の最大相関を与える `temp` と `press` の散布図を描く．
+
 ```{r}
 tw_data |> # 負の最大相関
     ggpairs(columns = c("temp","press"))
+```
+
+他の組み合わせも個別に指定すれば良い．
+
+```{r}
+#| eval: false
 tw_data |> # 最大相関
     ggpairs(columns = c("temp","humid"))
 tw_data |> # 最小相関
@@ -488,16 +507,19 @@ for(name in names(my_data)){
 }
 ```
 
+::: column-margin
 以下のようにすれば定義域とビンを揃えて表示することができる．
 
 ```{r}
-breaks <- # 全データを用いて適切なビンを計算して固定する
-    tw_data |> pull(temp) |> pretty(n = 50)
+breaks <-          # 全データを用いて適切なビンを計算して固定する
+    tw_data |>
+    pull(temp) |>
+    pretty(n = 50) # データの値域を50程度の切りの良い数字に分割
 for(name in names(my_data)){
     gg <- my_data |>
         ggplot(aes(x = !!sym(name))) +
         geom_histogram(aes(y = after_stat(density)),
-                       breaks = breaks, # ビンを固定
+                       breaks = breaks, # ビンを指定
                        fill = "lightblue",
                        colour = "blue") +
         geom_vline(xintercept = tw_temp_summary[[name]],
@@ -508,6 +530,7 @@ for(name in names(my_data)){
     print(gg)
 }
 ```
+:::
 
 ::: column-margin
 表示には密度推定を用いても良い．
