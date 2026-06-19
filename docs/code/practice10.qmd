@@ -55,8 +55,10 @@ $X$ を一様乱数に従う確率変数とし，平均値の推定量として�
 ```{r}
 #| eval: false
 estimate_means <- function(n, min, max){ # 観測データ数
-    x <- runif(n, min = min, max = max) # 一様乱数を生成，範囲は引数から
-    return(c(xbar = mean(x), med = median(x), mid = (max(x)+min(x))/2))
+    x <- runif(n, min = min, max = max)  # 一様乱数を生成，範囲は引数から
+    return(c(xbar = mean(x),
+             med = median(x),
+             mid = (max(x)+min(x))/2))
 } # 3つまとめて計算する関数
 ```
 
@@ -94,7 +96,7 @@ mc_data <-
     replicate(mc, estimate_means(n, min = a, max = b)) |> # 3 x mc 型行列
     t() |>      # 転置して mc x 3 型行列に変換
     as_tibble() # データフレーム化
-mc_data # 実験結果の一部を確認
+print(mc_data)  # 実験結果の一部を確認
 ```
 
 それぞれの推定量の平均と分散を計算し，結果を集計する．
@@ -113,7 +115,7 @@ mc_data |>
     ggplot(aes(x = value)) +
     geom_histogram(aes(fill = name),
                    show.legend = FALSE) + # 凡例を表示しない
-    facet_wrap(vars(name))                # 横に並べる 
+    facet_wrap(vars(as_factor(name)))     # 登場順に横に並べる 
 ```
 
 一様分布においては，最大最小の平均が良い推定量であることがわかる．
@@ -156,7 +158,9 @@ for(name in c("xbar","med","mid")) {
 ```{r}
 estimate_means2 <- function(n){
     x <- rt(n, df = 2) # 自由度2のt分布 (裾が重く平均が推定しにくい分布)
-    return(c(xbar = mean(x), med = median(x), mid = (max(x)+min(x))/2))
+    return(c(xbar = mean(x),
+             med = median(x),
+             mid = (max(x)+min(x))/2))
 }
 mc_data2 <- 
     replicate(mc, estimate_means2(n)) |> t() |> as_tibble()
@@ -167,7 +171,7 @@ mc_data2 |>
     geom_histogram(aes(fill = name),
                    show.legend = FALSE) + 
     xlim(-8,8) +                          # x軸を調整する
-    facet_wrap(vars(name))
+    facet_wrap(vars(as_factor(name)))
 ```
 
 この分布では中央値が良い推定量となることがわかる．
@@ -218,10 +222,10 @@ mle.gamma <- function(x, # 観測データ
         suppressWarnings(-sum(dgamma(x, nu, alpha, log = TRUE)))
     ## suppressWarnings は定義域外で評価された際の警告を表示させない
     ## 最尤推定(負の尤度の最小化)
-    est <- mle(minuslogl = ll,   # 負の対数尤度関数
+    est <- mle(minuslogl = ll,                         # 負の対数尤度関数
                start = list(nu = nu0, alpha = alpha0), # 初期値
-               method = "BFGS",  # 最適化方法 (選択可能)
-               nobs = length(x)) # 観測データ数
+               method = "BFGS",                        # 最適化方法 (選択可能)
+               nobs = length(x))                       # 観測データ数
     return(coef(est)) # 推定値のみ返す
 }
 ```
@@ -246,7 +250,7 @@ tw_data <- read_csv("data/tokyo_weather.csv")
 tw_data |>
     ggplot(aes(x = wind)) +
     geom_histogram(aes(y = after_stat(density)), # 密度表示
-                   bins = 30,
+                   bins = 25,                    # ビンの数の指定
                    fill = "skyblue",
                    colour = "slateblue") +
     labs(x = "風速 [m/s]", y = "密度", title = "風速のヒストグラム")
@@ -255,35 +259,42 @@ tw_data |>
 ガンマ分布の最尤推定量を求めるための関数を作成する．
 
 ```{r}
-library("stats4") # 関数mleを利用
-mle.gamma <- function(x,                # 観測データ
-                      nu0 = 1,          # nu (shape) の初期値 
-                      alpha0 = 1,       # alpha (rate) の初期値
-                      verbose = FALSE){ # debug用に追加
-    ## 負の対数尤度関数を定義 (最小化を考えるため)
-    ll <- function(nu, alpha) # nuとalphaの関数として定義 
-        suppressWarnings(-sum(dgamma(x,
-                                     shape = nu, 
-                                     rate = alpha, 
-                                     log = TRUE))) # 対数密度
-    ## suppressWarnings は定義域外で評価された際の警告を表示させない
-    ## 最尤推定(負の尤度の最小化)
-    est <- mle(minuslogl = ll,   # 負の対数尤度関数
-               start = list(nu = nu0, alpha = alpha0), # 初期値
-               method = "BFGS",  # 最適化方法 (選択可能)
-               nobs = length(x)) # 観測データ数
-    if(verbose) { 
-        return(est) # verbose=TRUEならmleの結果を全て返す
-    } else {
-        return(coef(est)) # 推定値のみ返す
+library("stats4")              # 関数mleを利用
+mle.gamma <-
+    function(x,                # 観測データ
+             nu0 = 1,          # nu (shape) の初期値 
+             alpha0 = 1,       # alpha (rate) の初期値
+             verbose = FALSE){ # debug用に追加
+        ## 負の対数尤度関数の定義
+        ll <-
+            function(nu, alpha) # nuとalphaの関数として定義 
+                suppressWarnings( # 定義域外で評価された際の警告を表示させない
+                    -sum(dgamma(x,
+                                shape = nu, 
+                                rate = alpha, 
+                                log = TRUE))) # 対数密度
+        ## 最尤推定(負の尤度の最小化)の実行
+        est <- mle(minuslogl = ll,               # 負の対数尤度関数
+                   start = list(nu = nu0,        # 初期値
+                                alpha = alpha0), 
+                   method = "BFGS",              # 最適化方法 (選択可能)
+                   nobs = length(x))             # 観測データ数
+        ## 返値の処理
+        if(verbose) { 
+            return(est)       # verbose=TRUEならmleの結果を全て返す
+        } else {
+            return(coef(est)) # 推定値のみ返す
+        }
     }
-}
 ```
 
 最尤推定を行う．
 
 ```{r}
-(theta <- with(tw_data, mle.gamma(wind))) 
+theta <-
+    tw_data |>
+    with(mle.gamma(wind)) # データフレームの列名を関数に渡す
+print(theta)
 ```
 
 得られた結果を前出のヒストグラム上に重ね描きする．
@@ -385,7 +396,11 @@ for(n in c(10, 50, 100)){ # データ数を変えて実験
 全データによる平均値の計算を行う．
 
 ```{r}
-(mu <- tw_data |> pull(solar) |> mean()) # 真値
+mu <- 
+    tw_data |>
+    pull(solar) |>
+    mean()         # 真値(全データによる平均値)
+print(mu)
 ```
 
 これを真値として信頼区間の精度の検証を行う．
@@ -395,13 +410,15 @@ for(n in c(10, 50, 100)){ # データ数を変えて実験
 ```{r}
 set.seed(1357) # 乱数のシード値の指定 (変更して再現性を確認してみよ)
 n <- 50
-est <- # 平均と標準偏差の推定を行う
+#' 平均と標準偏差の推定を行う
+est <- 
     tw_data |>
-    slice_sample(n = n) |> # ランダムにn個取り出す
-    summarize(across(solar, list(mean = mean, sd = sd))) 
-xbar  <- est[["solar_mean"]] # 標本平均
-sigma <- est[["solar_sd"]]   # 標本標準偏差
-z95 <- qnorm(0.95) # 標準正規分布の0.95分位点
+    slice_sample(n = n) |>            # ランダムにn個取り出す
+    summarize(across(solar,
+                     list(mean = mean, sd = sd))) 
+xbar  <- est[["solar_mean"]]          # 標本平均
+sigma <- est[["solar_sd"]]            # 標本標準偏差
+z95 <- qnorm(0.95)                    # 標準正規分布の0.95分位点
 (ci <- c(L = xbar-z95*sigma/sqrt(n),
          U = xbar+z95*sigma/sqrt(n))) # 信頼区間
 ```
@@ -413,16 +430,18 @@ mc <- 100
 mc_trial <- function(n){ # nを変えて実験できるように
     est <- tw_data |> slice_sample(n = n) |> 
         summarize(across(solar, list(mean = mean, sd = sd))) 
-    xbar  <- est[["solar_mean"]] # 標本平均
-    sigma <- est[["solar_sd"]]   # 標本標準偏差
+    xbar  <- est[["solar_mean"]]          # 標本平均
+    sigma <- est[["solar_sd"]]            # 標本標準偏差
     return(c(L = xbar-z95*sigma/sqrt(n),
              U = xbar+z95*sigma/sqrt(n))) # 信頼区間
 }
-mc_data <- # 信頼区間のMonte-Carlo実験
-    replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
-    mutate(answer = L < mu & mu < U) # 真値が信頼区間に含まれるか
-mc_data                              # 実験結果を見る
-mc_data |> count(answer)             # 頻度を見る
+#' 信頼区間のMonte-Carlo実験
+mc_data <- 
+    replicate(mc, mc_trial(n)) |>
+    t() |> as_tibble() |>
+    mutate(flag = L < mu & mu < U) # 真値が信頼区間に含まれるか
+print(mc_data)                     # 実験結果を見る
+mc_data |> count(flag)             # 頻度を見る
 ```
 
 ::: column-margin
@@ -432,9 +451,9 @@ mc_data |> count(answer)             # 頻度を見る
 mc <- 2000
 mc_data <- # 信頼区間のMonte-Carlo実験
     replicate(mc, mc_trial(n)) |> t() |> as_tibble() |>
-    mutate(answer = L < mu & mu < U)
+    mutate(flag = L < mu & mu < U)
 mc_data |> 
-    count(answer) |>        # 頻度を見る
+    count(flag) |>          # 正否の頻度を見る
     mutate(prob = n/sum(n)) # 確率を見る
 ```
 :::
@@ -442,15 +461,17 @@ mc_data |>
 日射量の平均の推定における観測データを全て使った推定値(真値に相当)と信頼区間の関係をグラフを描いて確認してみる．
 
 ```{r}
-k <- 20 
+k <- 40 
 mc_data |>
-    slice_sample(n = k) |> # k個ランダムに選んで描く
-    rowid_to_column(var = "index") |>
+    slice_sample(n = k) |>            # k個ランダムに選んで描く
+    rowid_to_column(var = "index") |> # 抜き出したデータに番号を振る
+    mutate(flag = L < mu & mu < U) |> # 区間に真値が含まれるか判別
     ggplot(aes(x = index)) +
-    geom_errorbar(aes(ymin = L, ymax = U),
-                  colour = "blue",
+    geom_errorbar(aes(ymin = L,       # 下側信頼限界
+                      ymax = U,       # 上側信頼限界
+                      colour = flag), # 判別結果で色分け
                   width = 0.2) +
-    geom_hline(yintercept = mu, # 観測データを全て使った推定値
+    geom_hline(yintercept = mu,       # 観測データを全て使った推定値
                colour = "orange",
                linewidth = 1.1)
 ```
