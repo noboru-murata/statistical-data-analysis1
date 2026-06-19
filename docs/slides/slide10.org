@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-06 17:40:57 mura>
+# Time-stamp: <2026-06-19 15:59:27 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -58,18 +58,20 @@
 
 ** 推定の標準的な枠組
 - 観測データは独立同分布な確率変数列 \(X_1,X_2,\dots,X_n\) 
-- \(X_i\) の従う共通の法則 \(\mathcal{L}\) を想定
-   - \(\mathcal{L}\) として全ての分布を考察対象とすることは困難
+-  \(X_i\) の従う共通の法則 \(\mathcal{L}\) を想定
+   -  \(\mathcal{L}\) として全ての分布を考察対象とすることは困難
       - 対象とする範囲が広くなりすぎる
       - データ数 \(n\) が大きくないと意味のある結論を導き出せない
    - 確率分布 \(\mathcal{L}\) を特徴づけるパラメタ \(\theta\) を考察対象
-      - \(\mathcal{L}\) の平均・分散・歪度・尖度など
-      - \(\mathcal{L}\) の確率関数・確率密度関数のパラメタ
+      -  \(\mathcal{L}\) の平均・分散・歪度・尖度など
+      -  \(\mathcal{L}\) の確率関数・確率密度関数のパラメタ
 
-
+         
 * 点推定
 ** 点推定
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(\mathcal{L}\) 
    に含まれるパラメタ \(\theta\) を \(X_1,\dotsc,X_n\) の関数
@@ -79,8 +81,10 @@
    で推定することで，
    \(\hat{\theta}\) を \(\theta\) の *推定量* と呼ぶ．
    #+end_quote
-- 記述統計量は分布のパラメタの1つ
-- [[color:green][推定量の例]]
+   - 記述統計量は分布のパラメタの1つ
+- 推定量の例
+   #+attr_html: :class callout-tip
+   #+attr_latex: :environment callout-tip
    #+begin_quote
    \(\mathcal{L}\) の平均 \(\mu\) を
    標本平均 \(\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\) によって
@@ -91,36 +95,42 @@
 ** 良い推定量
 - 一般に1つのパラメタの推定量は無数に存在
 - 推定量の良さの代表的な基準 : *不偏性・一致性*
-   - \(\hat{\theta}\) が \(\theta\) の不偏推定量
+   -  \(\hat{\theta}\) が \(\theta\) の不偏推定量
       #+begin_quote
       \begin{equation}
         \mathbb{E}[\hat{\theta}]=\theta
       \end{equation}
       #+end_quote
-   - \(\hat{\theta}\) が \(\theta\) の一致推定量
+   -  \(\hat{\theta}\) が \(\theta\) の一致推定量
       #+begin_quote
       \begin{equation}
         \text{\(\hat{\theta}\) が \(\theta\) に収束する確率が1}\quad (n\to\infty)
       \end{equation}
       #+end_quote
-   - [[color:green][良い推定量の例]]
-      #+begin_quote
-      標本平均, 不偏分散はそれぞれ
-      \(\mathcal{L}\) の平均, 分散の不偏かつ一致性をもつ推定量
-      #+end_quote
+- 良い推定量の例
+   #+attr_html: :class callout-tip
+   #+attr_latex: :environment callout-tip
+   #+begin_quote
+   標本平均, 不偏分散はそれぞれ
+   \(\mathcal{L}\) の平均, 分散の不偏かつ一致性をもつ推定量
+   #+end_quote
 
 ** 良い不偏推定量
 - 一般に不偏推定量も複数存在
+   #+attr_html: :class callout-tip
+   #+attr_latex: :environment callout-tip
    #+begin_quote
    [[color:green][例: \(\mathcal{L}\) の平均 \(\mu\) の不偏推定量]]
    - 標本平均 \(\bar{X}\) 
-   - \(X_1,\dots,X_n\) のメディアン
+   -  \(X_1,\dots,X_n\) のメディアン
       ( \(\mathcal{L}\) が \(x=\mu\) に関して対称な場合)
-   - \(X_1\)
+   -  \(X_1\)
       (最初の観測データだけ信じる極端な例)
    #+end_quote
 - 不偏推定量の良さを評価する基準が必要
 - *一様最小分散不偏推定量* 
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(\theta\) の任意の不偏推定量 \(\hat{\theta}'\) 
    に対して推定値のばらつき(分散)が最も小さいもの
@@ -131,6 +141,8 @@
 
 ** Cramér-Rao の不等式
 - 定理
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    \(\mathcal{L}\) は1次元パラメタ \(\theta\) を含む連続分布とし，
    その確率密度関数 \(f_\theta(x)\) は \(\theta\) に関して
@@ -152,8 +164,10 @@
 ** 一様最小分散不偏推定量
 - 用語の定義
    - 下界 \(1/nI(\theta)\) : *Cramér-Rao 下界*
-   - \(I(\theta)\) : *Fisher 情報量*
+   -  \(I(\theta)\) : *Fisher 情報量*
 - 定理 (Cramér-Rao の不等式の系)
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    \(\theta\) の不偏推定量 \(\hat{\theta}\) で
    分散が Cramér-Rao 下界 \(1/nI(\theta)\) に一致するものが存在すれば，
@@ -161,7 +175,7 @@
    #+end_quote
 
 ** 例 : 正規分布モデルの標本平均
-- \(\mathcal{L}\) は平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布
+-  \(\mathcal{L}\) は平均 \(\mu\) , 分散 \(\sigma^2\) の正規分布
    - 平均パラメタ \(\mu\) に関するFisher情報量 :
       #+begin_quote
       \begin{align}
@@ -173,7 +187,7 @@
       #+end_quote
    - Cramér-Rao下界 : \(\sigma^2/n\) 
    - 標本平均 \(\bar{X}\) の分散 : \(\sigma^2/n\) (=Cramér-Rao下界)
-- \(\bar{X}\) は \(\mu\) の一様最小分散不偏推定量
+-  \(\bar{X}\) は \(\mu\) の一様最小分散不偏推定量
 
 
 * 実習
@@ -185,7 +199,7 @@
 :reveal_background: #fef4f4
 :ID:       47576F93-BEC2-46CD-8F33-DC572E9BCBD0
 :END:
-- \(X\) を一様乱数に従う確率変数とし，
+-  \(X\) を一様乱数に従う確率変数とし，
    平均値の推定量として以下を考える．
    それぞれの推定量の分散を比較しなさい．
    - 標本平均 (mean)
@@ -314,6 +328,8 @@
 
 ** 尤度関数
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    パラメタ \(\boldsymbol{\theta}\) に対して
    観測データ \(X_1,X_2,\dots,X_n\) が得られる理論上の確率
@@ -334,12 +350,16 @@
 
 ** 最尤法
 - 最尤法
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    観測データに対して「最も尤もらしい」パラメタ値
    を \(\boldsymbol{\theta}\) の推定量として採用する方法
    を最尤法という．
    #+end_quote
 - 最尤推定量
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(\Theta\) を尤度関数の定義域として，
    尤度関数を最大とする  \(\hat{\boldsymbol{\theta}}\) 
@@ -366,10 +386,12 @@
    \end{equation}
    #+end_quote
    - 対数関数は狭義単調増加
-   - \(\ell(\boldsymbol{\theta})\) の最大化と \(L(\boldsymbol{\theta})\) の最大化は同義
+   -  \(\ell(\boldsymbol{\theta})\) の最大化と \(L(\boldsymbol{\theta})\) の最大化は同義
    - 扱い易い和の形なのでこちらを用いることが多い
    - 大数の法則を用いて対数尤度関数の収束が議論できる
 - 最尤推定量の性質
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    広い範囲の確率分布に対して最尤推定量は *一致性* を持つ
    #+end_quote
@@ -396,7 +418,7 @@
    #+end_quote
 
 ** 例 : Poisson 分布の最尤推定
-- \(\mathcal{L}\) をパラメタ \(\lambda>0\) のPoisson分布でモデル化
+-  \(\mathcal{L}\) をパラメタ \(\lambda>0\) のPoisson分布でモデル化
    - 確率質量関数
       #+begin_quote
       \begin{equation}
@@ -414,7 +436,7 @@
     
 #+reveal: split
 - (Poisson分布のつづき)
-   - \(\ell(\lambda)\) の微分
+   -  \(\ell(\lambda)\) の微分
       #+begin_quote
       \begin{equation}
         \ell'(\lambda)=\frac{1}{\lambda}\sum_{i=1}^nX_i-n,\quad
@@ -422,7 +444,7 @@
       \end{equation}
       #+end_quote
    - 方程式 \(\ell'(\lambda)=0\) の解が \(\ell(\lambda)\) を最大化
-   - \(\lambda\) の最尤推定量
+   -  \(\lambda\) の最尤推定量
      #+begin_quote
      \begin{equation}
        \hat{\lambda}=\frac{1}{n}\sum_{i=1}^nX_i
@@ -430,7 +452,7 @@
      #+end_quote
 
 ** 例 : 指数分布の最尤推定
-- \(\mathcal{L}\) をパラメタ \(\lambda>0\) の指数分布でモデル化
+-  \(\mathcal{L}\) をパラメタ \(\lambda>0\) の指数分布でモデル化
    - 確率密度関数
       #+begin_quote
       \begin{equation}
@@ -451,7 +473,7 @@
 
 #+reveal: split
 - (指数分布のつづき)
-   - \(\ell(\lambda)\) の微分
+   -  \(\ell(\lambda)\) の微分
       #+begin_quote
       \begin{equation}
         \ell'(\lambda)=\frac{n}{\lambda}-\sum_{i=1}^nX_i,\quad
@@ -459,7 +481,7 @@
       \end{equation}
       #+end_quote
    - 方程式 \(\ell'(\lambda)=0\) の解が \(\ell(\lambda)\) を最大化
-   - \(\lambda\) の最尤推定量
+   -  \(\lambda\) の最尤推定量
       #+begin_quote
       \begin{equation}
         \hat{\lambda}=\frac{1}{\frac{1}{n}\sum_{i=1}^nX_i}
@@ -467,7 +489,7 @@
       #+end_quote
 
 ** 例 : ガンマ分布の最尤推定
-- \(\mathcal{L}\) をパラメタ \(\nu,\alpha>0\) のガンマ分布でモデル化
+-  \(\mathcal{L}\) をパラメタ \(\nu,\alpha>0\) のガンマ分布でモデル化
    - 確率密度関数
       #+begin_quote
       \begin{equation}
@@ -496,7 +518,7 @@
         &=n\nu\log\alpha-n\log\Gamma(\nu)+\sum_{i=1}^n\{(\nu-1)\log X_i-\alpha X_i\}
       \end{align}
       #+end_quote
-   - \(\ell(\nu,\alpha)\) を最大化する \(\nu,\alpha\) は解析的に求まらないので実際の計算では数値的に求める
+   -  \(\ell(\nu,\alpha)\) を最大化する \(\nu,\alpha\) は解析的に求まらないので実際の計算では数値的に求める
 
 #+reveal: split
 - [[color:green][Rでの計算例]] (ガンマ分布の最尤推定量)
@@ -658,6 +680,8 @@
 
 ** 区間推定
 - 定義
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    区間推定とは
    未知パラメタ \(\theta\) とある値 \(\alpha\in(0,1)\) に対して
@@ -667,9 +691,9 @@
    \end{equation}
    #+end_quote
    - 区間 \([L,U]\) : \(1{-}\alpha\) *信頼区間* (\(100(1{-}\alpha)\) % と書くことも多い)
-   - \(L\) : \(1{-}\alpha\) *下側信頼限界*
-   - \(U\) : \(1{-}\alpha\) *上側信頼限界*
-   - \(1{-}\alpha\) : *信頼係数*
+   -  \(L\) : \(1{-}\alpha\) *下側信頼限界*
+   -  \(U\) : \(1{-}\alpha\) *上側信頼限界*
+   -  \(1{-}\alpha\) : *信頼係数*
       (\(\alpha=0.01,0.05,0.1\) とすることが多い)
 
 ** 信頼区間の性質
@@ -807,6 +831,8 @@
     
 #+reveal: split
 - 信頼区間の構成
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
   #+begin_quote
   \(\mu\) について解くと
   \begin{equation}
@@ -823,12 +849,12 @@
   #+end_quote
 
 ** 平均の区間推定 (分散未知)
-- \(\chi^2\) 分布の特徴付け
+-  \(\chi^2\) 分布の特徴付け
    #+begin_quote
    標準正規分布に従う \(k\) 個の独立な確率変数の
    二乗和は自由度 \(k\) の \(\chi^2\) 分布に従う
    #+end_quote
-- \(t\) 分布の特徴付け
+-  \(t\) 分布の特徴付け
    #+begin_quote
    \(Z\) を標準正規分布に従う確率変数，
    \(Y\) を自由度 \(k\) の \(\chi^2\) 分布に従う確率変数とし，
@@ -841,7 +867,7 @@
    #+end_quote
 
 #+reveal: split
-- \(\chi^{2}\) 分布
+-  \(\chi^{2}\) 分布
 #+begin_leftcol
 #+begin_src R :file figs/pdf_chisq.png :exports results :results graphics :tangle no
   par(family="HiraginoSans-W4") 
@@ -871,7 +897,7 @@
 #+end_rightcol
 
 #+reveal: split
-- \(t\) 分布
+-  \(t\) 分布
 #+begin_leftcol
 #+begin_src R :file figs/pdf_t.png :exports results :results graphics :tangle no
   par(family="HiraginoSans-W4") 
@@ -935,6 +961,8 @@
 
 #+reveal: split
 - 信頼区間の構成
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
   #+begin_quote
   \(t_{1{-}\alpha/2}(n{-}1)\) を自由度 \(n{-}1\) の \(t\) 分布の
   \(1{-}\alpha/2\) 分位点とすれば
@@ -971,6 +999,8 @@
 
 #+reveal: split
 - 信頼区間の構成
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(\sigma^2\) について解くと
    \begin{equation}
@@ -987,9 +1017,11 @@
    #+end_quote
 
 
-* 漸近正規性にもとづく区間推定
+* 漸近正規性に基づく区間推定
 ** 推定量の漸近正規性
 - *漸近正規性*
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    多くの推定量 \(\hat{\theta}\) の分布は正規分布で近似できる
    #+end_quote
@@ -1001,6 +1033,8 @@
 
 ** 標本平均の漸近正規性
 - 定理
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    確率分布 \(\mathcal{L}\) が2次のモーメントを持てば，
    \(\mathcal{L}\) の平均 \(\mu\) の推定量である標本平均
@@ -1037,6 +1071,8 @@
 
 #+reveal: split
 - 信頼区間の構成
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(\sigma\) が既知の場合の平均 \(\mu\) の \(1{-}\alpha\) *信頼区間*
    は以下で構成される．
@@ -1048,18 +1084,20 @@
    #+end_quote
 
 ** 平均の区間推定 (分散未知)
-- \(\sigma\) をその一致推定量 \(\hat{\sigma}\) で置き換えてもそのまま成立する
-   - \(\hat{\sigma}\) としては例えば不偏分散の平方根を用いる
+-  \(\sigma\) をその一致推定量 \(\hat{\sigma}\) で置き換えてもそのまま成立する
+   -  \(\hat{\sigma}\) としては例えば不偏分散の平方根を用いる
       #+begin_quote
       \begin{equation}
         \hat{\sigma}=\sqrt{\frac{1}{n{-}1}\sum_{i=1}^n(X_i-\bar{X})^2}
       \end{equation}
       #+end_quote
    - 実問題で平均はわからないが，分散はわかるという場合はあまりない
-   - \(t\) 分布は自由度 \(n\to\infty\) で標準正規分布になる
+   -  \(t\) 分布は自由度 \(n\to\infty\) で標準正規分布になる
 
 #+reveal: split
 - 信頼区間の構成
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(\sigma\) が未知の場合の平均 \(\mu\) の \(1{-}\alpha\) *信頼区間*
    は以下で構成される．
@@ -1072,6 +1110,8 @@
 
 ** 最尤推定量の区間推定
 - 定理 (最尤推定量の漸近正規性)
+   #+attr_html: :class callout-important
+   #+attr_latex: :environment callout-important
    #+begin_quote
    \(\mathcal{L}\) が1次元パラメタ \(\theta\) を含む連続分布とするとき，
    最尤推定量 \(\hat\theta\) は
@@ -1079,6 +1119,8 @@
    分散 \(1/(nI(\hat\theta))\) の正規分布で近似できる．
    #+end_quote
 - 信頼区間の構成
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \(\theta\) の \(1{-}\alpha\) *信頼区間* は以下で構成される．
    \begin{equation}
@@ -1185,7 +1227,7 @@
 - 検定
    - 帰無仮説と対立仮説
    - 棄却域
-   - \(p\)-値
+   -  \(p\)-値
 - 平均の検定
 - 分散の検定
 - 平均の差の検定
