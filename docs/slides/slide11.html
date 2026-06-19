@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
 <link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
 <style>
 /* Position computations of klipse get confused by reveal.js's scaling.
@@ -72,8 +73,8 @@
 
 </section>
 <section>
-<section id="slide-org2d9c198">
-<h2 id="org2d9c198">講義概要</h2>
+<section id="slide-orge4b3c47">
+<h2 id="orge4b3c47">講義概要</h2>
 <ul>
 <li>検定
 <ul>
@@ -91,20 +92,20 @@
 </section>
 </section>
 <section>
-<section id="slide-orgc42d87d">
-<h2 id="orgc42d87d">検定とは</h2>
-<div class="outline-text-2" id="text-orgc42d87d">
+<section id="slide-org22b09d8">
+<h2 id="org22b09d8">検定とは</h2>
+<div class="outline-text-2" id="text-org22b09d8">
 </div>
 </section>
-<section id="slide-orgf4f30b8">
-<h3 id="orgf4f30b8">統計的仮説検定</h3>
+<section id="slide-orgdb10c9c">
+<h3 id="orgdb10c9c">統計的仮説検定</h3>
 <ul>
 <li>ある現象・母集団に対して仮定された仮説の真偽を
 データに基づいて統計的に検証する方法</li>
 <li><p>
-<span style="color:green;">薬の治験の例</span>
+薬の治験の例
 </p>
-<blockquote>
+<blockquote class="callout-tip">
 <p>
 新しい薬の効能が古い薬よりも優れていること(仮説)を
 薬の治験結果(データ)から検証したい
@@ -115,8 +116,8 @@
 
 </ul>
 </section>
-<section id="slide-org661d252">
-<h3 id="org661d252">検定の基本的手続き</h3>
+<section id="slide-org47c3177">
+<h3 id="org47c3177">検定の基本的手続き</h3>
 <ol>
 <li><b>仮説</b> を立てる</li>
 <li>仮説のもとで <b>検定統計量</b> が従う標本分布を調べる</li>
@@ -127,13 +128,13 @@
 
 </ol>
 </section>
-<section id="slide-org194574a">
-<h3 id="org194574a">検定における仮説</h3>
+<section id="slide-orgdf920f4">
+<h3 id="orgdf920f4">検定における仮説</h3>
 <ul>
 <li><p>
 <b>帰無仮説</b>
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 検定統計量の分布を予想するために立てる仮説
 </p>
@@ -141,7 +142,7 @@
 <li><p>
 <b>対立仮説</b>
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 &ldquo;帰無仮説が誤っているときに起こりうるシナリオ&rdquo;として想定する仮説
 </p>
@@ -156,31 +157,39 @@
 
 </ul>
 </section>
-<section id="slide-org6d80d93">
-<h3 id="org6d80d93">帰無仮説と対立仮説</h3>
+<section id="slide-orgecf4e4b">
+<h3 id="orgecf4e4b">帰無仮説と対立仮説</h3>
 <ul>
-<li><span style="color:green;">薬の治験の例</span> (単純な場合)
+<li><p>
+薬の治験の例 (単純な場合)
+</p>
+<blockquote class="callout-tip">
 <ul>
 <li>帰無仮説 \(H_0\) : 新しい薬も古い薬も効能は同じ</li>
 <li>対立仮説 \(H_1\) : 新しい薬と古い薬の効能は異なる</li>
 
-</ul></li>
-<li><span style="color:green;">薬の治験の例</span> (新薬がより良いことを期待する場合)
+</ul>
+</blockquote></li>
+<li><p>
+薬の治験の例 (新薬がより良いことを期待する場合)
+</p>
+<blockquote class="callout-tip">
 <ul>
 <li>帰無仮説 \(H_0\) : 新しい薬も古い薬も効能は同じ</li>
 <li>対立仮説 \(H_1\) : 新しい薬の方が古い薬より効能が高い</li>
 
-</ul></li>
+</ul>
+</blockquote></li>
 
 </ul>
 </section>
-<section id="slide-orga497542">
-<h3 id="orga497542">検定の用語</h3>
+<section id="slide-orga5e050e">
+<h3 id="orga5e050e">検定の用語</h3>
 <ul>
 <li><p>
 <b>帰無分布</b>
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 帰無仮説が正しい場合に検定統計量が従う分布
 </p>
@@ -188,7 +197,7 @@
 <li><p>
 <b>棄却域</b>
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 帰無仮説の下で統計量の取り得るべき範囲の外の領域
 </p>
@@ -211,7 +220,7 @@
 </section>
 <section>
 
-<div id="orgf4b1bcc" class="figure">
+<div id="orgd24c7ee" class="figure">
 <p><img src="figs/test1.png" alt="test1.png" height="100%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>検定の考え方</p>
@@ -220,14 +229,14 @@
 </section>
 <section>
 
-<div id="org47d3e9e" class="figure">
+<div id="orgba20acd" class="figure">
 <p><img src="figs/test2.png" alt="test2.png" height="100%" />
 </p>
 <p><span class="figure-number">Figure 2: </span>棄却と受容</p>
 </div>
 </section>
-<section id="slide-orgf476e16">
-<h3 id="orgf476e16">検定の設計指針</h3>
+<section id="slide-orga8f35b1">
+<h3 id="orga8f35b1">検定の設計指針</h3>
 <ul>
 <li>検定統計量 \(T\) に対して棄却域 \(R\) を設計
 <ul>
@@ -260,7 +269,7 @@
 <li><p>
 <b>有意水準</b>
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 第一種過誤が起きる確率(サイズ)として許容する上限
 </p>
@@ -271,19 +280,19 @@
 </section>
 <section>
 
-<div id="orgf61338e" class="figure">
+<div id="org9a1bf27" class="figure">
 <p><img src="figs/test3.png" alt="test3.png" height="100%" />
 </p>
 <p><span class="figure-number">Figure 3: </span>検定の設計</p>
 </div>
 </section>
-<section id="slide-org7cbc939">
-<h3 id="org7cbc939">棄却域の決め方</h3>
+<section id="slide-orgc87543d">
+<h3 id="orgc87543d">棄却域の決め方</h3>
 <ul>
 <li><p>
 検定を構成する場合の一般的な戦略
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 棄却域 \(R_{\alpha}\) は以下のように設定する
 </p>
@@ -308,13 +317,13 @@
 
 </ul>
 </section>
-<section id="slide-org59f98dd">
-<h3 id="org59f98dd">\(p\) 値 (有意確率)</h3>
+<section id="slide-orge31d39e">
+<h3 id="orge31d39e"> \(p\) 値 (有意確率)</h3>
 <ul>
 <li><p>
 帰無分布における検定統計量の評価
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 検定統計量の値が棄却域に含まれる有意水準の最小値を考える
 </p>
@@ -322,7 +331,7 @@
 <li><p>
 <b>\(p\) 値 (有意確率)</b> : (検定統計量 \(T\), 棄却域 \(R_{\alpha}\))
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <div>
 \begin{equation}
   \text{(\(p\) 値)}
@@ -331,17 +340,17 @@
 
 </div>
 </blockquote></li>
-<li>\(p\) 値が有意水準未満のときに帰無仮説を棄却する</li>
+<li> \(p\) 値が有意水準未満のときに帰無仮説を棄却する</li>
 
 </ul>
 </section>
-<section id="slide-org88d48af">
-<h3 id="org88d48af">検定に関する注意</h3>
+<section id="slide-orga2b03f8">
+<h3 id="orga2b03f8">検定に関する注意</h3>
 <ul>
 <li><p>
 帰無仮説の受容の意味
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 帰無仮説が正しいと仮定しても矛盾は生じない
 </p>
@@ -353,7 +362,7 @@
 <li><p>
 第二種過誤
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 一般に第二種過誤の起こる確率については何ら仮定がないため，
 その確率は非常に大きい可能性がある
@@ -364,13 +373,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org0ee9944">
-<h2 id="org0ee9944">1標本正規母集団</h2>
-<div class="outline-text-2" id="text-org0ee9944">
+<section id="slide-orgfcbb2b1">
+<h2 id="orgfcbb2b1">1標本正規母集団</h2>
+<div class="outline-text-2" id="text-orgfcbb2b1">
 </div>
 </section>
-<section id="slide-orga5766f6">
-<h3 id="orga5766f6">1標本データに対する仮定</h3>
+<section id="slide-orgba85aa9">
+<h3 id="orgba85aa9">1標本データに対する仮定</h3>
 <ul>
 <li><p>
 観測データは独立同分布な確率変数列
@@ -383,25 +392,25 @@
 
 </div>
 </blockquote></li>
-<li>\(X_{i}\) は平均 \(\mu\), 分散 \(\sigma^2\) の正規分布に従う</li>
+<li> \(X_{i}\) は平均 \(\mu\), 分散 \(\sigma^2\) の正規分布に従う</li>
 <li>以下では平均 \(\mu\) および分散 \(\sigma^2\) に対する検定を説明</li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-orgccab30d">
-<h2 id="orgccab30d">平均の検定</h2>
-<div class="outline-text-2" id="text-orgccab30d">
+<section id="slide-orge252f90">
+<h2 id="orge252f90">平均の検定</h2>
+<div class="outline-text-2" id="text-orge252f90">
 </div>
 </section>
-<section id="slide-org3916505">
-<h3 id="org3916505">平均の検定</h3>
+<section id="slide-org6be1a6a">
+<h3 id="org6be1a6a">平均の検定</h3>
 <ul>
 <li><p>
 両側検定
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 \(\mu_0\) を既知の定数として，
 観測データを生成している分布の平均 \(\mu\) が
@@ -425,8 +434,8 @@
 
 </ul>
 </section>
-<section id="slide-org3c4c111">
-<h3 id="org3c4c111">考え方</h3>
+<section id="slide-orgb35dfc8">
+<h3 id="orgb35dfc8">考え方</h3>
 <ul>
 <li>標本平均 \(\bar{X}\) (推定量) が
 帰無仮説のもとでの真の平均 \(\mu_0\) とどの程度離れているかを検証</li>
@@ -465,7 +474,7 @@
 <li><p>
 <b>Studentの \(t\) 検定</b>
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <div>
 \begin{equation}
   \text{検定統計量 : }
@@ -487,19 +496,19 @@
 </section>
 <section>
 <ul>
-<li>\(t\) 分布</li>
+<li> \(t\) 分布</li>
 
 </ul>
-<div class="leftcol" id="org91ebbb6">
+<div class="leftcol" id="org3762f80">
 
-<div id="orgc98c749" class="figure">
+<div id="org4bdeb09" class="figure">
 <p><img src="figs/pdf_t.png" alt="pdf_t.png" width="100%" />
 </p>
 <p><span class="figure-number">Figure 4: </span>\(t\) 分布 (自由度\(3\))</p>
 </div>
 
 </div>
-<div class="rightcol" id="org89aa4c2">
+<div class="rightcol" id="orgf4fa96c">
 <blockquote>
 <ul>
 <li>見本空間 : \((-\infty,\infty)\)</li>
@@ -529,12 +538,12 @@
 
 </div>
 </section>
-<section id="slide-orgf394b4b">
-<h3 id="orgf394b4b">棄却域を用いる場合</h3>
+<section id="slide-org00a738b">
+<h3 id="org00a738b">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
-\(H_0\) の下で以下が成立
+ \(H_0\) の下で以下が成立
 </p>
 <blockquote>
 <div>
@@ -545,7 +554,7 @@
 </div>
 </blockquote>
 <ul>
-<li>\(t_{1{-}\alpha/2}(n{-}1)\) :
+<li> \(t_{1{-}\alpha/2}(n{-}1)\) :
 自由度 \(n{-}1\) の \(t\) 分布の \(1{-}\alpha/2\) 分位点</li>
 
 </ul></li>
@@ -584,11 +593,11 @@
 
 </ul>
 </section>
-<section id="slide-orge3d87a4">
-<h3 id="orge3d87a4">\(p\) 値を用いる場合</h3>
+<section id="slide-org6b1269d">
+<h3 id="org6b1269d"> \(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
-\(p\) 値を計算 ( \(f(x)\) : 自由度 \(n{-}1\) の \(t\) 分布の密度)
+ \(p\) 値を計算 ( \(f(x)\) : 自由度 \(n{-}1\) の \(t\) 分布の密度)
 </p>
 <blockquote>
 <div>
@@ -600,7 +609,7 @@
 </div>
 </blockquote></li>
 <li><p>
-\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
+ \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却
 </p>
 <blockquote>
 <div>
@@ -620,13 +629,13 @@
 
 </ul>
 </section>
-<section id="slide-orgbae4d4c">
-<h3 id="orgbae4d4c">対立仮説の違い</h3>
+<section id="slide-orgba41e8a">
+<h3 id="orgba41e8a">対立仮説の違い</h3>
 <ul>
 <li><p>
-<span style="color:green;">薬の治験例</span>
+薬の治験例
 </p>
-<blockquote>
+<blockquote class="callout-tip">
 <p>
 観測データ \(X_1,X_2,\dotsc,X_n\)
 (\(n\) 人の被験者の治験結果)
@@ -644,30 +653,30 @@
 
 </section>
 <section>
-<div class="leftcol" id="orgae03da3">
+<div class="leftcol" id="orgcffc2cd">
 
-<div id="org6a29d33" class="figure">
+<div id="org88b10fb" class="figure">
 <p><img src="figs/cr_two.png" alt="cr_two.png" width="100%" />
 </p>
 </div>
 
 </div>
-<div class="rightcol" id="org2ef81b7">
+<div class="rightcol" id="orge0d12b3">
 
-<div id="org041ce41" class="figure">
+<div id="org0f0b63d" class="figure">
 <p><img src="figs/cr_one.png" alt="cr_one.png" width="100%" />
 </p>
 </div>
 
 </div>
 </section>
-<section id="slide-org1e139f0">
-<h3 id="org1e139f0">平均の検定</h3>
+<section id="slide-org6696a4b">
+<h3 id="org6696a4b">平均の検定</h3>
 <ul>
 <li><p>
 右片側検定
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 \(\mu_0\) を既知の定数として，
 観測データを生成している分布の平均 \(\mu\) が
@@ -698,12 +707,12 @@
 
 </ul>
 </section>
-<section id="slide-org3b12df4">
-<h3 id="org3b12df4">棄却域を用いる場合</h3>
+<section id="slide-org441639e">
+<h3 id="org441639e">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
-\(H_0\) の下で以下が成立
+ \(H_0\) の下で以下が成立
 </p>
 <blockquote>
 <div>
@@ -714,7 +723,7 @@
 </div>
 </blockquote>
 <ul>
-<li>\(t_{1{-}\alpha}(n{-}1)\):
+<li> \(t_{1{-}\alpha}(n{-}1)\):
 自由度 \(n{-}1\) の \(t\) 分布の \(1{-}\alpha\) 分位点</li>
 
 </ul></li>
@@ -751,11 +760,11 @@
 
 </ul>
 </section>
-<section id="slide-orge9fd7b2">
-<h3 id="orge9fd7b2">\(p\) 値を用いる場合</h3>
+<section id="slide-org1e54c69">
+<h3 id="org1e54c69"> \(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
-\(p\) 値を計算 ( \(f(x)\):自由度 \(n{-}1\) の \(t\) 分布の密度)
+ \(p\) 値を計算 ( \(f(x)\):自由度 \(n{-}1\) の \(t\) 分布の密度)
 </p>
 <blockquote>
 <div>
@@ -766,12 +775,12 @@
 
 </div>
 </blockquote></li>
-<li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
+<li> \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
 </section>
-<section id="slide-orgc3501f4">
-<h3 id="orgc3501f4">平均の検定</h3>
+<section id="slide-orgf4e5cc6">
+<h3 id="orgf4e5cc6">平均の検定</h3>
 <ul>
 <li><p>
 左片側検定
@@ -822,8 +831,8 @@
 
 </ul>
 </section>
-<section id="slide-orgfd0f751">
-<h3 id="orgfd0f751">両側検定と片側検定</h3>
+<section id="slide-org5abdd8e">
+<h3 id="org5abdd8e">両側検定と片側検定</h3>
 <ul>
 <li>棄却域の形による分類
 <ul>
@@ -875,63 +884,63 @@
 
 </section>
 <section>
-<div class="leftcol" id="org9092eab">
+<div class="leftcol" id="org6e542b9">
 
-<div id="orgaa5bfcc" class="figure">
+<div id="org4cff39c" class="figure">
 <p><img src="figs/cr_two.png" alt="cr_two.png" width="100%" />
 </p>
 </div>
 
 </div>
-<div class="rightcol" id="orgf1e3532">
+<div class="rightcol" id="orgf225366">
 
-<div id="org490d700" class="figure">
+<div id="org8e6525b" class="figure">
 <p><img src="figs/cr_one.png" alt="cr_one.png" width="100%" />
 </p>
 </div>
 
 </div>
 </section>
-<section id="slide-orgd71d646">
-<h3 id="orgd71d646">\(t\) 検定の関数</h3>
+<section id="slide-org364af43">
+<h3 id="org364af43"> \(t\) 検定の関数</h3>
 <ul>
 <li><p>
 使い方
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">t.test(x, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">1&#27161;&#26412;&#12398;&#22580;&#21512;</span>
-       alternative = c(<span style="color: #d08928;">"two.sided"</span>, <span style="color: #d08928;">"less"</span>, <span style="color: #d08928;">"greater"</span>),
+<pre><code class="R" >t.test(x, # 1標本の場合
+       alternative = c("two.sided", "less", "greater"),
        mu = 0, conf.level = 0.95, ...)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x : &#12505;&#12463;&#12488;&#12523;&#65294; </span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> alternative: &#23550;&#31435;&#20206;&#35500; (&#20001;&#20596;&#65292;&#24038;&#29255;&#20596;&#65292;&#21491;&#29255;&#20596;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> mu: &#26908;&#23450;&#23550;&#35937;&#12398;&#24179;&#22343;&#20516;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> conf.level: &#20449;&#38972;&#21306;&#38291;&#12398;&#27700;&#28310; (&#28857;&#25512;&#23450;&#12539;&#21306;&#38291;&#25512;&#23450;&#12418;&#34892;&#12387;&#12390;&#12367;&#12428;&#12427;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#20182;&#12398;&#12458;&#12503;&#12471;&#12519;&#12531;&#65294;&#35443;&#32048;&#12399; help(t.test) &#12434;&#21442;&#29031;</span>
-</pre>
+#' x : ベクトル． 
+#' alternative: 対立仮説 (両側，左片側，右片側)
+#' mu: 検定対象の平均値
+#' conf.level: 信頼区間の水準 (点推定・区間推定も行ってくれる)
+#' ...: 他のオプション．詳細は help(t.test) を参照
+</code></pre>
 </div></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-org604b2f3" data-background="#fef4f4">
-<h2 id="org604b2f3">実習</h2>
+<section id="slide-org12ab00a" data-background="#fef4f4">
+<h2 id="org12ab00a">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgd4a623b">
-<h2 id="orgd4a623b">分散の検定</h2>
-<div class="outline-text-2" id="text-orgd4a623b">
+<section id="slide-org838bd24">
+<h2 id="org838bd24">分散の検定</h2>
+<div class="outline-text-2" id="text-org838bd24">
 </div>
 </section>
-<section id="slide-orge3d786e">
-<h3 id="orge3d786e">分散の検定</h3>
+<section id="slide-org6ed2ab5">
+<h3 id="org6ed2ab5">分散の検定</h3>
 <ul>
 <li><p>
 両側検定
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 \(\sigma_0^2\) を既知の定数として，
 観測データを生成している分布の分散 \(\sigma^2\) が
@@ -955,8 +964,8 @@
 
 </ul>
 </section>
-<section id="slide-org7d176ce">
-<h3 id="org7d176ce">考え方</h3>
+<section id="slide-org09db71c">
+<h3 id="org09db71c">考え方</h3>
 <ul>
 <li>不偏分散 \(s^2\) が
 真の分散 \(\sigma_{0}^{2}\) とどの程度離れているかを検証</li>
@@ -984,7 +993,7 @@
 <li><p>
 <b>\(\chi^2\) 検定</b>
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <div>
 \begin{equation}
   \text{検定統計量 : }
@@ -1004,19 +1013,19 @@
 </section>
 <section>
 <ul>
-<li>\(\chi^{2}\) 分布</li>
+<li> \(\chi^{2}\) 分布</li>
 
 </ul>
-<div class="leftcol" id="org4c63f23">
+<div class="leftcol" id="orgf1b9423">
 
-<div id="org84583c0" class="figure">
+<div id="org5514063" class="figure">
 <p><img src="figs/pdf_chisq.png" alt="pdf_chisq.png" width="100%" />
 </p>
 <p><span class="figure-number">Figure 5: </span>\(\chi^{2}\) 分布 (自由度\(3\))</p>
 </div>
 
 </div>
-<div class="rightcol" id="org5893aa5">
+<div class="rightcol" id="orgd125f39">
 <blockquote>
 <ul>
 <li>見本空間 : \([0,\infty)\)</li>
@@ -1043,12 +1052,12 @@
 
 </div>
 </section>
-<section id="slide-orga964282">
-<h3 id="orga964282">棄却域を用いる場合</h3>
+<section id="slide-org86d22c9">
+<h3 id="org86d22c9">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
-\(H_0\) の下で以下が成立
+ \(H_0\) の下で以下が成立
 </p>
 <blockquote>
 <div>
@@ -1061,9 +1070,9 @@
 </div>
 </blockquote>
 <ul>
-<li>\(\chi^2_{\alpha/2}(n{-}1)\):
+<li> \(\chi^2_{\alpha/2}(n{-}1)\):
 自由度 \(n{-}1\) の \(\chi^2\) 分布の \(\alpha/2\) 分位点</li>
-<li>\(\chi^2_{1{-}\alpha/2}(n{-}1)\):
+<li> \(\chi^2_{1{-}\alpha/2}(n{-}1)\):
 自由度 \(n{-}1\) の \(\chi^2\) 分布の \(1{-}\alpha/2\) 分位点</li>
 
 </ul></li>
@@ -1102,11 +1111,11 @@
 
 </ul>
 </section>
-<section id="slide-org80fce45">
-<h3 id="org80fce45">\(p\) 値を用いる場合</h3>
+<section id="slide-orga9edde6">
+<h3 id="orga9edde6"> \(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
-\(p\) 値を計算 ( \(f(x)\): 自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
+ \(p\) 値を計算 ( \(f(x)\): 自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
 </p>
 <blockquote>
 <div>
@@ -1117,12 +1126,12 @@
 
 </div>
 </blockquote></li>
-<li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
+<li> \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
 </section>
-<section id="slide-orgb836b29">
-<h3 id="orgb836b29">片側検定</h3>
+<section id="slide-org2bf8587">
+<h3 id="org2bf8587">片側検定</h3>
 <ul>
 <li>対立仮説が片側 (右側対立仮説) の場合
 <ul>
@@ -1144,8 +1153,8 @@
 
 </ul>
 </section>
-<section id="slide-org469fcc7">
-<h3 id="org469fcc7">棄却域を用いる場合</h3>
+<section id="slide-org3e9ec11">
+<h3 id="org3e9ec11">棄却域を用いる場合</h3>
 <ul>
 <li>自由度 \(n{-}1\) の \(\chi^2\) 分布の \(1{-}\alpha\) 分位点 :
 \(\chi^2_{1{-}\alpha}(n{-}1)\)</li>
@@ -1163,11 +1172,11 @@
 
 </ul>
 </section>
-<section id="slide-orge879331">
-<h3 id="orge879331">\(p\) 値を用いる場合</h3>
+<section id="slide-org3a598ed">
+<h3 id="org3a598ed"> \(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
-\(p\) 値を計算 ( \(f(x)\):自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
+ \(p\) 値を計算 ( \(f(x)\):自由度 \(n{-}1\) の \(\chi^2\) 分布の密度)
 </p>
 <blockquote>
 <div>
@@ -1178,44 +1187,44 @@
 
 </div>
 </blockquote></li>
-<li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
+<li> \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
 </section>
-<section id="slide-org7c6f8f6">
-<h3 id="org7c6f8f6">\(\chi^2\) 検定の計算</h3>
+<section id="slide-org06f2e66">
+<h3 id="org06f2e66"> \(\chi^2\) 検定の計算</h3>
 <ul>
 <li>関数 <code>chisq.test</code> はあるが目的が違うので注意 (適合度検定・独立性検定)</li>
 <li><p>
-\(\chi^2\) 分布に関する関数を用いて直接計算することができる
+ \(\chi^2\) 分布に関する関数を用いて直接計算することができる
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">x <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#35251;&#28204;&#12487;&#12540;&#12479;</span>
-sigma0 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24112;&#28961;&#20206;&#35500;&#12391;&#29992;&#12356;&#12427;&#27161;&#28310;&#20559;&#24046;</span>
-n <span style="color: #60aa00;">&lt;-</span> length(x) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#25968;</span>
-chi2 <span style="color: #60aa00;">&lt;-</span> (n-1)*var(x)/sigma0^2 <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#26908;&#23450;&#32113;&#35336;&#37327;&#12434;&#35336;&#31639;&#12377;&#12427;</span>
-p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
-2*min(p0, 1-p0) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">p&#20516; (&#20001;&#20596;&#26908;&#23450;&#12398;&#22580;&#21512;)</span>
-</pre>
+<pre><code class="R" >x # 観測データ
+sigma0 # 帰無仮説で用いる標準偏差
+n &lt;- length(x) # データ数
+chi2 &lt;- (n-1)*var(x)/sigma0^2 # 検定統計量を計算する
+p0 &lt;- pchisq(chi2, df=n-1)
+2*min(p0, 1-p0) # p値 (両側検定の場合)
+</code></pre>
 </div></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-orgcdcde7e" data-background="#fef4f4">
-<h2 id="orgcdcde7e">実習</h2>
+<section id="slide-org9bee6b8" data-background="#fef4f4">
+<h2 id="org9bee6b8">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgd9eca3e">
-<h2 id="orgd9eca3e">2標本正規母集団</h2>
-<div class="outline-text-2" id="text-orgd9eca3e">
+<section id="slide-orgcbf1649">
+<h2 id="orgcbf1649">2標本正規母集団</h2>
+<div class="outline-text-2" id="text-orgcbf1649">
 </div>
 </section>
-<section id="slide-org7dce98a">
-<h3 id="org7dce98a">2標本データに対する仮定</h3>
+<section id="slide-orgb166b6b">
+<h3 id="orgb166b6b">2標本データに対する仮定</h3>
 <ul>
 <li><p>
 2種類の観測データ
@@ -1231,11 +1240,11 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </blockquote></li>
 <li>3つの条件を仮定
 <ul>
-<li>\(X_1,X_2,\dotsc,X_m,Y_1,Y_2,\dotsc,Y_n\) は
+<li> \(X_1,X_2,\dotsc,X_m,Y_1,Y_2,\dotsc,Y_n\) は
 独立な確率変数列</li>
-<li>\(X_1,\dotsc,X_m\) は同分布で
+<li> \(X_1,\dotsc,X_m\) は同分布で
 平均 \(\mu_1\) 分散 \(\sigma_1^2\) の正規分布に従う</li>
-<li>\(Y_1,\dotsc,Y_n\) は同分布で
+<li> \(Y_1,\dotsc,Y_n\) は同分布で
 平均 \(\mu_2\) 分散 \(\sigma_2^2\) の正規分布に従う</li>
 
 </ul></li>
@@ -1245,18 +1254,18 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </section>
 </section>
 <section>
-<section id="slide-orgea14cc2">
-<h2 id="orgea14cc2">平均の差の検定</h2>
-<div class="outline-text-2" id="text-orgea14cc2">
+<section id="slide-orgebc2fe2">
+<h2 id="orgebc2fe2">平均の差の検定</h2>
+<div class="outline-text-2" id="text-orgebc2fe2">
 </div>
 </section>
-<section id="slide-org9e0b8c0">
-<h3 id="org9e0b8c0">平均の差の検定</h3>
+<section id="slide-orgb563428">
+<h3 id="orgb563428">平均の差の検定</h3>
 <ul>
 <li><p>
 両側検定
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 2種類のデータの平均が等しいか否かを検定する
 </p>
@@ -1282,7 +1291,7 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </ul></li>
 <li><b>Welch(またはSatterthwaite)の近似法</b>
 <ul>
-<li>\(\chi^2\) 分布に従う独立確率変数列の一次結合の分布を，
+<li> \(\chi^2\) 分布に従う独立確率変数列の一次結合の分布を，
 1つの \(\chi^2\) 分布に従う確率変数の定数倍の分布で近似する方法</li>
 <li>平均と分散が元の確率変数と一致するように近似</li>
 
@@ -1290,11 +1299,11 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 
 </ul>
 </section>
-<section id="slide-orga17ac02">
-<h3 id="orga17ac02">考え方</h3>
+<section id="slide-org5cc608a">
+<h3 id="org5cc608a">考え方</h3>
 <ul>
 <li><p>
-\(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_m\) の不偏分散 :
+ \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_m\) の不偏分散 :
 \(s_1^2\),\(s_2^2\)
 </p>
 <blockquote>
@@ -1308,23 +1317,23 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </blockquote></li>
 <li>標本平均と不偏分散の性質
 <ul>
-<li>\(\bar{X}-\bar{Y},s_1^2,s_2^2\) は独立となる</li>
-<li>\((m{-}1)s_1^2/\sigma_1^2\)
+<li> \(\bar{X}-\bar{Y},s_1^2,s_2^2\) は独立となる</li>
+<li> \((m{-}1)s_1^2/\sigma_1^2\)
 は自由度 \(m{-}1\) の \(\chi^2\) 分布に従う</li>
-<li>\((n{-}1)s_2^2/\sigma_2^2\)
+<li> \((n{-}1)s_2^2/\sigma_2^2\)
 は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う</li>
 
 </ul></li>
 
 </ul>
 </section>
-<section id="slide-orgf6256c2">
-<h3 id="orgf6256c2">Welchの近似法</h3>
+<section id="slide-orgcc8fd42">
+<h3 id="orgcc8fd42">Welchの近似法</h3>
 <ul>
 <li><b>詳細は資料を参照</b></li>
 <li>確率変数 \(s_1^2/m+s_2^2/n\) の分布を \(c\chi^2_\nu\) の分布で近似</li>
 <li><p>
-\(\chi^2_\nu\) は自由度 \(\nu\) の \(\chi^2\) 分布に従う確率変数
+ \(\chi^2_\nu\) は自由度 \(\nu\) の \(\chi^2\) 分布に従う確率変数
 </p>
 <blockquote>
 <div>
@@ -1360,9 +1369,9 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </div>
 </blockquote>
 <ul>
-<li>\(\bar{X}-\bar{Y},s_1^2/m+s_2^2/n\) は独立</li>
-<li>\(\bar{X}-\bar{Y},c\chi^2_\nu\) も独立と考える</li>
-<li>\(t\) の分布は \((\bar{X}-\bar{Y})/\sqrt{c\chi^2_\nu}\) で近似できる</li>
+<li> \(\bar{X}-\bar{Y},s_1^2/m+s_2^2/n\) は独立</li>
+<li> \(\bar{X}-\bar{Y},c\chi^2_\nu\) も独立と考える</li>
+<li> \(t\) の分布は \((\bar{X}-\bar{Y})/\sqrt{c\chi^2_\nu}\) で近似できる</li>
 
 </ul></li>
 
@@ -1386,7 +1395,7 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </div>
 </blockquote></li>
 <li><p>
-\(H_0\) の下で以下は自由度 \(\nu\) の \(t\) 分布に従う
+ \(H_0\) の下で以下は自由度 \(\nu\) の \(t\) 分布に従う
 </p>
 <blockquote>
 <div>
@@ -1409,7 +1418,7 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 <li><p>
 <b>Welchの \(t\) 検定</b> 
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <p>
 \(\nu\) は未知の分散 \(\sigma_1^2,\sigma_2^2\) を含むので
 不偏推定量 \(s_1^2,s_2^2\) で代用し，
@@ -1430,8 +1439,8 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 
 </ul>
 </section>
-<section id="slide-orgc569691">
-<h3 id="orgc569691">棄却域を用いる場合</h3>
+<section id="slide-org8acd5c0">
+<h3 id="org8acd5c0">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
@@ -1447,7 +1456,7 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </div>
 </blockquote>
 <ul>
-<li>\(t_{1{-}\alpha/2}(\hat{\nu})\) :
+<li> \(t_{1{-}\alpha/2}(\hat{\nu})\) :
 自由度 \(\hat{\nu}\) の \(t\) 分布の \(1{-}\alpha/2\) 分位点</li>
 
 </ul></li>
@@ -1470,79 +1479,79 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </div>
 </blockquote>
 <ul>
-<li><i><span style="color:gray;">\(p\) 値の計算や片側対立仮説への対応は前と同様</span></i></li>
+<li><i>\(p\) 値の計算や片側対立仮説への対応は前と同様</i></li>
 
 </ul></li>
 
 </ul>
 </section>
-<section id="slide-orgf9afe33">
-<h3 id="orgf9afe33">対応がある場合の平均の差の検定</h3>
+<section id="slide-org8c486aa">
+<h3 id="org8c486aa">対応がある場合の平均の差の検定</h3>
 <ul>
 <li>対応がある観測データの平均の差の検定では
 2種類のデータ間の自然な対応を考慮することがある</li>
 <li><p>
-<span style="color:green;">薬の投薬の例</span>
+薬の投薬の例
 </p>
-<blockquote>
+<blockquote class="callout-tip">
 <ul>
 <li>2種類の薬の効能を比較するために被験者に両方の薬を投与</li>
 <li>被験者 \(i\) にそれぞれの薬を投与した場合の治験結果: \(X_i,Y_i\)</li>
-<li>\(X_i\) と \(Y_i\) には&ldquo;同一の被験者に対する治験結果&rdquo;という意味で対応がある</li>
+<li> \(X_i\) と \(Y_i\) には&ldquo;同一の被験者に対する治験結果&rdquo;という意味で対応がある</li>
 
 </ul>
 </blockquote>
 <ul>
 <li>&ldquo;対応がある観測値の差の平均が0&rdquo;
 という帰無仮説を考える</li>
-<li>\(Z_i=X_i-Y_i\) \((i=1,\dotsc,n)\) として，
+<li> \(Z_i=X_i-Y_i\) \((i=1,\dotsc,n)\) として，
 \(Z_1,\dotsc,Z_n\) の平均が0か否かを検定すれば良い</li>
 
 </ul></li>
 
 </ul>
 </section>
-<section id="slide-org33dabd8">
-<h3 id="org33dabd8">\(t\) 検定の計算</h3>
+<section id="slide-org4916b7d">
+<h3 id="org4916b7d"> \(t\) 検定の計算</h3>
 <ul>
 <li><p>
 使い方
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">t.test(x, y = <span style="color: #00aa80;">NULL</span>, <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">2&#27161;&#26412;&#12398;&#22580;&#21512;</span>
-       alternative = c(<span style="color: #d08928;">"two.sided"</span>, <span style="color: #d08928;">"less"</span>, <span style="color: #d08928;">"greater"</span>),
-       mu = 0, paired = <span style="color: #00aa80;">FALSE</span>, var.equal = <span style="color: #00aa80;">FALSE</span>,
+<pre><code class="R" >t.test(x, y = NULL, # 2標本の場合
+       alternative = c("two.sided", "less", "greater"),
+       mu = 0, paired = FALSE, var.equal = FALSE,
        conf.level = 0.95, ...)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x,y: &#12505;&#12463;&#12488;&#12523;&#65294;2&#27161;&#26412;&#12398;&#22580;&#21512;&#12399;y&#12434;&#25351;&#23450;&#12377;&#12427;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> alternative: &#23550;&#31435;&#20206;&#35500; (&#20001;&#20596;&#65292;&#24038;&#29255;&#20596;&#65292;&#21491;&#29255;&#20596;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> mu: &#26908;&#23450;&#23550;&#35937;&#12398;&#24179;&#22343;&#20516;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> paired: &#23550;&#24540;&#12354;&#12426;&#12398;&#22580;&#21512;&#12399; TRUE</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> var.equal: 2&#27161;&#26412;&#12398;&#20998;&#25955;&#12434;&#21516;&#12376;&#12392;&#12375;&#12390;&#33391;&#12356;&#22580;&#21512;&#12399; TRUE</span>
-</pre>
+#' x,y: ベクトル．2標本の場合はyを指定する
+#' alternative: 対立仮説 (両側，左片側，右片側)
+#' mu: 検定対象の平均値
+#' paired: 対応ありの場合は TRUE
+#' var.equal: 2標本の分散を同じとして良い場合は TRUE
+</code></pre>
 </div></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-orgbde48f5" data-background="#fef4f4">
-<h2 id="orgbde48f5">実習</h2>
+<section id="slide-org0d8414a" data-background="#fef4f4">
+<h2 id="org0d8414a">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org91b2ff2">
-<h2 id="org91b2ff2">分散の比の検定</h2>
-<div class="outline-text-2" id="text-org91b2ff2">
+<section id="slide-org225727e">
+<h2 id="org225727e">分散の比の検定</h2>
+<div class="outline-text-2" id="text-org225727e">
 </div>
 </section>
-<section id="slide-org675734e">
-<h3 id="org675734e">分散の比の検定</h3>
+<section id="slide-org007fc20">
+<h3 id="org007fc20">分散の比の検定</h3>
 <ul>
 <li><p>
 両側検定
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 2種類のデータの分散が等しいか否かを検定する
 </p>
@@ -1564,18 +1573,18 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 
 </ul>
 </section>
-<section id="slide-orgb4b9540">
-<h3 id="orgb4b9540">考え方</h3>
+<section id="slide-org0a9aa57">
+<h3 id="org0a9aa57">考え方</h3>
 <ul>
-<li>\(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
+<li> \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
 の不偏分散: \(s_1^2\), \(s_2^2\)
 
 <ul>
 <li>このとき \(s_1^2,s_2^2\) は独立 :
 <ul>
-<li>\((m{-}1)s_1^2/\sigma_1^2\)
+<li> \((m{-}1)s_1^2/\sigma_1^2\)
 自由度 \(m{-}1\) の \(\chi^2\) 分布に従う</li>
-<li>\((n{-}1)s_2^2/\sigma_2^2\)
+<li> \((n{-}1)s_2^2/\sigma_2^2\)
 は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う</li>
 
 </ul></li>
@@ -1584,7 +1593,7 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 <li><p>
 <b>\(F\) 検定</b>
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <div>
 \begin{equation}
   \text{検定統計量 : }
@@ -1603,19 +1612,19 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </section>
 <section>
 <ul>
-<li>\(F\) 分布</li>
+<li> \(F\) 分布</li>
 
 </ul>
-<div class="leftcol" id="org33511ad">
+<div class="leftcol" id="orgd588164">
 
-<div id="org21542f6" class="figure">
+<div id="org19dfffa" class="figure">
 <p><img src="figs/pdf_f.png" alt="pdf_f.png" width="100%" />
 </p>
 <p><span class="figure-number">Figure 6: </span>\(F\) 分布 (自由度\(3,5\))</p>
 </div>
 
 </div>
-<div class="rightcol" id="org42954f1">
+<div class="rightcol" id="org7aba2a4">
 <blockquote>
 <ul>
 <li>標本空間: \([0,\infty)\)</li>
@@ -1642,12 +1651,12 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 
 </div>
 </section>
-<section id="slide-org3f87857">
-<h3 id="org3f87857">棄却域を用いる場合</h3>
+<section id="slide-orgaafca54">
+<h3 id="orgaafca54">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
-\(H_0\) の下では以下が成立
+ \(H_0\) の下では以下が成立
 </p>
 <blockquote>
 <div>
@@ -1659,9 +1668,9 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </div>
 </blockquote>
 <ul>
-<li>\(F_{\alpha/2}(m{-}1,n{-}1)\):
+<li> \(F_{\alpha/2}(m{-}1,n{-}1)\):
 自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(\alpha/2\) 分位点</li>
-<li>\(F_{1{-}\alpha/2}(m{-}1,n{-}1)\):
+<li> \(F_{1{-}\alpha/2}(m{-}1,n{-}1)\):
 自由度 \(m{-}1,n{-}1\) の \(F\) 分布の \(1{-}\alpha/2\) 分位点</li>
 
 </ul></li>
@@ -1698,41 +1707,41 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 </div>
 </blockquote>
 <ul>
-<li><i><span style="color:gray;">\(p\) 値の計算や片側対立仮説への対応は前と同様</span></i></li>
+<li><i>\(p\) 値の計算や片側対立仮説への対応は前と同様</i></li>
 
 </ul></li>
 
 </ul>
 </section>
-<section id="slide-orge708f7c">
-<h3 id="orge708f7c">\(F\) 検定の計算</h3>
+<section id="slide-orgb72f120">
+<h3 id="orgb72f120"> \(F\) 検定の計算</h3>
 <ul>
 <li><p>
 使い方
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">var.test(x, y, ratio = 1,
-         alternative = c(<span style="color: #d08928;">"two.sided"</span>, <span style="color: #d08928;">"less"</span>, <span style="color: #d08928;">"greater"</span>),
+<pre><code class="R" >var.test(x, y, ratio = 1,
+         alternative = c("two.sided", "less", "greater"),
          conf.level = 0.95, ...)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x,y: &#12505;&#12463;&#12488;&#12523;&#65294; </span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ratio: &#26908;&#23450;&#12377;&#12427;&#27604;&#29575;(1&#12399;&#21516;&#12376;&#12363;&#12393;&#12358;&#12363;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> alternative: &#23550;&#31435;&#20206;&#35500; (&#20001;&#20596;&#65292;&#24038;&#29255;&#20596;&#65292;&#21491;&#29255;&#20596;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> conf.level: &#20449;&#38972;&#21306;&#38291;&#12398;&#27700;&#28310; (&#28857;&#25512;&#23450;&#12539;&#21306;&#38291;&#25512;&#23450;&#12418;&#34892;&#12387;&#12390;&#12367;&#12428;&#12427;)</span>
-</pre>
+#' x,y: ベクトル． 
+#' ratio: 検定する比率(1は同じかどうか)
+#' alternative: 対立仮説 (両側，左片側，右片側)
+#' conf.level: 信頼区間の水準 (点推定・区間推定も行ってくれる)
+</code></pre>
 </div></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-org43f4f5e" data-background="#fef4f4">
-<h2 id="org43f4f5e">演習</h2>
+<section id="slide-orgf927d2a" data-background="#fef4f4">
+<h2 id="orgf927d2a">演習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org71d05d2">
-<h2 id="org71d05d2">次回の予定</h2>
+<section id="slide-org24b2fa0">
+<h2 id="org24b2fa0">次回の予定</h2>
 <ul>
 <li>分散分析とは</li>
 <li>一元配置
@@ -1758,6 +1767,7 @@ p0 <span style="color: #60aa00;">&lt;-</span> pchisq(chi2, df=n-1)
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
 <script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
 <script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
@@ -1792,7 +1802,7 @@ showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : fal
 'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
