@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-06-19 22:57:42 mura>
+# Time-stamp: <2026-06-24 17:44:12 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -1046,7 +1046,7 @@
    - 平均と分散が元の確率変数と一致するように近似
 
 ** 考え方
--  \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_m\) の不偏分散 :
+-  \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\) の不偏分散 :
    \(s_1^2\),\(s_2^2\)
    #+begin_quote
    \begin{equation}
