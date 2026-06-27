@@ -294,7 +294,7 @@
 :EXPORT_FILE_NAME: record
 :EXPORT_DATE: <2022-04-08 Fri>
 :END:
-<2026-06-20 Sat> 更新
+<2026-06-27 Sat> 更新
 
 講義の進捗に合わせて追加します．
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/VujUv8JTKkOTC4JsdLCqn0X9i_iKNH2M1zSNytk8GnKrbEzvx4ADSQm9XiU_JuhQ.O5aSsYzeggLUBNna?startTime=1775809051000][第1講 (2026年4月10日)]]
@@ -307,7 +307,7 @@
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/HUDh4YkCg8eOed4Z5yh5PsZxjXM176rt8vUvcRLmGGVmCcAKc6YUGU2M7t_bQh8.aedMccyoNF5QTCJY?startTime=1780646420000][第8講 (2026年6月5日)]]
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/l5R0Uo0bw4iw78xghmCS8VBR23v1gUnJN58vUOtZj9agl0n7Q2YKAB8JuxrhaBm1.UvE7MXSkHkrBoRwM?startTime=1781251241000][第9講 (2026年6月12日)]]
 - [[https://u-tokyo-ac-jp.zoom.us/rec/share/lPDDtCCQ_zv42VpB2r2qat-nsAVBL0iY0F012vfn3f8_PSdhyR39TqUQ055gIAHb.IG3AvizGjgksVV_h?startTime=1781856071000][第10講 (2026年6月19日)]]
-- 第11講 (2026年6月26日)
+- [[https://u-tokyo-ac-jp.zoom.us/rec/share/enFt1gqrQOe8hqv1goKI87DpQQOyWeSlirOfxtfsIkRoemPBHm_FiPeKracdcOiv.sRR9UiyPufzc8tNO?startTime=1782460823000][第11講 (2026年6月26日)]]
 - 第12講 (2026年7月3日)
 - 第13講 (2026年7月10日)
 

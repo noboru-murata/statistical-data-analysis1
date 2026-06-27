@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Generated on 2026-06-26 Fri 15:03 -->
 <meta charset="utf-8"/>
 <title>分散分析</title>
 <meta name="author" content="村田 昇"/>
@@ -22,6 +23,7 @@
 <link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
 <link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
 <style>
 /* Position computations of klipse get confused by reveal.js's scaling.
@@ -72,8 +74,8 @@
 
 </section>
 <section>
-<section id="slide-org60037ac">
-<h2 id="org60037ac">講義概要</h2>
+<section id="slide-orgcd625c2">
+<h2 id="orgcd625c2">講義概要</h2>
 <ul>
 <li>分散分析とは</li>
 <li>一元配置
@@ -93,22 +95,22 @@
 </section>
 </section>
 <section>
-<section id="slide-orga073ef2">
-<h2 id="orga073ef2">分散分析とは</h2>
-<div class="outline-text-2" id="text-orga073ef2">
+<section id="slide-org346eb69">
+<h2 id="org346eb69">分散分析とは</h2>
+<div class="outline-text-2" id="text-org346eb69">
 </div>
 </section>
-<section id="slide-org1334313">
-<h3 id="org1334313">分散分析</h3>
+<section id="slide-org5e4b4de">
+<h3 id="org5e4b4de">分散分析</h3>
 <ul>
 <li>平均の差の検定 <br />
 <b>2つのグループ間</b> で平均の差があるか否か</li>
 <li>分散分析 <br />
 <b>2つ以上のグループ間</b> で平均の差があるか否か</li>
 <li><p>
-<span style="color:green;">分散分析における仮説の例</span>
+分散分析における仮説の例
 </p>
-<blockquote>
+<blockquote class="callout-tip">
 <ul>
 <li>ある小売店について&ldquo;売上高は月によって差があるか&rdquo;</li>
 <li>ある銘柄の株価について&ldquo;収益率は曜日によって差があるか&rdquo;</li>
@@ -118,8 +120,8 @@
 
 </ul>
 </section>
-<section id="slide-org2caab7a">
-<h3 id="org2caab7a">基本的な考え方</h3>
+<section id="slide-org63b24d7">
+<h3 id="org63b24d7">基本的な考え方</h3>
 <ul>
 <li>データの変動 (<b>分散</b>) =不確定性 を分解 
 <ul>
@@ -139,13 +141,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orge5a115c">
-<h2 id="orge5a115c">分散の比の検定 (再掲)</h2>
-<div class="outline-text-2" id="text-orge5a115c">
+<section id="slide-orgd02b9fa">
+<h2 id="orgd02b9fa">分散の比の検定 (再掲)</h2>
+<div class="outline-text-2" id="text-orgd02b9fa">
 </div>
 </section>
-<section id="slide-org9645e9d">
-<h3 id="org9645e9d">分散の比の検定</h3>
+<section id="slide-org36f1c16">
+<h3 id="org36f1c16">分散の比の検定</h3>
 <ul>
 <li><p>
 2種類のデータの分散が等しいか否かを検定する
@@ -161,25 +163,27 @@
 
 </ul>
 </section>
-<section id="slide-org5287d8c">
-<h3 id="org5287d8c">考え方</h3>
+<section id="slide-orgf542ae6">
+<h3 id="orgf542ae6">考え方</h3>
 <ul>
-<li>\(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
+<li> \(X_1,\dotsc,X_m\) および \(Y_1,\dotsc,Y_n\)
 の不偏分散: \(s_1^2\), \(s_2^2\)
 
 <ul>
 <li>このとき \(s_1^2,s_2^2\) は独立でそれぞれ
 <ul>
-<li>\((m{-}1)s_1^2/\sigma_1^2\)
+<li> \((m{-}1)s_1^2/\sigma_1^2\)
 は自由度 \(m{-}1\) の \(\chi^2\) 分布に従う</li>
-<li>\((n{-}1)s_2^2/\sigma_2^2\)
+<li> \((n{-}1)s_2^2/\sigma_2^2\)
 は自由度 \(n{-}1\) の \(\chi^2\) 分布に従う</li>
+
+</ul></li>
 
 </ul></li>
 <li><p>
 <b>\(F\) 検定</b>
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <div>
 \begin{equation}
   \text{検定統計量 : }
@@ -199,16 +203,14 @@
 
 </ul></li>
 
-</ul></li>
-
 </ul>
 </section>
-<section id="slide-orgb543066">
-<h3 id="orgb543066">両側検定の棄却域</h3>
+<section id="slide-orgefd1d87">
+<h3 id="orgefd1d87">両側検定の棄却域</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li><p>
-\(H_0\) の下では以下が成立
+ \(H_0\) の下では以下が成立
 </p>
 <blockquote>
 <div>
@@ -222,8 +224,8 @@
 <ul>
 <li>自由度 \(m{-}1,n{-}1\) の \(F\) 分布
 <ul>
-<li>\(F_{\alpha/2}(m{-}1,n{-}1)\) : \(\alpha/2\) 分位点</li>
-<li>\(F_{1{-}\alpha/2}(m{-}1,n{-}1)\) : \(1{-}\alpha/2\) 分位点</li>
+<li> \(F_{\alpha/2}(m{-}1,n{-}1)\) : \(\alpha/2\) 分位点</li>
+<li> \(F_{1{-}\alpha/2}(m{-}1,n{-}1)\) : \(1{-}\alpha/2\) 分位点</li>
 
 </ul></li>
 
@@ -266,13 +268,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org237b711">
-<h2 id="org237b711">一元配置</h2>
-<div class="outline-text-2" id="text-org237b711">
+<section id="slide-orgde92d88">
+<h2 id="orgde92d88">一元配置</h2>
+<div class="outline-text-2" id="text-orgde92d88">
 </div>
 </section>
-<section id="slide-org9024aae">
-<h3 id="org9024aae">一元配置の問題設定</h3>
+<section id="slide-org5b05625">
+<h3 id="org5b05625">一元配置の問題設定</h3>
 <ul>
 <li>グループ分けが1種類 : \(p\) グループ
 \(A_1,A_2,\dotsc,A_p\)</li>
@@ -288,20 +290,20 @@
 </div>
 </blockquote></li>
 <li><p>
-<span style="color:green;">小売店の売上高の問題</span>
+小売店の売上高の問題
 </p>
-<blockquote>
+<blockquote class="callout-tip">
 <ul>
-<li>\(A_1,A_2,\dotsc,A_p\) : 月</li>
-<li>\(Y_{i1},Y_{i2},\dotsc,Y_{in_i}\) : \(i\) 月の各日における売上高</li>
+<li> \(A_1,A_2,\dotsc,A_p\) : 月</li>
+<li> \(Y_{i1},Y_{i2},\dotsc,Y_{in_i}\) : \(i\) 月の各日における売上高</li>
 
 </ul>
 </blockquote></li>
 
 </ul>
 </section>
-<section id="slide-orgf5fac50">
-<h3 id="orgf5fac50">一元配置のモデル</h3>
+<section id="slide-org20c4910">
+<h3 id="org20c4910">一元配置のモデル</h3>
 <ul>
 <li>分散分析の用語
 <ul>
@@ -323,19 +325,19 @@
 <li>モデルの仮定
 <ul>
 <li>水準 \(A_i\) における観測データの平均値 \(\mu_i\) は定数</li>
-<li>\(\varepsilon_{ij}\) は独立同分布 (平均0, 分散 \(\sigma^2\) の正規分布)</li>
+<li> \(\varepsilon_{ij}\) は独立同分布 (平均0, 分散 \(\sigma^2\) の正規分布)</li>
 
 </ul></li>
 
 </ul>
 </section>
-<section id="slide-org190aeaf">
-<h3 id="org190aeaf">一元配置の検定</h3>
+<section id="slide-org045f9b0">
+<h3 id="org045f9b0">一元配置の検定</h3>
 <ul>
 <li><p>
 検定問題
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 各水準 \(A_1,A_2,\dotsc,A_p\)
 の平均 \(\mu_1,\mu_2,\dotsc,\mu_{p}\)
@@ -359,8 +361,8 @@
 
 </ul>
 </section>
-<section id="slide-org25d00b1">
-<h3 id="org25d00b1">分析の考え方</h3>
+<section id="slide-orgc2e01db">
+<h3 id="orgc2e01db">分析の考え方</h3>
 <ul>
 <li>データの変動から因子間での変動と観測誤差の変動を抽出して比較</li>
 <li><p>
@@ -429,8 +431,8 @@
 <ul>
 <li>水準内・水準間でのデータの変動はともに観測誤差が原因</li>
 <li>自由度を除けば本質的な違いはない</li>
-<li>\(SS_T/(n{-}1)\) は \(\sigma^2\) の不偏推定量</li>
-<li>\(SS_W/(n{-}p)\), \(SS_B/(p{-}1)\) もともに \(\sigma^2\) の不偏推定量</li>
+<li> \(SS_T/(n{-}1)\) は \(\sigma^2\) の不偏推定量</li>
+<li> \(SS_W/(n{-}p)\), \(SS_B/(p{-}1)\) もともに \(\sigma^2\) の不偏推定量</li>
 
 </ul></li>
 
@@ -455,19 +457,19 @@
 <li>対立仮説 \(H_1\) が正しい場合
 <ul>
 <li>水準間での変動 \(SS_B\) は観測誤差と平均値の差に影響される</li>
-<li>\(SS_B\) は \(SS_W\) より本質的に大きくなる</li>
+<li> \(SS_B\) は \(SS_W\) より本質的に大きくなる</li>
 
 </ul></li>
 
 </ul>
 </section>
-<section id="slide-org673d73a">
-<h3 id="org673d73a">一元配置の検定</h3>
+<section id="slide-org8760846">
+<h3 id="org8760846">一元配置の検定</h3>
 <ul>
 <li><p>
 検定統計量
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <div>
 \begin{equation}
   F=\frac{SS_B/(p{-}1)}{SS_W/(n{-}p)}
@@ -477,9 +479,9 @@
 </blockquote></li>
 <li>帰無仮説の下で次の事実が成り立つ
 <ul>
-<li>\(SS_B,SS_W\) は独立</li>
-<li>\(SS_B/\sigma^{2}\) は自由度 \(p{-}1\) の \(\chi^2\) 分布に従う</li>
-<li>\(SS_W/\sigma^{2}\) は自由度 \(n{-}p\) の \(\chi^2\) 分布に従う</li>
+<li> \(SS_B,SS_W\) は独立</li>
+<li> \(SS_B/\sigma^{2}\) は自由度 \(p{-}1\) の \(\chi^2\) 分布に従う</li>
+<li> \(SS_W/\sigma^{2}\) は自由度 \(n{-}p\) の \(\chi^2\) 分布に従う</li>
 
 </ul></li>
 <li>帰無分布は自由度 \(p{-}1,n{-}p\) の \(F\) 分布に従う</li>
@@ -487,17 +489,17 @@
 
 </ul>
 </section>
-<section id="slide-org89a1031">
-<h3 id="org89a1031">棄却域を用いる場合</h3>
+<section id="slide-orgddcea74">
+<h3 id="orgddcea74">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準を選択 : \(\alpha\in(0,1)\)</li>
 <li>自由度 \(p{-}1,n{-}p\) の \(F\) 分布
 <ul>
-<li>\(F_{1{-}\alpha}(p{-}1,n{-}p)\) : \(1{-}\alpha\) 分位点</li>
+<li> \(F_{1{-}\alpha}(p{-}1,n{-}p)\) : \(1{-}\alpha\) 分位点</li>
 
 </ul></li>
 <li><p>
-\(H_0\) の下で以下が成立
+ \(H_0\) の下で以下が成立
 </p>
 <blockquote>
 <div>
@@ -540,11 +542,11 @@
 
 </ul>
 </section>
-<section id="slide-org5893268">
-<h3 id="org5893268">\(p\) 値を用いる場合</h3>
+<section id="slide-org523f424">
+<h3 id="org523f424"> \(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
-\(p\) 値を計算 (右片側検定の場合の計算方法)
+ \(p\) 値を計算 (右片側検定の場合の計算方法)
 </p>
 <blockquote>
 <div>
@@ -555,15 +557,15 @@
 </div>
 </blockquote>
 <ul>
-<li>\(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の確率密度</li>
+<li> \(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の確率密度</li>
 
 </ul></li>
-<li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
+<li> \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
 </section>
-<section id="slide-org186c370">
-<h3 id="org186c370">分散分析表 (一元配置の場合)</h3>
+<section id="slide-org57eb668">
+<h3 id="org57eb668">分散分析表 (一元配置の場合)</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -584,13 +586,13 @@
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&nbsp;</th>
 <th scope="col" class="org-left">自由度</th>
 <th scope="col" class="org-left">平方和</th>
 <th scope="col" class="org-left">平均平方和</th>
 <th scope="col" class="org-left">\(F\) 値</th>
 <th scope="col" class="org-left">\(p\) 値</th>
-<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&nbsp;</th>
 </tr>
 </thead>
 <tbody>
@@ -601,7 +603,7 @@
 <td class="org-left">\(SS_B/(p{-}1)\)</td>
 <td class="org-left">\(F\)</td>
 <td class="org-left">\(\mathstrut\int_{F}^\infty f(x)dx\)</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&nbsp;</td>
 </tr>
 
 <tr>
@@ -609,9 +611,9 @@
 <td class="org-left">\(n{-}p\)</td>
 <td class="org-left">\(SS_W\)</td>
 <td class="org-left">\(SS_W/(n{-}p)\)</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&nbsp;</td>
+<td class="org-left">&nbsp;</td>
+<td class="org-left">&nbsp;</td>
 </tr>
 </tbody>
 <tbody>
@@ -619,20 +621,20 @@
 <td class="org-left">全変動</td>
 <td class="org-left">\(n{-}1\)</td>
 <td class="org-left">\(SS_T\)</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&nbsp;</td>
+<td class="org-left">&nbsp;</td>
+<td class="org-left">&nbsp;</td>
+<td class="org-left">&nbsp;</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>\(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の確率密度</li>
+<li> \(f(x)\) は自由度 \(p{-}1,n{-}p\) の \(F\) 分布の確率密度</li>
 
 </ul>
 </section>
-<section id="slide-org2272f96">
-<h3 id="org2272f96">モデルの別表現</h3>
+<section id="slide-org33e6fa9">
+<h3 id="org33e6fa9">モデルの別表現</h3>
 <ul>
 <li>各水準の平均値の相対効果による定式化
 <ul>
@@ -667,68 +669,68 @@
 
 </ul>
 </section>
-<section id="slide-org3135dbc">
-<h3 id="org3135dbc">分散分析の計算</h3>
+<section id="slide-orgc721db3">
+<h3 id="orgc721db3">分散分析の計算</h3>
 <ul>
 <li><p>
 基本書式 
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">aov(formula, data)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> formula: &#24335;&#65292;&#19968;&#20803;&#37197;&#32622;&#12398;&#22580;&#21512;&#12399; (&#35251;&#28204;&#20516; ~ &#22240;&#23376;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#20998;&#26512;&#12398;&#32080;&#26524;&#12434;&#21442;&#29031;&#12377;&#12427;&#38306;&#25968;&#12364;&#12356;&#12367;&#12388;&#12363;&#12354;&#12427;&#12398;&#12391;&#65292;&#22810;&#12367;&#12398;&#22580;&#21512;&#36969;&#24403;&#12394;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12395;&#20195;&#20837;</span>
-</pre>
+<pre><code class="R" >aov(formula, data)
+#' formula: 式，一元配置の場合は (観測値 ~ 因子)
+#' data: データフレーム
+#' 分析の結果を参照する関数がいくつかあるので，多くの場合適当なオブジェクトに代入
+</code></pre>
 </div></li>
 <li><p>
 分散分析表の表示
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">aov(formula, data) |&gt; summary()     <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#20998;&#26512;&#34920;&#24418;&#24335;&#12391;&#12398;&#34920;&#31034;</span>
-aov(formula, data) |&gt; anova()       <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;(data.frame&#24418;&#24335;)</span>
-aov(formula, data) |&gt; broom::tidy() <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;(tibble&#24418;&#24335;)</span>
-aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"means"</span>)   <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#24179;&#22343;&#20516;</span>
-aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effects"</span>) <span style="color: #808080; font-style: italic;"># </span><span style="color: #808080; font-style: italic;">&#21177;&#26524;(&#26082;&#23450;&#20516;)</span>
-</pre>
+<pre><code class="R" >aov(formula, data) |&gt; summary()     # 分析表形式での表示
+aov(formula, data) |&gt; anova()       # データフレーム(data.frame形式)
+aov(formula, data) |&gt; broom::tidy() # データフレーム(tibble形式)
+aov(formula, data) |&gt; model.table(type = "means")   # 平均値
+aov(formula, data) |&gt; model.table(type = "effects") # 効果(既定値)
+</code></pre>
 </div></li>
 
 </ul>
 </section>
-<section id="slide-org9343480">
-<h3 id="org9343480">分散分析の計算 (検定のみ)</h3>
+<section id="slide-org7779c13">
+<h3 id="org7779c13">分散分析の計算 (検定のみ)</h3>
 <ul>
 <li><p>
 基本書式 
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">oneway.test(formula, data, subset, na.action, var.equal = <span style="color: #00aa80;">FALSE</span>)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> formula: &#24335;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> subset: subset&#12398;&#25351;&#23450;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> na.action: &#27424;&#25613;&#20516;&#12398;&#25201;&#12356;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> var.equal: &#31561;&#20998;&#25955;&#12434;&#20206;&#23450;&#12377;&#12427;&#22580;&#21512;&#12399; TRUE&#65292;&#27161;&#28310;&#12391;&#12399; Welch &#12398;&#36817;&#20284;&#12364;&#29992;&#12356;&#12425;&#12428;&#12427;</span>
-</pre>
+<pre><code class="R" >oneway.test(formula, data, subset, na.action, var.equal = FALSE)
+#' formula: 式
+#' data: データフレーム
+#' subset: subsetの指定
+#' na.action: 欠損値の扱い
+#' var.equal: 等分散を仮定する場合は TRUE，標準では Welch の近似が用いられる
+</code></pre>
 </div></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-org5cd8db4" data-background="#fef4f4">
-<h2 id="org5cd8db4">実習</h2>
+<section id="slide-org94f228e" data-background="#fef4f4">
+<h2 id="org94f228e">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgee683b4">
-<h2 id="orgee683b4">二元配置</h2>
-<div class="outline-text-2" id="text-orgee683b4">
+<section id="slide-org8e743c5">
+<h2 id="org8e743c5">二元配置</h2>
+<div class="outline-text-2" id="text-org8e743c5">
 </div>
 </section>
-<section id="slide-org3d44f24">
-<h3 id="org3d44f24">二元配置の問題</h3>
+<section id="slide-org6977b85">
+<h3 id="org6977b85">二元配置の問題</h3>
 <ul>
 <li>因子が2種類ある場合
 <ul>
@@ -737,9 +739,9 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 
 </ul></li>
 <li><p>
-<span style="color:green;">複数の薬の治験の問題</span>
+複数の薬の治験の問題
 </p>
-<blockquote>
+<blockquote class="callout-tip">
 <p>
 複数の薬の効能を複数の被験者に投与する実験
 </p>
@@ -754,15 +756,15 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 
 </ul>
 </section>
-<section id="slide-orgc251ee3">
-<h3 id="orgc251ee3">二元配置のモデル</h3>
+<section id="slide-org59f14c4">
+<h3 id="org59f14c4">二元配置のモデル</h3>
 <ul>
 <li>2種類の因子 \(A, B\)
 <ul>
 <li>因子 \(A\) には \(a\) 個の水準 : \(A_1,\dotsc,A_a\)</li>
 <li>因子 \(B\) には \(b\) 個の水準 : \(B_1,\dotsc,B_b\)</li>
 <li>因子 \(A,B\) の水準がそれぞれ \(A_i,B_j\) である観測値 : \(Y_{ij}\)</li>
-<li><span style="color:orange;">各水準ごとに1つの観測値が得られる一番簡単な場合を想定</span></li>
+<li><i>各水準ごとに1つの観測値が得られる一番簡単な場合を想定</i></li>
 
 </ul></li>
 <li><p>
@@ -781,16 +783,19 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 <ul>
 <li>因子 \(A,B\) の水準 \(A_i,B_j\) における効果
 \(\alpha_i,\beta_j\) は定数</li>
-<li>\(\varepsilon_{ij}\) は独立同分布 (平均0, 分散 \(\sigma^2\) の正規分布)</li>
+<li> \(\varepsilon_{ij}\) は独立同分布 (平均0, 分散 \(\sigma^2\) の正規分布)</li>
 
 </ul></li>
 
 </ul>
 </section>
-<section id="slide-orgf4bfe5c">
-<h3 id="orgf4bfe5c">二元配置の例</h3>
+<section id="slide-org98d8ea1">
+<h3 id="org98d8ea1">二元配置の例</h3>
 <ul>
-<li><span style="color:green;">複数の薬の治験の問題</span>
+<li><p>
+複数の薬の治験の問題
+</p>
+<blockquote class="callout-tip">
 <ul>
 <li>因子
 <ul>
@@ -800,23 +805,24 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 </ul></li>
 <li>効果
 <ul>
-<li>\(\alpha_i\) : 薬 \(A_i\) の効能</li>
-<li>\(\beta_j\) : 被験者 \(B_j\) 固有の薬の効きやすさ</li>
+<li> \(\alpha_i\) : 薬 \(A_i\) の効能</li>
+<li> \(\beta_j\) : 被験者 \(B_j\) 固有の薬の効きやすさ</li>
 
 </ul></li>
 <li>薬の効能に差があるか否かという検定</li>
 
-</ul></li>
+</ul>
+</blockquote></li>
 
 </ul>
 </section>
-<section id="slide-orge52b63a">
-<h3 id="orge52b63a">二元配置の検定</h3>
+<section id="slide-orgce35935">
+<h3 id="orgce35935">二元配置の検定</h3>
 <ul>
 <li><p>
 検定問題
 </p>
-<blockquote>
+<blockquote class="callout">
 <p>
 因子 \(A\) の各水準の効果に差があるか否かを検定する
 </p>
@@ -844,8 +850,8 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 
 </ul>
 </section>
-<section id="slide-org7989484">
-<h3 id="org7989484">分析の考え方</h3>
+<section id="slide-org70c1504">
+<h3 id="org70c1504">分析の考え方</h3>
 <ul>
 <li>データの変動から因子間での変動と観測誤差の変動を抽出して比較</li>
 <li><p>
@@ -948,7 +954,7 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 <ul>
 <li>変動 \(SS_A,SS_E\) はともに観測誤差のみが原因で生じる</li>
 <li>自由度を除けば本質的な違いはない</li>
-<li>\(SS_A/(a{-}1)\), \(SS_E/(a{-}1)(b{-}1)\) は \(\sigma^2\) の不偏推定量</li>
+<li> \(SS_A/(a{-}1)\), \(SS_E/(a{-}1)(b{-}1)\) は \(\sigma^2\) の不偏推定量</li>
 
 </ul></li>
 
@@ -974,19 +980,19 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 <li>対立仮説 \(H_1\) が正しい場合
 <ul>
 <li>因子 \(A\) 内の水準間での効果 \(\alpha_1,\dotsc,\alpha_a\) の差に影響される</li>
-<li>\(SS_A\) は \(SS_E\) より本質的に大きくなる</li>
+<li> \(SS_A\) は \(SS_E\) より本質的に大きくなる</li>
 
 </ul></li>
 
 </ul>
 </section>
-<section id="slide-org88d3028">
-<h3 id="org88d3028">二元配置の検定</h3>
+<section id="slide-orgd81b9f0">
+<h3 id="orgd81b9f0">二元配置の検定</h3>
 <ul>
 <li><p>
 検定統計量
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <div>
 \begin{equation}
   F_A=\frac{SS_A/(a{-}1)}{SS_E/(a{-}1)(b{-}1)}
@@ -996,9 +1002,9 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 </blockquote></li>
 <li>帰無仮説の下で次の事実が成り立つ
 <ul>
-<li>\(SS_A,SS_E\) は独立</li>
-<li>\(SS_A/\sigma^{2}\) は自由度 \(a{-}1\) の \(\chi^2\) 分布に従う</li>
-<li>\(SS_E/\sigma^{2}\) は自由度 \((a{-}1)(b{-}1)\) の \(\chi^2\) 分布に従う</li>
+<li> \(SS_A,SS_E\) は独立</li>
+<li> \(SS_A/\sigma^{2}\) は自由度 \(a{-}1\) の \(\chi^2\) 分布に従う</li>
+<li> \(SS_E/\sigma^{2}\) は自由度 \((a{-}1)(b{-}1)\) の \(\chi^2\) 分布に従う</li>
 
 </ul></li>
 <li>帰無仮説の下 \(F_A\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布に従う</li>
@@ -1006,17 +1012,17 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 
 </ul>
 </section>
-<section id="slide-org4a370a4">
-<h3 id="org4a370a4">棄却域を用いる場合</h3>
+<section id="slide-org881b3ca">
+<h3 id="org881b3ca">棄却域を用いる場合</h3>
 <ul>
 <li>有意水準 : \(\alpha\in(0,1)\)</li>
 <li>自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布
 <ul>
-<li>\(F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))\) : \(1{-}\alpha\) 分位点</li>
+<li> \(F_{1{-}\alpha}(a{-}1,(a{-}1)(b{-}1))\) : \(1{-}\alpha\) 分位点</li>
 
 </ul></li>
 <li><p>
-\(H_0\) の下で以下が成立
+ \(H_0\) の下で以下が成立
 </p>
 <blockquote>
 <div>
@@ -1059,11 +1065,11 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 
 </ul>
 </section>
-<section id="slide-org39ec740">
-<h3 id="org39ec740">\(p\) 値を用いる場合</h3>
+<section id="slide-orge11b18f">
+<h3 id="orge11b18f"> \(p\) 値を用いる場合</h3>
 <ul>
 <li><p>
-\(p\) 値を計算 (右片側検定の場合の計算方法)
+ \(p\) 値を計算 (右片側検定の場合の計算方法)
 </p>
 <blockquote>
 <div>
@@ -1074,15 +1080,15 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 </div>
 </blockquote>
 <ul>
-<li>\(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度</li>
+<li> \(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度</li>
 
 </ul></li>
-<li>\(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
+<li> \(p\) 値が \(\alpha\) 未満なら帰無仮説を棄却</li>
 
 </ul>
 </section>
-<section id="slide-org64fb11d">
-<h3 id="org64fb11d">分散分析表 (二元配置の場合)</h3>
+<section id="slide-org8e88ffc">
+<h3 id="org8e88ffc">分散分析表 (二元配置の場合)</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1101,7 +1107,7 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&nbsp;</th>
 <th scope="col" class="org-left">自由度</th>
 <th scope="col" class="org-left">平方和</th>
 <th scope="col" class="org-left">平均平方和</th>
@@ -1134,19 +1140,19 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 <td class="org-left">\((a{-}1)(b{-}1)\)</td>
 <td class="org-left">\(SS_E\)</td>
 <td class="org-left">\(\displaystyle\frac{SS_E}{(a{-}1)(b{-}1)}\)</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&nbsp;</td>
+<td class="org-left">&nbsp;</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>\(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度</li>
-<li>\(g\) は自由度 \(b{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度</li>
+<li> \(f\) は自由度 \(a{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度</li>
+<li> \(g\) は自由度 \(b{-}1,(a{-}1)(b{-}1)\) の \(F\) 分布の確率密度</li>
 
 </ul>
 </section>
-<section id="slide-orgfe8b200">
-<h3 id="orgfe8b200">モデルの別表現</h3>
+<section id="slide-org4b36447">
+<h3 id="org4b36447">モデルの別表現</h3>
 <p>
 相対効果による定式化
 </p>
@@ -1199,18 +1205,18 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 
 </ul>
 </section>
-<section id="slide-orgb75d806">
-<h3 id="orgb75d806">分散分析の計算</h3>
+<section id="slide-org4ce26f9">
+<h3 id="org4ce26f9">分散分析の計算</h3>
 <ul>
 <li><p>
 基本書式 
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">aov(formula, data)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> formula: &#24335;&#65292;&#20108;&#20803;&#37197;&#32622;&#12398;&#22580;&#21512;&#12399; (&#35251;&#28204;&#20516; ~ &#22240;&#23376; + &#22240;&#23376;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
-</pre>
+<pre><code class="R" >aov(formula, data)
+#' formula: 式，二元配置の場合は (観測値 ~ 因子 + 因子)
+#' data: データフレーム
+</code></pre>
 </div></li>
 <li>分散分析表なども同様</li>
 
@@ -1218,13 +1224,13 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 </section>
 </section>
 <section>
-<section id="slide-orgda37ef3" data-background="#fef4f4">
-<h2 id="orgda37ef3">実習</h2>
+<section id="slide-orgbfc4a1d" data-background="#fef4f4">
+<h2 id="orgbfc4a1d">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgda36642">
-<h2 id="orgda36642">次回の予定</h2>
+<section id="slide-org4e3a61c">
+<h2 id="org4e3a61c">次回の予定</h2>
 <ul>
 <li>回帰分析</li>
 <li>回帰係数の推定
@@ -1250,6 +1256,7 @@ aov(formula, data) |&gt; model.table(type = <span style="color: #d08928;">"effec
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
 <script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
 <script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
@@ -1284,7 +1291,7 @@ showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : fal
 'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
@@ -1292,7 +1299,7 @@ dependencies: [
 
 });
 </script>
-<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script defer src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>
 /* Recompute layout upon changes by klipse.  Code fragment from
    asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:

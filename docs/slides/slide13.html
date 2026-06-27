@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Generated on 2026-06-26 Fri 15:07 -->
 <meta charset="utf-8"/>
 <title>回帰分析</title>
 <meta name="author" content="村田 昇"/>
@@ -22,6 +23,7 @@
 <link rel="stylesheet" href="./reveal.js/plugin/reveal-menu/quarto-menu.css"/>
 
 <link rel="stylesheet" href="./reveal.js/plugin/chalkboard/style.css"/>
+<link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css"/>
 <link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
 <style>
 /* Position computations of klipse get confused by reveal.js's scaling.
@@ -72,8 +74,8 @@
 
 </section>
 <section>
-<section id="slide-orge2f882b">
-<h2 id="orge2f882b">講義概要</h2>
+<section id="slide-org04e2f13">
+<h2 id="org04e2f13">講義概要</h2>
 <ul>
 <li>回帰分析</li>
 <li>回帰係数の推定
@@ -93,13 +95,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgea266c6">
-<h2 id="orgea266c6">回帰分析</h2>
-<div class="outline-text-2" id="text-orgea266c6">
+<section id="slide-org378d5bd">
+<h2 id="org378d5bd">回帰分析</h2>
+<div class="outline-text-2" id="text-org378d5bd">
 </div>
 </section>
-<section id="slide-org73716ba">
-<h3 id="org73716ba">回帰分析</h3>
+<section id="slide-orgaf0b68f">
+<h3 id="orgaf0b68f">回帰分析</h3>
 <ul>
 <li>データのある変量をその他の変量を用いて説明・予測するモデル
 (<b>回帰モデル</b>)を構築するための分析法</li>
@@ -122,19 +124,19 @@
 </section>
 <section>
 
-<div id="org238c1cf" class="figure">
+<div id="orgbd3ba49" class="figure">
 <p><img src="figs/r-brainbody.png" alt="r-brainbody.png" height="100%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>脳の重さと体重の関係</p>
 </div>
 </section>
-<section id="slide-org5e3865e">
-<h3 id="org5e3865e">回帰モデル</h3>
+<section id="slide-org1fb482a">
+<h3 id="org1fb482a">回帰モデル</h3>
 <ul>
 <li>説明変数 : \(X\)</li>
 <li>目的変数 : \(Y\)</li>
 <li><p>
-\(Y\) を \(X\) で説明する関係式として一次関数を考える
+ \(Y\) を \(X\) で説明する関係式として一次関数を考える
 </p>
 <blockquote>
 <div>
@@ -145,8 +147,8 @@
 </div>
 </blockquote>
 <ul>
-<li>\(\alpha\): <b>定数項</b></li>
-<li>\(\beta\): \(X\) の <b>回帰係数</b></li>
+<li> \(\alpha\): <b>定数項</b></li>
+<li> \(\beta\): \(X\) の <b>回帰係数</b></li>
 
 </ul></li>
 <li><b>注意</b> : 非線形な関係への対応
@@ -160,16 +162,16 @@
 </section>
 </section>
 <section>
-<section id="slide-orge1a488e">
-<h2 id="orge1a488e">回帰係数の点推定</h2>
-<div class="outline-text-2" id="text-orge1a488e">
+<section id="slide-org2a89193">
+<h2 id="org2a89193">回帰係数の点推定</h2>
+<div class="outline-text-2" id="text-org2a89193">
 </div>
 </section>
-<section id="slide-org43b4761">
-<h3 id="org43b4761">回帰係数の点推定</h3>
+<section id="slide-org59cdd6b">
+<h3 id="org59cdd6b">回帰係数の点推定</h3>
 <ul>
 <li><p>
-\(n\) 個の説明変数と目的変数の組 \((X,Y)\) を観測
+ \(n\) 個の説明変数と目的変数の組 \((X,Y)\) を観測
 </p>
 <blockquote>
 <div>
@@ -191,15 +193,15 @@
 </div>
 </blockquote>
 <ul>
-<li>\(\epsilon_1,\epsilon_2,\dotsc,\epsilon_n\) : <b>誤差項</b> または <b>撹乱項</b></li>
+<li> \(\epsilon_1,\epsilon_2,\dotsc,\epsilon_n\) : <b>誤差項</b> または <b>撹乱項</b></li>
 
 </ul></li>
 <li>線形回帰モデルのパラメータ \(\alpha,\beta\) を推定</li>
 
 </ul>
 </section>
-<section id="slide-org9da73df">
-<h3 id="org9da73df">分析における仮定</h3>
+<section id="slide-orgb8a48b0">
+<h3 id="orgb8a48b0">分析における仮定</h3>
 <ul>
 <li>説明変数 \(X_1,\dotsc,X_n\) は確率変数ではなく <b>確定値</b></li>
 <li>説明変数は一定値ではない <br />
@@ -210,8 +212,8 @@
 
 </ul>
 </section>
-<section id="slide-org6e2415d">
-<h3 id="org6e2415d">最小二乗法</h3>
+<section id="slide-org758b449">
+<h3 id="org758b449">最小二乗法</h3>
 <ul>
 <li><p>
 係数 \(\alpha,\beta\) の回帰式で説明できない
@@ -276,7 +278,7 @@
 <li><p>
 最小二乗推定量の解
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <div>
 \begin{equation}
   \hat{\beta}
@@ -300,41 +302,41 @@
 
 </ul>
 </section>
-<section id="slide-org8b8fe34">
-<h3 id="org8b8fe34">回帰分析の計算</h3>
+<section id="slide-org50c2f44">
+<h3 id="org50c2f44">回帰分析の計算</h3>
 <ul>
 <li><p>
 関数 <code>stats::lm()</code> : 線形モデルを当てはめる
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">lm(formula, data, subset, na.action, ...)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> formula: &#24335; (&#30446;&#30340;&#22793;&#25968; ~ &#35500;&#26126;&#22793;&#25968;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> data: &#12487;&#12540;&#12479;&#12501;&#12524;&#12540;&#12512;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> subset: &#23550;&#35937;&#12392;&#12377;&#12427;&#37096;&#20998;&#12487;&#12540;&#12479;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> na.action: &#27424;&#25613;&#20516;&#12398;&#25201;&#12356;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#20182;&#12398;&#12458;&#12503;&#12471;&#12519;&#12531;&#65294;&#35443;&#32048;&#12399; '?stats::lm' &#12434;&#21442;&#29031;</span>
-</pre>
+<pre><code class="R" >lm(formula, data, subset, na.action, ...)
+#' formula: 式 (目的変数 ~ 説明変数)
+#' data: データフレーム
+#' subset: 対象とする部分データ
+#' na.action: 欠損値の扱い
+#' ...: 他のオプション．詳細は '?stats::lm' を参照
+</code></pre>
 </div></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-orgee8a90f" data-background="#fef4f4">
-<h2 id="orgee8a90f">実習</h2>
+<section id="slide-org53390e1" data-background="#fef4f4">
+<h2 id="org53390e1">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgbee9cd0">
-<h2 id="orgbee9cd0">回帰係数の区間推定</h2>
-<div class="outline-text-2" id="text-orgbee9cd0">
+<section id="slide-org184d1a1">
+<h2 id="org184d1a1">回帰係数の区間推定</h2>
+<div class="outline-text-2" id="text-org184d1a1">
 </div>
 </section>
-<section id="slide-org1e2961c">
-<h3 id="org1e2961c">誤差項に関する仮定</h3>
+<section id="slide-orgfef3d90">
+<h3 id="orgfef3d90">誤差項に関する仮定</h3>
 <ul>
-<li>\(\epsilon_i\) は正規分布に従う</li>
+<li> \(\epsilon_i\) は正規分布に従う</li>
 <li>上の仮定より
 \(\hat{\alpha},\hat{\beta}\) は <b>正規分布</b> に従う</li>
 <li><p>
@@ -351,17 +353,17 @@
 
 </div>
 </blockquote></li>
-<li>\(\sigma^2\) が <b>既知なら</b> 正規分布を用いて信頼区間を構成</li>
+<li> \(\sigma^2\) が <b>既知なら</b> 正規分布を用いて信頼区間を構成</li>
 
 </ul>
 </section>
-<section id="slide-org271836f">
-<h3 id="org271836f">誤差分散の推定</h3>
+<section id="slide-org0d2a193">
+<h3 id="org0d2a193">誤差分散の推定</h3>
 <ul>
 <li>一般に \(\sigma^2\) は <b>既知でない</b> ためデータから推定
 <ul>
-<li>\(\epsilon_i\) の平均は0</li>
-<li>\(\sigma^2\) は \(\epsilon_i\) の共通の分散</li>
+<li> \(\epsilon_i\) の平均は0</li>
+<li> \(\sigma^2\) は \(\epsilon_i\) の共通の分散</li>
 
 </ul></li>
 <li><p>
@@ -377,7 +379,7 @@
 </div>
 </blockquote></li>
 <li><p>
-\(\sigma^2\) の自然な推定量(良いとは限らない)
+ \(\sigma^2\) の自然な推定量(良いとは限らない)
 </p>
 <blockquote>
 <div>
@@ -423,7 +425,7 @@
 </div>
 </blockquote></li>
 <li><p>
-\(\sigma^{2}\) の不偏推定量
+ \(\sigma^{2}\) の不偏推定量
 </p>
 <blockquote>
 <div>
@@ -436,11 +438,11 @@
 
 </ul>
 </section>
-<section id="slide-org2190830">
-<h3 id="org2190830">回帰係数の性質</h3>
+<section id="slide-org3d46755">
+<h3 id="org3d46755">回帰係数の性質</h3>
 <ul>
 <li><p>
-\(\hat{\alpha},\hat{\beta}\) の分散の推定量 (資料; Gauss-Markovの定理)
+ \(\hat{\alpha},\hat{\beta}\) の分散の推定量 (資料; Gauss-Markovの定理)
 </p>
 <blockquote>
 <div>
@@ -455,7 +457,7 @@
 </div>
 </blockquote>
 <ul>
-<li>\(\mathrm{s.e.}(\hat{\alpha}),\mathrm{s.e.}(\hat{\beta})\) は <b>標準誤差</b> と呼ばれる</li>
+<li> \(\mathrm{s.e.}(\hat{\alpha}),\mathrm{s.e.}(\hat{\beta})\) は <b>標準誤差</b> と呼ばれる</li>
 
 </ul></li>
 <li><p>
@@ -472,8 +474,8 @@
 
 </ul>
 </section>
-<section id="slide-org48bacc7">
-<h3 id="org48bacc7">回帰係数の区間推定</h3>
+<section id="slide-orgc9779a3">
+<h3 id="orgc9779a3">回帰係数の区間推定</h3>
 <ul>
 <li><p>
 以下の確率変数は自由度 \(n{-}2\) の \(t\) 分布に従う
@@ -489,9 +491,9 @@
 </div>
 </blockquote></li>
 <li><p>
-\(\gamma\in(0,1)\) に対する \(\beta\) の \(1-\gamma\) 信頼区間
+ \(\gamma\in(0,1)\) に対する \(\beta\) の \(1-\gamma\) 信頼区間
 </p>
-<blockquote>
+<blockquote class="callout-note">
 <div>
 \begin{equation}
   \left[
@@ -505,20 +507,20 @@
 
 </ul>
 </section>
-<section id="slide-org20e2619">
-<h3 id="org20e2619">区間推定の計算</h3>
+<section id="slide-org3552f39">
+<h3 id="org3552f39">区間推定の計算</h3>
 <ul>
 <li><p>
 関数 <code>confint()</code> : 係数の信頼区間を求める
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">confint(object, parm, level = 0.95, ...)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> object: &#38306;&#25968; lm &#12391;&#25512;&#23450;&#12375;&#12383;&#12514;&#12487;&#12523;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> parm: &#21306;&#38291;&#25512;&#23450;&#12434;&#12377;&#12427;&#12497;&#12521;&#12513;&#12479;&#65294;&#25351;&#23450;&#12375;&#12394;&#12369;&#12428;&#12400;&#20840;&#12390;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> level: &#20449;&#38972;&#20418;&#25968;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#20182;&#12398;&#12458;&#12503;&#12471;&#12519;&#12531;&#65294;&#35443;&#32048;&#12399; '?confint' &#12434;&#21442;&#29031;</span>
-</pre>
+<pre><code class="R" >confint(object, parm, level = 0.95, ...)
+#' object: 関数 lm で推定したモデル
+#' parm: 区間推定をするパラメタ．指定しなければ全て
+#' level: 信頼係数
+#' ...: 他のオプション．詳細は '?confint' を参照
+</code></pre>
 </div></li>
 
 </ul>
@@ -531,20 +533,20 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">predict(object, newdata, se.fit = <span style="color: #00aa80;">FALSE</span>, scale = <span style="color: #00aa80;">NULL</span>, df = <span style="color: #00aa80;">Inf</span>,
-        interval = c(<span style="color: #d08928;">"none"</span>, <span style="color: #d08928;">"confidence"</span>, <span style="color: #d08928;">"prediction"</span>),
-        level = 0.95, type = c(<span style="color: #d08928;">"response"</span>, <span style="color: #d08928;">"terms"</span>),
-        terms = <span style="color: #00aa80;">NULL</span>, na.action = na.pass,
+<pre><code class="R" >predict(object, newdata, se.fit = FALSE, scale = NULL, df = Inf,
+        interval = c("none", "confidence", "prediction"),
+        level = 0.95, type = c("response", "terms"),
+        terms = NULL, na.action = na.pass,
         pred.var = res.var/weights, weights = 1,
-        rankdeficient = c(<span style="color: #d08928;">"warnif"</span>, <span style="color: #d08928;">"simple"</span>, <span style="color: #d08928;">"non-estim"</span>, <span style="color: #d08928;">"NA"</span>, <span style="color: #d08928;">"NAwarn"</span>),
-        tol = 1e-6, verbose = <span style="color: #00aa80;">FALSE</span>,
+        rankdeficient = c("warnif", "simple", "non-estim", "NA", "NAwarn"),
+        tol = 1e-6, verbose = FALSE,
         ...)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> object: &#38306;&#25968; lm &#12391;&#25512;&#23450;&#12375;&#12383;&#12514;&#12487;&#12523;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> newdata: &#20104;&#28204;&#20516;&#12434;&#35336;&#31639;&#12377;&#12427;&#35500;&#26126;&#22793;&#25968;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> interval: &#20309;&#12418;&#20184;&#12369;&#12394;&#12356;(none)&#12539;&#20449;&#38972;&#21306;&#38291;(confidence)&#12539;&#20104;&#28204;&#21306;&#38291;(prediction)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> level: &#20449;&#38972;&#20418;&#25968; (&#26082;&#23450;&#20516;&#12399;0.95)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> ...: &#20182;&#12398;&#12458;&#12503;&#12471;&#12519;&#12531;&#65294;&#35443;&#32048;&#12399; '?predict.lm' &#12434;&#21442;&#29031;</span>
-</pre>
+#' object: 関数 lm で推定したモデル
+#' newdata: 予測値を計算する説明変数
+#' interval: 何も付けない(none)・信頼区間(confidence)・予測区間(prediction)
+#' level: 信頼係数 (既定値は0.95)
+#' ...: 他のオプション．詳細は '?predict.lm' を参照
+</code></pre>
 </div></li>
 
 </ul>
@@ -557,39 +559,39 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">augment(
+<pre><code class="R" >augment(
   x,
   data = model.frame(x),
-  newdata = <span style="color: #00aa80;">NULL</span>,
-  se_fit = <span style="color: #00aa80;">FALSE</span>,
-  interval = c(<span style="color: #d08928;">"none"</span>, <span style="color: #d08928;">"confidence"</span>, <span style="color: #d08928;">"prediction"</span>),
+  newdata = NULL,
+  se_fit = FALSE,
+  interval = c("none", "confidence", "prediction"),
   conf.level = 0.95,
   ...
 )
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x: &#38306;&#25968; lm &#12391;&#25512;&#23450;&#12375;&#12383;&#12514;&#12487;&#12523;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> newdata: data &#12392;&#30064;&#12394;&#12427;&#35500;&#26126;&#22793;&#25968;&#12391;&#12354;&#12390;&#12399;&#12417;&#12539;&#20104;&#28204;&#12434;&#34892;&#12358;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> se_fit: &#27161;&#28310;&#35492;&#24046;&#12434;&#20184;&#12369;&#12427;&#12363;&#21542;&#12363;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> interval: &#20449;&#38972;&#21306;&#38291;(confidence)&#12539;&#20104;&#28204;&#21306;&#38291;(prediction)&#12434;&#20184;&#12369;&#12427;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?broom::augment.lm' &#12434;&#21442;&#29031;</span>
-</pre>
+#' x: 関数 lm で推定したモデル
+#' newdata: data と異なる説明変数であてはめ・予測を行う
+#' se_fit: 標準誤差を付けるか否か
+#' interval: 信頼区間(confidence)・予測区間(prediction)を付ける
+#' 詳細は '?broom::augment.lm' を参照
+</code></pre>
 </div></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-orgad22224" data-background="#fef4f4">
-<h2 id="orgad22224">実習</h2>
+<section id="slide-orgbea5b46" data-background="#fef4f4">
+<h2 id="orgbea5b46">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org3d8a194">
-<h2 id="org3d8a194">回帰係数の有意性検定</h2>
-<div class="outline-text-2" id="text-org3d8a194">
+<section id="slide-orge68fe72">
+<h2 id="orge68fe72">回帰係数の有意性検定</h2>
+<div class="outline-text-2" id="text-orge68fe72">
 </div>
 </section>
-<section id="slide-orgea698fd">
-<h3 id="orgea698fd">回帰係数の有意性</h3>
+<section id="slide-org5f877cb">
+<h3 id="org5f877cb">回帰係数の有意性</h3>
 <ul>
 <li><p>
 説明変数 \(X\) が目的変数 \(Y\) を説明・予測するのに本当に役立っているかを検証
@@ -603,7 +605,7 @@
 </div>
 </blockquote></li>
 <li><p>
-\(\beta\) の <b>有意性の検定</b>
+ \(\beta\) の <b>有意性の検定</b>
 </p>
 <blockquote>
 <p>
@@ -614,8 +616,8 @@
 
 </ul>
 </section>
-<section id="slide-orgbbc83f0">
-<h3 id="orgbbc83f0">回帰係数の有意性検定</h3>
+<section id="slide-org636f95c">
+<h3 id="org636f95c">回帰係数の有意性検定</h3>
 <ul>
 <li><p>
 帰無仮説 \(H_0\) が正しければ以下の統計量
@@ -654,7 +656,7 @@
 </div>
 </blockquote></li>
 <li><p>
-\(p\) 値による検定
+ \(p\) 値による検定
 </p>
 <blockquote>
 <p>
@@ -671,21 +673,21 @@
 
 </ul>
 </section>
-<section id="slide-org8625c68">
-<h3 id="org8625c68">係数の検定</h3>
+<section id="slide-orgacb60f4">
+<h3 id="orgacb60f4">係数の検定</h3>
 <ul>
 <li><p>
 関数 <code>stat::summary()</code> : 情報の要約 (base R)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">summary(object)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> object: &#38306;&#25968; lm() &#12391;&#25512;&#23450;&#12375;&#12383;&#12514;&#12487;&#12523;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968;&#12398;&#20986;&#21147; (&#12522;&#12473;&#12488;&#21517; $"&#21517;&#21069;" &#12391;&#21442;&#29031;&#21487;&#33021;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> coefficients : &#20418;&#25968;&#12392;t&#32113;&#35336;&#37327;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> fstatistics : F&#32113;&#35336;&#37327; (&#12514;&#12487;&#12523;&#12398;&#35413;&#20385;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?summary.lm' &#12434;&#21442;&#29031;</span>
-</pre>
+<pre><code class="R" >summary(object)
+#' object: 関数 lm() で推定したモデル
+#' 関数の出力 (リスト名 $"名前" で参照可能)
+#' coefficients : 係数とt統計量
+#' fstatistics : F統計量 (モデルの評価)
+#' 詳細は '?summary.lm' を参照
+</code></pre>
 </div></li>
 
 </ul>
@@ -698,43 +700,43 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">tidy(x, conf.int = <span style="color: #00aa80;">FALSE</span>, conf.level = 0.95, exponentiate = <span style="color: #00aa80;">FALSE</span>, ...)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x: &#38306;&#25968; lm() &#12391;&#25512;&#23450;&#12375;&#12383;&#12514;&#12487;&#12523;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> conf.int: &#20449;&#38972;&#21306;&#38291;&#12434;&#20184;&#12369;&#12427;&#12363;&#21542;&#12363;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> conf.level: &#20449;&#38972;&#20418;&#25968;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?broom::tidy.lm' &#12434;&#21442;&#29031;</span>
-</pre>
+<pre><code class="R" >tidy(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+#' x: 関数 lm() で推定したモデル
+#' conf.int: 信頼区間を付けるか否か
+#' conf.level: 信頼係数
+#' 詳細は '?broom::tidy.lm' を参照
+</code></pre>
 </div></li>
 <li><p>
 関数 <code>broom::glance()</code> : モデルの統計情報 (tidyverse)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">glance(x, ...)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x: &#38306;&#25968; lm() &#12391;&#25512;&#23450;&#12375;&#12383;&#12514;&#12487;&#12523;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> F&#32113;&#35336;&#37327;&#12399; statistic/p.value &#12398;&#21015;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?broom::glance.lm' &#12434;&#21442;&#29031;</span>
-</pre>
+<pre><code class="R" >glance(x, ...)
+#' x: 関数 lm() で推定したモデル
+#' F統計量は statistic/p.value の列
+#' 詳細は '?broom::glance.lm' を参照
+</code></pre>
 </div></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-org403981f" data-background="#fef4f4">
-<h2 id="org403981f">実習</h2>
+<section id="slide-orgcee75ee" data-background="#fef4f4">
+<h2 id="orgcee75ee">実習</h2>
 </section>
 </section>
 <section>
-<section id="slide-org11b2523">
-<h2 id="org11b2523">決定係数</h2>
-<div class="outline-text-2" id="text-org11b2523">
+<section id="slide-org4312b70">
+<h2 id="org4312b70">決定係数</h2>
+<div class="outline-text-2" id="text-org4312b70">
 </div>
 </section>
-<section id="slide-org3a3e748">
-<h3 id="org3a3e748">決定係数</h3>
+<section id="slide-org4e25a43">
+<h3 id="org4e25a43">決定係数</h3>
 <ul>
-<li>\(X\) が \(Y\) の変動をどの程度説明できるかを数量化</li>
+<li> \(X\) が \(Y\) の変動をどの程度説明できるかを数量化</li>
 <li><p>
 <b>決定係数</b> (あるいは <b>寄与率</b>)
 </p>
@@ -748,7 +750,7 @@
 </div>
 </blockquote></li>
 <li><p>
-\(\hat{Y}_{i}\) は
+ \(\hat{Y}_{i}\) は
 <b>あてはめ値</b> または <b>予測値</b> と呼ばれる
 </p>
 <blockquote>
@@ -799,13 +801,13 @@
 
 </div>
 </blockquote></li>
-<li>\(R^2\) の成分
+<li> \(R^2\) の成分
 <ul>
-<li>\(R^2\) の分子 : あてはめ値の(標本平均まわりでの)変動</li>
-<li>\(R^2\) の分母 : 目的変数の(標本平均まわりでの)変動</li>
+<li> \(R^2\) の分子 : あてはめ値の(標本平均まわりでの)変動</li>
+<li> \(R^2\) の分母 : 目的変数の(標本平均まわりでの)変動</li>
 
 </ul></li>
-<li>\(R^2\) の意味
+<li> \(R^2\) の意味
 <ul>
 <li>回帰式が目的変数の変動をどの位説明できるか評価</li>
 <li>大きいほど説明力が高いと解釈される</li>
@@ -814,10 +816,10 @@
 
 </ul>
 </section>
-<section id="slide-orgc79ea9d">
-<h3 id="orgc79ea9d">決定係数の別表現</h3>
+<section id="slide-org70e594b">
+<h3 id="org70e594b">決定係数の別表現</h3>
 <ul>
-<li>\(R^2\) は以下のように書き直すことも可能
+<li> \(R^2\) は以下のように書き直すことも可能
 <ul>
 <li><p>
 目的変数の観測データとあてはめ値の相関の二乗
@@ -858,8 +860,8 @@
 
 </ul>
 </section>
-<section id="slide-orgf1365df">
-<h3 id="orgf1365df">自由度調整済み決定係数</h3>
+<section id="slide-orgb06a9a3">
+<h3 id="orgb06a9a3">自由度調整済み決定係数</h3>
 <ul>
 <li>不偏分散による \(R^2\) の修正
 <ul>
@@ -892,21 +894,21 @@
 
 </ul>
 </section>
-<section id="slide-org92fe0eb">
-<h3 id="org92fe0eb">決定係数の計算</h3>
+<section id="slide-org1c8d1a2">
+<h3 id="org1c8d1a2">決定係数の計算</h3>
 <ul>
 <li><p>
 関数 <code>stat::summary()</code> : 情報の要約 (base R)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">summary(object)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> object: &#38306;&#25968; lm() &#12391;&#25512;&#23450;&#12375;&#12383;&#12514;&#12487;&#12523;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#38306;&#25968;&#12398;&#20986;&#21147; (&#12522;&#12473;&#12488;&#21517; $"&#21517;&#21069;" &#12391;&#21442;&#29031;&#21487;&#33021;)</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> r.squareds : &#27770;&#23450;&#20418;&#25968;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> adj.r.squareds : &#33258;&#30001;&#24230;&#35519;&#25972;&#28168;&#12415;&#27770;&#23450;&#20418;&#25968;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?summary.lm' &#12434;&#21442;&#29031;</span>
-</pre>
+<pre><code class="R" >summary(object)
+#' object: 関数 lm() で推定したモデル
+#' 関数の出力 (リスト名 $"名前" で参照可能)
+#' r.squareds : 決定係数
+#' adj.r.squareds : 自由度調整済み決定係数
+#' 詳細は '?summary.lm' を参照
+</code></pre>
 </div></li>
 
 </ul>
@@ -919,31 +921,31 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">tidy(x, conf.int = <span style="color: #00aa80;">FALSE</span>, conf.level = 0.95, exponentiate = <span style="color: #00aa80;">FALSE</span>, ...)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x: &#38306;&#25968; lm() &#12391;&#25512;&#23450;&#12375;&#12383;&#12514;&#12487;&#12523;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> conf.int: &#20449;&#38972;&#21306;&#38291;&#12434;&#20184;&#12369;&#12427;&#12363;&#21542;&#12363;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> conf.level: &#20449;&#38972;&#20418;&#25968;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?broom::tidy.lm' &#12434;&#21442;&#29031;</span>
-</pre>
+<pre><code class="R" >tidy(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+#' x: 関数 lm() で推定したモデル
+#' conf.int: 信頼区間を付けるか否か
+#' conf.level: 信頼係数
+#' 詳細は '?broom::tidy.lm' を参照
+</code></pre>
 </div></li>
 <li><p>
 関数 <code>broom::glance()</code> : モデルの統計情報 (tidyverse)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-R">glance(x, ...)
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> x: &#38306;&#25968; lm() &#12391;&#25512;&#23450;&#12375;&#12383;&#12514;&#12487;&#12523;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> F&#32113;&#35336;&#37327;&#12399; statistic/p.value &#12398;&#21015;</span>
-<span style="color: #808080; font-weight: bold; font-style: italic;">#</span><span style="color: #808080; font-weight: bold; font-style: italic;">'</span><span style="color: #808080; font-style: italic;"> &#35443;&#32048;&#12399; '?broom::glance.lm' &#12434;&#21442;&#29031;</span>
-</pre>
+<pre><code class="R" >glance(x, ...)
+#' x: 関数 lm() で推定したモデル
+#' F統計量は statistic/p.value の列
+#' 詳細は '?broom::glance.lm' を参照
+</code></pre>
 </div></li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-orga2cff35" data-background="#fef4f4">
-<h2 id="orga2cff35">演習</h2>
+<section id="slide-orgbc9cf15" data-background="#fef4f4">
+<h2 id="orgbc9cf15">演習</h2>
 </section>
 </section>
 </div>
@@ -953,6 +955,7 @@
 <script src="./reveal.js/plugin/notes/notes.js"></script>
 <script src="./reveal.js/plugin/search/search.js"></script>
 <script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
 <script src="./reveal.js/plugin/reveal-menu/menu.js"></script>
 <script src="./reveal.js/plugin/chalkboard/plugin.js"></script>
 <script src="./reveal.js/plugin/pdf-export/pdfexport.js"></script>
@@ -987,7 +990,7 @@ showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : fal
 'controlsAuto': true, 'previewLinksAuto': true, 'pdfSeparateFragments': false, 'autoAnimateEasing': "ease", 'autoAnimateDuration': 1, 'autoAnimateUnmatched': true, 'jumpToSlide': true, 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true}, 'chalkboard': {"buttons":false}, 'smaller': false, 'spotlight': { size: 80, initialPresentationMode: false, }, keyboard: { 81: function() { RevealSpotlight.toggleSpotlight()}, 90: function() { RevealSpotlight.togglePresentationMode();}, },
 
 // Plugins with reveal.js 4.x
-plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
+plugins: [ RevealNotes, RevealSearch, RevealZoom, RevealHighlight, RevealMenu, RevealChalkboard, PdfExport, RevealSpotlight ],
 
 // Optional libraries used to extend reveal.js
 dependencies: [
@@ -995,7 +998,7 @@ dependencies: [
 
 });
 </script>
-<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script defer src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>
 /* Recompute layout upon changes by klipse.  Code fragment from
    asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:

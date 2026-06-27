@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-04-06 17:49:47 mura>
+# Time-stamp: <2026-06-26 15:07:11 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -109,14 +109,14 @@
 ** 回帰モデル
 - 説明変数 : \(X\)
 - 目的変数 : \(Y\)
-- \(Y\) を \(X\) で説明する関係式として一次関数を考える
+-  \(Y\) を \(X\) で説明する関係式として一次関数を考える
    #+begin_quote
    \begin{equation}
      Y=\alpha+\beta X\quad\text{(線形回帰モデル)}
    \end{equation}
    #+end_quote
-   - \(\alpha\): *定数項*
-   - \(\beta\): \(X\) の *回帰係数*
+   -  \(\alpha\): *定数項*
+   -  \(\beta\): \(X\) の *回帰係数*
 - *注意* : 非線形な関係への対応
    - 適切な変数変換(二乗, 対数など)を施して線形な関係に変換
    - 弱い非線形性を線形で近似
@@ -124,7 +124,7 @@
 
 * 回帰係数の点推定
 ** 回帰係数の点推定
-- \(n\) 個の説明変数と目的変数の組 \((X,Y)\) を観測
+-  \(n\) 個の説明変数と目的変数の組 \((X,Y)\) を観測
    #+begin_quote
    \begin{equation}
      (X_1,Y_1),(X_2,Y_2),\dotsc,(X_n,Y_n)
@@ -136,7 +136,7 @@
      Y_i=\alpha+\beta X_i+\epsilon_i,\quad i=1,\dotsc,n.
    \end{equation}
    #+end_quote
-   - \(\epsilon_1,\epsilon_2,\dotsc,\epsilon_n\) : *誤差項* または *撹乱項*
+   -  \(\epsilon_1,\epsilon_2,\dotsc,\epsilon_n\) : *誤差項* または *撹乱項*
 - 線形回帰モデルのパラメータ \(\alpha,\beta\) を推定
 
 ** 分析における仮定
@@ -174,29 +174,31 @@
    \end{equation}
    #+end_quote
 - *最小二乗推定量*
-  #+begin_quote
-  \(S(\alpha,\beta)\) を最小にするパラメータの組
-  \((\hat{\alpha},\hat{\beta})\)
-  #+end_quote
+   #+begin_quote
+   \(S(\alpha,\beta)\) を最小にするパラメータの組
+   \((\hat{\alpha},\hat{\beta})\)
+   #+end_quote
 
 #+reveal: split
 - 最小二乗推定量の解
-  #+begin_quote
-  \begin{equation}
-    \hat{\beta}
-    =\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\sum_{i=1}^n(X_i-\bar{X})^2},
-    \quad
-    \hat{\alpha}=\bar{Y}-\hat{\beta}\bar{X}
-  \end{equation}
-  ただし
-  \begin{equation}
-    \bar{X}=\frac{1}{n}\sum_{i=1}^nX_i,\quad
-    \bar{Y}=\frac{1}{n}\sum_{i=1}^nY_i.
-  \end{equation}
-  #+end_quote
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
+   #+begin_quote
+   \begin{equation}
+     \hat{\beta}
+     =\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\sum_{i=1}^n(X_i-\bar{X})^2},
+     \quad
+     \hat{\alpha}=\bar{Y}-\hat{\beta}\bar{X}
+   \end{equation}
+   ただし
+   \begin{equation}
+     \bar{X}=\frac{1}{n}\sum_{i=1}^nX_i,\quad
+     \bar{Y}=\frac{1}{n}\sum_{i=1}^nY_i.
+   \end{equation}
+   #+end_quote
 
-  # 回帰モデルの推定には通常 *最小二乗法* が用いられる
-  # - \(S(\alpha,\beta)\): *残差平方和*
+   # 回帰モデルの推定には通常 *最小二乗法* が用いられる
+   # -  \(S(\alpha,\beta)\): *残差平方和*
 
 ** 回帰分析の計算
 :PROPERTIES:
@@ -434,7 +436,7 @@
 
 * 回帰係数の区間推定
 ** 誤差項に関する仮定
-- \(\epsilon_i\) は正規分布に従う
+-  \(\epsilon_i\) は正規分布に従う
 - 上の仮定より
    \(\hat{\alpha},\hat{\beta}\) は *正規分布* に従う
 - 点推定の平均と分散
@@ -446,12 +448,12 @@
      &&\mathrm{Var}(\hat{\beta})=\frac{\sigma^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}
    \end{align}
    #+end_quote
-- \(\sigma^2\) が *既知なら* 正規分布を用いて信頼区間を構成
+-  \(\sigma^2\) が *既知なら* 正規分布を用いて信頼区間を構成
 
 ** 誤差分散の推定
 - 一般に \(\sigma^2\) は *既知でない* ためデータから推定
-   - \(\epsilon_i\) の平均は0
-   - \(\sigma^2\) は \(\epsilon_i\) の共通の分散
+   -  \(\epsilon_i\) の平均は0
+   -  \(\sigma^2\) は \(\epsilon_i\) の共通の分散
 - 誤差と回帰式の関係
    #+begin_quote
    \begin{equation}
@@ -459,7 +461,7 @@
      \quad(i=1,\dotsc,n)      
    \end{equation}
    #+end_quote
-- \(\sigma^2\) の自然な推定量(良いとは限らない)
+-  \(\sigma^2\) の自然な推定量(良いとは限らない)
    #+begin_quote
    \begin{equation}
      \hat{\sigma}^2
@@ -486,15 +488,15 @@
      % \mathbb{E}[\hat{\epsilon}_i^2]=\frac{n{-}2}{n}\sigma^2\quad(i=1,\dotsc,n)      
    \end{equation}
    #+end_quote
-- \(\sigma^{2}\) の不偏推定量
-   #+begin_quote
-   \begin{equation}
-     \hat{\sigma}^2=\frac{1}{n{-}2}\sum_{i=1}^n\hat{\epsilon}_i^2.
-   \end{equation}
-   #+end_quote
+-  \(\sigma^{2}\) の不偏推定量
+  #+begin_quote
+  \begin{equation}
+    \hat{\sigma}^2=\frac{1}{n{-}2}\sum_{i=1}^n\hat{\epsilon}_i^2.
+  \end{equation}
+  #+end_quote
 
 ** 回帰係数の性質
-- \(\hat{\alpha},\hat{\beta}\) の分散の推定量 (資料; Gauss-Markovの定理)
+-  \(\hat{\alpha},\hat{\beta}\) の分散の推定量 (資料; Gauss-Markovの定理)
    #+begin_quote
    \begin{equation}
      \mathrm{s.e.}(\hat{\alpha})^2
@@ -504,7 +506,7 @@
      =\frac{\hat{\sigma}^2}{\sum_i(X_i-\bar{X})^2}
    \end{equation}
    #+end_quote
-   - \(\mathrm{s.e.}(\hat{\alpha}),\mathrm{s.e.}(\hat{\beta})\) は *標準誤差* と呼ばれる
+   -  \(\mathrm{s.e.}(\hat{\alpha}),\mathrm{s.e.}(\hat{\beta})\) は *標準誤差* と呼ばれる
 - 以下は \(\hat{\beta}\) と独立で自由度 \(n{-}2\) の \(\chi^2\) 分布に従う
    #+begin_quote
    \begin{equation}
@@ -521,7 +523,9 @@
      \frac{(\hat{\beta}-\beta)/\sqrt{\mathrm{Var}(\hat{\beta})}}{\sqrt{(n{-}2)\mathrm{s.e.}(\hat{\beta})^{2}/(n{-}2)\mathrm{Var}(\hat{\beta})}}
    \end{equation}
    #+end_quote
-- \(\gamma\in(0,1)\) に対する \(\beta\) の \(1-\gamma\) 信頼区間
+-  \(\gamma\in(0,1)\) に対する \(\beta\) の \(1-\gamma\) 信頼区間
+   #+attr_html: :class callout-note
+   #+attr_latex: :environment callout-note
    #+begin_quote
    \begin{equation}
      \left[
@@ -546,40 +550,40 @@
 
 #+reveal: split
 - 関数 ~predict()~ : 予測値の信頼区間を求める
-  #+begin_src R :eval no :tangle no
-    predict(object, newdata, se.fit = FALSE, scale = NULL, df = Inf,
-            interval = c("none", "confidence", "prediction"),
-            level = 0.95, type = c("response", "terms"),
-            terms = NULL, na.action = na.pass,
-            pred.var = res.var/weights, weights = 1,
-            rankdeficient = c("warnif", "simple", "non-estim", "NA", "NAwarn"),
-            tol = 1e-6, verbose = FALSE,
-            ...)
-    #' object: 関数 lm で推定したモデル
-    #' newdata: 予測値を計算する説明変数
-    #' interval: 何も付けない(none)・信頼区間(confidence)・予測区間(prediction)
-    #' level: 信頼係数 (既定値は0.95)
-    #' ...: 他のオプション．詳細は '?predict.lm' を参照
-  #+end_src
+   #+begin_src R :eval no :tangle no
+     predict(object, newdata, se.fit = FALSE, scale = NULL, df = Inf,
+             interval = c("none", "confidence", "prediction"),
+             level = 0.95, type = c("response", "terms"),
+             terms = NULL, na.action = na.pass,
+             pred.var = res.var/weights, weights = 1,
+             rankdeficient = c("warnif", "simple", "non-estim", "NA", "NAwarn"),
+             tol = 1e-6, verbose = FALSE,
+             ...)
+     #' object: 関数 lm で推定したモデル
+     #' newdata: 予測値を計算する説明変数
+     #' interval: 何も付けない(none)・信頼区間(confidence)・予測区間(prediction)
+     #' level: 信頼係数 (既定値は0.95)
+     #' ...: 他のオプション．詳細は '?predict.lm' を参照
+   #+end_src
 
 #+reveal: split
 - 関数 ~broom::augment()~ によるデータの情報 (tidyverse)
-  #+begin_src R :eval no :tangle no
-    augment(
-      x,
-      data = model.frame(x),
-      newdata = NULL,
-      se_fit = FALSE,
-      interval = c("none", "confidence", "prediction"),
-      conf.level = 0.95,
-      ...
-    )
-    #' x: 関数 lm で推定したモデル
-    #' newdata: data と異なる説明変数であてはめ・予測を行う
-    #' se_fit: 標準誤差を付けるか否か
-    #' interval: 信頼区間(confidence)・予測区間(prediction)を付ける
-    #' 詳細は '?broom::augment.lm' を参照
-  #+end_src
+   #+begin_src R :eval no :tangle no
+     augment(
+       x,
+       data = model.frame(x),
+       newdata = NULL,
+       se_fit = FALSE,
+       interval = c("none", "confidence", "prediction"),
+       conf.level = 0.95,
+       ...
+     )
+     #' x: 関数 lm で推定したモデル
+     #' newdata: data と異なる説明変数であてはめ・予測を行う
+     #' se_fit: 標準誤差を付けるか否か
+     #' interval: 信頼区間(confidence)・予測区間(prediction)を付ける
+     #' 詳細は '?broom::augment.lm' を参照
+   #+end_src
   
 
 * 実習
@@ -715,7 +719,7 @@
      H_0:\beta=0\qquad\text{vs}\qquad H_1:\beta\neq0
    \end{equation}
    #+end_quote
-- \(\beta\) の *有意性の検定*
+-  \(\beta\) の *有意性の検定*
    #+begin_quote
    帰無仮説 \(H_0\) が有意水準 \(\gamma\) で棄却されるとき，
    \(\beta\) は有意水準 \(\gamma\) で *有意である* 
@@ -743,7 +747,7 @@
      |t| > t_{1-\gamma/2}(n{-}2)
    \end{equation}
    #+end_quote
-- \(p\) 値による検定
+-  \(p\) 値による検定
    #+begin_quote
    以下で定義される \(\hat{\beta}\) の *\(p\) 値* が
    \(\gamma\) 未満の場合に帰無仮説を棄却
@@ -771,20 +775,20 @@
 
 #+reveal: split
 - 関数 ~broom::tidy()~ : 回帰係数の情報 (tidyverse)
-  #+begin_src R :eval no :tangle no
-    tidy(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
-    #' x: 関数 lm() で推定したモデル
-    #' conf.int: 信頼区間を付けるか否か
-    #' conf.level: 信頼係数
-    #' 詳細は '?broom::tidy.lm' を参照
-  #+end_src
+   #+begin_src R :eval no :tangle no
+     tidy(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+     #' x: 関数 lm() で推定したモデル
+     #' conf.int: 信頼区間を付けるか否か
+     #' conf.level: 信頼係数
+     #' 詳細は '?broom::tidy.lm' を参照
+   #+end_src
 - 関数 ~broom::glance()~ : モデルの統計情報 (tidyverse)
-  #+begin_src R :eval no :tangle no
-    glance(x, ...)
-    #' x: 関数 lm() で推定したモデル
-    #' F統計量は statistic/p.value の列
-    #' 詳細は '?broom::glance.lm' を参照
-  #+end_src
+   #+begin_src R :eval no :tangle no
+     glance(x, ...)
+     #' x: 関数 lm() で推定したモデル
+     #' F統計量は statistic/p.value の列
+     #' 詳細は '?broom::glance.lm' を参照
+   #+end_src
   
 
 
@@ -846,7 +850,7 @@
 
 * 決定係数
 ** 決定係数
-- \(X\) が \(Y\) の変動をどの程度説明できるかを数量化
+-  \(X\) が \(Y\) の変動をどの程度説明できるかを数量化
 - *決定係数* (あるいは *寄与率*)
    #+begin_quote
    \begin{equation}
@@ -854,7 +858,7 @@
      \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}
    \end{equation}
    #+end_quote
-- \(\hat{Y}_{i}\) は
+-  \(\hat{Y}_{i}\) は
    *あてはめ値* または *予測値* と呼ばれる
    #+begin_quote
    \begin{equation}
@@ -883,15 +887,15 @@
      \frac{\sum_{i=1}^{n}(\hat{Y}_{i}-\bar{Y})^{2}}{\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}}
    \end{equation}
    #+end_quote
-- \(R^2\) の成分
-   - \(R^2\) の分子 : あてはめ値の(標本平均まわりでの)変動
-   - \(R^2\) の分母 : 目的変数の(標本平均まわりでの)変動
-- \(R^2\) の意味
+-  \(R^2\) の成分
+   -  \(R^2\) の分子 : あてはめ値の(標本平均まわりでの)変動
+   -  \(R^2\) の分母 : 目的変数の(標本平均まわりでの)変動
+-  \(R^2\) の意味
    - 回帰式が目的変数の変動をどの位説明できるか評価
    - 大きいほど説明力が高いと解釈される
 
 ** 決定係数の別表現
-- \(R^2\) は以下のように書き直すことも可能
+-  \(R^2\) は以下のように書き直すことも可能
    - 目的変数の観測データとあてはめ値の相関の二乗
       #+begin_quote
       \begin{equation}
@@ -976,9 +980,9 @@
 :ID:       036157C9-86CA-4AF1-B884-757209AD3835
 :END:
 - 前問で作成した回帰モデルについて
-  決定係数を確認しなさい．
+   決定係数を確認しなさい．
 - 説明変数として降水量を用いた回帰モデルについて
-  検討しなさい．
+   検討しなさい．
 
 #+begin_src R :eval no :exports none
   #' ---------------------------------------------------------------------------
