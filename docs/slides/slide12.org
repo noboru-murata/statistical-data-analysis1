@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-06-26 15:07:56 mura>
+# Time-stamp: <2026-07-02 10:20:57 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -342,8 +342,8 @@
      aov(formula, data) |> summary()     # 分析表形式での表示
      aov(formula, data) |> anova()       # データフレーム(data.frame形式)
      aov(formula, data) |> broom::tidy() # データフレーム(tibble形式)
-     aov(formula, data) |> model.table(type = "means")   # 平均値
-     aov(formula, data) |> model.table(type = "effects") # 効果(既定値)
+     aov(formula, data) |> model.tables(type = "means")   # 平均値
+     aov(formula, data) |> model.tables(type = "effects") # 効果(既定値)
    #+end_src
 
 ** 分散分析の計算 (検定のみ)
@@ -540,7 +540,7 @@
    #+attr_html: :class callout-tip
    #+attr_latex: :environment callout-tip
    #+begin_quote
-   複数の薬の効能を複数の被験者に投与する実験
+   複数の薬を複数の被験者に投与する実験
    - "薬の種類"と"被験者番号"の2種類の因子
    - "薬の種類"という因子での薬の効能の差を検証したい
    - "被験者番号"という因子で効能に差があることは許容したい

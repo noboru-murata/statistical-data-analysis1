@@ -105,7 +105,7 @@ aov(value ~ factor, data = toy_data0)
 aov(value ~ factor, data = toy_data0) |>
     summary() # 詳細な表示
 aov(value ~ factor, data = toy_data0) |>
-    tidy()    # tibble型式のデータフレームに変換
+    tidy()    # tibble形式のデータフレームに変換
 ```
 
 関数 `aov()` のようにデータが第1引数でない場合にパイプ演算子を使うには `_` (placeholder) を使って位置を明示すればよい．
@@ -198,7 +198,7 @@ replicate(2000, mc_trial(h0 = FALSE)) |>
 
 #### ヒント
 
-週日を因子(factor)とするには例えば以下のような項目を加えればよい．
+曜日を因子(factor)とするには例えば以下のような項目を加えればよい．
 
 ```{r}
 #| eval: false
