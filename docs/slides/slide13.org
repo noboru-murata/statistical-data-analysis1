@@ -4,7 +4,7 @@
 #+EMAIL: noboru.murata@gmail.com
 #+DATE: 
 #+STARTUP: hidestars content indent
-# Time-stamp: <2026-06-26 15:07:11 mura>
+# Time-stamp: <2026-07-08 16:26:04 mura>
 :REVEAL:
 #+SETUPFILE: "./reveal.js/local/lecture.org"
 # C-c C-x C-v でinlineを切り替え
@@ -763,7 +763,7 @@
 :PROPERTIES:
 :ID:       D9AD7FC0-2744-40AB-A758-00878B473039
 :END:
-- 関数 ~stat::summary()~ : 情報の要約 (base R)
+- 関数 ~stats::summary()~ : 情報の要約 (base R)
    #+begin_src R :eval no :tangle no
      summary(object)
      #' object: 関数 lm() で推定したモデル
@@ -942,7 +942,7 @@
 :PROPERTIES:
 :ID:       1E08B1FB-CEA5-4DE9-A958-DDC9676B18E7
 :END:
-- 関数 ~stat::summary()~ : 情報の要約 (base R)
+- 関数 ~stats::summary()~ : 情報の要約 (base R)
    #+begin_src R :eval no :tangle no
      summary(object)
      #' object: 関数 lm() で推定したモデル
