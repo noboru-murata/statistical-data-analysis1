@@ -430,6 +430,12 @@ tw_data |>
     geom_ribbon(aes(ymin = .lower, ymax = .upper), 
                 fill = alpha("steelblue", 0.3)) +
     labs(x = "日射量", y = "気温", colour = NULL)
+```
+
+::: column-margin
+関数 `predict()` を用いることもできる．
+
+```{r}
 tw_data |>
     mutate(predict(tw_lm, # 推定したモデル
                    interval = "confidence", # 信頼区間の推定を指定
@@ -443,6 +449,7 @@ tw_data |>
                 fill = alpha("steelblue", 0.3)) +
     labs(x = "日射量", y = "気温", colour = NULL)
 ```
+:::
 
 夏のモデル `tw_lm2` で同様に区間推定を行う．
 
@@ -475,6 +482,7 @@ tw_lm2 |>
     labs(x = "日射量", y = "気温", colour = NULL)
 ```
 
+::: column-margin
 1年のデータから限定して信頼区間を描いてもよい．
 
 ```{r}
@@ -486,6 +494,7 @@ tw_data |>
                 colour = "red", fill = "pink") +
     labs(x = "日射量", y = "気温", colour = NULL)
 ```
+:::
 
 ## 回帰モデルの係数の検定
 
@@ -517,6 +526,7 @@ summary(tw_lm)$fstat                                 # F統計量 (モデルの�
 anova(tw_lm)$'Pr(>F)'[1]                             # F統計量のp値 (summaryからは取り出し難い)
 ```
 
+::: column-margin
 パイプを使う場合は以下のようにすればよい．
 
 ```{r}
@@ -524,6 +534,7 @@ tw_lm |> summary() |> _$coef
 tw_lm |> summary() |> _$coef["solar",c("t value","Pr(>|t|)")]
 tw_lm |> summary() |> _$coef[2,3:4]
 ```
+:::
 
 tidyverse での操作は以下のようになる．
 
