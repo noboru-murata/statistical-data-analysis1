@@ -31,6 +31,7 @@ conflicts_prefer(    # 優先的に使う関数を指定
     dplyr::lag(),
     )
 library(tidyverse)
+library(broom)       # tidy(), gloance(), augment() を利用する
 #' 日本語を用いるので macOS ではフォントの設定を行う
 if(Sys.info()["sysname"] == "Darwin") { # macOS か調べて日本語フォントを指定
     theme_update(text = element_text(family = "HiraginoSans-W4"))
@@ -93,9 +94,9 @@ coef(toy_lm) # 推定された係数の取得
 #' base R での情報の表示 
 toy_lm |> summary() # さまざまな情報がlist形式
 #' tidyverse での情報の表示 (tibble形式)
-toy_lm |> broom::tidy()    # 推定された係数の情報
-toy_lm |> broom::glance()  # 推定に関するさまざまな情報
-toy_lm |> broom::augment() # 推定に用いられたデータの情報
+toy_lm |> tidy()    # 推定された係数の情報
+toy_lm |> glance()  # 推定に関するさまざまな情報
+toy_lm |> augment() # 推定に用いられたデータの情報
 ```
 
 推定結果の視覚化を行う．
@@ -204,8 +205,8 @@ tw_data |>
 tw_lm <- lm(temp ~ solar,    # 目的変数 ~ 説明変数
             data = tw_data) # 気温を日射量で説明
 tw_lm |> summary()       # 結果の要約
-tw_lm |> broom::tidy()   # 係数とその統計量
-tw_lm |> broom::glance() # その他の統計量
+tw_lm |> tidy()   # 係数とその統計量
+tw_lm |> glance() # その他の統計量
 ```
 
 回帰直線を前の図に重ね描きして図示する．
@@ -378,11 +379,11 @@ tw_data |>
 ```{r}
 tw_conf <-
     tw_lm |> 
-    broom::augment(newdata = tibble(solar = tw_data |> pull(solar) |>
-                                        range() |> # 日射量の範囲を取得
-                                        pretty(n = 50)), # 50個程度の区間を作成
-                   interval = "confidence",
-                   conf.level = 0.95) # 既定値なので無くてもよい
+    augment(newdata = tibble(solar = tw_data |> pull(solar) |>
+                                 range() |> # 日射量の範囲を取得
+                                 pretty(n = 50)), # 50個程度の区間を作成
+            interval = "confidence",
+            conf.level = 0.95) # 既定値なので無くてもよい
 ```
 
 データ点と信頼区間を描画する．
@@ -407,7 +408,7 @@ tw_data |>
 
 ```{r}
 tw_lm |>
-    broom::augment(interval = "confidence") |>
+    augment(interval = "confidence") |>
     ggplot(aes(x = solar, y = temp)) +
     geom_point(colour = "olivedrab") + # augmentの出力にmonthは含まれていないため
     geom_line(aes(y = .fitted),
@@ -421,7 +422,7 @@ tw_lm |>
 
 ```{r}
 tw_data |>
-    mutate(broom::augment(tw_lm, interval = "confidence")) |>
+    mutate(augment(tw_lm, interval = "confidence")) |>
     ggplot(aes(x = solar, y = temp)) +
     geom_point(aes(colour = factor(month))) + 
     geom_line(aes(y = .fitted), 
@@ -463,7 +464,8 @@ model.frame(tw_lm2) |> # モデルの作成に用いたデータ
 1年のデータも重ねて表示する．
 
 ```{r}
-tw_lm2 |> broom::augment() |> # この関数でも取り出せる
+tw_lm2 |>
+    augment() |> # この関数でも取り出せる
     ggplot(aes(x = solar, y = temp)) +
     geom_point(data = tw_data, # 1年分のデータを使用
                colour = alpha("grey", 0.5)) + # 薄い灰色で表示
@@ -526,13 +528,13 @@ tw_lm |> summary() |> _$coef[2,3:4]
 tidyverse での操作は以下のようになる．
 
 ```{r}
-tw_lm |> broom::tidy() # 係数の情報をまとめたデータフレーム
-tw_lm |> broom::tidy() |> # solarの係数のt統計量とp値を抽出
+tw_lm |> tidy() # 係数の情報をまとめたデータフレーム
+tw_lm |> tidy() |> # solarの係数のt統計量とp値を抽出
     filter(term == "solar") |> select(statistic, p.value)
-tw_lm |> broom::tidy() |> _[2, c("statistic","p.value")]
-tw_lm |> broom::tidy() |> _[2,4:5]
-tw_lm |> broom::glance() # モデルの情報をまとめたデータフレーム
-tw_lm |> broom::glance() |> # F統計量に関する情報
+tw_lm |> tidy() |> _[2, c("statistic","p.value")]
+tw_lm |> tidy() |> _[2,4:5]
+tw_lm |> glance() # モデルの情報をまとめたデータフレーム
+tw_lm |> glance() |> # F統計量に関する情報
     select(statistic, p.value, df, df.residual)
 ```
 
@@ -549,8 +551,8 @@ coef(summary(tw_lm2))[,"Estimate"] # 上と同じ
 tidyverse での操作は以下のようになる．
 
 ```{r}
-tw_lm2 |> broom::tidy()   # 係数の情報
-tw_lm2 |> broom::glance() # モデルの情報
+tw_lm2 |> tidy()   # 係数の情報
+tw_lm2 |> glance() # モデルの情報
 ```
 
 ## 決定係数による回帰モデルの検討
@@ -573,8 +575,8 @@ tw_lm2 |> broom::glance() # モデルの情報
 summary(tw_lm) # 全情報の表示
 summary(tw_lm)$r.squared
 summary(tw_lm)$adj.r.squared
-tw_lm |> broom::glance() 
-tw_lm |> broom::glance() |> # 1:2列が決定係数
+tw_lm |> glance() 
+tw_lm |> glance() |> # 1:2列が決定係数
     select(r.squared, adj.r.squared)
 ```
 
@@ -584,8 +586,8 @@ tw_lm |> broom::glance() |> # 1:2列が決定係数
 summary(tw_lm2) # 全情報の表示
 summary(tw_lm2)$r.squared
 summary(tw_lm2)$adj.r.squared
-tw_lm2 |> broom::glance() 
-tw_lm2 |> broom::glance() |> 
+tw_lm2 |> glance() 
+tw_lm2 |> glance() |> 
     select(r.squared, adj.r.squared)
 ```
 
@@ -706,7 +708,7 @@ Animals |>
 Animals |>
     rownames_to_column() |>
     mutate( # 予測区間の情報を追加する
-        broom::augment(bb_lm,
+        augment(bb_lm,
                        interval = "prediction", # 予測区間を指定
                        conf.level = 0.95) |>    # 既定値なので省略可能
         select(.fitted, .lower, .upper) |> exp() # 必要な列を選択して対数変換を戻す
@@ -769,7 +771,7 @@ bb_lm |> summary()
 Animals |>
     rownames_to_column() |>
     mutate( 
-        broom::augment(bb_lm,
+        augment(bb_lm,
                        newdata = Animals, # 外れ値を除いたので全データで計算
                        interval = "prediction") |>
         select(.fitted, .lower, .upper) |> exp()) |>   
@@ -797,12 +799,12 @@ bb_new_body <- # 計算用のbody列を作成
                log() |> pretty(n=32) |> exp())
 bb_new_data <- # 作成したbody列に対する区間の計算
     tibble(bb_new_body,
-           broom::augment(bb_lm,
+           augment(bb_lm,
                           newdata = bb_new_body,
                           interval = "confidence") |> # 信頼区間
            select(.fitted, .lower, .upper) |> exp() |>
            set_names(c("brain","c.lower","c.upper")), # 列名の指定
-           broom::augment(bb_lm,
+           augment(bb_lm,
                           newdata = bb_new_body,
                           interval = "prediction") |> # 予測区間
            select(.lower, .upper) |> exp() |>
